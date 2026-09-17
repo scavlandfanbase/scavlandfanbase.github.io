@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SCAVLAND Vendors</title>
+
+<div class="nav-bar">
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="weapons.html">Weapons</a>
+        <a href="vendors.html">Vendors</a>
+        <a href="areas.html">Areas</a>
+        <a href="map.html">Map</a>
+        <a href="crafting.html">Crafting</a>
+    </div>
+</div>
+
+<style>
+.nav-bar {
+    background: #222;
+    padding: 12px 20px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    justify-content: center; /* centers the nav */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-links a {
+    color: #ffffff; /* white text */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 20px; /* spacing between links */
+}
+
+.nav-links a:hover {
+    color: #ffcc66; /* gold hover */
+}
+</style>
+
+
+<style>
+body {
+    background: #111;
+    color: #ddd;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Vendor Container */
+.vendor-section {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+/* Vendor Header */
+.vendor-header {
+    padding: 15px;
+    background: #222;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc66;
+    border-bottom: 2px solid #333;
+}
+
+/* Faction Label */
+.vendor-faction {
+    font-size: 14px;
+    color: #bbb;
+    margin-top: 4px;
+}
+
+/* Hidden Content */
+.vendor-content {
+    display: none;
+    padding: 15px;
+}
+
+/* Table Styling */
+.vendor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.vendor-table th, .vendor-table td {
+    padding: 8px;
+    border-bottom: 1px solid #333;
+}
+
+.vendor-table th {
+    color: #ffcc66;
+    text-align: left;
+}
+
+.vendor-table td {
+    color: #ddd;
+}
+
+.vendor-header:hover {
+    background: #2a2a2a;
+}
+</style>
+
+<script>
+function toggleVendor(id) {
+    const section = document.getElementById(id);
+    section.style.display = (section.style.display === "block") ? "none" : "block";
+}
+</script>
+
+</head>
+<body>
+
+<h1 style="color:#ffcc66;">SCAVLAND Vendors</h1>
+
+<div id="vendor-list">
+
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('grigory')">
+        Grigory — The Mire
+        <div class="vendor-faction">Faction: ?</div>
+    </div>
+
+    <div class="vendor-content" id="grigory">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+
+            <tr><td>PM Nikolay</td><td>1</td><td>2750</td></tr>
+            <tr><td>Leon 1895 (Long)</td><td>1</td><td>5250</td></tr>
+            <tr><td>Zavod 24 (Short)</td><td>1</td><td>9500</td></tr>
+            <tr><td>Medved Monster</td><td>1</td><td>13250</td></tr>
+            <tr><td>Mikhail 74 U</td><td>2</td><td>36250</td></tr>
+            <tr><td>PM 12-70 (Short)</td><td>2</td><td>16500</td></tr>
+            <tr><td>Mikhail 47</td><td>3</td><td>47000</td></tr>
+
+            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td></tr>
+            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td></tr>
+            <tr><td>Rifle FMJ Ammo</td><td>2</td><td>200</td></tr>
+
+            <tr><td>Gun Lube</td><td>1</td><td>1500</td></tr>
+            <tr><td>Gun Cleaning Rod</td><td>1</td><td>3500</td></tr>
+            <tr><td>Gun Field Tools</td><td>1</td><td>5000</td></tr>
+            <tr><td>Scrap Gun Repair Kit</td><td>1</td><td>12000</td></tr>
+
+            <tr><td>Makeshift Large Steel Stick Mag</td><td>1</td><td>1250</td></tr>
+            <tr><td>MK Steel-Polymer Mag (Brown)</td><td>2</td><td>1250</td></tr>
+            <tr><td>MK Triangle Stock</td><td>2</td><td>2500</td></tr>
+            <tr><td>MK Underfolding Stock</td><td>2</td><td>1250</td></tr>
+            <tr><td>MK Dust Cover</td><td>2</td><td>1250</td></tr>
+            <tr><td>MK Railed Dust Cover</td><td>3</td><td>2500</td></tr>
+            <tr><td>MK Vert Grip Handguard</td><td>2</td><td>1250</td></tr>
+            <tr><td>MK Wood Handguard</td><td>2</td><td>750</td></tr>
+            <tr><td>MK Railed Combination Handguard</td><td>3</td><td>2500</td></tr>
+            <tr><td>Short Tapered Vertical Foregrip</td><td>3</td><td>1250</td></tr>
+            <tr><td>MK Slant Muzzle Brake</td><td>2</td><td>2000</td></tr>
+            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td></tr>
+            <tr><td>Bakelite Pistol Grip Module</td><td>2</td><td>750</td></tr>
+            <tr><td>Wooden Pistol Grip Module</td><td>2</td><td>1250</td></tr>
+            <tr><td>Vintage Red Dot Sight</td><td>3</td><td>2500</td></tr>
+            <tr><td>Red Dot Sight</td><td>3</td><td>1250</td></tr>
+
+            <tr><td>Bandage</td><td>1</td><td>250</td></tr>
+            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td></tr>
+
+            <tr><td>Basic Gun Repair Kit Blueprint</td><td>1</td><td>30000</td></tr>
+        </table>
+    </div>
+</div>
+
+</div> <!-- vendor-list -->
+
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('petar')">
+        Petar — The Mire
+        <div class="vendor-faction">Faction: ?</div>
+    </div>
+
+    <div class="vendor-content" id="petar">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+
+            <tr><td>Moonshine</td><td>1</td><td>2400</td></tr>
+            <tr><td>Overripe Potato</td><td>1</td><td>250</td></tr>
+            <tr><td>WG-40</td><td>1</td><td>250</td></tr>
+
+            <tr><td>Mechanical Components</td><td>1</td><td>10000</td></tr>
+            <tr><td>Metal Scrap</td><td>1</td><td>100</td></tr>
+            <tr><td>Fabric Scrap</td><td>1</td><td>100</td></tr>
+            <tr><td>Plastic Scrap</td><td>1</td><td>100</td></tr>
+            <tr><td>Rubber Scrap</td><td>1</td><td>100</td></tr>
+            <tr><td>Chemical Residue</td><td>1</td><td>100</td></tr>
+
+        </table>
+    </div>
+
+</div>
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('bogdan')">
+        Bogdan — The Mire
+        <div class="vendor-faction">Faction: ?</div>
+    </div>
+
+    <div class="vendor-content" id="bogdan">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+
+            <tr><td>Pistol HP Ammo</td><td>2</td><td>60</td></tr>
+            <tr><td>Shotgun HP Ammo</td><td>2</td><td>180</td></tr>
+            <tr><td>Rifle HP Ammo</td><td>3</td><td>280</td></tr>
+            <tr><td>High Caliber Rifle HP Ammo</td><td>3</td><td>250</td></tr>
+
+            <tr><td>Meat Drumstick</td><td>2</td><td>2400</td></tr>
+            <tr><td>Meat Skewer</td><td>1</td><td>1800</td></tr>
+            <tr><td>Dried Steak</td><td>1</td><td>1450</td></tr>
+            <tr><td>Rabbit Meat</td><td>1</td><td>50</td></tr>
+            <tr><td>Rat Meat</td><td>1</td><td>25</td></tr>
+            <tr><td>Mutant Steak</td><td>1</td><td>100</td></tr>
+            <tr><td>Worm Meat</td><td>1</td><td>100</td></tr>
+
+        </table>
+    </div>
+</div>
+
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('marko')">
+        Marko — The Mire
+        <div class="vendor-faction">Faction: Commenfolk</div>
+    </div>
+
+    <div class="vendor-content" id="marko">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+
+            <tr><td>Cigarettes</td><td>1</td><td>750</td></tr>
+            <tr><td>Mystery Pills</td><td>1</td><td>6000</td></tr>
+            <tr><td>Moonshite</td><td>1</td><td>2400</td></tr>
+            <tr><td>Echelon - Killer Apple</td><td>1</td><td>3000</td></tr>
+            <tr><td>Fresh Mushrooms</td><td>1</td><td>3000</td></tr>
+
+        </table>
+    </div>
+</div>
+
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('jasna')">
+        Jasna — The Mire
+        <div class="vendor-faction">Faction: Acolytes</div>
+    </div>
+
+    <div class="vendor-content" id="jasna">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+
+            <tr><td>Canteen</td><td>1</td><td>480</td></tr>
+            <tr><td>Radish</td><td>1</td><td>150</td></tr>
+            <tr><td>Russet Potato</td><td>1</td><td>800</td></tr>
+            <tr><td>Dried Mushrooms</td><td>1</td><td>1000</td></tr>
+            <tr><td>Large Pumpkin</td><td>2</td><td>3000</td></tr>
+            <tr><td>Vegetable Soup</td><td>2</td><td>7500</td></tr>
+
+        </table>
+    </div>
+</div>
+
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('yefim')">
+        Yefim — East of Sontse Station
+        <div class="vendor-faction">Faction: ?</div>
+    </div>
+
+    <div class="vendor-content" id="yefim">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+
+            <tr><td>GP-4 Gas Mask</td><td>1</td><td>25000</td></tr>
+            <tr><td>Armoured Rags</td><td>2</td><td>35000</td></tr>
+            <tr><td>Plated Overcoat</td><td>3</td><td>45000</td></tr>
+            <tr><td>Scrapyard Pants</td><td>2</td><td>22000</td></tr>
+            <tr><td>Plated Ragged Pants</td><td>3</td><td>45000</td></tr>
+
+            <tr><td>Bandage</td><td>1</td><td>250</td></tr>
+            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td></tr>
+            <tr><td>Canteen</td><td>1</td><td>480</td></tr>
+            <tr><td>Canned Beans</td><td>1</td><td>2100</td></tr>
+
+            <tr><td>Medium Armor Repair Kit Blueprint</td><td>2</td><td>50000</td></tr>
+
+        </table>
+    </div>
+</div>
+
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('alexei')">
+        Alexei — North East of the Mire
+        <div class="vendor-faction">Faction: ?</div>
+    </div>
+
+    <div class="vendor-content" id="alexei">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+
+            <tr><td>Bandage</td><td>1</td><td>250</td></tr>
+            <tr><td>Advanced Bandage</td><td>3</td><td>4000</td></tr>
+            <tr><td>IFAK Medkit</td><td>3</td><td>12000</td></tr>
+            <tr><td>Morphine</td><td>1</td><td>1250</td></tr>
+            <tr><td>Stimpack</td><td>2</td><td>6000</td></tr>
+            <tr><td>Headache Pills</td><td>1</td><td>1500</td></tr>
+            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td></tr>
+            <tr><td>AI-2 Army Medkit</td><td>2</td><td>6200</td></tr>
+            <tr><td>Pills</td><td>1</td><td>2500</td></tr>
+            <tr><td>Splint</td><td>1</td><td>3000</td></tr>
+            <tr><td>Canteen</td><td>1</td><td>480</td></tr>
+
+            <tr><td>Advanced Bandage Blueprint</td><td>1</td><td>15000</td></tr>
+            <tr><td>Stimpack Blueprint</td><td>1</td><td>20000</td></tr>
+            <tr><td>AI-2 Army Medkit Blueprint</td><td>2</td><td>30000</td></tr>
+            <tr><td>IFAK Medkit Blueprint</td><td>3</td><td>50000</td></tr>
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

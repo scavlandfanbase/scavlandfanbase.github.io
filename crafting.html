@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SCAVLAND Crafting</title>
+
+<style>
+    body {
+        background: #111;
+        color: #eee;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #222;
+        padding: 15px;
+        border-bottom: 2px solid #ffcc66;
+    }
+
+    .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: #ffcc66;
+    }
+
+    nav a {
+        color: #eee;
+        margin-left: 15px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        color: #ffcc66;
+    }
+
+    h2 {
+        color: #ffcc66;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .craft-table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: #222;
+    }
+
+    .craft-table th, .craft-table td {
+        border: 1px solid #333;
+        padding: 10px;
+        vertical-align: top;
+    }
+
+    .craft-table th {
+        background: #333;
+        color: #ffcc66;
+    }
+
+    .craft-table td ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+</style>
+
+</head>
+<body>
+<div class="nav-bar">
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="weapons.html">Weapons</a>
+        <a href="vendors.html">Vendors</a>
+        <a href="areas.html">Areas</a>
+        <a href="map.html">Map</a>
+        <a href="crafting.html">Crafting</a>
+    </div>
+</div>
+
+<style>
+.nav-bar {
+    background: #222;
+    padding: 12px 20px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    justify-content: center; /* centers the nav */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-links a {
+    color: #ffffff; /* white text */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 20px; /* spacing between links */
+}
+
+.nav-links a:hover {
+    color: #ffcc66; /* gold hover */
+}
+</style>
+
+<!-- ARMOR CRAFTING -->
+<h2>Armor Crafting</h2>
+<table class="craft-table">
+<tr>
+    <th>Item</th>
+    <th>Ingredients</th>
+</tr>
+
+<tr>
+    <td>Tattered Armor Repair Kit</td>
+    <td>
+        <ul>
+            <li>Sewing Kit ×1</li>
+            <li>Glue ×1</li>
+            <li>Plier ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Scavenger Armor Repair Kit</td>
+    <td>
+        <ul>
+            <li>Tattered Kit ×1</li>
+            <li>Field Kit ×1</li>
+            <li>Plier ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Medium Armor Repair Kit</td>
+    <td>
+        <ul>
+            <li>Scavenger ×1</li>
+            <li>Kevlar Weave ×1</li>
+            <li>Glue ×1</li>
+            <li>Plier ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Heavy Armor Repair Kit</td>
+    <td>
+        <ul>
+            <li>Medium Armor Repair Kit ×1</li>
+            <li>Armor Plate ×1</li>
+            <li>Field Repair Kit ×1</li>
+            <li>Glue ×1</li>
+            <li>Plier ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Sewing Kit</td>
+    <td>
+        <ul>
+            <li>Metal Scrap ×2</li>
+            <li>Field Repair Kit ×1</li>
+            <li>Plier ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Field Repair Kit</td>
+    <td>
+        <ul>
+            <li>Fabric Scrap ×2</li>
+            <li>Metal Scrap ×2</li>
+            <li>Glue ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Glue</td>
+    <td>
+        <ul>
+            <li>Plastic Scrap ×2</li>
+            <li>Chemical Residue ×2</li>
+        </ul>
+    </td>
+</tr>
+
+</table>
+
+<!-- GUN CRAFTING -->
+<h2>Gun Crafting</h2>
+<table class="craft-table">
+<tr>
+    <th>Item</th>
+    <th>Ingredients</th>
+</tr>
+
+<tr>
+    <td>Scrap Gun Repair Kit</td>
+    <td>
+        <ul>
+            <li>Metal Scrap ×5</li>
+            <li>Field Tools ×1</li>
+            <li>Hammer ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Basic Gun Repair Kit</td>
+    <td>
+        <ul>
+            <li>Scrap Gun Kit ×1</li>
+            <li>Mechanical Components ×1</li>
+            <li>Screwdriver ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Advanced Gun Repair Kit</td>
+    <td>
+        <ul>
+            <li>Basic Gun Repair Kit ×1</li>
+            <li>Advanced Mechanical Components ×1</li>
+            <li>Screwdriver ×1</li>
+            <li>Hammer ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Expert Gun Repair Kit</td>
+    <td>
+        <ul>
+            <li>Advanced Gun Repair Kit ×1</li>
+            <li>Advanced Mechanical Components ×1</li>
+            <li>Screwdriver ×1</li>
+            <li>Hammer ×1</li>
+            <li>Plier ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Gun Field Tools</td>
+    <td>
+        <ul>
+            <li>Gun Cleaning Rod ×1</li>
+            <li>Screwdriver ×1</li>
+            <li>Hammer ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Gun Cleaning Rod</td>
+    <td>
+        <ul>
+            <li>Metal Scrap ×2</li>
+            <li>Fabric Scrap ×2</li>
+            <li>Gun Lube ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Gun Lube</td>
+    <td>
+        <ul>
+            <li>Chemical Residue ×1</li>
+            <li>WG-40 ×1</li>
+        </ul>
+    </td>
+</tr>
+
+</table>
+
+<!-- MEDICINE CRAFTING -->
+<h2>Medicine Crafting</h2>
+<table class="craft-table">
+<tr>
+    <th>Item</th>
+    <th>Ingredients</th>
+</tr>
+
+<tr>
+    <td>Bandage</td>
+    <td>
+        <ul>
+            <li>Fabric Scrap ×4</li>
+            <li>Moonshine ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Moonshine</td>
+    <td>
+        <ul>
+            <li>Canteen ×1</li>
+            <li>Chemical Residue ×1</li>
+            <li>Overripe Potato ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Morphine</td>
+    <td>
+        <ul>
+            <li>Metal Scrap ×1</li>
+            <li>Plastic Scrap ×1</li>
+            <li>Medicinal Herb ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>AI-2 Medkit</td>
+    <td>
+        <ul>
+            <li>Metal Scrap ×2</li>
+            <li>Chemical Residue ×2</li>
+            <li>Morphine ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Stimpack</td>
+    <td>
+        <ul>
+            <li>Morphine ×1</li>
+            <li>Headache Pills ×1</li>
+            <li>Chemical Residue ×2</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>Advance Bandage</td>
+    <td>
+        <ul>
+            <li>Bandage ×2</li>
+            <li>Glue ×1</li>
+            <li>Medicinal Herb ×1</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>AI-2 Army Medkit</td>
+    <td>
+        <ul>
+            <li>AI-2 Medkit ×1</li>
+            <li>Morphine ×1</li>
+            <li>Chemical Residue ×2</li>
+        </ul>
+    </td>
+</tr>
+
+<tr>
+    <td>IFAK Medkit</td>
+    <td>
+        <ul>
+            <li>AI-2 Army Medkit ×1</li>
+            <li>Advance Bandage ×1</li>
+            <li>Fabric Scrap ×2</li>
+        </ul>
+    </td>
+</tr>
+
+</table>
+
+</body>
+</html>

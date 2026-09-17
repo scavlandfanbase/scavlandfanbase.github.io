@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SCAVLAND Database</title>
+
+<style>
+    body {
+        background: #111;
+        color: #eee;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* NAV BAR */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #222;
+        padding: 15px;
+        border-bottom: 2px solid #ffcc66;
+    }
+
+    .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: #ffcc66;
+    }
+
+    nav a {
+        color: #eee;
+        margin-left: 15px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        color: #ffcc66;
+    }
+
+    /* HERO TEXT */
+    .hero {
+        text-align: center;
+        padding: 60px 20px;
+        background: #1a1a1a;
+        border-bottom: 2px solid #333;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+        color: #ffcc66;
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        color: #ccc;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    /* FEATURE GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 40px 20px;
+    }
+
+    .card {
+        background: #222;
+        padding: 20px;
+        border: 1px solid #333;
+        border-radius: 6px;
+        text-align: center;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+
+    .card:hover {
+        border-color: #ffcc66;
+        transform: translateY(-4px);
+    }
+
+    .card h3 {
+        color: #ffcc66;
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        color: #ccc;
+        font-size: 14px;
+    }
+
+    /* LATEST UPDATE PANEL */
+    .updates {
+        background: #1a1a1a;
+        padding: 30px 20px;
+        border-top: 2px solid #333;
+        border-bottom: 2px solid #333;
+    }
+
+    .updates h2 {
+        color: #ffcc66;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .update-box {
+        background: #222;
+        padding: 20px;
+        border: 1px solid #333;
+        border-radius: 6px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .update-box h3 {
+        color: #ffcc66;
+        margin-bottom: 10px;
+    }
+
+    .update-box p {
+        color: #ccc;
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        color: #777;
+        border-top: 1px solid #333;
+    }
+</style>
+
+</head>
+<body>
+
+<header>
+    <div class="logo">SCAVLAND</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="areas.html">Areas</a>
+        <a href="Map.html">Map</a>
+        <a href="vendors.html">Vendors</a>
+        <a href="weapons.html">Weapons</a>
+        <a href="armour.html">Armour</a>
+        <a href="crafting.html">Crafting</a>
+        <a href="factions.html">Factions</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Welcome to SCAVLAND</h1>
+    <p>A fan‑made database and community hub for the post‑apocalyptic survival game.</p>
+</section>
+
+<section class="grid">
+    <div class="card" onclick="location.href='areas.html'">
+        <h3>Areas</h3>
+        <p>Explore every zone, region, and dangerous territory.</p>
+    </div>
+
+    <div class="card" onclick="location.href='bunkers.html'">
+        <h3>Bunkers</h3>
+        <p>Find hidden shelters, loot spots, and underground safe havens.</p>
+    </div>
+
+    <div class="card" onclick="location.href='vendors.html'">
+        <h3>Vendors</h3>
+        <p>Discover traders, their stock, and where to find them.</p>
+    </div>
+
+    <div class="card" onclick="location.href='weapons.html'">
+        <h3>Weapons</h3>
+        <p>Browse the full arsenal of firearms and melee weapons.</p>
+    </div>
+
+    <div class="card" onclick="location.href='armour.html'">
+        <h3>Armour</h3>
+        <p>Compare protective gear and survival outfits.</p>
+    </div>
+
+    <div class="card" onclick="location.href='crafting.html'">
+        <h3>Crafting</h3>
+        <p>Learn recipes, materials, and upgrade paths.</p>
+    </div>
+
+    <div class="card" onclick="location.href='factions.html'">
+        <h3>Factions</h3>
+        <p>Meet the groups that rule the wasteland.</p>
+    </div>
+</section>
+
+<section class="updates">
+    <h2>Latest Developer Update</h2>
+    <div class="update-box" id="updateBox">
+        <h3>Loading latest update...</h3>
+        <p>Please wait.</p>
+    </div>
+</section>
+
+<footer>
+    SCAVLAND Fan Database © 2026
+</footer>
+
+<script>
+fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavland-updates.json")
+    .then(response => response.json())
+    .then(data => {
+        const box = document.getElementById("updateBox");
+        box.innerHTML = `
+            <h3>${data.title}</h3>
+            <p>${data.summary}</p>
+            <p><a href="${data.url}" style="color:#ffcc66;" target="_blank">Read full update</a></p>
+        `;
+    })
+    .catch(err => {
+        document.getElementById("updateBox").innerHTML =
+            "<h3>Unable to load updates</h3><p>Feed may be temporarily unavailable.</p>";
+    });
+</script>
+
+</body>
+</html>

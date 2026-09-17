@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCAVLAND — Armour</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+    /* Extra spacing for armour tables */
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px 12px;
+    }
+    th, td {
+        padding: 8px 12px;
+        text-align: center; /* CENTER ALL TEXT */
+    }
+    th {
+        background: #222;
+    }
+    tr:nth-child(even) {
+        background: #1a1a1a;
+    }
+</style>
+
+</head>
+
+<body>
+<div class="nav-bar">
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="weapons.html">Weapons</a>
+        <a href="vendors.html">Vendors</a>
+        <a href="areas.html">Areas</a>
+        <a href="map.html">Map</a>
+        <a href="crafting.html">Crafting</a>
+    </div>
+</div>
+
+<style>
+.nav-bar {
+    background: #222;
+    padding: 12px 20px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    justify-content: center; /* centers the nav */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-links a {
+    color: #ffffff; /* white text */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 20px; /* spacing between links */
+}
+
+.nav-links a:hover {
+    color: #ffcc66; /* gold hover */
+}
+</style>
+</header>
+
+<main>
+    <h1>Armour</h1>
+    <p>Complete list of helmets, body armour, and pants available in SCAVLAND.</p>
+
+    <!-- HELMETS -->
+    <div class="card">
+        <h2>Helmets</h2>
+        <table>
+            <tr>
+                <th>Item</th><th>Vendor Rank</th><th>Price</th><th>Stat 1</th><th>Stat 2</th><th>Stat 3</th><th>Type</th>
+            </tr>
+            <tr><td>Old GP-4 Gas Mask</td><td>1</td><td>15000</td><td>0</td><td>5</td><td>1</td><td>Tattered</td></tr>
+            <tr><td>Old Kepka</td><td>1</td><td>5000</td><td>5</td><td>5</td><td>5</td><td>Tattered</td></tr>
+            <tr><td>Ruined Beret</td><td>1</td><td>8500</td><td>5</td><td>8</td><td>5</td><td>Tattered</td></tr>
+            <tr><td>Ashen Ushanka</td><td>2</td><td>18000</td><td>8</td><td>10</td><td>8</td><td>Tattered</td></tr>
+            <tr><td>GP-4 Gas Mask</td><td>-</td><td>25000</td><td>5</td><td>8</td><td>20</td><td>Scavenger</td></tr>
+            <tr><td>Refurbished Kask</td><td>-</td><td>27500</td><td>15</td><td>15</td><td>5</td><td>Medium</td></tr>
+            <tr><td>Parade Helmet</td><td>-</td><td>29000</td><td>15</td><td>15</td><td>5</td><td>Medium</td></tr>
+            <tr><td>Security Helmet</td><td>-</td><td>89000</td><td>35</td><td>35</td><td>20</td><td>Heavy</td></tr>
+            <tr><td>Revolutionary Kepka</td><td>-</td><td>5000</td><td>10</td><td>8</td><td>8</td><td>Scavenger</td></tr>
+            <tr><td>Skull Mask</td><td>-</td><td>5000</td><td>3</td><td>10</td><td>5</td><td>Tattered</td></tr>
+            <tr><td>Balistic Kask</td><td>-</td><td>40000</td><td>23</td><td>25</td><td>5</td><td>Medium</td></tr>
+        </table>
+    </div>
+
+    <!-- BODY ARMOUR -->
+    <div class="card">
+        <h2>Body Armour</h2>
+        <table>
+            <tr>
+                <th>Item</th><th>Vendor Rank</th><th>Price</th><th>Stat 1</th><th>Stat 2</th><th>Stat 3</th><th>Type</th>
+            </tr>
+            <tr><td>Green Rags</td><td>1</td><td>5000</td><td>3</td><td>5</td><td>5</td><td>Tattered</td></tr>
+            <tr><td>Patched Armored Blouse</td><td>2</td><td>19000</td><td>10</td><td>15</td><td>10</td><td>Tattered</td></tr>
+            <tr><td>Plated Overcoat</td><td>-</td><td>45000</td><td>25</td><td>18</td><td>15</td><td>Scavenger</td></tr>
+            <tr><td>Armoured Rags</td><td>2</td><td>35000</td><td>15</td><td>23</td><td>13</td><td>Scavenger</td></tr>
+            <tr><td>Dusty Overcoat</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Tattered</td></tr>
+            <tr><td>Metal Breastplate</td><td>-</td><td>40000</td><td>25</td><td>30</td><td>10</td><td>Medium</td></tr>
+            <tr><td>Stronghold Vest</td><td>-</td><td>65000</td><td>38</td><td>35</td><td>15</td><td>Medium</td></tr>
+            <tr><td>Roit Vest</td><td>-</td><td>86000</td><td>40</td><td>50</td><td>20</td><td>Heavy</td></tr>
+            <tr><td>Ekzoskelet Armor</td><td>-</td><td>100000</td><td>50</td><td>50</td><td>30</td><td>Heavy</td></tr>
+            <tr><td>Scrapyard Armor</td><td>-</td><td>32000</td><td>15</td><td>15</td><td>8</td><td>Scavenger</td></tr>
+        </table>
+    </div>
+
+    <!-- PANTS -->
+    <div class="card">
+        <h2>Pants</h2>
+        <table>
+            <tr>
+                <th>Item</th><th>Vendor Rank</th><th>Price</th><th>Stat 1</th><th>Stat 2</th><th>Stat 3</th><th>Type</th>
+            </tr>
+            <tr><td>Old Blue Trousers</td><td>1</td><td>8500</td><td>5</td><td>8</td><td>5</td><td>Tattered</td></tr>
+            <tr><td>Winter Pants</td><td>2</td><td>12500</td><td>10</td><td>10</td><td>8</td><td>Tattered</td></tr>
+            <tr><td>Reinforced Leather Pants</td><td>-</td><td>33000</td><td>18</td><td>18</td><td>10</td><td>Medium</td></tr>
+            <tr><td>Scrapyard Pants</td><td>2</td><td>22000</td><td>10</td><td>13</td><td>10</td><td>Scavenger</td></tr>
+            <tr><td>Plated Ragged Pants</td><td>3</td><td>45000</td><td>13</td><td>15</td><td>10</td><td>Scavenger</td></tr>
+            <tr><td>Ekzoskelet Legs</td><td>-</td><td>100000</td><td>30</td><td>35</td><td>20</td><td>Heavy</td></tr>
+        </table>
+    </div>
+
+</main>
+
+<div class="card">
+    <h2>Backpacks</h2>
+    <p><em>Backpacks will be added to SCAVLAND in a future update.</em></p>
+
+    <table>
+        <tr>
+            <th>Item</th><th>Vendor Rank</th><th>Price</th>
+            <th>Stat 1</th><th>Stat 2</th><th>Stat 3</th><th>Type</th>
+        </tr>
+
+        <!-- No items yet — coming soon -->
+    </table>
+</div>
+
+<div class="card">
+    <h2>Gas Masks</h2>
+    <p><em>Gas Masks will be added to SCAVLAND in a future update.</em></p>
+
+    <table>
+        <tr>
+            <th>Item</th><th>Vendor Rank</th><th>Price</th>
+            <th>Stat 1</th><th>Stat 2</th><th>Stat 3</th><th>Type</th>
+        </tr>
+
+        <!-- No items yet — coming soon -->
+    </table>
+</div>
+
+
+<footer>
+    <p>SCAVLAND © 2026 — Fan‑made database</p>
+</footer>
+</body>
+</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const order = ["Tattered", "Scavenger", "Medium", "Heavy"];
+
+    function sortTable(table) {
+        const rows = Array.from(table.querySelectorAll("tr")).slice(1); // skip header
+        rows.sort((a, b) => {
+            const typeA = a.cells[6].innerText.trim();
+            const typeB = b.cells[6].innerText.trim();
+            return order.indexOf(typeA) - order.indexOf(typeB);
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+
+    document.querySelectorAll("table").forEach(sortTable);
+
+});
+</script>
+

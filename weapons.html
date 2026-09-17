@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SCAVLAND Weapons Database</title>
+
+<style>
+
+/* NAV BAR CSS GOES FIRST */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    padding: 15px;
+    border-bottom: 2px solid #ffcc66;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffcc66;
+}
+
+nav a {
+    color: #eee;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffcc66;
+}
+
+/* THEN YOUR TABLE CSS */
+body {
+    background: #111;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #222;
+}
+
+th, td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: #333;
+    color: #ffcc66;
+}
+
+tr:nth-child(even) {
+    background: #1a1a1a;
+}
+
+</style>
+<script>
+function autoSort(tableId) {
+    const tierOrder = ["Scrap", "Basic", "Advanced", "Expert", "Elite"];
+    const table = document.getElementById(tableId);
+    const rows = Array.from(table.querySelectorAll("tr")).slice(1);
+
+    rows.sort((a, b) => {
+        const tierA = a.cells[9].innerText.trim();
+        const tierB = b.cells[9].innerText.trim();
+        return tierOrder.indexOf(tierA) - tierOrder.indexOf(tierB);
+    });
+
+    rows.forEach(r => table.appendChild(r));
+}
+
+window.onload = function() {
+    autoSort("pistolTable");
+    autoSort("shotgunTable");
+    autoSort("rifleTable");
+    autoSort("highcalTable");
+    autoSort("specialTable");
+};
+</script>
+
+</head>
+<body>
+<div class="nav-bar">
+    <div class="logo">SCAVLAND</div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="weapons.html">Weapons</a>
+        <a href="vendors.html">Vendors</a>
+        <a href="areas.html">Areas</a>
+        <a href="map.html">Map</a>
+        <a href="crafting.html">Crafting</a>
+        <a href="armour.html">Armour</a>
+        <a href="factions.html">Factions</a>
+    </div>
+</div>
+
+<style>
+.nav-bar {
+    background: #222;
+    padding: 15px 20px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers everything */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffcc66;
+    margin-bottom: 8px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #ffffff; /* white text */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #ffcc66; /* gold hover */
+}
+</style>
+
+
+<h1 style="color:#ffcc66;">SCAVLAND Weapons Database</h1>
+
+<!-- ========================================================= -->
+<!-- ===================== PISTOL AMMO ======================== -->
+<!-- ========================================================= -->
+
+<h2>Pistol Ammo</h2>
+
+<table id="pistolTable">
+<tr>
+    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
+    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
+    <th>Reload</th><th>Tier</th><th>Ammo</th>
+</tr>
+
+<tr><td>PM Nikolay</td><td>10</td><td>600</td><td>15</td><td>12</td><td>36</td><td>30</td><td>33</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+<tr><td>PM Nikolay PB</td><td>11</td><td>600</td><td>15</td><td>14</td><td>36</td><td>30</td><td>33</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+
+<tr><td>Leon 1895</td><td>15</td><td>75</td><td>17</td><td>34</td><td>36</td><td>10</td><td>24</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+<tr><td>Leon 1895 (Long)</td><td>15</td><td>75</td><td>18</td><td>34</td><td>31</td><td>12</td><td>20</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+<tr><td>Leon 1895 (Short)</td><td>15</td><td>18</td><td>16</td><td>28</td><td>40</td><td>6</td><td>30</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+
+<tr><td>Medved Monster</td><td>10</td><td>450</td><td>16</td><td>26</td><td>38</td><td>14</td><td>14</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+<tr><td>Medved Monster (Silenced)</td><td>10</td><td>450</td><td>16</td><td>30</td><td>37</td><td>14</td><td>12</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+
+<tr><td>Bahadir 920</td><td>10</td><td>600</td><td>18</td><td>28</td><td>30</td><td>18</td><td>15</td><td>1.5</td><td>Basic</td><td>Pistol</td></tr>
+<tr><td>Bahadir 918 (Short)</td><td>10</td><td>700</td><td>17</td><td>20</td><td>35</td><td>28</td><td>15</td><td>1</td><td>Basic</td><td>Pistol</td></tr>
+<tr><td>Bahadir 918 (Long)</td><td>11</td><td>700</td><td>18</td><td>24</td><td>25</td><td>30</td><td>14</td><td>1</td><td>Basic</td><td>Pistol</td></tr>
+
+</table>
+
+<!-- ========================================================= -->
+<!-- ===================== SHOTGUN AMMO ======================= -->
+<!-- ========================================================= -->
+
+<h2>Shotgun Ammo</h2>
+
+<table id="shotgunTable">
+<tr>
+    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
+    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
+    <th>Reload</th><th>Tier</th><th>Ammo</th>
+</tr>
+
+<tr><td>Svarsh Miracle (Short)</td><td>30</td><td>150</td><td>14</td><td>33</td><td>65</td><td>8</td><td>8</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+<tr><td>Svarsh Miracle (Long)</td><td>30</td><td>150</td><td>16</td><td>28</td><td>61</td><td>8</td><td>4</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+
+<tr><td>PM 12-70 (Short)</td><td>30</td><td>90</td><td>14</td><td>12</td><td>67</td><td>4</td><td>15</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+<tr><td>PM 12-70 (Short | Extended)</td><td>30</td><td>90</td><td>14</td><td>12</td><td>67</td><td>4</td><td>15</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+<tr><td>PM 12-70 (Long)</td><td>30</td><td>90</td><td>16</td><td>14</td><td>59</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+<tr><td>PM 12-70 (Long | Extended)</td><td>30</td><td>90</td><td>16</td><td>14</td><td>59</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+
+<tr><td>Zavod 34</td><td>30</td><td>600</td><td>15</td><td>18</td><td>53</td><td>4</td><td>8</td><td>1.1</td><td>Scrap</td><td>Shotgun</td></tr>
+<tr><td>Zavod 34 (Short)</td><td>30</td><td>600</td><td>12</td><td>12</td><td>59</td><td>4</td><td>14</td><td>1.3</td><td>Scrap</td><td>Shotgun</td></tr>
+
+<tr><td>Borealis 12</td><td>30</td><td>500</td><td>18</td><td>10</td><td>55</td><td>7</td><td>10</td><td>1</td><td>Advanced</td><td>Shotgun</td></tr>
+<tr><td>Borealis 12-TAK</td><td>30</td><td>500</td><td>18</td><td>10</td><td>55</td><td>7</td><td>10</td><td>1</td><td>Advanced</td><td>Shotgun</td></tr>
+
+</table>
+
+<!-- ========================================================= -->
+<!-- ======================= RIFLE AMMO ======================= -->
+<!-- ========================================================= -->
+
+<h2>Rifle Ammo</h2>
+
+<table id="rifleTable">
+<tr>
+    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
+    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
+    <th>Reload</th><th>Tier</th><th>Ammo</th>
+</tr>
+
+<tr><td>Mikhail 74 U</td><td>17</td><td>700</td><td>16</td><td>32</td><td>39</td><td>8</td><td>12</td><td>1</td><td>Basic</td><td>Rifle</td></tr>
+<tr><td>Mikhail 47</td><td>17</td><td>600</td><td>18</td><td>38</td><td>49</td><td>14</td><td>8</td><td>1</td><td>Basic</td><td>Rifle</td></tr>
+
+<tr><td>Thread Cutter</td><td>17</td><td>600</td><td>18</td><td>45</td><td>42</td><td>10</td><td>10</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
+<tr><td>Thread Cutter (Short)</td><td>17</td><td>900</td><td>18</td><td>48</td><td>38</td><td>14</td><td>16</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
+
+<tr><td>M4 Svodbonik</td><td>18</td><td>600</td><td>19</td><td>46</td><td>44</td><td>22</td><td>18</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
+<tr><td>Svobodnik M4 (Long)</td><td>17</td><td>600</td><td>20</td><td>52</td><td>41</td><td>18</td><td>16</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
+
+</table>
+
+<!-- ========================================================= -->
+<!-- =================== HIGH CAL RIFLE AMMO ================== -->
+<!-- ========================================================= -->
+
+<h2>High Caliber Rifle Ammo</h2>
+
+<table id="highcalTable">
+<tr>
+    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
+    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
+    <th>Reload</th><th>Tier</th><th>Ammo</th>
+</tr>
+
+<tr><td>3-Line Nagant (Stockless)</td><td>30</td><td>60</td><td>18</td><td>44</td><td>42</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
+<tr><td>3-Line Nagant (Obrez)</td><td>20</td><td>60</td><td>16</td><td>50</td><td>52</td><td>4</td><td>12</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
+<tr><td>3-Line Nagant (Infantry)</td><td>30</td><td>60</td><td>20</td><td>50</td><td>35</td><td>4</td><td>6</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
+<tr><td>3-Line Nagant (Full Stock)</td><td>30</td><td>60</td><td>21</td><td>60</td><td>35</td><td>4</td><td>4</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
+
+<tr><td>Bortovka Tinker</td><td>30</td><td>100</td><td>18</td><td>38</td><td>50</td><td>4</td><td>12</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
+<tr><td>Bortovka Tinker (Long / +Mag)</td><td>30</td><td>100</td><td>20</td><td>42</td><td>41</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
+<tr><td>Bortovka Tinker (+Mag)</td><td>30</td><td>100</td><td>18</td><td>50</td><td>44</td><td>4</td><td>12</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
+
+<tr><td>2HMG</td><td>30</td><td>700</td><td>16</td><td>24</td><td>27</td><td>20</td><td>8</td><td>1</td><td>Expert</td><td>High Cal</td></tr>
+<tr><td>63 Dragoon</td><td>30</td><td>125</td><td>22</td><td>64</td><td>47</td><td>10</td><td>10</td><td>1</td><td>Expert</td><td>High Cal</td></tr>
+
+</table>
+
+<!-- ========================================================= -->
+<!-- ======================= SPECIAL AMMO ===================== -->
+<!-- ========================================================= -->
+
+<h2>Special Ammo</h2>
+
+<table id="specialTable">
+<tr>
+    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
+    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
+    <th>Reload</th><th>Tier</th><th>Ammo</th>
+</tr>
+
+<tr><td>Mikhail 50</td><td>76</td><td>200</td><td>22</td><td>68</td><td>100</td><td>5</td><td>5</td><td>1</td><td>Expert</td><td>Special</td></tr>
+<tr><td>Mikhail 50 (Prototype)</td><td>76</td><td>200</td><td>22</td><td>70</td><td>100</td><td>4</td><td>2</td><td>1</td><td>Expert</td><td>Special</td></tr>
+<tr><td>Mikhail 50 (Pristine)</td><td>76</td><td>80</td><td>22</td><td>64</td><td>100</td><td>5</td><td>2</td><td>1</td><td>Expert</td><td>Special</td></tr>
+
+</table>
+
+<footer style="text-align:center; padding:20px; color:#777;">
+    SCAVLAND Weapons Database © 2026
+</footer>
+
+</body>
+</html>
