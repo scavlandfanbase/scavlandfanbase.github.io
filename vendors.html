@@ -260,11 +260,10 @@ function toggleVendor(id) {
 
             <tr><td>Canteen</td><td>1</td><td>480</td></tr>
             <tr><td>Radish</td><td>1</td><td>150</td></tr>
-            <tr><td>Russet Potato</td><td>1</td><td>800</td></tr>
+                       <tr><td>Russet Potato</td><td>1</td><td>800</td></tr>
             <tr><td>Dried Mushrooms</td><td>1</td><td>1000</td></tr>
             <tr><td>Large Pumpkin</td><td>2</td><td>3000</td></tr>
             <tr><td>Vegetable Soup</td><td>2</td><td>7500</td></tr>
-
         </table>
     </div>
 </div>
@@ -274,24 +273,19 @@ function toggleVendor(id) {
         Yefim — East of Sontse Station
         <div class="vendor-faction">Faction: ?</div>
     </div>
-
     <div class="vendor-content" id="yefim">
         <table class="vendor-table">
             <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-
             <tr><td>GP-4 Gas Mask</td><td>1</td><td>25000</td></tr>
             <tr><td>Armoured Rags</td><td>2</td><td>35000</td></tr>
             <tr><td>Plated Overcoat</td><td>3</td><td>45000</td></tr>
             <tr><td>Scrapyard Pants</td><td>2</td><td>22000</td></tr>
             <tr><td>Plated Ragged Pants</td><td>3</td><td>45000</td></tr>
-
             <tr><td>Bandage</td><td>1</td><td>250</td></tr>
             <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td></tr>
             <tr><td>Canteen</td><td>1</td><td>480</td></tr>
             <tr><td>Canned Beans</td><td>1</td><td>2100</td></tr>
-
             <tr><td>Medium Armor Repair Kit Blueprint</td><td>2</td><td>50000</td></tr>
-
         </table>
     </div>
 </div>
@@ -301,11 +295,9 @@ function toggleVendor(id) {
         Alexei — North East of the Mire
         <div class="vendor-faction">Faction: ?</div>
     </div>
-
     <div class="vendor-content" id="alexei">
         <table class="vendor-table">
             <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-
             <tr><td>Bandage</td><td>1</td><td>250</td></tr>
             <tr><td>Advanced Bandage</td><td>3</td><td>4000</td></tr>
             <tr><td>IFAK Medkit</td><td>3</td><td>12000</td></tr>
@@ -317,11 +309,121 @@ function toggleVendor(id) {
             <tr><td>Pills</td><td>1</td><td>2500</td></tr>
             <tr><td>Splint</td><td>1</td><td>3000</td></tr>
             <tr><td>Canteen</td><td>1</td><td>480</td></tr>
-
             <tr><td>Advanced Bandage Blueprint</td><td>1</td><td>15000</td></tr>
             <tr><td>Stimpack Blueprint</td><td>1</td><td>20000</td></tr>
             <tr><td>AI-2 Army Medkit Blueprint</td><td>2</td><td>30000</td></tr>
             <tr><td>IFAK Medkit Blueprint</td><td>3</td><td>50000</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- NEW VENDOR SECTION FOR VOLODYMYR -->
+<div class="vendor-section">
+    <div class="vendor-header" onclick="toggleVendor('volodymyr')">
+        Volodymyr
+        <div class="vendor-faction">Faction: Gunners</div>
+    </div>
+    <div class="vendor-content" id="volodymyr">
+        <table class="vendor-table">
+            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+            <!-- Weapon Maintenance & Blueprints -->
+            <tr><td>Gun Lube</td><td>1</td><td>3000</td></tr>
+            <tr><td>Gun Cleaning Rod</td><td>1</td><td>5000</td></tr>
+            <tr><td>Gun Field Tools</td><td>1</td><td>7500</td></tr>
+            <tr><td>Advanced Gun Repair Kit</td><td>2</td><td>60000</td></tr>
+            <tr><td>Expert Gun Repair Kit</td><td>3</td><td>120000</td></tr>
+            <tr><td>Advanced Gun Repair Kit Blueprint</td><td>2</td><td>40000</td></tr>
+            <tr><td>Expert Gun Repair Kit Blueprint</td><td>3</td><td>60000</td></tr>
+            
+            <!-- Ammunition -->
+            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td></tr>
+            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td></tr>
+            <tr><td>Rifle FMJ Ammo</td><td>1</td><td>120</td></tr>
+            <tr><td>High Caliber Rifle FMJ Ammo</td><td>1</td><td>150</td></tr>
+            <tr><td>Pistol AP Ammo</td><td>2</td><td>100</td></tr>
+            <tr><td>Shotgun AP Ammo</td><td>2</td><td>400</td></tr>
+            <tr><td>Rifle AP Ammo</td><td>3</td><td>240</td></tr>
+            <tr><td>High Caliber Rifle AP Ammo</td><td>3</td><td>300</td></tr>
+            
+            <!-- Sights & Scopes -->
+            <tr><td>Sidemounted 4x Scope</td><td>2</td><td>1250</td></tr>
+            <tr><td>Sniper 4x Scope</td><td>2</td><td>2500</td></tr>
+            <tr><td>Classic Scope</td><td>2</td><td>4000</td></tr>
+            <tr><td>Holographic Sight</td><td>2</td><td>2500</td></tr>
+            <tr><td>Red Dot Sight</td><td>2</td><td>1250</td></tr>
+            <tr><td>Vintage Red Dot Sight</td><td>2</td><td>2500</td></tr>
+            <tr><td>Elevated Red Dot Sight</td><td>2</td><td>1250</td></tr>
+            <tr><td>Lightweight 2x Scope</td><td>2</td><td>2500</td></tr>
+            <tr><td>Lightweight 4x Scope</td><td>2</td><td>4000</td></tr>
+            
+            <!-- Muzzle Devices & Silencers -->
+            <tr><td>PM Small Compensator</td><td>1</td><td>4000</td></tr>
+            <tr><td>PM Muzzle Brake</td><td>2</td><td>4000</td></tr>
+            <tr><td>PM Silencer</td><td>2</td><td>2500</td></tr>
+            <tr><td>MK Slant Muzzle Brake</td><td>1</td><td>2000</td></tr>
+            <tr><td>MK Upgraded Muzzle Brake</td><td>2</td><td>4000</td></tr>
+            <tr><td>MK Compensator</td><td>2</td><td>10000</td></tr>
+            <tr><td>MK Silencer</td><td>3</td><td>4000</td></tr>
+            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td></tr>
+            
+            <!-- Weapon Magazines -->
+            <tr><td>Svarsh Drum Mag</td><td>2</td><td>4000</td></tr>
+            <tr><td>MK Drum Mag</td><td>3</td><td>8000</td></tr>
+            <tr><td>M4 Gen2 Drum Mag</td><td>3</td><td>8000</td></tr>
+            <tr><td>Borealis Drum Mag</td><td>3</td><td>8000</td></tr>
+            <tr><td>Medved Drum Mag</td><td>2</td><td>4000</td></tr>
+            <tr><td>TC Polymer Large Mag (Black)</td><td>2</td><td>2500</td></tr>
+            <tr><td>TC Polymer Mag (Black)</td><td>1</td><td>1250</td></tr>
+            <tr><td>MK Stamped Steel Mag</td><td>2</td><td>1250</td></tr>
+            <tr><td>Makeshift Double Stacked Steel Stick Mag</td><td>1</td><td>2500</td></tr>
+            <tr><td>M4 Large Aluminum Mag</td><td>2</td><td>2500</td></tr>
+            <tr><td>M4 Large Aluminum Mag (Tan)</td><td>2</td><td>2500</td></tr>
+            <tr><td>Borealis Aluminum Mag</td><td>2</td><td>1500</td></tr>
+            <tr><td>Borealis Curved Mag</td><td>2</td><td>2500</td></tr>
+            <tr><td>Borealis Long Curved Mag</td><td>2</td><td>4000</td></tr>
+            <tr><td>PP Pristine Mag</td><td>2</td><td>2500</td></tr>
+            <tr><td>Dragoon Steel Mag</td><td>2</td><td>2500</td></tr>
+            <tr><td>Dragoon Large Steel Mag</td><td>3</td><td>4000</td></tr>
+            <tr><td>Bahadir Ribbed Cylinder Mag</td><td>2</td><td>1250</td></tr>
+            
+            <!-- Weapon Stocks -->
+            <tr><td>Zavod Polymer Full Stock</td><td>1</td><td>1250</td></tr>
+            <tr><td>TC Skeleton Stock</td><td>2</td><td>2500</td></tr>
+            <tr><td>TC Wood Stock</td><td>2</td><td>750</td></tr>
+            <tr><td>Makeshift Prosthetic Stock</td><td>1</td><td>2500</td></tr>
+            <tr><td>Makeshift Grated Stock</td><td>1</td><td>2500</td></tr>
+            <tr><td>PM Full Polymer Stock</td><td>1</td><td>1250</td></tr>
+            <tr><td>PM Polymer Stock</td><td>1</td><td>750</td></tr>
+            <tr><td>MK Polymer Stock</td><td>1</td><td>2500</td></tr>
+            <tr><td>MK Fixed Carbine Stock</td><td>2</td><td>1250</td></tr>
+            <tr><td>Rifle Collapsible Stock Module</td><td>2</td><td>2500</td></tr>
+            <tr><td>Makeshift Collapsible Stock Module</td><td>2</td><td>2500</td></tr>
+            <tr><td>Borealis Adaptable Folding Stock</td><td>2</td><td>4000</td></tr>
+            <tr><td>Borealis Skeleton Stock</td><td>1</td><td>1250</td></tr>
+            <tr><td>MK Metal Stock</td><td>2</td><td>2500</td></tr>
+            <tr><td>Dragoon Polymer Stock</td><td>2</td><td>1250</td></tr>
+            <tr><td>Dragoon Folding Stock</td><td>2</td><td>4000</td></tr>
+            <tr><td>2HMG Modern Polymer Stock Module</td><td>3</td><td>2500</td></tr>
+            
+            <!-- Handguards & Grips -->
+            <tr><td>2HMG Railed Handguard</td><td>2</td><td>1250</td></tr>
+            <tr><td>Dragoon Polymer Handguard</td><td>2</td><td>1250</td></tr>
+            <tr><td>Dragoon Railed Handguard</td><td>3</td><td>4000</td></tr>
+            <tr><td>Bahadir Extended Handguard</td><td>3</td><td>2500</td></tr>
+            <tr><td>Bahadir Railed Handguard</td><td>2</td><td>1250</td></tr>
+            <tr><td>Borealis Polymer Short Handguard</td><td>1</td><td>1250</td></tr>
+            <tr><td>Borealis Adaptable Railed Handguard</td><td>2</td><td>4000</td></tr>
+            <tr><td>Borealis Lock Mount Handguard</td><td>2</td><td>2500</td></tr>
+            <tr><td>M4 Adaptable Extended Handguard</td><td>2</td><td>8000</td></tr>
+            <tr><td>M4 Slotted Mount Handguard</td><td>2</td><td>1250</td></tr>
+            <tr><td>M4 Ribbed Handguard</td><td>2</td><td>2500</td></tr>
+            <tr><td>M4 Railed Handguard</td><td>2</td><td>2500</td></tr>
+            <tr><td>MK Combination Handguard</td><td>1</td><td>2500</td></tr>
+            <tr><td>MK Slotted Mount Handguard</td><td>3</td><td>4000</td></tr>
+            <tr><td>MK Extended Railed Handguard</td><td>3</td><td>4000</td></tr>
+            <tr><td>MK Railed Combination Handguard</td><td>2</td><td>2500</td></tr>
+            <tr><td>MK Railed Polymer Handguard</td><td>2</td><td>2500</td></tr>
+            <tr><td>MK Extended Slotted Mount Handguard</td><td>2</td><td>4000</td></tr>
 
         </table>
     </div>
