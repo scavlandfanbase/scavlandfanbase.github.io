@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>SCAVLAND Vendors</title>
 
+<!-- Navigation Bar Component -->
 <div class="nav-bar">
     <div class="nav-links">
         <a href="index.html">Home</a>
@@ -16,32 +17,7 @@
 </div>
 
 <style>
-.nav-bar {
-    background: #222;
-    padding: 12px 20px;
-    border-bottom: 2px solid #333;
-    display: flex;
-    justify-content: center; /* centers the nav */
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.nav-links a {
-    color: #ffffff; /* white text */
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 20px; /* spacing between links */
-}
-
-.nav-links a:hover {
-    color: #ffcc66; /* gold hover */
-}
-</style>
-
-
-<style>
+/* Base Reset and Layout */
 body {
     background: #111;
     color: #ddd;
@@ -50,7 +26,30 @@ body {
     padding: 20px;
 }
 
-/* Vendor Container */
+.nav-bar {
+    background: #222;
+    padding: 12px 20px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 20px;
+}
+
+.nav-links a:hover {
+    color: #ffcc66;
+}
+
+/* Accordion Vendor Cards */
 .vendor-section {
     background: #1a1a1a;
     border: 2px solid #333;
@@ -58,7 +57,6 @@ body {
     border-radius: 6px;
 }
 
-/* Vendor Header */
 .vendor-header {
     padding: 15px;
     background: #222;
@@ -69,20 +67,22 @@ body {
     border-bottom: 2px solid #333;
 }
 
-/* Faction Label */
+.vendor-header:hover {
+    background: #2a2a2a;
+}
+
 .vendor-faction {
     font-size: 14px;
     color: #bbb;
     margin-top: 4px;
 }
 
-/* Hidden Content */
 .vendor-content {
     display: none;
     padding: 15px;
 }
 
-/* Table Styling */
+/* Normalized Unified Table Grid Layout */
 .vendor-table {
     width: 100%;
     border-collapse: collapse;
@@ -92,6 +92,7 @@ body {
 .vendor-table th, .vendor-table td {
     padding: 8px;
     border-bottom: 1px solid #333;
+    vertical-align: middle;
 }
 
 .vendor-table th {
@@ -103,8 +104,33 @@ body {
     color: #ddd;
 }
 
-.vendor-header:hover {
-    background: #2a2a2a;
+/* REUSABLE GLOBAL BADGE UTILITIES FOR FUTURE EXPANSIONS */
+.badge-group {
+    display: flex; 
+    gap: 6px; 
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    background: #222; 
+    border: 1px solid #444; 
+    padding: 2px 8px; 
+    border-radius: 4px; 
+    font-size: 13px;
+    color: #ddd;
+}
+
+.stat-badge b {
+    color: #ffcc66;
+}
+
+.type-label {
+    color: #888;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
 }
 </style>
 
@@ -122,6 +148,7 @@ function toggleVendor(id) {
 
 <div id="vendor-list">
 
+<!-- VENDOR 1: GRIGORY -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('grigory')">
         Grigory — The Mire
@@ -130,144 +157,132 @@ function toggleVendor(id) {
 
     <div class="vendor-content" id="grigory">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
 
-            <tr><td>PM Nikolay</td><td>1</td><td>2750</td></tr>
-            <tr><td>Leon 1895 (Long)</td><td>1</td><td>5250</td></tr>
-            <tr><td>Zavod 24 (Short)</td><td>1</td><td>9500</td></tr>
-            <tr><td>Medved Monster</td><td>1</td><td>13250</td></tr>
-            <tr><td>Mikhail 74 U</td><td>2</td><td>36250</td></tr>
-            <tr><td>PM 12-70 (Short)</td><td>2</td><td>16500</td></tr>
-            <tr><td>Mikhail 47</td><td>3</td><td>47000</td></tr>
+            <tr><td>PM Nikolay</td><td>1</td><td>2750</td><td><span class="type-label">Pistol</span></td></tr>
+            <tr><td>Leon 1895 (Long)</td><td>1</td><td>5250</td><td><span class="type-label">Rifle</span></td></tr>
+            <tr><td>Zavod 24 (Short)</td><td>1</td><td>9500</td><td><span class="type-label">Shotgun</span></td></tr>
+            <tr><td>Medved Monster</td><td>1</td><td>13250</td><td><span class="type-label">Rifle</span></td></tr>
+            <tr><td>Mikhail 74 U</td><td>2</td><td>36250</td><td><span class="type-label">SMG</span></td></tr>
+            <tr><td>PM 12-70 (Short)</td><td>2</td><td>16500</td><td><span class="type-label">Shotgun</span></td></tr>
+            <tr><td>Mikhail 47</td><td>3</td><td>47000</td><td><span class="type-label">Assault Rifle</span></td></tr>
 
-            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td></tr>
-            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td></tr>
-            <tr><td>Rifle FMJ Ammo</td><td>2</td><td>200</td></tr>
+            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 10</span><span class="stat-badge"><b>Pen:</b> 0%</span></div></td></tr>
+            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 30</span><span class="stat-badge"><b>Pen:</b> 0%</span></div></td></tr>
+            <tr><td>Rifle FMJ Ammo</td><td>2</td><td>200</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 17</span><span class="stat-badge"><b>Pen:</b> 0%</span></div></td></tr>
 
-            <tr><td>Gun Lube</td><td>1</td><td>1500</td></tr>
-            <tr><td>Gun Cleaning Rod</td><td>1</td><td>3500</td></tr>
-            <tr><td>Gun Field Tools</td><td>1</td><td>5000</td></tr>
-            <tr><td>Scrap Gun Repair Kit</td><td>1</td><td>12000</td></tr>
+            <tr><td>Gun Lube</td><td>1</td><td>1500</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 5%</span><span class="stat-badge"><b>Min Cond:</b> 80%</span></div></td></tr>
+            <tr><td>Gun Cleaning Rod</td><td>1</td><td>3500</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 70%</span></div></td></tr>
+            <tr><td>Gun Field Tools</td><td>1</td><td>5000</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 60%</span></div></td></tr>
+            <tr><td>Scrap Gun Repair Kit</td><td>1</td><td>12000</td><td><div class="badge-group"><span class="type-label">Kit</span><span class="stat-badge"><b>Repair:</b> 20%</span><span class="stat-badge"><b>Min Cond:</b> 10%</span></div></td></tr>
 
-            <tr><td>Makeshift Large Steel Stick Mag</td><td>1</td><td>1250</td></tr>
-            <tr><td>MK Steel-Polymer Mag (Brown)</td><td>2</td><td>1250</td></tr>
-            <tr><td>MK Triangle Stock</td><td>2</td><td>2500</td></tr>
-            <tr><td>MK Underfolding Stock</td><td>2</td><td>1250</td></tr>
-            <tr><td>MK Dust Cover</td><td>2</td><td>1250</td></tr>
-            <tr><td>MK Railed Dust Cover</td><td>3</td><td>2500</td></tr>
-            <tr><td>MK Vert Grip Handguard</td><td>2</td><td>1250</td></tr>
-            <tr><td>MK Wood Handguard</td><td>2</td><td>750</td></tr>
-            <tr><td>MK Railed Combination Handguard</td><td>3</td><td>2500</td></tr>
-            <tr><td>Short Tapered Vertical Foregrip</td><td>3</td><td>1250</td></tr>
-            <tr><td>MK Slant Muzzle Brake</td><td>2</td><td>2000</td></tr>
-            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td></tr>
-            <tr><td>Bakelite Pistol Grip Module</td><td>2</td><td>750</td></tr>
-            <tr><td>Wooden Pistol Grip Module</td><td>2</td><td>1250</td></tr>
-            <tr><td>Vintage Red Dot Sight</td><td>3</td><td>2500</td></tr>
-            <tr><td>Red Dot Sight</td><td>3</td><td>1250</td></tr>
+            <tr><td>Makeshift Large Steel Stick Mag</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -4</span></div></td></tr>
+            <tr><td>MK Steel-Polymer Mag (Brown)</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
+            <tr><td>MK Triangle Stock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -9</span></div></td></tr>
+            <tr><td>MK Underfolding Stock</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -6</span></div></td></tr>
+            <tr><td>MK Dust Cover</td><td>2</td><td>1250</td><td><span class="type-label">Receiver</span></td></tr>
+            <tr><td>MK Railed Dust Cover</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>MK Vert Grip Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4</span><span class="stat-badge"><b>Handling:</b> +4</span></div></td></tr>
+            <tr><td>MK Wood Handguard</td><td>2</td><td>750</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span></div></td></tr>
+            <tr><td>MK Railed Combination Handguard</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Handling:</b> +6</span></div></td></tr>
+            <tr><td>Short Tapered Vertical Foregrip</td><td>3</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Handling:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>MK Slant Muzzle Brake</td><td>2</td><td>2000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6.5</span></div></td></tr>
+            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Handling:</b> +4</span></div></td></tr>
+            <tr><td>Bakelite Pistol Grip Module</td><td>2</td><td>750</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Handling:</b> +2</span></div></td></tr>
+            <tr><td>Wooden Pistol Grip Module</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Handling:</b> +3</span></div></td></tr>
+            <tr><td>Vintage Red Dot Sight</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Sight</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span></div></td></tr>
+            <tr><td>Red Dot Sight</td><td>3</td><td>1250</td><td><div class="badge-group"><span class="type-label">Sight</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span></div></td></tr>
 
-            <tr><td>Bandage</td><td>1</td><td>250</td></tr>
-            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td></tr>
+            <tr><td>Bandage</td><td>1</td><td>250</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +5</span><span class="stat-badge"><b>Bleed:</b> -15</span></div></td></tr>
+            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +30</span><span class="stat-badge"><b>Rad:</b> -15</span></div></td></tr>
 
-            <tr><td>Basic Gun Repair Kit Blueprint</td><td>1</td><td>30000</td></tr>
+            <tr><td>Basic Gun Repair Kit Blueprint</td><td>1</td><td>30000</td><td><span class="type-label">Blueprint</span></td></tr>
         </table>
     </div>
 </div>
-
-</div> <!-- vendor-list -->
-
+<!-- VENDOR 2: PETAR -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('petar')">
         Petar — The Mire
         <div class="vendor-faction">Faction: ?</div>
     </div>
-
     <div class="vendor-content" id="petar">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-
-            <tr><td>Moonshine</td><td>1</td><td>2400</td></tr>
-            <tr><td>Overripe Potato</td><td>1</td><td>250</td></tr>
-            <tr><td>WG-40</td><td>1</td><td>250</td></tr>
-
-            <tr><td>Mechanical Components</td><td>1</td><td>10000</td></tr>
-            <tr><td>Metal Scrap</td><td>1</td><td>100</td></tr>
-            <tr><td>Fabric Scrap</td><td>1</td><td>100</td></tr>
-            <tr><td>Plastic Scrap</td><td>1</td><td>100</td></tr>
-            <tr><td>Rubber Scrap</td><td>1</td><td>100</td></tr>
-            <tr><td>Chemical Residue</td><td>1</td><td>100</td></tr>
-
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
+            <tr><td>Moonshine</td><td>1</td><td>2400</td><td><span class="type-label">Consumable</span></td></tr>
+            <tr><td>Overripe Potato</td><td>1</td><td>250</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>WG-40</td><td>1</td><td>250</td><td><span class="type-label">Material</span></td></tr>
+            <tr><td>Mechanical Components</td><td>1</td><td>10000</td><td><span class="type-label">Material</span></td></tr>
+            <tr><td>Metal Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
+            <tr><td>Fabric Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
+            <tr><td>Plastic Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
+            <tr><td>Rubber Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
+            <tr><td>Chemical Residue</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
         </table>
     </div>
-
 </div>
+
+<!-- VENDOR 3: BOGDAN -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('bogdan')">
         Bogdan — The Mire
         <div class="vendor-faction">Faction: ?</div>
     </div>
-
     <div class="vendor-content" id="bogdan">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-
-            <tr><td>Pistol HP Ammo</td><td>2</td><td>60</td></tr>
-            <tr><td>Shotgun HP Ammo</td><td>2</td><td>180</td></tr>
-            <tr><td>Rifle HP Ammo</td><td>3</td><td>280</td></tr>
-            <tr><td>High Caliber Rifle HP Ammo</td><td>3</td><td>250</td></tr>
-
-            <tr><td>Meat Drumstick</td><td>2</td><td>2400</td></tr>
-            <tr><td>Meat Skewer</td><td>1</td><td>1800</td></tr>
-            <tr><td>Dried Steak</td><td>1</td><td>1450</td></tr>
-            <tr><td>Rabbit Meat</td><td>1</td><td>50</td></tr>
-            <tr><td>Rat Meat</td><td>1</td><td>25</td></tr>
-            <tr><td>Mutant Steak</td><td>1</td><td>100</td></tr>
-            <tr><td>Worm Meat</td><td>1</td><td>100</td></tr>
-
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
+            <tr><td>Pistol HP Ammo</td><td>2</td><td>60</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
+            <tr><td>Shotgun HP Ammo</td><td>2</td><td>180</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
+            <tr><td>Rifle HP Ammo</td><td>3</td><td>280</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
+            <tr><td>High Caliber Rifle HP Ammo</td><td>3</td><td>250</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
+            <tr><td>Meat Drumstick</td><td>2</td><td>2400</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Meat Skewer</td><td>1</td><td>1800</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Dried Steak</td><td>1</td><td>1450</td><td><div class="badge-group"><span class="type-label">Food</span><span class="stat-badge"><b>Hunger:</b> -20</span><span class="stat-badge"><b>Radiation:</b> +5</span></div></td></tr>
+            <tr><td>Rabbit Meat</td><td>1</td><td>50</td><td><span class="type-label">Raw Food</span></td></tr>
+            <tr><td>Rat Meat</td><td>1</td><td>25</td><td><span class="type-label">Raw Food</span></td></tr>
+            <tr><td>Mutant Steak</td><td>1</td><td>100</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Worm Meat</td><td>1</td><td>100</td><td><span class="type-label">Raw Food</span></td></tr>
         </table>
     </div>
 </div>
 
+<!-- VENDOR 4: MARKO -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('marko')">
         Marko — The Mire
         <div class="vendor-faction">Faction: Commenfolk</div>
     </div>
-
     <div class="vendor-content" id="marko">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-
-            <tr><td>Cigarettes</td><td>1</td><td>750</td></tr>
-            <tr><td>Mystery Pills</td><td>1</td><td>6000</td></tr>
-            <tr><td>Moonshite</td><td>1</td><td>2400</td></tr>
-            <tr><td>Echelon - Killer Apple</td><td>1</td><td>3000</td></tr>
-            <tr><td>Fresh Mushrooms</td><td>1</td><td>3000</td></tr>
-
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
+            <tr><td>Cigarettes</td><td>1</td><td>750</td><td><span class="type-label">Consumable</span></td></tr>
+            <tr><td>Mystery Pills</td><td>1</td><td>6000</td><td><span class="type-label">Medical</span></td></tr>
+            <tr><td>Moonshine</td><td>1</td><td>2400</td><td><span class="type-label">Consumable</span></td></tr>
+            <tr><td>Echelon - Killer Apple</td><td>1</td><td>3000</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Fresh Mushrooms</td><td>1</td><td>3000</td><td><span class="type-label">Food</span></td></tr>
         </table>
     </div>
 </div>
-
+<!-- VENDOR 5: JASNA -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('jasna')">
         Jasna — The Mire
         <div class="vendor-faction">Faction: Acolytes</div>
     </div>
-
     <div class="vendor-content" id="jasna">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-
-            <tr><td>Canteen</td><td>1</td><td>480</td></tr>
-            <tr><td>Radish</td><td>1</td><td>150</td></tr>
-                       <tr><td>Russet Potato</td><td>1</td><td>800</td></tr>
-            <tr><td>Dried Mushrooms</td><td>1</td><td>1000</td></tr>
-            <tr><td>Large Pumpkin</td><td>2</td><td>3000</td></tr>
-            <tr><td>Vegetable Soup</td><td>2</td><td>7500</td></tr>
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
+            <tr><td>Canteen</td><td>1</td><td>480</td><td><span class="type-label">Water</span></td></tr>
+            <tr><td>Radish</td><td>1</td><td>150</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Russet Potato</td><td>1</td><td>800</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Dried Mushrooms</td><td>1</td><td>1000</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Large Pumpkin</td><td>2</td><td>3000</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Vegetable Soup</td><td>2</td><td>7500</td><td><div class="badge-group"><span class="type-label">Food</span><span class="stat-badge"><b>Hunger:</b> -40</span><span class="stat-badge"><b>Thirst:</b> -20</span></div></td></tr>
         </table>
     </div>
 </div>
 
+<!-- VENDOR 6: YEFIM -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('yefim')">
         Yefim — East of Sontse Station
@@ -275,21 +290,22 @@ function toggleVendor(id) {
     </div>
     <div class="vendor-content" id="yefim">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-            <tr><td>GP-4 Gas Mask</td><td>1</td><td>25000</td></tr>
-            <tr><td>Armoured Rags</td><td>2</td><td>35000</td></tr>
-            <tr><td>Plated Overcoat</td><td>3</td><td>45000</td></tr>
-            <tr><td>Scrapyard Pants</td><td>2</td><td>22000</td></tr>
-            <tr><td>Plated Ragged Pants</td><td>3</td><td>45000</td></tr>
-            <tr><td>Bandage</td><td>1</td><td>250</td></tr>
-            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td></tr>
-            <tr><td>Canteen</td><td>1</td><td>480</td></tr>
-            <tr><td>Canned Beans</td><td>1</td><td>2100</td></tr>
-            <tr><td>Medium Armor Repair Kit Blueprint</td><td>2</td><td>50000</td></tr>
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
+            <tr><td>GP-4 Gas Mask</td><td>1</td><td>25000</td><td><span class="type-label">Gear</span></td></tr>
+            <tr><td>Armoured Rags</td><td>2</td><td>35000</td><td><span class="type-label">Armor</span></td></tr>
+            <tr><td>Plated Overcoat</td><td>3</td><td>45000</td><td><span class="type-label">Armor</span></td></tr>
+            <tr><td>Scrapyard Pants</td><td>2</td><td>22000</td><td><span class="type-label">Armor</span></td></tr>
+            <tr><td>Plated Ragged Pants</td><td>3</td><td>45000</td><td><span class="type-label">Armor</span></td></tr>
+            <tr><td>Bandage</td><td>1</td><td>250</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +5</span><span class="stat-badge"><b>Bleed:</b> -15</span></div></td></tr>
+            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +30</span><span class="stat-badge"><b>Rad:</b> -15</span><span class="stat-badge"><b>Thirst:</b> +3</span><span class="stat-badge"><b>Hunger:</b> +3</span></div></td></tr>
+            <tr><td>Canteen</td><td>1</td><td>480</td><td><span class="type-label">Water</span></td></tr>
+            <tr><td>Canned Beans</td><td>1</td><td>2100</td><td><span class="type-label">Food</span></td></tr>
+            <tr><td>Medium Armor Repair Kit Blueprint</td><td>2</td><td>50000</td><td><span class="type-label">Blueprint</span></td></tr>
         </table>
     </div>
 </div>
 
+<!-- VENDOR 7: ALEXEI -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('alexei')">
         Alexei — North East of the Mire
@@ -297,704 +313,163 @@ function toggleVendor(id) {
     </div>
     <div class="vendor-content" id="alexei">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
-            <tr><td>Bandage</td><td>1</td><td>250</td></tr>
-            <tr><td>Advanced Bandage</td><td>3</td><td>4000</td></tr>
-            <tr><td>IFAK Medkit</td><td>3</td><td>12000</td></tr>
-            <tr><td>Morphine</td><td>1</td><td>1250</td></tr>
-            <tr><td>Stimpack</td><td>2</td><td>6000</td></tr>
-            <tr><td>Headache Pills</td><td>1</td><td>1500</td></tr>
-            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td></tr>
-            <tr><td>AI-2 Army Medkit</td><td>2</td><td>6200</td></tr>
-            <tr><td>Pills</td><td>1</td><td>2500</td></tr>
-            <tr><td>Splint</td><td>1</td><td>3000</td></tr>
-            <tr><td>Canteen</td><td>1</td><td>480</td></tr>
-            <tr><td>Advanced Bandage Blueprint</td><td>1</td><td>15000</td></tr>
-            <tr><td>Stimpack Blueprint</td><td>1</td><td>20000</td></tr>
-            <tr><td>AI-2 Army Medkit Blueprint</td><td>2</td><td>30000</td></tr>
-            <tr><td>IFAK Medkit Blueprint</td><td>3</td><td>50000</td></tr>
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
+            <tr><td>Bandage</td><td>1</td><td>250</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +5</span><span class="stat-badge"><b>Bleed:</b> -15</span></div></td></tr>
+            <tr><td>Advanced Bandage</td><td>3</td><td>4000</td><td><span class="type-label">Meds</span></td></tr>
+            <tr><td>IFAK Medkit</td><td>3</td><td>12000</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +65</span><span class="stat-badge"><b>Bleed:</b> -50</span></div></td></tr>
+            <tr><td>Morphine</td><td>1</td><td>1250</td><td><span class="type-label">Infection</span></td></tr>
+            <tr><td>Stimpack</td><td>2</td><td>6000</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +35</span><span class="stat-badge"><b>Thirst:</b> +5</span><span class="stat-badge"><b>Hunger:</b> +5</span></div></td></tr>
+            <tr><td>Headache Pills</td><td>1</td><td>1500</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +15</span><span class="stat-badge"><b>Thirst:</b> +3</span></div></td></tr>
+            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +30</span><span class="stat-badge"><b>Rad:</b> -15</span><span class="stat-badge"><b>Thirst:</b> +3</span><span class="stat-badge"><b>Hunger:</b> +3</span></div></td></tr>
+            <tr><td>AI-2 Army Medkit</td><td>2</td><td>6200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +40</span><span class="stat-badge"><b>Bleed:</b> -20</span><span class="stat-badge"><b>Rad:</b> -10</span><span class="stat-badge"><b>Thirst:</b> +3</span><span class="stat-badge"><b>Hunger:</b> +3</span></div></td></tr>
+            <tr><td>Pills</td><td>1</td><td>2500</td><td><span class="type-label">Meds</span></td></tr>
+            <tr><td>Splint</td><td>1</td><td>3000</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Fracture:</b> -50</span></div></td></tr>
+            <tr><td>Canteen</td><td>1</td><td>480</td><td><span class="type-label">Water</span></td></tr>
+            <tr><td>Advanced Bandage Blueprint</td><td>1</td><td>15000</td><td><span class="type-label">Blueprint</span></td></tr>
+            <tr><td>Stimpack Blueprint</td><td>1</td><td>20000</td><td><span class="type-label">Blueprint</span></td></tr>
+            <tr><td>AI-2 Army Medkit Blueprint</td><td>2</td><td>30000</td><td><span class="type-label">Blueprint</span></td></tr>
+            <tr><td>IFAK Medkit Blueprint</td><td>3</td><td>50000</td><td><span class="type-label">Blueprint</span></td></tr>
         </table>
     </div>
 </div>
-
-<!-- VOLODYMYR PART 1: MAINTENACE & AMMUNITION -->
+<!-- VENDOR 8: VOLODYMYR (PART 1 OF 3) -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('volodymyr')">
-        Volodymyr
+        Volodymyr — Gunners Outpost
         <div class="vendor-faction">Faction: Gunners</div>
     </div>
     <div class="vendor-content" id="volodymyr">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Item Mechanics & Modifiers</th></tr>
-            
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
+
             <!-- Weapon Maintenance & Blueprints -->
-            <tr><td>Gun Lube</td><td>1</td><td>3000</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Polish & Carbon Removal</span>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Repair:</b> 5%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Min Condition:</b> 80%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Max Stacks:</b> 5</span>
-                </div>
-            </td></tr>
-            <tr><td>Gun Cleaning Rod</td><td>1</td><td>5000</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Field Barrel Maintenance</span>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Repair:</b> 15%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Min Condition:</b> 70%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Max Stacks:</b> 5</span>
-                </div>
-            </td></tr>
-            <tr><td>Gun Field Tools</td><td>1</td><td>7500</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Upkeep Tool Set</span>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Repair:</b> 15%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Min Condition:</b> 60%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Max Stacks:</b> 5</span>
-                </div>
-            </td></tr>
-            <tr><td>Advanced Gun Repair Kit</td><td>2</td><td>60000</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Pro-Grade Maintenance Case</span>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Repair:</b> 25%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Min Condition:</b> None (Any)</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Max Stacks:</b> 5</span>
-                </div>
-            </td></tr>
-            <tr><td>Expert Gun Repair Kit</td><td>3</td><td>120000</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Critical High-Grade Tools</span>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Repair:</b> 25%</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Min Condition:</b> None (Any)</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Max Stacks:</b> 5</span>
-                </div>
-            </td></tr>
-            <tr><td>Advanced Gun Repair Kit Blueprint</td><td>2</td><td>40000</td><td>
-                <span style="color:#ffcc66; font-size:13px;">Unlocks crafting recipe for the Advanced Kit</span>
-            </td></tr>
-            <tr><td>Expert Gun Repair Kit Blueprint</td><td>3</td><td>60000</td><td>
-                <span style="color:#ffcc66; font-size:13px;">Unlocks crafting recipe for the Expert Kit</span>
-            </td></tr>
+            <tr><td>Gun Lube</td><td>1</td><td>3000</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 5%</span><span class="stat-badge"><b>Min Cond:</b> 80%</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
+            <tr><td>Gun Cleaning Rod</td><td>1</td><td>5000</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 70%</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
+            <tr><td>Gun Field Tools</td><td>1</td><td>7500</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 60%</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
+            <tr><td>Advanced Gun Repair Kit</td><td>2</td><td>60000</td><td><div class="badge-group"><span class="type-label">Kit</span><span class="stat-badge"><b>Repair:</b> 25%</span><span class="stat-badge"><b>Min Cond:</b> Any</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
+            <tr><td>Expert Gun Repair Kit</td><td>3</td><td>120000</td><td><div class="badge-group"><span class="type-label">Kit</span><span class="stat-badge"><b>Repair:</b> 25%</span><span class="stat-badge"><b>Min Cond:</b> Any</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
+            <tr><td>Advanced Gun Repair Kit Blueprint</td><td>2</td><td>40000</td><td><span class="type-label">Blueprint</span></td></tr>
+            <tr><td>Expert Gun Repair Kit Blueprint</td><td>3</td><td>60000</td><td><span class="type-label">Blueprint</span></td></tr>
             
             <!-- Ammunition -->
-            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Standard Pistol / SMG Cartridge</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 10</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 0%</span></div>
-            </td></tr>
-            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Standard Spread Shot Pellets</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 6 x 5 (30)</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 0%</span></div>
-            </td></tr>
-            <tr><td>Rifle FMJ Ammo</td><td>1</td><td>120</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Standard Service Rifle Round</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 17</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 0%</span></div>
-            </td></tr>
-            <tr><td>High Caliber Rifle FMJ Ammo</td><td>1</td><td>150</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Heavy Full Metal Jacket Round</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 30</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 0%</span></div>
-            </td></tr>
-            <tr><td>Pistol AP Ammo</td><td>2</td><td>100</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Armor Piercing Pistol / SMG Round</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 8</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 50%</span></div>
-            </td></tr>
-            <tr><td>Shotgun AP Ammo</td><td>2</td><td>400</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Armor Piercing Shotgun Slug Variant</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 6 x 4 (24)</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 50%</span></div>
-            </td></tr>
-            <tr><td>Rifle AP Ammo</td><td>3</td><td>240</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Armor Piercing Service Rifle Round</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 14</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 50%</span></div>
-            </td></tr>
-            <tr><td>High Caliber Rifle AP Ammo</td><td>3</td><td>300</td><td>
-                <span style="color:#bbb; font-size:12px; display:block; margin-bottom:4px;">Heavy Tactical Armor Piercing Round</span>
-                <div style="display: flex; gap: 8px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Damage:</b> 26</span><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Penetration:</b> 50%</span></div>
-            <!-- Sights & Scopes -->
-            <tr><td>Sidemounted 4x Scope</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +15</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -6</span>
-                </div>
-            </td></tr>
-            <tr><td>Sniper 4x Scope</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +18</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -10</span>
-                </div>
-            </td></tr>
-            <tr><td>Classic Scope</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">4x Scope</b></span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +20</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +12</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -12</span>
-                </div>
-            </td></tr>
-            <tr><td>Holographic Sight</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +1</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -1</span>
-                </div>
-            </td></tr>
-            <tr><td>Red Dot Sight</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +1</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>Vintage Red Dot Sight</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +1</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -1</span>
-                </div>
-            </td></tr>
-            <tr><td>Elevated Red Dot Sight</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +1</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -1</span>
-                </div>
-            </td></tr>
-            <tr><td>Lightweight 2x Scope</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">2x Scope</b></span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -3</span>
-                </div>
-            </td></tr>
-            <tr><td>Lightweight 4x Scope</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">4x Scope</b></span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Range:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -4</span>
-                </div>
-            </td></tr>
-            <!-- Muzzle Devices & Silencers -->
-            <tr><td>PM Small Compensator</td><td>1</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -5</span></div>
-            </td></tr>
-            <tr><td>PM Muzzle Brake</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -8</span></div>
-            </td></tr>
-            <tr><td>PM Silencer</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -4</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Slant Muzzle Brake</td><td>1</td><td>2000</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -6.5</span></div>
-            </td></tr>
-            <tr><td>MK Upgraded Muzzle Brake</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -7</span></div>
-            </td></tr>
-            <tr><td>MK Compensator</td><td>2</td><td>10000</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -9</span></div>
-            </td></tr>
-            <tr><td>MK Silencer</td><td>3</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Accuracy:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -6</span>
-                </div>
-            </td></tr>
-            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                </div>
-            </td></tr>
-            <!-- Weapon Magazines - Part 1 -->
-            <tr><td>Svarsh Drum Mag</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -6</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Drum Mag</td><td>3</td><td>8000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -15</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -30</span>
-                </div>
-            </td></tr>
-            <tr><td>M4 Gen2 Drum Mag</td><td>3</td><td>8000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -30</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Drum Mag</td><td>3</td><td>8000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -24</span>
-                </div>
-            </td></tr>
-            <tr><td>Medved Drum Mag</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> -10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -7</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -18</span>
-                </div>
-            </td></tr>
-            <tr><td>TC Polymer Large Mag (Black)</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span></div>
-            </td></tr>
-            <tr><td>TC Polymer Mag (Black)</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> +12</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Stamped Steel Mag</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span></div>
-            </td></tr>
-            <tr><td>Makeshift Double Stacked Steel Stick Mag</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -8</span>
-                </div>
-            </td></tr>
-            <!-- Weapon Magazines - Part 2 -->
-            <tr><td>M4 Large Aluminum Mag</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span></div>
-            </td></tr>
-            <tr><td>M4 Large Aluminum Mag (Tan)</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span></div>
-            </td></tr>
-            <tr><td>Borealis Aluminum Mag</td><td>2</td><td>1500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> +12</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Curved Mag</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -6</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Long Curved Mag</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -12</span>
-                </div>
-            </td></tr>
-            <tr><td>PP Pristine Mag</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span></div>
-            </td></tr>
-            <tr><td>Dragoon Steel Mag</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -10</span>
-                </div>
-            </td></tr>
-            <tr><td>Dragoon Large Steel Mag</td><td>3</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> +16</span>
-                </div>
-            </td></tr>
-            <tr><td>Bahadir Ribbed Cylinder Mag</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> -6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Reload Speed:</b> -13</span>
-                </div>
-            </td></tr>
-            <!-- Weapon Stocks - Part 1 -->
-            <tr><td>Zavod Polymer Full Stock</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -11</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +3</span>
-                </div>
-            </td></tr>
-            <tr><td>TC Skeleton Stock</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -11</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span>
-                </div>
-            </td></tr>
-            <tr><td>TC Wood Stock</td><td>2</td><td>750</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -11</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>Makeshift Prosthetic Stock</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -11</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>Makeshift Grated Stock</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>PM Full Polymer Stock</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>PM Polymer Stock</td><td>1</td><td>750</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Polymer Stock</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -9</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <!-- Weapon Stocks - Part 2 -->
-            <tr><td>MK Fixed Carbine Stock</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span>
-                </div>
-            </td></tr>
-            <tr><td>Rifle Collapsible Stock Module</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -13</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +5</span>
-                </div>
-            </td></tr>
-            <tr><td>Makeshift Collapsible Stock Module</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -13</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +5</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Adaptable Folding Stock</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -13</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Skeleton Stock</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -11</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Metal Stock</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -14</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>Dragoon Polymer Stock</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>Dragoon Folding Stock</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -12</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>2HMG Modern Polymer Stock Module</td><td>3</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <!-- Handguards & Grips - Part 1 -->
-            <tr><td>2HMG Railed Handguard</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>Dragoon Polymer Handguard</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>Dragoon Railed Handguard</td><td>3</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +12</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +10</span>
-                </div>
-            </td></tr>
-            <tr><td>Bahadir Extended Handguard</td><td>3</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -3.5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span>
-                </div>
-            </td></tr>
-            <tr><td>Bahadir Railed Handguard</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +5</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Polymer Short Handguard</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Adaptable Railed Handguard</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>Borealis Lock Mount Handguard</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -4.5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span>
-                </div>
-            </td></tr>
-            <tr><td>M4 Adaptable Extended Handguard</td><td>2</td><td>8000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>M4 Slotted Mount Handguard</td><td>2</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px; color:#aaa;">No stat modifiers listed</span></div>
-            </td></tr>
-            <!-- Handguards & Grips - Part 2 -->
-            <tr><td>M4 Ribbed Handguard</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -2.5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +3</span>
-                </div>
-            </td></tr>
-            <tr><td>M4 Railed Handguard</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -3.5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Combination Handguard</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +3</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Slotted Mount Handguard</td><td>3</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +8</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Extended Railed Handguard</td><td>3</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +10</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Railed Combination Handguard</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -4.5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +3</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Railed Polymer Handguard</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -4.5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +3</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Extended Slotted Mount Handguard</td><td>2</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>MK Slotted Mount Handguard (Alt)</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <!-- Handguards & Grips - Part 3 -->
-            <tr><td>PM Flashlight Forestock</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>PM Railed Forestock</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span>
-                </div>
-            </td></tr>
-            <tr><td>TC Railed Handguard</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>TC Handguard</td><td>1</td><td>750</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>Zavod Polymer Handguard</td><td>1</td><td>750</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Recoil:</b> -1.5</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>M4 Target Pistol Grip Module</td><td>3</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>M4 Ergonomic Pistol Grip Module</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>M4 Pistol Grip Module</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>Polymer Pistol Grip Module</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>2HMG Ergonomic Pistol Grip</td><td>3</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +6</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <!-- Handguards & Grips - Part 4 -->
-            <tr><td>Tapered Vertical Foregrip</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>Short Tapered Vertical Foregrip</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +3</span>
-                </div>
-            </td></tr>
-            <tr><td>Vertical Foregrip</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +4</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>Short Vertical Foregrip</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>Handstop</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +1</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +3</span>
-                </div>
-            </td></tr>
-            <tr><td>Angled Foregrip</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +3</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            <tr><td>Forward Angled Foregrip</td><td>3</td><td>4000</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +4</span>
-                </div>
-            </td></tr>
-            <tr><td>PM Polymer Beavertail Grip</td><td>1</td><td>1250</td><td>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Handling:</b> +2</span>
-                    <span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +2</span>
-                </div>
-            </td></tr>
-            
-            <!-- Railed Dust Covers -->
-            <tr><td>TC Railed Dust Cover</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px; color:#aaa;">Adds attachment rails</span></div>
-            </td></tr>
-            <tr><td>MK Railed Dust Cover</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span></div>
-            </td></tr>
-            <tr><td>Borealis Railed Dust Cover</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +6</span></div>
-            </td></tr>
-            <tr><td>SMG Railed Dust Cover</td><td>2</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span></div>
-            </td></tr>
-            <tr><td>Dragoon Railed Dust Cover</td><td>1</td><td>2500</td><td>
-                <div style="display: flex; gap: 6px;"><span style="background:#222; border:1px solid #444; padding:2px 6px; border-radius:4px; font-size:13px;"><b style="color:#ffcc66;">Ergonomics:</b> +8</span></div>
-            </td></tr>
+            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 10</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
+            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 30</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
+            <tr><td>Rifle FMJ Ammo</td><td>1</td><td>120</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 17</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
+            <tr><td>High Caliber Rifle FMJ Ammo</td><td>1</td><td>150</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 30</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
+            <tr><td>Pistol AP Ammo</td><td>2</td><td>100</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 8</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
+            <tr><td>Shotgun AP Ammo</td><td>2</td><td>400</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 24</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
+            <tr><td>Rifle AP Ammo</td><td>3</td><td>240</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 14</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
+            <tr><td>High Caliber Rifle AP Ammo</td><td>3</td><td>300</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 26</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
 
+            <!-- Sights & Scopes -->
+            <tr><td>Sidemounted 4x Scope</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +15</span><span class="stat-badge"><b>Acc:</b> +6</span><span class="stat-badge"><b>Ergo:</b> -6</span></div></td></tr>
+            <tr><td>Sniper 4x Scope</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +18</span><span class="stat-badge"><b>Acc:</b> +10</span><span class="stat-badge"><b>Ergo:</b> -10</span></div></td></tr>
+            <tr><td>Classic Scope</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +20</span><span class="stat-badge"><b>Acc:</b> +12</span><span class="stat-badge"><b>Ergo:</b> -12</span></div></td></tr>
+            <tr><td>Holographic Sight</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +3</span><span class="stat-badge"><b>Ergo:</b> -1</span></div></td></tr>
+            <tr><td>Red Dot Sight</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span></div></td></tr>
+            <tr><td>Vintage Red Dot Sight</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span> <span class="stat-badge"><b>Ergo:</b> -1</span></div></td></tr>
+            <tr><td>Elevated Red Dot Sight</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +3</span><span class="stat-badge"><b>Ergo:</b> -1</span></div></td></tr>
+            <tr><td>Lightweight 2x Scope</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +4</span><span class="stat-badge"><b>Acc:</b> +5</span><span class="stat-badge"><b>Ergo:</b> -3</span></div></td></tr>
+            <tr><td>Lightweight 4x Scope</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +8</span><span class="stat-badge"><b>Acc:</b> +6</span><span class="stat-badge"><b>Ergo:</b> -4</span></div></td></tr>
+            
+            <!-- Muzzle Devices & Silencers -->
+            <tr><td>PM Small Compensator</td><td>1</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -5</span></div></td></tr>
+            <tr><td>PM Muzzle Brake</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -8</span></div></td></tr>
+            <tr><td>PM Silencer</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Acc:</b> +5</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> -4</span></div></td></tr>
+            <tr><td>MK Slant Muzzle Brake</td><td>1</td><td>2000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6.5</span></div></td></tr>
+            <tr><td>MK Upgraded Muzzle Brake</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -7</span></div></td></tr>
+            <tr><td>MK Compensator</td><td>2</td><td>10000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -9</span></div></td></tr>
+            <tr><td>MK Silencer</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Acc:</b> +4</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> -6</span></div></td></tr>
+            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +4</span></div></td></tr>
+            
+            <!-- Weapon Magazines -->
+            <tr><td>Svarsh Drum Mag</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -3</span><span class="stat-badge"><b>Reload:</b> -6</span></div></td></tr>
+            <tr><td>MK Drum Mag</td><td>3</td><td>8000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -15</span><span class="stat-badge"><b>Reload:</b> -30</span></div></td></tr>
+            <tr><td>M4 Gen2 Drum Mag</td><td>3</td><td>8000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -10</span><span class="stat-badge"><b>Reload:</b> -30</span></div></td></tr>
+            <tr><td>Borealis Drum Mag</td><td>3</td><td>8000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -8</span><span class="stat-badge"><b>Reload:</b> -24</span></div></td></tr>
+            <tr><td>Medved Drum Mag</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Hand:</b> -10</span><span class="stat-badge"><b>Ergo:</b> -7</span><span class="stat-badge"><b>Reload:</b> -18</span></div></td></tr>
+            <tr><td>TC Polymer Large Mag (Black)</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
+            <tr><td>TC Polymer Mag (Black)</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> +2</span><span class="stat-badge"><b>Reload:</b> +12</span></div></td></tr>
+            <tr><td>MK Stamped Steel Mag</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
+            <tr><td>Makeshift Double Stacked Steel Stick Mag</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -4</span><span class="stat-badge"><b>Reload:</b> -8</span></div></td></tr>
+            <tr><td>M4 Large Aluminum Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
+            <tr><td>M4 Large Aluminum Mag (Tan)</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
+            <tr><td>Borealis Aluminum Mag</td><td>2</td><td>1500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span><span class="stat-badge"><b>Reload:</b> +12</span></div></td></tr>
+            <tr><td>Borealis Curved Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span><span class="stat-badge"><b>Reload:</b> -6</span></div></td></tr>
+            <tr><td>Borealis Long Curved Mag</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -6</span><span class="stat-badge"><b>Reload:</b> -12</span></div></td></tr>
+            <tr><td>PP Pristine Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
+            <tr><td>Dragoon Steel Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -4</span><span class="stat-badge"><b>Reload:</b> -10</span></div></td></tr>
+            <tr><td>Dragoon Large Steel Mag</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span><span class="stat-badge"><b>Reload:</b> +16</span></div></td></tr>
+            <tr><td>Bahadir Ribbed Cylinder Mag</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -6</span><span class="stat-badge"><b>Reload:</b> -13</span></div></td></tr>
+
+              <!-- Weapon Stocks - Part 1 -->
+            <tr><td>Zavod Polymer Full Stock</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>TC Skeleton Stock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>TC Wood Stock</td><td>2</td><td>750</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>Makeshift Prosthetic Stock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>Makeshift Grated Stock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -8</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>PM Full Polymer Stock</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -10</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>PM Polymer Stock</td><td>1</td><td>750</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>MK Polymer Stock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -9</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+               
+            <!-- Weapon Stocks - Part 2 -->
+            <tr><td>MK Fixed Carbine Stock</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>Rifle Collapsible Stock Module</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -13</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +5</span></div></td></tr>
+            <tr><td>Makeshift Collapsible Stock Module</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -13</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +5</span></div></td></tr>
+            <tr><td>Borealis Adaptable Folding Stock</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -13</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>Borealis Skeleton Stock</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +10</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>MK Metal Stock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -14</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>Dragoon Polymer Stock</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -10</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>Dragoon Folding Stock</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -12</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>2HMG Modern Polymer Stock Module</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -10</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+
+                        <!-- Handguards, Grips & Dust Covers -->
+            <tr><td>2HMG Railed Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>Angled Foregrip</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>Bahadir Extended Handguard</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3.5</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>Bahadir Railed Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +5</span></div></td></tr>
+            <tr><td>Borealis Adaptable Railed Handguard</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>Borealis Lock Mount Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>Borealis Polymer Short Handguard</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>Borealis Railed Dust Cover</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>Dragoon Polymer Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>Dragoon Railed Dust Cover</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>Dragoon Railed Handguard</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +12</span><span class="stat-badge"><b>Ergo:</b> +10</span></div></td></tr>
+            <tr><td>Forward Angled Foregrip</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>Handstop</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +1</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>M4 Adaptable Extended Handguard</td><td>2</td><td>8000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +5</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>M4 Ergonomic Pistol Grip Module</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>M4 Pistol Grip Module</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>M4 Ribbed Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2.5</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>M4 Railed Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3.5</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>M4 Slotted Mount Handguard</td><td>2</td><td>1250</td><td><span class="type-label">Guard</span></td></tr>
+            <tr><td>M4 Target Pistol Grip Module</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>MK Combination Handguard</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>MK Extended Railed Handguard</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +10</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>MK Extended Slotted Handguard</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>MK Railed Combination Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>MK Railed Dust Cover</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>MK Railed Polymer Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>MK Slotted Mount Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>MK Slotted Mount Handguard (Ext.)</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>PM Flashlight Forestock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>PM Polymer Beavertail Grip</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>PM Railed Forestock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
+            <tr><td>Polymer Pistol Grip Module</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>Short Tapered Vertical Foregrip</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
+            <tr><td>Short Vertical Foregrip</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
+            <tr><td>SMG Railed Dust Cover</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
+            <tr><td>Tapered Vertical Foregrip</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>TC Handguard</td><td>1</td><td>750</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>TC Railed Dust Cover</td><td>2</td><td>2500</td><td><span class="type-label">Receiver</span></td></tr>
+            <tr><td>TC Railed Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>Vertical Foregrip</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>Zavod Polymer Handguard</td><td>1</td><td>750</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -1.5</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
+            <tr><td>2HMG Ergonomic Pistol Grip</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
         </table>
     </div>
 </div>
 
+</div> <!-- Closes #vendor-list -->
 </body>
 </html>
