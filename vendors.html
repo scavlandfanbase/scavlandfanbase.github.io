@@ -325,105 +325,121 @@ function toggleVendor(id) {
     </div>
     <div class="vendor-content" id="volodymyr">
         <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th></tr>
+            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Description / Stats</th></tr>
+            
             <!-- Weapon Maintenance & Blueprints -->
-            <tr><td>Gun Lube</td><td>1</td><td>3000</td></tr>
-            <tr><td>Gun Cleaning Rod</td><td>1</td><td>5000</td></tr>
-            <tr><td>Gun Field Tools</td><td>1</td><td>7500</td></tr>
-            <tr><td>Advanced Gun Repair Kit</td><td>2</td><td>60000</td></tr>
-            <tr><td>Expert Gun Repair Kit</td><td>3</td><td>120000</td></tr>
-            <tr><td>Advanced Gun Repair Kit Blueprint</td><td>2</td><td>40000</td></tr>
-            <tr><td>Expert Gun Repair Kit Blueprint</td><td>3</td><td>60000</td></tr>
+            <tr><td>Gun Lube</td><td>1</td><td>3000</td><td>Polishes weapons and removes grime/carbon. Repair: 5%. Minimum required condition to use: 80%. Stacks to 5.</td></tr>
+            <tr><td>Gun Cleaning Rod</td><td>1</td><td>5000</td><td>Ramrod for cleaning firearms out in the field. Repair: 15%. Minimum required condition to use: 70%. Stacks to 5.</td></tr>
+            <tr><td>Gun Field Tools</td><td>1</td><td>7500</td><td>Set of tools for weapon upkeep. Prevents extensive repairs. Repair: 15%. Minimum required condition to use: 60%. Stacks to 5.</td></tr>
+            <tr><td>Advanced Gun Repair Kit</td><td>2</td><td>60000</td><td>Pro-grade tools to fix any weapon. Repair: 25%. Usable in any condition state. Stacks to 5.</td></tr>
+            <tr><td>Expert Gun Repair Kit</td><td>3</td><td>120000</td><td>High-grade tool case for critical, life-saving field repairs. Repair: 25%. Usable in any condition state. Stacks to 5.</td></tr>
+            <tr><td>Advanced Gun Repair Kit Blueprint</td><td>2</td><td>40000</td><td>Teaches you how to craft a high-quality kit to maintain and repair weapons reliably. Not stackable.</td></tr>
+            <tr><td>Expert Gun Repair Kit Blueprint</td><td>3</td><td>60000</td><td>Teaches you how to make a highly advanced, expert-grade weapon repair kit. Not stackable.</td></tr>
             
             <!-- Ammunition -->
-            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td></tr>
-            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td></tr>
-            <tr><td>Rifle FMJ Ammo</td><td>1</td><td>120</td></tr>
-            <tr><td>High Caliber Rifle FMJ Ammo</td><td>1</td><td>150</td></tr>
-            <tr><td>Pistol AP Ammo</td><td>2</td><td>100</td></tr>
-            <tr><td>Shotgun AP Ammo</td><td>2</td><td>400</td></tr>
-            <tr><td>Rifle AP Ammo</td><td>3</td><td>240</td></tr>
-            <tr><td>High Caliber Rifle AP Ammo</td><td>3</td><td>300</td></tr>
+            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td><td>Standard full metal jacket rounds for pistols, SMGs, and repeaters. Damage: 10, Penetration: 0%. Stacks to 999.</td></tr>
+            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td><td>Spread-shot ammunition built for shotguns. Damage: 6 x 5 = 30, Penetration: 0%. Stacks to 999.</td></tr>
+            <tr><td>Rifle FMJ Ammo</td><td>1</td><td>120</td><td>Standard full metal jacket ammunition for assault rifles. Damage: 17, Penetration: 0%. Stacks to 999.</td></tr>
+            <tr><td>High Caliber Rifle FMJ Ammo</td><td>1</td><td>150</td><td>Reliable, heavy-hitting high-caliber rifle rounds. Damage: 30, Penetration: 0%. Stacks to 999.</td></tr>
+            <tr><td>Pistol AP Ammo</td><td>2</td><td>100</td><td>Armor-piercing rounds meant to cut through enemy body gear. Damage: 8, Penetration: 50%. Stacks to 999.</td></tr>
+            <tr><td>Shotgun AP Ammo</td><td>2</td><td>400</td><td>Armor-piercing shotgun rounds that ignore standard armor layers. Damage: 6 x 4 = 24, Penetration: 50%. Stacks to 999.</td></tr>
+            <tr><td>Rifle AP Ammo</td><td>3</td><td>240</td><td>Armor-piercing rifle variant ideal for fighting well-equipped foes. Damage: 14, Penetration: 50%. Stacks to 999.</td></tr>
+            <tr><td>High Caliber Rifle AP Ammo</td><td>3</td><td>300</td><td>Armor-piercing high-caliber ammo for a severe tactical advantage. Damage: 26, Penetration: 50%. Stacks to 999.</td></tr>
             
             <!-- Sights & Scopes -->
-            <tr><td>Sidemounted 4x Scope</td><td>2</td><td>1250</td></tr>
-            <tr><td>Sniper 4x Scope</td><td>2</td><td>2500</td></tr>
-            <tr><td>Classic Scope</td><td>2</td><td>4000</td></tr>
-            <tr><td>Holographic Sight</td><td>2</td><td>2500</td></tr>
-            <tr><td>Red Dot Sight</td><td>2</td><td>1250</td></tr>
-            <tr><td>Vintage Red Dot Sight</td><td>2</td><td>2500</td></tr>
-            <tr><td>Elevated Red Dot Sight</td><td>2</td><td>1250</td></tr>
-            <tr><td>Lightweight 2x Scope</td><td>2</td><td>2500</td></tr>
-            <tr><td>Lightweight 4x Scope</td><td>2</td><td>4000</td></tr>
+            <tr><td>Sidemounted 4x Scope</td><td>2</td><td>1250</td><td>High-grade optic with a dovetail side mount. Stats: Range +15, Accuracy +6, Ergonomics -6.</td></tr>
+            <tr><td>Sniper 4x Scope</td><td>2</td><td>2500</td><td>High-grade rifle optic originally manufactured for the Dragoon. Stats: Range +18, Accuracy +10, Ergonomics -10.</td></tr>
+            <tr><td>Classic Scope</td><td>2</td><td>4000</td><td>Traditional combat scope design. Stats: 4x Magnification, Range +20, Accuracy +12, Ergonomics -12.</td></tr>
+            <tr><td>Holographic Sight</td><td>2</td><td>2500</td><td>Lightweight, compact, quick-acquisition target sight. Stats: Range +1, Accuracy +3, Ergonomics -1.</td></tr>
+            <tr><td>Red Dot Sight</td><td>2</td><td>1250</td><td>Simple, durable, and highly reliable tactical sight overview. Stats: Range +1, Accuracy +2.</td></tr>
+            <tr><td>Vintage Red Dot Sight</td><td>2</td><td>2500</td><td>Sturdy and light red dot sight boasting a vintage aesthetic. Stats: Range +1, Accuracy +2, Ergonomics -1.</td></tr>
+            <tr><td>Elevated Red Dot Sight</td><td>2</td><td>1250</td><td>Raised red dot mounting to improve ergonomics while stalking. Stats: Range +1, Accuracy +3, Ergonomics -1.</td></tr>
+            <tr><td>Lightweight 2x Scope</td><td>2</td><td>2500</td><td>Sturdy glass prism scope with an aluminum chassis. Stats: 2x Magnification, Range +4, Accuracy +5, Ergonomics -3.</td></tr>
+            <tr><td>Lightweight 4x Scope</td><td>2</td><td>4000</td><td>Durable and versatile optic optimized for low light conditions. Stats: 4x Magnification, Range +8, Accuracy +6, Ergonomics -4.</td></tr>
             
             <!-- Muzzle Devices & Silencers -->
-            <tr><td>PM Small Compensator</td><td>1</td><td>4000</td></tr>
-            <tr><td>PM Muzzle Brake</td><td>2</td><td>4000</td></tr>
-            <tr><td>PM Silencer</td><td>2</td><td>2500</td></tr>
-            <tr><td>MK Slant Muzzle Brake</td><td>1</td><td>2000</td></tr>
-            <tr><td>MK Upgraded Muzzle Brake</td><td>2</td><td>4000</td></tr>
-            <tr><td>MK Compensator</td><td>2</td><td>10000</td></tr>
-            <tr><td>MK Silencer</td><td>3</td><td>4000</td></tr>
-            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td></tr>
+            <tr><td>PM Small Compensator</td><td>1</td><td>4000</td><td>Small barrel profile stabilizer built to reduce pistol recoil. Stats: Recoil -5.</td></tr>
+            <tr><td>PM Muzzle Brake</td><td>2</td><td>4000</td><td>Muzzle brake and compensator combo configured for the PM Nikolay. Stats: Recoil -8.</td></tr>
+            <tr><td>PM Silencer</td><td>2</td><td>2500</td><td>Simple sound suppressor designed for the PM Nikolay. Stats: Accuracy +5, Recoil -3, Handling +2, Ergonomics -4.</td></tr>
+            <tr><td>MK Slant Muzzle Brake</td><td>1</td><td>2000</td><td>Classic muzzle brake designed to keep long automatic bursts stable. Stats: Recoil -6.5.</td></tr>
+            <tr><td>MK Upgraded Muzzle Brake</td><td>2</td><td>4000</td><td>All-in-one component serving as a flash hider, brake, and compensator. Stats: Recoil -7.</td></tr>
+            <tr><td>MK Compensator</td><td>2</td><td>10000</td><td>Common muzzle attachment designed to combat rising barrel tilt. Stats: Recoil -9.</td></tr>
+            <tr><td>MK Silencer</td><td>3</td><td>4000</td><td>Standard sound suppression barrel device for the Mikhail 47 series. Stats: Accuracy +4, Recoil -3, Handling +2, Ergonomics -6.</td></tr>
+            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td><td>Highly adaptable ventilated compensator that fights muzzle climb. Stats: Recoil -6, Handling +4.</td></tr>
             
             <!-- Weapon Magazines -->
-            <tr><td>Svarsh Drum Mag</td><td>2</td><td>4000</td></tr>
-            <tr><td>MK Drum Mag</td><td>3</td><td>8000</td></tr>
-            <tr><td>M4 Gen2 Drum Mag</td><td>3</td><td>8000</td></tr>
-            <tr><td>Borealis Drum Mag</td><td>3</td><td>8000</td></tr>
-            <tr><td>Medved Drum Mag</td><td>2</td><td>4000</td></tr>
-            <tr><td>TC Polymer Large Mag (Black)</td><td>2</td><td>2500</td></tr>
-            <tr><td>TC Polymer Mag (Black)</td><td>1</td><td>1250</td></tr>
-            <tr><td>MK Stamped Steel Mag</td><td>2</td><td>1250</td></tr>
-            <tr><td>Makeshift Double Stacked Steel Stick Mag</td><td>1</td><td>2500</td></tr>
-            <tr><td>M4 Large Aluminum Mag</td><td>2</td><td>2500</td></tr>
-            <tr><td>M4 Large Aluminum Mag (Tan)</td><td>2</td><td>2500</td></tr>
-            <tr><td>Borealis Aluminum Mag</td><td>2</td><td>1500</td></tr>
-            <tr><td>Borealis Curved Mag</td><td>2</td><td>2500</td></tr>
-            <tr><td>Borealis Long Curved Mag</td><td>2</td><td>4000</td></tr>
-            <tr><td>PP Pristine Mag</td><td>2</td><td>2500</td></tr>
-            <tr><td>Dragoon Steel Mag</td><td>2</td><td>2500</td></tr>
-            <tr><td>Dragoon Large Steel Mag</td><td>3</td><td>4000</td></tr>
-            <tr><td>Bahadir Ribbed Cylinder Mag</td><td>2</td><td>1250</td></tr>
+            <tr><td>Svarsh Drum Mag</td><td>2</td><td>4000</td><td>High-capacity drum configuration for 12-Gauge shell output. Stats: Ergonomics -3, Reload Speed -6.</td></tr>
+            <tr><td>MK Drum Mag</td><td>3</td><td>8000</td><td>Standard rounded drum magazine maximizing cartridge count. Stats: Ergonomics -15, Reload Speed -30.</td></tr>
+            <tr><td>M4 Gen2 Drum Mag</td><td>3</td><td>8000</td><td>Ingenious double-cylinder high-capacity magazine setup. Stats: Ergonomics -10, Reload Speed -30.</td></tr>
+            <tr><td>Borealis Drum Mag</td><td>3</td><td>8000</td><td>Stamped aluminum high-capacity drum built for the Borealis. Stats: Ergonomics -8, Reload Speed -24.</td></tr>
+            <tr><td>Medved Drum Mag</td><td>2</td><td>4000</td><td>Homebrew high-capacity drum assembly with lower stability. Stats: Handling -10, Ergonomics -7, Reload Speed -18.</td></tr>
+            <tr><td>TC Polymer Large Mag (Black)</td><td>2</td><td>2500</td><td>Extended black polymer magazine tailored for marksman weapons. Stats: Ergonomics -2.</td></tr>
+            <tr><td>TC Polymer Mag (Black)</td><td>1</td><td>1250</td><td>Standard black polymer marksman weapon magazine feed. Stats: Ergonomics +2, Reload Speed +12.</td></tr>
+            <tr><td>MK Stamped Steel Mag</td><td>2</td><td>1250</td><td>Extended stamped steel casing for the Mikhail. Light but durable. Stats: Ergonomics -2.</td></tr>
+            <tr><td>Makeshift Double Stacked Steel Stick Mag</td><td>1</td><td>2500</td><td>Improvised double-stacked stamped steel stick magazine layout. Stats: Ergonomics -4, Reload Speed -8.</td></tr>
+            <tr><td>M4 Large Aluminum Mag</td><td>2</td><td>2500</td><td>Lightweight high-capacity stamped aluminum casing. Stats: Ergonomics -2.</td></tr>
+            <tr><td>M4 Large Aluminum Mag (Tan)</td><td>2</td><td>2500</td><td>Tan variant of the light high-capacity aluminum magazine. Stats: Ergonomics -2.</td></tr>
+            <tr><td>Borealis Aluminum Mag</td><td>2</td><td>1500</td><td>Standard stamped aluminum magazine layout for the Borealis. Stats: Ergonomics -2, Reload Speed +12.</td></tr>
+            <tr><td>Borealis Curved Mag</td><td>2</td><td>2500</td><td>Curved stamped aluminum frame magazine profile. Stats: Ergonomics -2, Reload Speed -6.</td></tr>
+            <tr><td>Borealis Long Curved Mag</td><td>2</td><td>4000</td><td>Extended curved aluminum structure for the Borealis. Stats: Ergonomics -6, Reload Speed -12.</td></tr>
+            <tr><td>PP Pristine Mag</td><td>2</td><td>2500</td><td>Flawless polymer magazine component for submachine guns. Stats: Ergonomics -2.</td></tr>
+            <tr><td>Dragoon Steel Mag</td><td>2</td><td>2500</td><td>Stamped steel ammunition housing for long-range marksman platforms. Stats: Ergonomics -4, Reload Speed -10.</td></tr>
+            <tr><td>Dragoon Large Steel Mag</td><td>3</td><td>4000</td><td>Extended steel construction built for marksman weapon feeds. Stats: Ergonomics -2, Reload Speed +16.</td></tr>
+            <tr><td>Bahadir Ribbed Cylinder Mag</td><td>2</td><td>1250</td><td>Unique submachine gun cylinder feed with structural ribbing. Stats: Ergonomics -6, Reload Speed -13.</td></tr>
             
             <!-- Weapon Stocks -->
-            <tr><td>Zavod Polymer Full Stock</td><td>1</td><td>1250</td></tr>
-            <tr><td>TC Skeleton Stock</td><td>2</td><td>2500</td></tr>
-            <tr><td>TC Wood Stock</td><td>2</td><td>750</td></tr>
-            <tr><td>Makeshift Prosthetic Stock</td><td>1</td><td>2500</td></tr>
-            <tr><td>Makeshift Grated Stock</td><td>1</td><td>2500</td></tr>
-            <tr><td>PM Full Polymer Stock</td><td>1</td><td>1250</td></tr>
-            <tr><td>PM Polymer Stock</td><td>1</td><td>750</td></tr>
-            <tr><td>MK Polymer Stock</td><td>1</td><td>2500</td></tr>
-            <tr><td>MK Fixed Carbine Stock</td><td>2</td><td>1250</td></tr>
-            <tr><td>Rifle Collapsible Stock Module</td><td>2</td><td>2500</td></tr>
-            <tr><td>Makeshift Collapsible Stock Module</td><td>2</td><td>2500</td></tr>
-            <tr><td>Borealis Adaptable Folding Stock</td><td>2</td><td>4000</td></tr>
-            <tr><td>Borealis Skeleton Stock</td><td>1</td><td>1250</td></tr>
-            <tr><td>MK Metal Stock</td><td>2</td><td>2500</td></tr>
-            <tr><td>Dragoon Polymer Stock</td><td>2</td><td>1250</td></tr>
-            <tr><td>Dragoon Folding Stock</td><td>2</td><td>4000</td></tr>
-            <tr><td>2HMG Modern Polymer Stock Module</td><td>3</td><td>2500</td></tr>
+            <tr><td>Zavod Polymer Full Stock</td><td>1</td><td>1250</td><td>Complete structural synthetic stock made for over-under shotguns. Stats: Recoil -11, Handling +2, Ergonomics +3.</td></tr>
+            <tr><td>TC Skeleton Stock</td><td>2</td><td>2500</td><td>Lightweight skeleton build optimized for close-quarters handling. Stats: Recoil -11, Handling +6, Ergonomics +8.</td></tr>
+            <tr><td>TC Wood Stock</td><td>2</td><td>750</td><td>Simple timber platform configured for long-range target stability. Stats: Recoil -11, Handling +2, Ergonomics +4.</td></tr>
+            <tr><td>Makeshift Prosthetic Stock</td><td>1</td><td>2500</td><td>Improvised stock attachment engineered for homebrew weapon variants. Stats: Recoil -11, Handling +6, Ergonomics +4.</td></tr>
+            <tr><td>Makeshift Grated Stock</td><td>1</td><td>2500</td><td>Rough, grated scrap metal piece acting as a steady shoulder brace. Stats: Recoil -8, Handling +4, Ergonomics +2.</td></tr>
+            <tr><td>PM Full Polymer Stock</td><td>1</td><td>1250</td><td>Complete polymer housing built for pump-action shotgun frames. Stats: Recoil -10, Handling +2, Ergonomics +6.</td></tr>
+            <tr><td>PM Polymer Stock</td><td>1</td><td>750</td><td>Sawed-off, compact synthetic stock module for a pump-action build. Stats: Recoil -6, Handling +2, Ergonomics +8.</td></tr>
+            <tr><td>MK Polymer Stock</td><td>1</td><td>2500</td><td>Standard manufactured synthetic stock replacement for the Mikhail-47. Stats: Recoil -9, Handling +2, Ergonomics +4.</td></tr>
+            <tr><td>MK Fixed Carbine Stock</td><td>2</td><td>1250</td><td>Light, low-profile fixed carbine piece built for quick handling. Stats: Recoil -6, Handling +8, Ergonomics +8.</td></tr>
+            <tr><td>Rifle Collapsible Stock Module</td><td>2</td><td>2500</td><td>Adjustable stock following an M4 style template for rifles/shotguns. Stats: Recoil -13, Handling +8, Ergonomics +5.</td></tr>
+            <tr><td>Makeshift Collapsible Stock Module</td><td>2</td><td>2500</td><td>Improvised sliding stock built on a reclaimed M4 format template. Stats: Recoil -13, Handling +8, Ergonomics +5.</td></tr>
+            <tr><td>Borealis Adaptable Folding Stock</td><td>2</td><td>4000</td><td>Sturdy side-folding mechanical stock customizable to operator size. Stats: Recoil -13, Handling +6, Ergonomics +6.</td></tr>
+            <tr><td>Borealis Skeleton Stock</td><td>1</td><td>1250</td><td>Lightweight, ventilated skeleton design with structural resilience. Stats: Recoil -11, Handling +10, Ergonomics +8.</td></tr>
+            <tr><td>MK Metal Stock</td><td>2</td><td>2500</td><td>Skeletal metallic layout adding ergonomic shoulder placement. Stats: Recoil -14, Handling +8, Ergonomics +6.</td></tr>
+            <tr><td>Dragoon Polymer Stock</td><td>2</td><td>1250</td><td>Synthetic component layout updating the classic rifle stock profile. Stats: Recoil -10, Handling +4, Ergonomics +4.</td></tr>
+            <tr><td>Dragoon Folding Stock</td><td>2</td><td>4000</td><td>Hinged frame piece helping condense long-range rifle dimensions. Stats: Recoil -12, Handling +6, Ergonomics +6.</td></tr>
+            <tr><td>2HMG Modern Polymer Stock Module</td><td>3</td><td>2500</td><td>Highly versatile synthetic modular brace for heavy machine guns. Stats: Recoil -10, Handling +6, Ergonomics +4.</td></tr>
             
             <!-- Handguards & Grips -->
-            <tr><td>2HMG Railed Handguard</td><td>2</td><td>1250</td></tr>
-            <tr><td>Dragoon Polymer Handguard</td><td>2</td><td>1250</td></tr>
-            <tr><td>Dragoon Railed Handguard</td><td>3</td><td>4000</td></tr>
-            <tr><td>Bahadir Extended Handguard</td><td>3</td><td>2500</td></tr>
-            <tr><td>Bahadir Railed Handguard</td><td>2</td><td>1250</td></tr>
-            <tr><td>Borealis Polymer Short Handguard</td><td>1</td><td>1250</td></tr>
-            <tr><td>Borealis Adaptable Railed Handguard</td><td>2</td><td>4000</td></tr>
-            <tr><td>Borealis Lock Mount Handguard</td><td>2</td><td>2500</td></tr>
-            <tr><td>M4 Adaptable Extended Handguard</td><td>2</td><td>8000</td></tr>
-            <tr><td>M4 Slotted Mount Handguard</td><td>2</td><td>1250</td></tr>
-            <tr><td>M4 Ribbed Handguard</td><td>2</td><td>2500</td></tr>
-            <tr><td>M4 Railed Handguard</td><td>2</td><td>2500</td></tr>
-            <tr><td>MK Combination Handguard</td><td>1</td><td>2500</td></tr>
-            <tr><td>MK Slotted Mount Handguard</td><td>3</td><td>4000</td></tr>
-            <tr><td>MK Extended Railed Handguard</td><td>3</td><td>4000</td></tr>
-            <tr><td>MK Railed Combination Handguard</td><td>2</td><td>2500</td></tr>
-            <tr><td>MK Railed Polymer Handguard</td><td>2</td><td>2500</td></tr>
-            <tr><td>MK Extended Slotted Mount Handguard</td><td>2</td><td>4000</td></tr>
+            <tr><td>2HMG Railed Handguard</td><td>2</td><td>1250</td><td>Thick polymer guard incorporating equipment mounting rail segments. Stats: Recoil -6, Handling +4, Ergonomics +4.</td></tr>
+            <tr><td>Dragoon Polymer Handguard</td><td>2</td><td>1250</td><td>Standard synthetic front shroud built for heavy automatic service. Stats: Recoil -3, Handling +8, Ergonomics +6.</td></tr>
+            <tr><td>Dragoon Railed Handguard</td><td>3</td><td>4000</td><td>Extended handguard profile adding top and bottom adapter paths. Stats: Recoil -5, Handling +12, Ergonomics +10.</td></tr>
+            <tr><td>Bahadir Extended Handguard</td><td>3</td><td>2500</td><td>Elongated equipment track adapter dedicated to a unique SMG frame. Stats: Recoil -3.5, Handling +8, Ergonomics +8.</td></tr>
+            <tr><td>Bahadir Railed Handguard</td><td>2</td><td>1250</td><td>Standard forward casing rail bracket for an uncommon SMG receiver. Stats: Recoil -2, Handling +6, Ergonomics +5.</td></tr>
+            <tr><td>Borealis Polymer Short Handguard</td><td>1</td><td>1250</td><td>Short forearm placement shield for a semi-automatic shotgun. Stats: Recoil -2, Handling +2, Ergonomics +4.</td></tr>
+            <tr><td>Borealis Adaptable Railed Handguard</td><td>2</td><td>4000</td><td>Versatile accessory track assembly updating tactical shotgun utility. Stats: Recoil -4, Handling +4, Ergonomics +4.</td></tr>
+            <tr><td>Borealis Lock Mount Handguard</td><td>2</td><td>2500</td><td>Reinforced composite guard including an accessory locking clamp. Stats: Recoil -4.5, Handling +8, Ergonomics +8.</td></tr>
+            <tr><td>M4 Adaptable Extended Handguard</td><td>2</td><td>8000</td><td>Extended shroud mixing modern slot styles over traditional rails. Stats: Recoil -5, Handling +5, Ergonomics +2.</td></tr>
+            <tr><td>M4 Slotted Mount Handguard</td><td>2</td><td>1250</td><td>Standard size attachment shroud using modern slot connectors. Stats: Modifies attachment rails.</td></tr>
+            <tr><td>M4 Ribbed Handguard</td><td>2</td><td>2500</td><td>Textured, rib-molded forearm guard yielding a surer support hold. Stats: Recoil -2.5, Handling +3, Ergonomics +3.</td></tr>
+            <tr><td>M4 Railed Handguard</td><td>2</td><td>2500</td><td>Standard size forward tube shield fitted with modular mounting slots. Stats: Recoil -3.5, Handling +2, Ergonomics +4.</td></tr>
+            <tr><td>MK Combination Handguard</td><td>1</td><td>2500</td><td>Classic combat rifle fore-end using matching wood and polymer components. Stats: Recoil -3, Handling +4, Ergonomics +3.</td></tr>
+            <tr><td>MK Slotted Mount Handguard</td><td>3</td><td>4000</td><td>Extended forearm cover utilizing lightweight item slot systems. Stats: Recoil -6, Handling +8, Ergonomics +6.</td></tr>
+            <tr><td>MK Extended Railed Handguard</td><td>3</td><td>4000</td><td>Elongated metallic forearm sheath giving full-length gear tracks. Stats: Recoil -5, Handling +10, Ergonomics +6.</td></tr>
+            <tr><td>MK Railed Combination Handguard</td><td>2</td><td>2500</td><td>Hybrid wood-synthetic composite layout supplying a bottom gear rail. Stats: Recoil -4.5, Handling +6, Ergonomics +3.</td></tr>
+            <tr><td>MK Railed Polymer Handguard</td><td>2</td><td>2500</td><td>All-polymer automatic rifle fore-end fitted with tactical rails. Stats: Recoil -4.5, Handling +6, Ergonomics +3.</td></tr>
+            <tr><td>MK Extended Slotted Mount Handguard</td><td>2</td><td>4000</td><td>Elongated forearm kit supporting low-profile slot accessories. Stats: Recoil -5, Handling +6, Ergonomics +6.</td></tr>
+            <tr><td>MK Slotted Mount Handguard (Alt)</td><td>2</td><td>2500</td><td>Standard length receiver shell outfitted with a slotted bracket line. Stats: Recoil -5, Handling +4, Ergonomics +4.</td></tr>
+            <tr><td>PM Flashlight Forestock</td><td>1</td><td>2500</td><td>Synthetic pump fore-end featuring a built-in search spotlight. Stats: Recoil -5, Handling +6, Ergonomics +4.</td></tr>
+            <tr><td>PM Railed Forestock</td><td>2</td><td>2500</td><td>Synthetic pump assembly supplying a mounting point for laser accessories. Stats: Recoil -4, Handling +6, Ergonomics +6.</td></tr>
+            <tr><td>TC Railed Handguard</td><td>2</td><td>2500</td><td>Weathered sniper forearm mount bracket with external equipment tracks. Stats: Recoil -3, Handling +4, Ergonomics +2.</td></tr>
+            <tr><td>TC Handguard</td><td>1</td><td>750</td><td>Battle-worn, basic wood-grain forearm housing for a marksman rifle. Stats: Recoil -2, Handling +2, Ergonomics +2.</td></tr>
+            <tr><td>Zavod Polymer Handguard</td><td>1</td><td>750</td><td>Synthetic forearm replacement that eases breakout shotgun control. Stats: Recoil -1.5, Handling +2, Ergonomics +2.</td></tr>
+            <tr><td>M4 Target Pistol Grip Module</td><td>3</td><td>4000</td><td>Broad-based target handle that shifts smoothly between firearms. Stats: Handling +3, Ergonomics +2.</td></tr>
+            <tr><td>M4 Ergonomic Pistol Grip Module</td><td>2</td><td>2500</td><td>Contoured shooter's grip adaptable to homebrew or service guns. Stats: Handling +3, Ergonomics +2.</td></tr>
+            <tr><td>M4 Pistol Grip Module</td><td>1</td><td>1250</td><td>Standard weapon handle component matching multiple configurations. Stats: Handling +3, Ergonomics +2.</td></tr>
+            <tr><td>Polymer Pistol Grip Module</td><td>1</td><td>2500</td><td>Highly adaptable lightweight synthetic handle for field comfort. Stats: Handling +3, Ergonomics +2.</td></tr>
+            <tr><td>2HMG Ergonomic Pistol Grip</td><td>3</td><td>2500</td><td>Heavily reinforced synthetic handle scaled for machine gun tools. Stats: Handling +6, Ergonomics +4.</td></tr>
+            <tr><td>Tapered Vertical Foregrip</td><td>2</td><td>2500</td><td>Polished downstream stick handle tapered for comfort. Stats: Handling +2, Ergonomics +2.</td></tr>
+            <tr><td>Short Tapered Vertical Foregrip</td><td>1</td><td>1250</td><td>Stubby vertical attachment offering localized wrist support options. Stats: Handling +3, Ergonomics +3.</td></tr>
+            <tr><td>Vertical Foregrip</td><td>2</td><td>2500</td><td>Straight vertical stick accessory engineered for weapon control. Stats: Handling +4, Ergonomics +2.</td></tr>
+            <tr><td>Short Vertical Foregrip</td><td>1</td><td>1250</td><td>Compact straight vertical handle layout making targeting snappier. Stats: Handling +2, Ergonomics +4.</td></tr>
 
         </table>
     </div>
