@@ -2,48 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SCAVLAND Map</title>
-
-<div class="nav-bar">
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="weapons.html">Weapons</a>
-        <a href="vendors.html">Vendors</a>
-        <a href="areas.html">Areas</a>
-        <a href="map.html">Map</a>
-        <a href="crafting.html">Crafting</a>
-    </div>
-</div>
-
+<link rel="stylesheet" href="site-theme.css">
 <style>
-.nav-bar {
-    background: #222;
-    padding: 12px 20px;
-    border-bottom: 2px solid #333;
-    display: flex;
-    justify-content: center; /* centers the nav */
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.nav-links a {
-    color: #ffffff; /* white text */
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 20px; /* spacing between links */
-}
-
-.nav-links a:hover {
-    color: #ffcc66; /* gold hover */
-}
+.map-page{width:100%;margin:0 auto;padding:0 0 30px}
+.map-intro{text-align:center;padding:30px 20px 24px;background:rgba(18,20,19,.94);border-bottom:1px solid var(--scav-line)}
+.map-intro h1{margin:0 0 8px;color:var(--scav-gold-bright);font-size:clamp(30px,3vw,48px)}
+.map-intro p{margin:0;color:#bbb;font-size:clamp(14px,1.2vw,18px)}
+.map-container{width:100%!important;margin:0 auto!important;padding:clamp(10px,1.5vw,24px);display:flex;justify-content:center;align-items:flex-start}
+.map-img{width:100%;height:auto;max-width:1920px;max-height:calc(100vh - 170px);object-fit:contain;border:1px solid var(--scav-line);background:#b8aa96}
+@media(max-width:700px){.map-container{padding:8px}.map-img{max-height:none}.map-intro{padding:22px 12px 18px}}
 </style>
-
-<div class="map-container">
-    <!-- Replace this with your actual map image when you upload it -->
-    <img src="https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/images/scavland-map.png" class="map-img">
-</div>
-
-<script src="site-shell.js"></script>\n</body>
+</head>
+<body>
+<main class="map-page">
+<section class="map-intro"><h1>SCAVLAND Map</h1><p>Explore the current community map of Zalesye.</p></section>
+<div class="map-container"><img src="images/scavland-map.png" alt="SCAVLAND map of Zalesye" class="map-img"></div>
+</main>
+<script src="site-shell.js"></script>
+</body>
 </html>
