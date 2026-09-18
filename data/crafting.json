@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 1,
+  "description": "Crafting recipes migrated from crafting.html.",
+  "lastMigratedFromSite": "2026-09-18",
+  "data": [
+    {
+      "id": "ifak-medkit",
+      "name": "IFAK Medkit",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "ai-2-army-medkit",
+          "name": "AI-2 Army Medkit",
+          "quantity": 1
+        },
+        {
+          "itemId": "advanced-bandage",
+          "name": "Advanced Bandage",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "ai-2-army-medkit",
+      "name": "AI-2 Army Medkit",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "ai-2-medkit",
+          "name": "AI-2 Medkit",
+          "quantity": 1
+        },
+        {
+          "itemId": "morphine",
+          "name": "Morphine",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "advanced-bandage",
+      "name": "Advanced Bandage",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "bandage",
+          "name": "Bandage",
+          "quantity": 2
+        },
+        {
+          "itemId": "glue",
+          "name": "Glue",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "stimpack",
+      "name": "Stimpack",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "morphine",
+          "name": "Morphine",
+          "quantity": 1
+        },
+        {
+          "itemId": "headache-pills",
+          "name": "Headache Pills",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "ai-2-medkit",
+      "name": "AI-2 Medkit",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "plastic-scrap",
+          "name": "Plastic Scrap",
+          "quantity": 2
+        },
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "quantity": 2
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "morphine",
+      "name": "Morphine",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "metal-scrap",
+          "name": "Metal Scrap",
+          "quantity": 1
+        },
+        {
+          "itemId": "plastic-scrap",
+          "name": "Plastic Scrap",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "moonshine",
+      "name": "Moonshine",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "quantity": 1
+        },
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bandage",
+      "name": "Bandage",
+      "workbench": "medical",
+      "ingredients": [
+        {
+          "itemId": "fabric-scrap",
+          "name": "Fabric Scrap",
+          "quantity": 4
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "expert-gun-repair-kit",
+      "name": "Expert Gun Repair Kit",
+      "workbench": "weapon",
+      "ingredients": [
+        {
+          "itemId": "advanced-gun-repair-kit",
+          "name": "Advanced Gun Repair Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "advanced-mechanical-components",
+          "name": "Advanced Mechanical Components",
+          "quantity": 1
+        },
+        {
+          "itemId": "screwdriver",
+          "name": "Screwdriver",
+          "quantity": 1
+        },
+        {
+          "itemId": "hammer",
+          "name": "Hammer",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "advanced-gun-repair-kit",
+      "name": "Advanced Gun Repair Kit",
+      "workbench": "weapon",
+      "ingredients": [
+        {
+          "itemId": "basic-gun-repair-kit",
+          "name": "Basic Gun Repair Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "advanced-mechanical-components",
+          "name": "Advanced Mechanical Components",
+          "quantity": 1
+        },
+        {
+          "itemId": "screwdriver",
+          "name": "Screwdriver",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "basic-gun-repair-kit",
+      "name": "Basic Gun Repair Kit",
+      "workbench": "weapon",
+      "ingredients": [
+        {
+          "itemId": "scrap-gun-repair-kit",
+          "name": "Scrap Gun Repair Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "mechanical-components",
+          "name": "Mechanical Components",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "scrap-gun-repair-kit",
+      "name": "Scrap Gun Repair Kit",
+      "workbench": "weapon",
+      "ingredients": [
+        {
+          "itemId": "metal-scrap",
+          "name": "Metal Scrap",
+          "quantity": 5
+        },
+        {
+          "itemId": "gun-field-tools",
+          "name": "Gun Field Tools",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "gun-field-tools",
+      "name": "Gun Field Tools",
+      "workbench": "weapon",
+      "ingredients": [
+        {
+          "itemId": "gun-cleaning-rod",
+          "name": "Gun Cleaning Rod",
+          "quantity": 1
+        },
+        {
+          "itemId": "screwdriver",
+          "name": "Screwdriver",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "gun-cleaning-rod",
+      "name": "Gun Cleaning Rod",
+      "workbench": "weapon",
+      "ingredients": [
+        {
+          "itemId": "metal-scrap",
+          "name": "Metal Scrap",
+          "quantity": 2
+        },
+        {
+          "itemId": "fabric-scrap",
+          "name": "Fabric Scrap",
+          "quantity": 2
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "gun-lube",
+      "name": "Gun Lube",
+      "workbench": "weapon",
+      "ingredients": [
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "heavy-armor-repair-kit",
+      "name": "Heavy Armor Repair Kit",
+      "workbench": "armour",
+      "ingredients": [
+        {
+          "itemId": "medium-armor-repair-kit",
+          "name": "Medium Armor Repair Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "armor-plate",
+          "name": "Armor Plate",
+          "quantity": 1
+        },
+        {
+          "itemId": "field-repair-kit",
+          "name": "Field Repair Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "glue",
+          "name": "Glue",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "medium-armor-repair-kit",
+      "name": "Medium Armor Repair Kit",
+      "workbench": "armour",
+      "ingredients": [
+        {
+          "itemId": "scavenger-armor-repair-kit",
+          "name": "Scavenger Armor Repair Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "kevlar-weave",
+          "name": "Kevlar Weave",
+          "quantity": 1
+        },
+        {
+          "itemId": "glue",
+          "name": "Glue",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "scavenger-armor-repair-kit",
+      "name": "Scavenger Armor Repair Kit",
+      "workbench": "armour",
+      "ingredients": [
+        {
+          "itemId": "tattered-armor-repair-kit",
+          "name": "Tattered Armor Repair Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "field-repair-kit",
+          "name": "Field Repair Kit",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "tattered-armor-repair-kit",
+      "name": "Tattered Armor Repair Kit",
+      "workbench": "armour",
+      "ingredients": [
+        {
+          "itemId": "sewing-kit",
+          "name": "Sewing Kit",
+          "quantity": 1
+        },
+        {
+          "itemId": "glue",
+          "name": "Glue",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "sewing-kit",
+      "name": "Sewing Kit",
+      "workbench": "armour",
+      "ingredients": [
+        {
+          "itemId": "metal-scrap",
+          "name": "Metal Scrap",
+          "quantity": 2
+        },
+        {
+          "itemId": "field-repair-kit",
+          "name": "Field Repair Kit",
+          "quantity": 1
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "field-repair-kit",
+      "name": "Field Repair Kit",
+      "workbench": "armour",
+      "ingredients": [
+        {
+          "itemId": "fabric-scrap",
+          "name": "Fabric Scrap",
+          "quantity": 2
+        },
+        {
+          "itemId": "metal-scrap",
+          "name": "Metal Scrap",
+          "quantity": 2
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "glue",
+      "name": "Glue",
+      "workbench": "armour",
+      "ingredients": [
+        {
+          "itemId": "plastic-scrap",
+          "name": "Plastic Scrap",
+          "quantity": 2
+        }
+      ],
+      "source": {
+        "file": "crafting.html",
+        "status": "existing-site-data"
+      }
+    }
+  ]
+}
