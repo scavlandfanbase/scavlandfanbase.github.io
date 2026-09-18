@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "description": "Developer-provided vendor selling-rate information; wording is preserved without inferring base values.",
+  "lastMigratedFromSite": "2026-09-18",
+  "data": {
+    "source": "Developer-provided information supplied to site maintainer",
+    "rates": [
+      {
+        "vendorId": "vesna",
+        "category": "Common",
+        "percent": 30
+      },
+      {
+        "vendorId": "vesna",
+        "category": "Clothing",
+        "percent": 60
+      },
+      {
+        "vendorId": "grigory",
+        "category": "Common",
+        "percent": 50
+      },
+      {
+        "vendorId": "zhivan",
+        "category": "Common",
+        "percent": 140,
+        "wording": "140% value"
+      },
+      {
+        "vendorId": "nadja",
+        "category": "Common",
+        "percent": 90
+      },
+      {
+        "vendorId": "nadja",
+        "category": "Crafting",
+        "percent": 80
+      },
+      {
+        "vendorId": "bogdan",
+        "category": "Mutant Parts",
+        "modifierText": "40% more"
+      }
+    ]
+  }
+}
