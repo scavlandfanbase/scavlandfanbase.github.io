@@ -132,6 +132,18 @@ body {
     letter-spacing: 0.5px;
     margin-right: 6px;
 }
+
+.placeholder-note { color:#999; font-style:italic; padding:10px 0; }
+.vendor-count { color:#aaa; margin:0 0 18px; }
+.vendor-section.placeholder { border-style:dashed; opacity:.88; }
+.vendor-section.placeholder .vendor-header { border-bottom:0; }
+@media (max-width:650px){
+  body{padding:12px}
+  .nav-links{display:flex;gap:12px;overflow-x:auto}
+  .nav-links a{margin:0;white-space:nowrap;font-size:15px}
+  .vendor-table{font-size:13px}
+  .vendor-table th,.vendor-table td{padding:7px 5px}
+}
 </style>
 
 <script>
@@ -145,6 +157,7 @@ function toggleVendor(id) {
 <body>
 
 <h1 style="color:#ffcc66;">SCAVLAND Vendors</h1>
+<p class="vendor-count">22 confirmed vendors · inventories are being documented from in-game data.</p>
 
 <div id="vendor-list">
 
@@ -152,7 +165,7 @@ function toggleVendor(id) {
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('grigory')">
         Grigory — The Mire
-        <div class="vendor-faction">Faction: ?</div>
+        <div class="vendor-faction">Faction: Gunners</div>
     </div>
 
     <div class="vendor-content" id="grigory">
@@ -204,7 +217,7 @@ function toggleVendor(id) {
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('petar')">
         Petar — The Mire
-        <div class="vendor-faction">Faction: ?</div>
+        <div class="vendor-faction">Faction: Commonfolk</div>
     </div>
     <div class="vendor-content" id="petar">
         <table class="vendor-table">
@@ -226,7 +239,7 @@ function toggleVendor(id) {
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('bogdan')">
         Bogdan — The Mire
-        <div class="vendor-faction">Faction: ?</div>
+        <div class="vendor-faction">Faction: Rada</div>
     </div>
     <div class="vendor-content" id="bogdan">
         <table class="vendor-table">
@@ -250,7 +263,7 @@ function toggleVendor(id) {
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('marko')">
         Marko — The Mire
-        <div class="vendor-faction">Faction: Commenfolk</div>
+        <div class="vendor-faction">Faction: Commonfolk</div>
     </div>
 
     <div class="vendor-content" id="marko">
@@ -290,7 +303,7 @@ function toggleVendor(id) {
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('yefim')">
         Yefim — East of Sontse Station
-        <div class="vendor-faction">Faction: ?</div>
+        <div class="vendor-faction">Faction: Commonfolk</div>
     </div>
     
     <div class="vendor-content" id="yefim">
@@ -314,7 +327,7 @@ function toggleVendor(id) {
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('alexei')">
         Alexei — North East of the Mire
-        <div class="vendor-faction">Faction: ?</div>
+        <div class="vendor-faction">Faction: Acolytes</div>
     </div>
     <div class="vendor-content" id="alexei">
         <table class="vendor-table">
@@ -943,6 +956,139 @@ function toggleVendor(id) {
             <tr><td>2HMG Ergonomic Pistol Grip</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
         </table>
     </div>
+</div>
+
+
+<!-- PLACEHOLDER: RAISA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('raisa')">
+    Raisa
+    <div class="vendor-faction">Faction: Vultures</div>
+  </div>
+  <div class="vendor-content" id="raisa">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: MILA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('mila')">
+    Mila
+    <div class="vendor-faction">Faction: Rada</div>
+  </div>
+  <div class="vendor-content" id="mila">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: VESNA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('vesna')">
+    Vesna
+    <div class="vendor-faction">Faction: Rada</div>
+  </div>
+  <div class="vendor-content" id="vesna">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: OLGA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('olga')">
+    Olga
+    <div class="vendor-faction">Faction: Rada</div>
+  </div>
+  <div class="vendor-content" id="olga">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: ROSA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('rosa')">
+    Rosa
+    <div class="vendor-faction">Faction: Acolytes</div>
+  </div>
+  <div class="vendor-content" id="rosa">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: SASHA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('sasha')">
+    Sasha
+    <div class="vendor-faction">Faction: Palatines</div>
+  </div>
+  <div class="vendor-content" id="sasha">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: YELENA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('yelena')">
+    Yelena
+    <div class="vendor-faction">Faction: Palatines</div>
+  </div>
+  <div class="vendor-content" id="yelena">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: TAJRA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('tajra')">
+    Tajra
+    <div class="vendor-faction">Faction: Rada</div>
+  </div>
+  <div class="vendor-content" id="tajra">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: SNEZHANA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('snezhana')">
+    Snezhana
+    <div class="vendor-faction">Faction: Rada</div>
+  </div>
+  <div class="vendor-content" id="snezhana">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: ZHIVAN -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('zhivan')">
+    Zhivan
+    <div class="vendor-faction">Faction: Vultures</div>
+  </div>
+  <div class="vendor-content" id="zhivan">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: ILYA -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('ilya')">
+    Ilya
+    <div class="vendor-faction">Faction: Mudlarks</div>
+  </div>
+  <div class="vendor-content" id="ilya">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
+</div>
+
+<!-- PLACEHOLDER: GAVRON -->
+<div class="vendor-section placeholder">
+  <div class="vendor-header" onclick="toggleVendor('gavron')">
+    Gavron
+    <div class="vendor-faction">Faction: Mudlarks</div>
+  </div>
+  <div class="vendor-content" id="gavron">
+    <div class="placeholder-note">Inventory data not documented yet.</div>
+  </div>
 </div>
 
 </div> <!-- Closes #vendor-list -->
