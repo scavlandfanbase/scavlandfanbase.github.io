@@ -1,0 +1,1898 @@
+{
+  "schemaVersion": 1,
+  "description": "Vendor identities and inventories migrated from vendors.html.",
+  "lastMigratedFromSite": "2026-09-18",
+  "data": [
+    {
+      "id": "grigory",
+      "name": "Grigory",
+      "location": "The Mire",
+      "factionId": "gunners",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "pm-nikolay",
+          "name": "PM Nikolay",
+          "rank": "1",
+          "price": 2750,
+          "details": "Pistol"
+        },
+        {
+          "itemId": "leon-1895-long",
+          "name": "Leon 1895 (Long)",
+          "rank": "1",
+          "price": 5250,
+          "details": "Rifle"
+        },
+        {
+          "itemId": "zavod-24-short",
+          "name": "Zavod 24 (Short)",
+          "rank": "1",
+          "price": 9500,
+          "details": "Shotgun"
+        },
+        {
+          "itemId": "medved-monster",
+          "name": "Medved Monster",
+          "rank": "1",
+          "price": 13250,
+          "details": "Rifle"
+        },
+        {
+          "itemId": "mikhail-74-u",
+          "name": "Mikhail 74 U",
+          "rank": "2",
+          "price": 36250,
+          "details": "SMG"
+        },
+        {
+          "itemId": "pm-12-70-short",
+          "name": "PM 12-70 (Short)",
+          "rank": "2",
+          "price": 16500,
+          "details": "Shotgun"
+        },
+        {
+          "itemId": "mikhail-47",
+          "name": "Mikhail 47",
+          "rank": "3",
+          "price": 47000,
+          "details": "Assault Rifle"
+        },
+        {
+          "itemId": "pistol-fmj-ammo",
+          "name": "Pistol FMJ Ammo",
+          "rank": "1",
+          "price": 30,
+          "details": "Ammo Dmg: 10 Pen: 0%"
+        },
+        {
+          "itemId": "shotgun-buckshot-ammo",
+          "name": "Shotgun Buckshot Ammo",
+          "rank": "1",
+          "price": 60,
+          "details": "Ammo Dmg: 30 Pen: 0%"
+        },
+        {
+          "itemId": "rifle-fmj-ammo",
+          "name": "Rifle FMJ Ammo",
+          "rank": "2",
+          "price": 200,
+          "details": "Ammo Dmg: 17 Pen: 0%"
+        },
+        {
+          "itemId": "gun-lube",
+          "name": "Gun Lube",
+          "rank": "1",
+          "price": 1500,
+          "details": "Maint Repair: 5% Min Cond: 80%"
+        },
+        {
+          "itemId": "gun-cleaning-rod",
+          "name": "Gun Cleaning Rod",
+          "rank": "1",
+          "price": 3500,
+          "details": "Maint Repair: 15% Min Cond: 70%"
+        },
+        {
+          "itemId": "gun-field-tools",
+          "name": "Gun Field Tools",
+          "rank": "1",
+          "price": 5000,
+          "details": "Maint Repair: 15% Min Cond: 60%"
+        },
+        {
+          "itemId": "scrap-gun-repair-kit",
+          "name": "Scrap Gun Repair Kit",
+          "rank": "1",
+          "price": 12000,
+          "details": "Kit Repair: 20% Min Cond: 10%"
+        },
+        {
+          "itemId": "makeshift-large-steel-stick-mag",
+          "name": "Makeshift Large Steel Stick Mag",
+          "rank": "1",
+          "price": 1250,
+          "details": "Mag Ergo: -4"
+        },
+        {
+          "itemId": "mk-steel-polymer-mag-brown",
+          "name": "MK Steel-Polymer Mag (Brown)",
+          "rank": "2",
+          "price": 1250,
+          "details": "Mag Ergo: -2"
+        },
+        {
+          "itemId": "mk-triangle-stock",
+          "name": "MK Triangle Stock",
+          "rank": "2",
+          "price": 2500,
+          "details": "Stock Recoil: -9"
+        },
+        {
+          "itemId": "mk-underfolding-stock",
+          "name": "MK Underfolding Stock",
+          "rank": "2",
+          "price": 1250,
+          "details": "Stock Recoil: -6"
+        },
+        {
+          "itemId": "mk-dust-cover",
+          "name": "MK Dust Cover",
+          "rank": "2",
+          "price": 1250,
+          "details": "Receiver"
+        },
+        {
+          "itemId": "mk-railed-dust-cover",
+          "name": "MK Railed Dust Cover",
+          "rank": "3",
+          "price": 2500,
+          "details": "Receiver Ergo: +6"
+        },
+        {
+          "itemId": "mk-vert-grip-handguard",
+          "name": "MK Vert Grip Handguard",
+          "rank": "2",
+          "price": 1250,
+          "details": "Guard Recoil: -4 Handling: +4"
+        },
+        {
+          "itemId": "mk-wood-handguard",
+          "name": "MK Wood Handguard",
+          "rank": "2",
+          "price": 750,
+          "details": "Guard Recoil: -2"
+        },
+        {
+          "itemId": "mk-railed-combination-handguard",
+          "name": "MK Railed Combination Handguard",
+          "rank": "3",
+          "price": 2500,
+          "details": "Guard Recoil: -4.5 Handling: +6"
+        },
+        {
+          "itemId": "short-tapered-vertical-foregrip",
+          "name": "Short Tapered Vertical Foregrip",
+          "rank": "3",
+          "price": 1250,
+          "details": "Grip Handling: +3 Ergo: +3"
+        },
+        {
+          "itemId": "mk-slant-muzzle-brake",
+          "name": "MK Slant Muzzle Brake",
+          "rank": "2",
+          "price": 2000,
+          "details": "Muzzle Recoil: -6.5"
+        },
+        {
+          "itemId": "dragoon-2-slot-compensator",
+          "name": "Dragoon 2-Slot Compensator",
+          "rank": "2",
+          "price": 2500,
+          "details": "Muzzle Recoil: -6 Handling: +4"
+        },
+        {
+          "itemId": "bakelite-pistol-grip-module",
+          "name": "Bakelite Pistol Grip Module",
+          "rank": "2",
+          "price": 750,
+          "details": "Grip Handling: +2"
+        },
+        {
+          "itemId": "wooden-pistol-grip-module",
+          "name": "Wooden Pistol Grip Module",
+          "rank": "2",
+          "price": 1250,
+          "details": "Grip Handling: +3"
+        },
+        {
+          "itemId": "vintage-red-dot-sight",
+          "name": "Vintage Red Dot Sight",
+          "rank": "3",
+          "price": 2500,
+          "details": "Sight Range: +1 Acc: +2"
+        },
+        {
+          "itemId": "red-dot-sight",
+          "name": "Red Dot Sight",
+          "rank": "3",
+          "price": 1250,
+          "details": "Sight Range: +1 Acc: +2"
+        },
+        {
+          "itemId": "bandage",
+          "name": "Bandage",
+          "rank": "1",
+          "price": 250,
+          "details": "Meds Health: +5 Bleed: -15"
+        },
+        {
+          "itemId": "ai-2-medkit",
+          "name": "AI-2 Medkit",
+          "rank": "1",
+          "price": 3200,
+          "details": "Meds Health: +30 Rad: -15"
+        },
+        {
+          "itemId": "basic-gun-repair-kit-blueprint",
+          "name": "Basic Gun Repair Kit Blueprint",
+          "rank": "1",
+          "price": 30000,
+          "details": "Blueprint"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "petar",
+      "name": "Petar",
+      "location": "The Mire",
+      "factionId": "commonfolk",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "moonshine",
+          "name": "Moonshine",
+          "rank": "1",
+          "price": 2400,
+          "details": "Consumable"
+        },
+        {
+          "itemId": "overripe-potato",
+          "name": "Overripe Potato",
+          "rank": "1",
+          "price": 250,
+          "details": "Food"
+        },
+        {
+          "itemId": "wg-40",
+          "name": "WG-40",
+          "rank": "1",
+          "price": 250,
+          "details": "Material"
+        },
+        {
+          "itemId": "mechanical-components",
+          "name": "Mechanical Components",
+          "rank": "1",
+          "price": 10000,
+          "details": "Material"
+        },
+        {
+          "itemId": "metal-scrap",
+          "name": "Metal Scrap",
+          "rank": "1",
+          "price": 100,
+          "details": "Scrap"
+        },
+        {
+          "itemId": "fabric-scrap",
+          "name": "Fabric Scrap",
+          "rank": "1",
+          "price": 100,
+          "details": "Scrap"
+        },
+        {
+          "itemId": "plastic-scrap",
+          "name": "Plastic Scrap",
+          "rank": "1",
+          "price": 100,
+          "details": "Scrap"
+        },
+        {
+          "itemId": "rubber-scrap",
+          "name": "Rubber Scrap",
+          "rank": "1",
+          "price": 100,
+          "details": "Scrap"
+        },
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "rank": "1",
+          "price": 100,
+          "details": "Scrap"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bogdan",
+      "name": "Bogdan",
+      "location": "The Mire",
+      "factionId": "rada",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "pistol-hp-ammo",
+          "name": "Pistol HP Ammo",
+          "rank": "2",
+          "price": 60,
+          "details": "Ammo Hollow Point"
+        },
+        {
+          "itemId": "shotgun-hp-ammo",
+          "name": "Shotgun HP Ammo",
+          "rank": "2",
+          "price": 180,
+          "details": "Ammo Hollow Point"
+        },
+        {
+          "itemId": "rifle-hp-ammo",
+          "name": "Rifle HP Ammo",
+          "rank": "3",
+          "price": 280,
+          "details": "Ammo Hollow Point"
+        },
+        {
+          "itemId": "high-caliber-rifle-hp-ammo",
+          "name": "High Caliber Rifle HP Ammo",
+          "rank": "3",
+          "price": 250,
+          "details": "Ammo Hollow Point"
+        },
+        {
+          "itemId": "meat-drumstick",
+          "name": "Meat Drumstick",
+          "rank": "2",
+          "price": 2400,
+          "details": "Food"
+        },
+        {
+          "itemId": "meat-skewer",
+          "name": "Meat Skewer",
+          "rank": "1",
+          "price": 1800,
+          "details": "Food"
+        },
+        {
+          "itemId": "dried-steak",
+          "name": "Dried Steak",
+          "rank": "1",
+          "price": 1450,
+          "details": "Food Hunger: -20 Radiation: +5"
+        },
+        {
+          "itemId": "rabbit-meat",
+          "name": "Rabbit Meat",
+          "rank": "1",
+          "price": 50,
+          "details": "Raw Food"
+        },
+        {
+          "itemId": "rat-meat",
+          "name": "Rat Meat",
+          "rank": "1",
+          "price": 25,
+          "details": "Raw Food"
+        },
+        {
+          "itemId": "mutant-steak",
+          "name": "Mutant Steak",
+          "rank": "1",
+          "price": 100,
+          "details": "Food"
+        },
+        {
+          "itemId": "worm-meat",
+          "name": "Worm Meat",
+          "rank": "1",
+          "price": 100,
+          "details": "Raw Food"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "marko",
+      "name": "Marko",
+      "location": "The Mire",
+      "factionId": "commonfolk",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "cigarettes",
+          "name": "Cigarettes",
+          "rank": "1",
+          "price": 750,
+          "details": "Consumable"
+        },
+        {
+          "itemId": "mystery-pills",
+          "name": "Mystery Pills",
+          "rank": "1",
+          "price": 6000,
+          "details": "Medical"
+        },
+        {
+          "itemId": "moonshine",
+          "name": "Moonshine",
+          "rank": "1",
+          "price": 2400,
+          "details": "Consumable"
+        },
+        {
+          "itemId": "echelon-killer-apple",
+          "name": "Echelon - Killer Apple",
+          "rank": "1",
+          "price": 3000,
+          "details": "Food"
+        },
+        {
+          "itemId": "fresh-mushrooms",
+          "name": "Fresh Mushrooms",
+          "rank": "1",
+          "price": 3000,
+          "details": "Food"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "jasna",
+      "name": "Jasna",
+      "location": "The Mire",
+      "factionId": "acolytes",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "rank": "1",
+          "price": 480,
+          "details": "Water"
+        },
+        {
+          "itemId": "radish",
+          "name": "Radish",
+          "rank": "1",
+          "price": 150,
+          "details": "Food"
+        },
+        {
+          "itemId": "russet-potato",
+          "name": "Russet Potato",
+          "rank": "1",
+          "price": 800,
+          "details": "Food"
+        },
+        {
+          "itemId": "dried-mushrooms",
+          "name": "Dried Mushrooms",
+          "rank": "1",
+          "price": 1000,
+          "details": "Food"
+        },
+        {
+          "itemId": "large-pumpkin",
+          "name": "Large Pumpkin",
+          "rank": "2",
+          "price": 3000,
+          "details": "Food"
+        },
+        {
+          "itemId": "vegetable-soup",
+          "name": "Vegetable Soup",
+          "rank": "2",
+          "price": 7500,
+          "details": "Food Hunger: -40 Thirst: -20"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "yefim",
+      "name": "Yefim",
+      "location": "East of Sontse Station",
+      "factionId": "commonfolk",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "gp-4-gas-mask",
+          "name": "GP-4 Gas Mask",
+          "rank": "1",
+          "price": 25000,
+          "details": "Gear"
+        },
+        {
+          "itemId": "armoured-rags",
+          "name": "Armoured Rags",
+          "rank": "2",
+          "price": 35000,
+          "details": "Armor"
+        },
+        {
+          "itemId": "plated-overcoat",
+          "name": "Plated Overcoat",
+          "rank": "3",
+          "price": 45000,
+          "details": "Armor"
+        },
+        {
+          "itemId": "scrapyard-pants",
+          "name": "Scrapyard Pants",
+          "rank": "2",
+          "price": 22000,
+          "details": "Armor"
+        },
+        {
+          "itemId": "plated-ragged-pants",
+          "name": "Plated Ragged Pants",
+          "rank": "3",
+          "price": 45000,
+          "details": "Armor"
+        },
+        {
+          "itemId": "bandage",
+          "name": "Bandage",
+          "rank": "1",
+          "price": 250,
+          "details": "Meds Health: +5 Bleed: -15"
+        },
+        {
+          "itemId": "ai-2-medkit",
+          "name": "AI-2 Medkit",
+          "rank": "1",
+          "price": 3200,
+          "details": "Meds Health: +30 Rad: -15 Thirst: +3 Hunger: +3"
+        },
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "rank": "1",
+          "price": 480,
+          "details": "Water"
+        },
+        {
+          "itemId": "canned-beans",
+          "name": "Canned Beans",
+          "rank": "1",
+          "price": 2100,
+          "details": "Food"
+        },
+        {
+          "itemId": "medium-armor-repair-kit-blueprint",
+          "name": "Medium Armor Repair Kit Blueprint",
+          "rank": "2",
+          "price": 50000,
+          "details": "Blueprint"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "alexei",
+      "name": "Alexei",
+      "location": "North East of the Mire",
+      "factionId": "acolytes",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "bandage",
+          "name": "Bandage",
+          "rank": "1",
+          "price": 250,
+          "details": "Meds Health: +5 Bleed: -15"
+        },
+        {
+          "itemId": "advanced-bandage",
+          "name": "Advanced Bandage",
+          "rank": "3",
+          "price": 4000,
+          "details": "Meds"
+        },
+        {
+          "itemId": "ifak-medkit",
+          "name": "IFAK Medkit",
+          "rank": "3",
+          "price": 12000,
+          "details": "Meds Health: +65 Bleed: -50"
+        },
+        {
+          "itemId": "morphine",
+          "name": "Morphine",
+          "rank": "1",
+          "price": 1250,
+          "details": "Infection"
+        },
+        {
+          "itemId": "stimpack",
+          "name": "Stimpack",
+          "rank": "2",
+          "price": 6000,
+          "details": "Meds Health: +35 Thirst: +5 Hunger: +5"
+        },
+        {
+          "itemId": "headache-pills",
+          "name": "Headache Pills",
+          "rank": "1",
+          "price": 1500,
+          "details": "Meds Health: +15 Thirst: +3"
+        },
+        {
+          "itemId": "ai-2-medkit",
+          "name": "AI-2 Medkit",
+          "rank": "1",
+          "price": 3200,
+          "details": "Meds Health: +30 Rad: -15 Thirst: +3 Hunger: +3"
+        },
+        {
+          "itemId": "ai-2-army-medkit",
+          "name": "AI-2 Army Medkit",
+          "rank": "2",
+          "price": 6200,
+          "details": "Meds Health: +40 Bleed: -20 Rad: -10 Thirst: +3 Hunger: +3"
+        },
+        {
+          "itemId": "pills",
+          "name": "Pills",
+          "rank": "1",
+          "price": 2500,
+          "details": "Meds"
+        },
+        {
+          "itemId": "splint",
+          "name": "Splint",
+          "rank": "1",
+          "price": 3000,
+          "details": "Meds Fracture: -50"
+        },
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "rank": "1",
+          "price": 480,
+          "details": "Water"
+        },
+        {
+          "itemId": "advanced-bandage-blueprint",
+          "name": "Advanced Bandage Blueprint",
+          "rank": "1",
+          "price": 15000,
+          "details": "Blueprint"
+        },
+        {
+          "itemId": "stimpack-blueprint",
+          "name": "Stimpack Blueprint",
+          "rank": "1",
+          "price": 20000,
+          "details": "Blueprint"
+        },
+        {
+          "itemId": "ai-2-army-medkit-blueprint",
+          "name": "AI-2 Army Medkit Blueprint",
+          "rank": "2",
+          "price": 30000,
+          "details": "Blueprint"
+        },
+        {
+          "itemId": "ifak-medkit-blueprint",
+          "name": "IFAK Medkit Blueprint",
+          "rank": "3",
+          "price": 50000,
+          "details": "Blueprint"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "anatoly",
+      "name": "Anatoly",
+      "location": "The Mechanists",
+      "factionId": "mechanists",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "bortovka-tinker",
+          "name": "Bortovka Tinker",
+          "rank": "1",
+          "price": "13250₽",
+          "details": "Weapon Damage: 30 RPM: 100 Range: 20 Accuracy: 52 Recoil: 41 - 11 Handling: 4 + 6 Ergo: 8 + 8 Reload: 1.0 Durability: 100 Caliber: High Caliber Rifle Ammo Repair Class: Scrap Stacking: Not Stackable"
+        },
+        {
+          "itemId": "medved-monster",
+          "name": "Medved Monster",
+          "rank": "1",
+          "price": "17250₽",
+          "details": "Weapon Damage: 10 RPM: 450 Range: 16 Accuracy: 35 Recoil: 37 - 9 Handling: 14 + 8 Ergo: 12 Reload: 1.0 Durability: 100 Caliber: Pistol Ammo Repair Class: Scrap Stacking: Not Stackable"
+        },
+        {
+          "itemId": "svarsh-miracle-short",
+          "name": "Svarsh Miracle (Short)",
+          "rank": "2",
+          "price": "35750₽",
+          "details": "Weapon Damage: 30 RPM: 100 Range: 14 Accuracy: 13 Recoil: 65 - 14 Handling: 8 + 11 Ergo: 8 + 5 Reload: 1.0 Durability: 100 Caliber: Shotgun Ammo Repair Class: Basic Stacking: Not Stackable"
+        },
+        {
+          "itemId": "pistol-fmj-ammo",
+          "name": "Pistol FMJ Ammo",
+          "rank": "1",
+          "price": "30₽",
+          "details": "Ammo Damage: 10 Penetration: 0% Max Stacks: 999"
+        },
+        {
+          "itemId": "shotgun-buckshot-ammo",
+          "name": "Shotgun Buckshot Ammo",
+          "rank": "1",
+          "price": "60₽",
+          "details": "Ammo Damage: 6 × 5 = 30 Penetration: 0% Max Stacks: 999"
+        },
+        {
+          "itemId": "glue",
+          "name": "Glue",
+          "rank": "1",
+          "price": "3000₽ / 2699₽",
+          "details": "Armor Repair Repair: 5% Not usable below: 80% condition Repair Class: Global Max Stacks: 5"
+        },
+        {
+          "itemId": "field-repair-kit",
+          "name": "Field Repair Kit",
+          "rank": "1",
+          "price": "5000₽ / 4499₽",
+          "details": "Armor Repair Repair: 15% Not usable below: 70% condition Repair Class: Global Max Stacks: 5"
+        },
+        {
+          "itemId": "tattered-armor-repair-kit",
+          "name": "Tattered Armor Repair Kit",
+          "rank": "1",
+          "price": "12000₽ / 10799₽",
+          "details": "Armor Repair Repair: 25% Usable in any condition Repair Class: Tattered Max Stacks: 5"
+        },
+        {
+          "itemId": "gun-lube",
+          "name": "Gun Lube",
+          "rank": "1",
+          "price": "3000₽ / 2699₽",
+          "details": "Weapon Maintenance Repair: 5% Not usable below: 80% condition Repair Class: Global Max Stacks: 5"
+        },
+        {
+          "itemId": "gun-cleaning-rod",
+          "name": "Gun Cleaning Rod",
+          "rank": "1",
+          "price": "5000₽ / 4499₽",
+          "details": "Weapon Maintenance Repair: 15% Not usable below: 70% condition Repair Class: Global Max Stacks: 5"
+        },
+        {
+          "itemId": "scrap-gun-repair-kit",
+          "name": "Scrap Gun Repair Kit",
+          "rank": "1",
+          "price": "12000₽ / 10799₽",
+          "details": "Weapon Maintenance Repair: 25% Usable in any condition Repair Class: Scrap Max Stacks: 5"
+        },
+        {
+          "itemId": "ai-2-medkit",
+          "name": "AI-2 Medkit",
+          "rank": "1",
+          "price": "3200₽",
+          "details": "Medical Health: +30 Radiation: -15 Hunger: +3 Thirst: +3 Max Stacks: 5"
+        },
+        {
+          "itemId": "ai-2-army-medkit",
+          "name": "AI-2 Army Medkit",
+          "rank": "2",
+          "price": "6200₽",
+          "details": "Medical Health: +40 Bleed: -20 Radiation: -10 Hunger: +3 Thirst: +3 Max Stacks: 5"
+        },
+        {
+          "itemId": "ai-2-mechanist-medkit",
+          "name": "AI-2 Mechanist Medkit",
+          "rank": "3",
+          "price": "9200₽",
+          "details": "Medical Health: +50 Bleed: -30 Radiation: -50 Hunger: +3 Thirst: +3 Max Stacks: 5"
+        },
+        {
+          "itemId": "bandage",
+          "name": "Bandage",
+          "rank": "1",
+          "price": "250₽",
+          "details": "Medical Health: +5 Bleed: -15 Max Stacks: 5"
+        },
+        {
+          "itemId": "advanced-bandage",
+          "name": "Advanced Bandage",
+          "rank": "2",
+          "price": "4000₽",
+          "details": "Medical Health: +10 Bleed: -33 Max Stacks: 5"
+        },
+        {
+          "itemId": "stimpack",
+          "name": "Stimpack",
+          "rank": "2",
+          "price": "6000₽",
+          "details": "Medical Health: +35 Hunger: +5 Thirst: +5 Max Stacks: 5"
+        },
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "rank": "1",
+          "price": "480₽",
+          "details": "Food & Drink Thirst: -33 Radiation: -5 Max Stacks: 5"
+        },
+        {
+          "itemId": "canned-beans",
+          "name": "Canned Beans",
+          "rank": "1",
+          "price": "2100₽",
+          "details": "Food & Drink Hunger: -27 Max Stacks: 5"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "nadja",
+      "name": "Nadja",
+      "location": "The Mechanists",
+      "factionId": "mechanists",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "hammer",
+          "name": "Hammer",
+          "rank": "1",
+          "price": "2000₽",
+          "details": "Hand Tool Description: A simple and reliable tool, for all kinds of work I don't do. Not very handy in combat, as Mutants have sturdy bones. Maybe better against humans? Max Stacks: 4"
+        },
+        {
+          "itemId": "screwdriver",
+          "name": "Screwdriver",
+          "rank": "1",
+          "price": "2000₽",
+          "details": "Hand Tool Description: A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it. Max Stacks: 4"
+        },
+        {
+          "itemId": "plier",
+          "name": "Plier",
+          "rank": "1",
+          "price": "2000₽",
+          "details": "Hand Tool Description: I'm not the type to pull someone's teeth out. But what else is this thing for? Max Stacks: 5"
+        },
+        {
+          "itemId": "wg-40",
+          "name": "WG-40",
+          "rank": "1",
+          "price": "250₽",
+          "details": "Hand Tool Description: A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. Max Stacks: 4"
+        },
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "rank": "1",
+          "price": "100₽",
+          "details": "Component Description: Industrial waste from when Svarog Factories was still operational. Max Stacks: 40"
+        },
+        {
+          "itemId": "metal-scrap",
+          "name": "Metal Scrap",
+          "rank": "1",
+          "price": "100₽",
+          "details": "Component Description: Scraps of metal that can be recycled into something useful. Max Stacks: 40"
+        },
+        {
+          "itemId": "plastic-scrap",
+          "name": "Plastic Scrap",
+          "rank": "1",
+          "price": "100₽",
+          "details": "Component Description: A scrap of plastic that can maybe be recycled. Max Stacks: 40"
+        },
+        {
+          "itemId": "fabric-scrap",
+          "name": "Fabric Scrap",
+          "rank": "1",
+          "price": "100₽",
+          "details": "Component Description: Low-quality fabric scrap, useful for patching clothes. Max Stacks: 40"
+        },
+        {
+          "itemId": "rubber-scrap",
+          "name": "Rubber Scrap",
+          "rank": "1",
+          "price": "100₽",
+          "details": "Component Description: A scrap of rubber which resisted the years. Good for trading. Max Stacks: 40"
+        },
+        {
+          "itemId": "screws",
+          "name": "Screws",
+          "rank": "1",
+          "price": "100₽",
+          "details": "Component Description: Hard-to-find metal screws, valuable for tinkerers. Max Stacks: 10"
+        },
+        {
+          "itemId": "mechanical-components",
+          "name": "Mechanical Components",
+          "rank": "1",
+          "price": "10000₽",
+          "details": "Advanced Component Description: Small gears, levers and bits of machinery. Max Stacks: 5"
+        },
+        {
+          "itemId": "advanced-mechanical-components",
+          "name": "Advanced Mechanical Components",
+          "rank": "3",
+          "price": "25000₽",
+          "details": "Advanced Component Description: High-grade machine parts, possibly reusable. Max Stacks: 5"
+        },
+        {
+          "itemId": "kevlar-weave",
+          "name": "Kevlar Weave",
+          "rank": "2",
+          "price": "10000₽",
+          "details": "Armor Material Description: High-impact resistant fabric used in bulletproof armor. Max Stacks: 5"
+        },
+        {
+          "itemId": "armor-plate",
+          "name": "Armor Plate",
+          "rank": "3",
+          "price": "25000₽",
+          "details": "Armor Material Description: Rusty armor plate offering minimal protection — stopping even one bullet is good enough. Max Stacks: 5"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "volodymyr",
+      "name": "Volodymyr",
+      "location": "Gunners Outpost",
+      "factionId": "gunners",
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "gun-lube",
+          "name": "Gun Lube",
+          "rank": "1",
+          "price": 3000,
+          "details": "Maint Repair: 5% Min Cond: 80% Stacks: 5"
+        },
+        {
+          "itemId": "gun-cleaning-rod",
+          "name": "Gun Cleaning Rod",
+          "rank": "1",
+          "price": 5000,
+          "details": "Maint Repair: 15% Min Cond: 70% Stacks: 5"
+        },
+        {
+          "itemId": "gun-field-tools",
+          "name": "Gun Field Tools",
+          "rank": "1",
+          "price": 7500,
+          "details": "Maint Repair: 15% Min Cond: 60% Stacks: 5"
+        },
+        {
+          "itemId": "advanced-gun-repair-kit",
+          "name": "Advanced Gun Repair Kit",
+          "rank": "2",
+          "price": 60000,
+          "details": "Kit Repair: 25% Min Cond: Any Stacks: 5"
+        },
+        {
+          "itemId": "expert-gun-repair-kit",
+          "name": "Expert Gun Repair Kit",
+          "rank": "3",
+          "price": 120000,
+          "details": "Kit Repair: 25% Min Cond: Any Stacks: 5"
+        },
+        {
+          "itemId": "advanced-gun-repair-kit-blueprint",
+          "name": "Advanced Gun Repair Kit Blueprint",
+          "rank": "2",
+          "price": 40000,
+          "details": "Unlocks crafting recipe for Advanced Kit"
+        },
+        {
+          "itemId": "expert-gun-repair-kit-blueprint",
+          "name": "Expert Gun Repair Kit Blueprint",
+          "rank": "3",
+          "price": 60000,
+          "details": "Unlocks crafting recipe for Expert Kit"
+        },
+        {
+          "itemId": "pistol-fmj-ammo",
+          "name": "Pistol FMJ Ammo",
+          "rank": "1",
+          "price": 30,
+          "details": "Ammo Dmg: 10 Pen: 0% Max: 999"
+        },
+        {
+          "itemId": "shotgun-buckshot-ammo",
+          "name": "Shotgun Buckshot Ammo",
+          "rank": "1",
+          "price": 60,
+          "details": "Ammo Dmg: 30 Pen: 0% Max: 999"
+        },
+        {
+          "itemId": "rifle-fmj-ammo",
+          "name": "Rifle FMJ Ammo",
+          "rank": "1",
+          "price": 120,
+          "details": "Ammo Dmg: 17 Pen: 0% Max: 999"
+        },
+        {
+          "itemId": "high-caliber-rifle-fmj-ammo",
+          "name": "High Caliber Rifle FMJ Ammo",
+          "rank": "1",
+          "price": 150,
+          "details": "Ammo Dmg: 30 Pen: 0% Max: 999"
+        },
+        {
+          "itemId": "pistol-ap-ammo",
+          "name": "Pistol AP Ammo",
+          "rank": "2",
+          "price": 100,
+          "details": "Ammo Dmg: 8 Pen: 50% Max: 999"
+        },
+        {
+          "itemId": "shotgun-ap-ammo",
+          "name": "Shotgun AP Ammo",
+          "rank": "2",
+          "price": 400,
+          "details": "Ammo Dmg: 24 Pen: 50% Max: 999"
+        },
+        {
+          "itemId": "rifle-ap-ammo",
+          "name": "Rifle AP Ammo",
+          "rank": "3",
+          "price": 240,
+          "details": "Ammo Dmg: 14 Pen: 50% Max: 999"
+        },
+        {
+          "itemId": "high-caliber-rifle-ap-ammo",
+          "name": "High Caliber Rifle AP Ammo",
+          "rank": "3",
+          "price": 300,
+          "details": "Ammo Dmg: 26 Pen: 50% Max: 999"
+        },
+        {
+          "itemId": "sidemounted-4x-scope",
+          "name": "Sidemounted 4x Scope",
+          "rank": "2",
+          "price": 1250,
+          "details": "Optic Range: +15 Acc: +6 Ergo: -6"
+        },
+        {
+          "itemId": "sniper-4x-scope",
+          "name": "Sniper 4x Scope",
+          "rank": "2",
+          "price": 2500,
+          "details": "Optic Range: +18 Acc: +10 Ergo: -10"
+        },
+        {
+          "itemId": "classic-scope",
+          "name": "Classic Scope",
+          "rank": "2",
+          "price": 4000,
+          "details": "Optic Range: +20 Acc: +12 Ergo: -12"
+        },
+        {
+          "itemId": "holographic-sight",
+          "name": "Holographic Sight",
+          "rank": "2",
+          "price": 2500,
+          "details": "Optic Range: +1 Acc: +3 Ergo: -1"
+        },
+        {
+          "itemId": "red-dot-sight",
+          "name": "Red Dot Sight",
+          "rank": "2",
+          "price": 1250,
+          "details": "Optic Range: +1 Acc: +2"
+        },
+        {
+          "itemId": "vintage-red-dot-sight",
+          "name": "Vintage Red Dot Sight",
+          "rank": "2",
+          "price": 2500,
+          "details": "Optic Range: +1 Acc: +2 Ergo: -1"
+        },
+        {
+          "itemId": "elevated-red-dot-sight",
+          "name": "Elevated Red Dot Sight",
+          "rank": "2",
+          "price": 1250,
+          "details": "Optic Range: +1 Acc: +3 Ergo: -1"
+        },
+        {
+          "itemId": "lightweight-2x-scope",
+          "name": "Lightweight 2x Scope",
+          "rank": "2",
+          "price": 2500,
+          "details": "Optic Range: +4 Acc: +5 Ergo: -3"
+        },
+        {
+          "itemId": "lightweight-4x-scope",
+          "name": "Lightweight 4x Scope",
+          "rank": "2",
+          "price": 4000,
+          "details": "Optic Range: +8 Acc: +6 Ergo: -4"
+        },
+        {
+          "itemId": "pm-small-compensator",
+          "name": "PM Small Compensator",
+          "rank": "1",
+          "price": 4000,
+          "details": "Muzzle Recoil: -5"
+        },
+        {
+          "itemId": "pm-muzzle-brake",
+          "name": "PM Muzzle Brake",
+          "rank": "2",
+          "price": 4000,
+          "details": "Muzzle Recoil: -8"
+        },
+        {
+          "itemId": "pm-silencer",
+          "name": "PM Silencer",
+          "rank": "2",
+          "price": 2500,
+          "details": "Muzzle Recoil: -3 Acc: +5 Hand: +2 Ergo: -4"
+        },
+        {
+          "itemId": "mk-slant-muzzle-brake",
+          "name": "MK Slant Muzzle Brake",
+          "rank": "1",
+          "price": 2000,
+          "details": "Muzzle Recoil: -6.5"
+        },
+        {
+          "itemId": "mk-upgraded-muzzle-brake",
+          "name": "MK Upgraded Muzzle Brake",
+          "rank": "2",
+          "price": 4000,
+          "details": "Muzzle Recoil: -7"
+        },
+        {
+          "itemId": "mk-compensator",
+          "name": "MK Compensator",
+          "rank": "2",
+          "price": 10000,
+          "details": "Muzzle Recoil: -9"
+        },
+        {
+          "itemId": "mk-silencer",
+          "name": "MK Silencer",
+          "rank": "3",
+          "price": 4000,
+          "details": "Muzzle Recoil: -3 Acc: +4 Hand: +2 Ergo: -6"
+        },
+        {
+          "itemId": "dragoon-2-slot-compensator",
+          "name": "Dragoon 2-Slot Compensator",
+          "rank": "2",
+          "price": 2500,
+          "details": "Muzzle Recoil: -6 Hand: +4"
+        },
+        {
+          "itemId": "svarsh-drum-mag",
+          "name": "Svarsh Drum Mag",
+          "rank": "2",
+          "price": 4000,
+          "details": "Mag Ergo: -3 Reload: -6"
+        },
+        {
+          "itemId": "mk-drum-mag",
+          "name": "MK Drum Mag",
+          "rank": "3",
+          "price": 8000,
+          "details": "Mag Ergo: -15 Reload: -30"
+        },
+        {
+          "itemId": "m4-gen2-drum-mag",
+          "name": "M4 Gen2 Drum Mag",
+          "rank": "3",
+          "price": 8000,
+          "details": "Mag Ergo: -10 Reload: -30"
+        },
+        {
+          "itemId": "borealis-drum-mag",
+          "name": "Borealis Drum Mag",
+          "rank": "3",
+          "price": 8000,
+          "details": "Mag Ergo: -8 Reload: -24"
+        },
+        {
+          "itemId": "medved-drum-mag",
+          "name": "Medved Drum Mag",
+          "rank": "2",
+          "price": 4000,
+          "details": "Mag Hand: -10 Ergo: -7 Reload: -18"
+        },
+        {
+          "itemId": "tc-polymer-large-mag-black",
+          "name": "TC Polymer Large Mag (Black)",
+          "rank": "2",
+          "price": 2500,
+          "details": "Mag Ergo: -2"
+        },
+        {
+          "itemId": "tc-polymer-mag-black",
+          "name": "TC Polymer Mag (Black)",
+          "rank": "1",
+          "price": 1250,
+          "details": "Mag Ergo: +2 Reload: +12"
+        },
+        {
+          "itemId": "mk-stamped-steel-mag",
+          "name": "MK Stamped Steel Mag",
+          "rank": "2",
+          "price": 1250,
+          "details": "Mag Ergo: -2"
+        },
+        {
+          "itemId": "makeshift-double-stacked-steel-stick-mag",
+          "name": "Makeshift Double Stacked Steel Stick Mag",
+          "rank": "1",
+          "price": 2500,
+          "details": "Mag Ergo: -4 Reload: -8"
+        },
+        {
+          "itemId": "m4-large-aluminum-mag",
+          "name": "M4 Large Aluminum Mag",
+          "rank": "2",
+          "price": 2500,
+          "details": "Mag Ergo: -2"
+        },
+        {
+          "itemId": "m4-large-aluminum-mag-tan",
+          "name": "M4 Large Aluminum Mag (Tan)",
+          "rank": "2",
+          "price": 2500,
+          "details": "Mag Ergo: -2"
+        },
+        {
+          "itemId": "borealis-aluminum-mag",
+          "name": "Borealis Aluminum Mag",
+          "rank": "2",
+          "price": 1500,
+          "details": "Mag Ergo: -2 Reload: +12"
+        },
+        {
+          "itemId": "borealis-curved-mag",
+          "name": "Borealis Curved Mag",
+          "rank": "2",
+          "price": 2500,
+          "details": "Mag Ergo: -2 Reload: -6"
+        },
+        {
+          "itemId": "borealis-long-curved-mag",
+          "name": "Borealis Long Curved Mag",
+          "rank": "2",
+          "price": 4000,
+          "details": "Mag Ergo: -6 Reload: -12"
+        },
+        {
+          "itemId": "pp-pristine-mag",
+          "name": "PP Pristine Mag",
+          "rank": "2",
+          "price": 2500,
+          "details": "Mag Ergo: -2"
+        },
+        {
+          "itemId": "dragoon-steel-mag",
+          "name": "Dragoon Steel Mag",
+          "rank": "2",
+          "price": 2500,
+          "details": "Mag Ergo: -4 Reload: -10"
+        },
+        {
+          "itemId": "dragoon-large-steel-mag",
+          "name": "Dragoon Large Steel Mag",
+          "rank": "3",
+          "price": 4000,
+          "details": "Mag Ergo: -2 Reload: +16"
+        },
+        {
+          "itemId": "bahadir-ribbed-cylinder-mag",
+          "name": "Bahadir Ribbed Cylinder Mag",
+          "rank": "2",
+          "price": 1250,
+          "details": "Mag Ergo: -6 Reload: -13"
+        },
+        {
+          "itemId": "zavod-polymer-full-stock",
+          "name": "Zavod Polymer Full Stock",
+          "rank": "1",
+          "price": 1250,
+          "details": "Stock Recoil: -11 Hand: +2 Ergo: +3"
+        },
+        {
+          "itemId": "tc-skeleton-stock",
+          "name": "TC Skeleton Stock",
+          "rank": "2",
+          "price": 2500,
+          "details": "Stock Recoil: -11 Hand: +6 Ergo: +8"
+        },
+        {
+          "itemId": "tc-wood-stock",
+          "name": "TC Wood Stock",
+          "rank": "2",
+          "price": 750,
+          "details": "Stock Recoil: -11 Hand: +2 Ergo: +4"
+        },
+        {
+          "itemId": "makeshift-prosthetic-stock",
+          "name": "Makeshift Prosthetic Stock",
+          "rank": "1",
+          "price": 2500,
+          "details": "Stock Recoil: -11 Hand: +6 Ergo: +4"
+        },
+        {
+          "itemId": "makeshift-grated-stock",
+          "name": "Makeshift Grated Stock",
+          "rank": "1",
+          "price": 2500,
+          "details": "Stock Recoil: -8 Hand: +4 Ergo: +2"
+        },
+        {
+          "itemId": "pm-full-polymer-stock",
+          "name": "PM Full Polymer Stock",
+          "rank": "1",
+          "price": 1250,
+          "details": "Stock Recoil: -10 Hand: +2 Ergo: +6"
+        },
+        {
+          "itemId": "pm-polymer-stock",
+          "name": "PM Polymer Stock",
+          "rank": "1",
+          "price": 750,
+          "details": "Stock Recoil: -6 Hand: +2 Ergo: +8"
+        },
+        {
+          "itemId": "mk-polymer-stock",
+          "name": "MK Polymer Stock",
+          "rank": "1",
+          "price": 2500,
+          "details": "Stock Recoil: -9 Hand: +2 Ergo: +4"
+        },
+        {
+          "itemId": "mk-fixed-carbine-stock",
+          "name": "MK Fixed Carbine Stock",
+          "rank": "2",
+          "price": 1250,
+          "details": "Stock Recoil: -6 Hand: +8 Ergo: +8"
+        },
+        {
+          "itemId": "rifle-collapsible-stock-module",
+          "name": "Rifle Collapsible Stock Module",
+          "rank": "2",
+          "price": 2500,
+          "details": "Stock Recoil: -13 Hand: +8 Ergo: +5"
+        },
+        {
+          "itemId": "makeshift-collapsible-stock-module",
+          "name": "Makeshift Collapsible Stock Module",
+          "rank": "2",
+          "price": 2500,
+          "details": "Stock Recoil: -13 Hand: +8 Ergo: +5"
+        },
+        {
+          "itemId": "borealis-adaptable-folding-stock",
+          "name": "Borealis Adaptable Folding Stock",
+          "rank": "2",
+          "price": 4000,
+          "details": "Stock Recoil: -13 Hand: +6 Ergo: +6"
+        },
+        {
+          "itemId": "borealis-skeleton-stock",
+          "name": "Borealis Skeleton Stock",
+          "rank": "1",
+          "price": 1250,
+          "details": "Stock Recoil: -11 Hand: +10 Ergo: +8"
+        },
+        {
+          "itemId": "mk-metal-stock",
+          "name": "MK Metal Stock",
+          "rank": "2",
+          "price": 2500,
+          "details": "Stock Recoil: -14 Hand: +8 Ergo: +6"
+        },
+        {
+          "itemId": "dragoon-polymer-stock",
+          "name": "Dragoon Polymer Stock",
+          "rank": "2",
+          "price": 1250,
+          "details": "Stock Recoil: -10 Hand: +4 Ergo: +4"
+        },
+        {
+          "itemId": "dragoon-folding-stock",
+          "name": "Dragoon Folding Stock",
+          "rank": "2",
+          "price": 4000,
+          "details": "Stock Recoil: -12 Hand: +6 Ergo: +6"
+        },
+        {
+          "itemId": "2hmg-modern-polymer-stock-module",
+          "name": "2HMG Modern Polymer Stock Module",
+          "rank": "3",
+          "price": 2500,
+          "details": "Stock Recoil: -10 Hand: +6 Ergo: +4"
+        },
+        {
+          "itemId": "2hmg-railed-handguard",
+          "name": "2HMG Railed Handguard",
+          "rank": "2",
+          "price": 1250,
+          "details": "Guard Recoil: -6 Hand: +4 Ergo: +4"
+        },
+        {
+          "itemId": "angled-foregrip",
+          "name": "Angled Foregrip",
+          "rank": "2",
+          "price": 2500,
+          "details": "Grip Hand: +3 Ergo: +2"
+        },
+        {
+          "itemId": "bahadir-extended-handguard",
+          "name": "Bahadir Extended Handguard",
+          "rank": "3",
+          "price": 2500,
+          "details": "Guard Recoil: -3.5 Hand: +8 Ergo: +8"
+        },
+        {
+          "itemId": "bahadir-railed-handguard",
+          "name": "Bahadir Railed Handguard",
+          "rank": "2",
+          "price": 1250,
+          "details": "Guard Recoil: -2 Hand: +6 Ergo: +5"
+        },
+        {
+          "itemId": "borealis-adaptable-railed-handguard",
+          "name": "Borealis Adaptable Railed Handguard",
+          "rank": "2",
+          "price": 4000,
+          "details": "Guard Recoil: -4 Hand: +4 Ergo: +4"
+        },
+        {
+          "itemId": "borealis-lock-mount-handguard",
+          "name": "Borealis Lock Mount Handguard",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -4.5 Hand: +8 Ergo: +8"
+        },
+        {
+          "itemId": "borealis-polymer-short-handguard",
+          "name": "Borealis Polymer Short Handguard",
+          "rank": "1",
+          "price": 1250,
+          "details": "Guard Recoil: -2 Hand: +2 Ergo: +4"
+        },
+        {
+          "itemId": "borealis-railed-dust-cover",
+          "name": "Borealis Railed Dust Cover",
+          "rank": "2",
+          "price": 2500,
+          "details": "Receiver Ergo: +6"
+        },
+        {
+          "itemId": "dragoon-polymer-handguard",
+          "name": "Dragoon Polymer Handguard",
+          "rank": "2",
+          "price": 1250,
+          "details": "Guard Recoil: -3 Hand: +8 Ergo: +6"
+        },
+        {
+          "itemId": "dragoon-railed-dust-cover",
+          "name": "Dragoon Railed Dust Cover",
+          "rank": "1",
+          "price": 2500,
+          "details": "Receiver Ergo: +8"
+        },
+        {
+          "itemId": "dragoon-railed-handguard",
+          "name": "Dragoon Railed Handguard",
+          "rank": "3",
+          "price": 4000,
+          "details": "Guard Recoil: -5 Hand: +12 Ergo: +10"
+        },
+        {
+          "itemId": "forward-angled-foregrip",
+          "name": "Forward Angled Foregrip",
+          "rank": "3",
+          "price": 4000,
+          "details": "Grip Hand: +2 Ergo: +4"
+        },
+        {
+          "itemId": "handstop",
+          "name": "Handstop",
+          "rank": "1",
+          "price": 2500,
+          "details": "Grip Hand: +1 Ergo: +3"
+        },
+        {
+          "itemId": "m4-adaptable-extended-handguard",
+          "name": "M4 Adaptable Extended Handguard",
+          "rank": "2",
+          "price": 8000,
+          "details": "Guard Recoil: -5 Hand: +5 Ergo: +2"
+        },
+        {
+          "itemId": "m4-ergonomic-pistol-grip-module",
+          "name": "M4 Ergonomic Pistol Grip Module",
+          "rank": "2",
+          "price": 2500,
+          "details": "Grip Hand: +3 Ergo: +2"
+        },
+        {
+          "itemId": "m4-pistol-grip-module",
+          "name": "M4 Pistol Grip Module",
+          "rank": "1",
+          "price": 1250,
+          "details": "Grip Hand: +3 Ergo: +2"
+        },
+        {
+          "itemId": "m4-ribbed-handguard",
+          "name": "M4 Ribbed Handguard",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -2.5 Hand: +3 Ergo: +3"
+        },
+        {
+          "itemId": "m4-railed-handguard",
+          "name": "M4 Railed Handguard",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -3.5 Hand: +2 Ergo: +4"
+        },
+        {
+          "itemId": "m4-slotted-mount-handguard",
+          "name": "M4 Slotted Mount Handguard",
+          "rank": "2",
+          "price": 1250,
+          "details": "Guard"
+        },
+        {
+          "itemId": "m4-target-pistol-grip-module",
+          "name": "M4 Target Pistol Grip Module",
+          "rank": "3",
+          "price": 4000,
+          "details": "Grip Hand: +3 Ergo: +2"
+        },
+        {
+          "itemId": "mk-combination-handguard",
+          "name": "MK Combination Handguard",
+          "rank": "1",
+          "price": 2500,
+          "details": "Guard Recoil: -3 Hand: +4 Ergo: +3"
+        },
+        {
+          "itemId": "mk-extended-railed-handguard",
+          "name": "MK Extended Railed Handguard",
+          "rank": "3",
+          "price": 4000,
+          "details": "Guard Recoil: -5 Hand: +10 Ergo: +6"
+        },
+        {
+          "itemId": "mk-extended-slotted-handguard",
+          "name": "MK Extended Slotted Handguard",
+          "rank": "2",
+          "price": 4000,
+          "details": "Guard Recoil: -5 Hand: +6 Ergo: +6"
+        },
+        {
+          "itemId": "mk-railed-combination-handguard",
+          "name": "MK Railed Combination Handguard",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -4.5 Hand: +6 Ergo: +3"
+        },
+        {
+          "itemId": "mk-railed-dust-cover",
+          "name": "MK Railed Dust Cover",
+          "rank": "2",
+          "price": 2500,
+          "details": "Receiver Ergo: +6"
+        },
+        {
+          "itemId": "mk-railed-polymer-handguard",
+          "name": "MK Railed Polymer Handguard",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -4.5 Hand: +6 Ergo: +3"
+        },
+        {
+          "itemId": "mk-slotted-mount-handguard",
+          "name": "MK Slotted Mount Handguard",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -5 Hand: +4 Ergo: +4"
+        },
+        {
+          "itemId": "mk-slotted-mount-handguard-ext",
+          "name": "MK Slotted Mount Handguard (Ext.)",
+          "rank": "3",
+          "price": 4000,
+          "details": "Guard Recoil: -6 Hand: +8 Ergo: +6"
+        },
+        {
+          "itemId": "pm-flashlight-forestock",
+          "name": "PM Flashlight Forestock",
+          "rank": "1",
+          "price": 2500,
+          "details": "Guard Recoil: -5 Hand: +6 Ergo: +4"
+        },
+        {
+          "itemId": "pm-polymer-beavertail-grip",
+          "name": "PM Polymer Beavertail Grip",
+          "rank": "1",
+          "price": 1250,
+          "details": "Grip Hand: +2 Ergo: +2"
+        },
+        {
+          "itemId": "pm-railed-forestock",
+          "name": "PM Railed Forestock",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -4 Hand: +6 Ergo: +6"
+        },
+        {
+          "itemId": "polymer-pistol-grip-module",
+          "name": "Polymer Pistol Grip Module",
+          "rank": "1",
+          "price": 2500,
+          "details": "Grip Hand: +3 Ergo: +2"
+        },
+        {
+          "itemId": "short-tapered-vertical-foregrip",
+          "name": "Short Tapered Vertical Foregrip",
+          "rank": "1",
+          "price": 1250,
+          "details": "Grip Hand: +3 Ergo: +3"
+        },
+        {
+          "itemId": "short-vertical-foregrip",
+          "name": "Short Vertical Foregrip",
+          "rank": "1",
+          "price": 1250,
+          "details": "Grip Hand: +2 Ergo: +4"
+        },
+        {
+          "itemId": "smg-railed-dust-cover",
+          "name": "SMG Railed Dust Cover",
+          "rank": "2",
+          "price": 2500,
+          "details": "Receiver Ergo: +8"
+        },
+        {
+          "itemId": "tapered-vertical-foregrip",
+          "name": "Tapered Vertical Foregrip",
+          "rank": "2",
+          "price": 2500,
+          "details": "Grip Hand: +2 Ergo: +2"
+        },
+        {
+          "itemId": "tc-handguard",
+          "name": "TC Handguard",
+          "rank": "1",
+          "price": 750,
+          "details": "Guard Recoil: -2 Hand: +2 Ergo: +2"
+        },
+        {
+          "itemId": "tc-railed-dust-cover",
+          "name": "TC Railed Dust Cover",
+          "rank": "2",
+          "price": 2500,
+          "details": "Receiver"
+        },
+        {
+          "itemId": "tc-railed-handguard",
+          "name": "TC Railed Handguard",
+          "rank": "2",
+          "price": 2500,
+          "details": "Guard Recoil: -3 Hand: +4 Ergo: +2"
+        },
+        {
+          "itemId": "vertical-foregrip",
+          "name": "Vertical Foregrip",
+          "rank": "2",
+          "price": 2500,
+          "details": "Grip Hand: +4 Ergo: +2"
+        },
+        {
+          "itemId": "zavod-polymer-handguard",
+          "name": "Zavod Polymer Handguard",
+          "rank": "1",
+          "price": 750,
+          "details": "Guard Recoil: -1.5 Hand: +2 Ergo: +2"
+        },
+        {
+          "itemId": "2hmg-ergonomic-pistol-grip",
+          "name": "2HMG Ergonomic Pistol Grip",
+          "rank": "3",
+          "price": 2500,
+          "details": "Grip Hand: +6 Ergo: +4"
+        }
+      ],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "raisa",
+      "name": "Raisa",
+      "location": null,
+      "factionId": "vultures",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "mila",
+      "name": "Mila",
+      "location": null,
+      "factionId": "rada",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "vesna",
+      "name": "Vesna",
+      "location": null,
+      "factionId": "rada",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "olga",
+      "name": "Olga",
+      "location": null,
+      "factionId": "rada",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "rosa",
+      "name": "Rosa",
+      "location": null,
+      "factionId": "acolytes",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "sasha",
+      "name": "Sasha",
+      "location": null,
+      "factionId": "palatines",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "yelena",
+      "name": "Yelena",
+      "location": null,
+      "factionId": "palatines",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "tajra",
+      "name": "Tajra",
+      "location": null,
+      "factionId": "rada",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "snezhana",
+      "name": "Snezhana",
+      "location": null,
+      "factionId": "rada",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "zhivan",
+      "name": "Zhivan",
+      "location": null,
+      "factionId": "vultures",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "ilya",
+      "name": "Ilya",
+      "location": null,
+      "factionId": "mudlarks",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "gavron",
+      "name": "Gavron",
+      "location": null,
+      "factionId": "mudlarks",
+      "inventoryDocumented": false,
+      "inventory": [],
+      "source": {
+        "file": "vendors.html",
+        "status": "existing-site-data"
+      }
+    }
+  ]
+}
