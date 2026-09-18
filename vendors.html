@@ -137,6 +137,31 @@ body {
 .vendor-count { color:#aaa; margin:0 0 18px; }
 .vendor-section.placeholder { border-style:dashed; opacity:.88; }
 .vendor-section.placeholder .vendor-header { border-bottom:0; }
+
+/* SELLING GUIDE */
+.sell-guide {
+  background:#181818;
+  border:2px solid #4a412b;
+  border-radius:6px;
+  padding:16px;
+  margin:18px 0 24px;
+}
+.sell-guide h2 { color:#ffcc66; margin:0 0 8px; }
+.sell-guide p { color:#bbb; margin:0 0 12px; }
+.sell-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:10px;
+}
+.sell-card {
+  background:#222;
+  border:1px solid #444;
+  border-radius:5px;
+  padding:12px;
+}
+.sell-card strong { color:#ffcc66; display:block; margin-bottom:5px; }
+.sell-rate { font-size:20px; font-weight:bold; color:#fff; }
+.sell-note { color:#aaa; font-size:12px; margin-top:5px; }
 @media (max-width:650px){
   body{padding:12px}
   .nav-links{display:flex;gap:12px;overflow-x:auto}
@@ -158,6 +183,36 @@ function toggleVendor(id) {
 
 <h1 style="color:#ffcc66;">SCAVLAND Vendors</h1>
 <p class="vendor-count">22 confirmed vendors · inventories are being documented from in-game data.</p>
+
+<section class="sell-guide" aria-labelledby="selling-guide-title">
+  <h2 id="selling-guide-title">Best Places to Sell</h2>
+  <p>Known vendor buy-price modifiers by item category. Higher percentages pay more for the same base-value item.</p>
+  <div class="sell-grid">
+    <div class="sell-card">
+      <strong>Common Items</strong>
+      <div><span class="sell-rate">140%</span> — Zhivan</div>
+      <div>90% — Nadja</div>
+      <div>50% — Grigory</div>
+      <div>30% — Vesna</div>
+      <div class="sell-note">Best documented rate: Zhivan</div>
+    </div>
+    <div class="sell-card">
+      <strong>Clothing</strong>
+      <div><span class="sell-rate">60%</span> — Vesna</div>
+      <div class="sell-note">Known clothing buy rate</div>
+    </div>
+    <div class="sell-card">
+      <strong>Crafting Items</strong>
+      <div><span class="sell-rate">80%</span> — Nadja</div>
+      <div class="sell-note">Known crafting-item buy rate</div>
+    </div>
+    <div class="sell-card">
+      <strong>Mutant Parts</strong>
+      <div><span class="sell-rate">140%</span> — Bogdan</div>
+      <div class="sell-note">40% above base value</div>
+    </div>
+  </div>
+</section>
 
 <div id="vendor-list">
 
