@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>SCAVLAND Database</title>
 
+<style>
 body {
     background: url('images/backgrounds/tactical-grid.png') no-repeat center center fixed;
     background-size: cover;
@@ -17,137 +18,139 @@ body {
     padding: 0;
 }
 
-    /* NAV BAR */
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: #222;
-        padding: 15px;
-        border-bottom: 2px solid #ffcc66;
-    }
+/* NAV BAR */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(20,20,20,0.85);
+    padding: 15px;
+    border-bottom: 2px solid #ffcc66;
+    backdrop-filter: blur(3px);
+}
 
-    .logo {
-        font-size: 28px;
-        font-weight: bold;
-        color: #ffcc66;
-    }
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffcc66;
+}
 
-    nav a {
-        color: #eee;
-        margin-left: 15px;
-        text-decoration: none;
-        font-weight: bold;
-    }
+nav a {
+    color: #eee;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-    nav a:hover {
-        color: #ffcc66;
-    }
+nav a:hover {
+    color: #ffcc66;
+}
 
-    /* HERO TEXT */
-    .hero {
-        text-align: center;
-        padding: 60px 20px;
-        background: #1a1a1a;
-        border-bottom: 2px solid #333;
-    }
+/* HERO TEXT */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: #1a1a1a;
+    border-bottom: 2px solid #333;
+}
 
-    .hero h1 {
-        font-size: 40px;
-        color: #ffcc66;
-        margin-bottom: 10px;
-    }
+.hero h1 {
+    font-size: 40px;
+    color: #ffcc66;
+    margin-bottom: 10px;
+}
 
-    .hero p {
-        font-size: 18px;
-        color: #ccc;
-        max-width: 700px;
-        margin: 0 auto;
-    }
+.hero p {
+    font-size: 18px;
+    color: #ccc;
+    max-width: 700px;
+    margin: 0 auto;
+}
 
-    /* FEATURE GRID */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-        padding: 40px 20px;
-    }
+/* FEATURE GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 40px 20px;
+}
 
-    .card {
-        background: #222;
-        padding: 20px;
-        border: 1px solid #333;
-        border-radius: 6px;
-        text-align: center;
-        transition: 0.2s;
-        cursor: pointer;
-    }
+.card {
+    background: #222;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    text-align: center;
+    transition: 0.2s;
+    cursor: pointer;
+}
 
-    .card:hover {
-        border-color: #ffcc66;
-        transform: translateY(-4px);
-    }
+.card:hover {
+    border-color: #ffcc66;
+    transform: translateY(-4px);
+}
 
-    .card h3 {
-        color: #ffcc66;
-        margin-bottom: 10px;
-    }
+.card h3 {
+    color: #ffcc66;
+    margin-bottom: 10px;
+}
 
-    .card p {
-        color: #ccc;
-        font-size: 14px;
-    }
+.card p {
+    color: #ccc;
+    font-size: 14px;
+}
 
-    /* LATEST UPDATE PANEL */
-    .updates {
-        background: #1a1a1a;
-        padding: 30px 20px;
-        border-top: 2px solid #333;
-        border-bottom: 2px solid #333;
-    }
+/* LATEST UPDATE PANEL */
+.updates {
+    background: #1a1a1a;
+    padding: 30px 20px;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+}
 
-    .updates h2 {
-        color: #ffcc66;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+.updates h2 {
+    color: #ffcc66;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    .update-box {
-        background: #222;
-        padding: 20px;
-        border: 1px solid #333;
-        border-radius: 6px;
-        max-width: 800px;
-        margin: 0 auto;
-    }
+.update-box {
+    background: #222;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    max-width: 800px;
+    margin: 0 auto;
+}
 
-    .update-box h3 {
-        color: #ffcc66;
-        margin-bottom: 10px;
-    }
+.update-box h3 {
+    color: #ffcc66;
+    margin-bottom: 10px;
+}
 
-    .update-box p {
-        color: #ccc;
-    }
+.update-box p {
+    color: #ccc;
+}
 
-    /* FOOTER */
-    footer {
-        text-align: center;
-        padding: 20px;
-        margin-top: 40px;
-        color: #777;
-        border-top: 1px solid #333;
-    }
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #777;
+    border-top: 1px solid #333;
+}
 </style>
 
 </head>
+
 <body>
 
-    <!-- Visitor Counter -->
-    <a href="https://librecounter.org/referer/show">
-        <img src="https://librecounter.org/counter.svg" referrerpolicy="unsafe-url" alt="Visitor Counter">
-    </a>
-    
+<!-- Visitor Counter -->
+<a href="https://librecounter.org/referer/show">
+    <img src="https://librecounter.org/counter.svg" referrerpolicy="unsafe-url" alt="Visitor Counter">
+</a>
+
 <header>
     <div class="logo">SCAVLAND</div>
     <nav>
@@ -193,8 +196,8 @@ body {
         <h3>Map</h3>
         <p>Find hidden shelters, loot spots, and underground safe havens.</p>
     </div>
-    
-     <div class="card" onclick="location.href='areas.html'">
+
+    <div class="card" onclick="location.href='areas.html'">
         <h3>Areas</h3>
         <p>Explore every zone, region, and dangerous territory.</p>
     </div>
