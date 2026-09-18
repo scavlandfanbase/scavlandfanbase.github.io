@@ -56,3 +56,23 @@ body>.construction-box{display:block!important;width:min(760px,calc(100% - 30px)
   input,select,button{font-size:16px!important}
   footer{font-size:14px!important;padding:28px!important}
 }
+
+
+/* Fluid page sizing refinements */
+.vendor-modal{padding:clamp(12px,2vw,32px)!important}
+.vendor-modal-card{width:min(1600px,94vw)!important;max-height:90vh!important;margin:clamp(10px,2vh,28px) auto!important}
+.vendor-modal-head{padding:clamp(16px,1.4vw,24px)!important}
+.vendor-modal-title{font-size:clamp(22px,1.7vw,32px)!important}
+.vendor-modal-body{padding:clamp(16px,1.5vw,28px)!important}
+.vendor-modal-body .vendor-table{width:100%!important;min-width:760px!important;font-size:clamp(15px,1vw,18px)!important}
+.vendor-modal-body .vendor-table th,.vendor-modal-body .vendor-table td{padding:clamp(9px,.8vw,14px)!important}
+.vendor-directory{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))!important}
+#vendor-list,.sell-guide,.vendor-tools,.vendor-count,body>h1{width:min(1600px,calc(100% - 40px));margin-left:auto!important;margin-right:auto!important}
+.crafting-layout{grid-template-columns:minmax(320px,.72fr) minmax(520px,1.5fr)!important;gap:24px!important}
+.crafting-layout .panel-heading{font-size:clamp(18px,1.15vw,22px)!important;padding:20px!important}
+.recipe-btn{font-size:clamp(16px,1.05vw,19px)!important;padding:18px 20px!important}
+.detail-head{padding:30px!important}.detail-head h2{font-size:clamp(30px,2vw,40px)!important}
+.resources{padding:25px 30px 32px!important}.resource{padding:18px!important;font-size:clamp(16px,1.05vw,19px)!important}.resource-note{font-size:13px!important}.qty{font-size:21px!important}
+.bench-btn{font-size:16px!important;padding:12px 19px!important}
+@media(min-width:1100px){.container{width:min(1700px,calc(100% - 5vw))!important;max-width:1700px!important}}
+@media(max-width:800px){.crafting-layout{grid-template-columns:1fr!important}.vendor-modal-card{width:98vw!important}.vendor-modal{padding:4px!important}}
