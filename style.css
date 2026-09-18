@@ -18,6 +18,70 @@ body {
     color: var(--text-light);
 }
 
+/* ============================
+   FACTION COLOUR SYSTEM
+   ============================ */
+
+/* MECHANISTS — teal + steel */
+.faction-mechanist {
+    --faction-main: #4ea3b1;
+    --faction-dark: #1a2e30;
+    --faction-light: #a8dce3;
+}
+
+/* SCRAPPERS — rust + iron */
+.faction-scrapper {
+    --faction-main: #c97a2b;
+    --faction-dark: #3a2a1a;
+    --faction-light: #f0c28a;
+}
+
+/* MIRE DWELLERS — toxic green */
+.faction-mire {
+    --faction-main: #7bd13b;
+    --faction-dark: #1f2a1a;
+    --faction-light: #b8f59a;
+}
+
+/* WANDERERS — sand + leather */
+.faction-wanderer {
+    --faction-main: #d7b56d;
+    --faction-dark: #3a3325;
+    --faction-light: #f2e2b8;
+}
+
+/* ============================
+   UNIVERSAL FACTION ELEMENTS
+   ============================ */
+
+.faction-banner {
+    background: var(--faction-dark);
+    border-bottom: 3px solid var(--faction-main);
+    padding: 25px;
+    text-align: center;
+    color: var(--faction-light);
+    font-size: 2rem;
+    letter-spacing: 3px;
+}
+
+.faction-box {
+    background: #111;
+    border: 2px solid var(--faction-main);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.faction-title {
+    color: var(--faction-main);
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.faction-text {
+    color: var(--faction-light);
+}
+
 /* 3. HEADER + BANNER (paste here) */
 .scav-header {
     background: linear-gradient(
