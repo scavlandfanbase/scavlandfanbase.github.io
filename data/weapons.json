@@ -1,0 +1,767 @@
+{
+  "schemaVersion": 1,
+  "description": "Weapon-specific data migrated from weapons.html.",
+  "lastMigratedFromSite": "2026-09-18",
+  "data": [
+    {
+      "id": "pm-nikolay",
+      "name": "PM Nikolay",
+      "category": "Pistols",
+      "tier": "Scrap",
+      "ammo": "Pistol FMJ",
+      "damage": 10,
+      "rpm": 600,
+      "range": 15,
+      "accuracy": 12,
+      "recoil": 36,
+      "handling": 30,
+      "ergonomics": 33,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "pm-nikolay-pb",
+      "name": "PM Nikolay PB",
+      "category": "Pistols",
+      "tier": "Scrap",
+      "ammo": "Pistol FMJ",
+      "damage": 11,
+      "rpm": 600,
+      "range": 15,
+      "accuracy": 14,
+      "recoil": 36,
+      "handling": 30,
+      "ergonomics": 33,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "leon-1895",
+      "name": "Leon 1895",
+      "category": "Pistols",
+      "tier": "Scrap",
+      "ammo": "Pistol FMJ",
+      "damage": 15,
+      "rpm": 75,
+      "range": 17,
+      "accuracy": 34,
+      "recoil": 36,
+      "handling": 10,
+      "ergonomics": 24,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "leon-1895-long",
+      "name": "Leon 1895 (Long)",
+      "category": "Pistols",
+      "tier": "Scrap",
+      "ammo": "Pistol FMJ",
+      "damage": 15,
+      "rpm": 75,
+      "range": 18,
+      "accuracy": 34,
+      "recoil": 31,
+      "handling": 12,
+      "ergonomics": 20,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "leon-1895-short",
+      "name": "Leon 1895 (Short)",
+      "category": "Pistols",
+      "tier": "Scrap",
+      "ammo": "Pistol FMJ",
+      "damage": 15,
+      "rpm": 18,
+      "range": 16,
+      "accuracy": 28,
+      "recoil": 40,
+      "handling": 6,
+      "ergonomics": 30,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "medved-monster",
+      "name": "Medved Monster",
+      "category": "Pistols",
+      "tier": "Scrap",
+      "ammo": "Pistol FMJ",
+      "damage": 10,
+      "rpm": 450,
+      "range": 16,
+      "accuracy": 26,
+      "recoil": 38,
+      "handling": 14,
+      "ergonomics": 14,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "medved-monster-silenced",
+      "name": "Medved Monster (Silenced)",
+      "category": "Pistols",
+      "tier": "Scrap",
+      "ammo": "Pistol FMJ",
+      "damage": 10,
+      "rpm": 450,
+      "range": 16,
+      "accuracy": 30,
+      "recoil": 37,
+      "handling": 14,
+      "ergonomics": 12,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bahadir-920",
+      "name": "Bahadir 920",
+      "category": "Pistols",
+      "tier": "Basic",
+      "ammo": "Pistol FMJ",
+      "damage": 10,
+      "rpm": 600,
+      "range": 18,
+      "accuracy": 28,
+      "recoil": 30,
+      "handling": 18,
+      "ergonomics": 15,
+      "reload": 1.5,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bahadir-918-short",
+      "name": "Bahadir 918 (Short)",
+      "category": "Pistols",
+      "tier": "Basic",
+      "ammo": "Pistol FMJ",
+      "damage": 10,
+      "rpm": 700,
+      "range": 17,
+      "accuracy": 20,
+      "recoil": 35,
+      "handling": 28,
+      "ergonomics": 15,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bahadir-918-long",
+      "name": "Bahadir 918 (Long)",
+      "category": "Pistols",
+      "tier": "Basic",
+      "ammo": "Pistol FMJ",
+      "damage": 11,
+      "rpm": 700,
+      "range": 18,
+      "accuracy": 24,
+      "recoil": 25,
+      "handling": 30,
+      "ergonomics": 14,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "svarsh-miracle-short",
+      "name": "Svarsh Miracle (Short)",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 150,
+      "range": 14,
+      "accuracy": 33,
+      "recoil": 65,
+      "handling": 8,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "svarsh-miracle-long",
+      "name": "Svarsh Miracle (Long)",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 150,
+      "range": 16,
+      "accuracy": 28,
+      "recoil": 61,
+      "handling": 8,
+      "ergonomics": 4,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "pm-12-70-short",
+      "name": "PM 12-70 (Short)",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 90,
+      "range": 14,
+      "accuracy": 12,
+      "recoil": 67,
+      "handling": 4,
+      "ergonomics": 15,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "pm-12-70-short-extended",
+      "name": "PM 12-70 (Short | Extended)",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 90,
+      "range": 14,
+      "accuracy": 12,
+      "recoil": 67,
+      "handling": 4,
+      "ergonomics": 15,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "pm-12-70-long",
+      "name": "PM 12-70 (Long)",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 90,
+      "range": 16,
+      "accuracy": 14,
+      "recoil": 59,
+      "handling": 4,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "pm-12-70-long-extended",
+      "name": "PM 12-70 (Long | Extended)",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 90,
+      "range": 16,
+      "accuracy": 14,
+      "recoil": 59,
+      "handling": 4,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "zavod-34",
+      "name": "Zavod 34",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 600,
+      "range": 15,
+      "accuracy": 18,
+      "recoil": 53,
+      "handling": 4,
+      "ergonomics": 8,
+      "reload": 1.1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "zavod-34-short",
+      "name": "Zavod 34 (Short)",
+      "category": "Shotguns",
+      "tier": "Scrap",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 600,
+      "range": 12,
+      "accuracy": 12,
+      "recoil": 59,
+      "handling": 4,
+      "ergonomics": 14,
+      "reload": 1.3,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "borealis-12",
+      "name": "Borealis 12",
+      "category": "Shotguns",
+      "tier": "Advanced",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 500,
+      "range": 18,
+      "accuracy": 10,
+      "recoil": 55,
+      "handling": 7,
+      "ergonomics": 10,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "borealis-12-tak",
+      "name": "Borealis 12-TAK",
+      "category": "Shotguns",
+      "tier": "Advanced",
+      "ammo": "Shotgun Buckshot",
+      "damage": 30,
+      "rpm": 500,
+      "range": 18,
+      "accuracy": 10,
+      "recoil": 55,
+      "handling": 7,
+      "ergonomics": 10,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "mikhail-74-u",
+      "name": "Mikhail 74 U",
+      "category": "Rifles",
+      "tier": "Basic",
+      "ammo": "Rifle FMJ",
+      "damage": 17,
+      "rpm": 700,
+      "range": 16,
+      "accuracy": 32,
+      "recoil": 39,
+      "handling": 8,
+      "ergonomics": 12,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "mikhail-47",
+      "name": "Mikhail 47",
+      "category": "Rifles",
+      "tier": "Advanced",
+      "ammo": "Rifle FMJ",
+      "damage": 17,
+      "rpm": 600,
+      "range": 18,
+      "accuracy": 38,
+      "recoil": 49,
+      "handling": 14,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "thread-cutter",
+      "name": "Thread Cutter",
+      "category": "Rifles",
+      "tier": "Advanced",
+      "ammo": "Rifle FMJ",
+      "damage": 17,
+      "rpm": 600,
+      "range": 18,
+      "accuracy": 45,
+      "recoil": 42,
+      "handling": 10,
+      "ergonomics": 10,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "thread-cutter-short",
+      "name": "Thread Cutter (Short)",
+      "category": "Rifles",
+      "tier": "Advanced",
+      "ammo": "Rifle FMJ",
+      "damage": 17,
+      "rpm": 900,
+      "range": 18,
+      "accuracy": 48,
+      "recoil": 38,
+      "handling": 14,
+      "ergonomics": 16,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "m4-svodbonik",
+      "name": "M4 Svodbonik",
+      "category": "Rifles",
+      "tier": "Advanced",
+      "ammo": "Rifle FMJ",
+      "damage": 18,
+      "rpm": 600,
+      "range": 19,
+      "accuracy": 46,
+      "recoil": 44,
+      "handling": 22,
+      "ergonomics": 18,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "svobodnik-m4-long",
+      "name": "Svobodnik M4 (Long)",
+      "category": "Rifles",
+      "tier": "Advanced",
+      "ammo": "Rifle FMJ",
+      "damage": 17,
+      "rpm": 600,
+      "range": 20,
+      "accuracy": 52,
+      "recoil": 41,
+      "handling": 18,
+      "ergonomics": 16,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "3-line-nagant-stockless",
+      "name": "3-Line Nagant (Stockless)",
+      "category": "High Caliber Rifles",
+      "tier": "Scrap",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 60,
+      "range": 18,
+      "accuracy": 44,
+      "recoil": 42,
+      "handling": 4,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "3-line-nagant-obrez",
+      "name": "3-Line Nagant (Obrez)",
+      "category": "High Caliber Rifles",
+      "tier": "Scrap",
+      "ammo": "High Cal FMJ",
+      "damage": 20,
+      "rpm": 60,
+      "range": 16,
+      "accuracy": 50,
+      "recoil": 52,
+      "handling": 4,
+      "ergonomics": 12,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "3-line-nagant-infantry",
+      "name": "3-Line Nagant (Infantry)",
+      "category": "High Caliber Rifles",
+      "tier": "Scrap",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 60,
+      "range": 20,
+      "accuracy": 50,
+      "recoil": 35,
+      "handling": 4,
+      "ergonomics": 6,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "3-line-nagant-full-stock",
+      "name": "3-Line Nagant (Full Stock)",
+      "category": "High Caliber Rifles",
+      "tier": "Scrap",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 60,
+      "range": 21,
+      "accuracy": 60,
+      "recoil": 35,
+      "handling": 4,
+      "ergonomics": 4,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bortovka-tinker",
+      "name": "Bortovka Tinker",
+      "category": "High Caliber Rifles",
+      "tier": "Scrap",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 100,
+      "range": 18,
+      "accuracy": 38,
+      "recoil": 50,
+      "handling": 4,
+      "ergonomics": 12,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bortovka-tinker-long-mag",
+      "name": "Bortovka Tinker (Long / +Mag)",
+      "category": "High Caliber Rifles",
+      "tier": "Scrap",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 100,
+      "range": 20,
+      "accuracy": 42,
+      "recoil": 41,
+      "handling": 4,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "bortovka-tinker-mag",
+      "name": "Bortovka Tinker (+Mag)",
+      "category": "High Caliber Rifles",
+      "tier": "Scrap",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 100,
+      "range": 18,
+      "accuracy": 50,
+      "recoil": 44,
+      "handling": 4,
+      "ergonomics": 12,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "2hmg",
+      "name": "2HMG",
+      "category": "High Caliber Rifles",
+      "tier": "Expert",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 700,
+      "range": 16,
+      "accuracy": 24,
+      "recoil": 27,
+      "handling": 20,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "2hmg-short",
+      "name": "2HMG (Short)",
+      "category": "High Caliber Rifles",
+      "tier": "Expert",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 700,
+      "range": 16,
+      "accuracy": 35,
+      "recoil": 27,
+      "handling": 20,
+      "ergonomics": 8,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "2hmg-long",
+      "name": "2HMG (Long)",
+      "category": "High Caliber Rifles",
+      "tier": "Expert",
+      "ammo": "High Cal FMJ",
+      "damage": 33,
+      "rpm": 700,
+      "range": 18,
+      "accuracy": 40,
+      "recoil": 27,
+      "handling": 20,
+      "ergonomics": 5,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "63-dragoon",
+      "name": "63 Dragoon",
+      "category": "High Caliber Rifles",
+      "tier": "Expert",
+      "ammo": "High Cal FMJ",
+      "damage": 30,
+      "rpm": 125,
+      "range": 22,
+      "accuracy": 64,
+      "recoil": 47,
+      "handling": 10,
+      "ergonomics": 10,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "mikhail-50",
+      "name": "Mikhail 50",
+      "category": "Special Weapons",
+      "tier": "Expert",
+      "ammo": "Special FMJ",
+      "damage": 76,
+      "rpm": 200,
+      "range": 22,
+      "accuracy": 68,
+      "recoil": 100,
+      "handling": 5,
+      "ergonomics": 5,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "mikhail-50-prototype",
+      "name": "Mikhail 50 (Prototype)",
+      "category": "Special Weapons",
+      "tier": "Expert",
+      "ammo": "Special FMJ",
+      "damage": 76,
+      "rpm": 200,
+      "range": 22,
+      "accuracy": 70,
+      "recoil": 100,
+      "handling": 4,
+      "ergonomics": 2,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "mikhail-50-pristine",
+      "name": "Mikhail 50 (Pristine)",
+      "category": "Special Weapons",
+      "tier": "Expert",
+      "ammo": "Special FMJ",
+      "damage": 76,
+      "rpm": 80,
+      "range": 22,
+      "accuracy": 64,
+      "recoil": 100,
+      "handling": 5,
+      "ergonomics": 2,
+      "reload": 1,
+      "source": {
+        "file": "weapons.html",
+        "status": "existing-site-data"
+      }
+    }
+  ]
+}
