@@ -6,42 +6,63 @@
 <title>SCAVLAND Database</title>
 
 <style>
+/* GLOBAL */
 body {
     background: url('images/backgrounds/tactical-grid.png') no-repeat center center fixed;
     background-size: cover;
-    background-color: #0d0d0d; /* fallback */
+    background-color: #0d0d0d;
     background-blend-mode: multiply;
-
     color: #eee;
-    font-family: Arial, sans-serif; /* we will change this later */
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-    <header class="scav-header">
-    <div class="scav-title">SCAVLAND</div>
-    <div class="scav-subtitle">Wasteland Survival Database</div>
-</header>
+/* BANNER HEADER */
+.scav-header {
+    background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.95),
+        rgba(20,20,20,0.85)
+    ),
+    url('images/banners/wasteland-banner.jpg') center/cover no-repeat;
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 4px solid #ffcc66;
+    box-shadow: 0 0 25px rgba(255, 204, 102, 0.25);
+}
+
+.scav-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #ffcc66;
+    text-shadow: 0 0 10px rgba(255, 204, 102, 0.4);
+}
+
+.scav-subtitle {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: 8px;
+    letter-spacing: 2px;
+}
 
 /* NAV BAR */
 header {
-    display: flex;
-    justify-content: center;
-    padding: 15px 30px;
+    text-align: center;
+    padding: 15px 0;
     background: #111;
     border-bottom: 2px solid #222;
 }
 
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #ffcc66;
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
 }
 
 nav a {
     color: #eee;
-    margin:0 15px;
     text-decoration: none;
     font-weight: bold;
 }
@@ -147,16 +168,16 @@ footer {
 </style>
 
 </head>
-
 <body>
 
-<!-- Visitor Counter -->
-<a href="https://librecounter.org/referer/show">
-    <img src="https://librecounter.org/counter.svg" referrerpolicy="unsafe-url" alt="Visitor Counter">
-</a>
+<!-- BANNER HEADER -->
+<header class="scav-header">
+    <div class="scav-title">SCAVLAND</div>
+    <div class="scav-subtitle">Wasteland Survival Database</div>
+</header>
 
+<!-- NAV BAR -->
 <header>
-    <div class="logo">SCAVLAND</div>
     <nav>
         <a href="index.html">Home</a>
         <a href="vendors.html">Vendors</a>
@@ -169,13 +190,14 @@ footer {
     </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
     <h1>Welcome to SCAVLAND</h1>
     <p>A fan‑made database and community hub for the post‑apocalyptic survival game.</p>
 </section>
 
+<!-- FEATURE GRID -->
 <section class="grid">
-
     <div class="card" onclick="location.href='vendors.html'">
         <h3>Vendors</h3>
         <p>Discover traders, their stock, and where to find them.</p>
@@ -212,6 +234,7 @@ footer {
     </div>
 </section>
 
+<!-- UPDATE FEED -->
 <section class="updates">
     <h2>Latest Developer Update</h2>
     <div class="update-box" id="updateBox">
@@ -220,6 +243,7 @@ footer {
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
     SCAVLAND Fan Database © 2026
 </footer>
