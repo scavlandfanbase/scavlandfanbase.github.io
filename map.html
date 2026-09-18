@@ -15,11 +15,11 @@
 .map-toolbar button:hover{background:var(--scav-gold-bright);color:#111;border-color:var(--scav-gold-bright)}
 #zoomLabel{min-width:64px;text-align:center;color:var(--scav-gold-bright);font-weight:700}
 .map-help{color:#999;font-size:13px;margin-left:8px}
-.map-viewport{width:min(1800px,calc(100% - 24px));height:clamp(520px,72vh,1000px);margin:14px auto 30px;overflow:auto;overscroll-behavior:contain;background:#090a09;border:1px solid var(--scav-line);box-shadow:0 12px 35px rgba(0,0,0,.45);cursor:grab;touch-action:none}
+.map-viewport{position:relative;width:min(1800px,calc(100% - 24px));height:clamp(560px,72vh,1000px);margin:14px auto 30px;overflow:hidden;background:#090a09;border:1px solid var(--scav-line);box-shadow:0 12px 35px rgba(0,0,0,.45);cursor:grab;touch-action:none}
 .map-viewport.dragging{cursor:grabbing;user-select:none}
-.map-stage{position:relative;width:max-content;height:max-content;min-width:100%;min-height:100%}
-.map-img{display:block;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:initial!important;border:0!important;box-shadow:none!important;transform-origin:top left;user-select:none;-webkit-user-drag:none}
-@media(max-width:700px){.map-intro{padding:18px 12px 14px}.map-toolbar{top:50px}.map-help{width:100%;text-align:center;margin:2px 0 0}.map-viewport{width:calc(100% - 12px);height:68vh;margin-top:6px}}
+.map-stage{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.map-img{display:block;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;border:0!important;box-shadow:none!important;user-select:none;-webkit-user-drag:none}
+@media(max-width:700px){.map-intro{padding:18px 12px 14px}.map-toolbar{top:50px}.map-help{width:100%;text-align:center;margin:2px 0 0}.map-viewport{width:calc(100% - 12px);height:68vh;margin-top:6px}}.map-help{width:100%;text-align:center;margin:2px 0 0}.map-viewport{width:calc(100% - 12px);height:68vh;margin-top:6px}}
 </style>
 </head>
 <body>
@@ -40,38 +40,46 @@
 <script>
 (function(){
  const viewport=document.getElementById('mapViewport'),stage=document.getElementById('mapStage'),img=document.getElementById('mapImage'),label=document.getElementById('zoomLabel');
- let zoom=1,minZoom=.25,maxZoom=4,drag=false,startX=0,startY=0,startLeft=0,startTop=0;
- function render(){
-   if(!img.naturalWidth)return;
-   const w=img.naturalWidth*zoom,h=img.naturalHeight*zoom;
-   img.style.width=w+'px';img.style.height=h+'px';
-   stage.style.width=w+'px';stage.style.height=h+'px';
-   label.textContent=Math.round(zoom*100)+'%';
+ let scale=1,minScale=.05,maxScale=5,x=0,y=0,drag=false,startX=0,startY=0,startPanX=0,startPanY=0;
+
+ function apply(){
+   stage.style.transform='translate('+x+'px,'+y+'px) scale('+scale+')';
+   label.textContent=Math.round(scale*100)+'%';
  }
- function setZoom(next,cx,cy){
-   const old=zoom; next=Math.max(minZoom,Math.min(maxZoom,next)); if(next===old)return;
-   const x=cx==null?viewport.clientWidth/2:cx,y=cy==null?viewport.clientHeight/2:cy;
-   const mapX=(viewport.scrollLeft+x)/old,mapY=(viewport.scrollTop+y)/old;
-   zoom=next;render();
-   viewport.scrollLeft=mapX*zoom-x;viewport.scrollTop=mapY*zoom-y;
+ function clampPan(){
+   if(!img.naturalWidth)return;
+   const w=img.naturalWidth*scale,h=img.naturalHeight*scale,vw=viewport.clientWidth,vh=viewport.clientHeight;
+   const pad=40;
+   if(w<=vw){x=(vw-w)/2}else{x=Math.min(pad,Math.max(vw-w-pad,x))}
+   if(h<=vh){y=(vh-h)/2}else{y=Math.min(pad,Math.max(vh-h-pad,y))}
  }
  function fit(){
    if(!img.naturalWidth)return;
-   zoom=Math.max(minZoom,Math.min(1,Math.min(viewport.clientWidth/img.naturalWidth,viewport.clientHeight/img.naturalHeight)));
-   render();viewport.scrollLeft=0;viewport.scrollTop=0;
+   scale=Math.min(viewport.clientWidth/img.naturalWidth,viewport.clientHeight/img.naturalHeight);
+   scale=Math.max(minScale,Math.min(maxScale,scale));
+   x=(viewport.clientWidth-img.naturalWidth*scale)/2;
+   y=(viewport.clientHeight-img.naturalHeight*scale)/2;
+   apply();
  }
- img.addEventListener('load',fit);
- if(img.complete)fit();
- document.getElementById('zoomIn').onclick=()=>setZoom(zoom*1.25);
- document.getElementById('zoomOut').onclick=()=>setZoom(zoom/1.25);
+ function setScale(next,cx,cy){
+   if(!img.naturalWidth)return;
+   next=Math.max(minScale,Math.min(maxScale,next));
+   cx=cx==null?viewport.clientWidth/2:cx; cy=cy==null?viewport.clientHeight/2:cy;
+   const imageX=(cx-x)/scale,imageY=(cy-y)/scale;
+   scale=next;x=cx-imageX*scale;y=cy-imageY*scale;
+   clampPan();apply();
+ }
+ img.addEventListener('load',fit); if(img.complete)fit();
+ document.getElementById('zoomIn').onclick=()=>setScale(scale*1.25);
+ document.getElementById('zoomOut').onclick=()=>setScale(scale/1.25);
  document.getElementById('fitMap').onclick=fit;
- document.getElementById('actualMap').onclick=()=>setZoom(1);
- viewport.addEventListener('wheel',e=>{e.preventDefault();const r=viewport.getBoundingClientRect();setZoom(zoom*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top)},{passive:false});
- viewport.addEventListener('pointerdown',e=>{drag=true;viewport.classList.add('dragging');viewport.setPointerCapture(e.pointerId);startX=e.clientX;startY=e.clientY;startLeft=viewport.scrollLeft;startTop=viewport.scrollTop});
- viewport.addEventListener('pointermove',e=>{if(!drag)return;viewport.scrollLeft=startLeft-(e.clientX-startX);viewport.scrollTop=startTop-(e.clientY-startY)});
+ document.getElementById('actualMap').onclick=()=>{scale=1;x=(viewport.clientWidth-img.naturalWidth)/2;y=(viewport.clientHeight-img.naturalHeight)/2;clampPan();apply()};
+ viewport.addEventListener('wheel',e=>{e.preventDefault();const r=viewport.getBoundingClientRect();setScale(scale*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+ viewport.addEventListener('pointerdown',e=>{drag=true;viewport.classList.add('dragging');viewport.setPointerCapture(e.pointerId);startX=e.clientX;startY=e.clientY;startPanX=x;startPanY=y});
+ viewport.addEventListener('pointermove',e=>{if(!drag)return;x=startPanX+(e.clientX-startX);y=startPanY+(e.clientY-startY);clampPan();apply()});
  function stop(){drag=false;viewport.classList.remove('dragging')}
  viewport.addEventListener('pointerup',stop);viewport.addEventListener('pointercancel',stop);
- window.addEventListener('resize',()=>{if(zoom<1)fit()});
+ window.addEventListener('resize',fit);
 })();
 </script>
 <script src="site-shell.js"></script>
