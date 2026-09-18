@@ -1,0 +1,117 @@
+Here is the complete list of all 13 ammunition types you have shared from the screenshots, including their full descriptions, exact stats, estimated prices, and stack limits.
+------------------------------
+## 🔥 Special Ammo## Special FMJ Ammo (~1000₽)
+
+* Full Description: Special ammunition that can fit into different types of weapons.
+* Stats:
+* Damage: 75
+   * Penetration: 100%
+* Max Stacks: 999
+
+------------------------------
+## 🔴 High Caliber Rifle Ammo## High Caliber Rifle HP Ammo (~350₽)
+
+* Full Description: Hollow point variant of high-caliber rifle ammo. Lots of stopping power – and pain.
+* Stats:
+* Damage: 46
+   * Penetration: -25%
+* Max Stacks: 999
+
+## High Caliber Rifle AP Ammo (~500₽)
+
+* Full Description: Armor piercing variant of high-caliber rifle ammo. A nice tactical advantage.
+* Stats:
+* Damage: 26
+   * Penetration: 50%
+* Max Stacks: 999
+
+## High Caliber Rifle FMJ Ammo (~250₽)
+
+* Full Description: High-caliber, full metal jacket ammo. As reliable as they come.
+* Stats:
+* Damage: 30
+   * Penetration: 0%
+* Max Stacks: 999
+
+------------------------------
+## 🟣 Shotgun Ammo## Shotgun HP Ammo (~180₽)
+
+* Full Description: Hollow point ammunition for shotguns. Even if I miss, I don't miss.
+* Stats:
+* Damage: 6 x 6 = 36
+   * Penetration: -25%
+* Max Stacks: 999
+
+## Shotgun Buckshot Ammo (~60₽)
+
+* Full Description: Ammunition for shotguns and guns with spread shots.
+* Stats:
+* Damage: 6 x 5 = 30
+   * Penetration: 0%
+* Max Stacks: 999
+
+## Shotgun AP Ammo (~400₽)
+
+* Full Description: Armor piercing rounds for shotguns. They might as well be wearing rubakhas.
+* Stats:
+* Damage: 6 x 4 = 24
+   * Penetration: 50%
+* Max Stacks: 999
+
+------------------------------
+## 🟢 Rifle Ammo## Rifle HP Ammo (~280₽)
+
+* Full Description: Hollow point ammunition for rifles. Don't need great aim when you got this.
+* Stats:
+* Damage: 25
+   * Penetration: -25%
+* Max Stacks: 999
+
+## Rifle FMJ Ammo (~200₽)
+
+* Full Description: Standard ammunition for rifles.
+* Stats:
+* Damage: 17
+   * Penetration: 0%
+* Max Stacks: 999
+
+## Rifle AP Ammo (~400₽)
+
+* Full Description: Armor piercing ammunition. Good for mowing down some well-equipped enemies.
+* Stats:
+* Damage: 14
+   * Penetration: 50%
+* Max Stacks: 999
+
+------------------------------
+## 🟡 Pistol Ammo## Pistol HP Ammo (~60₽)
+
+* Full Description: Hollow point ammunition, perfect for self-defense.
+* Stats:
+* Damage: 15
+   * Penetration: -25%
+* Max Stacks: 999
+
+## Pistol FMJ Ammo (~30₽)
+
+* Full Description: Ammunition made for pistols, submachine guns, repeaters etc.
+* Stats:
+* Damage: 10
+   * Penetration: 0%
+* Max Stacks: 999
+
+## Pistol AP Ammo (~100₽)
+
+* Full Description: Armor piercing ammo. They may have gear, but that doesn't mean they're safe.
+* Stats:
+* Damage: 8
+   * Penetration: 50%
+* Max Stacks: 999
+
+If you want to keep working with this data, I can:
+
+* Generate a downloadable master file (.txt or .csv format) containing all 13 items.
+* Match these ammo classes back to the weapons (Bortovka Tinker, Medved Monster, Svarsh Miracle) you showed me earlier.
+
+
+
