@@ -57,19 +57,64 @@ h1 {
 
 /* --- FACTION ICON BUTTONS --- */
 .faction-icon {
-    width: 180px;
-    height: 180px;
+    width: 240px;
+    height: 240px;
     border: 3px solid var(--faction-main);
     border-radius: 10px;
     padding: 10px;
     background: #222;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 .faction-icon:hover {
     transform: scale(1.08);
     box-shadow: 0 0 20px var(--faction-main);
+}
+
+/* --- GRID DEFAULT --- */
+.faction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    max-width: 1400px;
+    margin: 60px auto;
+    transition: 0.4s ease;
+}
+
+/* --- FOCUS MODE --- */
+.faction-grid.focused {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 40px;
+}
+
+.faction-tile {
+    text-align: center;
+    transition: 0.4s ease;
+}
+
+.faction-tile h2 {
+    margin-top: 15px;
+    font-size: 1.8rem;
+    color: var(--faction-main);
+}
+
+/* --- CENTER TILE --- */
+.faction-tile.centered {
+    transform: scale(1.15);
+}
+
+/* --- SIDE TILES --- */
+.faction-tile.side-left {
+    transform: translateX(-200px) scale(0.85);
+    opacity: 0.7;
+}
+
+.faction-tile.side-right {
+    transform: translateX(200px) scale(0.85);
+    opacity: 0.7;
 }
 
 /* --- COLLAPSIBLE DESCRIPTION BOX --- */
@@ -87,7 +132,6 @@ h1 {
     max-width: 900px;
     text-align: left;
 
-    /* animation */
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -115,59 +159,16 @@ h1 {
    SCAVLAND FACTION COLOURS
    ============================ */
 
-.faction-bandits {
-    --faction-main: #b14a3b;
-    --faction-dark: #2a1a1a;
-    --faction-light: #e8b0a0;
-}
+.faction-bandits { --faction-main:#b14a3b; --faction-dark:#2a1a1a; --faction-light:#e8b0a0; }
+.faction-mudlarks { --faction-main:#7bd13b; --faction-dark:#1f2a1a; --faction-light:#b8f59a; }
+.faction-mechanists { --faction-main:#4ea3b1; --faction-dark:#1a2e30; --faction-light:#a8dce3; }
+.faction-rada { --faction-main:#c93b3b; --faction-dark:#3a1a1a; --faction-light:#f2c2c2; }
+.faction-gunners { --faction-main:#d7b56d; --faction-dark:#2a2a1a; --faction-light:#f2e2b8; }
+.faction-commonfolk { --faction-main:#c9a66b; --faction-dark:#3a2f1f; --faction-light:#f2d9b0; }
+.faction-acolytes { --faction-main:#b13b3b; --faction-dark:#2a0f0f; --faction-light:#e8a0a0; }
+.faction-palatines { --faction-main:#4a6ea8; --faction-dark:#1a2230; --faction-light:#a8b9d3; }
+.faction-vultures { --faction-main:#d9d9d9; --faction-dark:#1a1a1a; --faction-light:#f2f2f2; }
 
-.faction-mudlarks {
-    --faction-main: #7bd13b;
-    --faction-dark: #1f2a1a;
-    --faction-light: #b8f59a;
-}
-
-.faction-mechanists {
-    --faction-main: #4ea3b1;
-    --faction-dark: #1a2e30;
-    --faction-light: #a8dce3;
-}
-
-.faction-rada {
-    --faction-main: #c93b3b;
-    --faction-dark: #3a1a1a;
-    --faction-light: #f2c2c2;
-}
-
-.faction-gunners {
-    --faction-main: #d7b56d;
-    --faction-dark: #2a2a1a;
-    --faction-light: #f2e2b8;
-}
-
-.faction-commonfolk {
-    --faction-main: #c9a66b;
-    --faction-dark: #3a2f1f;
-    --faction-light: #f2d9b0;
-}
-
-.faction-acolytes {
-    --faction-main: #b13b3b;
-    --faction-dark: #2a0f0f;
-    --faction-light: #e8a0a0;
-}
-
-.faction-palatines {
-    --faction-main: #4a6ea8;
-    --faction-dark: #1a2230;
-    --faction-light: #a8b9d3;
-}
-
-.faction-vultures {
-    --faction-main: #d9d9d9;
-    --faction-dark: #1a1a1a;
-    --faction-light: #f2f2f2;
-}
 </style>
 
 </head>
@@ -190,77 +191,60 @@ h1 {
 
 <h1>Factions of Zalesye</h1>
 
-<!-- COLLAPSE ALL BUTTON -->
 <button onclick="collapseAll()" 
 style="margin:20px auto; padding:10px 20px; font-size:16px; background:#333; color:#ffcc66; border:2px solid #ffcc66; border-radius:6px; cursor:pointer;">
     Collapse All
 </button>
 
 <!-- FACTION GRID -->
-<div style="
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:50px;
-    max-width:1400px;
-    margin:60px auto;
-">
+<div id="factionGrid" class="faction-grid">
 
-    <!-- BANDITS -->
-    <div class="faction-bandits" onclick="toggleFaction('bandits')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/bandits.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Bandits</h2>
+    <div class="faction-tile faction-bandits" onclick="focusFaction('bandits')">
+        <img src="images/factions/bandits.png" class="faction-icon">
+        <h2>Bandits</h2>
     </div>
 
-    <!-- MUDLARKS -->
-    <div class="faction-mudlarks" onclick="toggleFaction('mudlarks')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/mudlarks.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Mudlarks</h2>
+    <div class="faction-tile faction-mudlarks" onclick="focusFaction('mudlarks')">
+        <img src="images/factions/mudlarks.png" class="faction-icon">
+        <h2>Mudlarks</h2>
     </div>
 
-    <!-- MECHANISTS -->
-    <div class="faction-mechanists" onclick="toggleFaction('mechanists')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/mechanist.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Mechanists</h2>
+    <div class="faction-tile faction-mechanists" onclick="focusFaction('mechanists')">
+        <img src="images/factions/mechanist.png" class="faction-icon">
+        <h2>Mechanists</h2>
     </div>
 
-    <!-- RADA -->
-    <div class="faction-rada" onclick="toggleFaction('rada')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/rada.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Rada</h2>
+    <div class="faction-tile faction-rada" onclick="focusFaction('rada')">
+        <img src="images/factions/rada.png" class="faction-icon">
+        <h2>Rada</h2>
     </div>
 
-    <!-- GUNNERS -->
-    <div class="faction-gunners" onclick="toggleFaction('gunners')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/gunners.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Gunners</h2>
+    <div class="faction-tile faction-gunners" onclick="focusFaction('gunners')">
+        <img src="images/factions/gunners.png" class="faction-icon">
+        <h2>Gunners</h2>
     </div>
 
-    <!-- COMMONFOLK -->
-    <div class="faction-commonfolk" onclick="toggleFaction('commonfolk')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/commonfolk.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Commonfolk</h2>
+    <div class="faction-tile faction-commonfolk" onclick="focusFaction('commonfolk')">
+        <img src="images/factions/commonfolk.png" class="faction-icon">
+        <h2>Commonfolk</h2>
     </div>
 
-    <!-- ACOLYTES -->
-    <div class="faction-acolytes" onclick="toggleFaction('acolytes')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/acolytes.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Acolytes</h2>
+    <div class="faction-tile faction-acolytes" onclick="focusFaction('acolytes')">
+        <img src="images/factions/acolytes.png" class="faction-icon">
+        <h2>Acolytes</h2>
     </div>
 
-    <!-- PALATINES -->
-    <div class="faction-palatines" onclick="toggleFaction('palatines')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/palatines.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Palatines</h2>
+    <div class="faction-tile faction-palatines" onclick="focusFaction('palatines')">
+        <img src="images/factions/palatines.png" class="faction-icon">
+        <h2>Palatines</h2>
     </div>
 
-    <!-- VULTURES -->
-    <div class="faction-vultures" onclick="toggleFaction('vultures')" style="cursor:pointer; padding:20px;">
-        <img src="images/factions/vultures.png" class="faction-icon" style="width:240px;height:240px;">
-        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Vultures</h2>
+    <div class="faction-tile faction-vultures" onclick="focusFaction('vultures')">
+        <img src="images/factions/vultures.png" class="faction-icon">
+        <h2>Vultures</h2>
     </div>
 
 </div>
-
 
 <!-- DESCRIPTIONS -->
 <div id="bandits" class="faction-bandits faction-box">
@@ -345,12 +329,41 @@ style="margin:20px auto; padding:10px 20px; font-size:16px; background:#333; col
 </div>
 
 <script>
-function toggleFaction(id) {
-    const box = document.getElementById(id);
-    box.classList.toggle("open");
+function focusFaction(id) {
+    collapseAll();
+
+    const grid = document.getElementById("factionGrid");
+    grid.classList.add("focused");
+
+    const tiles = document.querySelectorAll(".faction-tile");
+    tiles.forEach(tile => {
+        tile.classList.remove("centered", "side-left", "side-right");
+    });
+
+    const clickedTile = document.querySelector(`.faction-tile.faction-${id}`);
+    clickedTile.classList.add("centered");
+
+    let passedCenter = false;
+
+    tiles.forEach(tile => {
+        if (tile === clickedTile) {
+            passedCenter = true;
+        } else {
+            tile.classList.add(passedCenter ? "side-right" : "side-left");
+        }
+    });
+
+    document.getElementById(id).classList.add("open");
 }
 
 function collapseAll() {
+    const grid = document.getElementById("factionGrid");
+    grid.classList.remove("focused");
+
+    document.querySelectorAll(".faction-tile").forEach(tile => {
+        tile.classList.remove("centered", "side-left", "side-right");
+    });
+
     document.querySelectorAll('.faction-box').forEach(box => {
         box.classList.remove("open");
     });
