@@ -136,3 +136,24 @@ body>.construction-box{display:block!important;width:min(760px,calc(100% - 30px)
   .scav-site-nav-inner{padding:11px 10px!important;gap:5px!important}
   .scav-site-nav a{font-size:15px!important;padding:10px 12px!important}
 }
+
+
+/* Official SCAVLAND header logo */
+.scav-site-logo{
+  display:block;
+  width:min(760px,72vw);
+  max-height:210px;
+  object-fit:contain;
+  filter:drop-shadow(0 5px 12px rgba(0,0,0,.7));
+}
+.scav-site-header:has(.scav-site-logo){
+  min-height:clamp(230px,22vw,360px)!important;
+  padding:clamp(28px,3vw,48px) 20px!important;
+}
+.scav-site-header:has(.scav-site-logo) .scav-site-subtitle{
+  margin-top:8px!important;
+}
+@media(max-width:700px){
+  .scav-site-logo{width:min(92vw,560px);max-height:145px}
+  .scav-site-header:has(.scav-site-logo){min-height:180px!important;padding:24px 12px!important}
+}
