@@ -408,7 +408,7 @@
       "category": "Rifles",
       "tier": "Advanced",
       "ammo": "Rifle FMJ",
-      "damage": 17,
+      "damage": 20,
       "rpm": 600,
       "range": 18,
       "accuracy": 38,
@@ -417,8 +417,9 @@
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "community report",
+        "status": "community-reported-correction",
+        "note": "Reported as MK47 on 18 September 2026; matched to existing Mikhail 47 record"
       }
     },
     {
@@ -465,7 +466,7 @@
       "category": "Rifles",
       "tier": "Advanced",
       "ammo": "Rifle FMJ",
-      "damage": 18,
+      "damage": 19,
       "rpm": 600,
       "range": 19,
       "accuracy": 46,
@@ -474,8 +475,9 @@
       "ergonomics": 18,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "community report",
+        "status": "community-reported-correction",
+        "note": "Reported 18 September 2026: M4 damage 19"
       }
     },
     {
@@ -693,7 +695,7 @@
       "category": "High Caliber Rifles",
       "tier": "Expert",
       "ammo": "High Cal FMJ",
-      "damage": 30,
+      "damage": 36,
       "rpm": 125,
       "range": 22,
       "accuracy": 64,
@@ -702,8 +704,9 @@
       "ergonomics": 10,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "community report",
+        "status": "community-reported-correction",
+        "note": "Reported 18 September 2026: Dragoon damage 36"
       }
     },
     {
