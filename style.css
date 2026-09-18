@@ -5,6 +5,57 @@ body {
     color: #e0e0e0;
 }
 
+/* 1. Global colours */
+:root {
+    --bg-dark: #0f0f0f;
+    --accent-main: #ffcc66;
+    --text-light: #e6e6e6;
+}
+
+/* 2. Global body styling */
+body {
+    background: #111;
+    color: var(--text-light);
+}
+
+/* 3. HEADER + BANNER (paste here) */
+.scav-header {
+    background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.95),
+        rgba(20,20,20,0.85)
+    ),
+    url('images/banners/wasteland-banner.jpg') center/cover no-repeat;
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 4px solid var(--accent-main);
+    box-shadow: 0 0 25px rgba(255, 204, 102, 0.25);
+}
+
+.scav-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--accent-main);
+    text-shadow: 0 0 10px rgba(255, 204, 102, 0.4);
+}
+
+.scav-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    letter-spacing: 2px;
+}
+
+/* 4. Navigation styles */
+nav { ... }
+
+/* 5. Vendor styles */
+.vendor-section { ... }
+
+/* 6. Weapon table styles */
+.weapon-table { ... }
+
 header {
     display: flex;
     justify-content: space-between;
