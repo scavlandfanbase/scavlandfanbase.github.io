@@ -19,35 +19,70 @@ body {
 }
 
 /* ============================
-   FACTION COLOUR SYSTEM
+   SCAVLAND FACTION COLOURS
    ============================ */
 
-/* MECHANISTS — teal + steel */
-.faction-mechanist {
-    --faction-main: #4ea3b1;
-    --faction-dark: #1a2e30;
-    --faction-light: #a8dce3;
+/* BANDITS — dirty red + charcoal */
+.faction-bandits {
+    --faction-main: #b14a3b;
+    --faction-dark: #2a1a1a;
+    --faction-light: #e8b0a0;
 }
 
-/* SCRAPPERS — rust + iron */
-.faction-scrapper {
-    --faction-main: #c97a2b;
-    --faction-dark: #3a2a1a;
-    --faction-light: #f0c28a;
-}
-
-/* MIRE DWELLERS — toxic green */
-.faction-mire {
+/* MUDLARKS — toxic green + swamp brown */
+.faction-mudlarks {
     --faction-main: #7bd13b;
     --faction-dark: #1f2a1a;
     --faction-light: #b8f59a;
 }
 
-/* WANDERERS — sand + leather */
-.faction-wanderer {
+/* MECHANISTS — teal + steel */
+.faction-mechanists {
+    --faction-main: #4ea3b1;
+    --faction-dark: #1a2e30;
+    --faction-light: #a8dce3;
+}
+
+/* RADA — socialist red + wheat */
+.faction-rada {
+    --faction-main: #c93b3b;
+    --faction-dark: #3a1a1a;
+    --faction-light: #f2c2c2;
+}
+
+/* GUNNERS — yellow hazard + black */
+.faction-gunners {
     --faction-main: #d7b56d;
-    --faction-dark: #3a3325;
+    --faction-dark: #2a2a1a;
     --faction-light: #f2e2b8;
+}
+
+/* COMMONFOLK — earthy brown */
+.faction-commonfolk {
+    --faction-main: #c9a66b;
+    --faction-dark: #3a2f1f;
+    --faction-light: #f2d9b0;
+}
+
+/* ACOLYTES — deep crimson + ash */
+.faction-acolytes {
+    --faction-main: #b13b3b;
+    --faction-dark: #2a0f0f;
+    --faction-light: #e8a0a0;
+}
+
+/* PALATINES — military blue */
+.faction-palatines {
+    --faction-main: #4a6ea8;
+    --faction-dark: #1a2230;
+    --faction-light: #a8b9d3;
+}
+
+/* VULTURES — bone white + soot */
+.faction-vultures {
+    --faction-main: #d9d9d9;
+    --faction-dark: #1a1a1a;
+    --faction-light: #f2f2f2;
 }
 
 /* ============================
@@ -81,6 +116,7 @@ body {
 .faction-text {
     color: var(--faction-light);
 }
+
 
 /* 3. HEADER + BANNER (paste here) */
 .scav-header {
