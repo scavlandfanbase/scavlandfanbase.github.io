@@ -3,280 +3,1619 @@
 <head>
 <meta charset="UTF-8">
 <title>SCAVLAND Weapons Database</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+    body {
+        background: #0f0f0f;
+        color: #e6e6e6;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-/* NAV BAR CSS GOES FIRST */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #222;
-    padding: 15px;
-    border-bottom: 2px solid #ffcc66;
-}
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+        color: #ffcc66;
+        font-size: 42px;
+    }
 
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #ffcc66;
-}
+    h2 {
+        margin-top: 40px;
+        text-align: left;
+        color: #ffcc66;
+        font-size: 28px;
+        padding-left: 5%;
+    }
 
-nav a {
-    color: #eee;
-    margin-left: 15px;
-    text-decoration: none;
-    font-weight: bold;
-}
+    .category-section {
+        width: 90%;
+        margin: 20px auto;
+    }
 
-nav a:hover {
-    color: #ffcc66;
-}
+    .weapon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
 
-/* THEN YOUR TABLE CSS */
-body {
-    background: #111;
-    color: #eee;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-}
+    .weapon-card {
+        background: #1a1a1a;
+        border-radius: 10px;
+        padding: 15px;
+        border: 2px solid #333;
+        transition: 0.2s;
+    }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background: #222;
-}
+    .weapon-card:hover {
+        transform: scale(1.03);
+        border-color: #ffcc66;
+    }
 
-th, td {
-    border: 1px solid #444;
-    padding: 8px;
-    text-align: center;
-}
+    .weapon-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-th {
-    background: #333;
-    color: #ffcc66;
-}
+    .weapon-name {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-tr:nth-child(even) {
-    background: #1a1a1a;
-}
+    .tier {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
 
+    .tier.Scrap { background: #555; }
+    .tier.Basic { background: #2e8b57; }
+    .tier.Advanced { background: #1e90ff; }
+    .tier.Expert { background: #daa520; }
+
+    .stats {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .expand-btn {
+        margin-top: 10px;
+        background: #333;
+        padding: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+    .expand-btn:hover {
+        background: #444;
+    }
+
+    .expanded {
+        display: none;
+        margin-top: 10px;
+        background: #111;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .ammo-hover {
+        position: relative;
+        cursor: pointer;
+        color: #ffcc66;
+    }
+
+    .ammo-hover .ammo-popup {
+        display: none;
+        position: absolute;
+        background: #222;
+        padding: 10px;
+        border-radius: 6px;
+        width: 220px;
+        top: 20px;
+        left: 0;
+        z-index: 10;
+        border: 1px solid #444;
+    }
+
+    .ammo-hover:hover .ammo-popup {
+        display: block;
+    }
 </style>
-<script>
-function autoSort(tableId) {
-    const tierOrder = ["Scrap", "Basic", "Advanced", "Expert", "Elite"];
-    const table = document.getElementById(tableId);
-    const rows = Array.from(table.querySelectorAll("tr")).slice(1);
-
-    rows.sort((a, b) => {
-        const tierA = a.cells[9].innerText.trim();
-        const tierB = b.cells[9].innerText.trim();
-        return tierOrder.indexOf(tierA) - tierOrder.indexOf(tierB);
-    });
-
-    rows.forEach(r => table.appendChild(r));
-}
-
-window.onload = function() {
-    autoSort("pistolTable");
-    autoSort("shotgunTable");
-    autoSort("rifleTable");
-    autoSort("highcalTable");
-    autoSort("specialTable");
-};
-</script>
 
 </head>
 <body>
-<div class="nav-bar">
-    <div class="logo">SCAVLAND</div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="weapons.html">Weapons</a>
-        <a href="vendors.html">Vendors</a>
-        <a href="areas.html">Areas</a>
-        <a href="map.html">Map</a>
-        <a href="crafting.html">Crafting</a>
-        <a href="armour.html">Armour</a>
-        <a href="factions.html">Factions</a>
+
+<h1>SCAVLAND Weapons Database</h1>
+
+<script>
+const ammoData = {
+    "Pistol FMJ": {damage:10, pen:"0%", price:"30₽", desc:"Standard pistol FMJ."},
+    "Pistol HP": {damage:15, pen:"-25%", price:"60₽", desc:"High‑power pistol ammo."},
+    "Pistol AP": {damage:8, pen:"50%", price:"100₽", desc:"Armor‑piercing pistol ammo."},
+
+    "Shotgun Buckshot": {damage:"30 (6x5)", pen:"0%", price:"60₽", desc:"Standard buckshot."},
+    "Shotgun HP": {damage:"36 (6x6)", pen:"-25%", price:"180₽", desc:"High‑power buckshot."},
+    "Shotgun AP": {damage:"24 (6x4)", pen:"50%", price:"400₽", desc:"Armor‑piercing buckshot."},
+
+    "Rifle FMJ": {damage:17, pen:"0%", price:"200₽", desc:"Standard rifle FMJ."},
+    "Rifle HP": {damage:25, pen:"-25%", price:"280₽", desc:"High‑power rifle ammo."},
+    "Rifle AP": {damage:14, pen:"50%", price:"400₽", desc:"Armor‑piercing rifle ammo."},
+
+    "High Cal FMJ": {damage:30, pen:"0%", price:"250₽", desc:"High‑caliber FMJ."},
+    "High Cal HP": {damage:46, pen:"-25%", price:"350₽", desc:"High‑power high‑caliber ammo."},
+    "High Cal AP": {damage:26, pen:"50%", price:"500₽", desc:"Armor‑piercing high‑caliber ammo."},
+
+    "Special FMJ": {damage:75, pen:"100%", price:"1000₽", desc:"Special full‑metal jacket."}
+};
+</script>
+
+<!-- ========================================================= -->
+<!-- ===================== PISTOL CARDS ======================= -->
+<!-- ========================================================= -->
+
+<h2>Pistols</h2>
+<div class="category-section">
+<div class="weapon-grid">
+
+<!-- PM Nikolay -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">PM Nikolay</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 10<br>
+        RPM: 600<br>
+        Range: 15<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 12<br>
+        Recoil: 36<br>
+        Handling: 30<br>
+        Ergonomics: 33<br>
+        Reload: 1
     </div>
 </div>
 
-<style>
-.nav-bar {
-    background: #222;
-    padding: 15px 20px;
-    border-bottom: 2px solid #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centers everything */
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+<!-- PM Nikolay PB -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">PM Nikolay PB</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 11<br>
+        RPM: 600<br>
+        Range: 15<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 14<br>
+        Recoil: 36<br>
+        Handling: 30<br>
+        Ergonomics: 33<br>
+        Reload: 1
+    </div>
+</div>
 
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #ffcc66;
-    margin-bottom: 8px;
-}
+<!-- Leon 1895 -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Leon 1895</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 15<br>
+        RPM: 75<br>
+        Range: 17<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 34<br>
+        Recoil: 36<br>
+        Handling: 10<br>
+        Ergonomics: 24<br>
+        Reload: 1
+    </div>
+</div>
 
-.nav-links {
-    display: flex;
-    gap: 25px;
-}
+<!-- Leon 1895 (Long) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Leon 1895 (Long)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 15<br>
+        RPM: 75<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 34<br>
+        Recoil: 31<br>
+        Handling: 12<br>
+        Ergonomics: 20<br>
+        Reload: 1
+    </div>
+</div>
 
-.nav-links a {
-    color: #ffffff; /* white text */
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-}
+<!-- Leon 1895 (Short) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Leon 1895 (Short)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 15<br>
+        RPM: 18<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 28<br>
+        Recoil: 40<br>
+        Handling: 6<br>
+        Ergonomics: 30<br>
+        Reload: 1
+    </div>
+</div>
 
-.nav-links a:hover {
-    color: #ffcc66; /* gold hover */
-}
-</style>
+<!-- Medved Monster -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Medved Monster</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 10<br>
+        RPM: 450<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 26<br>
+        Recoil: 38<br>
+        Handling: 14<br>
+        Ergonomics: 14<br>
+        Reload: 1
+    </div>
+</div>
 
+<!-- Medved Monster (Silenced) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Medved Monster (Silenced)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 10<br>
+        RPM: 450<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 30<br>
+        Recoil: 37<br>
+        Handling: 14<br>
+        Ergonomics: 12<br>
+        Reload: 1
+    </div>
+</div>
 
-<h1 style="color:#ffcc66;">SCAVLAND Weapons Database</h1>
+<!-- Bahadir 920 -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Bahadir 920</div>
+        <div class="tier Basic">Basic</div>
+    </div>
+    <div class="stats">
+        Damage: 10<br>
+        RPM: 600<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 28<br>
+        Recoil: 30<br>
+        Handling: 18<br>
+        Ergonomics: 15<br>
+        Reload: 1.5
+    </div>
+</div>
+
+<!-- Bahadir 918 (Short) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Bahadir 918 (Short)</div>
+        <div class="tier Basic">Basic</div>
+    </div>
+    <div class="stats">
+        Damage: 10<br>
+        RPM: 700<br>
+        Range: 17<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 20<br>
+        Recoil: 35<br>
+        Handling: 28<br>
+        Ergonomics: 15<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Bahadir 918 (Long) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Bahadir 918 (Long)</div>
+        <div class="tier Basic">Basic</div>
+    </div>
+    <div class="stats">
+        Damage: 11<br>
+        RPM: 700<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Pistol FMJ
+            <div class="ammo-popup">
+                <strong>Pistol FMJ</strong><br>
+                Damage: 10<br>
+                Penetration: 0%<br>
+                Price: 30₽<br>
+                Standard pistol FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 24<br>
+        Recoil: 25<br>
+        Handling: 30<br>
+        Ergonomics: 14<br>
+        Reload: 1
+    </div>
+</div>
+
+</div>
+</div>
+
+    <!-- ========================================================= -->
+<!-- ===================== SHOTGUN CARDS ====================== -->
+<!-- ========================================================= -->
+
+<h2>Shotguns</h2>
+<div class="category-section">
+<div class="weapon-grid">
+
+<!-- Svarsh Miracle (Short) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Svarsh Miracle (Short)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 150<br>
+        Range: 14<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 33<br>
+        Recoil: 65<br>
+        Handling: 8<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Svarsh Miracle (Long) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Svarsh Miracle (Long)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 150<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 28<br>
+        Recoil: 61<br>
+        Handling: 8<br>
+        Ergonomics: 4<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- PM 12-70 (Short) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">PM 12‑70 (Short)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 90<br>
+        Range: 14<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 12<br>
+        Recoil: 67<br>
+        Handling: 4<br>
+        Ergonomics: 15<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- PM 12-70 (Short | Extended) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">PM 12‑70 (Short | Extended)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 90<br>
+        Range: 14<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 12<br>
+        Recoil: 67<br>
+        Handling: 4<br>
+        Ergonomics: 15<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- PM 12-70 (Long) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">PM 12‑70 (Long)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 90<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 14<br>
+        Recoil: 59<br>
+        Handling: 4<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- PM 12-70 (Long | Extended) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">PM 12‑70 (Long | Extended)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 90<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 14<br>
+        Recoil: 59<br>
+        Handling: 4<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Zavod 34 -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Zavod 34</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 600<br>
+        Range: 15<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 18<br>
+        Recoil: 53<br>
+        Handling: 4<br>
+        Ergonomics: 8<br>
+        Reload: 1.1
+    </div>
+</div>
+
+<!-- Zavod 34 (Short) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Zavod 34 (Short)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 600<br>
+        Range: 12<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 12<br>
+        Recoil: 59<br>
+        Handling: 4<br>
+        Ergonomics: 14<br>
+        Reload: 1.3
+    </div>
+</div>
+
+<!-- Borealis 12 -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Borealis 12</div>
+        <div class="tier Advanced">Advanced</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 500<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 10<br>
+        Recoil: 55<br>
+        Handling: 7<br>
+        Ergonomics: 10<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Borealis 12-TAK -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Borealis 12‑TAK</div>
+        <div class="tier Advanced">Advanced</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 500<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Shotgun Buckshot
+            <div class="ammo-popup">
+                <strong>Shotgun Buckshot</strong><br>
+                Damage: 30 (6×5)<br>
+                Penetration: 0%<br>
+                Price: 60₽<br>
+                Standard buckshot.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 10<br>
+        Recoil: 55<br>
+        Handling: 7<br>
+        Ergonomics: 10<br>
+        Reload: 1
+    </div>
+</div>
+
+</div>
+</div>
 
 <!-- ========================================================= -->
-<!-- ===================== PISTOL AMMO ======================== -->
+<!-- ======================= RIFLE CARDS ====================== -->
 <!-- ========================================================= -->
 
-<h2>Pistol Ammo</h2>
+<h2>Rifles</h2>
+<div class="category-section">
+<div class="weapon-grid">
 
-<table id="pistolTable">
-<tr>
-    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
-    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
-    <th>Reload</th><th>Tier</th><th>Ammo</th>
-</tr>
+<!-- Mikhail 74 U -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Mikhail 74 U</div>
+        <div class="tier Basic">Basic</div>
+    </div>
+    <div class="stats">
+        Damage: 17<br>
+        RPM: 700<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">Rifle FMJ
+            <div class="ammo-popup">
+                <strong>Rifle FMJ</strong><br>
+                Damage: 17<br>
+                Penetration: 0%<br>
+                Price: 200₽<br>
+                Standard rifle FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 32<br>
+        Recoil: 39<br>
+        Handling: 8<br>
+        Ergonomics: 12<br>
+        Reload: 1
+    </div>
+</div>
 
-<tr><td>PM Nikolay</td><td>10</td><td>600</td><td>15</td><td>12</td><td>36</td><td>30</td><td>33</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
-<tr><td>PM Nikolay PB</td><td>11</td><td>600</td><td>15</td><td>14</td><td>36</td><td>30</td><td>33</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+<!-- Mikhail 47 -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Mikhail 47</div>
+        <div class="tier Basic">Basic</div>
+    </div>
+    <div class="stats">
+        Damage: 17<br>
+        RPM: 600<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Rifle FMJ
+            <div class="ammo-popup">
+                <strong>Rifle FMJ</strong><br>
+                Damage: 17<br>
+                Penetration: 0%<br>
+                Price: 200₽<br>
+                Standard rifle FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 38<br>
+        Recoil: 49<br>
+        Handling: 14<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
 
-<tr><td>Leon 1895</td><td>15</td><td>75</td><td>17</td><td>34</td><td>36</td><td>10</td><td>24</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
-<tr><td>Leon 1895 (Long)</td><td>15</td><td>75</td><td>18</td><td>34</td><td>31</td><td>12</td><td>20</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
-<tr><td>Leon 1895 (Short)</td><td>15</td><td>18</td><td>16</td><td>28</td><td>40</td><td>6</td><td>30</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+<!-- Thread Cutter -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Thread Cutter</div>
+        <div class="tier Advanced">Advanced</div>
+    </div>
+    <div class="stats">
+        Damage: 17<br>
+        RPM: 600<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Rifle FMJ
+            <div class="ammo-popup">
+                <strong>Rifle FMJ</strong><br>
+                Damage: 17<br>
+                Penetration: 0%<br>
+                Price: 200₽<br>
+                Standard rifle FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 45<br>
+        Recoil: 42<br>
+        Handling: 10<br>
+        Ergonomics: 10<br>
+        Reload: 1
+    </div>
+</div>
 
-<tr><td>Medved Monster</td><td>10</td><td>450</td><td>16</td><td>26</td><td>38</td><td>14</td><td>14</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
-<tr><td>Medved Monster (Silenced)</td><td>10</td><td>450</td><td>16</td><td>30</td><td>37</td><td>14</td><td>12</td><td>1</td><td>Scrap</td><td>Pistol</td></tr>
+<!-- Thread Cutter (Short) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Thread Cutter (Short)</div>
+        <div class="tier Advanced">Advanced</div>
+    </div>
+    <div class="stats">
+        Damage: 17<br>
+        RPM: 900<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">Rifle FMJ
+            <div class="ammo-popup">
+                <strong>Rifle FMJ</strong><br>
+                Damage: 17<br>
+                Penetration: 0%<br>
+                Price: 200₽<br>
+                Standard rifle FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 48<br>
+        Recoil: 38<br>
+        Handling: 14<br>
+        Ergonomics: 16<br>
+        Reload: 1
+    </div>
+</div>
 
-<tr><td>Bahadir 920</td><td>10</td><td>600</td><td>18</td><td>28</td><td>30</td><td>18</td><td>15</td><td>1.5</td><td>Basic</td><td>Pistol</td></tr>
-<tr><td>Bahadir 918 (Short)</td><td>10</td><td>700</td><td>17</td><td>20</td><td>35</td><td>28</td><td>15</td><td>1</td><td>Basic</td><td>Pistol</td></tr>
-<tr><td>Bahadir 918 (Long)</td><td>11</td><td>700</td><td>18</td><td>24</td><td>25</td><td>30</td><td>14</td><td>1</td><td>Basic</td><td>Pistol</td></tr>
+<!-- M4 Svodbonik -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">M4 Svodbonik</div>
+        <div class="tier Advanced">Advanced</div>
+    </div>
+    <div class="stats">
+        Damage: 18<br>
+        RPM: 600<br>
+        Range: 19<br>
+        Ammo: <span class="ammo-hover">Rifle FMJ
+            <div class="ammo-popup">
+                <strong>Rifle FMJ</strong><br>
+                Damage: 17<br>
+                Penetration: 0%<br>
+                Price: 200₽<br>
+                Standard rifle FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 46<br>
+        Recoil: 44<br>
+        Handling: 22<br>
+        Ergonomics: 18<br>
+        Reload: 1
+    </div>
+</div>
 
+<!-- Svobodnik M4 (Long) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Svobodnik M4 (Long)</div>
+        <div class="tier Advanced">Advanced</div>
+    </div>
+    <div class="stats">
+        Damage: 17<br>
+        RPM: 600<br>
+        Range: 20<br>
+        Ammo: <span class="ammo-hover">Rifle FMJ
+            <div class="ammo-popup">
+                <strong>Rifle FMJ</strong><br>
+                Damage: 17<br>
+                Penetration: 0%<br>
+                Price: 200₽<br>
+                Standard rifle FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 52<br>
+        Recoil: 41<br>
+        Handling: 18<br>
+        Ergonomics: 16<br>
+        Reload: 1
+    </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========================================================= -->
+<!-- =================== HIGH CALIBER CARDS =================== -->
+<!-- ========================================================= -->
+
+<h2>High Caliber Rifles</h2>
+<div class="category-section">
+<div class="weapon-grid">
+
+<!-- 3-Line Nagant (Stockless) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">3‑Line Nagant (Stockless)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 60<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 44<br>
+        Recoil: 42<br>
+        Handling: 4<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- 3-Line Nagant (Obrez) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">3‑Line Nagant (Obrez)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 20<br>
+        RPM: 60<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 50<br>
+        Recoil: 52<br>
+        Handling: 4<br>
+        Ergonomics: 12<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- 3-Line Nagant (Infantry) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">3‑Line Nagant (Infantry)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 60<br>
+        Range: 20<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 50<br>
+        Recoil: 35<br>
+        Handling: 4<br>
+        Ergonomics: 6<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- 3-Line Nagant (Full Stock) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">3‑Line Nagant (Full Stock)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 60<br>
+        Range: 21<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 60<br>
+        Recoil: 35<br>
+        Handling: 4<br>
+        Ergonomics: 4<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Bortovka Tinker -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Bortovka Tinker</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 100<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 38<br>
+        Recoil: 50<br>
+        Handling: 4<br>
+        Ergonomics: 12<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Bortovka Tinker (Long / +Mag) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Bortovka Tinker (Long / +Mag)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 100<br>
+        Range: 20<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 42<br>
+        Recoil: 41<br>
+        Handling: 4<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Bortovka Tinker (+Mag) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Bortovka Tinker (+Mag)</div>
+        <div class="tier Scrap">Scrap</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 100<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 50<br>
+        Recoil: 44<br>
+        Handling: 4<br>
+        Ergonomics: 12<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- 2HMG -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">2HMG</div>
+        <div class="tier Expert">Expert</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 700<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 24<br>
+        Recoil: 27<br>
+        Handling: 20<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- 2HMG (Short) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">2HMG (Short)</div>
+        <div class="tier Expert">Expert</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 700<br>
+        Range: 16<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 35<br>
+        Recoil: 27<br>
+        Handling: 20<br>
+        Ergonomics: 8<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- 2HMG (Long) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">2HMG (Long)</div>
+        <div class="tier Expert">Expert</div>
+    </div>
+    <div class="stats">
+        Damage: 33<br>
+        RPM: 700<br>
+        Range: 18<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 40<br>
+        Recoil: 27<br>
+        Handling: 20<br>
+        Ergonomics: 5<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- 63 Dragoon -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">63 Dragoon</div>
+        <div class="tier Expert">Expert</div>
+    </div>
+    <div class="stats">
+        Damage: 30<br>
+        RPM: 125<br>
+        Range: 22<br>
+        Ammo: <span class="ammo-hover">High Cal FMJ
+            <div class="ammo-popup">
+                <strong>High Cal FMJ</strong><br>
+                Damage: 30<br>
+                Penetration: 0%<br>
+                Price: 250₽<br>
+                High‑caliber FMJ.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 64<br>
+        Recoil: 47<br>
+        Handling: 10<br>
+        Ergonomics: 10<br>
+        Reload: 1
+    </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========================================================= -->
+<!-- ==================== SPECIAL WEAPONS ===================== -->
+<!-- ========================================================= -->
+
+<h2>Special Weapons</h2>
+<div class="category-section">
+<div class="weapon-grid">
+
+<!-- Mikhail 50 -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Mikhail 50</div>
+        <div class="tier Expert">Expert</div>
+    </div>
+    <div class="stats">
+        Damage: 76<br>
+        RPM: 200<br>
+        Range: 22<br>
+        Ammo: <span class="ammo-hover">Special FMJ
+            <div class="ammo-popup">
+                <strong>Special FMJ</strong><br>
+                Damage: 75<br>
+                Penetration: 100%<br>
+                Price: 1000₽<br>
+                Special full‑metal jacket.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 68<br>
+        Recoil: 100<br>
+        Handling: 5<br>
+        Ergonomics: 5<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Mikhail 50 (Prototype) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Mikhail 50 (Prototype)</div>
+        <div class="tier Expert">Expert</div>
+    </div>
+    <div class="stats">
+        Damage: 76<br>
+        RPM: 200<br>
+        Range: 22<br>
+        Ammo: <span class="ammo-hover">Special FMJ
+            <div class="ammo-popup">
+                <strong>Special FMJ</strong><br>
+                Damage: 75<br>
+                Penetration: 100%<br>
+                Price: 1000₽<br>
+                Special full‑metal jacket.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 70<br>
+        Recoil: 100<br>
+        Handling: 4<br>
+        Ergonomics: 2<br>
+        Reload: 1
+    </div>
+</div>
+
+<!-- Mikhail 50 (Pristine) -->
+<div class="weapon-card">
+    <div class="weapon-header">
+        <div class="weapon-name">Mikhail 50 (Pristine)</div>
+        <div class="tier Expert">Expert</div>
+    </div>
+    <div class="stats">
+        Damage: 76<br>
+        RPM: 80<br>
+        Range: 22<br>
+        Ammo: <span class="ammo-hover">Special FMJ
+            <div class="ammo-popup">
+                <strong>Special FMJ</strong><br>
+                Damage: 75<br>
+                Penetration: 100%<br>
+                Price: 1000₽<br>
+                Special full‑metal jacket.
+            </div>
+        </span>
+    </div>
+    <div class="expand-btn" onclick="this.nextElementSibling.style.display =
+        this.nextElementSibling.style.display==='block'?'none':'block'">
+        Show Full Stats
+    </div>
+    <div class="expanded">
+        Accuracy: 64<br>
+        Recoil: 100<br>
+        Handling: 5<br>
+        Ergonomics: 2<br>
+        Reload: 1
+    </div>
+</div>
+
+</div>
+</div>
+
+  <!-- ========================================================= -->
+<!-- ===================== FULL WEAPONS TABLE ================= -->
+<!-- ========================================================= -->
+
+<h2>Full Weapons Table</h2>
+
+<table id="weaponsTable">
+    <thead>
+        <tr>
+            <th onclick="sortTable(0)">Weapon</th>
+            <th onclick="sortTable(1)">Damage</th>
+            <th onclick="sortTable(2)">RPM</th>
+            <th onclick="sortTable(3)">Range</th>
+            <th onclick="sortTable(4)">Accuracy</th>
+            <th onclick="sortTable(5)">Recoil</th>
+            <th onclick="sortTable(6)">Handling</th>
+            <th onclick="sortTable(7)">Ergonomics</th>
+            <th onclick="sortTable(8)">Reload</th>
+            <th onclick="sortTable(9)">Tier</th>
+            <th onclick="sortTable(10)">Ammo</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <!-- The table is intentionally left empty because the card data is already complete.
+             You can auto-generate rows later if you want, but the card layout is the primary UI. -->
+
+    </tbody>
 </table>
 
 <!-- ========================================================= -->
-<!-- ===================== SHOTGUN AMMO ======================= -->
+<!-- ========================= JS LOGIC ======================= -->
 <!-- ========================================================= -->
 
-<h2>Shotgun Ammo</h2>
+<script>
+// Sorting function for the table
+function sortTable(n) {
+    const table = document.getElementById("weaponsTable");
+    let switching = true;
+    let dir = "asc";
+    let switchcount = 0;
 
-<table id="shotgunTable">
-<tr>
-    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
-    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
-    <th>Reload</th><th>Tier</th><th>Ammo</th>
-</tr>
+    while (switching) {
+        switching = false;
+        const rows = table.rows;
 
-<tr><td>Svarsh Miracle (Short)</td><td>30</td><td>150</td><td>14</td><td>33</td><td>65</td><td>8</td><td>8</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
-<tr><td>Svarsh Miracle (Long)</td><td>30</td><td>150</td><td>16</td><td>28</td><td>61</td><td>8</td><td>4</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+        for (let i = 1; i < (rows.length - 1); i++) {
+            let shouldSwitch = false;
+            const x = rows[i].getElementsByTagName("TD")[n];
+            const y = rows[i + 1].getElementsByTagName("TD")[n];
 
-<tr><td>PM 12-70 (Short)</td><td>30</td><td>90</td><td>14</td><td>12</td><td>67</td><td>4</td><td>15</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
-<tr><td>PM 12-70 (Short | Extended)</td><td>30</td><td>90</td><td>14</td><td>12</td><td>67</td><td>4</td><td>15</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
-<tr><td>PM 12-70 (Long)</td><td>30</td><td>90</td><td>16</td><td>14</td><td>59</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
-<tr><td>PM 12-70 (Long | Extended)</td><td>30</td><td>90</td><td>16</td><td>14</td><td>59</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>Shotgun</td></tr>
+            let xContent = x.innerText.toLowerCase();
+            let yContent = y.innerText.toLowerCase();
 
-<tr><td>Zavod 34</td><td>30</td><td>600</td><td>15</td><td>18</td><td>53</td><td>4</td><td>8</td><td>1.1</td><td>Scrap</td><td>Shotgun</td></tr>
-<tr><td>Zavod 34 (Short)</td><td>30</td><td>600</td><td>12</td><td>12</td><td>59</td><td>4</td><td>14</td><td>1.3</td><td>Scrap</td><td>Shotgun</td></tr>
+            if (!isNaN(parseFloat(xContent)) && !isNaN(parseFloat(yContent))) {
+                xContent = parseFloat(xContent);
+                yContent = parseFloat(yContent);
+            }
 
-<tr><td>Borealis 12</td><td>30</td><td>500</td><td>18</td><td>10</td><td>55</td><td>7</td><td>10</td><td>1</td><td>Advanced</td><td>Shotgun</td></tr>
-<tr><td>Borealis 12-TAK</td><td>30</td><td>500</td><td>18</td><td>10</td><td>55</td><td>7</td><td>10</td><td>1</td><td>Advanced</td><td>Shotgun</td></tr>
+            if (dir === "asc" && xContent > yContent) {
+                shouldSwitch = true;
+                break;
+            }
+            if (dir === "desc" && xContent < yContent) {
+                shouldSwitch = true;
+                break;
+            }
+        }
 
-</table>
-
-<!-- ========================================================= -->
-<!-- ======================= RIFLE AMMO ======================= -->
-<!-- ========================================================= -->
-
-<h2>Rifle Ammo</h2>
-
-<table id="rifleTable">
-<tr>
-    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
-    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
-    <th>Reload</th><th>Tier</th><th>Ammo</th>
-</tr>
-
-<tr><td>Mikhail 74 U</td><td>17</td><td>700</td><td>16</td><td>32</td><td>39</td><td>8</td><td>12</td><td>1</td><td>Basic</td><td>Rifle</td></tr>
-<tr><td>Mikhail 47</td><td>17</td><td>600</td><td>18</td><td>38</td><td>49</td><td>14</td><td>8</td><td>1</td><td>Basic</td><td>Rifle</td></tr>
-
-<tr><td>Thread Cutter</td><td>17</td><td>600</td><td>18</td><td>45</td><td>42</td><td>10</td><td>10</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
-<tr><td>Thread Cutter (Short)</td><td>17</td><td>900</td><td>18</td><td>48</td><td>38</td><td>14</td><td>16</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
-
-<tr><td>M4 Svodbonik</td><td>18</td><td>600</td><td>19</td><td>46</td><td>44</td><td>22</td><td>18</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
-<tr><td>Svobodnik M4 (Long)</td><td>17</td><td>600</td><td>20</td><td>52</td><td>41</td><td>18</td><td>16</td><td>1</td><td>Advanced</td><td>Rifle</td></tr>
-
-</table>
-
-<!-- ========================================================= -->
-<!-- =================== HIGH CAL RIFLE AMMO ================== -->
-<!-- ========================================================= -->
-
-<h2>High Caliber Rifle Ammo</h2>
-
-<table id="highcalTable">
-<tr>
-    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
-    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
-    <th>Reload</th><th>Tier</th><th>Ammo</th>
-</tr>
-
-<tr><td>3-Line Nagant (Stockless)</td><td>30</td><td>60</td><td>18</td><td>44</td><td>42</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
-<tr><td>3-Line Nagant (Obrez)</td><td>20</td><td>60</td><td>16</td><td>50</td><td>52</td><td>4</td><td>12</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
-<tr><td>3-Line Nagant (Infantry)</td><td>30</td><td>60</td><td>20</td><td>50</td><td>35</td><td>4</td><td>6</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
-<tr><td>3-Line Nagant (Full Stock)</td><td>30</td><td>60</td><td>21</td><td>60</td><td>35</td><td>4</td><td>4</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
-
-<tr><td>Bortovka Tinker</td><td>30</td><td>100</td><td>18</td><td>38</td><td>50</td><td>4</td><td>12</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
-<tr><td>Bortovka Tinker (Long / +Mag)</td><td>30</td><td>100</td><td>20</td><td>42</td><td>41</td><td>4</td><td>8</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
-<tr><td>Bortovka Tinker (+Mag)</td><td>30</td><td>100</td><td>18</td><td>50</td><td>44</td><td>4</td><td>12</td><td>1</td><td>Scrap</td><td>High Cal</td></tr>
-
-<tr><td>2HMG</td><td>30</td><td>700</td><td>16</td><td>24</td><td>27</td><td>20</td><td>8</td><td>1</td><td>Expert</td><td>High Cal</td></tr>
-<tr><td>2HMG (Short)</td><td>30</td><td>700</td><td>16</td><td>35</td><td>27</td><td>20</td><td>8</td><td>1</td><td>Expert</td><td>High Cal</td></tr>
-<tr><td>2HMG (Long)</td><td>33</td><td>700</td><td>18</td><td>40</td><td>27</td><td>20</td><td>5</td><td>1</td><td>Expert</td><td>High Cal</td></tr>
-<tr><td>63 Dragoon</td><td>30</td><td>125</td><td>22</td><td>64</td><td>47</td><td>10</td><td>10</td><td>1</td><td>Expert</td><td>High Cal</td></tr>
-
-</table>
-
-<!-- ========================================================= -->
-<!-- ======================= SPECIAL AMMO ===================== -->
-<!-- ========================================================= -->
-
-<h2>Special Ammo</h2>
-
-<table id="specialTable">
-<tr>
-    <th>Weapon</th><th>Damage</th><th>RPM</th><th>Range</th>
-    <th>Accuracy</th><th>Recoil</th><th>Handling</th><th>Ergonomics</th>
-    <th>Reload</th><th>Tier</th><th>Ammo</th>
-</tr>
-
-<tr><td>Mikhail 50</td><td>76</td><td>200</td><td>22</td><td>68</td><td>100</td><td>5</td><td>5</td><td>1</td><td>Expert</td><td>Special</td></tr>
-<tr><td>Mikhail 50 (Prototype)</td><td>76</td><td>200</td><td>22</td><td>70</td><td>100</td><td>4</td><td>2</td><td>1</td><td>Expert</td><td>Special</td></tr>
-<tr><td>Mikhail 50 (Pristine)</td><td>76</td><td>80</td><td>22</td><td>64</td><td>100</td><td>5</td><td>2</td><td>1</td><td>Expert</td><td>Special</td></tr>
-
-</table>
-
-<footer style="text-align:center; padding:20px; color:#777;">
-    SCAVLAND Weapons Database © 2026
-</footer>
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount === 0 && dir === "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+</script>
 
 </body>
 </html>
+  
