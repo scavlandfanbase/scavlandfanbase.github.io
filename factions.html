@@ -55,18 +55,99 @@ h1 {
     margin-top: 40px;
 }
 
-.construction-box {
+/* ============================
+   UNIVERSAL FACTION ELEMENTS
+   ============================ */
+
+.faction-banner {
+    background: var(--faction-dark);
+    border-bottom: 3px solid var(--faction-main);
+    padding: 25px;
+    text-align: center;
+    color: var(--faction-light);
+    font-size: 2rem;
+    letter-spacing: 3px;
     margin-top: 40px;
-    padding: 30px;
-    background: #222;
-    border: 2px solid #ffcc66;
-    border-radius: 8px;
-    display: inline-block;
 }
 
-.construction-box p {
-    font-size: 20px;
-    color: #ccc;
+.faction-box {
+    background: #222;
+    border: 2px solid var(--faction-main);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto 40px auto;
+    max-width: 900px;
+    text-align: left;
+}
+
+.faction-title {
+    color: var(--faction-main);
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.faction-text {
+    color: var(--faction-light);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* ============================
+   SCAVLAND FACTION COLOURS
+   ============================ */
+
+.faction-bandits {
+    --faction-main: #b14a3b;
+    --faction-dark: #2a1a1a;
+    --faction-light: #e8b0a0;
+}
+
+.faction-mudlarks {
+    --faction-main: #7bd13b;
+    --faction-dark: #1f2a1a;
+    --faction-light: #b8f59a;
+}
+
+.faction-mechanists {
+    --faction-main: #4ea3b1;
+    --faction-dark: #1a2e30;
+    --faction-light: #a8dce3;
+}
+
+.faction-rada {
+    --faction-main: #c93b3b;
+    --faction-dark: #3a1a1a;
+    --faction-light: #f2c2c2;
+}
+
+.faction-gunners {
+    --faction-main: #d7b56d;
+    --faction-dark: #2a2a1a;
+    --faction-light: #f2e2b8;
+}
+
+.faction-commonfolk {
+    --faction-main: #c9a66b;
+    --faction-dark: #3a2f1f;
+    --faction-light: #f2d9b0;
+}
+
+.faction-acolytes {
+    --faction-main: #b13b3b;
+    --faction-dark: #2a0f0f;
+    --faction-light: #e8a0a0;
+}
+
+.faction-palatines {
+    --faction-main: #4a6ea8;
+    --faction-dark: #1a2230;
+    --faction-light: #a8b9d3;
+}
+
+.faction-vultures {
+    --faction-main: #d9d9d9;
+    --faction-dark: #1a1a1a;
+    --faction-light: #f2f2f2;
 }
 </style>
 
@@ -88,13 +169,106 @@ h1 {
     </div>
 </div>
 
-<!-- PAGE TITLE -->
-<h1>Factions Page</h1>
+<h1>Factions of Zalesye</h1>
 
-<!-- UNDER CONSTRUCTION BOX -->
-<div class="construction-box">
-    <p>This page is currently under construction.</p>
-    <p>SCAVLAND factions will be added soon.</p>
+<!-- BANDITS -->
+<div class="faction-bandits faction-banner">BANDITS</div>
+<div class="faction-bandits faction-box">
+    <h2 class="faction-title">Bandits</h2>
+    <p class="faction-text">
+        Violent raiders who attack anyone for supplies. Disorganized at first glance,
+        but capable of forming large squads. Their largest base lies near the highway
+        at Svarog Factories. Encounters are always kill-or-be-killed.
+    </p>
+</div>
+
+<!-- MUDLARKS -->
+<div class="faction-mudlarks faction-banner">MUDLARKS</div>
+<div class="faction-mudlarks faction-box">
+    <h2 class="faction-title">Mudlarks</h2>
+    <p class="faction-text">
+        A half-mutated tribe resistant to Mist, treating it like a deity. They work
+        near Lake Pavlie, hired to dispose of corpses so they don’t attract Mist.
+        Misunderstood and eerie, their rituals grow more extreme as the world worsens.
+    </p>
+</div>
+
+<!-- MECHANISTS -->
+<div class="faction-mechanists faction-banner">MECHANISTS</div>
+<div class="faction-mechanists faction-box">
+    <h2 class="faction-title">Mechanists</h2>
+    <p class="faction-text">
+        Engineers and researchers who maintain tools, filters, and machinery for
+        everyone else. Based around Sontse Station. Their technology keeps Zalesye alive,
+        even if their prices and attitudes frustrate many.
+    </p>
+</div>
+
+<!-- RADA -->
+<div class="faction-rada faction-banner">RADA</div>
+<div class="faction-rada faction-box">
+    <h2 class="faction-title">Rada</h2>
+    <p class="faction-text">
+        A cooperative of farmers and traders promoting shared labour and comfort.
+        They run farms and hire Palatines for protection. Their largest settlement,
+        Dubravka Camp, attracts many Commonfolk. Their rise in influence comes with
+        rumours of political manipulation and hired sabotage.
+    </p>
+</div>
+
+<!-- GUNNERS -->
+<div class="faction-gunners faction-banner">GUNNERS</div>
+<div class="faction-gunners faction-box">
+    <h2 class="faction-title">Gunners</h2>
+    <p class="faction-text">
+        A ruthless gang running protection rackets and a growing drug trade. They
+        control the Water Treatment plant and push into Palatine territory. Leaders
+        act diplomatic, but payments are enforced with brutal efficiency.
+    </p>
+</div>
+
+<!-- COMMONFOLK -->
+<div class="faction-commonfolk faction-banner">COMMONFOLK</div>
+<div class="faction-commonfolk faction-box">
+    <h2 class="faction-title">Commonfolk</h2>
+    <p class="faction-text">
+        Ordinary people of Zalesye who belong to no faction. Many farm, trade, or
+        simply struggle to survive in the Mire. Beaten down by hardship, they often
+        lack the means to change their fate.
+    </p>
+</div>
+
+<!-- ACOLYTES -->
+<div class="faction-acolytes faction-banner">ACOLYTES</div>
+<div class="faction-acolytes faction-box">
+    <h2 class="faction-title">Acolytes</h2>
+    <p class="faction-text">
+        Religious travellers maintaining churches, hospitals, and shelters. They
+        spread pre-war beliefs and compete with Rada for the trust of Commonfolk.
+        Their faith promises salvation, though many doubt such hope still matters.
+    </p>
+</div>
+
+<!-- PALATINES -->
+<div class="faction-palatines faction-banner">PALATINES</div>
+<div class="faction-palatines faction-box">
+    <h2 class="faction-title">Palatines</h2>
+    <p class="faction-text">
+        A military force formed from remnants of war. They guard Arcadia and the
+        Bastion wall, keeping mutants out. Large but undisciplined, corruption and
+        violence plague their ranks as they lose ground to the Gunners.
+    </p>
+</div>
+
+<!-- VULTURES -->
+<div class="faction-vultures faction-banner">VULTURES</div>
+<div class="faction-vultures faction-box">
+    <h2 class="faction-title">Vultures</h2>
+    <p class="faction-text">
+        Scavengers and roamers who survive by picking through the ruins of Zalesye.
+        Not a unified group, more a loose alliance. They trade scraps, clear Bandits,
+        and follow grim mantras to endure the wasteland’s monotony.
+    </p>
 </div>
 
 </body>
