@@ -6,6 +6,8 @@ This is the active project backlog. Work from the top unless a new game-data upd
 
 ## Priority 1 — Process screenshot evidence
 
+- [ ] Re-verify all weapon stats against current game data; community report on 18 September 2026 identified multiple outdated damage values. Corrections already applied: 63 Dragoon 36, M4 Svodbonik 19, Mikhail 47/MK47 20.
+
 - [ ] Identify the screenshots in `images/items/` and rename them to descriptive item-based filenames.
 - [ ] Extract only confirmed visible item data and update `data/items.json`.
 - [ ] Identify and rename screenshots in `images/weapons/`; compare their stats against `data/weapons.json`.
