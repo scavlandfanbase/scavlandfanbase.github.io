@@ -941,9 +941,56 @@ More SCAVLAND locations will be added soon.
 - `images/vendors/petar.png`
 - `images/vendors/vesna.png`
 
+## Current website architecture — 18 September 2026
+
+### Shared presentation
+
+All primary pages now load `site-theme.css` and `site-shell.js`. The shared shell provides the SCAVLAND header, official logo, navigation and active-page state. The official header logo is `images/branding/Scavland_Logo_2025.png`.
+
+Primary pages:
+
+- `index.html`
+- `vendors.html`
+- `weapons.html`
+- `armour.html`
+- `crafting.html`
+- `map.html`
+- `factions.html`
+- `areas.html`
+
+The map is an interactive pan/zoom viewer using `images/scavland-map.png`. Vendor inventories open in scrollable modal windows. Weapons use category/database-view filtering so ammunition is shown only for Ammo or All Items views.
+
+### Structured data layer
+
+The repository now contains a parallel structured data layer under `data/`:
+
+| File | Current documented records |
+|---|---:|
+| `data/items.json` | 257 item identities |
+| `data/weapons.json` | 40 weapons |
+| `data/armour.json` | 29 armour/gear records |
+| `data/ammo.json` | 13 ammunition records |
+| `data/vendors.json` | 22 vendors |
+| `data/factions.json` | 9 factions |
+| `data/crafting.json` | 22 recipes |
+| `data/vendor-selling-rates.json` | Developer-provided selling modifiers |
+
+The HTML pages still contain their operational embedded data. The JSON files are not yet the live canonical source. Migration should be done page-by-page after verification.
+
+### Image/evidence layout
+
+Current asset folders include `images/ammo/`, `images/armour/`, `images/crafting/`, `images/items/`, `images/weapons/`, `images/vendors/`, `images/factions/`, `images/branding/`, `images/backgrounds/` and `images/screenshots/`.
+
+The old `Ammo Pics/` directory documented in the original asset snapshot was removed after exact duplicate files were consolidated into `images/ammo/`. Ammo filenames were normalized. Many newer item, weapon, armour, crafting and faction screenshots still have timestamp filenames and require identification/provenance work before being treated as canonical evidence.
+
 ## Maintenance notes
 
-- Treat the individual website data files as the current operational sources until the site is migrated to a true shared JSON database.
-- When a weapon, armour item, vendor, faction or crafting recipe changes, update this master document as part of the same change.
-- Percentages in the vendor selling-rate section preserve the developer-provided wording and should not be converted into assumed base values.
-- Placeholder/undocumented vendors are intentionally retained rather than filled with inferred information.
+- Treat the individual website data files as the current operational sources until each page is deliberately migrated to the shared JSON data layer.
+- Keep `data/*.json` synchronized with confirmed game data while migration is in progress.
+- Do not guess missing values. Preserve unknown values as `null` or explicitly undocumented.
+- Preserve exact in-game names, including `WG-40` and `Plier`.
+- Percentages in vendor selling-rate data preserve developer-provided wording and must not be converted into assumed base values.
+- Placeholder/undocumented vendors remain unknown rather than inferred.
+- Screenshot-derived facts should retain a source/evidence path.
+- Shared visual changes should normally be made in `site-theme.css` or `site-shell.js`, not copied independently into every page.
+- See `NEXT_JOBS.md` for the active project backlog.
