@@ -1,183 +1,2068 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCAVLAND — Armour</title>
-    <link rel="stylesheet" href="style.css">
 
-    <style>
-    /* Extra spacing for armour tables */
-    table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 10px 12px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SCAVLAND - Armour Database</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: url('images/backgrounds/tactical-grid.png') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #0d0d0d;
+    background-blend-mode: multiply;
+
+    color: #eee;
+    font-family: Arial, sans-serif;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   SCAVLAND BANNER
+   ========================================================= */
+
+.scav-header {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(10,10,10,0.95),
+            rgba(20,20,20,0.85)
+        ),
+        url('images/banners/wasteland-banner.jpg') center/cover no-repeat;
+
+    padding: 40px 20px;
+    text-align: center;
+
+    border-bottom: 4px solid #ffcc66;
+
+    box-shadow:
+        0 0 25px rgba(255, 204, 102, 0.25);
+}
+
+.scav-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+
+    color: #ffcc66;
+
+    text-shadow:
+        0 0 10px rgba(255, 204, 102, 0.4);
+}
+
+.scav-subtitle {
+    font-size: 1.2rem;
+    color: #ccc;
+
+    margin-top: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   MAIN SITE NAVIGATION
+   ========================================================= */
+
+.site-nav {
+    text-align: center;
+
+    padding: 15px 10px;
+
+    background: #111;
+
+    border-bottom: 2px solid #222;
+}
+
+.site-nav nav {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 25px;
+}
+
+.site-nav a {
+    color: #eee;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: color 0.2s;
+}
+
+.site-nav a:hover {
+    color: #ffcc66;
+}
+
+.site-nav a.active {
+    color: #ffcc66;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    text-align: center;
+
+    padding: 45px 20px 35px;
+
+    background: rgba(26, 26, 26, 0.94);
+
+    border-bottom: 2px solid #333;
+}
+
+.hero h1 {
+    font-size: 40px;
+
+    color: #ffcc66;
+
+    margin: 0 0 10px;
+}
+
+.hero p {
+    font-size: 17px;
+
+    color: #ccc;
+
+    max-width: 750px;
+
+    margin: 0 auto;
+
+    line-height: 1.5;
+}
+
+.database-count {
+    margin-top: 18px;
+
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+.database-count strong {
+    color: #ffcc66;
+}
+
+
+/* =========================================================
+   ARMOUR QUICK NAV
+   ========================================================= */
+
+.armour-nav {
+    background: rgba(17, 17, 17, 0.96);
+
+    border-bottom: 1px solid #333;
+
+    padding: 14px 15px;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.armour-nav a {
+    background: #222;
+
+    color: #ddd;
+
+    border: 1px solid #3a3a3a;
+
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    padding: 9px 14px;
+
+    transition: 0.2s;
+}
+
+.armour-nav a:hover {
+    color: #111;
+
+    background: #ffcc66;
+
+    border-color: #ffcc66;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    width: min(1500px, calc(100% - 30px));
+
+    margin: 0 auto;
+
+    padding: 35px 0 70px;
+}
+
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.controls {
+    background: rgba(26, 26, 26, 0.96);
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    padding: 18px;
+
+    margin-bottom: 40px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 2fr)
+        repeat(3, minmax(150px, 1fr));
+
+    gap: 12px;
+}
+
+.control {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.control label {
+    color: #aaa;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+.control input,
+.control select {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    background: #111;
+
+    color: #eee;
+
+    border: 1px solid #444;
+
+    border-radius: 5px;
+
+    outline: none;
+}
+
+.control input:focus,
+.control select:focus {
+    border-color: #ffcc66;
+}
+
+
+/* =========================================================
+   ARMOUR SECTIONS
+   ========================================================= */
+
+.armour-section {
+    margin-top: 45px;
+
+    scroll-margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    color: #ffcc66;
+
+    margin: 0;
+
+    font-size: 25px;
+}
+
+.section-heading::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            to right,
+            #ffcc66,
+            rgba(255, 204, 102, 0)
+        );
+}
+
+.section-count {
+    color: #888;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ARMOUR GRID
+   ========================================================= */
+
+.armour-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   ARMOUR CARDS
+   ========================================================= */
+
+.armour-card {
+    --class-color: #888;
+
+    position: relative;
+
+    background: rgba(34, 34, 34, 0.96);
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    padding: 17px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.armour-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: var(--class-color);
+}
+
+.armour-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--class-color);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.35);
+}
+
+
+/* =========================================================
+   ARMOUR CLASS COLOURS
+   ========================================================= */
+
+.armour-card[data-class="Tattered"] {
+    --class-color: #8a8a8a;
+}
+
+.armour-card[data-class="Scavenger"] {
+    --class-color: #c89645;
+}
+
+.armour-card[data-class="Medium"] {
+    --class-color: #4da3ff;
+}
+
+.armour-card[data-class="Heavy"] {
+    --class-color: #d85b4d;
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.armour-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.armour-name {
+    color: var(--class-color);
+
+    font-size: 18px;
+
+    line-height: 1.25;
+
+    margin: 0;
+}
+
+.class-badge {
+    background: var(--class-color);
+
+    color: #111;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    padding: 4px 7px;
+
+    border-radius: 4px;
+
+    text-transform: uppercase;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PRICE / VENDOR INFORMATION
+   ========================================================= */
+
+.armour-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+.info-box {
+    background: #181818;
+
+    border: 1px solid #333;
+
+    border-radius: 4px;
+
+    padding: 9px;
+}
+
+.info-label {
+    display: block;
+
+    color: #888;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 4px;
+}
+
+.info-value {
+    color: #eee;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   RESISTANCE STATS
+   ========================================================= */
+
+.resistance-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 7px;
+
+    margin-top: 12px;
+}
+
+.resistance {
+    background: #181818;
+
+    border: 1px solid #333;
+
+    border-radius: 4px;
+
+    padding: 10px 5px;
+
+    text-align: center;
+}
+
+.resistance-label {
+    display: block;
+
+    color: #888;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    line-height: 1.3;
+
+    margin-bottom: 5px;
+}
+
+.resistance-value {
+    color: #ffcc66;
+
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.armour-description {
+    color: #bbb;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-top: 14px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #333;
+}
+
+
+/* =========================================================
+   NO RESULTS
+   ========================================================= */
+
+.no-results {
+    display: none;
+
+    text-align: center;
+
+    color: #888;
+
+    padding: 50px 20px;
+}
+
+
+/* =========================================================
+   BACKPACKS
+   ========================================================= */
+
+.backpack-section {
+    margin-top: 70px;
+
+    scroll-margin-top: 20px;
+}
+
+.coming-soon {
+    background: rgba(34,34,34,0.96);
+
+    border: 1px dashed #555;
+
+    border-radius: 6px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+}
+
+.coming-soon h3 {
+    color: #ffcc66;
+
+    font-size: 22px;
+
+    margin-top: 0;
+}
+
+.coming-soon p {
+    color: #aaa;
+
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    text-align: center;
+
+    padding: 20px;
+
+    margin-top: 40px;
+
+    color: #777;
+
+    border-top: 1px solid #333;
+
+    background: rgba(13,13,13,0.95);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .controls {
+        grid-template-columns: 1fr 1fr;
     }
-    th, td {
-        padding: 8px 12px;
-        text-align: center; /* CENTER ALL TEXT */
+
+}
+
+
+@media (max-width: 650px) {
+
+    .scav-header {
+        padding: 30px 15px;
     }
-    th {
-        background: #222;
+
+    .scav-title {
+        font-size: 2.3rem;
     }
-    tr:nth-child(even) {
-        background: #1a1a1a;
+
+    .scav-subtitle {
+        font-size: 0.95rem;
     }
+
+    .site-nav nav {
+        gap: 8px;
+    }
+
+    .site-nav a {
+        background: #1c1c1c;
+
+        border: 1px solid #333;
+
+        border-radius: 4px;
+
+        padding: 8px 10px;
+
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 35px 15px;
+    }
+
+    .hero h1 {
+        font-size: 31px;
+    }
+
+    .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .armour-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: calc(100% - 20px);
+    }
+
+}
+
 </style>
 
 </head>
 
 <body>
-<div class="nav-bar">
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="weapons.html">Weapons</a>
-        <a href="vendors.html">Vendors</a>
-        <a href="areas.html">Areas</a>
-        <a href="map.html">Map</a>
-        <a href="crafting.html">Crafting</a>
+
+
+<!-- =========================================================
+     SCAVLAND BANNER
+     ========================================================= -->
+
+<header class="scav-header">
+
+    <div class="scav-title">
+        SCAVLAND
     </div>
-</div>
 
-<style>
-.nav-bar {
-    background: #222;
-    padding: 12px 20px;
-    border-bottom: 2px solid #333;
-    display: flex;
-    justify-content: center; /* centers the nav */
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+    <div class="scav-subtitle">
+        Wasteland Survival Database
+    </div>
 
-.nav-links a {
-    color: #ffffff; /* white text */
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 20px; /* spacing between links */
-}
-
-.nav-links a:hover {
-    color: #ffcc66; /* gold hover */
-}
-</style>
 </header>
 
-<main>
-    <h1>Armour</h1>
-    <p>Complete list of helmets, body armour, and pants available in SCAVLAND.</p>
-    
-<!-- Face Masks -->
-    <div class="card">
-    <h2>Gas Masks</h2>
-    <table>
-        <tr>
-            <th>Item</th><th>Vendor Rank</th><th>Price</th><th>Ballistic Res</th><th>Slash Res</th><th>Rad Res</th><th>Type</th>
-        </tr>
-            <tr><td>Old GP-4 Gas Mask</td><td>1</td><td>15000</td><td>0</td><td>5</td><td>1</td><td>Tattered</td></tr>
-            <tr><td>GP-4 Gas Mask</td><td>-</td><td>25000</td><td>5</td><td>8</td><td>20</td><td>Scavenger</td></tr>
-            <tr><td>Skull Mask</td><td>-</td><td>5000</td><td>3</td><td>10</td><td>5</td><td>Tattered</td></tr>
-    </table>
+
+<!-- =========================================================
+     MAIN NAVIGATION
+     ========================================================= -->
+
+<header class="site-nav">
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="vendors.html">
+            Vendors
+        </a>
+
+        <a href="weapons.html">
+            Weapons
+        </a>
+
+        <a href="armour.html" class="active">
+            Armour
+        </a>
+
+        <a href="crafting.html">
+            Crafting
+        </a>
+
+        <a href="map.html">
+            Map
+        </a>
+
+        <a href="factions.html">
+            Factions
+        </a>
+
+        <a href="areas.html">
+            Areas
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="hero">
+
+    <h1>
+        Armour Database
+    </h1>
+
+    <p>
+        Compare helmets, masks, body armour and leg protection
+        available throughout SCAVLAND. Resistance values shown
+        represent the item's maximum stats when fully repaired.
+    </p>
+
+    <div class="database-count">
+
+        <strong id="armourTotal">0</strong>
+        Armour Items
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUICK NAVIGATION
+     ========================================================= -->
+
+<nav class="armour-nav">
+
+    <a href="#allArmour">
+        All Armour
+    </a>
+
+    <a href="#gas-masks">
+        Gas Masks
+    </a>
+
+    <a href="#helmets">
+        Helmets
+    </a>
+
+    <a href="#body-armour">
+        Body Armour
+    </a>
+
+    <a href="#pants">
+        Pants
+    </a>
+
+    <a href="#backpacks">
+        Backpacks
+    </a>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     FILTER CONTROLS
+     ========================================================= -->
+
+<section class="controls" id="allArmour">
+
+
+    <div class="control">
+
+        <label for="searchInput">
+            Search Armour
+        </label>
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search item name..."
+        >
+
+    </div>
+
+
+    <div class="control">
+
+        <label for="categoryFilter">
+            Category
+        </label>
+
+        <select id="categoryFilter">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="Gas Masks">
+                Gas Masks
+            </option>
+
+            <option value="Helmets">
+                Helmets
+            </option>
+
+            <option value="Body Armour">
+                Body Armour
+            </option>
+
+            <option value="Pants">
+                Pants
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="control">
+
+        <label for="classFilter">
+            Repair Class
+        </label>
+
+        <select id="classFilter">
+
+            <option value="all">
+                All Classes
+            </option>
+
+            <option value="Tattered">
+                Tattered
+            </option>
+
+            <option value="Scavenger">
+                Scavenger
+            </option>
+
+            <option value="Medium">
+                Medium
+            </option>
+
+            <option value="Heavy">
+                Heavy
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="control">
+
+        <label for="vendorFilter">
+            Vendor Rank
+        </label>
+
+        <select id="vendorFilter">
+
+            <option value="all">
+                All Vendor Ranks
+            </option>
+
+            <option value="1">
+                Rank 1
+            </option>
+
+            <option value="2">
+                Rank 2
+            </option>
+
+            <option value="3">
+                Rank 3
+            </option>
+
+            <option value="-">
+                No Vendor Rank
+            </option>
+
+        </select>
+
+    </div>
+
+
+</section>
+
+
+<!-- ARMOUR GENERATED HERE -->
+
+<div id="armourSections"></div>
+
+
+<div class="no-results" id="noResults">
+    No armour matches your search or filters.
 </div>
 
-    <!-- HELMETS -->
-    <div class="card">
-        <h2>Helmets</h2>
-        <table>
-            <tr>
-                <th>Item</th><th>Vendor Rank</th><th>Price</th><th>Ballistic Res</th><th>Slash Res</th><th>Rad Res</th><th>Type</th>
-            </tr>
-            
-            <tr><td>Old Kepka</td><td>1</td><td>5000</td><td>5</td><td>5</td><td>5</td><td>Tattered</td></tr>
-            <tr><td>Ruined Beret</td><td>1</td><td>8500</td><td>5</td><td>8</td><td>5</td><td>Tattered</td></tr>
-            <tr><td>Ashen Ushanka</td><td>2</td><td>18000</td><td>8</td><td>10</td><td>8</td><td>Tattered</td></tr>
-            <tr><td>Refurbished Kask</td><td>-</td><td>27500</td><td>15</td><td>15</td><td>5</td><td>Medium</td></tr>
-            <tr><td>Parade Helmet</td><td>-</td><td>29000</td><td>15</td><td>15</td><td>5</td><td>Medium</td></tr>
-            <tr><td>Security Helmet</td><td>-</td><td>89000</td><td>35</td><td>35</td><td>20</td><td>Heavy</td></tr>
-            <tr><td>Revolutionary Kepka</td><td>-</td><td>5000</td><td>10</td><td>8</td><td>8</td><td>Scavenger</td></tr>
-            <tr><td>Balistic Kask</td><td>-</td><td>40000</td><td>23</td><td>25</td><td>5</td><td>Medium</td></tr>
-            <tr><td>Vozhd Beret</td><td>-</td><td>6000</td><td>5</td><td>10</td><td>5</td><td>Scavenger</td></tr>
-        </table>
+
+<!-- =========================================================
+     BACKPACKS
+     ========================================================= -->
+
+<section
+    class="backpack-section"
+    id="backpacks"
+>
+
+    <div class="section-heading">
+
+        <h2>
+            Backpacks
+        </h2>
+
     </div>
 
-    <!-- BODY ARMOUR -->
-    <div class="card">
-        <h2>Body Armour</h2>
-        <table>
-            <tr>
-                <th>Item</th><th>Vendor Rank</th><th>Price</th><th>Ballistic Res</th><th>Slash Res</th><th>Rad Res</th><th>Type</th>
-            </tr>
-            <tr><td>Green Rags</td><td>1</td><td>5000</td><td>3</td><td>5</td><td>5</td><td>Tattered</td></tr>
-            <tr><td>Patched Armored Blouse</td><td>2</td><td>19000</td><td>10</td><td>15</td><td>10</td><td>Tattered</td></tr>
-            <tr><td>Plated Overcoat</td><td>-</td><td>45000</td><td>25</td><td>18</td><td>15</td><td>Scavenger</td></tr>
-            <tr><td>Armoured Rags</td><td>2</td><td>35000</td><td>15</td><td>23</td><td>13</td><td>Scavenger</td></tr>
-            <tr><td>Dusty Overcoat</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Tattered</td></tr>
-            <tr><td>Metal Breastplate</td><td>-</td><td>40000</td><td>25</td><td>30</td><td>10</td><td>Medium</td></tr>
-            <tr><td>Stronghold Vest</td><td>-</td><td>65000</td><td>38</td><td>35</td><td>15</td><td>Medium</td></tr>
-            <tr><td>Roit Vest</td><td>-</td><td>86000</td><td>40</td><td>50</td><td>20</td><td>Heavy</td></tr>
-            <tr><td>Ekzoskelet Armor</td><td>-</td><td>100000</td><td>50</td><td>50</td><td>30</td><td>Heavy</td></tr>
-            <tr><td>Scrapyard Armor</td><td>-</td><td>32000</td><td>15</td><td>15</td><td>8</td><td>Scavenger</td></tr>
-        </table>
+
+    <div class="coming-soon">
+
+        <h3>
+            Coming Soon
+        </h3>
+
+        <p>
+            Backpacks will be added to SCAVLAND
+            in a future update.
+        </p>
+
     </div>
 
-    <!-- PANTS -->
-    <div class="card">
-        <h2>Pants</h2>
-        <table>
-            <tr>
-                <th>Item</th><th>Vendor Rank</th><th>Price</th><th>Ballistic Res</th><th>Slash Res</th><th>Rad Res</th><th>Type</th>
-            </tr>
-            <tr><td>Old Blue Trousers</td><td>1</td><td>8500</td><td>5</td><td>8</td><td>5</td><td>Tattered</td></tr>
-            <tr><td>Winter Pants</td><td>2</td><td>12500</td><td>10</td><td>10</td><td>8</td><td>Tattered</td></tr>
-            <tr><td>Reinforced Leather Pants</td><td>-</td><td>33000</td><td>18</td><td>18</td><td>10</td><td>Medium</td></tr>
-            <tr><td>Scrapyard Pants</td><td>2</td><td>22000</td><td>10</td><td>13</td><td>10</td><td>Scavenger</td></tr>
-            <tr><td>Plated Ragged Pants</td><td>3</td><td>45000</td><td>13</td><td>15</td><td>10</td><td>Scavenger</td></tr>
-            <tr><td>Ekzoskelet Legs</td><td>-</td><td>100000</td><td>30</td><td>35</td><td>20</td><td>Heavy</td></tr>
-        </table>
-    </div>
+</section>
+
 
 </main>
 
-<div class="card">
-    <h2>Backpacks</h2>
-    <p><em>Backpacks will be added to SCAVLAND in a future update.</em></p>
 
-    <table>
-        <tr>
-            <th>Item</th><th>Vendor Rank</th><th>Price</th>
-            <th>Stat 1</th><th>Stat 2</th><th>Stat 3</th><th>Type</th>
-        </tr>
-
-        <!-- No items yet — coming soon -->
-    </table>
-</div>
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
 
 <footer>
-    <p>SCAVLAND © 2026 — Fan‑made database</p>
+    SCAVLAND Fan Database © 2026
 </footer>
-</body>
-</html>
+
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
 
-    const order = ["Tattered", "Scavenger", "Medium", "Heavy"];
+/* =========================================================
+   MASTER ARMOUR DATABASE
 
-    function sortTable(table) {
-        const rows = Array.from(table.querySelectorAll("tr")).slice(1); // skip header
-        rows.sort((a, b) => {
-            const typeA = a.cells[6].innerText.trim();
-            const typeB = b.cells[6].innerText.trim();
-            return order.indexOf(typeA) - order.indexOf(typeB);
-        });
+   All resistance values represent MAXIMUM stats when the
+   item is fully repaired.
 
-        rows.forEach(row => table.appendChild(row));
+   EDIT ARMOUR STATS HERE.
+
+   You do not need to edit the cards themselves.
+   ========================================================= */
+
+const armour = [
+
+
+/* =========================================================
+   GAS MASKS
+   ========================================================= */
+
+{
+    name: "Old GP-4 Gas Mask",
+    category: "Gas Masks",
+
+    vendorRank: "1",
+    price: 15000,
+
+    ballistic: 0,
+    slash: 5,
+    radiation: 1,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "GP-4 Gas Mask",
+    category: "Gas Masks",
+
+    vendorRank: "-",
+    price: 25000,
+
+    ballistic: 5,
+    slash: 8,
+    radiation: 20,
+
+    repairClass: "Scavenger"
+},
+
+{
+    name: "Skull Mask",
+    category: "Gas Masks",
+
+    vendorRank: "-",
+    price: 5000,
+
+    ballistic: 3,
+    slash: 10,
+    radiation: 5,
+
+    repairClass: "Tattered"
+},
+
+
+/* =========================================================
+   HELMETS
+   ========================================================= */
+
+{
+    name: "Old Kepka",
+    category: "Helmets",
+
+    vendorRank: "1",
+    price: 5000,
+
+    ballistic: 5,
+    slash: 5,
+    radiation: 5,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Ruined Beret",
+    category: "Helmets",
+
+    vendorRank: "1",
+    price: 8500,
+
+    ballistic: 5,
+    slash: 8,
+    radiation: 5,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Ashen Ushanka",
+    category: "Helmets",
+
+    vendorRank: "2",
+    price: 18000,
+
+    ballistic: 8,
+    slash: 10,
+    radiation: 8,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Refurbished Kask",
+    category: "Helmets",
+
+    vendorRank: "-",
+    price: 27500,
+
+    ballistic: 15,
+    slash: 15,
+    radiation: 5,
+
+    repairClass: "Medium"
+},
+
+{
+    name: "Parade Helmet",
+    category: "Helmets",
+
+    vendorRank: "-",
+    price: 29000,
+
+    ballistic: 15,
+    slash: 15,
+    radiation: 5,
+
+    repairClass: "Medium"
+},
+
+{
+    name: "Security Helmet",
+    category: "Helmets",
+
+    vendorRank: "-",
+    price: 89000,
+
+    ballistic: 35,
+    slash: 35,
+    radiation: 20,
+
+    repairClass: "Heavy"
+},
+
+{
+    name: "Revolutionary Kepka",
+    category: "Helmets",
+
+    vendorRank: "-",
+    price: 5000,
+
+    ballistic: 10,
+    slash: 8,
+    radiation: 8,
+
+    repairClass: "Scavenger"
+},
+
+{
+    name: "Balistic Kask",
+    category: "Helmets",
+
+    vendorRank: "-",
+    price: 40000,
+
+    ballistic: 23,
+    slash: 25,
+    radiation: 5,
+
+    repairClass: "Medium"
+},
+
+{
+    name: "Vozhd Beret",
+    category: "Helmets",
+
+    vendorRank: "-",
+    price: 6000,
+
+    ballistic: 5,
+    slash: 10,
+    radiation: 5,
+
+    repairClass: "Scavenger"
+},
+
+
+/* =========================================================
+   PANSKIY KASK
+   Added from supplied screenshot.
+   ========================================================= */
+
+{
+    name: "Panskiy Kask",
+    category: "Helmets",
+
+    vendorRank: "-",
+    price: 15000,
+
+    ballistic: 8,
+    slash: 13,
+    radiation: 10,
+
+    repairClass: "Scavenger",
+
+    description:
+        "An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field."
+},
+
+
+/* =========================================================
+   BODY ARMOUR
+   ========================================================= */
+
+{
+    name: "Green Rags",
+    category: "Body Armour",
+
+    vendorRank: "1",
+    price: 5000,
+
+    ballistic: 3,
+    slash: 5,
+    radiation: 5,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Patched Armored Blouse",
+    category: "Body Armour",
+
+    vendorRank: "2",
+    price: 19000,
+
+    ballistic: 10,
+    slash: 15,
+    radiation: 10,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Plated Overcoat",
+    category: "Body Armour",
+
+    vendorRank: "-",
+    price: 45000,
+
+    ballistic: 25,
+    slash: 18,
+    radiation: 15,
+
+    repairClass: "Scavenger"
+},
+
+{
+    name: "Armoured Rags",
+    category: "Body Armour",
+
+    vendorRank: "2",
+    price: 35000,
+
+    ballistic: 15,
+    slash: 23,
+    radiation: 13,
+
+    repairClass: "Scavenger"
+},
+
+{
+    name: "Dusty Overcoat",
+    category: "Body Armour",
+
+    vendorRank: "-",
+    price: null,
+
+    ballistic: null,
+    slash: null,
+    radiation: null,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Metal Breastplate",
+    category: "Body Armour",
+
+    vendorRank: "-",
+    price: 40000,
+
+    ballistic: 25,
+    slash: 30,
+    radiation: 10,
+
+    repairClass: "Medium"
+},
+
+{
+    name: "Stronghold Vest",
+    category: "Body Armour",
+
+    vendorRank: "-",
+    price: 65000,
+
+    ballistic: 38,
+    slash: 35,
+    radiation: 15,
+
+    repairClass: "Medium"
+},
+
+{
+    name: "Roit Vest",
+    category: "Body Armour",
+
+    vendorRank: "-",
+    price: 86000,
+
+    ballistic: 40,
+    slash: 50,
+    radiation: 20,
+
+    repairClass: "Heavy"
+},
+
+{
+    name: "Ekzoskelet Armor",
+    category: "Body Armour",
+
+    vendorRank: "-",
+    price: 100000,
+
+    ballistic: 50,
+    slash: 50,
+    radiation: 30,
+
+    repairClass: "Heavy"
+},
+
+{
+    name: "Scrapyard Armor",
+    category: "Body Armour",
+
+    vendorRank: "-",
+    price: 32000,
+
+    ballistic: 15,
+    slash: 15,
+    radiation: 8,
+
+    repairClass: "Scavenger"
+},
+
+
+/* =========================================================
+   PANTS
+   ========================================================= */
+
+{
+    name: "Old Blue Trousers",
+    category: "Pants",
+
+    vendorRank: "1",
+    price: 8500,
+
+    ballistic: 5,
+    slash: 8,
+    radiation: 5,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Winter Pants",
+    category: "Pants",
+
+    vendorRank: "2",
+    price: 12500,
+
+    ballistic: 10,
+    slash: 10,
+    radiation: 8,
+
+    repairClass: "Tattered"
+},
+
+{
+    name: "Reinforced Leather Pants",
+    category: "Pants",
+
+    vendorRank: "-",
+    price: 33000,
+
+    ballistic: 18,
+    slash: 18,
+    radiation: 10,
+
+    repairClass: "Medium"
+},
+
+{
+    name: "Scrapyard Pants",
+    category: "Pants",
+
+    vendorRank: "2",
+    price: 22000,
+
+    ballistic: 10,
+    slash: 13,
+    radiation: 10,
+
+    repairClass: "Scavenger"
+},
+
+{
+    name: "Plated Ragged Pants",
+    category: "Pants",
+
+    vendorRank: "3",
+    price: 45000,
+
+    ballistic: 13,
+    slash: 15,
+    radiation: 10,
+
+    repairClass: "Scavenger"
+},
+
+{
+    name: "Ekzoskelet Legs",
+    category: "Pants",
+
+    vendorRank: "-",
+    price: 100000,
+
+    ballistic: 30,
+    slash: 35,
+    radiation: 20,
+
+    repairClass: "Heavy"
+}
+
+];
+
+
+/* =========================================================
+   CATEGORY ORDER
+   ========================================================= */
+
+const armourCategories = [
+
+    {
+        name: "Gas Masks",
+        id: "gas-masks"
+    },
+
+    {
+        name: "Helmets",
+        id: "helmets"
+    },
+
+    {
+        name: "Body Armour",
+        id: "body-armour"
+    },
+
+    {
+        name: "Pants",
+        id: "pants"
     }
 
-    document.querySelectorAll("table").forEach(sortTable);
+];
 
-});
+
+/* =========================================================
+   CLASS SORT ORDER
+
+   Cards will automatically appear in this order.
+   ========================================================= */
+
+const classOrder = [
+
+    "Tattered",
+    "Scavenger",
+    "Medium",
+    "Heavy"
+
+];
+
+
+/* =========================================================
+   PAGE ELEMENTS
+   ========================================================= */
+
+const armourSections =
+    document.getElementById("armourSections");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const categoryFilter =
+    document.getElementById("categoryFilter");
+
+const classFilter =
+    document.getElementById("classFilter");
+
+const vendorFilter =
+    document.getElementById("vendorFilter");
+
+const noResults =
+    document.getElementById("noResults");
+
+
+document.getElementById("armourTotal").textContent =
+    armour.length;
+
+
+/* =========================================================
+   SAFE TEXT HELPER
+   ========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   DISPLAY HELPERS
+   ========================================================= */
+
+function displayValue(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+
+        return "—";
+
+    }
+
+    return escapeHTML(value);
+
+}
+
+
+function displayPrice(price) {
+
+    if (
+        price === null ||
+        price === undefined
+    ) {
+
+        return "—";
+
+    }
+
+    return "~" +
+        Number(price).toLocaleString() +
+        "₽";
+
+}
+
+
+/* =========================================================
+   CREATE ARMOUR CARD
+   ========================================================= */
+
+function createArmourCard(item) {
+
+    const card =
+        document.createElement("article");
+
+
+    card.className =
+        "armour-card";
+
+
+    card.dataset.class =
+        item.repairClass;
+
+
+    let descriptionHTML = "";
+
+
+    if (item.description) {
+
+        descriptionHTML = `
+
+            <div class="armour-description">
+                ${escapeHTML(item.description)}
+            </div>
+
+        `;
+
+    }
+
+
+    card.innerHTML = `
+
+        <div class="armour-header">
+
+            <h3 class="armour-name">
+                ${escapeHTML(item.name)}
+            </h3>
+
+            <span class="class-badge">
+                ${escapeHTML(item.repairClass)}
+            </span>
+
+        </div>
+
+
+        <div class="armour-info">
+
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Price
+                </span>
+
+                <span class="info-value">
+                    ${displayPrice(item.price)}
+                </span>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Vendor Rank
+                </span>
+
+                <span class="info-value">
+                    ${
+                        item.vendorRank === "-"
+                            ? "—"
+                            : escapeHTML(item.vendorRank)
+                    }
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="resistance-grid">
+
+
+            <div class="resistance">
+
+                <span class="resistance-label">
+                    Ballistic Res
+                </span>
+
+                <span class="resistance-value">
+                    ${displayValue(item.ballistic)}
+                </span>
+
+            </div>
+
+
+            <div class="resistance">
+
+                <span class="resistance-label">
+                    Slash Res
+                </span>
+
+                <span class="resistance-value">
+                    ${displayValue(item.slash)}
+                </span>
+
+            </div>
+
+
+            <div class="resistance">
+
+                <span class="resistance-label">
+                    Rad Res
+                </span>
+
+                <span class="resistance-value">
+                    ${displayValue(item.radiation)}
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        ${descriptionHTML}
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* =========================================================
+   RENDER ARMOUR
+   ========================================================= */
+
+function renderArmour() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const selectedCategory =
+        categoryFilter.value;
+
+
+    const selectedClass =
+        classFilter.value;
+
+
+    const selectedVendor =
+        vendorFilter.value;
+
+
+    armourSections.innerHTML = "";
+
+
+    let totalVisible = 0;
+
+
+    armourCategories.forEach(
+        category => {
+
+
+            let matchingItems =
+                armour.filter(
+                    item => {
+
+
+                        const matchesSearch =
+                            item.name
+                                .toLowerCase()
+                                .includes(search);
+
+
+                        const matchesCategory =
+                            selectedCategory === "all" ||
+                            item.category === selectedCategory;
+
+
+                        const matchesClass =
+                            selectedClass === "all" ||
+                            item.repairClass === selectedClass;
+
+
+                        const matchesVendor =
+                            selectedVendor === "all" ||
+                            item.vendorRank === selectedVendor;
+
+
+                        return (
+
+                            item.category === category.name &&
+
+                            matchesSearch &&
+
+                            matchesCategory &&
+
+                            matchesClass &&
+
+                            matchesVendor
+
+                        );
+
+                    }
+                );
+
+
+            /*
+               Sort each category:
+               Tattered -> Scavenger -> Medium -> Heavy
+            */
+
+            matchingItems.sort(
+                (a, b) => {
+
+                    return (
+                        classOrder.indexOf(a.repairClass) -
+                        classOrder.indexOf(b.repairClass)
+                    );
+
+                }
+            );
+
+
+            if (matchingItems.length === 0) {
+
+                return;
+
+            }
+
+
+            totalVisible +=
+                matchingItems.length;
+
+
+            const section =
+                document.createElement("section");
+
+
+            section.className =
+                "armour-section";
+
+
+            section.id =
+                category.id;
+
+
+            const heading =
+                document.createElement("div");
+
+
+            heading.className =
+                "section-heading";
+
+
+            heading.innerHTML = `
+
+                <h2>
+                    ${escapeHTML(category.name)}
+                </h2>
+
+                <span class="section-count">
+
+                    ${matchingItems.length}
+
+                    ${
+                        matchingItems.length === 1
+                            ? "item"
+                            : "items"
+                    }
+
+                </span>
+
+            `;
+
+
+            const grid =
+                document.createElement("div");
+
+
+            grid.className =
+                "armour-grid";
+
+
+            matchingItems.forEach(
+                item => {
+
+                    grid.appendChild(
+                        createArmourCard(item)
+                    );
+
+                }
+            );
+
+
+            section.appendChild(
+                heading
+            );
+
+
+            section.appendChild(
+                grid
+            );
+
+
+            armourSections.appendChild(
+                section
+            );
+
+        }
+    );
+
+
+    noResults.style.display =
+        totalVisible === 0
+            ? "block"
+            : "none";
+
+}
+
+
+/* =========================================================
+   FILTER EVENTS
+   ========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    renderArmour
+);
+
+
+categoryFilter.addEventListener(
+    "change",
+    renderArmour
+);
+
+
+classFilter.addEventListener(
+    "change",
+    renderArmour
+);
+
+
+vendorFilter.addEventListener(
+    "change",
+    renderArmour
+);
+
+
+/* =========================================================
+   QUICK NAVIGATION
+
+   Resets filters before jumping to a category so the
+   requested category cannot accidentally be hidden.
+   ========================================================= */
+
+document
+    .querySelectorAll(".armour-nav a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function(event) {
+
+
+                const target =
+                    this.getAttribute("href");
+
+
+                if (
+                    target === "#allArmour" ||
+                    target === "#backpacks"
+                ) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+
+                searchInput.value =
+                    "";
+
+
+                categoryFilter.value =
+                    "all";
+
+
+                classFilter.value =
+                    "all";
+
+
+                vendorFilter.value =
+                    "all";
+
+
+                renderArmour();
+
+
+                const element =
+                    document.querySelector(target);
+
+
+                if (element) {
+
+                    element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   INITIAL PAGE BUILD
+   ========================================================= */
+
+renderArmour();
+
 </script>
 
+
+</body>
+</html>
