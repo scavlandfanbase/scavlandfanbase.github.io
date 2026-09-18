@@ -76,3 +76,30 @@ body>.construction-box{display:block!important;width:min(760px,calc(100% - 30px)
 .bench-btn{font-size:16px!important;padding:12px 19px!important}
 @media(min-width:1100px){.container{width:min(1700px,calc(100% - 5vw))!important;max-width:1700px!important}}
 @media(max-width:800px){.crafting-layout{grid-template-columns:1fr!important}.vendor-modal-card{width:98vw!important}.vendor-modal{padding:4px!important}}
+
+
+/* Vendor modal scrolling */
+.vendor-modal-card{
+  display:flex!important;
+  flex-direction:column!important;
+  max-height:90vh!important;
+  overflow:hidden!important;
+}
+.vendor-modal-head{
+  flex:0 0 auto!important;
+}
+.vendor-modal-body{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:auto!important;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  -webkit-overflow-scrolling:touch;
+}
+.vendor-modal-body .vendor-content{
+  display:block!important;
+}
+.vendor-modal-body .vendor-table{
+  margin-bottom:4px!important;
+}
