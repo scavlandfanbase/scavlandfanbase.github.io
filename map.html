@@ -7,19 +7,73 @@
 <link rel="stylesheet" href="site-theme.css">
 <style>
 .map-page{width:100%;margin:0 auto;padding:0 0 30px}
-.map-intro{text-align:center;padding:30px 20px 24px;background:rgba(18,20,19,.94);border-bottom:1px solid var(--scav-line)}
-.map-intro h1{margin:0 0 8px;color:var(--scav-gold-bright);font-size:clamp(30px,3vw,48px)}
+.map-intro{text-align:center;padding:24px 20px 18px;background:rgba(18,20,19,.94);border-bottom:1px solid var(--scav-line)}
+.map-intro h1{margin:0 0 6px;color:var(--scav-gold-bright);font-size:clamp(30px,3vw,48px)}
 .map-intro p{margin:0;color:#bbb;font-size:clamp(14px,1.2vw,18px)}
-.map-container{width:100%!important;margin:0 auto!important;padding:clamp(10px,1.5vw,24px);display:flex;justify-content:center;align-items:flex-start}
-.map-img{width:100%;height:auto;max-width:1920px;max-height:calc(100vh - 170px);object-fit:contain;border:1px solid var(--scav-line);background:#b8aa96}
-@media(max-width:700px){.map-container{padding:8px}.map-img{max-height:none}.map-intro{padding:22px 12px 18px}}
+.map-toolbar{position:sticky;top:58px;z-index:20;display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;background:rgba(10,12,11,.96);border-bottom:1px solid var(--scav-line)}
+.map-toolbar button{background:#242624;color:#eee;border:1px solid #555;border-radius:5px;padding:9px 14px;font-weight:700;cursor:pointer}
+.map-toolbar button:hover{background:var(--scav-gold-bright);color:#111;border-color:var(--scav-gold-bright)}
+#zoomLabel{min-width:64px;text-align:center;color:var(--scav-gold-bright);font-weight:700}
+.map-help{color:#999;font-size:13px;margin-left:8px}
+.map-viewport{width:min(1800px,calc(100% - 24px));height:clamp(520px,72vh,1000px);margin:14px auto 30px;overflow:auto;overscroll-behavior:contain;background:#090a09;border:1px solid var(--scav-line);box-shadow:0 12px 35px rgba(0,0,0,.45);cursor:grab;touch-action:none}
+.map-viewport.dragging{cursor:grabbing;user-select:none}
+.map-stage{position:relative;width:max-content;height:max-content;min-width:100%;min-height:100%}
+.map-img{display:block;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:initial!important;border:0!important;box-shadow:none!important;transform-origin:top left;user-select:none;-webkit-user-drag:none}
+@media(max-width:700px){.map-intro{padding:18px 12px 14px}.map-toolbar{top:50px}.map-help{width:100%;text-align:center;margin:2px 0 0}.map-viewport{width:calc(100% - 12px);height:68vh;margin-top:6px}}
 </style>
 </head>
 <body>
 <main class="map-page">
-<section class="map-intro"><h1>SCAVLAND Map</h1><p>Explore the current community map of Zalesye.</p></section>
-<div class="map-container"><img src="images/scavland-map.png" alt="SCAVLAND map of Zalesye" class="map-img"></div>
+<section class="map-intro"><h1>SCAVLAND Map</h1><p>Zoom and pan around Zalesye to inspect locations, vendors, factions and points of interest.</p></section>
+<div class="map-toolbar" aria-label="Map controls">
+<button id="zoomOut" type="button" aria-label="Zoom out">− Zoom</button>
+<span id="zoomLabel">100%</span>
+<button id="zoomIn" type="button" aria-label="Zoom in">+ Zoom</button>
+<button id="fitMap" type="button">Fit Screen</button>
+<button id="actualMap" type="button">100%</button>
+<span class="map-help">Mouse wheel to zoom · drag to move · scrollbars also work</span>
+</div>
+<div class="map-viewport" id="mapViewport">
+<div class="map-stage" id="mapStage"><img src="images/scavland-map.png" alt="SCAVLAND map of Zalesye" class="map-img" id="mapImage" draggable="false"></div>
+</div>
 </main>
+<script>
+(function(){
+ const viewport=document.getElementById('mapViewport'),stage=document.getElementById('mapStage'),img=document.getElementById('mapImage'),label=document.getElementById('zoomLabel');
+ let zoom=1,minZoom=.25,maxZoom=4,drag=false,startX=0,startY=0,startLeft=0,startTop=0;
+ function render(){
+   if(!img.naturalWidth)return;
+   const w=img.naturalWidth*zoom,h=img.naturalHeight*zoom;
+   img.style.width=w+'px';img.style.height=h+'px';
+   stage.style.width=w+'px';stage.style.height=h+'px';
+   label.textContent=Math.round(zoom*100)+'%';
+ }
+ function setZoom(next,cx,cy){
+   const old=zoom; next=Math.max(minZoom,Math.min(maxZoom,next)); if(next===old)return;
+   const x=cx==null?viewport.clientWidth/2:cx,y=cy==null?viewport.clientHeight/2:cy;
+   const mapX=(viewport.scrollLeft+x)/old,mapY=(viewport.scrollTop+y)/old;
+   zoom=next;render();
+   viewport.scrollLeft=mapX*zoom-x;viewport.scrollTop=mapY*zoom-y;
+ }
+ function fit(){
+   if(!img.naturalWidth)return;
+   zoom=Math.max(minZoom,Math.min(1,Math.min(viewport.clientWidth/img.naturalWidth,viewport.clientHeight/img.naturalHeight)));
+   render();viewport.scrollLeft=0;viewport.scrollTop=0;
+ }
+ img.addEventListener('load',fit);
+ if(img.complete)fit();
+ document.getElementById('zoomIn').onclick=()=>setZoom(zoom*1.25);
+ document.getElementById('zoomOut').onclick=()=>setZoom(zoom/1.25);
+ document.getElementById('fitMap').onclick=fit;
+ document.getElementById('actualMap').onclick=()=>setZoom(1);
+ viewport.addEventListener('wheel',e=>{e.preventDefault();const r=viewport.getBoundingClientRect();setZoom(zoom*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+ viewport.addEventListener('pointerdown',e=>{drag=true;viewport.classList.add('dragging');viewport.setPointerCapture(e.pointerId);startX=e.clientX;startY=e.clientY;startLeft=viewport.scrollLeft;startTop=viewport.scrollTop});
+ viewport.addEventListener('pointermove',e=>{if(!drag)return;viewport.scrollLeft=startLeft-(e.clientX-startX);viewport.scrollTop=startTop-(e.clientY-startY)});
+ function stop(){drag=false;viewport.classList.remove('dragging')}
+ viewport.addEventListener('pointerup',stop);viewport.addEventListener('pointercancel',stop);
+ window.addEventListener('resize',()=>{if(zoom<1)fit()});
+})();
+</script>
 <script src="site-shell.js"></script>
 </body>
 </html>
