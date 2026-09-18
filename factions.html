@@ -197,54 +197,70 @@ style="margin:20px auto; padding:10px 20px; font-size:16px; background:#333; col
 </button>
 
 <!-- FACTION GRID -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;max-width:1100px;margin:40px auto;">
+<div style="
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:50px;
+    max-width:1400px;
+    margin:60px auto;
+">
 
-    <div class="faction-bandits" onclick="toggleFaction('bandits')" style="cursor:pointer;">
-        <img src="images/factions/bandits.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Bandits</h3>
+    <!-- BANDITS -->
+    <div class="faction-bandits" onclick="toggleFaction('bandits')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/bandits.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Bandits</h2>
     </div>
 
-    <div class="faction-mudlarks" onclick="toggleFaction('mudlarks')" style="cursor:pointer;">
-        <img src="images/factions/mudlarks.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Mudlarks</h3>
+    <!-- MUDLARKS -->
+    <div class="faction-mudlarks" onclick="toggleFaction('mudlarks')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/mudlarks.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Mudlarks</h2>
     </div>
 
-    <div class="faction-mechanists" onclick="toggleFaction('mechanists')" style="cursor:pointer;">
-        <img src="images/factions/mechanist.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Mechanists</h3>
+    <!-- MECHANISTS -->
+    <div class="faction-mechanists" onclick="toggleFaction('mechanists')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/mechanist.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Mechanists</h2>
     </div>
 
-    <div class="faction-rada" onclick="toggleFaction('rada')" style="cursor:pointer;">
-        <img src="images/factions/rada.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Rada</h3>
+    <!-- RADA -->
+    <div class="faction-rada" onclick="toggleFaction('rada')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/rada.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Rada</h2>
     </div>
 
-    <div class="faction-gunners" onclick="toggleFaction('gunners')" style="cursor:pointer;">
-        <img src="images/factions/gunners.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Gunners</h3>
+    <!-- GUNNERS -->
+    <div class="faction-gunners" onclick="toggleFaction('gunners')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/gunners.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Gunners</h2>
     </div>
 
-    <div class="faction-commonfolk" onclick="toggleFaction('commonfolk')" style="cursor:pointer;">
-        <img src="images/factions/commonfolk.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Commonfolk</h3>
+    <!-- COMMONFOLK -->
+    <div class="faction-commonfolk" onclick="toggleFaction('commonfolk')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/commonfolk.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Commonfolk</h2>
     </div>
 
-    <div class="faction-acolytes" onclick="toggleFaction('acolytes')" style="cursor:pointer;">
-        <img src="images/factions/acolytes.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Acolytes</h3>
+    <!-- ACOLYTES -->
+    <div class="faction-acolytes" onclick="toggleFaction('acolytes')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/acolytes.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Acolytes</h2>
     </div>
 
-    <div class="faction-palatines" onclick="toggleFaction('palatines')" style="cursor:pointer;">
-        <img src="images/factions/palatines.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Palatines</h3>
+    <!-- PALATINES -->
+    <div class="faction-palatines" onclick="toggleFaction('palatines')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/palatines.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Palatines</h2>
     </div>
 
-    <div class="faction-vultures" onclick="toggleFaction('vultures')" style="cursor:pointer;">
-        <img src="images/factions/vultures.png" class="faction-icon">
-        <h3 style="color:var(--faction-main);margin-top:10px;">Vultures</h3>
+    <!-- VULTURES -->
+    <div class="faction-vultures" onclick="toggleFaction('vultures')" style="cursor:pointer; padding:20px;">
+        <img src="images/factions/vultures.png" class="faction-icon" style="width:240px;height:240px;">
+        <h2 style="color:var(--faction-main);margin-top:15px;font-size:1.8rem;">Vultures</h2>
     </div>
 
 </div>
+
 
 <!-- DESCRIPTIONS -->
 <div id="bandits" class="faction-bandits faction-box">
