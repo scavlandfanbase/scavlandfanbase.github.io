@@ -27,3 +27,32 @@ footer{background:rgba(9,11,10,.94)!important;color:#888!important;border-top:1p
 body>h1:first-of-type{margin:42px auto 10px;text-align:center}
 body>.construction-box{display:block!important;width:min(760px,calc(100% - 30px));margin:30px auto 70px!important;text-align:center}
 @media(max-width:700px){.scav-site-header{min-height:140px;padding:30px 15px 25px!important}.scav-site-nav-inner{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto}.scav-site-nav a{white-space:nowrap;font-size:13px!important;padding:7px 9px}.hero{padding:32px 15px 28px!important}}
+
+
+/* Desktop readability + space usage */
+@media(min-width:1100px){
+  body{font-size:17px!important}
+  .scav-site-header{min-height:230px!important;padding:54px 24px 44px!important}
+  .scav-site-title{font-size:clamp(4rem,5vw,6.2rem)!important}
+  .scav-site-subtitle{font-size:1.15rem!important}
+  .scav-site-nav-inner{max-width:1500px!important;padding:13px 18px!important;gap:10px!important}
+  .scav-site-nav a{font-size:16px!important;padding:10px 14px!important}
+  .hero{padding:58px 24px 48px!important}
+  .hero h1{font-size:48px!important;margin-bottom:14px!important}
+  .hero p{font-size:19px!important;max-width:900px!important}
+  main,.container{max-width:1500px!important}
+  .grid{max-width:1600px!important;margin:0 auto!important;gap:22px!important;padding:45px 28px!important}
+  .card{padding:28px 24px!important;min-height:150px!important;display:flex;flex-direction:column;justify-content:center}
+  .card h3{font-size:23px!important;margin:0 0 12px!important}
+  .card p{font-size:16px!important;line-height:1.55!important}
+  .updates{padding:45px 24px!important}
+  .updates h2{font-size:28px!important}
+  .update-box{max-width:950px!important;padding:28px!important}
+  .update-box h3{font-size:21px!important}
+  .update-box p{font-size:16px!important}
+  .panel-heading{font-size:19px!important}
+  .vendor-header{font-size:21px!important}
+  .vendor-table,.weapon-table,table{font-size:16px!important}
+  input,select,button{font-size:16px!important}
+  footer{font-size:14px!important;padding:28px!important}
+}
