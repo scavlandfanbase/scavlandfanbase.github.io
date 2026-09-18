@@ -1621,6 +1621,50 @@ function sortTable(n) {
 }
 </script>
 
+ <script>
+// ===================== AUTO TABLE GENERATION =====================
+
+// 1. Create a list of all weapons with stats
+const weapons = [
+    {
+        name: "PM Nikolay",
+        damage: 10,
+        rpm: 600,
+        range: 15,
+        accuracy: 12,
+        recoil: 36,
+        handling: 30,
+        ergo: 33,
+        reload: 1,
+        tier: "Scrap",
+        ammo: "FMJ | HP | AP"
+    },
+
+    // ⭐ I can generate the full list for you automatically if you want
+];
+
+// 2. Insert rows into the table
+const tbody = document.querySelector("#weaponsTable tbody");
+
+weapons.forEach(w => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${w.name}</td>
+        <td>${w.damage}</td>
+        <td>${w.rpm}</td>
+        <td>${w.range}</td>
+        <td>${w.accuracy}</td>
+        <td>${w.recoil}</td>
+        <td>${w.handling}</td>
+        <td>${w.ergo}</td>
+        <td>${w.reload}</td>
+        <td>${w.tier}</td>
+        <td>${w.ammo}</td>
+    `;
+    tbody.appendChild(row);
+});
+</script>
+   
 </body>
 </html>
   
