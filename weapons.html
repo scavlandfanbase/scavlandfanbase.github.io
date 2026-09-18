@@ -1,1816 +1,2942 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SCAVLAND | Weapons & Ammo Database</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    /* =========================================================
-       SCAVLAND WEAPONS DATABASE
-       ========================================================= */
+<title>SCAVLAND - Weapons & Ammo Database</title>
 
-    :root {
-      --bg: #090a0b;
-      --panel: #111315;
-      --panel-light: #17191c;
-      --panel-hover: #1c1f22;
-      --border: #2d3135;
-      --border-light: #3b4045;
+<style>
 
-      --text: #e8e8e8;
-      --muted: #999fa5;
+/* =========================================================
+   GLOBAL
+   ========================================================= */
 
-      --yellow: #f0b91c;
-      --yellow-light: #ffd45a;
+* {
+    box-sizing: border-box;
+}
 
-      --scrap: #74787c;
-      --basic: #28a86b;
-      --advanced: #268be3;
-      --expert: #e7a915;
+html {
+    scroll-behavior: smooth;
+}
 
-      --danger: #d95757;
+body {
+    background: url('images/backgrounds/tactical-grid.png') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #0d0d0d;
+    background-blend-mode: multiply;
+
+    color: #eee;
+    font-family: Arial, sans-serif;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   SCAVLAND BANNER HEADER
+   Matches index.html
+   ========================================================= */
+
+.scav-header {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(10,10,10,0.95),
+            rgba(20,20,20,0.85)
+        ),
+        url('images/banners/wasteland-banner.jpg') center/cover no-repeat;
+
+    padding: 40px 20px;
+    text-align: center;
+
+    border-bottom: 4px solid #ffcc66;
+
+    box-shadow:
+        0 0 25px rgba(255, 204, 102, 0.25);
+}
+
+.scav-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    color: #ffcc66;
+
+    text-shadow:
+        0 0 10px rgba(255, 204, 102, 0.4);
+}
+
+.scav-subtitle {
+    font-size: 1.2rem;
+
+    color: #ccc;
+
+    margin-top: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   MAIN SITE NAVIGATION
+   ========================================================= */
+
+.site-nav {
+    text-align: center;
+
+    padding: 15px 10px;
+
+    background: #111;
+
+    border-bottom: 2px solid #222;
+}
+
+.site-nav nav {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 25px;
+}
+
+.site-nav a {
+    color: #eee;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: color 0.2s;
+}
+
+.site-nav a:hover {
+    color: #ffcc66;
+}
+
+.site-nav a.active {
+    color: #ffcc66;
+}
+
+
+/* =========================================================
+   PAGE HERO
+   ========================================================= */
+
+.hero {
+    text-align: center;
+
+    padding: 45px 20px 35px;
+
+    background: rgba(26, 26, 26, 0.94);
+
+    border-bottom: 2px solid #333;
+}
+
+.hero h1 {
+    font-size: 40px;
+
+    color: #ffcc66;
+
+    margin: 0 0 10px;
+}
+
+.hero p {
+    font-size: 17px;
+
+    color: #ccc;
+
+    max-width: 750px;
+
+    margin: 0 auto;
+
+    line-height: 1.5;
+}
+
+.database-count {
+    margin-top: 18px;
+
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+.database-count strong {
+    color: #ffcc66;
+}
+
+
+/* =========================================================
+   WEAPON QUICK NAVIGATION
+   ========================================================= */
+
+.weapon-nav {
+    background: rgba(17, 17, 17, 0.96);
+
+    border-bottom: 1px solid #333;
+
+    padding: 14px 15px;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.weapon-nav a {
+    background: #222;
+
+    color: #ddd;
+
+    border: 1px solid #3a3a3a;
+
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    padding: 9px 14px;
+
+    transition: 0.2s;
+}
+
+.weapon-nav a:hover {
+    color: #111;
+
+    background: #ffcc66;
+
+    border-color: #ffcc66;
+}
+
+
+/* =========================================================
+   MAIN PAGE CONTAINER
+   ========================================================= */
+
+.container {
+    width: min(1500px, calc(100% - 30px));
+
+    margin: 0 auto;
+
+    padding: 35px 0 70px;
+}
+
+
+/* =========================================================
+   FILTER CONTROLS
+   ========================================================= */
+
+.controls {
+    background: rgba(26, 26, 26, 0.96);
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    padding: 18px;
+
+    margin-bottom: 40px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 2fr)
+        repeat(3, minmax(150px, 1fr));
+
+    gap: 12px;
+}
+
+.control {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.control label {
+    color: #aaa;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+.control input,
+.control select {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    background: #111;
+
+    color: #eee;
+
+    border: 1px solid #444;
+
+    border-radius: 5px;
+
+    outline: none;
+}
+
+.control input:focus,
+.control select:focus {
+    border-color: #ffcc66;
+}
+
+
+/* =========================================================
+   CATEGORY SECTIONS
+   ========================================================= */
+
+.weapon-section {
+    margin-top: 45px;
+
+    scroll-margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    color: #ffcc66;
+
+    margin: 0;
+
+    font-size: 25px;
+}
+
+.section-heading::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            to right,
+            #ffcc66,
+            rgba(255, 204, 102, 0)
+        );
+}
+
+.section-count {
+    color: #888;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   WEAPON GRID
+   ========================================================= */
+
+.weapon-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(270px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   WEAPON CARDS
+   ========================================================= */
+
+.weapon-card {
+    --tier-color: #777;
+
+    position: relative;
+
+    background: rgba(34, 34, 34, 0.96);
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    padding: 16px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.weapon-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 4px;
+
+    height: 100%;
+
+    background: var(--tier-color);
+}
+
+.weapon-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--tier-color);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.35);
+}
+
+
+/* =========================================================
+   TIER COLOURS
+   ========================================================= */
+
+.weapon-card[data-tier="Scrap"] {
+    --tier-color: #8a8a8a;
+}
+
+.weapon-card[data-tier="Basic"] {
+    --tier-color: #4dbd74;
+}
+
+.weapon-card[data-tier="Advanced"] {
+    --tier-color: #4da3ff;
+}
+
+.weapon-card[data-tier="Expert"] {
+    --tier-color: #ffb52e;
+}
+
+
+/* =========================================================
+   WEAPON HEADER
+   ========================================================= */
+
+.weapon-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.weapon-name {
+    color: var(--tier-color);
+
+    font-size: 17px;
+
+    line-height: 1.25;
+
+    margin: 0;
+}
+
+.tier-badge {
+    background: var(--tier-color);
+
+    color: #111;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    padding: 4px 7px;
+
+    border-radius: 4px;
+
+    text-transform: uppercase;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   WEAPON STATS
+   ========================================================= */
+
+.primary-stats,
+.full-stats {
+    display: grid;
+
+    gap: 6px;
+}
+
+.primary-stats {
+    margin-bottom: 12px;
+}
+
+.stat-line {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-bottom: 5px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.05);
+
+    font-size: 13px;
+}
+
+.stat-label {
+    color: #999;
+}
+
+.stat-value {
+    color: #eee;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   WEAPON AMMO LABEL
+   ========================================================= */
+
+.weapon-ammo {
+    background: #181818;
+
+    border: 1px solid #333;
+
+    border-radius: 4px;
+
+    padding: 8px;
+
+    margin: 12px 0;
+
+    font-size: 12px;
+
+    color: #999;
+}
+
+.weapon-ammo strong {
+    color: #ffcc66;
+}
+
+
+/* =========================================================
+   FULL STATS BUTTON
+   ========================================================= */
+
+.stats-button {
+    width: 100%;
+
+    padding: 9px;
+
+    background: #2c2c2c;
+
+    color: #eee;
+
+    border: 1px solid #444;
+
+    border-radius: 4px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.stats-button:hover {
+    border-color: #ffcc66;
+
+    color: #ffcc66;
+}
+
+
+/* =========================================================
+   EXPANDED STATS
+   ========================================================= */
+
+.full-stats {
+    display: none;
+
+    background: #181818;
+
+    border: 1px solid #333;
+
+    border-radius: 4px;
+
+    padding: 10px;
+
+    margin-top: 10px;
+}
+
+.full-stats.open {
+    display: grid;
+}
+
+
+/* =========================================================
+   NO RESULTS
+   ========================================================= */
+
+.no-results {
+    display: none;
+
+    text-align: center;
+
+    color: #888;
+
+    padding: 50px 20px;
+}
+
+
+/* =========================================================
+   AMMUNITION DATABASE
+   ========================================================= */
+
+.ammo-database {
+    margin-top: 80px;
+
+    scroll-margin-top: 20px;
+}
+
+.ammo-main-heading {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.ammo-main-heading h2 {
+    color: #ffcc66;
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+.ammo-main-heading p {
+    color: #aaa;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   AMMO CATEGORIES
+   ========================================================= */
+
+.ammo-category {
+    margin-top: 40px;
+
+    scroll-margin-top: 20px;
+}
+
+.ammo-category h3 {
+    color: #ffcc66;
+
+    font-size: 21px;
+
+    padding-bottom: 9px;
+
+    border-bottom: 1px solid #444;
+
+    margin-bottom: 16px;
+}
+
+.ammo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   AMMO CARD
+   ========================================================= */
+
+.ammo-card {
+    background: rgba(34, 34, 34, 0.96);
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    padding: 17px;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s;
+}
+
+.ammo-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #ffcc66;
+}
+
+.ammo-card h4 {
+    color: #ffcc66;
+
+    margin: 0 0 6px;
+
+    font-size: 17px;
+}
+
+.ammo-price {
+    color: #ddd;
+
+    font-weight: bold;
+
+    font-size: 13px;
+
+    margin-bottom: 13px;
+}
+
+.ammo-description {
+    color: #bbb;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    min-height: 60px;
+}
+
+
+/* =========================================================
+   AMMO STATS
+   ========================================================= */
+
+.ammo-stats {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 7px;
+
+    margin-top: 15px;
+}
+
+.ammo-stat {
+    background: #181818;
+
+    border: 1px solid #333;
+
+    border-radius: 4px;
+
+    padding: 8px 5px;
+
+    text-align: center;
+}
+
+.ammo-stat-label {
+    display: block;
+
+    color: #888;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 4px;
+}
+
+.ammo-stat-value {
+    color: #eee;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    text-align: center;
+
+    padding: 20px;
+
+    margin-top: 40px;
+
+    color: #777;
+
+    border-top: 1px solid #333;
+
+    background: rgba(13,13,13,0.95);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .controls {
+        grid-template-columns: 1fr 1fr;
     }
 
-    * {
-      box-sizing: border-box;
+}
+
+
+@media (max-width: 650px) {
+
+    .scav-header {
+        padding: 30px 15px;
     }
 
-    html {
-      scroll-behavior: smooth;
+    .scav-title {
+        font-size: 2.3rem;
     }
 
-    body {
-      margin: 0;
-      background:
-        radial-gradient(circle at top, #171717 0, #0b0c0d 35%, #08090a 75%);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
+    .scav-subtitle {
+        font-size: 0.95rem;
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
+    .site-nav nav {
+        gap: 8px;
     }
 
-    button {
-      cursor: pointer;
-    }
+    .site-nav a {
+        background: #1c1c1c;
 
-    /* =========================================================
-       HEADER
-       ========================================================= */
+        border: 1px solid #333;
 
-    .site-header {
-      background: rgba(8, 9, 10, 0.96);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(8px);
-    }
+        border-radius: 4px;
 
-    .header-inner {
-      width: min(1600px, calc(100% - 32px));
-      margin: 0 auto;
-      min-height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
+        padding: 8px 10px;
 
-    .brand {
-      color: var(--yellow);
-      font-weight: 900;
-      font-size: 24px;
-      letter-spacing: 2px;
-    }
-
-    .nav {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav a {
-      color: #c8c8c8;
-      text-decoration: none;
-      padding: 9px 12px;
-      border-radius: 6px;
-      transition: 0.2s ease;
-      font-size: 14px;
-    }
-
-    .nav a:hover {
-      background: var(--panel-light);
-      color: var(--yellow-light);
-    }
-
-    /* =========================================================
-       PAGE
-       ========================================================= */
-
-    .container {
-      width: min(1600px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 36px 0 80px;
+        font-size: 13px;
     }
 
     .hero {
-      text-align: center;
-      padding: 30px 15px 38px;
+        padding: 35px 15px;
     }
 
     .hero h1 {
-      margin: 0;
-      color: var(--yellow);
-      font-size: clamp(30px, 5vw, 52px);
-      letter-spacing: 1px;
+        font-size: 31px;
     }
-
-    .hero p {
-      max-width: 750px;
-      margin: 12px auto 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .database-count {
-      margin-top: 18px;
-      color: #d6d6d6;
-      font-size: 14px;
-    }
-
-    .database-count strong {
-      color: var(--yellow-light);
-    }
-
-    /* =========================================================
-       CONTROLS
-       ========================================================= */
 
     .controls {
-      background: rgba(17, 19, 21, 0.95);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 36px;
-
-      display: grid;
-      grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(150px, 1fr));
-      gap: 12px;
+        grid-template-columns: 1fr;
     }
 
-    .control {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .control label {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 700;
-      letter-spacing: 0.8px;
-    }
-
-    .control input,
-    .control select {
-      width: 100%;
-      border: 1px solid var(--border-light);
-      background: #0d0f10;
-      color: var(--text);
-      border-radius: 6px;
-      padding: 11px 12px;
-      outline: none;
-    }
-
-    .control input:focus,
-    .control select:focus {
-      border-color: var(--yellow);
-    }
-
-    /* =========================================================
-       SECTION TITLES
-       ========================================================= */
-
-    .section {
-      margin-top: 46px;
-      scroll-margin-top: 90px;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .section-title h2 {
-      color: var(--yellow-light);
-      margin: 0;
-      font-size: 23px;
-    }
-
-    .section-title::after {
-      content: "";
-      height: 1px;
-      background: linear-gradient(90deg, var(--yellow), transparent);
-      flex: 1;
-    }
-
-    .category-count {
-      color: var(--muted);
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    /* =========================================================
-       WEAPON GRID
-       ========================================================= */
-
-    .weapon-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .weapon-card {
-      position: relative;
-      background: linear-gradient(145deg, #17191b, #111315);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 16px;
-      overflow: hidden;
-      transition:
-        transform 0.18s ease,
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
-    }
-
-    .weapon-card:hover {
-      transform: translateY(-2px);
-      border-color: #50555a;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    }
-
-    .weapon-card::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--tier-color);
-    }
-
-    .weapon-card[data-tier="Scrap"] {
-      --tier-color: var(--scrap);
-    }
-
-    .weapon-card[data-tier="Basic"] {
-      --tier-color: var(--basic);
-    }
-
-    .weapon-card[data-tier="Advanced"] {
-      --tier-color: var(--advanced);
-    }
-
-    .weapon-card[data-tier="Expert"] {
-      --tier-color: var(--expert);
-    }
-
-    .weapon-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .weapon-name {
-      margin: 0;
-      font-size: 17px;
-      color: var(--tier-color);
-      line-height: 1.2;
-    }
-
-    .tier-badge {
-      flex-shrink: 0;
-      font-size: 10px;
-      font-weight: 900;
-      padding: 4px 7px;
-      border-radius: 5px;
-      text-transform: uppercase;
-      color: white;
-      background: var(--tier-color);
-    }
-
-    .primary-stats {
-      display: grid;
-      gap: 6px;
-      margin-bottom: 12px;
-      font-size: 13px;
-    }
-
-    .stat-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      padding-bottom: 4px;
-    }
-
-    .stat-label {
-      color: var(--muted);
-    }
-
-    .stat-value {
-      color: #f1f1f1;
-      font-weight: 700;
-    }
-
-    .ammo-line {
-      background: #0d0f10;
-      border: 1px solid #26292c;
-      border-radius: 5px;
-      padding: 8px;
-      font-size: 12px;
-      margin-bottom: 12px;
-      color: var(--muted);
-    }
-
-    .ammo-line strong {
-      color: var(--yellow-light);
-    }
-
-    .stats-button {
-      width: 100%;
-      border: 1px solid #3a3d40;
-      background: #2c2e30;
-      color: white;
-      border-radius: 5px;
-      padding: 9px 10px;
-      transition: 0.15s ease;
-    }
-
-    .stats-button:hover {
-      background: #383b3e;
-      border-color: #50555a;
-    }
-
-    .full-stats {
-      display: none;
-      margin-top: 10px;
-      background: #0b0d0e;
-      border: 1px solid #232629;
-      border-radius: 6px;
-      padding: 10px;
-    }
-
-    .full-stats.open {
-      display: grid;
-      gap: 6px;
-    }
-
-    /* =========================================================
-       AMMO
-       ========================================================= */
-
-    .ammo-section {
-      margin-top: 70px;
-      scroll-margin-top: 90px;
-    }
-
-    .ammo-category {
-      margin-top: 34px;
-    }
-
-    .ammo-category h3 {
-      color: var(--yellow-light);
-      font-size: 19px;
-      margin: 0 0 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
+    .weapon-grid,
     .ammo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-
-    .ammo-card {
-      background: linear-gradient(145deg, #16181a, #101214);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 16px;
-    }
-
-    .ammo-card h4 {
-      color: var(--yellow-light);
-      margin: 0 0 5px;
-      font-size: 16px;
-    }
-
-    .ammo-price {
-      color: var(--yellow);
-      font-weight: bold;
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
-
-    .ammo-description {
-      color: #b6b8ba;
-      line-height: 1.5;
-      font-size: 13px;
-      min-height: 58px;
-    }
-
-    .ammo-stats {
-      margin-top: 14px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-    }
-
-    .ammo-stat {
-      background: #0c0e0f;
-      border: 1px solid #272a2d;
-      border-radius: 5px;
-      padding: 8px 5px;
-      text-align: center;
-    }
-
-    .ammo-stat-label {
-      display: block;
-      color: var(--muted);
-      font-size: 9px;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .ammo-stat-value {
-      font-weight: 800;
-      font-size: 13px;
-      color: white;
-    }
-
-    /* =========================================================
-       EMPTY SEARCH RESULT
-       ========================================================= */
-
-    .empty-message {
-      display: none;
-      text-align: center;
-      padding: 50px 15px;
-      color: var(--muted);
-    }
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 24px;
-      color: #6f7478;
-      font-size: 12px;
-      background: #08090a;
-    }
-
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-
-    @media (max-width: 900px) {
-      .controls {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 14px 0;
-      }
-
-      .container {
-        width: min(100% - 20px, 1600px);
-      }
-
-      .controls {
         grid-template-columns: 1fr;
-      }
-
-      .weapon-grid,
-      .ammo-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 18px;
-      }
     }
-  </style>
+
+    .container {
+        width: calc(100% - 20px);
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <!-- =======================================================
-       HEADER
-       ======================================================= -->
 
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">SCAVLAND</div>
+<!-- =========================================================
+     SCAVLAND BANNER
+     ========================================================= -->
 
-      <nav class="nav">
-        <a href="#weapons">Weapons</a>
-        <a href="#ammo">Ammo</a>
-      </nav>
+<header class="scav-header">
+
+    <div class="scav-title">
+        SCAVLAND
     </div>
-  </header>
+
+    <div class="scav-subtitle">
+        Wasteland Survival Database
+    </div>
+
+</header>
 
 
-  <main class="container">
+<!-- =========================================================
+     MAIN SITE NAVIGATION
+     ========================================================= -->
 
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
+<header class="site-nav">
 
-    <section class="hero">
-      <h1>Weapons Database</h1>
+    <nav>
 
-      <p>
-        SCAVLAND weapon and ammunition reference database.
-        Browse weapons by category, tier and ammunition type,
-        or search for a specific weapon.
-      </p>
+        <a href="index.html">
+            Home
+        </a>
 
-      <div class="database-count">
-        <strong id="weaponTotal">40</strong> Weapons
+        <a href="vendors.html">
+            Vendors
+        </a>
+
+        <a href="weapons.html" class="active">
+            Weapons
+        </a>
+
+        <a href="armour.html">
+            Armour
+        </a>
+
+        <a href="crafting.html">
+            Crafting
+        </a>
+
+        <a href="map.html">
+            Map
+        </a>
+
+        <a href="factions.html">
+            Factions
+        </a>
+
+        <a href="areas.html">
+            Areas
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================================================
+     WEAPONS HERO
+     ========================================================= -->
+
+<section class="hero">
+
+    <h1>
+        Weapons & Ammo Database
+    </h1>
+
+    <p>
+        Browse SCAVLAND weapons, compare their statistics
+        and check the ammunition used by each weapon class.
+    </p>
+
+    <div class="database-count">
+
+        <strong id="weaponTotal">
+            40
+        </strong>
+
+        Weapons
+
         &nbsp;•&nbsp;
-        <strong id="ammoTotal">13</strong> Ammo Types
-      </div>
-    </section>
+
+        <strong id="ammoTotal">
+            13
+        </strong>
+
+        Ammo Types
+
+    </div>
+
+</section>
 
 
-    <!-- =====================================================
-         FILTERS
-         ===================================================== -->
+<!-- =========================================================
+     WEAPON QUICK NAVIGATION
+     ========================================================= -->
 
-    <section class="controls" id="weapons">
+<nav class="weapon-nav">
 
-      <div class="control">
-        <label for="searchInput">Search Weapons</label>
+    <a href="#allWeapons">
+        All Weapons
+    </a>
+
+    <a href="#pistols">
+        Pistols
+    </a>
+
+    <a href="#shotguns">
+        Shotguns
+    </a>
+
+    <a href="#rifles">
+        Rifles
+    </a>
+
+    <a href="#high-caliber-rifles">
+        High Caliber
+    </a>
+
+    <a href="#special-weapons">
+        Special
+    </a>
+
+    <a href="#ammo">
+        Ammo
+    </a>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     FILTERS
+     ========================================================= -->
+
+<section
+    class="controls"
+    id="allWeapons"
+>
+
+    <div class="control">
+
+        <label for="searchInput">
+            Search Weapons
+        </label>
+
         <input
-          id="searchInput"
-          type="search"
-          placeholder="Search weapon name..."
+            id="searchInput"
+            type="search"
+            placeholder="Search weapon name..."
         >
-      </div>
 
-      <div class="control">
-        <label for="categoryFilter">Category</label>
-        <select id="categoryFilter">
-          <option value="all">All Categories</option>
-          <option value="Pistols">Pistols</option>
-          <option value="Shotguns">Shotguns</option>
-          <option value="Rifles">Rifles</option>
-          <option value="High Caliber Rifles">High Caliber Rifles</option>
-          <option value="Special Weapons">Special Weapons</option>
-        </select>
-      </div>
-
-      <div class="control">
-        <label for="tierFilter">Tier</label>
-        <select id="tierFilter">
-          <option value="all">All Tiers</option>
-          <option value="Scrap">Scrap</option>
-          <option value="Basic">Basic</option>
-          <option value="Advanced">Advanced</option>
-          <option value="Expert">Expert</option>
-        </select>
-      </div>
-
-      <div class="control">
-        <label for="ammoFilter">Ammo Type</label>
-        <select id="ammoFilter">
-          <option value="all">All Ammo</option>
-          <option value="Pistol FMJ">Pistol FMJ</option>
-          <option value="Shotgun Buckshot">Shotgun Buckshot</option>
-          <option value="Rifle FMJ">Rifle FMJ</option>
-          <option value="High Cal FMJ">High Cal FMJ</option>
-          <option value="Special FMJ">Special FMJ</option>
-        </select>
-      </div>
-
-    </section>
-
-
-    <!-- Weapon categories are generated here -->
-    <div id="weaponSections"></div>
-
-    <div class="empty-message" id="emptyMessage">
-      No weapons match those filters.
     </div>
 
 
-    <!-- =====================================================
-         AMMUNITION
-         ===================================================== -->
-
-    <section class="ammo-section" id="ammo">
-
-      <div class="section-title">
-        <h2>Ammunition Database</h2>
-      </div>
-
-      <div id="ammoSections"></div>
-
-    </section>
-
-  </main>
-
-
-  <footer>
-    SCAVLAND Weapons & Ammo Database
-  </footer>
-
-
-  <script>
-    /* =========================================================
-       MASTER WEAPON DATA
-
-       IMPORTANT:
-       If you need to change a weapon later, THIS is the section
-       you edit.
-
-       Example:
-       damage: 30
-       can simply be changed to:
-       damage: 35
-       ========================================================= */
-
-    const weapons = [
-
-      /* =========================
-         PISTOLS
-         ========================= */
-
-      {
-        name: "PM Nikolay",
-        category: "Pistols",
-        tier: "Scrap",
-        ammo: "Pistol FMJ",
-        damage: 10,
-        rpm: 600,
-        range: 15,
-        accuracy: 12,
-        recoil: 36,
-        handling: 30,
-        ergonomics: 33,
-        reload: 1
-      },
-
-      {
-        name: "PM Nikolay PB",
-        category: "Pistols",
-        tier: "Scrap",
-        ammo: "Pistol FMJ",
-        damage: 11,
-        rpm: 600,
-        range: 15,
-        accuracy: 14,
-        recoil: 36,
-        handling: 30,
-        ergonomics: 33,
-        reload: 1
-      },
-
-      {
-        name: "Leon 1895",
-        category: "Pistols",
-        tier: "Scrap",
-        ammo: "Pistol FMJ",
-        damage: 15,
-        rpm: 75,
-        range: 17,
-        accuracy: 34,
-        recoil: 36,
-        handling: 10,
-        ergonomics: 24,
-        reload: 1
-      },
-
-      {
-        name: "Leon 1895 (Long)",
-        category: "Pistols",
-        tier: "Scrap",
-        ammo: "Pistol FMJ",
-        damage: 15,
-        rpm: 75,
-        range: 18,
-        accuracy: 34,
-        recoil: 31,
-        handling: 12,
-        ergonomics: 20,
-        reload: 1
-      },
-
-      {
-        name: "Leon 1895 (Short)",
-        category: "Pistols",
-        tier: "Scrap",
-        ammo: "Pistol FMJ",
-        damage: 15,
-        rpm: 18,
-        range: 16,
-        accuracy: 28,
-        recoil: 40,
-        handling: 6,
-        ergonomics: 30,
-        reload: 1
-      },
-
-      {
-        name: "Medved Monster",
-        category: "Pistols",
-        tier: "Scrap",
-        ammo: "Pistol FMJ",
-        damage: 10,
-        rpm: 450,
-        range: 16,
-        accuracy: 26,
-        recoil: 38,
-        handling: 14,
-        ergonomics: 14,
-        reload: 1
-      },
-
-      {
-        name: "Medved Monster (Silenced)",
-        category: "Pistols",
-        tier: "Scrap",
-        ammo: "Pistol FMJ",
-        damage: 10,
-        rpm: 450,
-        range: 16,
-        accuracy: 30,
-        recoil: 37,
-        handling: 14,
-        ergonomics: 12,
-        reload: 1
-      },
-
-      {
-        name: "Bahadir 920",
-        category: "Pistols",
-        tier: "Basic",
-        ammo: "Pistol FMJ",
-        damage: 10,
-        rpm: 600,
-        range: 18,
-        accuracy: 28,
-        recoil: 30,
-        handling: 18,
-        ergonomics: 15,
-        reload: 1.5
-      },
-
-      {
-        name: "Bahadir 918 (Short)",
-        category: "Pistols",
-        tier: "Basic",
-        ammo: "Pistol FMJ",
-        damage: 10,
-        rpm: 700,
-        range: 17,
-        accuracy: 20,
-        recoil: 35,
-        handling: 28,
-        ergonomics: 15,
-        reload: 1
-      },
-
-      {
-        name: "Bahadir 918 (Long)",
-        category: "Pistols",
-        tier: "Basic",
-        ammo: "Pistol FMJ",
-        damage: 11,
-        rpm: 700,
-        range: 18,
-        accuracy: 24,
-        recoil: 25,
-        handling: 30,
-        ergonomics: 14,
-        reload: 1
-      },
-
-
-      /* =========================
-         SHOTGUNS
-         ========================= */
-
-      {
-        name: "Svarsh Miracle (Short)",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 150,
-        range: 14,
-        accuracy: 33,
-        recoil: 65,
-        handling: 8,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "Svarsh Miracle (Long)",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 150,
-        range: 16,
-        accuracy: 28,
-        recoil: 61,
-        handling: 8,
-        ergonomics: 4,
-        reload: 1
-      },
-
-      {
-        name: "PM 12-70 (Short)",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 90,
-        range: 14,
-        accuracy: 12,
-        recoil: 67,
-        handling: 4,
-        ergonomics: 15,
-        reload: 1
-      },
-
-      {
-        name: "PM 12-70 (Short | Extended)",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 90,
-        range: 14,
-        accuracy: 12,
-        recoil: 67,
-        handling: 4,
-        ergonomics: 15,
-        reload: 1
-      },
-
-      {
-        name: "PM 12-70 (Long)",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 90,
-        range: 16,
-        accuracy: 14,
-        recoil: 59,
-        handling: 4,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "PM 12-70 (Long | Extended)",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 90,
-        range: 16,
-        accuracy: 14,
-        recoil: 59,
-        handling: 4,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "Zavod 34",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 600,
-        range: 15,
-        accuracy: 18,
-        recoil: 53,
-        handling: 4,
-        ergonomics: 8,
-        reload: 1.1
-      },
-
-      {
-        name: "Zavod 34 (Short)",
-        category: "Shotguns",
-        tier: "Scrap",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 600,
-        range: 12,
-        accuracy: 12,
-        recoil: 59,
-        handling: 4,
-        ergonomics: 14,
-        reload: 1.3
-      },
-
-      {
-        name: "Borealis 12",
-        category: "Shotguns",
-        tier: "Advanced",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 500,
-        range: 18,
-        accuracy: 10,
-        recoil: 55,
-        handling: 7,
-        ergonomics: 10,
-        reload: 1
-      },
-
-      {
-        name: "Borealis 12-TAK",
-        category: "Shotguns",
-        tier: "Advanced",
-        ammo: "Shotgun Buckshot",
-        damage: 30,
-        rpm: 500,
-        range: 18,
-        accuracy: 10,
-        recoil: 55,
-        handling: 7,
-        ergonomics: 10,
-        reload: 1
-      },
-
-
-      /* =========================
-         RIFLES
-         ========================= */
-
-      {
-        name: "Mikhail 74 U",
-        category: "Rifles",
-        tier: "Basic",
-        ammo: "Rifle FMJ",
-        damage: 17,
-        rpm: 700,
-        range: 16,
-        accuracy: 32,
-        recoil: 39,
-        handling: 8,
-        ergonomics: 12,
-        reload: 1
-      },
-
-      {
-        name: "Mikhail 47",
-        category: "Rifles",
-        tier: "Advanced",
-        ammo: "Rifle FMJ",
-        damage: 17,
-        rpm: 600,
-        range: 18,
-        accuracy: 38,
-        recoil: 49,
-        handling: 14,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "Thread Cutter",
-        category: "Rifles",
-        tier: "Advanced",
-        ammo: "Rifle FMJ",
-        damage: 17,
-        rpm: 600,
-        range: 18,
-        accuracy: 45,
-        recoil: 42,
-        handling: 10,
-        ergonomics: 10,
-        reload: 1
-      },
-
-      {
-        name: "Thread Cutter (Short)",
-        category: "Rifles",
-        tier: "Advanced",
-        ammo: "Rifle FMJ",
-        damage: 17,
-        rpm: 900,
-        range: 18,
-        accuracy: 48,
-        recoil: 38,
-        handling: 14,
-        ergonomics: 16,
-        reload: 1
-      },
-
-      {
-        name: "M4 Svodbonik",
-        category: "Rifles",
-        tier: "Advanced",
-        ammo: "Rifle FMJ",
-        damage: 18,
-        rpm: 600,
-        range: 19,
-        accuracy: 46,
-        recoil: 44,
-        handling: 22,
-        ergonomics: 18,
-        reload: 1
-      },
-
-      {
-        name: "Svobodnik M4 (Long)",
-        category: "Rifles",
-        tier: "Advanced",
-        ammo: "Rifle FMJ",
-        damage: 17,
-        rpm: 600,
-        range: 20,
-        accuracy: 52,
-        recoil: 41,
-        handling: 18,
-        ergonomics: 16,
-        reload: 1
-      },
-
-
-      /* =========================
-         HIGH CALIBER RIFLES
-         ========================= */
-
-      {
-        name: "3-Line Nagant (Stockless)",
-        category: "High Caliber Rifles",
-        tier: "Scrap",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 60,
-        range: 18,
-        accuracy: 44,
-        recoil: 42,
-        handling: 4,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "3-Line Nagant (Obrez)",
-        category: "High Caliber Rifles",
-        tier: "Scrap",
-        ammo: "High Cal FMJ",
-        damage: 20,
-        rpm: 60,
-        range: 16,
-        accuracy: 50,
-        recoil: 52,
-        handling: 4,
-        ergonomics: 12,
-        reload: 1
-      },
-
-      {
-        name: "3-Line Nagant (Infantry)",
-        category: "High Caliber Rifles",
-        tier: "Scrap",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 60,
-        range: 20,
-        accuracy: 50,
-        recoil: 35,
-        handling: 4,
-        ergonomics: 6,
-        reload: 1
-      },
-
-      {
-        name: "3-Line Nagant (Full Stock)",
-        category: "High Caliber Rifles",
-        tier: "Scrap",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 60,
-        range: 21,
-        accuracy: 60,
-        recoil: 35,
-        handling: 4,
-        ergonomics: 4,
-        reload: 1
-      },
-
-      {
-        name: "Bortovka Tinker",
-        category: "High Caliber Rifles",
-        tier: "Scrap",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 100,
-        range: 18,
-        accuracy: 38,
-        recoil: 50,
-        handling: 4,
-        ergonomics: 12,
-        reload: 1
-      },
-
-      {
-        name: "Bortovka Tinker (Long / +Mag)",
-        category: "High Caliber Rifles",
-        tier: "Scrap",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 100,
-        range: 20,
-        accuracy: 42,
-        recoil: 41,
-        handling: 4,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "Bortovka Tinker (+Mag)",
-        category: "High Caliber Rifles",
-        tier: "Scrap",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 100,
-        range: 18,
-        accuracy: 50,
-        recoil: 44,
-        handling: 4,
-        ergonomics: 12,
-        reload: 1
-      },
-
-      {
-        name: "2HMG",
-        category: "High Caliber Rifles",
-        tier: "Expert",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 700,
-        range: 16,
-        accuracy: 24,
-        recoil: 27,
-        handling: 20,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "2HMG (Short)",
-        category: "High Caliber Rifles",
-        tier: "Expert",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 700,
-        range: 16,
-        accuracy: 35,
-        recoil: 27,
-        handling: 20,
-        ergonomics: 8,
-        reload: 1
-      },
-
-      {
-        name: "2HMG (Long)",
-        category: "High Caliber Rifles",
-        tier: "Expert",
-        ammo: "High Cal FMJ",
-        damage: 33,
-        rpm: 700,
-        range: 18,
-        accuracy: 40,
-        recoil: 27,
-        handling: 20,
-        ergonomics: 5,
-        reload: 1
-      },
-
-      {
-        name: "63 Dragoon",
-        category: "High Caliber Rifles",
-        tier: "Expert",
-        ammo: "High Cal FMJ",
-        damage: 30,
-        rpm: 125,
-        range: 22,
-        accuracy: 64,
-        recoil: 47,
-        handling: 10,
-        ergonomics: 10,
-        reload: 1
-      },
-
-
-      /* =========================
-         SPECIAL WEAPONS
-         ========================= */
-
-      {
-        name: "Mikhail 50",
-        category: "Special Weapons",
-        tier: "Expert",
-        ammo: "Special FMJ",
-        damage: 76,
-        rpm: 200,
-        range: 22,
-        accuracy: 68,
-        recoil: 100,
-        handling: 5,
-        ergonomics: 5,
-        reload: 1
-      },
-
-      {
-        name: "Mikhail 50 (Prototype)",
-        category: "Special Weapons",
-        tier: "Expert",
-        ammo: "Special FMJ",
-        damage: 76,
-        rpm: 200,
-        range: 22,
-        accuracy: 70,
-        recoil: 100,
-        handling: 4,
-        ergonomics: 2,
-        reload: 1
-      },
-
-      {
-        name: "Mikhail 50 (Pristine)",
-        category: "Special Weapons",
-        tier: "Expert",
-        ammo: "Special FMJ",
-        damage: 76,
-        rpm: 80,
-        range: 22,
-        accuracy: 64,
-        recoil: 100,
-        handling: 5,
-        ergonomics: 2,
-        reload: 1
-      }
-
-    ];
-
-
-    /* =========================================================
-       MASTER AMMO DATA
-
-       This works the same way as the weapons array.
-       Change values here to update the cards.
-       ========================================================= */
-
-    const ammo = [
-
-      /* SPECIAL */
-
-      {
-        name: "Special FMJ Ammo",
-        category: "Special Ammo",
-        price: "~1000₽",
-        description:
-          "Special ammunition that can fit into different types of weapons.",
-        damage: "75",
-        penetration: "100%",
-        stacks: 999
-      },
-
-
-      /* HIGH CALIBER */
-
-      {
-        name: "High Caliber Rifle HP Ammo",
-        category: "High Caliber Rifle Ammo",
-        price: "~350₽",
-        description:
-          "Hollow point variant of high-caliber rifle ammo. Lots of stopping power – and pain.",
-        damage: "46",
-        penetration: "-25%",
-        stacks: 999
-      },
-
-      {
-        name: "High Caliber Rifle AP Ammo",
-        category: "High Caliber Rifle Ammo",
-        price: "~500₽",
-        description:
-          "Armor piercing variant of high-caliber rifle ammo. A nice tactical advantage.",
-        damage: "26",
-        penetration: "50%",
-        stacks: 999
-      },
-
-      {
-        name: "High Caliber Rifle FMJ Ammo",
-        category: "High Caliber Rifle Ammo",
-        price: "~250₽",
-        description:
-          "High-caliber, full metal jacket ammo. As reliable as they come.",
-        damage: "30",
-        penetration: "0%",
-        stacks: 999
-      },
-
-
-      /* SHOTGUN */
-
-      {
-        name: "Shotgun HP Ammo",
-        category: "Shotgun Ammo",
-        price: "~180₽",
-        description:
-          "Hollow point ammunition for shotguns. Even if I miss, I don't miss.",
-        damage: "6 × 6 = 36",
-        penetration: "-25%",
-        stacks: 999
-      },
-
-      {
-        name: "Shotgun Buckshot Ammo",
-        category: "Shotgun Ammo",
-        price: "~60₽",
-        description:
-          "Ammunition for shotguns and guns with spread shots.",
-        damage: "6 × 5 = 30",
-        penetration: "0%",
-        stacks: 999
-      },
-
-      {
-        name: "Shotgun AP Ammo",
-        category: "Shotgun Ammo",
-        price: "~400₽",
-        description:
-          "Armor piercing rounds for shotguns. They might as well be wearing rubakhas.",
-        damage: "6 × 4 = 24",
-        penetration: "50%",
-        stacks: 999
-      },
-
-
-      /* RIFLE */
-
-      {
-        name: "Rifle HP Ammo",
-        category: "Rifle Ammo",
-        price: "~280₽",
-        description:
-          "Hollow point ammunition for rifles. Don't need great aim when you got this.",
-        damage: "25",
-        penetration: "-25%",
-        stacks: 999
-      },
-
-      {
-        name: "Rifle FMJ Ammo",
-        category: "Rifle Ammo",
-        price: "~200₽",
-        description:
-          "Standard ammunition for rifles.",
-        damage: "17",
-        penetration: "0%",
-        stacks: 999
-      },
-
-      {
-        name: "Rifle AP Ammo",
-        category: "Rifle Ammo",
-        price: "~400₽",
-        description:
-          "Armor piercing ammunition. Good for mowing down some well-equipped enemies.",
-        damage: "14",
-        penetration: "50%",
-        stacks: 999
-      },
-
-
-      /* PISTOL */
-
-      {
-        name: "Pistol HP Ammo",
-        category: "Pistol Ammo",
-        price: "~60₽",
-        description:
-          "Hollow point ammunition, perfect for self-defense.",
-        damage: "15",
-        penetration: "-25%",
-        stacks: 999
-      },
-
-      {
-        name: "Pistol FMJ Ammo",
-        category: "Pistol Ammo",
-        price: "~30₽",
-        description:
-          "Ammunition made for pistols, submachine guns, repeaters etc.",
-        damage: "10",
-        penetration: "0%",
-        stacks: 999
-      },
-
-      {
-        name: "Pistol AP Ammo",
-        category: "Pistol Ammo",
-        price: "~100₽",
-        description:
-          "Armor piercing ammo. They may have gear, but that doesn't mean they're safe.",
-        damage: "8",
-        penetration: "50%",
-        stacks: 999
-      }
-
-    ];
-
-
-    /* =========================================================
-       CATEGORY ORDER
-       ========================================================= */
-
-    const weaponCategories = [
-      "Pistols",
-      "Shotguns",
-      "Rifles",
-      "High Caliber Rifles",
-      "Special Weapons"
-    ];
-
-    const ammoCategories = [
-      "Pistol Ammo",
-      "Rifle Ammo",
-      "Shotgun Ammo",
-      "High Caliber Rifle Ammo",
-      "Special Ammo"
-    ];
-
-
-    /* =========================================================
-       DOM ELEMENTS
-       ========================================================= */
-
-    const weaponSections = document.getElementById("weaponSections");
-    const ammoSections = document.getElementById("ammoSections");
-
-    const searchInput = document.getElementById("searchInput");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const tierFilter = document.getElementById("tierFilter");
-    const ammoFilter = document.getElementById("ammoFilter");
-
-    const emptyMessage = document.getElementById("emptyMessage");
-
-    document.getElementById("weaponTotal").textContent = weapons.length;
-    document.getElementById("ammoTotal").textContent = ammo.length;
-
-
-    /* =========================================================
-       CREATE WEAPON CARD
-       ========================================================= */
-
-    function createWeaponCard(weapon) {
-
-      const card = document.createElement("article");
-
-      card.className = "weapon-card";
-      card.dataset.tier = weapon.tier;
-
-      card.innerHTML = `
+    <div class="control">
+
+        <label for="categoryFilter">
+            Category
+        </label>
+
+        <select id="categoryFilter">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="Pistols">
+                Pistols
+            </option>
+
+            <option value="Shotguns">
+                Shotguns
+            </option>
+
+            <option value="Rifles">
+                Rifles
+            </option>
+
+            <option value="High Caliber Rifles">
+                High Caliber Rifles
+            </option>
+
+            <option value="Special Weapons">
+                Special Weapons
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="control">
+
+        <label for="tierFilter">
+            Tier
+        </label>
+
+        <select id="tierFilter">
+
+            <option value="all">
+                All Tiers
+            </option>
+
+            <option value="Scrap">
+                Scrap
+            </option>
+
+            <option value="Basic">
+                Basic
+            </option>
+
+            <option value="Advanced">
+                Advanced
+            </option>
+
+            <option value="Expert">
+                Expert
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="control">
+
+        <label for="ammoFilter">
+            Ammo Type
+        </label>
+
+        <select id="ammoFilter">
+
+            <option value="all">
+                All Ammo
+            </option>
+
+            <option value="Pistol FMJ">
+                Pistol FMJ
+            </option>
+
+            <option value="Shotgun Buckshot">
+                Shotgun Buckshot
+            </option>
+
+            <option value="Rifle FMJ">
+                Rifle FMJ
+            </option>
+
+            <option value="High Cal FMJ">
+                High Cal FMJ
+            </option>
+
+            <option value="Special FMJ">
+                Special FMJ
+            </option>
+
+        </select>
+
+    </div>
+
+</section>
+
+
+<!-- WEAPON SECTIONS GENERATED BY JAVASCRIPT -->
+
+<div id="weaponSections"></div>
+
+
+<div
+    id="noResults"
+    class="no-results"
+>
+    No weapons match your search or filters.
+</div>
+
+
+<!-- =========================================================
+     AMMO DATABASE
+     ========================================================= -->
+
+<section
+    class="ammo-database"
+    id="ammo"
+>
+
+    <div class="ammo-main-heading">
+
+        <h2>
+            Ammunition Database
+        </h2>
+
+        <p>
+            Ammunition damage, penetration,
+            approximate price and stack size.
+        </p>
+
+    </div>
+
+
+    <div id="ammoSections"></div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+    SCAVLAND Fan Database © 2026
+</footer>
+
+
+<script>
+
+/* =========================================================
+   MASTER WEAPON DATABASE
+
+   EDIT WEAPON STATS HERE.
+
+   You do NOT need to edit the weapon cards themselves.
+   The page automatically creates the cards from this data.
+   ========================================================= */
+
+const weapons = [
+
+
+/* =========================================================
+   PISTOLS
+   ========================================================= */
+
+{
+    name: "PM Nikolay",
+    category: "Pistols",
+    tier: "Scrap",
+    ammo: "Pistol FMJ",
+
+    damage: 10,
+    rpm: 600,
+    range: 15,
+
+    accuracy: 12,
+    recoil: 36,
+    handling: 30,
+    ergonomics: 33,
+    reload: 1
+},
+
+{
+    name: "PM Nikolay PB",
+    category: "Pistols",
+    tier: "Scrap",
+    ammo: "Pistol FMJ",
+
+    damage: 11,
+    rpm: 600,
+    range: 15,
+
+    accuracy: 14,
+    recoil: 36,
+    handling: 30,
+    ergonomics: 33,
+    reload: 1
+},
+
+{
+    name: "Leon 1895",
+    category: "Pistols",
+    tier: "Scrap",
+    ammo: "Pistol FMJ",
+
+    damage: 15,
+    rpm: 75,
+    range: 17,
+
+    accuracy: 34,
+    recoil: 36,
+    handling: 10,
+    ergonomics: 24,
+    reload: 1
+},
+
+{
+    name: "Leon 1895 (Long)",
+    category: "Pistols",
+    tier: "Scrap",
+    ammo: "Pistol FMJ",
+
+    damage: 15,
+    rpm: 75,
+    range: 18,
+
+    accuracy: 34,
+    recoil: 31,
+    handling: 12,
+    ergonomics: 20,
+    reload: 1
+},
+
+{
+    name: "Leon 1895 (Short)",
+    category: "Pistols",
+    tier: "Scrap",
+    ammo: "Pistol FMJ",
+
+    damage: 15,
+    rpm: 18,
+    range: 16,
+
+    accuracy: 28,
+    recoil: 40,
+    handling: 6,
+    ergonomics: 30,
+    reload: 1
+},
+
+{
+    name: "Medved Monster",
+    category: "Pistols",
+    tier: "Scrap",
+    ammo: "Pistol FMJ",
+
+    damage: 10,
+    rpm: 450,
+    range: 16,
+
+    accuracy: 26,
+    recoil: 38,
+    handling: 14,
+    ergonomics: 14,
+    reload: 1
+},
+
+{
+    name: "Medved Monster (Silenced)",
+    category: "Pistols",
+    tier: "Scrap",
+    ammo: "Pistol FMJ",
+
+    damage: 10,
+    rpm: 450,
+    range: 16,
+
+    accuracy: 30,
+    recoil: 37,
+    handling: 14,
+    ergonomics: 12,
+    reload: 1
+},
+
+{
+    name: "Bahadir 920",
+    category: "Pistols",
+    tier: "Basic",
+    ammo: "Pistol FMJ",
+
+    damage: 10,
+    rpm: 600,
+    range: 18,
+
+    accuracy: 28,
+    recoil: 30,
+    handling: 18,
+    ergonomics: 15,
+    reload: 1.5
+},
+
+{
+    name: "Bahadir 918 (Short)",
+    category: "Pistols",
+    tier: "Basic",
+    ammo: "Pistol FMJ",
+
+    damage: 10,
+    rpm: 700,
+    range: 17,
+
+    accuracy: 20,
+    recoil: 35,
+    handling: 28,
+    ergonomics: 15,
+    reload: 1
+},
+
+{
+    name: "Bahadir 918 (Long)",
+    category: "Pistols",
+    tier: "Basic",
+    ammo: "Pistol FMJ",
+
+    damage: 11,
+    rpm: 700,
+    range: 18,
+
+    accuracy: 24,
+    recoil: 25,
+    handling: 30,
+    ergonomics: 14,
+    reload: 1
+},
+
+
+/* =========================================================
+   SHOTGUNS
+   ========================================================= */
+
+{
+    name: "Svarsh Miracle (Short)",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 150,
+    range: 14,
+
+    accuracy: 33,
+    recoil: 65,
+    handling: 8,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "Svarsh Miracle (Long)",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 150,
+    range: 16,
+
+    accuracy: 28,
+    recoil: 61,
+    handling: 8,
+    ergonomics: 4,
+    reload: 1
+},
+
+{
+    name: "PM 12-70 (Short)",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 90,
+    range: 14,
+
+    accuracy: 12,
+    recoil: 67,
+    handling: 4,
+    ergonomics: 15,
+    reload: 1
+},
+
+{
+    name: "PM 12-70 (Short | Extended)",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 90,
+    range: 14,
+
+    accuracy: 12,
+    recoil: 67,
+    handling: 4,
+    ergonomics: 15,
+    reload: 1
+},
+
+{
+    name: "PM 12-70 (Long)",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 90,
+    range: 16,
+
+    accuracy: 14,
+    recoil: 59,
+    handling: 4,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "PM 12-70 (Long | Extended)",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 90,
+    range: 16,
+
+    accuracy: 14,
+    recoil: 59,
+    handling: 4,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "Zavod 34",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 600,
+    range: 15,
+
+    accuracy: 18,
+    recoil: 53,
+    handling: 4,
+    ergonomics: 8,
+    reload: 1.1
+},
+
+{
+    name: "Zavod 34 (Short)",
+    category: "Shotguns",
+    tier: "Scrap",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 600,
+    range: 12,
+
+    accuracy: 12,
+    recoil: 59,
+    handling: 4,
+    ergonomics: 14,
+    reload: 1.3
+},
+
+{
+    name: "Borealis 12",
+    category: "Shotguns",
+    tier: "Advanced",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 500,
+    range: 18,
+
+    accuracy: 10,
+    recoil: 55,
+    handling: 7,
+    ergonomics: 10,
+    reload: 1
+},
+
+{
+    name: "Borealis 12-TAK",
+    category: "Shotguns",
+    tier: "Advanced",
+    ammo: "Shotgun Buckshot",
+
+    damage: 30,
+    rpm: 500,
+    range: 18,
+
+    accuracy: 10,
+    recoil: 55,
+    handling: 7,
+    ergonomics: 10,
+    reload: 1
+},
+
+
+/* =========================================================
+   RIFLES
+   ========================================================= */
+
+{
+    name: "Mikhail 74 U",
+    category: "Rifles",
+    tier: "Basic",
+    ammo: "Rifle FMJ",
+
+    damage: 17,
+    rpm: 700,
+    range: 16,
+
+    accuracy: 32,
+    recoil: 39,
+    handling: 8,
+    ergonomics: 12,
+    reload: 1
+},
+
+{
+    name: "Mikhail 47",
+    category: "Rifles",
+    tier: "Advanced",
+    ammo: "Rifle FMJ",
+
+    damage: 17,
+    rpm: 600,
+    range: 18,
+
+    accuracy: 38,
+    recoil: 49,
+    handling: 14,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "Thread Cutter",
+    category: "Rifles",
+    tier: "Advanced",
+    ammo: "Rifle FMJ",
+
+    damage: 17,
+    rpm: 600,
+    range: 18,
+
+    accuracy: 45,
+    recoil: 42,
+    handling: 10,
+    ergonomics: 10,
+    reload: 1
+},
+
+{
+    name: "Thread Cutter (Short)",
+    category: "Rifles",
+    tier: "Advanced",
+    ammo: "Rifle FMJ",
+
+    damage: 17,
+    rpm: 900,
+    range: 18,
+
+    accuracy: 48,
+    recoil: 38,
+    handling: 14,
+    ergonomics: 16,
+    reload: 1
+},
+
+{
+    name: "M4 Svodbonik",
+    category: "Rifles",
+    tier: "Advanced",
+    ammo: "Rifle FMJ",
+
+    damage: 18,
+    rpm: 600,
+    range: 19,
+
+    accuracy: 46,
+    recoil: 44,
+    handling: 22,
+    ergonomics: 18,
+    reload: 1
+},
+
+{
+    name: "Svobodnik M4 (Long)",
+    category: "Rifles",
+    tier: "Advanced",
+    ammo: "Rifle FMJ",
+
+    damage: 17,
+    rpm: 600,
+    range: 20,
+
+    accuracy: 52,
+    recoil: 41,
+    handling: 18,
+    ergonomics: 16,
+    reload: 1
+},
+
+
+/* =========================================================
+   HIGH CALIBER RIFLES
+   ========================================================= */
+
+{
+    name: "3-Line Nagant (Stockless)",
+    category: "High Caliber Rifles",
+    tier: "Scrap",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 60,
+    range: 18,
+
+    accuracy: 44,
+    recoil: 42,
+    handling: 4,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "3-Line Nagant (Obrez)",
+    category: "High Caliber Rifles",
+    tier: "Scrap",
+    ammo: "High Cal FMJ",
+
+    damage: 20,
+    rpm: 60,
+    range: 16,
+
+    accuracy: 50,
+    recoil: 52,
+    handling: 4,
+    ergonomics: 12,
+    reload: 1
+},
+
+{
+    name: "3-Line Nagant (Infantry)",
+    category: "High Caliber Rifles",
+    tier: "Scrap",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 60,
+    range: 20,
+
+    accuracy: 50,
+    recoil: 35,
+    handling: 4,
+    ergonomics: 6,
+    reload: 1
+},
+
+{
+    name: "3-Line Nagant (Full Stock)",
+    category: "High Caliber Rifles",
+    tier: "Scrap",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 60,
+    range: 21,
+
+    accuracy: 60,
+    recoil: 35,
+    handling: 4,
+    ergonomics: 4,
+    reload: 1
+},
+
+{
+    name: "Bortovka Tinker",
+    category: "High Caliber Rifles",
+    tier: "Scrap",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 100,
+    range: 18,
+
+    accuracy: 38,
+    recoil: 50,
+    handling: 4,
+    ergonomics: 12,
+    reload: 1
+},
+
+{
+    name: "Bortovka Tinker (Long / +Mag)",
+    category: "High Caliber Rifles",
+    tier: "Scrap",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 100,
+    range: 20,
+
+    accuracy: 42,
+    recoil: 41,
+    handling: 4,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "Bortovka Tinker (+Mag)",
+    category: "High Caliber Rifles",
+    tier: "Scrap",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 100,
+    range: 18,
+
+    accuracy: 50,
+    recoil: 44,
+    handling: 4,
+    ergonomics: 12,
+    reload: 1
+},
+
+{
+    name: "2HMG",
+    category: "High Caliber Rifles",
+    tier: "Expert",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 700,
+    range: 16,
+
+    accuracy: 24,
+    recoil: 27,
+    handling: 20,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "2HMG (Short)",
+    category: "High Caliber Rifles",
+    tier: "Expert",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 700,
+    range: 16,
+
+    accuracy: 35,
+    recoil: 27,
+    handling: 20,
+    ergonomics: 8,
+    reload: 1
+},
+
+{
+    name: "2HMG (Long)",
+    category: "High Caliber Rifles",
+    tier: "Expert",
+    ammo: "High Cal FMJ",
+
+    damage: 33,
+    rpm: 700,
+    range: 18,
+
+    accuracy: 40,
+    recoil: 27,
+    handling: 20,
+    ergonomics: 5,
+    reload: 1
+},
+
+{
+    name: "63 Dragoon",
+    category: "High Caliber Rifles",
+    tier: "Expert",
+    ammo: "High Cal FMJ",
+
+    damage: 30,
+    rpm: 125,
+    range: 22,
+
+    accuracy: 64,
+    recoil: 47,
+    handling: 10,
+    ergonomics: 10,
+    reload: 1
+},
+
+
+/* =========================================================
+   SPECIAL WEAPONS
+   ========================================================= */
+
+{
+    name: "Mikhail 50",
+    category: "Special Weapons",
+    tier: "Expert",
+    ammo: "Special FMJ",
+
+    damage: 76,
+    rpm: 200,
+    range: 22,
+
+    accuracy: 68,
+    recoil: 100,
+    handling: 5,
+    ergonomics: 5,
+    reload: 1
+},
+
+{
+    name: "Mikhail 50 (Prototype)",
+    category: "Special Weapons",
+    tier: "Expert",
+    ammo: "Special FMJ",
+
+    damage: 76,
+    rpm: 200,
+    range: 22,
+
+    accuracy: 70,
+    recoil: 100,
+    handling: 4,
+    ergonomics: 2,
+    reload: 1
+},
+
+{
+    name: "Mikhail 50 (Pristine)",
+    category: "Special Weapons",
+    tier: "Expert",
+    ammo: "Special FMJ",
+
+    damage: 76,
+    rpm: 80,
+    range: 22,
+
+    accuracy: 64,
+    recoil: 100,
+    handling: 5,
+    ergonomics: 2,
+    reload: 1
+}
+
+];
+
+
+/* =========================================================
+   MASTER AMMUNITION DATABASE
+
+   EDIT AMMO INFORMATION HERE.
+   ========================================================= */
+
+const ammunition = [
+
+
+/* =========================================================
+   PISTOL AMMO
+   ========================================================= */
+
+{
+    name: "Pistol HP Ammo",
+
+    category: "Pistol Ammo",
+
+    price: "~60₽",
+
+    description:
+        "Hollow point ammunition, perfect for self-defense.",
+
+    damage: "15",
+
+    penetration: "-25%",
+
+    stacks: 999
+},
+
+{
+    name: "Pistol FMJ Ammo",
+
+    category: "Pistol Ammo",
+
+    price: "~30₽",
+
+    description:
+        "Ammunition made for pistols, submachine guns, repeaters etc.",
+
+    damage: "10",
+
+    penetration: "0%",
+
+    stacks: 999
+},
+
+{
+    name: "Pistol AP Ammo",
+
+    category: "Pistol Ammo",
+
+    price: "~100₽",
+
+    description:
+        "Armor piercing ammo. They may have gear, but that doesn't mean they're safe.",
+
+    damage: "8",
+
+    penetration: "50%",
+
+    stacks: 999
+},
+
+
+/* =========================================================
+   RIFLE AMMO
+   ========================================================= */
+
+{
+    name: "Rifle HP Ammo",
+
+    category: "Rifle Ammo",
+
+    price: "~280₽",
+
+    description:
+        "Hollow point ammunition for rifles. Don't need great aim when you got this.",
+
+    damage: "25",
+
+    penetration: "-25%",
+
+    stacks: 999
+},
+
+{
+    name: "Rifle FMJ Ammo",
+
+    category: "Rifle Ammo",
+
+    price: "~200₽",
+
+    description:
+        "Standard ammunition for rifles.",
+
+    damage: "17",
+
+    penetration: "0%",
+
+    stacks: 999
+},
+
+{
+    name: "Rifle AP Ammo",
+
+    category: "Rifle Ammo",
+
+    price: "~400₽",
+
+    description:
+        "Armor piercing ammunition. Good for mowing down some well-equipped enemies.",
+
+    damage: "14",
+
+    penetration: "50%",
+
+    stacks: 999
+},
+
+
+/* =========================================================
+   SHOTGUN AMMO
+   ========================================================= */
+
+{
+    name: "Shotgun HP Ammo",
+
+    category: "Shotgun Ammo",
+
+    price: "~180₽",
+
+    description:
+        "Hollow point ammunition for shotguns. Even if I miss, I don't miss.",
+
+    damage: "6 × 6 = 36",
+
+    penetration: "-25%",
+
+    stacks: 999
+},
+
+{
+    name: "Shotgun Buckshot Ammo",
+
+    category: "Shotgun Ammo",
+
+    price: "~60₽",
+
+    description:
+        "Ammunition for shotguns and guns with spread shots.",
+
+    damage: "6 × 5 = 30",
+
+    penetration: "0%",
+
+    stacks: 999
+},
+
+{
+    name: "Shotgun AP Ammo",
+
+    category: "Shotgun Ammo",
+
+    price: "~400₽",
+
+    description:
+        "Armor piercing rounds for shotguns. They might as well be wearing rubakhas.",
+
+    damage: "6 × 4 = 24",
+
+    penetration: "50%",
+
+    stacks: 999
+},
+
+
+/* =========================================================
+   HIGH CALIBER RIFLE AMMO
+   ========================================================= */
+
+{
+    name: "High Caliber Rifle HP Ammo",
+
+    category: "High Caliber Rifle Ammo",
+
+    price: "~350₽",
+
+    description:
+        "Hollow point variant of high-caliber rifle ammo. Lots of stopping power – and pain.",
+
+    damage: "46",
+
+    penetration: "-25%",
+
+    stacks: 999
+},
+
+{
+    name: "High Caliber Rifle AP Ammo",
+
+    category: "High Caliber Rifle Ammo",
+
+    price: "~500₽",
+
+    description:
+        "Armor piercing variant of high-caliber rifle ammo. A nice tactical advantage.",
+
+    damage: "26",
+
+    penetration: "50%",
+
+    stacks: 999
+},
+
+{
+    name: "High Caliber Rifle FMJ Ammo",
+
+    category: "High Caliber Rifle Ammo",
+
+    price: "~250₽",
+
+    description:
+        "High-caliber, full metal jacket ammo. As reliable as they come.",
+
+    damage: "30",
+
+    penetration: "0%",
+
+    stacks: 999
+},
+
+
+/* =========================================================
+   SPECIAL AMMO
+   ========================================================= */
+
+{
+    name: "Special FMJ Ammo",
+
+    category: "Special Ammo",
+
+    price: "~1000₽",
+
+    description:
+        "Special ammunition that can fit into different types of weapons.",
+
+    damage: "75",
+
+    penetration: "100%",
+
+    stacks: 999
+}
+
+];
+
+
+/* =========================================================
+   CATEGORY ORDER
+   ========================================================= */
+
+const weaponCategories = [
+
+    {
+        name: "Pistols",
+        id: "pistols"
+    },
+
+    {
+        name: "Shotguns",
+        id: "shotguns"
+    },
+
+    {
+        name: "Rifles",
+        id: "rifles"
+    },
+
+    {
+        name: "High Caliber Rifles",
+        id: "high-caliber-rifles"
+    },
+
+    {
+        name: "Special Weapons",
+        id: "special-weapons"
+    }
+
+];
+
+
+const ammoCategories = [
+
+    "Pistol Ammo",
+
+    "Rifle Ammo",
+
+    "Shotgun Ammo",
+
+    "High Caliber Rifle Ammo",
+
+    "Special Ammo"
+
+];
+
+
+/* =========================================================
+   PAGE ELEMENTS
+   ========================================================= */
+
+const weaponSections =
+    document.getElementById("weaponSections");
+
+const ammoSections =
+    document.getElementById("ammoSections");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const categoryFilter =
+    document.getElementById("categoryFilter");
+
+const tierFilter =
+    document.getElementById("tierFilter");
+
+const ammoFilter =
+    document.getElementById("ammoFilter");
+
+const noResults =
+    document.getElementById("noResults");
+
+
+document.getElementById("weaponTotal").textContent =
+    weapons.length;
+
+document.getElementById("ammoTotal").textContent =
+    ammunition.length;
+
+
+/* =========================================================
+   SAFE TEXT HELPER
+
+   Prevents weapon/ammo text from being interpreted as HTML.
+   ========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   CREATE WEAPON CARD
+   ========================================================= */
+
+function createWeaponCard(weapon) {
+
+    const card =
+        document.createElement("article");
+
+    card.className =
+        "weapon-card";
+
+    card.dataset.tier =
+        weapon.tier;
+
+
+    card.innerHTML = `
+
         <div class="weapon-header">
-          <h3 class="weapon-name">${weapon.name}</h3>
-          <span class="tier-badge">${weapon.tier}</span>
+
+            <h3 class="weapon-name">
+                ${escapeHTML(weapon.name)}
+            </h3>
+
+            <span class="tier-badge">
+                ${escapeHTML(weapon.tier)}
+            </span>
+
         </div>
+
 
         <div class="primary-stats">
 
-          <div class="stat-line">
-            <span class="stat-label">Damage</span>
-            <span class="stat-value">${weapon.damage}</span>
-          </div>
+            <div class="stat-line">
 
-          <div class="stat-line">
-            <span class="stat-label">RPM</span>
-            <span class="stat-value">${weapon.rpm}</span>
-          </div>
+                <span class="stat-label">
+                    Damage
+                </span>
 
-          <div class="stat-line">
-            <span class="stat-label">Range</span>
-            <span class="stat-value">${weapon.range}</span>
-          </div>
+                <span class="stat-value">
+                    ${escapeHTML(weapon.damage)}
+                </span>
+
+            </div>
+
+
+            <div class="stat-line">
+
+                <span class="stat-label">
+                    RPM
+                </span>
+
+                <span class="stat-value">
+                    ${escapeHTML(weapon.rpm)}
+                </span>
+
+            </div>
+
+
+            <div class="stat-line">
+
+                <span class="stat-label">
+                    Range
+                </span>
+
+                <span class="stat-value">
+                    ${escapeHTML(weapon.range)}
+                </span>
+
+            </div>
 
         </div>
 
-        <div class="ammo-line">
-          Ammo: <strong>${weapon.ammo}</strong>
+
+        <div class="weapon-ammo">
+
+            Ammo:
+
+            <strong>
+                ${escapeHTML(weapon.ammo)}
+            </strong>
+
         </div>
+
 
         <button
-          class="stats-button"
-          type="button"
-          aria-expanded="false"
+            class="stats-button"
+            type="button"
+            aria-expanded="false"
         >
-          Show Full Stats
+            Show Full Stats
         </button>
+
 
         <div class="full-stats">
 
-          <div class="stat-line">
-            <span class="stat-label">Accuracy</span>
-            <span class="stat-value">${weapon.accuracy}</span>
-          </div>
+            <div class="stat-line">
 
-          <div class="stat-line">
-            <span class="stat-label">Recoil</span>
-            <span class="stat-value">${weapon.recoil}</span>
-          </div>
+                <span class="stat-label">
+                    Accuracy
+                </span>
 
-          <div class="stat-line">
-            <span class="stat-label">Handling</span>
-            <span class="stat-value">${weapon.handling}</span>
-          </div>
+                <span class="stat-value">
+                    ${escapeHTML(weapon.accuracy)}
+                </span>
 
-          <div class="stat-line">
-            <span class="stat-label">Ergonomics</span>
-            <span class="stat-value">${weapon.ergonomics}</span>
-          </div>
+            </div>
 
-          <div class="stat-line">
-            <span class="stat-label">Reload</span>
-            <span class="stat-value">${weapon.reload}</span>
-          </div>
+
+            <div class="stat-line">
+
+                <span class="stat-label">
+                    Recoil
+                </span>
+
+                <span class="stat-value">
+                    ${escapeHTML(weapon.recoil)}
+                </span>
+
+            </div>
+
+
+            <div class="stat-line">
+
+                <span class="stat-label">
+                    Handling
+                </span>
+
+                <span class="stat-value">
+                    ${escapeHTML(weapon.handling)}
+                </span>
+
+            </div>
+
+
+            <div class="stat-line">
+
+                <span class="stat-label">
+                    Ergonomics
+                </span>
+
+                <span class="stat-value">
+                    ${escapeHTML(weapon.ergonomics)}
+                </span>
+
+            </div>
+
+
+            <div class="stat-line">
+
+                <span class="stat-label">
+                    Reload
+                </span>
+
+                <span class="stat-value">
+                    ${escapeHTML(weapon.reload)}
+                </span>
+
+            </div>
 
         </div>
-      `;
 
-      const button = card.querySelector(".stats-button");
-      const fullStats = card.querySelector(".full-stats");
-
-      button.addEventListener("click", () => {
-
-        const isOpen = fullStats.classList.toggle("open");
-
-        button.textContent =
-          isOpen ? "Hide Full Stats" : "Show Full Stats";
-
-        button.setAttribute(
-          "aria-expanded",
-          isOpen ? "true" : "false"
-        );
-
-      });
-
-      return card;
-    }
+    `;
 
 
-    /* =========================================================
-       RENDER WEAPONS
-       ========================================================= */
+    const button =
+        card.querySelector(".stats-button");
 
-    function renderWeapons() {
+    const fullStats =
+        card.querySelector(".full-stats");
 
-      const search = searchInput.value
-        .trim()
-        .toLowerCase();
 
-      const selectedCategory = categoryFilter.value;
-      const selectedTier = tierFilter.value;
-      const selectedAmmo = ammoFilter.value;
+    button.addEventListener(
+        "click",
+        function () {
 
-      weaponSections.innerHTML = "";
+            const open =
+                fullStats.classList.toggle("open");
 
-      let visibleWeapons = 0;
 
-      weaponCategories.forEach(category => {
+            button.textContent =
+                open
+                    ? "Hide Full Stats"
+                    : "Show Full Stats";
 
-        const filteredWeapons = weapons.filter(weapon => {
 
-          const matchesSearch =
-            weapon.name.toLowerCase().includes(search);
+            button.setAttribute(
+                "aria-expanded",
+                open ? "true" : "false"
+            );
 
-          const matchesCategory =
-            selectedCategory === "all" ||
-            weapon.category === selectedCategory;
-
-          const matchesTier =
-            selectedTier === "all" ||
-            weapon.tier === selectedTier;
-
-          const matchesAmmo =
-            selectedAmmo === "all" ||
-            weapon.ammo === selectedAmmo;
-
-          return (
-            weapon.category === category &&
-            matchesSearch &&
-            matchesCategory &&
-            matchesTier &&
-            matchesAmmo
-          );
-
-        });
-
-        if (filteredWeapons.length === 0) {
-          return;
         }
-
-        visibleWeapons += filteredWeapons.length;
-
-        const section = document.createElement("section");
-
-        section.className = "section";
-
-        const title = document.createElement("div");
-
-        title.className = "section-title";
-
-        title.innerHTML = `
-          <h2>${category}</h2>
-          <span class="category-count">
-            ${filteredWeapons.length}
-            ${filteredWeapons.length === 1 ? "weapon" : "weapons"}
-          </span>
-        `;
-
-        const grid = document.createElement("div");
-
-        grid.className = "weapon-grid";
-
-        filteredWeapons.forEach(weapon => {
-          grid.appendChild(createWeaponCard(weapon));
-        });
-
-        section.appendChild(title);
-        section.appendChild(grid);
-
-        weaponSections.appendChild(section);
-
-      });
-
-      emptyMessage.style.display =
-        visibleWeapons === 0 ? "block" : "none";
-    }
+    );
 
 
-    /* =========================================================
-       CREATE AMMO CARD
-       ========================================================= */
+    return card;
 
-    function createAmmoCard(ammoItem) {
+}
 
-      const card = document.createElement("article");
 
-      card.className = "ammo-card";
+/* =========================================================
+   RENDER WEAPONS
+   ========================================================= */
 
-      card.innerHTML = `
-        <h4>${ammoItem.name}</h4>
+function renderWeapons() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const selectedCategory =
+        categoryFilter.value;
+
+
+    const selectedTier =
+        tierFilter.value;
+
+
+    const selectedAmmo =
+        ammoFilter.value;
+
+
+    weaponSections.innerHTML = "";
+
+
+    let totalVisible = 0;
+
+
+    weaponCategories.forEach(
+        category => {
+
+            const matchingWeapons =
+                weapons.filter(
+                    weapon => {
+
+                        const matchesName =
+                            weapon.name
+                                .toLowerCase()
+                                .includes(search);
+
+
+                        const matchesCategory =
+                            selectedCategory === "all" ||
+                            weapon.category === selectedCategory;
+
+
+                        const matchesTier =
+                            selectedTier === "all" ||
+                            weapon.tier === selectedTier;
+
+
+                        const matchesAmmo =
+                            selectedAmmo === "all" ||
+                            weapon.ammo === selectedAmmo;
+
+
+                        return (
+
+                            weapon.category === category.name &&
+
+                            matchesName &&
+
+                            matchesCategory &&
+
+                            matchesTier &&
+
+                            matchesAmmo
+
+                        );
+
+                    }
+                );
+
+
+            if (matchingWeapons.length === 0) {
+
+                return;
+
+            }
+
+
+            totalVisible +=
+                matchingWeapons.length;
+
+
+            const section =
+                document.createElement("section");
+
+
+            section.className =
+                "weapon-section";
+
+
+            section.id =
+                category.id;
+
+
+            const heading =
+                document.createElement("div");
+
+
+            heading.className =
+                "section-heading";
+
+
+            heading.innerHTML = `
+
+                <h2>
+                    ${escapeHTML(category.name)}
+                </h2>
+
+                <span class="section-count">
+
+                    ${matchingWeapons.length}
+
+                    ${
+                        matchingWeapons.length === 1
+                            ? "weapon"
+                            : "weapons"
+                    }
+
+                </span>
+
+            `;
+
+
+            const grid =
+                document.createElement("div");
+
+
+            grid.className =
+                "weapon-grid";
+
+
+            matchingWeapons.forEach(
+                weapon => {
+
+                    grid.appendChild(
+                        createWeaponCard(weapon)
+                    );
+
+                }
+            );
+
+
+            section.appendChild(
+                heading
+            );
+
+
+            section.appendChild(
+                grid
+            );
+
+
+            weaponSections.appendChild(
+                section
+            );
+
+        }
+    );
+
+
+    noResults.style.display =
+        totalVisible === 0
+            ? "block"
+            : "none";
+
+}
+
+
+/* =========================================================
+   CREATE AMMO CARD
+   ========================================================= */
+
+function createAmmoCard(item) {
+
+    const card =
+        document.createElement("article");
+
+
+    card.className =
+        "ammo-card";
+
+
+    card.innerHTML = `
+
+        <h4>
+            ${escapeHTML(item.name)}
+        </h4>
+
 
         <div class="ammo-price">
-          ${ammoItem.price}
+            ${escapeHTML(item.price)}
         </div>
 
+
         <div class="ammo-description">
-          ${ammoItem.description}
+            ${escapeHTML(item.description)}
         </div>
+
 
         <div class="ammo-stats">
 
-          <div class="ammo-stat">
-            <span class="ammo-stat-label">Damage</span>
-            <span class="ammo-stat-value">
-              ${ammoItem.damage}
-            </span>
-          </div>
 
-          <div class="ammo-stat">
-            <span class="ammo-stat-label">Penetration</span>
-            <span class="ammo-stat-value">
-              ${ammoItem.penetration}
-            </span>
-          </div>
+            <div class="ammo-stat">
 
-          <div class="ammo-stat">
-            <span class="ammo-stat-label">Max Stack</span>
-            <span class="ammo-stat-value">
-              ${ammoItem.stacks}
-            </span>
-          </div>
+                <span class="ammo-stat-label">
+                    Damage
+                </span>
+
+                <span class="ammo-stat-value">
+                    ${escapeHTML(item.damage)}
+                </span>
+
+            </div>
+
+
+            <div class="ammo-stat">
+
+                <span class="ammo-stat-label">
+                    Penetration
+                </span>
+
+                <span class="ammo-stat-value">
+                    ${escapeHTML(item.penetration)}
+                </span>
+
+            </div>
+
+
+            <div class="ammo-stat">
+
+                <span class="ammo-stat-label">
+                    Max Stack
+                </span>
+
+                <span class="ammo-stat-value">
+                    ${escapeHTML(item.stacks)}
+                </span>
+
+            </div>
+
 
         </div>
-      `;
 
-      return card;
-    }
+    `;
 
 
-    /* =========================================================
-       RENDER AMMO
-       ========================================================= */
+    return card;
 
-    function renderAmmo() {
+}
 
-      ammoSections.innerHTML = "";
 
-      ammoCategories.forEach(category => {
+/* =========================================================
+   RENDER AMMUNITION
+   ========================================================= */
 
-        const categoryAmmo =
-          ammo.filter(item => item.category === category);
+function renderAmmo() {
 
-        if (categoryAmmo.length === 0) {
-          return;
+    ammoSections.innerHTML = "";
+
+
+    ammoCategories.forEach(
+        category => {
+
+            const categoryAmmo =
+                ammunition.filter(
+                    item =>
+                        item.category === category
+                );
+
+
+            if (categoryAmmo.length === 0) {
+
+                return;
+
+            }
+
+
+            const section =
+                document.createElement("section");
+
+
+            section.className =
+                "ammo-category";
+
+
+            const heading =
+                document.createElement("h3");
+
+
+            heading.textContent =
+                category;
+
+
+            const grid =
+                document.createElement("div");
+
+
+            grid.className =
+                "ammo-grid";
+
+
+            categoryAmmo.forEach(
+                item => {
+
+                    grid.appendChild(
+                        createAmmoCard(item)
+                    );
+
+                }
+            );
+
+
+            section.appendChild(
+                heading
+            );
+
+
+            section.appendChild(
+                grid
+            );
+
+
+            ammoSections.appendChild(
+                section
+            );
+
         }
-
-        const section = document.createElement("section");
-
-        section.className = "ammo-category";
-
-        const heading = document.createElement("h3");
-
-        heading.textContent = category;
-
-        const grid = document.createElement("div");
-
-        grid.className = "ammo-grid";
-
-        categoryAmmo.forEach(ammoItem => {
-          grid.appendChild(createAmmoCard(ammoItem));
-        });
-
-        section.appendChild(heading);
-        section.appendChild(grid);
-
-        ammoSections.appendChild(section);
-
-      });
-    }
-
-
-    /* =========================================================
-       FILTER EVENTS
-       ========================================================= */
-
-    searchInput.addEventListener(
-      "input",
-      renderWeapons
     );
 
-    categoryFilter.addEventListener(
-      "change",
-      renderWeapons
-    );
-
-    tierFilter.addEventListener(
-      "change",
-      renderWeapons
-    );
-
-    ammoFilter.addEventListener(
-      "change",
-      renderWeapons
-    );
+}
 
 
-    /* =========================================================
-       INITIAL PAGE LOAD
-       ========================================================= */
+/* =========================================================
+   FILTER EVENTS
+   ========================================================= */
 
-    renderWeapons();
-    renderAmmo();
+searchInput.addEventListener(
+    "input",
+    renderWeapons
+);
 
-  </script>
+
+categoryFilter.addEventListener(
+    "change",
+    renderWeapons
+);
+
+
+tierFilter.addEventListener(
+    "change",
+    renderWeapons
+);
+
+
+ammoFilter.addEventListener(
+    "change",
+    renderWeapons
+);
+
+
+/* =========================================================
+   QUICK NAVIGATION
+
+   The weapon sections are generated dynamically, so these
+   buttons make sure the requested category exists before
+   scrolling to it.
+   ========================================================= */
+
+document
+    .querySelectorAll(".weapon-nav a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                const target =
+                    this.getAttribute("href");
+
+
+                /*
+                   Ammo and All Weapons already exist
+                   permanently in the HTML.
+                */
+
+                if (
+                    target === "#ammo" ||
+                    target === "#allWeapons"
+                ) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+
+                /*
+                   Reset category filter so the requested
+                   section cannot be hidden.
+                */
+
+                categoryFilter.value =
+                    "all";
+
+
+                searchInput.value =
+                    "";
+
+
+                tierFilter.value =
+                    "all";
+
+
+                ammoFilter.value =
+                    "all";
+
+
+                renderWeapons();
+
+
+                const element =
+                    document.querySelector(target);
+
+
+                if (element) {
+
+                    element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   INITIAL PAGE BUILD
+   ========================================================= */
+
+renderWeapons();
+
+renderAmmo();
+
+</script>
+
 
 </body>
 </html>
