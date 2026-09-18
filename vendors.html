@@ -334,7 +334,7 @@ function toggleVendor(id) {
 </div>
 
 
-  <!-- VENDOR 8: ANATOLY -->
+ <!-- VENDOR 8: ANATOLY -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('anatoly')">
         Anatoly — The Mechanists
@@ -362,8 +362,9 @@ function toggleVendor(id) {
                         <span class="stat-badge"><b>Ergo:</b> 8 + 8</span>
                         <span class="stat-badge"><b>Reload:</b> 1.0</span>
                         <span class="stat-badge"><b>Durability:</b> 100</span>
-                        <span class="stat-badge"><b>Caliber:</b> High Cal Rifle</span>
-                        <span class="stat-badge"><b>Repair:</b> Scrap</span>
+                        <span class="stat-badge"><b>Caliber:</b> High Caliber Rifle Ammo</span>
+                        <span class="stat-badge"><b>Repair Class:</b> Scrap</span>
+                        <span class="stat-badge"><b>Stacking:</b> Not Stackable</span>
                     </div>
                 </td>
             </tr>
@@ -383,7 +384,8 @@ function toggleVendor(id) {
                         <span class="stat-badge"><b>Reload:</b> 1.0</span>
                         <span class="stat-badge"><b>Durability:</b> 100</span>
                         <span class="stat-badge"><b>Caliber:</b> Pistol Ammo</span>
-                        <span class="stat-badge"><b>Repair:</b> Scrap</span>
+                        <span class="stat-badge"><b>Repair Class:</b> Scrap</span>
+                        <span class="stat-badge"><b>Stacking:</b> Not Stackable</span>
                     </div>
                 </td>
             </tr>
@@ -403,7 +405,8 @@ function toggleVendor(id) {
                         <span class="stat-badge"><b>Reload:</b> 1.0</span>
                         <span class="stat-badge"><b>Durability:</b> 100</span>
                         <span class="stat-badge"><b>Caliber:</b> Shotgun Ammo</span>
-                        <span class="stat-badge"><b>Repair:</b> Basic</span>
+                        <span class="stat-badge"><b>Repair Class:</b> Basic</span>
+                        <span class="stat-badge"><b>Stacking:</b> Not Stackable</span>
                     </div>
                 </td>
             </tr>
@@ -415,8 +418,8 @@ function toggleVendor(id) {
                     <div class="badge-group">
                         <span class="type-label">Ammo</span>
                         <span class="stat-badge"><b>Damage:</b> 10</span>
-                        <span class="stat-badge"><b>Pen:</b> 0%</span>
-                        <span class="stat-badge"><b>Stacks:</b> 999</span>
+                        <span class="stat-badge"><b>Penetration:</b> 0%</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 999</span>
                     </div>
                 </td>
             </tr>
@@ -426,35 +429,206 @@ function toggleVendor(id) {
                 <td>
                     <div class="badge-group">
                         <span class="type-label">Ammo</span>
-                        <span class="stat-badge"><b>Damage:</b> 6×5 = 30</span>
-                        <span class="stat-badge"><b>Pen:</b> 0%</span>
-                        <span class="stat-badge"><b>Stacks:</b> 999</span>
+                        <span class="stat-badge"><b>Damage:</b> 6 × 5 = 30</span>
+                        <span class="stat-badge"><b>Penetration:</b> 0%</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 999</span>
                     </div>
                 </td>
             </tr>
 
-            <!-- ARMOR REPAIR -->
+            <!-- ARMOR REPAIR KITS -->
             <tr>
                 <td>Glue</td><td>1</td><td>3000₽ / 2699₽</td>
                 <td>
                     <div class="badge-group">
                         <span class="type-label">Armor Repair</span>
                         <span class="stat-badge"><b>Repair:</b> 5%</span>
-                        <span class="stat-badge"><b>Min Cond:</b> 80%</span>
-                        <span class="stat-badge"><b>Class:</b> Global</span>
-                        <span class="stat-badge"><b>Stacks:</b> 5</span>
+                        <span class="stat-badge"><b>Not usable below:</b> 80% condition</span>
+                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
                     </div>
                 </td>
             </tr>
 
-            <!-- (…and the rest continues exactly as I formatted earlier…) -->
+            <tr>
+                <td>Field Repair Kit</td><td>1</td><td>5000₽ / 4499₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Armor Repair</span>
+                        <span class="stat-badge"><b>Repair:</b> 15%</span>
+                        <span class="stat-badge"><b>Not usable below:</b> 70% condition</span>
+                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Tattered Armor Repair Kit</td><td>1</td><td>12000₽ / 10799₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Armor Repair</span>
+                        <span class="stat-badge"><b>Repair:</b> 25%</span>
+                        <span class="stat-badge"><b>Usable in any condition</b></span>
+                        <span class="stat-badge"><b>Repair Class:</b> Tattered</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- WEAPON MAINTENANCE -->
+            <tr>
+                <td>Gun Lube</td><td>1</td><td>3000₽ / 2699₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Weapon Maintenance</span>
+                        <span class="stat-badge"><b>Repair:</b> 5%</span>
+                        <span class="stat-badge"><b>Not usable below:</b> 80% condition</span>
+                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Gun Cleaning Rod</td><td>1</td><td>5000₽ / 4499₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Weapon Maintenance</span>
+                        <span class="stat-badge"><b>Repair:</b> 15%</span>
+                        <span class="stat-badge"><b>Not usable below:</b> 70% condition</span>
+                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Scrap Gun Repair Kit</td><td>1</td><td>12000₽ / 10799₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Weapon Maintenance</span>
+                        <span class="stat-badge"><b>Repair:</b> 25%</span>
+                        <span class="stat-badge"><b>Usable in any condition</b></span>
+                        <span class="stat-badge"><b>Repair Class:</b> Scrap</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- MEDICAL SUPPLIES -->
+            <tr>
+                <td>AI-2 Medkit</td><td>1</td><td>3200₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Medical</span>
+                        <span class="stat-badge"><b>Health:</b> +30</span>
+                        <span class="stat-badge"><b>Radiation:</b> -15</span>
+                        <span class="stat-badge"><b>Hunger:</b> +3</span>
+                        <span class="stat-badge"><b>Thirst:</b> +3</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>AI-2 Army Medkit</td><td>2</td><td>6200₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Medical</span>
+                        <span class="stat-badge"><b>Health:</b> +40</span>
+                        <span class="stat-badge"><b>Bleed:</b> -20</span>
+                        <span class="stat-badge"><b>Radiation:</b> -10</span>
+                        <span class="stat-badge"><b>Hunger:</b> +3</span>
+                        <span class="stat-badge"><b>Thirst:</b> +3</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>AI-2 Mechanist Medkit</td><td>3</td><td>9200₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Medical</span>
+                        <span class="stat-badge"><b>Health:</b> +50</span>
+                        <span class="stat-badge"><b>Bleed:</b> -30</span>
+                        <span class="stat-badge"><b>Radiation:</b> -50</span>
+                        <span class="stat-badge"><b>Hunger:</b> +3</span>
+                        <span class="stat-badge"><b>Thirst:</b> +3</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Bandage</td><td>1</td><td>250₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Medical</span>
+                        <span class="stat-badge"><b>Health:</b> +5</span>
+                        <span class="stat-badge"><b>Bleed:</b> -15</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Advanced Bandage</td><td>2</td><td>4000₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Medical</span>
+                        <span class="stat-badge"><b>Health:</b> +10</span>
+                        <span class="stat-badge"><b>Bleed:</b> -33</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Stimpack</td><td>2</td><td>6000₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Medical</span>
+                        <span class="stat-badge"><b>Health:</b> +35</span>
+                        <span class="stat-badge"><b>Hunger:</b> +5</span>
+                        <span class="stat-badge"><b>Thirst:</b> +5</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- FOOD & DRINK -->
+            <tr>
+                <td>Canteen</td><td>1</td><td>480₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Food & Drink</span>
+                        <span class="stat-badge"><b>Thirst:</b> -33</span>
+                        <span class="stat-badge"><b>Radiation:</b> -5</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Canned Beans</td><td>1</td><td>2100₽</td>
+                <td>
+                    <div class="badge-group">
+                        <span class="type-label">Food & Drink</span>
+                        <span class="stat-badge"><b>Hunger:</b> -27</span>
+                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
+                    </div>
+                </td>
+            </tr>
 
         </table>
     </div>
 </div>
 
 
-<!-- VENDOR 8: VOLODYMYR (PART 1 OF 3) -->
+
+<!-- VENDOR 9: VOLODYMYR (PART 1 OF 3) -->
 <div class="vendor-section">
     <div class="vendor-header" onclick="toggleVendor('volodymyr')">
         Volodymyr — Gunners Outpost
