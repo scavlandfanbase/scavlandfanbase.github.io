@@ -162,6 +162,47 @@ body {
 .sell-card strong { color:#ffcc66; display:block; margin-bottom:5px; }
 .sell-rate { font-size:20px; font-weight:bold; color:#fff; }
 .sell-note { color:#aaa; font-size:12px; margin-top:5px; }
+
+/* VENDOR DIRECTORY */
+.vendor-tools { display:flex; gap:10px; flex-wrap:wrap; margin:0 0 14px; }
+.vendor-tools input, .vendor-tools select {
+  background:#1b1b1b; color:#ddd; border:1px solid #444; border-radius:5px;
+  padding:11px 12px; font-size:15px;
+}
+.vendor-tools input { flex:1; min-width:220px; }
+.vendor-directory { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+.vendor-section { margin:0; min-height:112px; overflow:hidden; }
+.vendor-header {
+  height:100%; box-sizing:border-box; display:flex; flex-direction:column;
+  justify-content:center; min-height:112px; border-bottom:0;
+}
+.vendor-header::after { content:"View Vendor"; color:#999; font-size:12px; margin-top:12px; font-weight:normal; }
+.vendor-section.placeholder .vendor-header::after { content:"Details Coming Soon"; }
+.vendor-content { display:none !important; }
+.vendor-section.vendor-hidden { display:none; }
+
+.vendor-modal {
+  display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.82);
+  padding:24px; overflow:auto;
+}
+.vendor-modal.open { display:flex; align-items:flex-start; justify-content:center; }
+.vendor-modal-card {
+  width:min(1100px,100%); background:#181818; border:2px solid #444; border-radius:8px;
+  margin:30px auto; box-shadow:0 16px 60px #000; overflow:hidden;
+}
+.vendor-modal-head {
+  display:flex; align-items:center; justify-content:space-between; gap:15px;
+  padding:16px 18px; background:#222; border-bottom:2px solid #333;
+}
+.vendor-modal-title { color:#ffcc66; font-size:23px; font-weight:bold; }
+.vendor-modal-close {
+  background:#333; color:#fff; border:1px solid #555; border-radius:5px;
+  font-size:22px; width:40px; height:40px; cursor:pointer;
+}
+.vendor-modal-body { padding:18px; overflow-x:auto; }
+.vendor-modal-body .vendor-content { display:block !important; padding:0; }
+.vendor-modal-body .vendor-table { min-width:650px; }
+
 @media (max-width:650px){
   body{padding:12px}
   .nav-links{display:flex;gap:12px;overflow-x:auto}
@@ -173,9 +214,80 @@ body {
 
 <script>
 function toggleVendor(id) {
-    const section = document.getElementById(id);
-    section.style.display = (section.style.display === "block") ? "none" : "block";
+  openVendor(id);
 }
+
+function setupVendorDirectory() {
+  const list = document.getElementById('vendor-list');
+  if (!list) return;
+  list.classList.add('vendor-directory');
+
+  const sections = [...list.querySelectorAll('.vendor-section')];
+  sections.forEach(section => {
+    const header = section.querySelector('.vendor-header');
+    const factionEl = section.querySelector('.vendor-faction');
+    if (!header) return;
+    const clone = header.cloneNode(true);
+    const factionClone = clone.querySelector('.vendor-faction');
+    if (factionClone) factionClone.remove();
+    section.dataset.vendorName = clone.textContent.trim();
+    section.dataset.faction = factionEl ? factionEl.textContent.replace('Faction:', '').trim() : 'Unknown';
+  });
+
+  const factions = [...new Set(sections.map(s => s.dataset.faction).filter(Boolean))].sort();
+  const tools = document.createElement('div');
+  tools.className = 'vendor-tools';
+  tools.innerHTML = '<input id="vendorSearch" type="search" placeholder="Search vendors..." aria-label="Search vendors">' +
+    '<select id="factionFilter" aria-label="Filter vendors by faction"><option value="">All Factions</option>' +
+    factions.map(f => '<option value="' + f.replace(/"/g,'&quot;') + '">' + f + '</option>').join('') + '</select>';
+  list.parentNode.insertBefore(tools, list);
+
+  const filter = () => {
+    const q = document.getElementById('vendorSearch').value.trim().toLowerCase();
+    const faction = document.getElementById('factionFilter').value;
+    sections.forEach(s => {
+      const matchName = s.dataset.vendorName.toLowerCase().includes(q);
+      const matchFaction = !faction || s.dataset.faction === faction;
+      s.classList.toggle('vendor-hidden', !(matchName && matchFaction));
+    });
+  };
+  document.getElementById('vendorSearch').addEventListener('input', filter);
+  document.getElementById('factionFilter').addEventListener('change', filter);
+
+  const modal = document.createElement('div');
+  modal.id = 'vendorModal';
+  modal.className = 'vendor-modal';
+  modal.innerHTML = '<div class="vendor-modal-card" role="dialog" aria-modal="true" aria-labelledby="vendorModalTitle">' +
+    '<div class="vendor-modal-head"><div id="vendorModalTitle" class="vendor-modal-title"></div>' +
+    '<button class="vendor-modal-close" type="button" aria-label="Close vendor">&times;</button></div>' +
+    '<div id="vendorModalBody" class="vendor-modal-body"></div></div>';
+  document.body.appendChild(modal);
+  modal.querySelector('.vendor-modal-close').addEventListener('click', closeVendor);
+  modal.addEventListener('click', e => { if (e.target === modal) closeVendor(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVendor(); });
+}
+
+function openVendor(id) {
+  const content = document.getElementById(id);
+  if (!content) return;
+  const section = content.closest('.vendor-section');
+  const modal = document.getElementById('vendorModal');
+  const title = document.getElementById('vendorModalTitle');
+  const body = document.getElementById('vendorModalBody');
+  title.textContent = section.dataset.vendorName + ' — ' + section.dataset.faction;
+  body.innerHTML = content.outerHTML;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVendor() {
+  const modal = document.getElementById('vendorModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', setupVendorDirectory);
 </script>
 
 </head>
