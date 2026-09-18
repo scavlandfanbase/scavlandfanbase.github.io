@@ -1,2362 +1,1816 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>SCAVLAND – Weapons</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        /* ================= GLOBAL ================= */
-        body {
-            background: #0a0a0a;
-            font-family: 'Segoe UI', sans-serif;
-            color: #e0e0e0;
-            margin: 0;
-            padding: 0;
-        }
+  <title>SCAVLAND | Weapons & Ammo Database</title>
 
-        /* ================= NAV BAR ================= */
-        .nav-wrapper {
-            background: #050505;
-            border-bottom: 2px solid #ffd766;
-            box-shadow: 0 0 12px rgba(0,0,0,0.7);
-        }
+  <style>
+    /* =========================================================
+       SCAVLAND WEAPONS DATABASE
+       ========================================================= */
 
-        .nav-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 20px;
-        }
+    :root {
+      --bg: #090a0b;
+      --panel: #111315;
+      --panel-light: #17191c;
+      --panel-hover: #1c1f22;
+      --border: #2d3135;
+      --border-light: #3b4045;
 
-        .nav-logo {
-            font-size: 22px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #ffd766;
-        }
+      --text: #e8e8e8;
+      --muted: #999fa5;
 
-        .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            margin-left: 16px;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding-bottom: 2px;
-            border-bottom: 2px solid transparent;
-            transition: 0.2s;
-        }
+      --yellow: #f0b91c;
+      --yellow-light: #ffd45a;
 
-        .nav-links a:hover {
-            color: #ffd766;
-            border-bottom-color: #ffd766;
-        }
+      --scrap: #74787c;
+      --basic: #28a86b;
+      --advanced: #268be3;
+      --expert: #e7a915;
 
-        .nav-links a.active {
-            color: #ffd766;
-            border-bottom-color: #ffd766;
-        }
+      --danger: #d95757;
+    }
 
-        /* ================= PAGE WRAPPER ================= */
-        .page-wrapper {
-            max-width: 1100px;
-            margin: 20px auto 40px;
-            padding: 0 20px 40px;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        h1 {
-            text-align: center;
-            color: #ffd766;
-            font-size: 38px;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .page-subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: #bbbbbb;
-            margin-bottom: 30px;
-        }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, #171717 0, #0b0c0d 35%, #08090a 75%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
 
-        /* ================= CATEGORY BANNERS ================= */
-        .category-banner {
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding: 8px 12px;
-            background: linear-gradient(to right, #151515, #202020);
-            border-left: 4px solid #ffd766;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 14px;
-        }
+    button,
+    input,
+    select {
+      font: inherit;
+    }
 
-        /* ================= WEAPON GRID ================= */
-        .weapon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            gap: 20px;
-        }
+    button {
+      cursor: pointer;
+    }
 
-        /* ================= WEAPON CARDS ================= */
-        .weapon-card {
-            background: #111;
-            background-image: url('https://i.imgur.com/9QfQm2U.png');
-            background-size: cover;
-            border: 3px solid #333;
-            border-radius: 10px;
-            padding: 15px;
-            transition: 0.25s ease;
-            box-shadow: 0 0 12px rgba(0,0,0,0.6);
-        }
+    /* =========================================================
+       HEADER
+       ========================================================= */
 
-        .weapon-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 20px rgba(255, 215, 102, 0.25);
-        }
+    .site-header {
+      background: rgba(8, 9, 10, 0.96);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
 
-        /* Tier borders */
-        .weapon-card.Scrap { border-color: #555; }
-        .weapon-card.Basic { border-color: #2e8b57; }
-        .weapon-card.Advanced { border-color: #1e90ff; }
-        .weapon-card.Expert { border-color: #daa520; }
+    .header-inner {
+      width: min(1600px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-        .weapon-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+    .brand {
+      color: var(--yellow);
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
 
-        .weapon-name {
-            font-size: 20px;
-            font-weight: bold;
-            text-shadow: 0 0 6px rgba(255,255,255,0.25);
-        }
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-        .tier {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: #000;
-        }
+    .nav a {
+      color: #c8c8c8;
+      text-decoration: none;
+      padding: 9px 12px;
+      border-radius: 6px;
+      transition: 0.2s ease;
+      font-size: 14px;
+    }
 
-        .tier.Scrap { background: #555; }
-        .tier.Basic { background: #2e8b57; }
-        .tier.Advanced { background: #1e90ff; }
-        .tier.Expert { background: #daa520; }
+    .nav a:hover {
+      background: var(--panel-light);
+      color: var(--yellow-light);
+    }
 
-        .stats {
-            font-size: 13px;
-            line-height: 1.5;
-        }
+    /* =========================================================
+       PAGE
+       ========================================================= */
 
-        /* ================= AMMO POPUPS ================= */
-        .ammo-hover {
-            position: relative;
-            cursor: pointer;
-            color: #ffd766;
-            font-weight: bold;
-        }
+    .container {
+      width: min(1600px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 80px;
+    }
 
-        .ammo-hover:hover .ammo-popup {
-            display: block;
-        }
+    .hero {
+      text-align: center;
+      padding: 30px 15px 38px;
+    }
 
-        .ammo-popup {
-            display: none;
-            position: absolute;
-            background: #151515;
-            border: 2px solid #ffd766;
-            padding: 8px;
-            border-radius: 6px;
-            top: 20px;
-            left: 0;
-            width: 240px;
-            z-index: 10;
-            box-shadow: 0 0 12px rgba(255,215,102,0.25);
-            font-size: 12px;
-        }
+    .hero h1 {
+      margin: 0;
+      color: var(--yellow);
+      font-size: clamp(30px, 5vw, 52px);
+      letter-spacing: 1px;
+    }
 
-        /* ================= EXPAND PANEL ================= */
-        .expand-btn {
-            margin-top: 10px;
-            padding: 6px 10px;
-            background: #333;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.2s;
-        }
+    .hero p {
+      max-width: 750px;
+      margin: 12px auto 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
-        .expand-btn:hover {
-            background: #444;
-        }
+    .database-count {
+      margin-top: 18px;
+      color: #d6d6d6;
+      font-size: 14px;
+    }
 
-        .expanded {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background: rgba(255,255,255,0.05);
-            border-left: 3px solid #ffd766;
-            border-radius: 6px;
-            animation: slideDown 0.25s ease;
-            font-size: 13px;
-        }
+    .database-count strong {
+      color: var(--yellow-light);
+    }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* =========================================================
+       CONTROLS
+       ========================================================= */
 
-        /* ================= TABLE ================= */
-        h2 {
-            margin-top: 40px;
-            margin-bottom: 15px;
-            font-size: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ffd766;
-        }
+    .controls {
+      background: rgba(17, 19, 21, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 36px;
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background: #101010;
-        }
+      display: grid;
+      grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(150px, 1fr));
+      gap: 12px;
+    }
 
-        th {
-            background: #181818;
-            color: #ffd766;
-            padding: 8px;
-            cursor: pointer;
-            border-bottom: 2px solid #303030;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .control {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
-        td {
-            padding: 7px;
-            border-bottom: 1px solid #222;
-            font-size: 12px;
-        }
+    .control label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
 
-        tr:hover {
-            background: rgba(255,255,255,0.04);
-        }
-    </style>
+    .control input,
+    .control select {
+      width: 100%;
+      border: 1px solid var(--border-light);
+      background: #0d0f10;
+      color: var(--text);
+      border-radius: 6px;
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    .control input:focus,
+    .control select:focus {
+      border-color: var(--yellow);
+    }
+
+    /* =========================================================
+       SECTION TITLES
+       ========================================================= */
+
+    .section {
+      margin-top: 46px;
+      scroll-margin-top: 90px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .section-title h2 {
+      color: var(--yellow-light);
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      background: linear-gradient(90deg, var(--yellow), transparent);
+      flex: 1;
+    }
+
+    .category-count {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       WEAPON GRID
+       ========================================================= */
+
+    .weapon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .weapon-card {
+      position: relative;
+      background: linear-gradient(145deg, #17191b, #111315);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 16px;
+      overflow: hidden;
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .weapon-card:hover {
+      transform: translateY(-2px);
+      border-color: #50555a;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .weapon-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--tier-color);
+    }
+
+    .weapon-card[data-tier="Scrap"] {
+      --tier-color: var(--scrap);
+    }
+
+    .weapon-card[data-tier="Basic"] {
+      --tier-color: var(--basic);
+    }
+
+    .weapon-card[data-tier="Advanced"] {
+      --tier-color: var(--advanced);
+    }
+
+    .weapon-card[data-tier="Expert"] {
+      --tier-color: var(--expert);
+    }
+
+    .weapon-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .weapon-name {
+      margin: 0;
+      font-size: 17px;
+      color: var(--tier-color);
+      line-height: 1.2;
+    }
+
+    .tier-badge {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 4px 7px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      color: white;
+      background: var(--tier-color);
+    }
+
+    .primary-stats {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 4px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+    }
+
+    .stat-value {
+      color: #f1f1f1;
+      font-weight: 700;
+    }
+
+    .ammo-line {
+      background: #0d0f10;
+      border: 1px solid #26292c;
+      border-radius: 5px;
+      padding: 8px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      color: var(--muted);
+    }
+
+    .ammo-line strong {
+      color: var(--yellow-light);
+    }
+
+    .stats-button {
+      width: 100%;
+      border: 1px solid #3a3d40;
+      background: #2c2e30;
+      color: white;
+      border-radius: 5px;
+      padding: 9px 10px;
+      transition: 0.15s ease;
+    }
+
+    .stats-button:hover {
+      background: #383b3e;
+      border-color: #50555a;
+    }
+
+    .full-stats {
+      display: none;
+      margin-top: 10px;
+      background: #0b0d0e;
+      border: 1px solid #232629;
+      border-radius: 6px;
+      padding: 10px;
+    }
+
+    .full-stats.open {
+      display: grid;
+      gap: 6px;
+    }
+
+    /* =========================================================
+       AMMO
+       ========================================================= */
+
+    .ammo-section {
+      margin-top: 70px;
+      scroll-margin-top: 90px;
+    }
+
+    .ammo-category {
+      margin-top: 34px;
+    }
+
+    .ammo-category h3 {
+      color: var(--yellow-light);
+      font-size: 19px;
+      margin: 0 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ammo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .ammo-card {
+      background: linear-gradient(145deg, #16181a, #101214);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 16px;
+    }
+
+    .ammo-card h4 {
+      color: var(--yellow-light);
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+
+    .ammo-price {
+      color: var(--yellow);
+      font-weight: bold;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .ammo-description {
+      color: #b6b8ba;
+      line-height: 1.5;
+      font-size: 13px;
+      min-height: 58px;
+    }
+
+    .ammo-stats {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .ammo-stat {
+      background: #0c0e0f;
+      border: 1px solid #272a2d;
+      border-radius: 5px;
+      padding: 8px 5px;
+      text-align: center;
+    }
+
+    .ammo-stat-label {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .ammo-stat-value {
+      font-weight: 800;
+      font-size: 13px;
+      color: white;
+    }
+
+    /* =========================================================
+       EMPTY SEARCH RESULT
+       ========================================================= */
+
+    .empty-message {
+      display: none;
+      text-align: center;
+      padding: 50px 15px;
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      color: #6f7478;
+      font-size: 12px;
+      background: #08090a;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 900px) {
+      .controls {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .container {
+        width: min(100% - 20px, 1600px);
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .weapon-grid,
+      .ammo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 18px;
+      }
+    }
+  </style>
 </head>
 
-    <body>
+<body>
 
-    <!-- ================= NAV BAR ================= -->
-    <div class="nav-wrapper">
-        <div class="nav-inner">
-            <div class="nav-logo">SCAVLAND</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="areas.html">Areas</a>
-                <a href="bunkers.html">Bunkers</a>
-                <a href="vendors.html">Vendors</a>
-                <a href="weapons.html" class="active">Weapons</a>
-                <a href="armour.html">Armour</a>
-                <a href="crafting.html">Crafting</a>
-                <a href="factions.html">Factions</a>
-            </div>
-        </div>
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">SCAVLAND</div>
+
+      <nav class="nav">
+        <a href="#weapons">Weapons</a>
+        <a href="#ammo">Ammo</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="container">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="hero">
+      <h1>Weapons Database</h1>
+
+      <p>
+        SCAVLAND weapon and ammunition reference database.
+        Browse weapons by category, tier and ammunition type,
+        or search for a specific weapon.
+      </p>
+
+      <div class="database-count">
+        <strong id="weaponTotal">40</strong> Weapons
+        &nbsp;•&nbsp;
+        <strong id="ammoTotal">13</strong> Ammo Types
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         FILTERS
+         ===================================================== -->
+
+    <section class="controls" id="weapons">
+
+      <div class="control">
+        <label for="searchInput">Search Weapons</label>
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Search weapon name..."
+        >
+      </div>
+
+      <div class="control">
+        <label for="categoryFilter">Category</label>
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="Pistols">Pistols</option>
+          <option value="Shotguns">Shotguns</option>
+          <option value="Rifles">Rifles</option>
+          <option value="High Caliber Rifles">High Caliber Rifles</option>
+          <option value="Special Weapons">Special Weapons</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="tierFilter">Tier</label>
+        <select id="tierFilter">
+          <option value="all">All Tiers</option>
+          <option value="Scrap">Scrap</option>
+          <option value="Basic">Basic</option>
+          <option value="Advanced">Advanced</option>
+          <option value="Expert">Expert</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="ammoFilter">Ammo Type</label>
+        <select id="ammoFilter">
+          <option value="all">All Ammo</option>
+          <option value="Pistol FMJ">Pistol FMJ</option>
+          <option value="Shotgun Buckshot">Shotgun Buckshot</option>
+          <option value="Rifle FMJ">Rifle FMJ</option>
+          <option value="High Cal FMJ">High Cal FMJ</option>
+          <option value="Special FMJ">Special FMJ</option>
+        </select>
+      </div>
+
+    </section>
+
+
+    <!-- Weapon categories are generated here -->
+    <div id="weaponSections"></div>
+
+    <div class="empty-message" id="emptyMessage">
+      No weapons match those filters.
     </div>
 
-    <!-- ================= PAGE WRAPPER ================= -->
-    <div class="page-wrapper">
-        <h1>Weapons Database</h1>
-        <div class="page-subtitle">
-            Complete SCAVLAND weapon statistics with full ammo breakdown and tactical analysis.
-        </div>
 
-        <!-- ================= PISTOLS ================= -->
-        <div class="category-banner">Pistols</div>
-        <div class="weapon-grid" id="pistol-grid">
-   <!-- =============== PISTOLS =============== -->
-<div class="category-banner">Pistols</div>
-<div class="weapon-grid" id="pistol-grid">
+    <!-- =====================================================
+         AMMUNITION
+         ===================================================== -->
 
-    <!-- PM Nikolay -->
-    <div class="weapon-card Scrap">
+    <section class="ammo-section" id="ammo">
+
+      <div class="section-title">
+        <h2>Ammunition Database</h2>
+      </div>
+
+      <div id="ammoSections"></div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    SCAVLAND Weapons & Ammo Database
+  </footer>
+
+
+  <script>
+    /* =========================================================
+       MASTER WEAPON DATA
+
+       IMPORTANT:
+       If you need to change a weapon later, THIS is the section
+       you edit.
+
+       Example:
+       damage: 30
+       can simply be changed to:
+       damage: 35
+       ========================================================= */
+
+    const weapons = [
+
+      /* =========================
+         PISTOLS
+         ========================= */
+
+      {
+        name: "PM Nikolay",
+        category: "Pistols",
+        tier: "Scrap",
+        ammo: "Pistol FMJ",
+        damage: 10,
+        rpm: 600,
+        range: 15,
+        accuracy: 12,
+        recoil: 36,
+        handling: 30,
+        ergonomics: 33,
+        reload: 1
+      },
+
+      {
+        name: "PM Nikolay PB",
+        category: "Pistols",
+        tier: "Scrap",
+        ammo: "Pistol FMJ",
+        damage: 11,
+        rpm: 600,
+        range: 15,
+        accuracy: 14,
+        recoil: 36,
+        handling: 30,
+        ergonomics: 33,
+        reload: 1
+      },
+
+      {
+        name: "Leon 1895",
+        category: "Pistols",
+        tier: "Scrap",
+        ammo: "Pistol FMJ",
+        damage: 15,
+        rpm: 75,
+        range: 17,
+        accuracy: 34,
+        recoil: 36,
+        handling: 10,
+        ergonomics: 24,
+        reload: 1
+      },
+
+      {
+        name: "Leon 1895 (Long)",
+        category: "Pistols",
+        tier: "Scrap",
+        ammo: "Pistol FMJ",
+        damage: 15,
+        rpm: 75,
+        range: 18,
+        accuracy: 34,
+        recoil: 31,
+        handling: 12,
+        ergonomics: 20,
+        reload: 1
+      },
+
+      {
+        name: "Leon 1895 (Short)",
+        category: "Pistols",
+        tier: "Scrap",
+        ammo: "Pistol FMJ",
+        damage: 15,
+        rpm: 18,
+        range: 16,
+        accuracy: 28,
+        recoil: 40,
+        handling: 6,
+        ergonomics: 30,
+        reload: 1
+      },
+
+      {
+        name: "Medved Monster",
+        category: "Pistols",
+        tier: "Scrap",
+        ammo: "Pistol FMJ",
+        damage: 10,
+        rpm: 450,
+        range: 16,
+        accuracy: 26,
+        recoil: 38,
+        handling: 14,
+        ergonomics: 14,
+        reload: 1
+      },
+
+      {
+        name: "Medved Monster (Silenced)",
+        category: "Pistols",
+        tier: "Scrap",
+        ammo: "Pistol FMJ",
+        damage: 10,
+        rpm: 450,
+        range: 16,
+        accuracy: 30,
+        recoil: 37,
+        handling: 14,
+        ergonomics: 12,
+        reload: 1
+      },
+
+      {
+        name: "Bahadir 920",
+        category: "Pistols",
+        tier: "Basic",
+        ammo: "Pistol FMJ",
+        damage: 10,
+        rpm: 600,
+        range: 18,
+        accuracy: 28,
+        recoil: 30,
+        handling: 18,
+        ergonomics: 15,
+        reload: 1.5
+      },
+
+      {
+        name: "Bahadir 918 (Short)",
+        category: "Pistols",
+        tier: "Basic",
+        ammo: "Pistol FMJ",
+        damage: 10,
+        rpm: 700,
+        range: 17,
+        accuracy: 20,
+        recoil: 35,
+        handling: 28,
+        ergonomics: 15,
+        reload: 1
+      },
+
+      {
+        name: "Bahadir 918 (Long)",
+        category: "Pistols",
+        tier: "Basic",
+        ammo: "Pistol FMJ",
+        damage: 11,
+        rpm: 700,
+        range: 18,
+        accuracy: 24,
+        recoil: 25,
+        handling: 30,
+        ergonomics: 14,
+        reload: 1
+      },
+
+
+      /* =========================
+         SHOTGUNS
+         ========================= */
+
+      {
+        name: "Svarsh Miracle (Short)",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 150,
+        range: 14,
+        accuracy: 33,
+        recoil: 65,
+        handling: 8,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "Svarsh Miracle (Long)",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 150,
+        range: 16,
+        accuracy: 28,
+        recoil: 61,
+        handling: 8,
+        ergonomics: 4,
+        reload: 1
+      },
+
+      {
+        name: "PM 12-70 (Short)",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 90,
+        range: 14,
+        accuracy: 12,
+        recoil: 67,
+        handling: 4,
+        ergonomics: 15,
+        reload: 1
+      },
+
+      {
+        name: "PM 12-70 (Short | Extended)",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 90,
+        range: 14,
+        accuracy: 12,
+        recoil: 67,
+        handling: 4,
+        ergonomics: 15,
+        reload: 1
+      },
+
+      {
+        name: "PM 12-70 (Long)",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 90,
+        range: 16,
+        accuracy: 14,
+        recoil: 59,
+        handling: 4,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "PM 12-70 (Long | Extended)",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 90,
+        range: 16,
+        accuracy: 14,
+        recoil: 59,
+        handling: 4,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "Zavod 34",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 600,
+        range: 15,
+        accuracy: 18,
+        recoil: 53,
+        handling: 4,
+        ergonomics: 8,
+        reload: 1.1
+      },
+
+      {
+        name: "Zavod 34 (Short)",
+        category: "Shotguns",
+        tier: "Scrap",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 600,
+        range: 12,
+        accuracy: 12,
+        recoil: 59,
+        handling: 4,
+        ergonomics: 14,
+        reload: 1.3
+      },
+
+      {
+        name: "Borealis 12",
+        category: "Shotguns",
+        tier: "Advanced",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 500,
+        range: 18,
+        accuracy: 10,
+        recoil: 55,
+        handling: 7,
+        ergonomics: 10,
+        reload: 1
+      },
+
+      {
+        name: "Borealis 12-TAK",
+        category: "Shotguns",
+        tier: "Advanced",
+        ammo: "Shotgun Buckshot",
+        damage: 30,
+        rpm: 500,
+        range: 18,
+        accuracy: 10,
+        recoil: 55,
+        handling: 7,
+        ergonomics: 10,
+        reload: 1
+      },
+
+
+      /* =========================
+         RIFLES
+         ========================= */
+
+      {
+        name: "Mikhail 74 U",
+        category: "Rifles",
+        tier: "Basic",
+        ammo: "Rifle FMJ",
+        damage: 17,
+        rpm: 700,
+        range: 16,
+        accuracy: 32,
+        recoil: 39,
+        handling: 8,
+        ergonomics: 12,
+        reload: 1
+      },
+
+      {
+        name: "Mikhail 47",
+        category: "Rifles",
+        tier: "Advanced",
+        ammo: "Rifle FMJ",
+        damage: 17,
+        rpm: 600,
+        range: 18,
+        accuracy: 38,
+        recoil: 49,
+        handling: 14,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "Thread Cutter",
+        category: "Rifles",
+        tier: "Advanced",
+        ammo: "Rifle FMJ",
+        damage: 17,
+        rpm: 600,
+        range: 18,
+        accuracy: 45,
+        recoil: 42,
+        handling: 10,
+        ergonomics: 10,
+        reload: 1
+      },
+
+      {
+        name: "Thread Cutter (Short)",
+        category: "Rifles",
+        tier: "Advanced",
+        ammo: "Rifle FMJ",
+        damage: 17,
+        rpm: 900,
+        range: 18,
+        accuracy: 48,
+        recoil: 38,
+        handling: 14,
+        ergonomics: 16,
+        reload: 1
+      },
+
+      {
+        name: "M4 Svodbonik",
+        category: "Rifles",
+        tier: "Advanced",
+        ammo: "Rifle FMJ",
+        damage: 18,
+        rpm: 600,
+        range: 19,
+        accuracy: 46,
+        recoil: 44,
+        handling: 22,
+        ergonomics: 18,
+        reload: 1
+      },
+
+      {
+        name: "Svobodnik M4 (Long)",
+        category: "Rifles",
+        tier: "Advanced",
+        ammo: "Rifle FMJ",
+        damage: 17,
+        rpm: 600,
+        range: 20,
+        accuracy: 52,
+        recoil: 41,
+        handling: 18,
+        ergonomics: 16,
+        reload: 1
+      },
+
+
+      /* =========================
+         HIGH CALIBER RIFLES
+         ========================= */
+
+      {
+        name: "3-Line Nagant (Stockless)",
+        category: "High Caliber Rifles",
+        tier: "Scrap",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 60,
+        range: 18,
+        accuracy: 44,
+        recoil: 42,
+        handling: 4,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "3-Line Nagant (Obrez)",
+        category: "High Caliber Rifles",
+        tier: "Scrap",
+        ammo: "High Cal FMJ",
+        damage: 20,
+        rpm: 60,
+        range: 16,
+        accuracy: 50,
+        recoil: 52,
+        handling: 4,
+        ergonomics: 12,
+        reload: 1
+      },
+
+      {
+        name: "3-Line Nagant (Infantry)",
+        category: "High Caliber Rifles",
+        tier: "Scrap",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 60,
+        range: 20,
+        accuracy: 50,
+        recoil: 35,
+        handling: 4,
+        ergonomics: 6,
+        reload: 1
+      },
+
+      {
+        name: "3-Line Nagant (Full Stock)",
+        category: "High Caliber Rifles",
+        tier: "Scrap",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 60,
+        range: 21,
+        accuracy: 60,
+        recoil: 35,
+        handling: 4,
+        ergonomics: 4,
+        reload: 1
+      },
+
+      {
+        name: "Bortovka Tinker",
+        category: "High Caliber Rifles",
+        tier: "Scrap",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 100,
+        range: 18,
+        accuracy: 38,
+        recoil: 50,
+        handling: 4,
+        ergonomics: 12,
+        reload: 1
+      },
+
+      {
+        name: "Bortovka Tinker (Long / +Mag)",
+        category: "High Caliber Rifles",
+        tier: "Scrap",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 100,
+        range: 20,
+        accuracy: 42,
+        recoil: 41,
+        handling: 4,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "Bortovka Tinker (+Mag)",
+        category: "High Caliber Rifles",
+        tier: "Scrap",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 100,
+        range: 18,
+        accuracy: 50,
+        recoil: 44,
+        handling: 4,
+        ergonomics: 12,
+        reload: 1
+      },
+
+      {
+        name: "2HMG",
+        category: "High Caliber Rifles",
+        tier: "Expert",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 700,
+        range: 16,
+        accuracy: 24,
+        recoil: 27,
+        handling: 20,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "2HMG (Short)",
+        category: "High Caliber Rifles",
+        tier: "Expert",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 700,
+        range: 16,
+        accuracy: 35,
+        recoil: 27,
+        handling: 20,
+        ergonomics: 8,
+        reload: 1
+      },
+
+      {
+        name: "2HMG (Long)",
+        category: "High Caliber Rifles",
+        tier: "Expert",
+        ammo: "High Cal FMJ",
+        damage: 33,
+        rpm: 700,
+        range: 18,
+        accuracy: 40,
+        recoil: 27,
+        handling: 20,
+        ergonomics: 5,
+        reload: 1
+      },
+
+      {
+        name: "63 Dragoon",
+        category: "High Caliber Rifles",
+        tier: "Expert",
+        ammo: "High Cal FMJ",
+        damage: 30,
+        rpm: 125,
+        range: 22,
+        accuracy: 64,
+        recoil: 47,
+        handling: 10,
+        ergonomics: 10,
+        reload: 1
+      },
+
+
+      /* =========================
+         SPECIAL WEAPONS
+         ========================= */
+
+      {
+        name: "Mikhail 50",
+        category: "Special Weapons",
+        tier: "Expert",
+        ammo: "Special FMJ",
+        damage: 76,
+        rpm: 200,
+        range: 22,
+        accuracy: 68,
+        recoil: 100,
+        handling: 5,
+        ergonomics: 5,
+        reload: 1
+      },
+
+      {
+        name: "Mikhail 50 (Prototype)",
+        category: "Special Weapons",
+        tier: "Expert",
+        ammo: "Special FMJ",
+        damage: 76,
+        rpm: 200,
+        range: 22,
+        accuracy: 70,
+        recoil: 100,
+        handling: 4,
+        ergonomics: 2,
+        reload: 1
+      },
+
+      {
+        name: "Mikhail 50 (Pristine)",
+        category: "Special Weapons",
+        tier: "Expert",
+        ammo: "Special FMJ",
+        damage: 76,
+        rpm: 80,
+        range: 22,
+        accuracy: 64,
+        recoil: 100,
+        handling: 5,
+        ergonomics: 2,
+        reload: 1
+      }
+
+    ];
+
+
+    /* =========================================================
+       MASTER AMMO DATA
+
+       This works the same way as the weapons array.
+       Change values here to update the cards.
+       ========================================================= */
+
+    const ammo = [
+
+      /* SPECIAL */
+
+      {
+        name: "Special FMJ Ammo",
+        category: "Special Ammo",
+        price: "~1000₽",
+        description:
+          "Special ammunition that can fit into different types of weapons.",
+        damage: "75",
+        penetration: "100%",
+        stacks: 999
+      },
+
+
+      /* HIGH CALIBER */
+
+      {
+        name: "High Caliber Rifle HP Ammo",
+        category: "High Caliber Rifle Ammo",
+        price: "~350₽",
+        description:
+          "Hollow point variant of high-caliber rifle ammo. Lots of stopping power – and pain.",
+        damage: "46",
+        penetration: "-25%",
+        stacks: 999
+      },
+
+      {
+        name: "High Caliber Rifle AP Ammo",
+        category: "High Caliber Rifle Ammo",
+        price: "~500₽",
+        description:
+          "Armor piercing variant of high-caliber rifle ammo. A nice tactical advantage.",
+        damage: "26",
+        penetration: "50%",
+        stacks: 999
+      },
+
+      {
+        name: "High Caliber Rifle FMJ Ammo",
+        category: "High Caliber Rifle Ammo",
+        price: "~250₽",
+        description:
+          "High-caliber, full metal jacket ammo. As reliable as they come.",
+        damage: "30",
+        penetration: "0%",
+        stacks: 999
+      },
+
+
+      /* SHOTGUN */
+
+      {
+        name: "Shotgun HP Ammo",
+        category: "Shotgun Ammo",
+        price: "~180₽",
+        description:
+          "Hollow point ammunition for shotguns. Even if I miss, I don't miss.",
+        damage: "6 × 6 = 36",
+        penetration: "-25%",
+        stacks: 999
+      },
+
+      {
+        name: "Shotgun Buckshot Ammo",
+        category: "Shotgun Ammo",
+        price: "~60₽",
+        description:
+          "Ammunition for shotguns and guns with spread shots.",
+        damage: "6 × 5 = 30",
+        penetration: "0%",
+        stacks: 999
+      },
+
+      {
+        name: "Shotgun AP Ammo",
+        category: "Shotgun Ammo",
+        price: "~400₽",
+        description:
+          "Armor piercing rounds for shotguns. They might as well be wearing rubakhas.",
+        damage: "6 × 4 = 24",
+        penetration: "50%",
+        stacks: 999
+      },
+
+
+      /* RIFLE */
+
+      {
+        name: "Rifle HP Ammo",
+        category: "Rifle Ammo",
+        price: "~280₽",
+        description:
+          "Hollow point ammunition for rifles. Don't need great aim when you got this.",
+        damage: "25",
+        penetration: "-25%",
+        stacks: 999
+      },
+
+      {
+        name: "Rifle FMJ Ammo",
+        category: "Rifle Ammo",
+        price: "~200₽",
+        description:
+          "Standard ammunition for rifles.",
+        damage: "17",
+        penetration: "0%",
+        stacks: 999
+      },
+
+      {
+        name: "Rifle AP Ammo",
+        category: "Rifle Ammo",
+        price: "~400₽",
+        description:
+          "Armor piercing ammunition. Good for mowing down some well-equipped enemies.",
+        damage: "14",
+        penetration: "50%",
+        stacks: 999
+      },
+
+
+      /* PISTOL */
+
+      {
+        name: "Pistol HP Ammo",
+        category: "Pistol Ammo",
+        price: "~60₽",
+        description:
+          "Hollow point ammunition, perfect for self-defense.",
+        damage: "15",
+        penetration: "-25%",
+        stacks: 999
+      },
+
+      {
+        name: "Pistol FMJ Ammo",
+        category: "Pistol Ammo",
+        price: "~30₽",
+        description:
+          "Ammunition made for pistols, submachine guns, repeaters etc.",
+        damage: "10",
+        penetration: "0%",
+        stacks: 999
+      },
+
+      {
+        name: "Pistol AP Ammo",
+        category: "Pistol Ammo",
+        price: "~100₽",
+        description:
+          "Armor piercing ammo. They may have gear, but that doesn't mean they're safe.",
+        damage: "8",
+        penetration: "50%",
+        stacks: 999
+      }
+
+    ];
+
+
+    /* =========================================================
+       CATEGORY ORDER
+       ========================================================= */
+
+    const weaponCategories = [
+      "Pistols",
+      "Shotguns",
+      "Rifles",
+      "High Caliber Rifles",
+      "Special Weapons"
+    ];
+
+    const ammoCategories = [
+      "Pistol Ammo",
+      "Rifle Ammo",
+      "Shotgun Ammo",
+      "High Caliber Rifle Ammo",
+      "Special Ammo"
+    ];
+
+
+    /* =========================================================
+       DOM ELEMENTS
+       ========================================================= */
+
+    const weaponSections = document.getElementById("weaponSections");
+    const ammoSections = document.getElementById("ammoSections");
+
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const tierFilter = document.getElementById("tierFilter");
+    const ammoFilter = document.getElementById("ammoFilter");
+
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    document.getElementById("weaponTotal").textContent = weapons.length;
+    document.getElementById("ammoTotal").textContent = ammo.length;
+
+
+    /* =========================================================
+       CREATE WEAPON CARD
+       ========================================================= */
+
+    function createWeaponCard(weapon) {
+
+      const card = document.createElement("article");
+
+      card.className = "weapon-card";
+      card.dataset.tier = weapon.tier;
+
+      card.innerHTML = `
         <div class="weapon-header">
-            <div class="weapon-name">PM Nikolay</div>
-            <div class="tier Scrap">Scrap</div>
+          <h3 class="weapon-name">${weapon.name}</h3>
+          <span class="tier-badge">${weapon.tier}</span>
         </div>
 
-        <div class="stats">
-            Damage: 10<br>
-            RPM: 600<br>
-            Range: 15<br>
-            Accuracy: 12<br>
-            Recoil: 36<br>
-            Handling: 30<br>
-            Ergonomics: 33<br>
-            Reload: 1
+        <div class="primary-stats">
+
+          <div class="stat-line">
+            <span class="stat-label">Damage</span>
+            <span class="stat-value">${weapon.damage}</span>
+          </div>
+
+          <div class="stat-line">
+            <span class="stat-label">RPM</span>
+            <span class="stat-value">${weapon.rpm}</span>
+          </div>
+
+          <div class="stat-line">
+            <span class="stat-label">Range</span>
+            <span class="stat-value">${weapon.range}</span>
+          </div>
+
         </div>
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
+        <div class="ammo-line">
+          Ammo: <strong>${weapon.ammo}</strong>
+        </div>
 
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
+        <button
+          class="stats-button"
+          type="button"
+          aria-expanded="false"
+        >
+          Show Full Stats
+        </button>
 
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
+        <div class="full-stats">
 
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
+          <div class="stat-line">
+            <span class="stat-label">Accuracy</span>
+            <span class="stat-value">${weapon.accuracy}</span>
+          </div>
+
+          <div class="stat-line">
+            <span class="stat-label">Recoil</span>
+            <span class="stat-value">${weapon.recoil}</span>
+          </div>
+
+          <div class="stat-line">
+            <span class="stat-label">Handling</span>
+            <span class="stat-value">${weapon.handling}</span>
+          </div>
+
+          <div class="stat-line">
+            <span class="stat-label">Ergonomics</span>
+            <span class="stat-value">${weapon.ergonomics}</span>
+          </div>
+
+          <div class="stat-line">
+            <span class="stat-label">Reload</span>
+            <span class="stat-value">${weapon.reload}</span>
+          </div>
+
+        </div>
+      `;
+
+      const button = card.querySelector(".stats-button");
+      const fullStats = card.querySelector(".full-stats");
+
+      button.addEventListener("click", () => {
+
+        const isOpen = fullStats.classList.toggle("open");
+
+        button.textContent =
+          isOpen ? "Hide Full Stats" : "Show Full Stats";
+
+        button.setAttribute(
+          "aria-expanded",
+          isOpen ? "true" : "false"
+        );
+
+      });
+
+      return card;
+    }
+
+
+    /* =========================================================
+       RENDER WEAPONS
+       ========================================================= */
+
+    function renderWeapons() {
+
+      const search = searchInput.value
+        .trim()
+        .toLowerCase();
+
+      const selectedCategory = categoryFilter.value;
+      const selectedTier = tierFilter.value;
+      const selectedAmmo = ammoFilter.value;
+
+      weaponSections.innerHTML = "";
+
+      let visibleWeapons = 0;
+
+      weaponCategories.forEach(category => {
+
+        const filteredWeapons = weapons.filter(weapon => {
+
+          const matchesSearch =
+            weapon.name.toLowerCase().includes(search);
+
+          const matchesCategory =
+            selectedCategory === "all" ||
+            weapon.category === selectedCategory;
+
+          const matchesTier =
+            selectedTier === "all" ||
+            weapon.tier === selectedTier;
+
+          const matchesAmmo =
+            selectedAmmo === "all" ||
+            weapon.ammo === selectedAmmo;
+
+          return (
+            weapon.category === category &&
+            matchesSearch &&
+            matchesCategory &&
+            matchesTier &&
+            matchesAmmo
+          );
+
+        });
+
+        if (filteredWeapons.length === 0) {
+          return;
+        }
+
+        visibleWeapons += filteredWeapons.length;
+
+        const section = document.createElement("section");
+
+        section.className = "section";
+
+        const title = document.createElement("div");
+
+        title.className = "section-title";
+
+        title.innerHTML = `
+          <h2>${category}</h2>
+          <span class="category-count">
+            ${filteredWeapons.length}
+            ${filteredWeapons.length === 1 ? "weapon" : "weapons"}
+          </span>
+        `;
+
+        const grid = document.createElement("div");
+
+        grid.className = "weapon-grid";
+
+        filteredWeapons.forEach(weapon => {
+          grid.appendChild(createWeaponCard(weapon));
+        });
+
+        section.appendChild(title);
+        section.appendChild(grid);
+
+        weaponSections.appendChild(section);
+
+      });
+
+      emptyMessage.style.display =
+        visibleWeapons === 0 ? "block" : "none";
+    }
+
+
+    /* =========================================================
+       CREATE AMMO CARD
+       ========================================================= */
+
+    function createAmmoCard(ammoItem) {
+
+      const card = document.createElement("article");
+
+      card.className = "ammo-card";
+
+      card.innerHTML = `
+        <h4>${ammoItem.name}</h4>
+
+        <div class="ammo-price">
+          ${ammoItem.price}
+        </div>
+
+        <div class="ammo-description">
+          ${ammoItem.description}
+        </div>
+
+        <div class="ammo-stats">
+
+          <div class="ammo-stat">
+            <span class="ammo-stat-label">Damage</span>
+            <span class="ammo-stat-value">
+              ${ammoItem.damage}
             </span>
-        </div>
-    </div>
+          </div>
 
-
-    <!-- PM Nikolay PB -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">PM Nikolay PB</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 11<br>
-            RPM: 600<br>
-            Range: 15<br>
-            Accuracy: 14<br>
-            Recoil: 36<br>
-            Handling: 30<br>
-            Ergonomics: 33<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
+          <div class="ammo-stat">
+            <span class="ammo-stat-label">Penetration</span>
+            <span class="ammo-stat-value">
+              ${ammoItem.penetration}
             </span>
-        </div>
-    </div>
+          </div>
 
-
-    <!-- Leon 1895 -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">Leon 1895</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 15<br>
-            RPM: 75<br>
-            Range: 17<br>
-            Accuracy: 34<br>
-            Recoil: 36<br>
-            Handling: 10<br>
-            Ergonomics: 24<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
+          <div class="ammo-stat">
+            <span class="ammo-stat-label">Max Stack</span>
+            <span class="ammo-stat-value">
+              ${ammoItem.stacks}
             </span>
-        </div>
-    </div>
-    <!-- Leon 1895 (Long) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">Leon 1895 (Long)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 15<br>
-            RPM: 75<br>
-            Range: 18<br>
-            Accuracy: 34<br>
-            Recoil: 31<br>
-            Handling: 12<br>
-            Ergonomics: 20<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Leon 1895 (Short) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">Leon 1895 (Short)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 15<br>
-            RPM: 18<br>
-            Range: 16<br>
-            Accuracy: 28<br>
-            Recoil: 40<br>
-            Handling: 6<br>
-            Ergonomics: 30<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Medved Monster -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">Medved Monster</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 10<br>
-            RPM: 450<br>
-            Range: 16<br>
-            Accuracy: 26<br>
-            Recoil: 38<br>
-            Handling: 14<br>
-            Ergonomics: 14<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
-            </span>
-        </div>
-    </div>
-    <!-- Medved Monster (Silenced) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">Medved Monster (Silenced)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 10<br>
-            RPM: 450<br>
-            Range: 16<br>
-            Accuracy: 30<br>
-            Recoil: 37<br>
-            Handling: 14<br>
-            Ergonomics: 12<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Bahadir 920 -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Bahadir 920</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 10<br>
-            RPM: 600<br>
-            Range: 18<br>
-            Accuracy: 28<br>
-            Recoil: 30<br>
-            Handling: 18<br>
-            Ergonomics: 15<br>
-            Reload: 1.5
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Bahadir 918 (Short) -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Bahadir 918 (Short)</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 10<br>
-            RPM: 700<br>
-            Range: 17<br>
-            Accuracy: 20<br>
-            Recoil: 35<br>
-            Handling: 28<br>
-            Ergonomics: 15<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
-            </span>
-        </div>
-    </div>
-    <!-- Bahadir 918 (Long) -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Bahadir 918 (Long)</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 11<br>
-            RPM: 700<br>
-            Range: 18<br>
-            Accuracy: 24<br>
-            Recoil: 25<br>
-            Handling: 30<br>
-            Ergonomics: 14<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Pistol FMJ
-                <div class="ammo-popup">
-                    Damage: 10<br>
-                    Penetration: 0%<br>
-                    Price: 30₽<br>
-                    Stack: 999<br>
-                    "Ammunition made for pistols, submachine guns, repeaters etc."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol HP
-                <div class="ammo-popup">
-                    Damage: 15<br>
-                    Penetration: -25%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition, perfect for self-defense."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Pistol AP
-                <div class="ammo-popup">
-                    Damage: 8<br>
-                    Penetration: 50%<br>
-                    Price: 100₽<br>
-                    Stack: 999<br>
-                    "Armor piercing ammo. They may have gear, but that doesn't mean they're safe."
-                </div>
-            </span>
-        </div>
-    </div>
-
-</div> <!-- END OF PISTOL GRID -->
-
-        <!-- ================= SHOTGUNS ================= -->
-        <div class="category-banner">Shotguns</div>
-       <div class="weapon-grid" id="shotgun-grid">
-               <!-- ================= SHOTGUNS ================= -->
-<div class="category-banner">Shotguns</div>
-<div class="weapon-grid" id="shotgun-grid">
-
-    <!-- Svarsh Miracle (Short) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">Svarsh Miracle (Short)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 150<br>
-            Range: 14<br>
-            Accuracy: 33<br>
-            Recoil: 65<br>
-            Handling: 8<br>
-            Ergonomics: 8<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Svarsh Miracle (Long) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">Svarsh Miracle (Long)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 150<br>
-            Range: 16<br>
-            Accuracy: 28<br>
-            Recoil: 61<br>
-            Handling: 8<br>
-            Ergonomics: 4<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- PM 12-70 (Short) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">PM 12-70 (Short)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 90<br>
-            Range: 14<br>
-            Accuracy: 12<br>
-            Recoil: 67<br>
-            Handling: 4<br>
-            Ergonomics: 15<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-    <!-- PM 12-70 (Short | Extended) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">PM 12-70 (Short | Extended)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 90<br>
-            Range: 14<br>
-            Accuracy: 12<br>
-            Recoil: 67<br>
-            Handling: 4<br>
-            Ergonomics: 15<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- PM 12-70 (Long) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">PM 12-70 (Long)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 90<br>
-            Range: 16<br>
-            Accuracy: 14<br>
-            Recoil: 59<br>
-            Handling: 4<br>
-            Ergonomics: 8<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- PM 12-70 (Long | Extended) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">PM 12-70 (Long | Extended)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 90<br>
-            Range: 16<br>
-            Accuracy: 14<br>
-            Recoil: 59<br>
-            Handling: 4<br>
-            Ergonomics: 8<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-    <!-- Zavod 34 -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Zavod 34</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 150<br>
-            Range: 16<br>
-            Accuracy: 20<br>
-            Recoil: 60<br>
-            Handling: 10<br>
-            Ergonomics: 10<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Zavod 34 (Short) -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Zavod 34 (Short)</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 150<br>
-            Range: 14<br>
-            Accuracy: 18<br>
-            Recoil: 65<br>
-            Handling: 12<br>
-            Ergonomics: 12<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Borealis 12 -->
-    <div class="weapon-card Advanced">
-        <div class="weapon-header">
-            <div class="weapon-name">Borealis 12</div>
-            <div class="tier Advanced">Advanced</div>
-        </div>
+          </div>
 
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 500<br>
-            Range: 18<br>
-            Accuracy: 10<br>
-            Recoil: 55<br>
-            Handling: 7<br>
-            Ergonomics: 10<br>
-            Reload: 1
         </div>
+      `;
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
+      return card;
+    }
 
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
 
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
+    /* =========================================================
+       RENDER AMMO
+       ========================================================= */
 
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-    <!-- Borealis 12-TAK -->
-    <div class="weapon-card Advanced">
-        <div class="weapon-header">
-            <div class="weapon-name">Borealis 12-TAK</div>
-            <div class="tier Advanced">Advanced</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 500<br>
-            Range: 18<br>
-            Accuracy: 10<br>
-            Recoil: 55<br>
-            Handling: 7<br>
-            Ergonomics: 10<br>
-            Reload: 1
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Shotgun Buckshot
-                <div class="ammo-popup">
-                    Damage: 6 × 5 = 30<br>
-                    Penetration: 0%<br>
-                    Price: 60₽<br>
-                    Stack: 999<br>
-                    "Ammunition for shotguns and guns with spread shots."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun HP
-                <div class="ammo-popup">
-                    Damage: 6 × 6 = 36<br>
-                    Penetration: -25%<br>
-                    Price: 180₽<br>
-                    Stack: 999<br>
-                    "Hollow point ammunition for shotguns. Even if I miss, I don't miss."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Shotgun AP
-                <div class="ammo-popup">
-                    Damage: 6 × 4 = 24<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rounds for shotguns. They might as well be wearing rubakhas."
-                </div>
-            </span>
-        </div>
-    </div>
-
-</div> <!-- END OF SHOTGUN GRID -->
-
-
-        <!-- ================= RIFLES ================= -->
-        <div class="category-banner">Rifles</div>
-        <div class="weapon-grid" id="rifle-grid">
-<!-- ================= RIFLES ================= -->
-<div class="category-banner">Rifles</div>
-<div class="weapon-grid" id="rifle-grid">
-
-    <!-- Mikhail 74 U -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Mikhail 74 U</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 17<br>
-            RPM: 700<br>
-            Range: 60<br>
-            Ammo:
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle HP
-                <div class="ammo-popup">
-                    Damage: 22<br>
-                    Penetration: -25%<br>
-                    Price: 240₽<br>
-                    Stack: 999<br>
-                    "Hollow point rifle rounds. Extra damage, less armor punch."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle AP
-                <div class="ammo-popup">
-                    Damage: 14<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rifle ammunition. Expensive but effective."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Mikhail 47 -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Mikhail 47</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 17<br>
-            RPM: 600<br>
-            Range: 60<br>
-            Ammo:
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle HP
-                <div class="ammo-popup">
-                    Damage: 22<br>
-                    Penetration: -25%<br>
-                    Price: 240₽<br>
-                    Stack: 999<br>
-                    "Hollow point rifle rounds. Extra damage, less armor punch."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle AP
-                <div class="ammo-popup">
-                    Damage: 14<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rifle ammunition. Expensive but effective."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Thread Cutter -->
-    <div class="weapon-card Advanced">
-        <div class="weapon-header">
-            <div class="weapon-name">Thread Cutter</div>
-            <div class="tier Advanced">Advanced</div>
-        </div>
-
-        <div class="stats">
-            Damage: 17<br>
-            RPM: 600<br>
-            Range: 60<br>
-            Ammo:
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle HP
-                <div class="ammo-popup">
-                    Damage: 22<br>
-                    Penetration: -25%<br>
-                    Price: 240₽<br>
-                    Stack: 999<br>
-                    "Hollow point rifle rounds. Extra damage, less armor punch."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle AP
-                <div class="ammo-popup">
-                    Damage: 14<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rifle ammunition. Expensive but effective."
-                </div>
-            </span>
-        </div>
-    </div>
-    <!-- Thread Cutter (Short) -->
-    <div class="weapon-card Advanced">
-        <div class="weapon-header">
-            <div class="weapon-name">Thread Cutter (Short)</div>
-            <div class="tier Advanced">Advanced</div>
-        </div>
-
-        <div class="stats">
-            Damage: 17<br>
-            RPM: 600<br>
-            Range: 60<br>
-            Ammo:
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle HP
-                <div class="ammo-popup">
-                    Damage: 22<br>
-                    Penetration: -25%<br>
-                    Price: 240₽<br>
-                    Stack: 999<br>
-                    "Hollow point rifle rounds. Extra damage, less armor punch."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle AP
-                <div class="ammo-popup">
-                    Damage: 14<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rifle ammunition. Expensive but effective."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- M4 Svobonik -->
-    <div class="weapon-card Advanced">
-        <div class="weapon-header">
-            <div class="weapon-name">M4 Svobonik</div>
-            <div class="tier Advanced">Advanced</div>
-        </div>
-
-        <div class="stats">
-            Damage: 17<br>
-            RPM: 690<br>
-            Range: 60<br>
-            Ammo:
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle HP
-                <div class="ammo-popup">
-                    Damage: 22<br>
-                    Penetration: -25%<br>
-                    Price: 240₽<br>
-                    Stack: 999<br>
-                    "Hollow point rifle rounds. Extra damage, less armor punch."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle AP
-                <div class="ammo-popup">
-                    Damage: 14<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rifle ammunition. Expensive but effective."
-                </div>
-            </span>
-        </div>
-    </div>
-
-
-    <!-- Svobonik M4 (Long) -->
-    <div class="weapon-card Advanced">
-        <div class="weapon-header">
-            <div class="weapon-name">Svobonik M4 (Long)</div>
-            <div class="tier Advanced">Advanced</div>
-        </div>
-
-        <div class="stats">
-            Damage: 17<br>
-            RPM: 690<br>
-            Range: 60<br>
-            Ammo:
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            <strong>Ammo Types:</strong><br>
-
-            <span class="ammo-hover">
-                Rifle FMJ
-                <div class="ammo-popup">
-                    Damage: 17<br>
-                    Penetration: 0%<br>
-                    Price: 120₽<br>
-                    Stack: 999<br>
-                    "Standard rifle ammunition. Reliable and cheap."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle HP
-                <div class="ammo-popup">
-                    Damage: 22<br>
-                    Penetration: -25%<br>
-                    Price: 240₽<br>
-                    Stack: 999<br>
-                    "Hollow point rifle rounds. Extra damage, less armor punch."
-                </div>
-            </span><br>
-
-            <span class="ammo-hover">
-                Rifle AP
-                <div class="ammo-popup">
-                    Damage: 14<br>
-                    Penetration: 50%<br>
-                    Price: 400₽<br>
-                    Stack: 999<br>
-                    "Armor piercing rifle ammunition. Expensive but effective."
-                </div>
-            </span>
-        </div>
-    </div>
-
-</div> <!-- END OF RIFLE GRID -->
-
-
-        <!-- ================= HIGH CAL RIFLES ================= -->
-        <div class="category-banner">High Cal Rifles</div>
-        <div class="weapon-grid" id="highcal-grid">
-               <!-- ================= HIGH CALIBER RIFLES ================= -->
-<div class="category-banner">High Caliber Rifles</div>
-<div class="weapon-grid" id="highcal-grid">
-
-    <!-- 3-Line Nagant (Stockless) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">3-Line Nagant (Stockless)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 60<br>
-            Range: 16<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 20<br>
-            Recoil: 30<br>
-            Handling: 10<br>
-            Ergonomics: 10<br>
-            Reload: 1
-        </div>
-    </div>
-
-
-    <!-- 3-Line Nagant (Obrez) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">3-Line Nagant (Obrez)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 60<br>
-            Range: 16<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 18<br>
-            Recoil: 32<br>
-            Handling: 12<br>
-            Ergonomics: 12<br>
-            Reload: 1
-        </div>
-    </div>
-
-
-    <!-- 3-Line Nagant (Infantry) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">3-Line Nagant (Infantry)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 60<br>
-            Range: 20<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 25<br>
-            Recoil: 28<br>
-            Handling: 8<br>
-            Ergonomics: 8<br>
-            Reload: 1
-        </div>
-    </div>
-
-
-    <!-- 3-Line Nagant (Full Stock) -->
-    <div class="weapon-card Scrap">
-        <div class="weapon-header">
-            <div class="weapon-name">3-Line Nagant (Full Stock)</div>
-            <div class="tier Scrap">Scrap</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 60<br>
-            Range: 20<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 28<br>
-            Recoil: 26<br>
-            Handling: 7<br>
-            Ergonomics: 7<br>
-            Reload: 1
-        </div>
-    </div>
-    <!-- Bortovka Tinker -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Bortovka Tinker</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 60<br>
-            Range: 20<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 30<br>
-            Recoil: 30<br>
-            Handling: 10<br>
-            Ergonomics: 10<br>
-            Reload: 1
-        </div>
-    </div>
-
-
-    <!-- Bortovka Tinker (Long / +Mag) -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Bortovka Tinker (Long / +Mag)</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 60<br>
-            Range: 18<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
+    function renderAmmo() {
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 28<br>
-            Recoil: 32<br>
-            Handling: 10<br>
-            Ergonomics: 10<br>
-            Reload: 1
-        </div>
-    </div>
-
-
-    <!-- Bortovka Tinker (+Mag) -->
-    <div class="weapon-card Basic">
-        <div class="weapon-header">
-            <div class="weapon-name">Bortovka Tinker (+Mag)</div>
-            <div class="tier Basic">Basic</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 60<br>
-            Range: 18<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 28<br>
-            Recoil: 32<br>
-            Handling: 10<br>
-            Ergonomics: 10<br>
-            Reload: 1
-        </div>
-    </div>
-    <!-- 2HMG -->
-    <div class="weapon-card Expert">
-        <div class="weapon-header">
-            <div class="weapon-name">2HMG</div>
-            <div class="tier Expert">Expert</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 700<br>
-            Range: 16<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 24<br>
-            Recoil: 27<br>
-            Handling: 20<br>
-            Ergonomics: 8<br>
-            Reload: 1
-        </div>
-    </div>
-
-
-    <!-- 2HMG (Short) -->
-    <div class="weapon-card Expert">
-        <div class="weapon-header">
-            <div class="weapon-name">2HMG (Short)</div>
-            <div class="tier Expert">Expert</div>
-        </div>
-
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 700<br>
-            Range: 16<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
+      ammoSections.innerHTML = "";
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 35<br>
-            Recoil: 27<br>
-            Handling: 20<br>
-            Ergonomics: 8<br>
-            Reload: 1
-        </div>
-    </div>
-
-
-    <!-- 2HMG (Long) -->
-    <div class="weapon-card Expert">
-        <div class="weapon-header">
-            <div class="weapon-name">2HMG (Long)</div>
-            <div class="tier Expert">Expert</div>
-        </div>
+      ammoCategories.forEach(category => {
 
-        <div class="stats">
-            Damage: 33<br>
-            RPM: 700<br>
-            Range: 18<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
-
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 40<br>
-            Recoil: 27<br>
-            Handling: 20<br>
-            Ergonomics: 5<br>
-            Reload: 1
-        </div>
-    </div>
+        const categoryAmmo =
+          ammo.filter(item => item.category === category);
 
+        if (categoryAmmo.length === 0) {
+          return;
+        }
 
-    <!-- 63 Dragoon -->
-    <div class="weapon-card Expert">
-        <div class="weapon-header">
-            <div class="weapon-name">63 Dragoon</div>
-            <div class="tier Expert">Expert</div>
-        </div>
+        const section = document.createElement("section");
 
-        <div class="stats">
-            Damage: 30<br>
-            RPM: 125<br>
-            Range: 22<br>
-            Ammo:
-            <span class="ammo-hover">
-                High Cal FMJ
-                <div class="ammo-popup">
-                    <strong>High Cal FMJ</strong><br>
-                    Damage: 30<br>
-                    Penetration: 0%<br>
-                    Price: 250₽<br>
-                    High‑caliber FMJ.
-                </div>
-            </span>
-        </div>
+        section.className = "ammo-category";
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 64<br>
-            Recoil: 47<br>
-            Handling: 10<br>
-            Ergonomics: 10<br>
-            Reload: 1
-        </div>
-    </div>
+        const heading = document.createElement("h3");
 
-</div> <!-- END OF HIGH CAL GRID -->
+        heading.textContent = category;
 
+        const grid = document.createElement("div");
 
-        <!-- ================= SPECIAL WEAPONS ================= -->
-        <div class="category-banner">Special Weapons</div>
-        <div class="weapon-grid" id="special-grid">
-                    <!-- ================= SPECIAL WEAPONS ================= -->
-<div class="category-banner">Special Weapons</div>
-<div class="weapon-grid" id="special-grid">
+        grid.className = "ammo-grid";
 
-    <!-- Mikhail 50 -->
-    <div class="weapon-card Expert">
-        <div class="weapon-header">
-            <div class="weapon-name">Mikhail 50</div>
-            <div class="tier Expert">Expert</div>
-        </div>
+        categoryAmmo.forEach(ammoItem => {
+          grid.appendChild(createAmmoCard(ammoItem));
+        });
 
-        <div class="stats">
-            Damage: 76<br>
-            RPM: 200<br>
-            Range: 22<br>
-            Ammo:
-            <span class="ammo-hover">
-                Special FMJ
-                <div class="ammo-popup">
-                    <strong>Special FMJ</strong><br>
-                    Damage: 76<br>
-                    Penetration: 0%<br>
-                    Price: 500₽<br>
-                    High‑power special‑grade FMJ.
-                </div>
-            </span>
-        </div>
+        section.appendChild(heading);
+        section.appendChild(grid);
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 68<br>
-            Recoil: 100<br>
-            Handling: 5<br>
-            Ergonomics: 5<br>
-            Reload: 1
-        </div>
-    </div>
+        ammoSections.appendChild(section);
 
+      });
+    }
 
-    <!-- Mikhail 50 (Prototype) -->
-    <div class="weapon-card Expert">
-        <div class="weapon-header">
-            <div class="weapon-name">Mikhail 50 (Prototype)</div>
-            <div class="tier Expert">Expert</div>
-        </div>
 
-        <div class="stats">
-            Damage: 76<br>
-            RPM: 200<br>
-            Range: 22<br>
-            Ammo:
-            <span class="ammo-hover">
-                Special FMJ
-                <div class="ammo-popup">
-                    <strong>Special FMJ</strong><br>
-                    Damage: 76<br>
-                    Penetration: 0%<br>
-                    Price: 500₽<br>
-                    High‑power special‑grade FMJ.
-                </div>
-            </span>
-        </div>
+    /* =========================================================
+       FILTER EVENTS
+       ========================================================= */
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 70<br>
-            Recoil: 100<br>
-            Handling: 4<br>
-            Ergonomics: 2<br>
-            Reload: 1
-        </div>
-    </div>
+    searchInput.addEventListener(
+      "input",
+      renderWeapons
+    );
 
+    categoryFilter.addEventListener(
+      "change",
+      renderWeapons
+    );
 
-    <!-- Mikhail 50 (Pristine) -->
-    <div class="weapon-card Expert">
-        <div class="weapon-header">
-            <div class="weapon-name">Mikhail 50 (Pristine)</div>
-            <div class="tier Expert">Expert</div>
-        </div>
+    tierFilter.addEventListener(
+      "change",
+      renderWeapons
+    );
 
-        <div class="stats">
-            Damage: 76<br>
-            RPM: 80<br>
-            Range: 22<br>
-            Ammo:
-            <span class="ammo-hover">
-                Special FMJ
-                <div class="ammo-popup">
-                    <strong>Special FMJ</strong><br>
-                    Damage: 76<br>
-                    Penetration: 0%<br>
-                    Price: 500₽<br>
-                    High‑power special‑grade FMJ.
-                </div>
-            </span>
-        </div>
+    ammoFilter.addEventListener(
+      "change",
+      renderWeapons
+    );
 
-        <div class="expand-btn" onclick="toggleExpand(this)">Show Full Stats</div>
-        <div class="expanded">
-            Accuracy: 64<br>
-            Recoil: 100<br>
-            Handling: 5<br>
-            Ergonomics: 2<br>
-            Reload: 1
-        </div>
-    </div>
 
-</div> <!-- END OF SPECIAL GRID -->
+    /* =========================================================
+       INITIAL PAGE LOAD
+       ========================================================= */
 
+    renderWeapons();
+    renderAmmo();
 
-        <!-- ================= WEAPON TABLE ================= -->
-        <h2>Weapons Overview Table</h2>
-        <table id="weaponTable">
-            <thead>
-                <tr>
-                    <th onclick="sortTable(0)">Name</th>
-                    <th onclick="sortTable(1)">Tier</th>
-                    <th onclick="sortTable(2)">Damage</th>
-                    <th onclick="sortTable(3)">RPM</th>
-                    <th onclick="sortTable(4)">Range</th>
-                </tr>
-            </thead>
-            <tbody id="weaponTableBody">
-                
-            </tbody>
-        </table>
+  </script>
 
-    </div> <!-- end page-wrapper -->
+</body>
+</html>
