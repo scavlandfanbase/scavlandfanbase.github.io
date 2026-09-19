@@ -1470,7 +1470,18 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A dust cover for the Mikhail that has a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 202040.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mk-railed-polymer-handguard",
@@ -2380,7 +2391,16 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard dust cover for marksman rifles, with a rail for mounting accessories.",
+      "attachmentModifiers": {},
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 202033.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "tc-railed-handguard",
