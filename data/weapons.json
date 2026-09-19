@@ -280,7 +280,7 @@
       "id": "pm-12-70-short-extended",
       "name": "PM 12-70 (Short | Extended)",
       "category": "Shotguns",
-      "tier": "Scrap",
+      "tier": "Basic",
       "ammo": "Shotgun Buckshot",
       "damage": 30,
       "rpm": 90,
@@ -293,7 +293,7 @@
       "source": {
         "file": "images/weapons/PM 12-70 (Extended).png",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+        "note": "Repair Class Basic confirmed from user-provided in-game screenshot; base yellow stats retained; durability excluded."
       },
       "image": "images/weapons/PM 12-70 (Extended).png"
     },
