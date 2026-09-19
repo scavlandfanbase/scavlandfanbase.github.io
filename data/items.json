@@ -1534,6 +1534,15 @@
       "notes": null
     },
     {
+      "id": "old-tactical-vest",
+      "name": "Old Tactical Vest",
+      "classification": [
+        "armour"
+      ],
+      "image": "images/armour/old-tactical-vest-icon.webp",
+      "notes": null
+    },
+    {
       "id": "overripe-potato",
       "name": "Overripe Potato",
       "classification": [
