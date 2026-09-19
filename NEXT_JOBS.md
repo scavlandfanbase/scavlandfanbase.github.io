@@ -21,6 +21,8 @@ Whenever any website code, structured data, assets, navigation, UI, database con
 
 ## Handover — 19 September 2026
 
+- **Evidence workflow fully validated end-to-end:** a fresh live public submission successfully uploaded its screenshot, created a Pending database row, appeared in the secure Admin queue, and displayed the correct public success message after fixing the async form reset (`20a0752496b61c9ea5cea0f1ba316e8be7feede6`). Admin Rejected records now include **Restore to Pending** with confirmation for accidental rejections (`45a782ee93fff62175b6ff21c7f7cb80f29aa6de`).
+
 - **Public evidence submission false-failure fix:** the insert policy requires `status = 'pending'`, while the browser payload previously omitted `status`; PostgREST/RLS could therefore reject the row after the screenshot upload. `items.html` now explicitly sends `status: 'pending'` and displays the real backend error text if a future submission fails. Commit `4fb709540e4b5101590eed7e1bd82882f4637c26`. Next validation: submit one fresh screenshot from the live Items page and confirm it appears in Admin → Pending.
 
 - **Secure admin review is operational:** Supabase Auth login for the allowlisted admin is confirmed working. RLS authorization was fixed using `public.is_scavland_admin()` as a `SECURITY DEFINER` helper, so the private `admin_users` table remains unreadable while evidence policies can securely test admin membership. The admin UI now supports Pending / Approved / Rejected views, confirmation before decisions, review history via status tabs, and click-to-enlarge private screenshots. Workflow improvement commit: `3fdae529af63c4ca8408a3eb2c2d0364cbd29914`.
