@@ -1431,12 +1431,18 @@
     },
     {
       "id": "m4-svodbonik",
-      "name": "M4 Svodbonik",
+      "name": "Svobodnik M4",
       "classification": [
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/svobodnik-m4__stats__2026-09-19_144346.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-19",
+        "note": "Verification synchronized from canonical weapon record"
+      }
     },
     {
       "id": "m4-target-pistol-grip-module",
