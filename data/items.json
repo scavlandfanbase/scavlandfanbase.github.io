@@ -82,7 +82,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 3,
+      "stackable": false,
+      "description": "An ergonomic polymer pistol grip for a heavy machine gun.",
+      "attachmentModifiers": {
+        "handling": 6,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201901.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "2hmg-modern-polymer-stock-module",
@@ -274,7 +286,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An angled foregrip designed to give a balance between stability and ergonomy.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201949.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "armor-plate",
@@ -805,7 +829,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 4000,
+      "rank": 3,
+      "stackable": false,
+      "description": "A forward angled foregrip designed to feel comfortable and familiar, like a pistol grip.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201954.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "fresh-mushrooms",
@@ -895,7 +931,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A small handstop designed to give some comfort without changing one's preferred hold.",
+      "attachmentModifiers": {
+        "handling": 1,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201943.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "headache-pills",
@@ -1062,7 +1110,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An ergonomic pistol grip, highly adaptable for makeshift guns, rifles and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201739.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "m4-gen2-drum-mag",
@@ -1098,7 +1158,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A standard pistol grip, highly adaptable for makeshift guns, rifles and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201745.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "m4-railed-handguard",
@@ -1169,7 +1241,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 4000,
+      "rank": 3,
+      "stackable": false,
+      "description": "A pistol grip designed for target practice, highly adaptable for makeshift guns, rifles and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201733.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "makeshift-collapsible-stock-module",
@@ -1976,7 +2060,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A mag made of polymer that improves gun control, with a beavertail curve at the top to protect the hands.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201959.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "pm-polymer-stock",
@@ -2034,7 +2130,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A highly adaptable polymer pistol grip for rifles, shotguns and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201853.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "pp-pristine-mag",
@@ -2291,7 +2399,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A short polymer vertical foregrip with a slight taper for comfort.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201915.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "short-vertical-foregrip",
@@ -2300,7 +2420,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A short vertical foregrip designed for ease of use.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201936.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "shotgun-ap-ammo",
@@ -2448,7 +2580,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard polymer vertical foregrip with a slight taper for comfort.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201907.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "tattered-armor-repair-kit",
@@ -2593,7 +2737,19 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard vertical foregrip designed for ease of use.",
+      "attachmentModifiers": {
+        "handling": 4,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201923.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "vintage-red-dot-sight",
