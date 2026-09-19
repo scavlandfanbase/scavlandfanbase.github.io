@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "description": "Ammunition data migrated from the repository's screenshot-derived ammo documentation.",
+  "lastMigratedFromSite": "2026-09-18",
+  "data": [
+    {
+      "id": "special-ammo-special-fmj-ammo",
+      "name": "Special FMJ Ammo",
+      "estimatedPrice": 1000,
+      "description": "Special ammunition that can fit into different types of weapons.",
+      "damage": "75",
+      "penetrationPercent": 100,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
+      "name": "High Caliber Rifle HP Ammo",
+      "estimatedPrice": 350,
+      "description": "Hollow point variant of high-caliber rifle ammo. Lots of stopping power – and pain.",
+      "damage": "46",
+      "penetrationPercent": -25,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "high-caliber-rifle-ap-ammo",
+      "name": "High Caliber Rifle AP Ammo",
+      "estimatedPrice": 300,
+      "description": "Armor piercing variant of high-caliber rifle ammo. A nice tactical advantage.",
+      "damage": "26",
+      "penetrationPercent": 50,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 3
+    },
+    {
+      "id": "high-caliber-rifle-fmj-ammo",
+      "name": "High Caliber Rifle FMJ Ammo",
+      "estimatedPrice": 150,
+      "description": "High-caliber, full metal jacket ammo. As reliable as they come.",
+      "damage": "30",
+      "penetrationPercent": 0,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 1
+    },
+    {
+      "id": "shotgun-ammo-shotgun-hp-ammo",
+      "name": "Shotgun HP Ammo",
+      "estimatedPrice": 180,
+      "description": "Hollow point ammunition for shotguns. Even if I miss, I don't miss.",
+      "damage": "6 x 6 = 36",
+      "penetrationPercent": -25,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "shotgun-buckshot-ammo",
+      "name": "Shotgun Buckshot Ammo",
+      "estimatedPrice": 60,
+      "description": "Ammunition for shotguns and guns with spread shots.",
+      "damage": "6 x 5 = 30",
+      "penetrationPercent": 0,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 1
+    },
+    {
+      "id": "shotgun-ap-ammo",
+      "name": "Shotgun AP Ammo",
+      "estimatedPrice": 400,
+      "description": "Armor piercing rounds for shotguns. They might as well be wearing rubakhas.",
+      "damage": "6 x 4 = 24",
+      "penetrationPercent": 50,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 2
+    },
+    {
+      "id": "rifle-ammo-rifle-hp-ammo",
+      "name": "Rifle HP Ammo",
+      "estimatedPrice": 280,
+      "description": "Hollow point ammunition for rifles. Don't need great aim when you got this.",
+      "damage": "25",
+      "penetrationPercent": -25,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "rifle-fmj-ammo",
+      "name": "Rifle FMJ Ammo",
+      "estimatedPrice": 120,
+      "description": "Standard ammunition for rifles.",
+      "damage": "17",
+      "penetrationPercent": 0,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 1
+    },
+    {
+      "id": "rifle-ap-ammo",
+      "name": "Rifle AP Ammo",
+      "estimatedPrice": 240,
+      "description": "Armor piercing ammunition. Good for mowing down some well-equipped enemies.",
+      "damage": "14",
+      "penetrationPercent": 50,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 3
+    },
+    {
+      "id": "pistol-ammo-pistol-hp-ammo",
+      "name": "Pistol HP Ammo",
+      "estimatedPrice": 60,
+      "description": "Hollow point ammunition, perfect for self-defense.",
+      "damage": "15",
+      "penetrationPercent": -25,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "pistol-fmj-ammo",
+      "name": "Pistol FMJ Ammo",
+      "estimatedPrice": 30,
+      "description": "Ammunition made for pistols, submachine guns, repeaters etc.",
+      "damage": "10",
+      "penetrationPercent": 0,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 1
+    },
+    {
+      "id": "pistol-ap-ammo",
+      "name": "Pistol AP Ammo",
+      "estimatedPrice": 100,
+      "description": "Armor piercing ammo. They may have gear, but that doesn't mean they're safe.",
+      "damage": "8",
+      "penetrationPercent": 50,
+      "maxStack": 999,
+      "source": {
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 2
+    }
+  ]
+}
