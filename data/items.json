@@ -1107,7 +1107,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard size handguard with a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -3.5,
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201522.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "m4-ribbed-handguard",
@@ -1116,7 +1129,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard size handguard for the M4, ribbed to offer better grip.",
+      "attachmentModifiers": {
+        "recoil": -2.5,
+        "handling": 3,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201510.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "m4-slotted-mount-handguard",
@@ -1354,7 +1380,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "An assault rifle handguard made from a combination of polymer and wood.",
+      "attachmentModifiers": {
+        "recoil": -3,
+        "handling": 4,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201529.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mk-compensator",
@@ -1390,7 +1429,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 4000,
+      "rank": 3,
+      "stackable": false,
+      "description": "An extended handguard with a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -5,
+        "handling": 10,
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201543.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mk-extended-slotted-handguard",
@@ -1461,7 +1513,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An assault rifle handguard made with polymer and wood parts, plus a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -4.5,
+        "handling": 6,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201549.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mk-railed-dust-cover",
@@ -1490,7 +1555,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An assault rifle polymer handguard, with rails for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -4.5,
+        "handling": 6,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201555.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mk-silencer",
@@ -1839,7 +1917,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A shotgun forestock made of polymer, with an integrated flashlight.",
+      "attachmentModifiers": {
+        "recoil": -5,
+        "handling": 6,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201656.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "pm-full-polymer-stock",
@@ -1903,7 +1994,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A shotgun forestock made of polymer, with a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -5,
+        "handling": 6,
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201702.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "pm-silencer",
@@ -2364,7 +2468,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 750,
+      "rank": 1,
+      "stackable": false,
+      "description": "A weathered handguard for a marksman rifle.",
+      "attachmentModifiers": {
+        "recoil": -2,
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201715.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "tc-polymer-large-mag-black",
@@ -2409,7 +2526,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A weathered handguard for a subsonic marksman rifle, with rails for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -3,
+        "handling": 4,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201708.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "tc-skeleton-stock",
@@ -2570,7 +2700,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 750,
+      "rank": 1,
+      "stackable": false,
+      "description": "A polymer handguard for easier handling of an over-under shotgun.",
+      "attachmentModifiers": {
+        "recoil": -1.5,
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201721.png",
+        "status": "screenshot-verified"
+      }
     }
   ]
 }
