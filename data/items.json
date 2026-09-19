@@ -235,7 +235,7 @@
       "description": "A set of gears, levers and other high-grade machine parts. Possibly good for reuse instead of recycling.",
       "maxStack": 5,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/advanced-mechanical-components__tooltip__2026-09-18_091907.png",
         "status": "screenshot-verified"
       }
     },
@@ -314,7 +314,7 @@
       "description": "A rusty plate of armor which can be strapped to one's chest, offering minimal protection in combat. If it stops even one bullet, that’s already good enough.",
       "maxStack": 5,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/armor-plate__tooltip__2026-09-18_091919.png",
         "status": "screenshot-verified"
       }
     },
@@ -1039,7 +1039,7 @@
       "description": "A fabric designed for high impact resistance, usually sewn onto armor to make it bulletproof.",
       "maxStack": 5,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/kevlar-weave__tooltip__2026-09-18_091913.png",
         "status": "screenshot-verified"
       }
     },
@@ -1336,7 +1336,7 @@
       "description": "Small gears, levers and bits of machinery. Not too big or high-quality, but still probably worth something.",
       "maxStack": 5,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/mechanical-components__tooltip__2026-09-18_091859.png",
         "status": "screenshot-verified"
       }
     },
@@ -2280,7 +2280,7 @@
       "description": "A scrap of rubber which resisted the years. A very resilient material, and good for trading.",
       "maxStack": 40,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/rubber-scrap__tooltip__2026-09-18_091732.png",
         "status": "screenshot-verified"
       }
     },
@@ -2373,7 +2373,7 @@
       "description": "A bunch of metal screws, hard to find and pick up but valuable for the tinkering types.",
       "maxStack": 10,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/screws__tooltip__2026-09-18_091739.png",
         "status": "screenshot-verified"
       }
     },
