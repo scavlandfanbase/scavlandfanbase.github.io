@@ -608,7 +608,7 @@
       "description": "A container of industrial waste from when Svarog Factories was still operational.",
       "maxStack": 40,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/chemical-residue__tooltip__2026-09-18_091704.png",
         "status": "screenshot-verified"
       }
     },
@@ -807,7 +807,7 @@
       "description": "An old scrap of low-quality fabric, useful for patching up clothes.",
       "maxStack": 40,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/fabric-scrap__tooltip__2026-09-18_091726.png",
         "status": "screenshot-verified"
       }
     },
@@ -922,7 +922,11 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/hammer__tooltip__2026-09-18_091636.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "handstop",
@@ -1406,7 +1410,7 @@
       "description": "Scraps of metal that can be recycled into something useful by able hands.",
       "maxStack": 40,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/metal-scrap__tooltip__2026-09-18_091713.png",
         "status": "screenshot-verified"
       }
     },
@@ -1916,7 +1920,7 @@
       "description": "A scrap of plastic that can maybe be recycled.",
       "maxStack": 40,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/plastic-scrap__tooltip__2026-09-18_091720.png",
         "status": "screenshot-verified"
       }
     },
@@ -1953,7 +1957,7 @@
       "description": "I’m not the type to pull someone’s teeth out. But what else is this thing for?",
       "maxStack": 5,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/plier__tooltip__2026-09-18_091651.png",
         "status": "screenshot-verified"
       }
     },
@@ -2352,7 +2356,7 @@
       "description": "A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it.",
       "maxStack": 4,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/screwdriver__tooltip__2026-09-18_091645.png",
         "status": "screenshot-verified"
       }
     },
@@ -2782,7 +2786,7 @@
       "description": "A lubricant bottle so old and busted I’d need lubricant to open it. Still valuable for the tinkerers in Zalesye.",
       "maxStack": 4,
       "source": {
-        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "file": "evidence-inbox/items/wg-40__tooltip__2026-09-18_091658.png",
         "status": "screenshot-verified"
       }
     },
