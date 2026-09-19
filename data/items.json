@@ -2795,12 +2795,17 @@
     },
     {
       "id": "roit-vest",
-      "name": "Roit Vest",
+      "name": "Riot Vest",
       "classification": [
         "armour"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical armour record."
+      }
     },
     {
       "id": "rubber-scrap",
@@ -3516,6 +3521,20 @@
       "source": {
         "file": "evidence-inbox/attachments/zavod-polymer-handguard__tooltip__2026-09-17_201721.png",
         "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "medicinal-herb",
+      "name": "Medicinal Herb",
+      "classification": [
+        "crafting-resource"
+      ],
+      "image": null,
+      "notes": "Confirmed as a required crafting ingredient in screenshot-verified recipes; own item tooltip/stats still require direct evidence.",
+      "source": {
+        "file": "data/crafting.json",
+        "status": "recipe-evidenced",
+        "note": "Ingredient existence confirmed by screenshot-verified Advanced Bandage and Morphine recipes; not a direct item-tooltip verification."
       }
     }
   ]
