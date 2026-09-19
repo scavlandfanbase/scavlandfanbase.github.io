@@ -1,0 +1,56 @@
+name: Submit SCAVLAND evidence
+description: Upload an in-game screenshot for a missing item or correction
+title: "[Evidence] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve SCAVLAND. Community submissions are **pending evidence** until reviewed and will not automatically change verified game data.
+  - type: dropdown
+    id: submission
+    attributes:
+      label: Submission type
+      options:
+        - Missing item
+        - Incorrect stats or information
+        - New or clearer screenshot
+        - Other correction
+    validations:
+      required: true
+  - type: input
+    id: item
+    attributes:
+      label: Item / weapon / armour name
+      placeholder: Name exactly as shown in game
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Item
+        - Weapon
+        - Armour / gear
+        - Ammo
+        - Crafting
+        - Vendor
+        - Faction
+        - Area / map
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: In-game screenshot
+      description: Drag or paste the screenshot into this box. Please include the relevant in-game panel and readable values where possible.
+      placeholder: Paste or drag screenshot here
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Optional context such as what is missing or what appears incorrect.
