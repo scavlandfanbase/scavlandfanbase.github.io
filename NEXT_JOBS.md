@@ -21,6 +21,8 @@ Whenever any website code, structured data, assets, navigation, UI, database con
 
 ## Handover — 19 September 2026
 
+- **GitHub Pages HTTPS verified from repository settings:** site is live at the default `scavlandfanbase.github.io` domain, deployment source is `main` `/ (root)`, and **Enforce HTTPS** is enabled/required. Together with push protection, Dependabot/security settings and the active `Protect main` ruleset, the planned GitHub hardening pass is complete.
+
 - **GitHub main-branch hardening confirmed from repository settings:** active ruleset `Protect main` targets the default `main` branch, has an empty bypass list, blocks branch deletion and force pushes, while normal direct updates remain allowed. Account-level push protection and the selected code-security/Dependabot protections were also enabled manually in GitHub settings. A normal direct commit after enabling the ruleset is used below to verify our existing update workflow still works.
 
 - **Evidence workflow fully validated end-to-end:** a fresh live public submission successfully uploaded its screenshot, created a Pending database row, appeared in the secure Admin queue, and displayed the correct public success message after fixing the async form reset (`20a0752496b61c9ea5cea0f1ba316e8be7feede6`). Admin Rejected records now include **Restore to Pending** with confirmation for accidental rejections (`45a782ee93fff62175b6ff21c7f7cb80f29aa6de`).
