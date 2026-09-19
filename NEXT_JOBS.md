@@ -21,6 +21,8 @@ Whenever any website code, structured data, assets, navigation, UI, database con
 
 ## Handover — 19 September 2026
 
+- **Blueprint item evidence promoted:** full-resolution screenshots verified Advanced Gun Repair Kit Blueprint (~40,000₽, Rank 2, not stackable) and Expert Gun Repair Kit Blueprint (~60,000₽, Rank 3, not stackable), including their visible descriptions. Both existing identities in `data/items.json` are now `screenshot-verified`. Commit `7ead8540d060af48693907c59062d0e6e1000669`.
+
 - **Crafting evidence reconciliation completed:** all 22 Medical / Weapon / Armour Workbench recipes were compared against the uploaded in-game workbench screenshot set. The earlier JSON migration had dropped ingredients from all three benches. `data/crafting.json` now contains the complete screenshot-verified ingredient lists for all 22 recipes. Data commit `59477a5cdbb8c6c5db797768b89b0dbb66370505`.
 - **Crafting is now single-source:** `crafting.html` no longer embeds a second hard-coded recipe database. It loads `data/crafting.json`, builds Medical (8), Weapon (7), and Armour (7) dynamically, and derives displayed counts from canonical JSON. Page commit `c378418455ddb9c3da4d2a0b56f9c173e785aa80`.
 - **Crafting verification check passed:** repository re-read confirmed 22/22 records are `screenshot-verified`, the page contains the JSON fetch, and the old embedded recipe block is absent. The previous instruction to postpone crafting reconciliation is therefore resolved.
