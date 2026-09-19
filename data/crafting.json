@@ -1,7 +1,6 @@
 {
-  "schemaVersion": 1,
-  "description": "Crafting recipes migrated from crafting.html.",
-  "lastMigratedFromSite": "2026-09-18",
+  "schemaVersion": 2,
+  "description": "Crafting recipes verified from in-game workbench screenshots.",
   "data": [
     {
       "id": "ifak-medkit",
@@ -17,11 +16,16 @@
           "itemId": "advanced-bandage",
           "name": "Advanced Bandage",
           "quantity": 1
+        },
+        {
+          "itemId": "fabric-scrap",
+          "name": "Fabric Scrap",
+          "quantity": 2
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -38,11 +42,16 @@
           "itemId": "morphine",
           "name": "Morphine",
           "quantity": 1
+        },
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "quantity": 2
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -59,11 +68,16 @@
           "itemId": "glue",
           "name": "Glue",
           "quantity": 1
+        },
+        {
+          "itemId": "medicinal-herb",
+          "name": "Medicinal Herb",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -80,11 +94,16 @@
           "itemId": "headache-pills",
           "name": "Headache Pills",
           "quantity": 1
+        },
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "quantity": 2
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -101,11 +120,16 @@
           "itemId": "chemical-residue",
           "name": "Chemical Residue",
           "quantity": 2
+        },
+        {
+          "itemId": "morphine",
+          "name": "Morphine",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -122,11 +146,16 @@
           "itemId": "plastic-scrap",
           "name": "Plastic Scrap",
           "quantity": 1
+        },
+        {
+          "itemId": "medicinal-herb",
+          "name": "Medicinal Herb",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -143,11 +172,16 @@
           "itemId": "chemical-residue",
           "name": "Chemical Residue",
           "quantity": 1
+        },
+        {
+          "itemId": "overripe-potato",
+          "name": "Overripe Potato",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -159,11 +193,16 @@
           "itemId": "fabric-scrap",
           "name": "Fabric Scrap",
           "quantity": 4
+        },
+        {
+          "itemId": "moonshine",
+          "name": "Moonshine",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -190,11 +229,16 @@
           "itemId": "hammer",
           "name": "Hammer",
           "quantity": 1
+        },
+        {
+          "itemId": "plier",
+          "name": "Plier",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -216,11 +260,16 @@
           "itemId": "screwdriver",
           "name": "Screwdriver",
           "quantity": 1
+        },
+        {
+          "itemId": "hammer",
+          "name": "Hammer",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -237,11 +286,16 @@
           "itemId": "mechanical-components",
           "name": "Mechanical Components",
           "quantity": 1
+        },
+        {
+          "itemId": "screwdriver",
+          "name": "Screwdriver",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -258,11 +312,16 @@
           "itemId": "gun-field-tools",
           "name": "Gun Field Tools",
           "quantity": 1
+        },
+        {
+          "itemId": "hammer",
+          "name": "Hammer",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -279,11 +338,16 @@
           "itemId": "screwdriver",
           "name": "Screwdriver",
           "quantity": 1
+        },
+        {
+          "itemId": "hammer",
+          "name": "Hammer",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -300,11 +364,16 @@
           "itemId": "fabric-scrap",
           "name": "Fabric Scrap",
           "quantity": 2
+        },
+        {
+          "itemId": "gun-lube",
+          "name": "Gun Lube",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -316,11 +385,16 @@
           "itemId": "chemical-residue",
           "name": "Chemical Residue",
           "quantity": 1
+        },
+        {
+          "itemId": "wg-40",
+          "name": "WG-40",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -347,11 +421,16 @@
           "itemId": "glue",
           "name": "Glue",
           "quantity": 1
+        },
+        {
+          "itemId": "plier",
+          "name": "Plier",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -373,11 +452,16 @@
           "itemId": "glue",
           "name": "Glue",
           "quantity": 1
+        },
+        {
+          "itemId": "plier",
+          "name": "Plier",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -394,11 +478,16 @@
           "itemId": "field-repair-kit",
           "name": "Field Repair Kit",
           "quantity": 1
+        },
+        {
+          "itemId": "plier",
+          "name": "Plier",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -415,11 +504,16 @@
           "itemId": "glue",
           "name": "Glue",
           "quantity": 1
+        },
+        {
+          "itemId": "plier",
+          "name": "Plier",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -436,11 +530,16 @@
           "itemId": "field-repair-kit",
           "name": "Field Repair Kit",
           "quantity": 1
+        },
+        {
+          "itemId": "plier",
+          "name": "Plier",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -457,11 +556,16 @@
           "itemId": "metal-scrap",
           "name": "Metal Scrap",
           "quantity": 2
+        },
+        {
+          "itemId": "glue",
+          "name": "Glue",
+          "quantity": 1
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -473,12 +577,18 @@
           "itemId": "plastic-scrap",
           "name": "Plastic Scrap",
           "quantity": 2
+        },
+        {
+          "itemId": "chemical-residue",
+          "name": "Chemical Residue",
+          "quantity": 2
         }
       ],
       "source": {
-        "file": "crafting.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox.zip / crafting workbench screenshots",
+        "status": "screenshot-verified"
       }
     }
-  ]
+  ],
+  "lastVerified": "2026-09-19"
 }
