@@ -341,7 +341,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/ai-2-mechanist-medkit__tooltip__2026-09-18_085027.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-18"
+      }
     },
     {
       "id": "ai-2-medkit",
@@ -712,7 +717,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/canned-beans__tooltip__2026-09-18_085113.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-18"
+      }
     },
     {
       "id": "canteen",
@@ -722,7 +732,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/canteen__tooltip__2026-09-18_085107.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-18"
+      }
     },
     {
       "id": "chemical-residue",
