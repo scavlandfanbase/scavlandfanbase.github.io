@@ -1,0 +1,3550 @@
+{
+  "schemaVersion": 1,
+  "description": "Central registry of item identities referenced across the SCAVLAND site.",
+  "lastMigratedFromSite": "2026-09-18",
+  "data": [
+    {
+      "id": "special-ammo-special-fmj-ammo",
+      "name": "Special FMJ Ammo",
+      "classification": [
+        "ammunition"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/special-fmj-ammo__stats__2026-09-16_115812.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
+      "name": "High Caliber Rifle HP Ammo",
+      "classification": [
+        "ammunition"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "pistol-ammo-pistol-hp-ammo",
+      "name": "Pistol HP Ammo",
+      "classification": [
+        "ammunition"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "rifle-ammo-rifle-hp-ammo",
+      "name": "Rifle HP Ammo",
+      "classification": [
+        "ammunition"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "shotgun-ammo-shotgun-hp-ammo",
+      "name": "Shotgun HP Ammo",
+      "classification": [
+        "ammunition"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "2hmg",
+      "name": "2HMG",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "2hmg-long",
+      "name": "2HMG (Long)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/2hmg-long__stats__2026-09-19_084756.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "2hmg-short",
+      "name": "2HMG (Short)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/2hmg-short__stats__2026-09-19_084341.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "2hmg-ergonomic-pistol-grip",
+      "name": "2HMG Ergonomic Pistol Grip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 3,
+      "stackable": false,
+      "description": "An ergonomic polymer pistol grip for a heavy machine gun.",
+      "attachmentModifiers": {
+        "handling": 6,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/2hmg-ergonomic-pistol-grip__tooltip__2026-09-17_201901.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "2hmg-modern-polymer-stock-module",
+      "name": "2HMG Modern Polymer Stock Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 3,
+      "stackable": false,
+      "description": "A very adaptable and modern polymer stock, originally made for a heavy machine gun.",
+      "attachmentModifiers": {
+        "recoil": -10,
+        "handling": 6,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/2hmg-modern-polymer-stock-module__tooltip__2026-09-17_201233.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "2hmg-railed-handguard",
+      "name": "2HMG Railed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/2hmg-railed-handguard__tooltip__2026-09-17_201240.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "3-line-nagant-full-stock",
+      "name": "3-Line Nagant (Full Stock)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/3-Line Nagant (Full Stock).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "3-line-nagant-infantry",
+      "name": "3-Line Nagant (Infantry)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/3-Line Nagant (Infantry).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "3-line-nagant-obrez",
+      "name": "3-Line Nagant (Obrez)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/3-Line Nagant (Obrez).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "3-line-nagant-stockless",
+      "name": "3-Line Nagant (Stockless)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "63-dragoon",
+      "name": "63 Dragoon",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/63 Dragoon.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "advanced-bandage",
+      "name": "Advanced Bandage",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/advanced-bandage__recipe__2026-09-18_205115.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "advanced-bandage-blueprint",
+      "name": "Advanced Bandage Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "advanced-gun-repair-kit",
+      "name": "Advanced Gun Repair Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/advanced-gun-repair-kit__recipe__2026-09-18_205350.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "advanced-gun-repair-kit-blueprint",
+      "name": "Advanced Gun Repair Kit Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 40000,
+      "rank": 2,
+      "stackable": false,
+      "description": "This lets me learn to set up a high-quality kit for maintaining and repairing weapons very reliably.",
+      "file": "evidence-inbox/blueprints/advanced-gun-repair-kit-blueprint__tooltip__2026-09-17_202103.png",
+      "source": {
+        "file": "evidence-inbox/blueprints/advanced-gun-repair-kit-blueprint__tooltip__2026-09-17_202103.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "advanced-mechanical-components",
+      "name": "Advanced Mechanical Components",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 25000,
+      "rank": 3,
+      "description": "A set of gears, levers and other high-grade machine parts. Possibly good for reuse instead of recycling.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox/items/advanced-mechanical-components__tooltip__2026-09-18_091907.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "ai-2-army-medkit",
+      "name": "AI-2 Army Medkit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/ai-2-army-medkit__recipe__2026-09-18_205122.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "ai-2-army-medkit-blueprint",
+      "name": "AI-2 Army Medkit Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "ai-2-mechanist-medkit",
+      "name": "AI-2 Mechanist Medkit",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/ai-2-mechanist-medkit__tooltip__2026-09-18_085027.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-18"
+      }
+    },
+    {
+      "id": "ai-2-medkit",
+      "name": "AI-2 Medkit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/ai-2-medkit__recipe__2026-09-18_205059.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "angled-foregrip",
+      "name": "Angled Foregrip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An angled foregrip designed to give a balance between stability and ergonomy.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/angled-foregrip__tooltip__2026-09-17_201949.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "armor-plate",
+      "name": "Armor Plate",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 25000,
+      "rank": 3,
+      "description": "A rusty plate of armor which can be strapped to one's chest, offering minimal protection in combat. If it stops even one bullet, that’s already good enough.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox/items/armor-plate__tooltip__2026-09-18_091919.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "armoured-rags",
+      "name": "Armoured Rags",
+      "classification": [
+        "armour",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "ashen-ushanka",
+      "name": "Ashen Ushanka",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "bahadir-918-long",
+      "name": "Bahadir 918 (Long)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bahadir 918 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "bahadir-918-short",
+      "name": "Bahadir 918 (Short)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bahadir 918 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "bahadir-920",
+      "name": "Bahadir 920",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bahadir 920.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "bahadir-extended-handguard",
+      "name": "Bahadir Extended Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/bahadir-extended-handguard__tooltip__2026-09-17_201300.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "bahadir-railed-handguard",
+      "name": "Bahadir Railed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/bahadir-railed-handguard__tooltip__2026-09-17_201305.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "bahadir-ribbed-cylinder-mag",
+      "name": "Bahadir Ribbed Cylinder Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/bahadir-ribbed-cylinder-mag__tooltip__2026-09-17_200643.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "bakelite-pistol-grip-module",
+      "name": "Bakelite Pistol Grip Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "balistic-kask",
+      "name": "Balistic Kask",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "bandage",
+      "name": "Bandage",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/bandage__recipe__2026-09-18_205033.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "basic-gun-repair-kit",
+      "name": "Basic Gun Repair Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/basic-gun-repair-kit__recipe__2026-09-18_205344.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "basic-gun-repair-kit-blueprint",
+      "name": "Basic Gun Repair Kit Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "borealis-12",
+      "name": "Borealis 12",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/borealis-12__stats__2026-09-19_141353.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
+    },
+    {
+      "id": "borealis-12-tak",
+      "name": "Borealis 12-TAK",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Borealis 12-TAK.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
+    },
+    {
+      "id": "borealis-adaptable-folding-stock",
+      "name": "Borealis Adaptable Folding Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/borealis-adaptable-folding-stock__tooltip__2026-09-17_201102.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-adaptable-railed-handguard",
+      "name": "Borealis Adaptable Railed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/borealis-adaptable-railed-handguard__tooltip__2026-09-17_201334.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-aluminum-mag",
+      "name": "Borealis Aluminum Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/borealis-aluminum-mag__tooltip__2026-09-17_200439.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-curved-mag",
+      "name": "Borealis Curved Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/borealis-curved-mag__tooltip__2026-09-17_200446.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-drum-mag",
+      "name": "Borealis Drum Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/borealis-drum-mag__tooltip__2026-09-17_200340.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-lock-mount-handguard",
+      "name": "Borealis Lock Mount Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/borealis-lock-mount-handguard__tooltip__2026-09-17_201342.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-long-curved-mag",
+      "name": "Borealis Long Curved Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/borealis-long-curved-mag__tooltip__2026-09-17_200618.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-polymer-short-handguard",
+      "name": "Borealis Polymer Short Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/borealis-polymer-short-handguard__tooltip__2026-09-17_201328.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-railed-dust-cover",
+      "name": "Borealis Railed Dust Cover",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/dust-covers/borealis-railed-dust-cover__tooltip__2026-09-17_202047.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "borealis-skeleton-stock",
+      "name": "Borealis Skeleton Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/borealis-skeleton-stock__tooltip__2026-09-17_201109.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "bortovka-tinker",
+      "name": "Bortovka Tinker",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "bortovka-tinker-mag",
+      "name": "Bortovka Tinker (+Mag)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bortovka Tinker (+Mag).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "bortovka-tinker-long-mag",
+      "name": "Bortovka Tinker (Long / +Mag)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bortovka Tinker (Long - +Mag).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
+    },
+    {
+      "id": "canned-beans",
+      "name": "Canned Beans",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/canned-beans__tooltip__2026-09-18_085113.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-18"
+      }
+    },
+    {
+      "id": "canteen",
+      "name": "Canteen",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/canteen__tooltip__2026-09-18_085107.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-18"
+      }
+    },
+    {
+      "id": "chemical-residue",
+      "name": "Chemical Residue",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A container of industrial waste from when Svarog Factories was still operational.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox/items/chemical-residue__tooltip__2026-09-18_091704.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "cigarettes",
+      "name": "Cigarettes",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "classic-scope",
+      "name": "Classic Scope",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "dragoon-2-slot-compensator",
+      "name": "Dragoon 2-Slot Compensator",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "dragoon-folding-stock",
+      "name": "Dragoon Folding Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/dragoon-folding-stock__tooltip__2026-09-17_201225.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "dragoon-large-steel-mag",
+      "name": "Dragoon Large Steel Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/dragoon-large-steel-mag__tooltip__2026-09-17_200638.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "dragoon-polymer-handguard",
+      "name": "Dragoon Polymer Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/dragoon-polymer-handguard__tooltip__2026-09-17_201248.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "dragoon-polymer-stock",
+      "name": "Dragoon Polymer Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/dragoon-polymer-stock__tooltip__2026-09-17_201121.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "dragoon-railed-dust-cover",
+      "name": "Dragoon Railed Dust Cover",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/dust-covers/dragoon-railed-dust-cover__tooltip__2026-09-17_202057.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "dragoon-railed-handguard",
+      "name": "Dragoon Railed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/dragoon-railed-handguard__tooltip__2026-09-17_201255.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "dragoon-steel-mag",
+      "name": "Dragoon Steel Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/dragoon-steel-mag__tooltip__2026-09-17_200631.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "dried-mushrooms",
+      "name": "Dried Mushrooms",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "dried-steak",
+      "name": "Dried Steak",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "dusty-overcoat",
+      "name": "Dusty Overcoat",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "echelon-killer-apple",
+      "name": "Echelon - Killer Apple",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "ekzoskelet-armor",
+      "name": "Ekzoskelet Armor",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "ekzoskelet-legs",
+      "name": "Ekzoskelet Legs",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "elevated-red-dot-sight",
+      "name": "Elevated Red Dot Sight",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "expert-gun-repair-kit",
+      "name": "Expert Gun Repair Kit",
+      "classification": [
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/expert-gun-repair-kit__recipe__2026-09-18_205358.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "expert-gun-repair-kit-blueprint",
+      "name": "Expert Gun Repair Kit Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 60000,
+      "rank": 3,
+      "stackable": false,
+      "description": "This shows me how to make a highly advanced repair kit for weapons, fit only for experts.",
+      "file": "evidence-inbox/blueprints/expert-gun-repair-kit-blueprint__tooltip__2026-09-17_202109.png",
+      "source": {
+        "file": "evidence-inbox/blueprints/expert-gun-repair-kit-blueprint__tooltip__2026-09-17_202109.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "fabric-scrap",
+      "name": "Fabric Scrap",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "An old scrap of low-quality fabric, useful for patching up clothes.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox/items/fabric-scrap__tooltip__2026-09-18_091726.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "field-repair-kit",
+      "name": "Field Repair Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/field-repair-kit__recipe__2026-09-18_205425.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "forward-angled-foregrip",
+      "name": "Forward Angled Foregrip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 4000,
+      "rank": 3,
+      "stackable": false,
+      "description": "A forward angled foregrip designed to feel comfortable and familiar, like a pistol grip.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/forward-angled-foregrip__tooltip__2026-09-17_201954.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "fresh-mushrooms",
+      "name": "Fresh Mushrooms",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "glue",
+      "name": "Glue",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/glue__recipe__2026-09-18_205415.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "gp-4-gas-mask",
+      "name": "GP-4 Gas Mask",
+      "classification": [
+        "armour",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "green-rags",
+      "name": "Green Rags",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "gun-cleaning-rod",
+      "name": "Gun Cleaning Rod",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/gun-cleaning-rod__recipe__2026-09-18_205326.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "gun-field-tools",
+      "name": "Gun Field Tools",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/gun-field-tools__recipe__2026-09-18_205332.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "gun-lube",
+      "name": "Gun Lube",
+      "classification": [
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/gun-lube__recipe__2026-09-18_205320.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "hammer",
+      "name": "Hammer",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/hammer__tooltip__2026-09-18_091636.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "handstop",
+      "name": "Handstop",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A small handstop designed to give some comfort without changing one's preferred hold.",
+      "attachmentModifiers": {
+        "handling": 1,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/handstop__tooltip__2026-09-17_201943.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "headache-pills",
+      "name": "Headache Pills",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "heavy-armor-repair-kit",
+      "name": "Heavy Armor Repair Kit",
+      "classification": [
+        "crafted-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/heavy-armor-repair-kit__recipe__2026-09-18_205453.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "high-caliber-rifle-ap-ammo",
+      "name": "High Caliber Rifle AP Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "high-caliber-rifle-fmj-ammo",
+      "name": "High Caliber Rifle FMJ Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-fmj-ammo__stats__2026-09-19_221757.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "high-caliber-rifle-hp-ammo",
+      "name": "High Caliber Rifle HP Ammo",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "holographic-sight",
+      "name": "Holographic Sight",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/sights/holographic-sight__tooltip__2026-09-17_195031.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "ifak-medkit",
+      "name": "IFAK Medkit",
+      "classification": [
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/ifak-medkit__recipe__2026-09-18_205130.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "ifak-medkit-blueprint",
+      "name": "IFAK Medkit Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "kevlar-weave",
+      "name": "Kevlar Weave",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 10000,
+      "rank": 2,
+      "description": "A fabric designed for high impact resistance, usually sewn onto armor to make it bulletproof.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox/items/kevlar-weave__tooltip__2026-09-18_091913.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "large-pumpkin",
+      "name": "Large Pumpkin",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "leon-1895",
+      "name": "Leon 1895",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Leon 1895.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "leon-1895-long",
+      "name": "Leon 1895 (Long)",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Leon 1895 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "leon-1895-short",
+      "name": "Leon 1895 (Short)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Leon 1895 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "lightweight-2x-scope",
+      "name": "Lightweight 2x Scope",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "lightweight-4x-scope",
+      "name": "Lightweight 4x Scope",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "m4-adaptable-extended-handguard",
+      "name": "M4 Adaptable Extended Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/m4-adaptable-extended-handguard__tooltip__2026-09-17_201420.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "m4-ergonomic-pistol-grip-module",
+      "name": "M4 Ergonomic Pistol Grip Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An ergonomic pistol grip, highly adaptable for makeshift guns, rifles and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/m4-ergonomic-pistol-grip-module__tooltip__2026-09-17_201739.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "m4-gen2-drum-mag",
+      "name": "M4 Gen2 Drum Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/m4-gen2-drum-mag__tooltip__2026-09-17_200147.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "m4-large-aluminum-mag",
+      "name": "M4 Large Aluminum Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "m4-large-aluminum-mag-tan",
+      "name": "M4 Large Aluminum Mag (Tan)",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "m4-pistol-grip-module",
+      "name": "M4 Pistol Grip Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A standard pistol grip, highly adaptable for makeshift guns, rifles and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/m4-pistol-grip-module__tooltip__2026-09-17_201745.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "m4-railed-handguard",
+      "name": "M4 Railed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard size handguard with a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -3.5,
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/m4-railed-handguard__tooltip__2026-09-17_201522.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "m4-ribbed-handguard",
+      "name": "M4 Ribbed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard size handguard for the M4, ribbed to offer better grip.",
+      "attachmentModifiers": {
+        "recoil": -2.5,
+        "handling": 3,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/m4-ribbed-handguard__tooltip__2026-09-17_201510.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "m4-slotted-mount-handguard",
+      "name": "M4 Slotted Mount Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/handguards/m4-slotted-mount-handguard__tooltip__2026-09-17_201428.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "m4-svodbonik",
+      "name": "Svobodnik M4",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/svobodnik-m4__stats__2026-09-19_144346.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-19",
+        "note": "Verification synchronized from canonical weapon record"
+      }
+    },
+    {
+      "id": "m4-target-pistol-grip-module",
+      "name": "M4 Target Pistol Grip Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 4000,
+      "rank": 3,
+      "stackable": false,
+      "description": "A pistol grip designed for target practice, highly adaptable for makeshift guns, rifles and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/m4-target-pistol-grip-module__tooltip__2026-09-17_201733.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "makeshift-collapsible-stock-module",
+      "name": "Makeshift Collapsible Stock Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/makeshift-collapsible-stock-module__tooltip__2026-09-17_201056.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "makeshift-double-stacked-steel-stick-mag",
+      "name": "Makeshift Double Stacked Steel Stick Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/makeshift-double-stacked-steel-stick-mag__tooltip__2026-09-17_200413.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "makeshift-grated-stock",
+      "name": "Makeshift Grated Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/makeshift-grated-stock__tooltip__2026-09-17_200722.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "makeshift-large-steel-stick-mag",
+      "name": "Makeshift Large Steel Stick Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "makeshift-prosthetic-stock",
+      "name": "Makeshift Prosthetic Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/makeshift-prosthetic-stock__tooltip__2026-09-17_200716.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "meat-drumstick",
+      "name": "Meat Drumstick",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "meat-skewer",
+      "name": "Meat Skewer",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mechanical-components",
+      "name": "Mechanical Components",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 10000,
+      "rank": 1,
+      "description": "Small gears, levers and bits of machinery. Not too big or high-quality, but still probably worth something.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox/items/mechanical-components__tooltip__2026-09-18_091859.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "medium-armor-repair-kit",
+      "name": "Medium Armor Repair Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/medium-armor-repair-kit__recipe__2026-09-18_205448.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "medium-armor-repair-kit-blueprint",
+      "name": "Medium Armor Repair Kit Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "medved-drum-mag",
+      "name": "Medved Drum Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/medved-drum-mag__tooltip__2026-09-17_200347.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "medved-monster",
+      "name": "Medved Monster",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Medved Monster.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "medved-monster-silenced",
+      "name": "Medved Monster (Silenced)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/medved-monster-silenced__stats__2026-09-19_144317.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "metal-breastplate",
+      "name": "Metal Breastplate",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "metal-scrap",
+      "name": "Metal Scrap",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "Scraps of metal that can be recycled into something useful by able hands.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox/items/metal-scrap__tooltip__2026-09-18_091713.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mikhail-47",
+      "name": "Mikhail 47",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Mikhail 47.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
+    },
+    {
+      "id": "mikhail-50",
+      "name": "Mikhail 50",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/mikhail-50__stats__2026-09-19_084710.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Special Weapons record"
+      }
+    },
+    {
+      "id": "mikhail-50-pristine",
+      "name": "Mikhail 50 (Pristine)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/mikhail-50-pristine__stats__2026-09-19_084409.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Special Weapons record"
+      }
+    },
+    {
+      "id": "mikhail-50-prototype",
+      "name": "Mikhail 50 (Prototype)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/mikhail-50-prototype__stats__2026-09-19_084730.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Special Weapons record"
+      }
+    },
+    {
+      "id": "mikhail-74-u",
+      "name": "Mikhail 74 U",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Mikhail 74 U.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
+    },
+    {
+      "id": "mk-combination-handguard",
+      "name": "MK Combination Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "An assault rifle handguard made from a combination of polymer and wood.",
+      "attachmentModifiers": {
+        "recoil": -3,
+        "handling": 4,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/mk-combination-handguard__tooltip__2026-09-17_201529.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mk-compensator",
+      "name": "MK Compensator",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-drum-mag",
+      "name": "MK Drum Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/mk-drum-mag__tooltip__2026-09-17_200139.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "mk-dust-cover",
+      "name": "MK Dust Cover",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-extended-railed-handguard",
+      "name": "MK Extended Railed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 4000,
+      "rank": 3,
+      "stackable": false,
+      "description": "An extended handguard with a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -5,
+        "handling": 10,
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/mk-extended-railed-handguard__tooltip__2026-09-17_201543.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mk-extended-slotted-handguard",
+      "name": "MK Extended Slotted Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-fixed-carbine-stock",
+      "name": "MK Fixed Carbine Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/mk-fixed-carbine-stock__tooltip__2026-09-17_201029.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "mk-metal-stock",
+      "name": "MK Metal Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A lightweight skeleton-style metal stock with an ergonomic design.",
+      "attachmentModifiers": {
+        "recoil": -14,
+        "handling": 8,
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/mk-metal-stock__tooltip__2026-09-17_201115.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mk-polymer-stock",
+      "name": "MK Polymer Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A standard polymer stock for the Mikhail-47.",
+      "attachmentModifiers": {
+        "recoil": -9,
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/mk-polymer-stock__tooltip__2026-09-17_201019.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mk-railed-combination-handguard",
+      "name": "MK Railed Combination Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An assault rifle handguard made with polymer and wood parts, plus a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -4.5,
+        "handling": 6,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/mk-railed-combination-handguard__tooltip__2026-09-17_201549.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mk-railed-dust-cover",
+      "name": "MK Railed Dust Cover",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A dust cover for the Mikhail that has a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/mk-railed-dust-cover__tooltip__2026-09-17_202040.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mk-railed-polymer-handguard",
+      "name": "MK Railed Polymer Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "An assault rifle polymer handguard, with rails for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -4.5,
+        "handling": 6,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/mk-railed-polymer-handguard__tooltip__2026-09-17_201555.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "mk-silencer",
+      "name": "MK Silencer",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-slant-muzzle-brake",
+      "name": "MK Slant Muzzle Brake",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-slotted-mount-handguard",
+      "name": "MK Slotted Mount Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-slotted-mount-handguard-ext",
+      "name": "MK Slotted Mount Handguard (Ext.)",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-stamped-steel-mag",
+      "name": "MK Stamped Steel Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/mk-stamped-steel-mag__tooltip__2026-09-17_200406.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "mk-steel-polymer-mag-brown",
+      "name": "MK Steel-Polymer Mag (Brown)",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-triangle-stock",
+      "name": "MK Triangle Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-underfolding-stock",
+      "name": "MK Underfolding Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-upgraded-muzzle-brake",
+      "name": "MK Upgraded Muzzle Brake",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-vert-grip-handguard",
+      "name": "MK Vert Grip Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mk-wood-handguard",
+      "name": "MK Wood Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "moonshine",
+      "name": "Moonshine",
+      "classification": [
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/moonshine__recipe__2026-09-18_205043.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "morphine",
+      "name": "Morphine",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/morphine__recipe__2026-09-18_205050.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "mutant-steak",
+      "name": "Mutant Steak",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mystery-pills",
+      "name": "Mystery Pills",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "old-blue-trousers",
+      "name": "Old Blue Trousers",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "old-gp-4-gas-mask",
+      "name": "Old GP-4 Gas Mask",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "old-kepka",
+      "name": "Old Kepka",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "old-tactical-vest",
+      "name": "Old Tactical Vest",
+      "classification": [
+        "armour"
+      ],
+      "image": "images/armour/old-tactical-vest-icon.webp",
+      "notes": null,
+      "source": {
+        "file": "user-submitted in-game screenshot 2026-09-19",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Body Armour record"
+      }
+    },
+    {
+      "id": "overripe-potato",
+      "name": "Overripe Potato",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "panskiy-kask",
+      "name": "Panskiy Kask",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "parade-helmet",
+      "name": "Parade Helmet",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "patched-armored-blouse",
+      "name": "Patched Armored Blouse",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "pills",
+      "name": "Pills",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "pistol-ap-ammo",
+      "name": "Pistol AP Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-ap__stats__2026-09-13_141636.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "pistol-fmj-ammo",
+      "name": "Pistol FMJ Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-fmj-ammo__stats__2026-09-18_084728.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "pistol-hp-ammo",
+      "name": "Pistol HP Ammo",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "plastic-scrap",
+      "name": "Plastic Scrap",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A scrap of plastic that can maybe be recycled.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox/items/plastic-scrap__tooltip__2026-09-18_091720.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "plated-overcoat",
+      "name": "Plated Overcoat",
+      "classification": [
+        "armour",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "plated-ragged-pants",
+      "name": "Plated Ragged Pants",
+      "classification": [
+        "armour",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "plier",
+      "name": "Plier",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2000,
+      "rank": 1,
+      "description": "I’m not the type to pull someone’s teeth out. But what else is this thing for?",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox/items/plier__tooltip__2026-09-18_091651.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "pm-12-70-long-extended",
+      "name": "PM 12-70 (Long | Extended)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "pm-12-70-long",
+      "name": "PM 12-70 (Long)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "pm-12-70-short-extended",
+      "name": "PM 12-70 (Short | Extended)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "pm-12-70-short",
+      "name": "PM 12-70 (Short)",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/pm-12-70-short__stats__2026-09-19_090151.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
+    },
+    {
+      "id": "pm-flashlight-forestock",
+      "name": "PM Flashlight Forestock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A shotgun forestock made of polymer, with an integrated flashlight.",
+      "attachmentModifiers": {
+        "recoil": -5,
+        "handling": 6,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/pm-flashlight-forestock__tooltip__2026-09-17_201656.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "pm-full-polymer-stock",
+      "name": "PM Full Polymer Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/pm-full-polymer-stock__tooltip__2026-09-17_200954.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "pm-muzzle-brake",
+      "name": "PM Muzzle Brake",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/muzzle/pm-muzzle-brake__tooltip__2026-09-17_195324.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "pm-nikolay",
+      "name": "PM Nikolay",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/PM Nikolay.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "pm-nikolay-pb",
+      "name": "PM Nikolay PB",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/PM Nikolay PB.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
+    },
+    {
+      "id": "pm-polymer-beavertail-grip",
+      "name": "PM Polymer Beavertail Grip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A mag made of polymer that improves gun control, with a beavertail curve at the top to protect the hands.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/pm-polymer-beavertail-grip__tooltip__2026-09-17_201959.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "pm-polymer-stock",
+      "name": "PM Polymer Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/pm-polymer-stock__tooltip__2026-09-17_201004.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "pm-railed-forestock",
+      "name": "PM Railed Forestock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A shotgun forestock made of polymer, with a rail for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -5,
+        "handling": 6,
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/pm-railed-forestock__tooltip__2026-09-17_201702.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "pm-silencer",
+      "name": "PM Silencer",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "pm-small-compensator",
+      "name": "PM Small Compensator",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "polymer-pistol-grip-module",
+      "name": "Polymer Pistol Grip Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A highly adaptable polymer pistol grip for rifles, shotguns and SMGs.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/polymer-pistol-grip-module__tooltip__2026-09-17_201853.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "pp-pristine-mag",
+      "name": "PP Pristine Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/pp-pristine-mag__tooltip__2026-09-17_200626.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "rabbit-meat",
+      "name": "Rabbit Meat",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "radish",
+      "name": "Radish",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "rat-meat",
+      "name": "Rat Meat",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "red-dot-sight",
+      "name": "Red Dot Sight",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "refurbished-kask",
+      "name": "Refurbished Kask",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "reinforced-leather-pants",
+      "name": "Reinforced Leather Pants",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "revolutionary-kepka",
+      "name": "Revolutionary Kepka",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "rifle-ap-ammo",
+      "name": "Rifle AP Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-ap__stats__2026-09-13_141731.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "rifle-collapsible-stock-module",
+      "name": "Rifle Collapsible Stock Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/rifle-collapsible-stock-module__tooltip__2026-09-17_201043.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "rifle-fmj-ammo",
+      "name": "Rifle FMJ Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-fmj-ammo__stats__2026-09-19_221953.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "rifle-hp-ammo",
+      "name": "Rifle HP Ammo",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "roit-vest",
+      "name": "Roit Vest",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "rubber-scrap",
+      "name": "Rubber Scrap",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A scrap of rubber which resisted the years. A very resilient material, and good for trading.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox/items/rubber-scrap__tooltip__2026-09-18_091732.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "ruined-beret",
+      "name": "Ruined Beret",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "russet-potato",
+      "name": "Russet Potato",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "scavenger-armor-repair-kit",
+      "name": "Scavenger Armor Repair Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/scavenger-armor-repair-kit__recipe__2026-09-18_205442.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "scrap-gun-repair-kit",
+      "name": "Scrap Gun Repair Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/scrap-gun-repair-kit__recipe__2026-09-18_205338.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "scrapyard-armor",
+      "name": "Scrapyard Armor",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "scrapyard-pants",
+      "name": "Scrapyard Pants",
+      "classification": [
+        "armour",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "screwdriver",
+      "name": "Screwdriver",
+      "classification": [
+        "crafting-resource",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2000,
+      "rank": 1,
+      "description": "A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it.",
+      "maxStack": 4,
+      "source": {
+        "file": "evidence-inbox/items/screwdriver__tooltip__2026-09-18_091645.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "screws",
+      "name": "Screws",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A bunch of metal screws, hard to find and pick up but valuable for the tinkering types.",
+      "maxStack": 10,
+      "source": {
+        "file": "evidence-inbox/items/screws__tooltip__2026-09-18_091739.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "security-helmet",
+      "name": "Security Helmet",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Helmets record"
+      }
+    },
+    {
+      "id": "sewing-kit",
+      "name": "Sewing Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/sewing-kit__recipe__2026-09-18_205431.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "short-tapered-vertical-foregrip",
+      "name": "Short Tapered Vertical Foregrip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A short polymer vertical foregrip with a slight taper for comfort.",
+      "attachmentModifiers": {
+        "handling": 3,
+        "ergonomics": 3
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/short-tapered-vertical-foregrip__tooltip__2026-09-17_201915.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "short-vertical-foregrip",
+      "name": "Short Vertical Foregrip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 1250,
+      "rank": 1,
+      "stackable": false,
+      "description": "A short vertical foregrip designed for ease of use.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/short-vertical-foregrip__tooltip__2026-09-17_201936.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "shotgun-ap-ammo",
+      "name": "Shotgun AP Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-ap__stats__2026-09-13_141705.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "shotgun-buckshot-ammo",
+      "name": "Shotgun Buckshot Ammo",
+      "classification": [
+        "ammunition",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-buckshot-ammo__stats__2026-09-18_084734.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "shotgun-hp-ammo",
+      "name": "Shotgun HP Ammo",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "sidemounted-4x-scope",
+      "name": "Sidemounted 4x Scope",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "skull-mask",
+      "name": "Skull Mask",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "smg-railed-dust-cover",
+      "name": "SMG Railed Dust Cover",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/dust-covers/smg-railed-dust-cover__tooltip__2026-09-17_202052.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "sniper-4x-scope",
+      "name": "Sniper 4x Scope",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "splint",
+      "name": "Splint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "stimpack",
+      "name": "Stimpack",
+      "classification": [
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/stimpack__recipe__2026-09-18_205108.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "stimpack-blueprint",
+      "name": "Stimpack Blueprint",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "stronghold-vest",
+      "name": "Stronghold Vest",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "svarsh-drum-mag",
+      "name": "Svarsh Drum Mag",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/svarsh-drum-mag__tooltip__2026-09-17_200131.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "svarsh-miracle-long",
+      "name": "Svarsh Miracle (Long)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Svarsh Miracle (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
+    },
+    {
+      "id": "svarsh-miracle-short",
+      "name": "Svarsh Miracle (Short)",
+      "classification": [
+        "weapon",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Svarsh Miracle (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
+    },
+    {
+      "id": "svobodnik-m4-long",
+      "name": "Svobodnik M4 (Long)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Svobodnik M4 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
+    },
+    {
+      "id": "tapered-vertical-foregrip",
+      "name": "Tapered Vertical Foregrip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard polymer vertical foregrip with a slight taper for comfort.",
+      "attachmentModifiers": {
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/tapered-vertical-foregrip__tooltip__2026-09-17_201907.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "tattered-armor-repair-kit",
+      "name": "Tattered Armor Repair Kit",
+      "classification": [
+        "crafting-resource",
+        "crafted-item",
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/tattered-armor-repair-kit__recipe__2026-09-18_205436.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
+    },
+    {
+      "id": "tc-handguard",
+      "name": "TC Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 750,
+      "rank": 1,
+      "stackable": false,
+      "description": "A weathered handguard for a marksman rifle.",
+      "attachmentModifiers": {
+        "recoil": -2,
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/tc-handguard__tooltip__2026-09-17_201715.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "tc-polymer-large-mag-black",
+      "name": "TC Polymer Large Mag (Black)",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/tc-polymer-large-mag-black__tooltip__2026-09-17_200354.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "tc-polymer-mag-black",
+      "name": "TC Polymer Mag (Black)",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/magazines/tc-polymer-mag-black__tooltip__2026-09-17_200400.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "tc-railed-dust-cover",
+      "name": "TC Railed Dust Cover",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard dust cover for marksman rifles, with a rail for mounting accessories.",
+      "attachmentModifiers": {},
+      "source": {
+        "file": "evidence-inbox/attachments/tc-railed-dust-cover__tooltip__2026-09-17_202033.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "tc-railed-handguard",
+      "name": "TC Railed Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A weathered handguard for a subsonic marksman rifle, with rails for mounting accessories.",
+      "attachmentModifiers": {
+        "recoil": -3,
+        "handling": 4,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/tc-railed-handguard__tooltip__2026-09-17_201708.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "tc-skeleton-stock",
+      "name": "TC Skeleton Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/tc-skeleton-stock__tooltip__2026-09-17_200659.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "tc-wood-stock",
+      "name": "TC Wood Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/tc-wood-stock__tooltip__2026-09-17_200706.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "thread-cutter",
+      "name": "Thread Cutter",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/thread-cutter__stats__2026-09-19_084742.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
+    },
+    {
+      "id": "thread-cutter-short",
+      "name": "Thread Cutter (Short)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Thread Cutter (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
+    },
+    {
+      "id": "vegetable-soup",
+      "name": "Vegetable Soup",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "vertical-foregrip",
+      "name": "Vertical Foregrip",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A standard vertical foregrip designed for ease of use.",
+      "attachmentModifiers": {
+        "handling": 4,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/vertical-foregrip__tooltip__2026-09-17_201923.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "vintage-red-dot-sight",
+      "name": "Vintage Red Dot Sight",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "vozhd-beret",
+      "name": "Vozhd Beret",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "wg-40",
+      "name": "WG-40",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 250,
+      "rank": 1,
+      "description": "A lubricant bottle so old and busted I’d need lubricant to open it. Still valuable for the tinkerers in Zalesye.",
+      "maxStack": 4,
+      "source": {
+        "file": "evidence-inbox/items/wg-40__tooltip__2026-09-18_091658.png",
+        "status": "screenshot-verified"
+      }
+    },
+    {
+      "id": "winter-pants",
+      "name": "Winter Pants",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "wooden-pistol-grip-module",
+      "name": "Wooden Pistol Grip Module",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "worm-meat",
+      "name": "Worm Meat",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "zavod-24-short",
+      "name": "Zavod 24 (Short)",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "zavod-34",
+      "name": "Zavod 34",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Zavod 34.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
+    },
+    {
+      "id": "zavod-34-short",
+      "name": "Zavod 34 (Short)",
+      "classification": [
+        "weapon"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Zavod 34 (Short) - durability 23.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
+    },
+    {
+      "id": "zavod-polymer-full-stock",
+      "name": "Zavod Polymer Full Stock",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/attachments/stocks/zavod-polymer-full-stock__tooltip__2026-09-17_200652.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-17",
+        "note": "Direct in-game attachment tooltip screenshot."
+      }
+    },
+    {
+      "id": "zavod-polymer-handguard",
+      "name": "Zavod Polymer Handguard",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": null,
+      "notes": null,
+      "estimatedPrice": 750,
+      "rank": 1,
+      "stackable": false,
+      "description": "A polymer handguard for easier handling of an over-under shotgun.",
+      "attachmentModifiers": {
+        "recoil": -1.5,
+        "handling": 2,
+        "ergonomics": 2
+      },
+      "source": {
+        "file": "evidence-inbox/attachments/zavod-polymer-handguard__tooltip__2026-09-17_201721.png",
+        "status": "screenshot-verified"
+      }
+    }
+  ]
+}
