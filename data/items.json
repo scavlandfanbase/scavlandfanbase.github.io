@@ -91,7 +91,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 3,
+      "stackable": false,
+      "description": "A very adaptable and modern polymer stock, originally made for a heavy machine gun.",
+      "attachmentModifiers": {
+        "recoil": -10,
+        "handling": 6,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201233.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "2hmg-railed-handguard",
@@ -1404,7 +1417,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 2,
+      "stackable": false,
+      "description": "A lightweight skeleton-style metal stock with an ergonomic design.",
+      "attachmentModifiers": {
+        "recoil": -14,
+        "handling": 8,
+        "ergonomics": 6
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201115.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mk-polymer-stock",
@@ -1413,7 +1439,20 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2500,
+      "rank": 1,
+      "stackable": false,
+      "description": "A standard polymer stock for the Mikhail-47.",
+      "attachmentModifiers": {
+        "recoil": -9,
+        "handling": 2,
+        "ergonomics": 4
+      },
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 201019.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mk-railed-combination-handguard",
