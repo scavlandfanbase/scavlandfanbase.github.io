@@ -848,7 +848,13 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/historical/cigarettes__tooltip__2026-09-13_144346.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-13",
+        "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+      }
     },
     {
       "id": "classic-scope",
@@ -1258,7 +1264,13 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/historical/headache-pills__tooltip__2026-09-13_141136.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-13",
+        "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+      }
     },
     {
       "id": "heavy-armor-repair-kit",
@@ -2263,7 +2275,13 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/historical/mystery-pills__tooltip__2026-09-13_143915.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-13",
+        "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+      }
     },
     {
       "id": "old-blue-trousers",
@@ -2349,7 +2367,13 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/historical/pills__tooltip__2026-09-13_141150.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-13",
+        "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+      }
     },
     {
       "id": "pistol-ap-ammo",
