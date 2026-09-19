@@ -6,7 +6,6 @@ on:
     paths:
       - 'images/**'
       - 'screenshots/**'
-      - 'data/**'
 
 permissions:
   contents: write
@@ -44,7 +43,7 @@ jobs:
               git show "HEAD^:$file" > "$target"
               changed=1
             fi
-          done < <(git diff --name-only -z --diff-filter=M HEAD^ HEAD -- images screenshots data 2>/dev/null || true)
+          done < <(git diff --name-only -z --diff-filter=M HEAD^ HEAD -- images screenshots 2>/dev/null || true)
 
           if [[ "$changed" -eq 0 ]]; then
             echo "No superseded evidence to archive."
