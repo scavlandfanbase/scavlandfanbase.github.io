@@ -19,7 +19,7 @@ jobs:
           import hashlib
           root=Path('evidence-inbox')
           groups={}
-          for p in root.iterdir():
+          for p in root.rglob('*'):
               if p.is_file():
                   h=hashlib.sha256(p.read_bytes()).hexdigest()
                   groups.setdefault(h,[]).append(p)
