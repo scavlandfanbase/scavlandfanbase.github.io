@@ -21,6 +21,8 @@ Whenever any website code, structured data, assets, navigation, UI, database con
 
 ## Handover — 19 September 2026
 
+- **Weapon attachment evidence processing started:** five attachment identities were visually checked at full resolution and promoted in `data/items.json` with price, rank, non-stackable status, descriptions and only the modifiers visibly shown. MK Polymer Stock (Recoil -9, Handling +2, Ergonomics +4), MK Metal Stock (-14/+8/+6), 2HMG Modern Polymer Stock Module (-10/+6/+4), MK Railed Dust Cover (Ergonomics +6), and TC Railed Dust Cover (no modifier line shown). Commits `0fc4d9beaaee22f4f0d65f563d8bb9af9ae3a19f` and `07aa333ed333640c5b755e41b1a9272d28e0c295`. Attachment modifiers remain item-level data and must not be merged into weapon base stats.
+
 - **Blueprint item evidence promoted:** full-resolution screenshots verified Advanced Gun Repair Kit Blueprint (~40,000₽, Rank 2, not stackable) and Expert Gun Repair Kit Blueprint (~60,000₽, Rank 3, not stackable), including their visible descriptions. Both existing identities in `data/items.json` are now `screenshot-verified`. Commit `7ead8540d060af48693907c59062d0e6e1000669`.
 
 - **Crafting evidence reconciliation completed:** all 22 Medical / Weapon / Armour Workbench recipes were compared against the uploaded in-game workbench screenshot set. The earlier JSON migration had dropped ingredients from all three benches. `data/crafting.json` now contains the complete screenshot-verified ingredient lists for all 22 recipes. Data commit `59477a5cdbb8c6c5db797768b89b0dbb66370505`.
