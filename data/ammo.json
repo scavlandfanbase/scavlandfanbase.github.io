@@ -12,7 +12,7 @@
       "penetrationPercent": 100,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
+        "file": "evidence-inbox.zip",
         "status": "screenshot-verified"
       }
     },
@@ -25,22 +25,23 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
-        "status": "screenshot-derived-existing-data"
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
       }
     },
     {
       "id": "high-caliber-rifle-ap-ammo",
       "name": "High Caliber Rifle AP Ammo",
-      "estimatedPrice": 500,
+      "estimatedPrice": 300,
       "description": "Armor piercing variant of high-caliber rifle ammo. A nice tactical advantage.",
       "damage": "26",
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
-        "status": "screenshot-derived-existing-data"
-      }
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 3
     },
     {
       "id": "high-caliber-rifle-fmj-ammo",
@@ -51,9 +52,10 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
+        "file": "evidence-inbox.zip",
         "status": "screenshot-verified"
-      }
+      },
+      "rank": 1
     },
     {
       "id": "shotgun-ammo-shotgun-hp-ammo",
@@ -64,7 +66,7 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
+        "file": "evidence-inbox.zip",
         "status": "screenshot-verified"
       }
     },
@@ -77,9 +79,10 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
-        "status": "screenshot-derived-existing-data"
-      }
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 1
     },
     {
       "id": "shotgun-ap-ammo",
@@ -90,9 +93,10 @@
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
+        "file": "evidence-inbox.zip",
         "status": "screenshot-verified"
-      }
+      },
+      "rank": 2
     },
     {
       "id": "rifle-ammo-rifle-hp-ammo",
@@ -103,7 +107,7 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
+        "file": "evidence-inbox.zip",
         "status": "screenshot-verified"
       }
     },
@@ -116,22 +120,24 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
+        "file": "evidence-inbox.zip",
         "status": "screenshot-verified"
-      }
+      },
+      "rank": 1
     },
     {
       "id": "rifle-ap-ammo",
       "name": "Rifle AP Ammo",
-      "estimatedPrice": 400,
+      "estimatedPrice": 240,
       "description": "Armor piercing ammunition. Good for mowing down some well-equipped enemies.",
       "damage": "14",
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
-        "status": "screenshot-derived-existing-data"
-      }
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 3
     },
     {
       "id": "pistol-ammo-pistol-hp-ammo",
@@ -142,8 +148,8 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
-        "status": "screenshot-derived-existing-data"
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -155,9 +161,10 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
-        "status": "screenshot-derived-existing-data"
-      }
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 1
     },
     {
       "id": "pistol-ap-ammo",
@@ -168,9 +175,10 @@
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "ammo",
-        "status": "screenshot-derived-existing-data"
-      }
+        "file": "evidence-inbox.zip",
+        "status": "screenshot-verified"
+      },
+      "rank": 2
     }
   ]
 }
