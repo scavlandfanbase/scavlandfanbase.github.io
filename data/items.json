@@ -10,7 +10,12 @@
         "ammunition"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/special-fmj-ammo__stats__2026-09-16_115812.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
@@ -19,7 +24,12 @@
         "ammunition"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "pistol-ammo-pistol-hp-ammo",
@@ -28,7 +38,12 @@
         "ammunition"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "rifle-ammo-rifle-hp-ammo",
@@ -37,7 +52,12 @@
         "ammunition"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "shotgun-ammo-shotgun-hp-ammo",
@@ -46,7 +66,12 @@
         "ammunition"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "2hmg",
@@ -64,7 +89,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/2hmg-long__stats__2026-09-19_084756.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "2hmg-short",
@@ -73,7 +103,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/2hmg-short__stats__2026-09-19_084341.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "2hmg-ergonomic-pistol-grip",
@@ -134,7 +169,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/3-Line Nagant (Full Stock).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "3-line-nagant-infantry",
@@ -143,7 +183,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/3-Line Nagant (Infantry).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "3-line-nagant-obrez",
@@ -152,7 +197,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/3-Line Nagant (Obrez).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "3-line-nagant-stockless",
@@ -161,7 +211,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "63-dragoon",
@@ -170,7 +225,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/63 Dragoon.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "advanced-bandage",
@@ -181,7 +241,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/advanced-bandage__recipe__2026-09-18_205115.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "advanced-bandage-blueprint",
@@ -201,7 +266,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/advanced-gun-repair-kit__recipe__2026-09-18_205350.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "advanced-gun-repair-kit-blueprint",
@@ -248,7 +318,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/ai-2-army-medkit__recipe__2026-09-18_205122.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "ai-2-army-medkit-blueprint",
@@ -277,7 +352,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/ai-2-medkit__recipe__2026-09-18_205059.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "angled-foregrip",
@@ -344,7 +424,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bahadir 918 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "bahadir-918-short",
@@ -353,7 +438,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bahadir 918 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "bahadir-920",
@@ -362,7 +452,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bahadir 920.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "bahadir-extended-handguard",
@@ -418,7 +513,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/bandage__recipe__2026-09-18_205033.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "basic-gun-repair-kit",
@@ -428,7 +528,12 @@
         "crafted-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/basic-gun-repair-kit__recipe__2026-09-18_205344.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "basic-gun-repair-kit-blueprint",
@@ -446,7 +551,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/borealis-12__stats__2026-09-19_141353.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
     },
     {
       "id": "borealis-12-tak",
@@ -455,7 +565,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Borealis 12-TAK.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
     },
     {
       "id": "borealis-adaptable-folding-stock",
@@ -555,7 +670,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "bortovka-tinker-mag",
@@ -564,7 +684,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bortovka Tinker (+Mag).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "bortovka-tinker-long-mag",
@@ -573,7 +698,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Bortovka Tinker (Long - +Mag).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical High Caliber Rifles record"
+      }
     },
     {
       "id": "canned-beans",
@@ -773,7 +903,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/expert-gun-repair-kit__recipe__2026-09-18_205358.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "expert-gun-repair-kit-blueprint",
@@ -820,7 +955,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/field-repair-kit__recipe__2026-09-18_205425.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "forward-angled-foregrip",
@@ -861,7 +1001,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/glue__recipe__2026-09-18_205415.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "gp-4-gas-mask",
@@ -891,7 +1036,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/gun-cleaning-rod__recipe__2026-09-18_205326.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "gun-field-tools",
@@ -902,7 +1052,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/gun-field-tools__recipe__2026-09-18_205332.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "gun-lube",
@@ -912,7 +1067,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/gun-lube__recipe__2026-09-18_205320.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "hammer",
@@ -966,7 +1126,12 @@
         "crafted-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/heavy-armor-repair-kit__recipe__2026-09-18_205453.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "high-caliber-rifle-ap-ammo",
@@ -976,7 +1141,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "high-caliber-rifle-fmj-ammo",
@@ -986,7 +1156,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-fmj-ammo__stats__2026-09-19_221757.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "high-caliber-rifle-hp-ammo",
@@ -995,7 +1170,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "holographic-sight",
@@ -1014,7 +1194,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/ifak-medkit__recipe__2026-09-18_205130.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "ifak-medkit-blueprint",
@@ -1059,7 +1244,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Leon 1895.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "leon-1895-long",
@@ -1069,7 +1259,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Leon 1895 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "leon-1895-short",
@@ -1078,7 +1273,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Leon 1895 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "lightweight-2x-scope",
@@ -1348,7 +1548,12 @@
         "crafted-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/medium-armor-repair-kit__recipe__2026-09-18_205448.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "medium-armor-repair-kit-blueprint",
@@ -1376,7 +1581,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Medved Monster.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "medved-monster-silenced",
@@ -1385,7 +1595,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/medved-monster-silenced__stats__2026-09-19_144317.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "metal-breastplate",
@@ -1422,7 +1637,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Mikhail 47.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
     },
     {
       "id": "mikhail-50",
@@ -1431,7 +1651,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/mikhail-50__stats__2026-09-19_084710.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Special Weapons record"
+      }
     },
     {
       "id": "mikhail-50-pristine",
@@ -1440,7 +1665,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/mikhail-50-pristine__stats__2026-09-19_084409.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Special Weapons record"
+      }
     },
     {
       "id": "mikhail-50-prototype",
@@ -1449,7 +1679,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/mikhail-50-prototype__stats__2026-09-19_084730.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Special Weapons record"
+      }
     },
     {
       "id": "mikhail-74-u",
@@ -1459,7 +1694,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Mikhail 74 U.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
     },
     {
       "id": "mk-combination-handguard",
@@ -1765,7 +2005,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/moonshine__recipe__2026-09-18_205043.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "morphine",
@@ -1776,7 +2021,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/morphine__recipe__2026-09-18_205050.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "mutant-steak",
@@ -1830,7 +2080,12 @@
         "armour"
       ],
       "image": "images/armour/old-tactical-vest-icon.webp",
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "user-submitted in-game screenshot 2026-09-19",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Body Armour record"
+      }
     },
     {
       "id": "overripe-potato",
@@ -1885,7 +2140,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-ap__stats__2026-09-13_141636.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "pistol-fmj-ammo",
@@ -1895,7 +2155,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-fmj-ammo__stats__2026-09-18_084728.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "pistol-hp-ammo",
@@ -1904,7 +2169,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "plastic-scrap",
@@ -1996,7 +2266,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/pm-12-70-short__stats__2026-09-19_090151.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
     },
     {
       "id": "pm-flashlight-forestock",
@@ -2046,7 +2321,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/PM Nikolay.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "pm-nikolay-pb",
@@ -2055,7 +2335,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/PM Nikolay PB.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Pistols record"
+      }
     },
     {
       "id": "pm-polymer-beavertail-grip",
@@ -2228,7 +2513,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-ap__stats__2026-09-13_141731.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "rifle-collapsible-stock-module",
@@ -2247,7 +2537,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-fmj-ammo__stats__2026-09-19_221953.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "rifle-hp-ammo",
@@ -2256,7 +2551,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "roit-vest",
@@ -2310,7 +2610,12 @@
         "crafted-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/scavenger-armor-repair-kit__recipe__2026-09-18_205442.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "scrap-gun-repair-kit",
@@ -2321,7 +2626,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/weapon/scrap-gun-repair-kit__recipe__2026-09-18_205338.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "scrapyard-armor",
@@ -2384,7 +2694,12 @@
         "armour"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Helmets record"
+      }
     },
     {
       "id": "sewing-kit",
@@ -2394,7 +2709,12 @@
         "crafted-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/sewing-kit__recipe__2026-09-18_205431.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "short-tapered-vertical-foregrip",
@@ -2446,7 +2766,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-ap__stats__2026-09-13_141705.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "shotgun-buckshot-ammo",
@@ -2456,7 +2781,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-buckshot-ammo__stats__2026-09-18_084734.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "shotgun-hp-ammo",
@@ -2465,7 +2795,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "sidemounted-4x-scope",
@@ -2520,7 +2855,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/medical/stimpack__recipe__2026-09-18_205108.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "stimpack-blueprint",
@@ -2556,7 +2896,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Svarsh Miracle (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
     },
     {
       "id": "svarsh-miracle-short",
@@ -2566,7 +2911,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Svarsh Miracle (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
     },
     {
       "id": "svobodnik-m4-long",
@@ -2575,7 +2925,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Svobodnik M4 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
     },
     {
       "id": "tapered-vertical-foregrip",
@@ -2607,7 +2962,12 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/crafting/armour/tattered-armor-repair-kit__recipe__2026-09-18_205436.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical database record"
+      }
     },
     {
       "id": "tc-handguard",
@@ -2714,7 +3074,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/weapons/thread-cutter__stats__2026-09-19_084742.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
     },
     {
       "id": "thread-cutter-short",
@@ -2723,7 +3088,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Thread Cutter (Short).png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Rifles record"
+      }
     },
     {
       "id": "vegetable-soup",
@@ -2833,7 +3203,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Zavod 34.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
     },
     {
       "id": "zavod-34-short",
@@ -2842,7 +3217,12 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "images/weapons/Zavod 34 (Short) - durability 23.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Shotguns record"
+      }
     },
     {
       "id": "zavod-polymer-full-stock",
