@@ -5,7 +5,7 @@
   "data": [
     {
       "id": "special-ammo-special-fmj-ammo",
-      "name": "🔥 Special Ammo## Special FMJ Ammo",
+      "name": "Special FMJ Ammo",
       "estimatedPrice": 1000,
       "description": "Special ammunition that can fit into different types of weapons.",
       "damage": "75",
@@ -18,7 +18,7 @@
     },
     {
       "id": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
-      "name": "🔴 High Caliber Rifle Ammo## High Caliber Rifle HP Ammo",
+      "name": "High Caliber Rifle HP Ammo",
       "estimatedPrice": 350,
       "description": "Hollow point variant of high-caliber rifle ammo. Lots of stopping power – and pain.",
       "damage": "46",
@@ -57,7 +57,7 @@
     },
     {
       "id": "shotgun-ammo-shotgun-hp-ammo",
-      "name": "🟣 Shotgun Ammo## Shotgun HP Ammo",
+      "name": "Shotgun HP Ammo",
       "estimatedPrice": 180,
       "description": "Hollow point ammunition for shotguns. Even if I miss, I don't miss.",
       "damage": "6 x 6 = 36",
@@ -96,7 +96,7 @@
     },
     {
       "id": "rifle-ammo-rifle-hp-ammo",
-      "name": "🟢 Rifle Ammo## Rifle HP Ammo",
+      "name": "Rifle HP Ammo",
       "estimatedPrice": 280,
       "description": "Hollow point ammunition for rifles. Don't need great aim when you got this.",
       "damage": "25",
@@ -135,7 +135,7 @@
     },
     {
       "id": "pistol-ammo-pistol-hp-ammo",
-      "name": "🟡 Pistol Ammo## Pistol HP Ammo",
+      "name": "Pistol HP Ammo",
       "estimatedPrice": 60,
       "description": "Hollow point ammunition, perfect for self-defense.",
       "damage": "15",
