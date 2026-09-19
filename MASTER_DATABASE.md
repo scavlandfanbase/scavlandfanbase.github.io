@@ -1,3 +1,5 @@
+> **LEGACY SNAPSHOT — DO NOT USE AS CURRENT CANONICAL DATA (20 September 2026).** This file contains known stale names, counts and statistics (including historical M4/Riot Vest entries). Current truth lives in `data/*.json` plus screenshot evidence under `evidence-inbox/`. See `NEXT_JOBS.md` and `data/README.md` for current verification state. Do not copy values from the tables below back into canonical JSON without re-verifying them.
+
 # SCAVLAND MASTER DATABASE
 
 > **LEGACY SNAPSHOT — NOT CURRENT CANONICAL DATA.** This file was generated from older embedded website data and may contain values from before screenshot verification. Do not use it to overwrite `data/*.json` or to mark values verified. Current screenshot evidence and records explicitly marked `screenshot-verified` take precedence. See `NEXT_JOBS.md` and `data/README.md` for active rules.\n\n> **19 September 2026 audit:** this snapshot contains known stale weapon ammo labels/stats and must not be used to fill crafting gaps. Regenerate it from verified canonical JSON after migration and verification are complete.
