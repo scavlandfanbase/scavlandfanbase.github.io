@@ -12,7 +12,7 @@
       "penetrationPercent": 100,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/special-fmj-ammo__stats__2026-09-16_115812.png",
         "status": "screenshot-verified"
       }
     },
@@ -25,7 +25,7 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png",
         "status": "screenshot-verified"
       }
     },
@@ -38,7 +38,7 @@
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
         "status": "screenshot-verified"
       },
       "rank": 3
@@ -52,7 +52,7 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/high-caliber-rifle-fmj-ammo__stats__2026-09-19_221757.png",
         "status": "screenshot-verified"
       },
       "rank": 1
@@ -66,7 +66,7 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png",
         "status": "screenshot-verified"
       }
     },
@@ -79,7 +79,7 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/shotgun-buckshot-ammo__stats__2026-09-18_084734.png",
         "status": "screenshot-verified"
       },
       "rank": 1
@@ -93,7 +93,7 @@
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/shotgun-ap__stats__2026-09-13_141705.png",
         "status": "screenshot-verified"
       },
       "rank": 2
@@ -107,7 +107,7 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png",
         "status": "screenshot-verified"
       }
     },
@@ -120,7 +120,7 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/rifle-fmj-ammo__stats__2026-09-19_221953.png",
         "status": "screenshot-verified"
       },
       "rank": 1
@@ -134,7 +134,7 @@
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/rifle-ap__stats__2026-09-13_141731.png",
         "status": "screenshot-verified"
       },
       "rank": 3
@@ -148,7 +148,7 @@
       "penetrationPercent": -25,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png",
         "status": "screenshot-verified"
       }
     },
@@ -161,7 +161,7 @@
       "penetrationPercent": 0,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/pistol-fmj-ammo__stats__2026-09-18_084728.png",
         "status": "screenshot-verified"
       },
       "rank": 1
@@ -175,7 +175,7 @@
       "penetrationPercent": 50,
       "maxStack": 999,
       "source": {
-        "file": "evidence-inbox.zip",
+        "file": "evidence-inbox/ammo/pistol-ap__stats__2026-09-13_141636.png",
         "status": "screenshot-verified"
       },
       "rank": 2
