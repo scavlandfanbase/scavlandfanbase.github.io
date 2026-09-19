@@ -19,7 +19,7 @@ function itemStats(x){
  const a=armour.find(v=>norm(v.name)===n); if(a){bits.push(['Category',a.category],['Rank',a.vendorRank],['Price',a.price],['Ballistic',a.ballistic],['Slash',a.slash],['Radiation',a.radiation],['Repair',a.repairClass]);}
  const m=ammo.find(v=>norm(v.name)===n); if(m){bits.push(['Est. Price',m.estimatedPrice],['Damage',m.damage],['Penetration',m.penetrationPercent==null?null:m.penetrationPercent+'%'],['Max Stack',m.maxStack]);}
  const c=crafting.find(v=>norm(v.name)===n); if(c){bits.push(['Workbench',c.workbench]); if(c.ingredients?.length) bits.push(['Recipe',c.ingredients.map(i=>i.quantity+'× '+i.name).join(', ')]);}
- const inv=[]; vendors.forEach(v=>(v.inventory||[]).forEach(i=>{if(norm(i.name)===n)inv.push({vendor:v.name,rank:i.rank,price:i.price,details:i.details})})); if(inv.length){const best=inv[0];bits.push(['Vendor',best.vendor],['Rank',best.rank],['Price',best.price],['Details',best.details]); if(inv.length>1)bits.push(['Listings',inv.length]);}
+ const inv=[]; vendors.forEach(v=>(v.inventory||[]).forEach(i=>{if(norm(i.name)===n)inv.push({vendor:v.name,rank:i.rank,price:i.price,details:i.details})})); if(inv.length){const best=inv[0];bits.push(['Vendor',best.vendor],['Rank',best.rank],['Price',best.price]); if(inv.length>1)bits.push(['Listings',inv.length]);}
  return bits.filter(([,v])=>v!==null&&v!==undefined&&v!=='');
 }
 function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;")}
