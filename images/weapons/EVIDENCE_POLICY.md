@@ -1,25 +1,33 @@
-# Weapon screenshot evidence policy
+# Scavland evidence and versioning policy
 
-## Authority rule
+Scavland is Early Access. Game values, recipes, items, maps, equipment and mechanics may change between builds. The repository therefore preserves superseded evidence rather than deleting it.
 
-The newest verified in-game screenshot for a weapon is the authoritative evidence for that weapon.
+## Authority
 
-Evidence precedence:
+Evidence precedence for all categories:
 
-1. Newest verified in-game screenshot.
-2. Older verified in-game screenshot.
-3. Existing master/site data only when no screenshot evidence is available.
+1. Newest verified in-game screenshot or other direct in-game evidence.
+2. Older verified in-game evidence.
+3. Existing master/site data only where newer direct evidence is unavailable.
 
-For weapon statistics, use the beige/yellow base values shown by the game. Green/red equipment or attachment modifiers are excluded. Durability is not part of the weapon master stats.
+A newer verified screenshot overrides older website, JSON, HTML, notes and screenshots when they conflict.
 
-## Screenshot storage
+## Scope
 
-Current authoritative screenshots remain at `images/weapons/<weapon name>.png`.
+This policy applies to weapons, ammunition, armour, medical items, general items, crafting benches and recipes, map/location evidence, and future Scavland categories stored under `images/`, `screenshots/` or `data/`.
 
-When an existing screenshot at the same path is replaced, the GitHub Action `archive-weapon-screenshots.yml` saves the previous version under `images/weapons/archive/<weapon name>/<UTC timestamp>.png`.
+## Automatic archive
 
-This preserves old evidence without changing the image paths used by the website.
+When an existing file under `images/`, `screenshots/` or `data/` is replaced, GitHub Actions preserves the previous version under `evidence-archive/`, retaining its original directory structure and adding a UTC timestamp to the filename.
 
-## Data verification
+The newly committed file remains at its normal path and is the current candidate evidence. Existing website paths therefore remain stable.
 
-Uploading a new screenshot makes it the newest evidence image, but does **not** automatically rewrite numerical weapon data. The screenshot must first be visually verified. After verification, update `data/weapons.json`, mark it `screenshot-verified`, and sync the corresponding website data.
+## Verification before factual publication
+
+A new upload does not automatically rewrite factual site values. Direct evidence must be checked first. Once verified, the relevant master dataset and website output are synchronized and the source should be marked as verified where the schema supports it.
+
+For weapon screenshots specifically, beige/yellow values are base stats; green/red attachment or equipment modifiers are excluded, and durability is excluded from the weapon master stats.
+
+## Historical data
+
+Files in `evidence-archive/` are historical evidence only. They must not override a newer verified current file. They are retained so changes across Early Access builds can be audited or reconstructed later.
