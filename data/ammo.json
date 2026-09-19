@@ -45,7 +45,7 @@
     {
       "id": "high-caliber-rifle-fmj-ammo",
       "name": "High Caliber Rifle FMJ Ammo",
-      "estimatedPrice": 250,
+      "estimatedPrice": 150,
       "description": "High-caliber, full metal jacket ammo. As reliable as they come.",
       "damage": "30",
       "penetrationPercent": 0,
@@ -110,7 +110,7 @@
     {
       "id": "rifle-fmj-ammo",
       "name": "Rifle FMJ Ammo",
-      "estimatedPrice": 200,
+      "estimatedPrice": 120,
       "description": "Standard ammunition for rifles.",
       "damage": "17",
       "penetrationPercent": 0,
