@@ -82,10 +82,10 @@ document.getElementById('evidence-form').addEventListener('submit',async e=>{
  const path='incoming/'+crypto.randomUUID()+'.'+ext;
  try{
   const up=await supabaseRequest('/storage/v1/object/evidence-submissions/'+path,{method:'POST',headers:{'Content-Type':file.type,'x-upsert':'false'},body:file});
-  if(!up.ok)throw new Error('Screenshot upload failed');
+  if(!up.ok){const t=await up.text();throw new Error('Screenshot upload failed: '+t)}
   const payload={submission_type:document.getElementById('evidence-type').value,category:document.getElementById('evidence-category').value,item_name:document.getElementById('evidence-name').value.trim(),notes:document.getElementById('evidence-notes').value.trim()||null,screenshot_path:path};
   const save=await supabaseRequest('/rest/v1/evidence_submissions',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(payload)});
-  if(!save.ok)throw new Error('Submission record failed');
+  if(!save.ok){const t=await save.text();throw new Error('Submission record failed: '+t)}
   e.currentTarget.reset();status.textContent='Evidence submitted successfully. Thank you — it is now pending review.';
  }catch(err){console.error(err);status.textContent='Submission failed. Please try again.'}
  finally{btn.disabled=false}
