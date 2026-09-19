@@ -466,16 +466,17 @@
       "tier": "Advanced",
       "ammo": "Rifle FMJ",
       "damage": 17,
-      "rpm": 600,
+      "rpm": 800,
       "range": 18,
-      "accuracy": 45,
+      "accuracy": 68,
       "recoil": 42,
       "handling": 10,
       "ergonomics": 10,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
       }
     },
     {
@@ -632,15 +633,16 @@
       "ammo": "High Cal FMJ",
       "damage": 30,
       "rpm": 100,
-      "range": 18,
-      "accuracy": 38,
-      "recoil": 50,
+      "range": 20,
+      "accuracy": 52,
+      "recoil": 41,
       "handling": 4,
-      "ergonomics": 12,
+      "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
       }
     },
     {
@@ -719,8 +721,9 @@
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
       }
     },
     {
@@ -738,8 +741,9 @@
       "ergonomics": 5,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
       }
     },
     {
@@ -778,9 +782,9 @@
       "ergonomics": 5,
       "reload": 1,
       "source": {
-        "file": "images/weapons/Mikhail 50.png",
+        "file": "user-provided screenshot (2026-09-19)",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
       },
       "image": "images/weapons/Mikhail 50.png"
     },
@@ -793,14 +797,15 @@
       "damage": 76,
       "rpm": 200,
       "range": 22,
-      "accuracy": 70,
+      "accuracy": 64,
       "recoil": 100,
       "handling": 4,
       "ergonomics": 2,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
       }
     },
     {
@@ -812,14 +817,15 @@
       "damage": 76,
       "rpm": 80,
       "range": 22,
-      "accuracy": 64,
+      "accuracy": 75,
       "recoil": 100,
       "handling": 5,
       "ergonomics": 2,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
       }
     }
   ]
