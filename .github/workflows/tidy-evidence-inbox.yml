@@ -31,7 +31,8 @@ jobs:
               for p in paths[1:]:
                   p.unlink(); removed.append(str(p))
           print(f'Removed {len(removed)} byte-identical duplicates')
-          Path('evidence-dedupe-report.txt').write_text('\n'.join(removed)+'\n',encoding='utf-8')
+          if removed:
+              Path('evidence-dedupe-report.txt').write_text('\n'.join(removed)+'\n',encoding='utf-8')
           PY
       - name: Commit cleanup
         run: |
