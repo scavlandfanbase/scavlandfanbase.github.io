@@ -12,15 +12,17 @@
       "damage": 10,
       "rpm": 600,
       "range": 15,
-      "accuracy": 12,
+      "accuracy": 32,
       "recoil": 36,
       "handling": 30,
       "ergonomics": 33,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/PM Nikolay.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/PM Nikolay.png"
     },
     {
       "id": "pm-nikolay-pb",
@@ -52,15 +54,17 @@
       "damage": 15,
       "rpm": 75,
       "range": 17,
-      "accuracy": 34,
+      "accuracy": 45,
       "recoil": 36,
       "handling": 10,
       "ergonomics": 24,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Leon 1895.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Leon 1895.png"
     },
     {
       "id": "leon-1895-long",
@@ -90,17 +94,19 @@
       "tier": "Scrap",
       "ammo": "Pistol FMJ",
       "damage": 15,
-      "rpm": 18,
+      "rpm": 75,
       "range": 16,
-      "accuracy": 28,
+      "accuracy": 40,
       "recoil": 40,
       "handling": 6,
       "ergonomics": 30,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Leon 1895 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Leon 1895 (Short).png"
     },
     {
       "id": "medved-monster",
@@ -108,18 +114,20 @@
       "category": "Pistols",
       "tier": "Scrap",
       "ammo": "Pistol FMJ",
-      "damage": 10,
+      "damage": 11,
       "rpm": 450,
       "range": 16,
-      "accuracy": 26,
+      "accuracy": 38,
       "recoil": 38,
       "handling": 14,
       "ergonomics": 14,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Medved Monster.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Medved Monster.png"
     },
     {
       "id": "medved-monster-silenced",
@@ -130,15 +138,17 @@
       "damage": 10,
       "rpm": 450,
       "range": 16,
-      "accuracy": 30,
+      "accuracy": 35,
       "recoil": 37,
       "handling": 14,
       "ergonomics": 12,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Medved Monster (Silenced).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Medved Monster (Silenced).png"
     },
     {
       "id": "bahadir-920",
@@ -149,15 +159,17 @@
       "damage": 10,
       "rpm": 600,
       "range": 18,
-      "accuracy": 28,
+      "accuracy": 45,
       "recoil": 30,
       "handling": 18,
       "ergonomics": 15,
       "reload": 1.5,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Bahadir 920.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Bahadir 920.png"
     },
     {
       "id": "bahadir-918-short",
@@ -258,9 +270,11 @@
       "ergonomics": 15,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/PM 12-70 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/PM 12-70 (Short).png"
     },
     {
       "id": "pm-12-70-short-extended",
@@ -270,16 +284,18 @@
       "ammo": "Shotgun Buckshot",
       "damage": 30,
       "rpm": 90,
-      "range": 14,
-      "accuracy": 12,
-      "recoil": 67,
+      "range": 16,
+      "accuracy": 14,
+      "recoil": 59,
       "handling": 4,
-      "ergonomics": 15,
+      "ergonomics": 10,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/PM 12-70 (Extended).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/PM 12-70 (Extended).png"
     },
     {
       "id": "pm-12-70-long",
@@ -355,11 +371,11 @@
       "ergonomics": 14,
       "reload": 1.3,
       "source": {
-        "file": "images/weapons/Zavod 34 (Short).png",
+        "file": "images/weapons/Zavod 34 (Short) - durability 23.png",
         "status": "screenshot-verified",
         "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
       },
-      "image": "images/weapons/Zavod 34 (Short).png"
+      "image": "images/weapons/Zavod 34 (Short) - durability 23.png"
     },
     {
       "id": "borealis-12",
@@ -533,15 +549,17 @@
       "damage": 30,
       "rpm": 60,
       "range": 18,
-      "accuracy": 44,
+      "accuracy": 60,
       "recoil": 42,
       "handling": 4,
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/3-Line Nagant (Stockless).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/3-Line Nagant (Stockless).png"
     },
     {
       "id": "3-line-nagant-obrez",
@@ -549,7 +567,7 @@
       "category": "High Caliber Rifles",
       "tier": "Scrap",
       "ammo": "High Cal FMJ",
-      "damage": 20,
+      "damage": 30,
       "rpm": 60,
       "range": 16,
       "accuracy": 50,
@@ -558,9 +576,11 @@
       "ergonomics": 12,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/3-Line Nagant (Obrez).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/3-Line Nagant (Obrez).png"
     },
     {
       "id": "3-line-nagant-infantry",
@@ -571,15 +591,17 @@
       "damage": 30,
       "rpm": 60,
       "range": 20,
-      "accuracy": 50,
+      "accuracy": 68,
       "recoil": 35,
       "handling": 4,
       "ergonomics": 6,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/3-Line Nagant (Infantry).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/3-Line Nagant (Infantry).png"
     },
     {
       "id": "3-line-nagant-full-stock",
@@ -630,15 +652,17 @@
       "damage": 30,
       "rpm": 100,
       "range": 20,
-      "accuracy": 42,
+      "accuracy": 52,
       "recoil": 41,
       "handling": 4,
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Bortovka Tinker (Long - +Mag).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Bortovka Tinker (Long - +Mag).png"
     },
     {
       "id": "bortovka-tinker-mag",
