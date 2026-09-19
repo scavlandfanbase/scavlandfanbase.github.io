@@ -490,22 +490,23 @@
     },
     {
       "id": "m4-svodbonik",
-      "name": "M4 Svodbonik",
+      "name": "Svobodnik M4",
       "category": "Rifles",
       "tier": "Advanced",
       "ammo": "Rifle Ammo",
-      "damage": 19,
-      "rpm": 600,
+      "damage": 17,
+      "rpm": 700,
       "range": 19,
-      "accuracy": 46,
+      "accuracy": 65,
       "recoil": 44,
       "handling": 22,
       "ergonomics": 18,
       "reload": 1,
       "source": {
-        "file": "community report",
-        "status": "community-reported-correction",
-        "note": "Reported 18 September 2026: M4 damage 19"
+        "file": "evidence-inbox/weapons/svobodnik-m4__stats__2026-09-19_144346.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-19",
+        "note": "Direct in-game screenshot; beige/base values used, attachment modifiers excluded."
       }
     },
     {
