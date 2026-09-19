@@ -21,7 +21,8 @@
       "id": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
       "name": "High Caliber Rifle HP Ammo",
       "classification": [
-        "ammunition"
+        "ammunition",
+        "vendor-item"
       ],
       "image": null,
       "notes": null,
@@ -35,7 +36,8 @@
       "id": "pistol-ammo-pistol-hp-ammo",
       "name": "Pistol HP Ammo",
       "classification": [
-        "ammunition"
+        "ammunition",
+        "vendor-item"
       ],
       "image": null,
       "notes": null,
@@ -49,7 +51,8 @@
       "id": "rifle-ammo-rifle-hp-ammo",
       "name": "Rifle HP Ammo",
       "classification": [
-        "ammunition"
+        "ammunition",
+        "vendor-item"
       ],
       "image": null,
       "notes": null,
@@ -63,7 +66,8 @@
       "id": "shotgun-ammo-shotgun-hp-ammo",
       "name": "Shotgun HP Ammo",
       "classification": [
-        "ammunition"
+        "ammunition",
+        "vendor-item"
       ],
       "image": null,
       "notes": null,
@@ -1317,20 +1321,6 @@
       }
     },
     {
-      "id": "high-caliber-rifle-hp-ammo",
-      "name": "High Caliber Rifle HP Ammo",
-      "classification": [
-        "vendor-item"
-      ],
-      "image": null,
-      "notes": null,
-      "source": {
-        "file": "evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png",
-        "status": "screenshot-verified",
-        "note": "Verification synchronized from canonical database record"
-      }
-    },
-    {
       "id": "holographic-sight",
       "name": "Holographic Sight",
       "classification": [
@@ -2406,20 +2396,6 @@
       }
     },
     {
-      "id": "pistol-hp-ammo",
-      "name": "Pistol HP Ammo",
-      "classification": [
-        "vendor-item"
-      ],
-      "image": null,
-      "notes": null,
-      "source": {
-        "file": "evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png",
-        "status": "screenshot-verified",
-        "note": "Verification synchronized from canonical database record"
-      }
-    },
-    {
       "id": "plastic-scrap",
       "name": "Plastic Scrap",
       "classification": [
@@ -2818,20 +2794,6 @@
       }
     },
     {
-      "id": "rifle-hp-ammo",
-      "name": "Rifle HP Ammo",
-      "classification": [
-        "vendor-item"
-      ],
-      "image": null,
-      "notes": null,
-      "source": {
-        "file": "evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png",
-        "status": "screenshot-verified",
-        "note": "Verification synchronized from canonical database record"
-      }
-    },
-    {
       "id": "roit-vest",
       "name": "Roit Vest",
       "classification": [
@@ -3057,20 +3019,6 @@
       "notes": null,
       "source": {
         "file": "evidence-inbox/ammo/shotgun-buckshot-ammo__stats__2026-09-18_084734.png",
-        "status": "screenshot-verified",
-        "note": "Verification synchronized from canonical database record"
-      }
-    },
-    {
-      "id": "shotgun-hp-ammo",
-      "name": "Shotgun HP Ammo",
-      "classification": [
-        "vendor-item"
-      ],
-      "image": null,
-      "notes": null,
-      "source": {
-        "file": "evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
       }
