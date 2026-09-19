@@ -1,5 +1,28 @@
 # SCAVLAND Website — Next Jobs
 
+## START HERE — next session
+
+Evidence archive organisation is complete. Do **not** repeat the rename/archive pass.
+
+Current canonical verification state (20 September 2026):
+- Weapons: **38/39 screenshot-verified**. Only base `2HMG` remains unverified; archived screenshots prove Short/Long only.
+- Ammo: **13/13 screenshot-verified**, each linked to an exact organised evidence screenshot.
+- Crafting: **22/22 screenshot-verified**.
+- Armour: **3/30 screenshot-verified** under the strict 100%-durability rule: Old Tactical Vest, Riot Vest and Security Helmet.
+- Items: **174/258 screenshot-verified**.
+- `MK Slotted Mount Handguard` remains intentionally unverified because its screenshots conflict.
+- Svobodnik M4 is resolved from direct screenshot evidence: **17 damage / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload**.
+- Evidence root is clean: **0 opaque timestamp screenshots remain at `evidence-inbox/` root**. Two unidentified screenshots are deliberately preserved under `evidence-inbox/unresolved/`.
+- `items.html` verification badges now require persisted direct verification metadata; they no longer inherit a green badge merely from another matching dataset.
+
+Recommended next work:
+1. Audit the remaining **84/258 unverified item records** against any remaining valid evidence; do not bulk-promote without proof.
+2. Obtain/identify a direct **base 2HMG** screenshot before marking it verified.
+3. Armour audit: only promote resistance values from screenshots showing **100% durability**.
+4. Continue clean display-image/icon work separately from evidence verification.
+5. Verify the public site after data changes and keep this handover updated in the same session.
+
+
 Last reviewed: 19 September 2026
 
 This is the active project backlog. Work from the top unless a new game-data update or site bug takes priority.\n\n## Permanent cross-device documentation rule
@@ -76,15 +99,15 @@ Whenever any website code, structured data, assets, navigation, UI, database con
 
 ## Priority 1 — Process screenshot evidence
 
-- [ ] Re-verify all weapon stats against current game data; community report on 18 September 2026 identified multiple outdated damage values. Corrections already applied: 63 Dragoon 36, M4 Svodbonik 19, Mikhail 47/MK47 20.
+- [ ] Continue weapon verification only where evidence is still missing/conflicting. Current status is 38/39; base 2HMG is the sole unverified weapon. Svobodnik M4 was superseded by direct 19 September screenshot evidence and is now verified at 17 damage / 700 RPM / 65 accuracy.
 
-- [ ] Identify the screenshots in `images/items/` and rename them to descriptive item-based filenames.
+- [x] Organise the evidence archive into descriptive category/item filenames; 0 opaque timestamp screenshots remain at `evidence-inbox/` root.
 - [ ] Extract only confirmed visible item data and update `data/items.json`.
-- [ ] Identify and rename screenshots in `images/weapons/`; compare their stats against `data/weapons.json`.
+- [x] Organise weapon evidence and compare resolved screenshots against `data/weapons.json`; 38/39 weapons are screenshot-verified.
 - [ ] Identify and rename screenshots in `images/armour/`; compare their stats against `data/armour.json`.
 - [x] Process the 22 crafting screenshots/recipes and attach screenshot-verified evidence status to `data/crafting.json`.
 - [ ] Review faction screenshots and decide whether they add evidence beyond the existing faction icons/data.
-- [ ] Connect the normalized ammo icons/detail screenshots in `images/ammo/` to the 13 records in `data/ammo.json`.
+- [x] Link all 13 ammo records to exact organised screenshot evidence paths.
 - [ ] Flag unreadable or conflicting screenshot values instead of guessing.
 
 ## Priority 2 — Clean repository assets
@@ -100,8 +123,8 @@ Whenever any website code, structured data, assets, navigation, UI, database con
 
 Migrate incrementally and test after every page:
 
-1. [ ] Weapons + Ammo → `data/weapons.json` and `data/ammo.json`
-2. [ ] Armour → `data/armour.json`
+1. [x] Weapons + Ammo → `data/weapons.json` and `data/ammo.json`
+2. [x] Armour → `data/armour.json`
 3. [x] Crafting → `data/crafting.json`
 4. [ ] Vendors → `data/vendors.json` + `data/vendor-selling-rates.json`
 5. [ ] Factions → `data/factions.json`
@@ -129,7 +152,7 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 ## Current confirmed baseline
 
 - 258 indexed item identities
-- 40 weapons
+- 39 canonical weapon records currently in `data/weapons.json` (38 screenshot-verified; base 2HMG unverified)
 - 30 armour/gear records
 - 13 ammo records
 - 22 vendors
