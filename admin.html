@@ -7,7 +7,7 @@
 <section id="login" class="panel login"><h2>Admin sign in</h2><p>Authorized reviewers only.</p><input id="email" type="email" autocomplete="username" placeholder="Email"><input id="password" type="password" autocomplete="current-password" placeholder="Password"><button id="signin" class="btn">Sign in</button> <button id="forgot" class="btn" type="button">Reset password</button><p id="login-status" class="status"></p><div id="reset-box" class="hidden"><h3>Set a new password</h3><input id="new-password" type="password" autocomplete="new-password" minlength="10" placeholder="New password"><button id="save-password" class="btn" type="button">Save new password</button><p id="reset-status" class="status"></p></div></section>
 <section id="review" class="hidden"><div class="panel"><strong>Pending evidence</strong> <span id="count" class="status"></span></div><div id="cards" class="cards"></div></section></main>
 <script>
-const URL='https://demtoqsafufzmnhvaykj.supabase.co',KEY='sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH';
+const SB_URL='https://demtoqsafufzmnhvaykj.supabase.co',KEY='sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH';
 const $=id=>document.getElementById(id), statusEl=$('login-status'), login=$('login'),review=$('review'),cards=$('cards');
 const headers={'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
 let accessToken=null;
