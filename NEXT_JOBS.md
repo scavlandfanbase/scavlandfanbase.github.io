@@ -2,7 +2,24 @@
 
 Last reviewed: 19 September 2026
 
-This is the active project backlog. Work from the top unless a new game-data update or site bug takes priority.\n\n## Handover — 19 September 2026\n\n- Repository: `scavlandfanbase/scavlandfanbase.github.io`, branch `main`.\n- **Strict evidence rule:** do not promote a value into canonical/master data unless it is confirmed by an in-game screenshot or another explicitly approved authoritative source. Existing HTML or migrated JSON is not proof by itself.\n- `source.status: screenshot-verified` means the record may be presented as **In-game verified**. Legacy statuses such as `existing-site-data`, `community-reported-correction`, or migration-derived data must not be silently treated as screenshot-confirmed.\n- If evidence is missing, conflicting or unreadable, leave the value unverified/`null` and flag it for review. Never fill gaps by inference.\n- Crafting: `crafting.html` currently contains 22 embedded recipes and `data/crafting.json` contains a migrated copy. They do not fully match. **Do not reconcile or promote the extra HTML ingredients until the crafting screenshots are processed.** A proposed reconciliation was deliberately stopped before any repository write.\n- Items navigation is already immediately after Map in `site-shell.js`.\n- `items.html` is already JSON-driven and now displays verification badges. It shows **✓ In-game verified** only when linked specialist records are explicitly `screenshot-verified`; otherwise it shows **Needs verification**. No game values were changed for this UI update.\n- Verification-badge commit: `a7ee0c7fb2de0b37543d357de5f936d2eb678a38`.\n- Continue safe UI/site functionality work when screenshots are unavailable; do not use that as a reason to alter unverified game data.\n
+This is the active project backlog. Work from the top unless a new game-data update or site bug takes priority.\n\n## Permanent cross-device documentation rule
+
+**This rule applies to every future repository change, regardless of device or chat session.**
+
+Whenever any website code, structured data, assets, navigation, UI, database content, verification status, or project configuration is changed:
+
+1. Update the project documentation **in the same work session** before considering the task complete.
+2. Record what changed and which files/areas were affected.
+3. Record whether game data involved is screenshot-verified, unverified, community-sourced, or otherwise pending evidence.
+4. Record important decisions or rules that a future session must preserve.
+5. Record the relevant commit SHA/reference when useful.
+6. Update completed/remaining jobs so the next session knows exactly where to resume.
+7. Never leave a repo change undocumented simply because it was small.
+8. If a change is reverted, abandoned, or deliberately not made, document that too when it affects the expected project state.
+
+**Purpose:** a new ChatGPT session on phone, PC, or another device must be able to inspect the repository documentation and continue the SCAVLAND project without relying on the previous chat transcript.
+
+## Handover — 19 September 2026\n\n- Repository: `scavlandfanbase/scavlandfanbase.github.io`, branch `main`.\n- **Strict evidence rule:** do not promote a value into canonical/master data unless it is confirmed by an in-game screenshot or another explicitly approved authoritative source. Existing HTML or migrated JSON is not proof by itself.\n- `source.status: screenshot-verified` means the record may be presented as **In-game verified**. Legacy statuses such as `existing-site-data`, `community-reported-correction`, or migration-derived data must not be silently treated as screenshot-confirmed.\n- If evidence is missing, conflicting or unreadable, leave the value unverified/`null` and flag it for review. Never fill gaps by inference.\n- Crafting: `crafting.html` currently contains 22 embedded recipes and `data/crafting.json` contains a migrated copy. They do not fully match. **Do not reconcile or promote the extra HTML ingredients until the crafting screenshots are processed.** A proposed reconciliation was deliberately stopped before any repository write.\n- Items navigation is already immediately after Map in `site-shell.js`.\n- `items.html` is already JSON-driven and now displays verification badges. It shows **✓ In-game verified** only when linked specialist records are explicitly `screenshot-verified`; otherwise it shows **Needs verification**. No game values were changed for this UI update.\n- Verification-badge commit: `a7ee0c7fb2de0b37543d357de5f936d2eb678a38`.\n- Continue safe UI/site functionality work when screenshots are unavailable; do not use that as a reason to alter unverified game data.\n
 
 ## Priority 1 — Process screenshot evidence
 
