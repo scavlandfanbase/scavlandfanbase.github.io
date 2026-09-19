@@ -27,14 +27,18 @@ This directory is the structured data layer for the SCAVLAND fan database.
 
 First add or confirm the item in `items.json`. Use its stable ID in any specialist file. Record only information visible in the screenshot or otherwise confirmed. Store the original screenshot in the appropriate image/evidence folder and set the record's source to that exact path. If a value cannot be read confidently, use `null`.
 
-## Migration status
+## Migration and verification status
 
-These files were initially populated from the existing live HTML/text data on 18 September 2026. The live pages have **not** been switched to JSON yet; this keeps the current site stable while the structured data is checked and expanded.
+As of 20 September 2026:
 
+- `weapons.html` reads `data/weapons.json`; **38/39** canonical weapon records are screenshot-verified. Base `2HMG` remains unverified because only Short/Long screenshots are archived.
+- `armour.html` reads `data/armour.json`; **3/30** records currently meet the screenshot-verification threshold. Armour resistance evidence requires a screenshot at **100% durability**.
+- `ammo.json`: **13/13** screenshot-verified with exact organised evidence paths.
+- `crafting.html` reads `data/crafting.json`; **22/22** recipes are screenshot-verified.
+- `items.html` reads the structured JSON sources. `data/items.json` currently has **174/258** screenshot-verified records.
+- Item verification badges require persisted `source.status: "screenshot-verified"`; matching another verified dataset at runtime is not sufficient.
+- Evidence is organised under `evidence-inbox/` by category. Do not return to opaque timestamp-only filenames. Two genuinely unidentified screenshots remain deliberately under `evidence-inbox/unresolved/`.
+- `MK Slotted Mount Handguard` has conflicting screenshot evidence and must remain unverified until that conflict is resolved.
+- Direct screenshot evidence supersedes community/legacy values. Example: Svobodnik M4 is verified at 17 damage / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload.
 
-## Current site integration
-
-As of 19 September 2026, the shared site appearance is controlled by `site-theme.css` and `site-shell.js`. The live HTML pages still use embedded page data; the JSON files in this directory are the structured migration layer and should be verified before each live page is converted to fetch JSON directly.
-
-See `../NEXT_JOBS.md` for the active migration and evidence-processing backlog.
-\n## 19 September 2026 safety note\n\n`crafting.html` and `data/crafting.json` currently contain migrated/legacy crafting information that is not fully aligned. Do not automatically copy missing ingredients from the HTML into the JSON. Process the original crafting screenshots first, record only the visible confirmed requirements, and attach their evidence paths.\n\n`items.html` now reads the structured JSON sources and displays a verification badge. Only records whose relevant specialist source is explicitly `screenshot-verified` are labelled **In-game verified**; other records are labelled **Needs verification**. This UI rule does not itself validate any underlying game values.\n
+For the active backlog and cross-device handover, see `../NEXT_JOBS.md`.
