@@ -324,7 +324,7 @@
     },
     {
       "id": "roit-vest",
-      "name": "Roit Vest",
+      "name": "Riot Vest",
       "category": "Body Armour",
       "vendorRank": "-",
       "price": 86000,
@@ -333,8 +333,9 @@
       "radiation": 20,
       "repairClass": "Heavy",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
+        "status": "screenshot-verified",
+        "note": "100% durability screenshot evidence"
       }
     },
     {
@@ -393,8 +394,9 @@
       "radiation": 20,
       "repairClass": "Heavy",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png",
+        "status": "screenshot-verified",
+        "note": "100% durability screenshot evidence"
       }
     },
     {
