@@ -31,15 +31,17 @@
       "damage": 11,
       "rpm": 600,
       "range": 15,
-      "accuracy": 14,
+      "accuracy": 35,
       "recoil": 36,
       "handling": 30,
       "ergonomics": 33,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/PM Nikolay PB.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/PM Nikolay PB.png"
     },
     {
       "id": "leon-1895",
@@ -69,15 +71,17 @@
       "damage": 15,
       "rpm": 75,
       "range": 18,
-      "accuracy": 34,
+      "accuracy": 55,
       "recoil": 31,
       "handling": 12,
       "ergonomics": 20,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Leon 1895 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Leon 1895 (Long).png"
     },
     {
       "id": "leon-1895-short",
@@ -164,15 +168,17 @@
       "damage": 10,
       "rpm": 700,
       "range": 17,
-      "accuracy": 20,
+      "accuracy": 37,
       "recoil": 35,
       "handling": 28,
       "ergonomics": 15,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Bahadir 918 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Bahadir 918 (Short).png"
     },
     {
       "id": "bahadir-918-long",
@@ -180,18 +186,20 @@
       "category": "Pistols",
       "tier": "Basic",
       "ammo": "Pistol FMJ",
-      "damage": 11,
+      "damage": 10,
       "rpm": 700,
       "range": 18,
-      "accuracy": 24,
+      "accuracy": 45,
       "recoil": 25,
       "handling": 30,
       "ergonomics": 14,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Bahadir 918 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Bahadir 918 (Long).png"
     },
     {
       "id": "svarsh-miracle-short",
@@ -200,17 +208,19 @@
       "tier": "Scrap",
       "ammo": "Shotgun Buckshot",
       "damage": 30,
-      "rpm": 150,
+      "rpm": 100,
       "range": 14,
-      "accuracy": 33,
+      "accuracy": 13,
       "recoil": 65,
       "handling": 8,
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Svarsh Miracle (Short).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Svarsh Miracle (Short).png"
     },
     {
       "id": "svarsh-miracle-long",
@@ -221,15 +231,17 @@
       "damage": 30,
       "rpm": 150,
       "range": 16,
-      "accuracy": 28,
+      "accuracy": 18,
       "recoil": 61,
       "handling": 8,
       "ergonomics": 4,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Svarsh Miracle (Long).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Svarsh Miracle (Long).png"
     },
     {
       "id": "pm-12-70-short",
@@ -315,16 +327,18 @@
       "ammo": "Shotgun Buckshot",
       "damage": 30,
       "rpm": 600,
-      "range": 15,
+      "range": 16,
       "accuracy": 18,
       "recoil": 53,
       "handling": 4,
       "ergonomics": 8,
       "reload": 1.1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Zavod 34.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Zavod 34.png"
     },
     {
       "id": "zavod-34-short",
@@ -341,9 +355,11 @@
       "ergonomics": 14,
       "reload": 1.3,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Zavod 34 (Short).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Zavod 34 (Short).png"
     },
     {
       "id": "borealis-12",
@@ -379,9 +395,11 @@
       "ergonomics": 10,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Borealis 12-TAK.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Borealis 12-TAK.png"
     },
     {
       "id": "mikhail-74-u",
@@ -392,15 +410,17 @@
       "damage": 17,
       "rpm": 700,
       "range": 16,
-      "accuracy": 32,
+      "accuracy": 45,
       "recoil": 39,
       "handling": 8,
       "ergonomics": 12,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Mikhail 74 U.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Mikhail 74 U.png"
     },
     {
       "id": "mikhail-47",
@@ -411,16 +431,17 @@
       "damage": 20,
       "rpm": 600,
       "range": 18,
-      "accuracy": 38,
+      "accuracy": 58,
       "recoil": 49,
       "handling": 14,
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "community report",
-        "status": "community-reported-correction",
-        "note": "Reported as MK47 on 18 September 2026; matched to existing Mikhail 47 record"
-      }
+        "file": "images/weapons/Mikhail 47.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Mikhail 47.png"
     },
     {
       "id": "thread-cutter",
@@ -450,15 +471,17 @@
       "damage": 17,
       "rpm": 900,
       "range": 18,
-      "accuracy": 48,
+      "accuracy": 60,
       "recoil": 38,
       "handling": 14,
       "ergonomics": 16,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Thread Cutter (Short).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Thread Cutter (Short).png"
     },
     {
       "id": "m4-svodbonik",
@@ -486,18 +509,20 @@
       "category": "Rifles",
       "tier": "Advanced",
       "ammo": "Rifle FMJ",
-      "damage": 17,
-      "rpm": 600,
+      "damage": 19,
+      "rpm": 700,
       "range": 20,
-      "accuracy": 52,
+      "accuracy": 70,
       "recoil": 41,
       "handling": 18,
       "ergonomics": 16,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Svobodnik M4 (Long).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Svobodnik M4 (Long).png"
     },
     {
       "id": "3-line-nagant-stockless",
@@ -565,15 +590,17 @@
       "damage": 30,
       "rpm": 60,
       "range": 21,
-      "accuracy": 60,
+      "accuracy": 75,
       "recoil": 35,
       "handling": 4,
       "ergonomics": 4,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/3-Line Nagant (Full Stock).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/3-Line Nagant (Full Stock).png"
     },
     {
       "id": "bortovka-tinker",
@@ -628,9 +655,11 @@
       "ergonomics": 12,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Bortovka Tinker (+Mag).png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Bortovka Tinker (+Mag).png"
     },
     {
       "id": "2hmg",
@@ -698,16 +727,17 @@
       "damage": 36,
       "rpm": 125,
       "range": 22,
-      "accuracy": 64,
+      "accuracy": 80,
       "recoil": 47,
       "handling": 10,
       "ergonomics": 10,
       "reload": 1,
       "source": {
-        "file": "community report",
-        "status": "community-reported-correction",
-        "note": "Reported 18 September 2026: Dragoon damage 36"
-      }
+        "file": "images/weapons/63 Dragoon.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/63 Dragoon.png"
     },
     {
       "id": "mikhail-50",
@@ -718,15 +748,17 @@
       "damage": 76,
       "rpm": 200,
       "range": 22,
-      "accuracy": 68,
+      "accuracy": 70,
       "recoil": 100,
       "handling": 5,
       "ergonomics": 5,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
-      }
+        "file": "images/weapons/Mikhail 50.png",
+        "status": "screenshot-verified",
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+      },
+      "image": "images/weapons/Mikhail 50.png"
     },
     {
       "id": "mikhail-50-prototype",
