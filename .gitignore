@@ -1,0 +1,15 @@
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+
+# Local/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
