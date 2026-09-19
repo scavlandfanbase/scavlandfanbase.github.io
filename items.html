@@ -26,6 +26,30 @@ function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').
 const clean=n=>n.replace(/^[^A-Za-z0-9]+\s*/,'').replace(/##/g,' / ').trim();
 function renderFilters(){const order=['all','weapon','armour','ammunition','crafted-item','crafting-resource','vendor-item'];document.getElementById('item-filters').innerHTML=order.map(k=>'<button class="item-filter '+(active===k?'active':'')+'" data-filter="'+k+'">'+(k==='all'?'All Items':labels[k])+'</button>').join('');document.querySelectorAll('.item-filter').forEach(b=>b.onclick=()=>{active=b.dataset.filter;renderFilters();render()})}
 function render(){const q=document.getElementById('item-search').value.trim().toLowerCase();const list=items.filter(x=>(active==='all'||(x.classification||[]).includes(active))&&clean(x.name).toLowerCase().includes(q));document.getElementById('item-count').textContent=list.length+' of '+items.length+' items';document.getElementById('item-grid').innerHTML=list.length?list.map(x=>{const stats=itemStats(x);const verify=sourceStatus(x);return '<article class="item-card"><h2>'+esc(clean(x.name))+'</h2>'+(stats.length?'<div class="item-stats">'+stats.map(([k,v])=>'<div class="item-stat"><span>'+esc(k)+'</span><b>'+esc(v)+'</b></div>').join('')+'</div>':'<div class="item-note">No verified stats recorded yet.</div>')+'<div class="item-tags"><span class="verify-badge '+verify.cls+'">'+verify.label+'</span>'+(x.classification||[]).map(c=>'<span class="item-tag">'+esc(labels[c]||c.replaceAll('-',' '))+'</span>').join('')+'</div></article>'}).join(''):'<div class="empty">No items match this search.</div>'}
-Promise.all(['items','weapons','armour','ammo','crafting','vendors'].map(n=>fetch('data/'+n+'.json').then(r=>r.json()))).then(([i,w,a,m,c,v])=>{items=i.data||[];weapons=w.data||[];armour=a.data||[];ammo=m.data||[];crafting=c.data||[];vendors=v.data||[];items.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));renderFilters();render()}).catch(()=>{document.getElementById('item-count').textContent='Unable to load item data.'});
+async function loadJson(name,required=false){
+ try{
+  const r=await fetch('data/'+name+'.json',{cache:'no-store'});
+  if(!r.ok)throw new Error(name+' HTTP '+r.status);
+  return await r.json();
+ }catch(err){
+  console.error('SCAVLAND data load failed:',name,err);
+  if(required)throw err;
+  return {data:[]};
+ }
+}
+async function loadItems(){
+ try{
+  const i=await loadJson('items',true);
+  items=i.data||[];
+  const [w,a,m,c,v]=await Promise.all(['weapons','armour','ammo','crafting','vendors'].map(n=>loadJson(n)));
+  weapons=w.data||[];armour=a.data||[];ammo=m.data||[];crafting=c.data||[];vendors=v.data||[];
+  items.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));
+  renderFilters();render();
+ }catch(err){
+  document.getElementById('item-count').textContent='Unable to load item data. Please refresh the page.';
+  document.getElementById('item-grid').innerHTML='<div class="empty">The item database could not be loaded.</div>';
+ }
+}
+loadItems();
 document.getElementById('item-search').addEventListener('input',render);
 </script><script src="site-shell.js"></script></body></html>
