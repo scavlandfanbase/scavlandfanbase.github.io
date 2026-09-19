@@ -994,3 +994,8 @@ The old `Ammo Pics/` directory documented in the original asset snapshot was rem
 - Screenshot-derived facts should retain a source/evidence path.
 - Shared visual changes should normally be made in `site-theme.css` or `site-shell.js`, not copied independently into every page.
 - See `NEXT_JOBS.md` for the active project backlog.
+
+
+### Weapon screenshot verification — 19 September 2026
+
+Weapon Repair Class/tier and base stats are verified from user-provided in-game screenshots where a record is marked `screenshot-verified` in `data/weapons.json`. Only yellow/base values are recorded; green/red attachment modifiers and weapon durability are excluded. Current screenshot-accounted coverage is 35 of 40 weapons. Five records still require direct screenshots: `PM 12-70 (Long)`, `PM 12-70 (Long | Extended)`, `Borealis 12`, `M4 Svodbonik` (full stats), and standard `2HMG`. `PM 12-70 (Short)` and `PM 12-70 (Short | Extended)` are confirmed **Basic** Repair Class.
