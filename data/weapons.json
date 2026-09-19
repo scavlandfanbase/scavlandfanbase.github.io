@@ -277,27 +277,6 @@
       "image": "images/weapons/PM 12-70 (Short).png"
     },
     {
-      "id": "pm-12-70-short-extended",
-      "name": "PM 12-70 (Short | Extended)",
-      "category": "Shotguns",
-      "tier": "Basic",
-      "ammo": "Shotgun Ammo",
-      "damage": 30,
-      "rpm": 90,
-      "range": 16,
-      "accuracy": 14,
-      "recoil": 59,
-      "handling": 4,
-      "ergonomics": 10,
-      "reload": 1,
-      "source": {
-        "file": "images/weapons/PM 12-70 (Extended).png",
-        "status": "screenshot-verified",
-        "note": "Repair Class Basic confirmed from user-provided in-game screenshot; base yellow stats retained; durability excluded."
-      },
-      "image": "images/weapons/PM 12-70 (Extended).png"
-    },
-    {
       "id": "pm-12-70-long",
       "name": "PM 12-70",
       "category": "Shotguns",
@@ -307,15 +286,16 @@
       "rpm": 90,
       "range": 16,
       "accuracy": 14,
-      "recoil": 59,
+      "recoil": 63,
       "handling": 4,
       "ergonomics": 12,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "images/weapons/PM 12-70.png",
         "status": "screenshot-verified",
-        "note": "Repair Class Basic and base stats confirmed from in-game screenshot; green/red modifiers and durability excluded."
-      }
+        "note": "Live-branch in-game screenshot verified 2026-09-19. Base yellow stats and Repair Class used; modifiers and durability excluded."
+      },
+      "image": "images/weapons/PM 12-70.png"
     },
     {
       "id": "pm-12-70-long-extended",
@@ -332,10 +312,11 @@
       "ergonomics": 10,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "images/weapons/PM 12-70 (Extended).png",
         "status": "screenshot-verified",
-        "note": "Repair Class Basic and base stats confirmed from in-game screenshot; green/red modifiers and durability excluded."
-      }
+        "note": "Live-branch in-game screenshot verified 2026-09-19. Base yellow stats and Repair Class used; modifiers and durability excluded."
+      },
+      "image": "images/weapons/PM 12-70 (Extended).png"
     },
     {
       "id": "zavod-34",
