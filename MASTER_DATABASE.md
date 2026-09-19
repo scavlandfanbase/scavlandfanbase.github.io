@@ -1,6 +1,6 @@
 # SCAVLAND MASTER DATABASE
 
-> Canonical documentation snapshot generated from the current `main` branch of this repository. This file consolidates data already present in the website files; it does not invent missing game data. Where the site says information is undocumented, it remains marked as such here.
+> **LEGACY SNAPSHOT — NOT CURRENT CANONICAL DATA.** This file was generated from older embedded website data and may contain values from before screenshot verification. Do not use it to overwrite `data/*.json` or to mark values verified. Current screenshot evidence and records explicitly marked `screenshot-verified` take precedence. See `NEXT_JOBS.md` and `data/README.md` for active rules.\n\n> **19 September 2026 audit:** this snapshot contains known stale weapon ammo labels/stats and must not be used to fill crafting gaps. Regenerate it from verified canonical JSON after migration and verification are complete.
 
 ## Source coverage
 
@@ -983,7 +983,7 @@ Current asset folders include `images/ammo/`, `images/armour/`, `images/crafting
 
 The old `Ammo Pics/` directory documented in the original asset snapshot was removed after exact duplicate files were consolidated into `images/ammo/`. Ammo filenames were normalized. Many newer item, weapon, armour, crafting and faction screenshots still have timestamp filenames and require identification/provenance work before being treated as canonical evidence.
 
-## Maintenance notes
+## Documentation authority\n\nAuthority order: (1) in-game screenshot evidence; (2) structured records explicitly marked `source.status: screenshot-verified`; (3) other explicitly approved authoritative evidence; (4) migrated, legacy, or community data only as leads for review, not confirmation. `NEXT_JOBS.md` is the cross-device handover and `data/README.md` defines data editing rules.\n\n## Maintenance notes
 
 - Treat the individual website data files as the current operational sources until each page is deliberately migrated to the shared JSON data layer.
 - Keep `data/*.json` synchronized with confirmed game data while migration is in progress.
