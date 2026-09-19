@@ -1,17 +1,19 @@
-name: Archive superseded weapon screenshots
+name: Archive superseded Scavland evidence
 
 on:
   push:
     branches: [main]
     paths:
-      - 'images/weapons/*.png'
+      - 'images/**'
+      - 'screenshots/**'
+      - 'data/**'
 
 permissions:
   contents: write
 
 jobs:
   archive:
-    if: ${{ !contains(github.event.head_commit.message, '[weapon-archive]') }}
+    if: ${{ !contains(github.event.head_commit.message, '[evidence-archive]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout full history
@@ -19,30 +21,38 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Archive replaced screenshots
+      - name: Archive replaced evidence
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p images/weapons/archive
           stamp="$(date -u +'%Y-%m-%dT%H-%M-%SZ')"
           changed=0
+
           while IFS= read -r -d '' file; do
-            [[ "$file" == images/weapons/*.png ]] || continue
+            [[ "$file" == evidence-archive/* ]] && continue
             if git cat-file -e "HEAD^:$file" 2>/dev/null; then
-              base="$(basename "$file" .png)"
-              safe="$(printf '%s' "$base" | tr '/' '_' )"
-              dir="images/weapons/archive/$safe"
+              dir="evidence-archive/${file%/*}"
+              base="${file##*/}"
+              stem="${base%.*}"
+              ext="${base##*.}"
               mkdir -p "$dir"
-              git show "HEAD^:$file" > "$dir/$stamp.png"
+              if [[ "$base" == "$ext" ]]; then
+                target="$dir/${base}__${stamp}"
+              else
+                target="$dir/${stem}__${stamp}.${ext}"
+              fi
+              git show "HEAD^:$file" > "$target"
               changed=1
             fi
-          done < <(git diff --name-only -z --diff-filter=M HEAD^ HEAD -- 'images/weapons/*.png')
+          done < <(git diff --name-only -z --diff-filter=M HEAD^ HEAD -- images screenshots data 2>/dev/null || true)
+
           if [[ "$changed" -eq 0 ]]; then
-            echo "No replaced weapon screenshots to archive."
+            echo "No superseded evidence to archive."
             exit 0
           fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add images/weapons/archive
-          git commit -m "[weapon-archive] Preserve superseded weapon screenshots"
+          git add evidence-archive
+          git commit -m "[evidence-archive] Preserve superseded Scavland evidence"
           git push
