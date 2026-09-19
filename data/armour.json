@@ -4,15 +4,90 @@
   "lastMigratedFromSite": "2026-09-18",
   "data": [
     {
-      "id": "old-gp-4-gas-mask",
-      "name": "Old GP-4 Gas Mask",
-      "category": "Gas Masks",
-      "vendorRank": "1",
-      "price": 15000,
-      "ballistic": 0,
-      "slash": 5,
-      "radiation": 1,
+      "id": "armoured-rags",
+      "name": "Armoured Rags",
+      "category": "Body Armour",
+      "vendorRank": "2",
+      "price": 35000,
+      "ballistic": 15,
+      "slash": 23,
+      "radiation": 13,
+      "repairClass": "Scavenger",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "ashen-ushanka",
+      "name": "Ashen Ushanka",
+      "category": "Helmets",
+      "vendorRank": "2",
+      "price": 18000,
+      "ballistic": 8,
+      "slash": 10,
+      "radiation": 8,
       "repairClass": "Tattered",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "balistic-kask",
+      "name": "Balistic Kask",
+      "category": "Helmets",
+      "vendorRank": "-",
+      "price": 40000,
+      "ballistic": 23,
+      "slash": 25,
+      "radiation": 5,
+      "repairClass": "Medium",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "dusty-overcoat",
+      "name": "Dusty Overcoat",
+      "category": "Body Armour",
+      "vendorRank": "-",
+      "price": null,
+      "ballistic": null,
+      "slash": null,
+      "radiation": null,
+      "repairClass": "Tattered",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "ekzoskelet-armor",
+      "name": "Ekzoskelet Armor",
+      "category": "Body Armour",
+      "vendorRank": "-",
+      "price": 100000,
+      "ballistic": 50,
+      "slash": 50,
+      "radiation": 30,
+      "repairClass": "Heavy",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "ekzoskelet-legs",
+      "name": "Ekzoskelet Legs",
+      "category": "Pants",
+      "vendorRank": "-",
+      "price": 100000,
+      "ballistic": 30,
+      "slash": 35,
+      "radiation": 20,
+      "repairClass": "Heavy",
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
@@ -34,14 +109,59 @@
       }
     },
     {
-      "id": "skull-mask",
-      "name": "Skull Mask",
-      "category": "Gas Masks",
-      "vendorRank": "-",
+      "id": "green-rags",
+      "name": "Green Rags",
+      "category": "Body Armour",
+      "vendorRank": "1",
       "price": 5000,
       "ballistic": 3,
-      "slash": 10,
+      "slash": 5,
       "radiation": 5,
+      "repairClass": "Tattered",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "metal-breastplate",
+      "name": "Metal Breastplate",
+      "category": "Body Armour",
+      "vendorRank": "-",
+      "price": 40000,
+      "ballistic": 25,
+      "slash": 30,
+      "radiation": 10,
+      "repairClass": "Medium",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "old-blue-trousers",
+      "name": "Old Blue Trousers",
+      "category": "Pants",
+      "vendorRank": "1",
+      "price": 8500,
+      "ballistic": 5,
+      "slash": 8,
+      "radiation": 5,
+      "repairClass": "Tattered",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "old-gp-4-gas-mask",
+      "name": "Old GP-4 Gas Mask",
+      "category": "Gas Masks",
+      "vendorRank": "1",
+      "price": 15000,
+      "ballistic": 0,
+      "slash": 5,
+      "radiation": 1,
       "repairClass": "Tattered",
       "source": {
         "file": "armour.html",
@@ -64,123 +184,21 @@
       }
     },
     {
-      "id": "ruined-beret",
-      "name": "Ruined Beret",
-      "category": "Helmets",
-      "vendorRank": "1",
-      "price": 8500,
-      "ballistic": 5,
-      "slash": 8,
-      "radiation": 5,
-      "repairClass": "Tattered",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "ashen-ushanka",
-      "name": "Ashen Ushanka",
-      "category": "Helmets",
-      "vendorRank": "2",
-      "price": 18000,
-      "ballistic": 8,
-      "slash": 10,
-      "radiation": 8,
-      "repairClass": "Tattered",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "refurbished-kask",
-      "name": "Refurbished Kask",
-      "category": "Helmets",
-      "vendorRank": "-",
-      "price": 27500,
-      "ballistic": 15,
-      "slash": 15,
-      "radiation": 5,
-      "repairClass": "Medium",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "parade-helmet",
-      "name": "Parade Helmet",
-      "category": "Helmets",
-      "vendorRank": "-",
-      "price": 29000,
-      "ballistic": 15,
-      "slash": 15,
-      "radiation": 5,
-      "repairClass": "Medium",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "security-helmet",
-      "name": "Security Helmet",
-      "category": "Helmets",
-      "vendorRank": "-",
-      "price": 89000,
+      "id": "old-tactical-vest",
+      "name": "Old Tactical Vest",
+      "category": "Vests",
+      "vendorRank": null,
+      "price": 75000,
+      "durability": 100,
       "ballistic": 35,
-      "slash": 35,
-      "radiation": 20,
-      "repairClass": "Heavy",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "revolutionary-kepka",
-      "name": "Revolutionary Kepka",
-      "category": "Helmets",
-      "vendorRank": "-",
-      "price": 5000,
-      "ballistic": 10,
-      "slash": 8,
-      "radiation": 8,
-      "repairClass": "Scavenger",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "balistic-kask",
-      "name": "Balistic Kask",
-      "category": "Helmets",
-      "vendorRank": "-",
-      "price": 40000,
-      "ballistic": 23,
       "slash": 25,
-      "radiation": 5,
+      "radiation": 15,
       "repairClass": "Medium",
+      "image": "images/armour/old-tactical-vest-icon.webp",
+      "stackable": false,
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "vozhd-beret",
-      "name": "Vozhd Beret",
-      "category": "Helmets",
-      "vendorRank": "-",
-      "price": 6000,
-      "ballistic": 5,
-      "slash": 10,
-      "radiation": 5,
-      "repairClass": "Scavenger",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
+        "file": "user-submitted in-game screenshot 2026-09-19",
+        "status": "screenshot-verified"
       }
     },
     {
@@ -200,15 +218,15 @@
       }
     },
     {
-      "id": "green-rags",
-      "name": "Green Rags",
-      "category": "Body Armour",
-      "vendorRank": "1",
-      "price": 5000,
-      "ballistic": 3,
-      "slash": 5,
+      "id": "parade-helmet",
+      "name": "Parade Helmet",
+      "category": "Helmets",
+      "vendorRank": "-",
+      "price": 29000,
+      "ballistic": 15,
+      "slash": 15,
       "radiation": 5,
-      "repairClass": "Tattered",
+      "repairClass": "Medium",
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
@@ -245,14 +263,14 @@
       }
     },
     {
-      "id": "armoured-rags",
-      "name": "Armoured Rags",
-      "category": "Body Armour",
-      "vendorRank": "2",
-      "price": 35000,
-      "ballistic": 15,
-      "slash": 23,
-      "radiation": 13,
+      "id": "plated-ragged-pants",
+      "name": "Plated Ragged Pants",
+      "category": "Pants",
+      "vendorRank": "3",
+      "price": 45000,
+      "ballistic": 13,
+      "slash": 15,
+      "radiation": 10,
       "repairClass": "Scavenger",
       "source": {
         "file": "armour.html",
@@ -260,120 +278,15 @@
       }
     },
     {
-      "id": "dusty-overcoat",
-      "name": "Dusty Overcoat",
-      "category": "Body Armour",
+      "id": "refurbished-kask",
+      "name": "Refurbished Kask",
+      "category": "Helmets",
       "vendorRank": "-",
-      "price": null,
-      "ballistic": null,
-      "slash": null,
-      "radiation": null,
-      "repairClass": "Tattered",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "metal-breastplate",
-      "name": "Metal Breastplate",
-      "category": "Body Armour",
-      "vendorRank": "-",
-      "price": 40000,
-      "ballistic": 25,
-      "slash": 30,
-      "radiation": 10,
-      "repairClass": "Medium",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "stronghold-vest",
-      "name": "Stronghold Vest",
-      "category": "Body Armour",
-      "vendorRank": "-",
-      "price": 65000,
-      "ballistic": 38,
-      "slash": 35,
-      "radiation": 15,
-      "repairClass": "Medium",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "roit-vest",
-      "name": "Roit Vest",
-      "category": "Body Armour",
-      "vendorRank": "-",
-      "price": 86000,
-      "ballistic": 40,
-      "slash": 50,
-      "radiation": 20,
-      "repairClass": "Heavy",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "ekzoskelet-armor",
-      "name": "Ekzoskelet Armor",
-      "category": "Body Armour",
-      "vendorRank": "-",
-      "price": 100000,
-      "ballistic": 50,
-      "slash": 50,
-      "radiation": 30,
-      "repairClass": "Heavy",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "scrapyard-armor",
-      "name": "Scrapyard Armor",
-      "category": "Body Armour",
-      "vendorRank": "-",
-      "price": 32000,
+      "price": 27500,
       "ballistic": 15,
       "slash": 15,
-      "radiation": 8,
-      "repairClass": "Scavenger",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "old-blue-trousers",
-      "name": "Old Blue Trousers",
-      "category": "Pants",
-      "vendorRank": "1",
-      "price": 8500,
-      "ballistic": 5,
-      "slash": 8,
       "radiation": 5,
-      "repairClass": "Tattered",
-      "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
-    },
-    {
-      "id": "winter-pants",
-      "name": "Winter Pants",
-      "category": "Pants",
-      "vendorRank": "2",
-      "price": 12500,
-      "ballistic": 10,
-      "slash": 10,
-      "radiation": 8,
-      "repairClass": "Tattered",
+      "repairClass": "Medium",
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
@@ -395,6 +308,66 @@
       }
     },
     {
+      "id": "revolutionary-kepka",
+      "name": "Revolutionary Kepka",
+      "category": "Helmets",
+      "vendorRank": "-",
+      "price": 5000,
+      "ballistic": 10,
+      "slash": 8,
+      "radiation": 8,
+      "repairClass": "Scavenger",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "roit-vest",
+      "name": "Roit Vest",
+      "category": "Body Armour",
+      "vendorRank": "-",
+      "price": 86000,
+      "ballistic": 40,
+      "slash": 50,
+      "radiation": 20,
+      "repairClass": "Heavy",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "ruined-beret",
+      "name": "Ruined Beret",
+      "category": "Helmets",
+      "vendorRank": "1",
+      "price": 8500,
+      "ballistic": 5,
+      "slash": 8,
+      "radiation": 5,
+      "repairClass": "Tattered",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "scrapyard-armor",
+      "name": "Scrapyard Armor",
+      "category": "Body Armour",
+      "vendorRank": "-",
+      "price": 32000,
+      "ballistic": 15,
+      "slash": 15,
+      "radiation": 8,
+      "repairClass": "Scavenger",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
       "id": "scrapyard-pants",
       "name": "Scrapyard Pants",
       "category": "Pants",
@@ -410,14 +383,59 @@
       }
     },
     {
-      "id": "plated-ragged-pants",
-      "name": "Plated Ragged Pants",
-      "category": "Pants",
-      "vendorRank": "3",
-      "price": 45000,
-      "ballistic": 13,
-      "slash": 15,
-      "radiation": 10,
+      "id": "security-helmet",
+      "name": "Security Helmet",
+      "category": "Helmets",
+      "vendorRank": "-",
+      "price": 89000,
+      "ballistic": 35,
+      "slash": 35,
+      "radiation": 20,
+      "repairClass": "Heavy",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "skull-mask",
+      "name": "Skull Mask",
+      "category": "Gas Masks",
+      "vendorRank": "-",
+      "price": 5000,
+      "ballistic": 3,
+      "slash": 10,
+      "radiation": 5,
+      "repairClass": "Tattered",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "stronghold-vest",
+      "name": "Stronghold Vest",
+      "category": "Body Armour",
+      "vendorRank": "-",
+      "price": 65000,
+      "ballistic": 38,
+      "slash": 35,
+      "radiation": 15,
+      "repairClass": "Medium",
+      "source": {
+        "file": "armour.html",
+        "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "vozhd-beret",
+      "name": "Vozhd Beret",
+      "category": "Helmets",
+      "vendorRank": "-",
+      "price": 6000,
+      "ballistic": 5,
+      "slash": 10,
+      "radiation": 5,
       "repairClass": "Scavenger",
       "source": {
         "file": "armour.html",
@@ -425,15 +443,15 @@
       }
     },
     {
-      "id": "ekzoskelet-legs",
-      "name": "Ekzoskelet Legs",
+      "id": "winter-pants",
+      "name": "Winter Pants",
       "category": "Pants",
-      "vendorRank": "-",
-      "price": 100000,
-      "ballistic": 30,
-      "slash": 35,
-      "radiation": 20,
-      "repairClass": "Heavy",
+      "vendorRank": "2",
+      "price": 12500,
+      "ballistic": 10,
+      "slash": 10,
+      "radiation": 8,
+      "repairClass": "Tattered",
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
