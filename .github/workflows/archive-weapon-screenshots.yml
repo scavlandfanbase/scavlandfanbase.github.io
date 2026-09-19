@@ -1,0 +1,48 @@
+name: Archive superseded weapon screenshots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'images/weapons/*.png'
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    if: ${{ !contains(github.event.head_commit.message, '[weapon-archive]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Archive replaced screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p images/weapons/archive
+          stamp="$(date -u +'%Y-%m-%dT%H-%M-%SZ')"
+          changed=0
+          while IFS= read -r -d '' file; do
+            [[ "$file" == images/weapons/*.png ]] || continue
+            if git cat-file -e "HEAD^:$file" 2>/dev/null; then
+              base="$(basename "$file" .png)"
+              safe="$(printf '%s' "$base" | tr '/' '_' )"
+              dir="images/weapons/archive/$safe"
+              mkdir -p "$dir"
+              git show "HEAD^:$file" > "$dir/$stamp.png"
+              changed=1
+            fi
+          done < <(git diff --name-only -z --diff-filter=M HEAD^ HEAD -- 'images/weapons/*.png')
+          if [[ "$changed" -eq 0 ]]; then
+            echo "No replaced weapon screenshots to archive."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/weapons/archive
+          git commit -m "[weapon-archive] Preserve superseded weapon screenshots"
+          git push
