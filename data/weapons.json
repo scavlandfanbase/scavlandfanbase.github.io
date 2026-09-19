@@ -144,9 +144,10 @@
       "ergonomics": 12,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/medved-monster-silenced__stats__2026-09-19_144317.png",
         "status": "screenshot-verified",
-        "note": "Authoritative in-game screenshot. Repair Class and base yellow stats verified; green/red modifiers and durability excluded."
+        "note": "Authoritative in-game screenshot. Repair Class and base yellow stats verified; green/red modifiers and durability excluded.",
+        "lastVerified": "2026-09-19"
       },
       "image": "images/weapons/Medved Monster (Silenced).png"
     },
@@ -270,9 +271,10 @@
       "ergonomics": 15,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/pm-12-70-short__stats__2026-09-19_090151.png",
         "status": "screenshot-verified",
-        "note": "Authoritative in-game screenshot. Repair Class and base yellow stats verified; green/red modifiers and durability excluded."
+        "note": "Authoritative in-game screenshot. Repair Class and base yellow stats verified; green/red modifiers and durability excluded.",
+        "lastVerified": "2026-09-19"
       },
       "image": "images/weapons/PM 12-70 (Short).png"
     },
@@ -375,9 +377,10 @@
       "ergonomics": 4,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/borealis-12__stats__2026-09-19_141353.png",
         "status": "screenshot-verified",
-        "note": "Borealis 12 verified separately from Borealis 12-TAK. Base beige stats and Repair Class used; green modifiers and durability excluded."
+        "note": "Borealis 12 verified separately from Borealis 12-TAK. Base beige stats and Repair Class used; green modifiers and durability excluded.",
+        "lastVerified": "2026-09-19"
       }
     },
     {
@@ -458,9 +461,10 @@
       "ergonomics": 10,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/thread-cutter__stats__2026-09-19_084742.png",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded.",
+        "lastVerified": "2026-09-19"
       }
     },
     {
@@ -705,9 +709,10 @@
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/2hmg-short__stats__2026-09-19_084341.png",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded.",
+        "lastVerified": "2026-09-19"
       }
     },
     {
@@ -725,9 +730,10 @@
       "ergonomics": 5,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/2hmg-long__stats__2026-09-19_084756.png",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded.",
+        "lastVerified": "2026-09-19"
       }
     },
     {
@@ -766,9 +772,10 @@
       "ergonomics": 5,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/mikhail-50__stats__2026-09-19_084710.png",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded.",
+        "lastVerified": "2026-09-19"
       },
       "image": "images/weapons/Mikhail 50.png"
     },
@@ -787,9 +794,10 @@
       "ergonomics": 2,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/mikhail-50-prototype__stats__2026-09-19_084730.png",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded.",
+        "lastVerified": "2026-09-19"
       }
     },
     {
@@ -807,9 +815,10 @@
       "ergonomics": 2,
       "reload": 1,
       "source": {
-        "file": "user-provided screenshot (2026-09-19)",
+        "file": "evidence-inbox/weapons/mikhail-50-pristine__stats__2026-09-19_084409.png",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded."
+        "note": "Base stats transcribed from yellow in-game values; green/red modifier values and durability excluded.",
+        "lastVerified": "2026-09-19"
       }
     }
   ]
