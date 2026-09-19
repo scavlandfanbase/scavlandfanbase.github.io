@@ -15,12 +15,13 @@ const labels={weapon:'Weapons',armour:'Armour',ammunition:'Ammo','crafted-item':
 let items=[],active='all',verifiedOnly=false,needsReview=false,weapons=[],armour=[],ammo=[],crafting=[],vendors=[];
 const norm=s=>clean(String(s||'')).toLowerCase();
 function sourceStatus(x){
- const n=norm(x.name),records=[weapons.find(v=>norm(v.name)===n),armour.find(v=>norm(v.name)===n),ammo.find(v=>norm(v.name)===n),crafting.find(v=>norm(v.name)===n)].filter(Boolean);
+ const n=norm(x.name),records=[x,weapons.find(v=>norm(v.name)===n),armour.find(v=>norm(v.name)===n),ammo.find(v=>norm(v.name)===n),crafting.find(v=>norm(v.name)===n)].filter(Boolean);
  const statuses=records.map(v=>v.source?.status).filter(Boolean);
- return statuses.length&&statuses.every(v=>v==='screenshot-verified')?{label:'✓ In-game verified',cls:'verified'}:{label:'Needs verification',cls:'review'};
+ return statuses.includes('screenshot-verified')?{label:'✓ In-game verified',cls:'verified'}:{label:'Needs verification',cls:'review'};
 }
 function itemStats(x){
  const n=norm(x.name), bits=[];
+ if(x.source?.status==='screenshot-verified'){bits.push(['Item Rank',x.rank],['Est. Price',x.estimatedPrice],['Max Stack',x.maxStack]);}
  const w=weapons.find(v=>norm(v.name)===n); if(w){bits.push(['Tier',w.tier],['Damage',w.damage],['RPM',w.rpm],['Range',w.range],['Accuracy',w.accuracy],['Recoil',w.recoil],['Handling',w.handling],['Ergonomics',w.ergonomics],['Reload',w.reload],['Ammo',w.ammo]);}
  const a=armour.find(v=>norm(v.name)===n); if(a){bits.push(['Category',a.category],['Rank',a.vendorRank],['Price',a.price],['Ballistic',a.ballistic],['Slash',a.slash],['Radiation',a.radiation],['Repair',a.repairClass]);}
  const m=ammo.find(v=>norm(v.name)===n); if(m){bits.push(['Est. Price',m.estimatedPrice],['Damage',m.damage],['Penetration',m.penetrationPercent==null?null:m.penetrationPercent+'%'],['Max Stack',m.maxStack]);}
