@@ -144,9 +144,9 @@
       "ergonomics": 12,
       "reload": 1,
       "source": {
-        "file": "images/weapons/Medved Monster (Silenced).png",
+        "file": "user-provided screenshot (2026-09-19)",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+        "note": "Authoritative in-game screenshot. Repair Class and base yellow stats verified; green/red modifiers and durability excluded."
       },
       "image": "images/weapons/Medved Monster (Silenced).png"
     },
@@ -272,7 +272,7 @@
       "source": {
         "file": "user-provided screenshot (2026-09-19)",
         "status": "screenshot-verified",
-        "note": "Repair Class Basic confirmed from in-game screenshot; base stats transcribed from yellow values; durability excluded."
+        "note": "Authoritative in-game screenshot. Repair Class and base yellow stats verified; green/red modifiers and durability excluded."
       },
       "image": "images/weapons/PM 12-70 (Short).png"
     },
@@ -558,9 +558,9 @@
       "ergonomics": 8,
       "reload": 1,
       "source": {
-        "file": "images/weapons/3-Line Nagant (Stockless).png",
+        "file": "user-provided screenshot (2026-09-19)",
         "status": "screenshot-verified",
-        "note": "Base stats transcribed from yellow in-game values; green/red modifier values excluded."
+        "note": "Authoritative in-game screenshot. Repair Class and base yellow stats verified; green/red modifiers and durability excluded."
       },
       "image": "images/weapons/3-Line Nagant (Stockless).png"
     },
