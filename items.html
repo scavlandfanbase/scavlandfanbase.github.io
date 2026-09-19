@@ -15,9 +15,9 @@ const labels={weapon:'Weapons',armour:'Armour',ammunition:'Ammo','crafted-item':
 let items=[],active='all',verifiedOnly=false,needsReview=false,weapons=[],armour=[],ammo=[],crafting=[],vendors=[];
 const norm=s=>clean(String(s||'')).toLowerCase();
 function sourceStatus(x){
- const n=norm(x.name),records=[x,weapons.find(v=>norm(v.name)===n),armour.find(v=>norm(v.name)===n),ammo.find(v=>norm(v.name)===n),crafting.find(v=>norm(v.name)===n)].filter(Boolean);
- const statuses=records.map(v=>v.source?.status).filter(Boolean);
- return statuses.includes('screenshot-verified')?{label:'✓ In-game verified',cls:'verified'}:{label:'Needs verification',cls:'review'};
+ return x.source?.status==='screenshot-verified'
+  ?{label:'✓ In-game verified',cls:'verified'}
+  :{label:'Needs verification',cls:'review'};
 }
 function itemStats(x){
  const n=norm(x.name), bits=[];
