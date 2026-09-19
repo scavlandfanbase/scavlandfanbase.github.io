@@ -185,7 +185,16 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 40000,
+      "rank": 2,
+      "stackable": false,
+      "description": "This lets me learn to set up a high-quality kit for maintaining and repairing weapons very reliably.",
+      "file": "evidence-inbox/Screenshot 2026-09-17 202103.png",
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 202103.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "advanced-mechanical-components",
@@ -736,7 +745,16 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 60000,
+      "rank": 3,
+      "stackable": false,
+      "description": "This shows me how to make a highly advanced repair kit for weapons, fit only for experts.",
+      "file": "evidence-inbox/Screenshot 2026-09-17 202109.png",
+      "source": {
+        "file": "evidence-inbox/Screenshot 2026-09-17 202109.png",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "fabric-scrap",
