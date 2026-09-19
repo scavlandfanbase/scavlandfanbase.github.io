@@ -107,3 +107,5 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Shared visual theme: `site-theme.css`
 - Interactive map: `map.html`
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
+
+- Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
