@@ -195,7 +195,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 25000,
+      "rank": 3,
+      "description": "A set of gears, levers and other high-grade machine parts. Possibly good for reuse instead of recycling.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "ai-2-army-medkit",
@@ -254,7 +262,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 25000,
+      "rank": 3,
+      "description": "A rusty plate of armor which can be strapped to one's chest, offering minimal protection in combat. If it stops even one bullet, that’s already good enough.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "armoured-rags",
@@ -540,7 +556,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A container of industrial waste from when Svarog Factories was still operational.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "cigarettes",
@@ -722,7 +746,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "An old scrap of low-quality fabric, useful for patching up clothes.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "field-repair-kit",
@@ -918,7 +950,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 10000,
+      "rank": 2,
+      "description": "A fabric designed for high impact resistance, usually sewn onto armor to make it bulletproof.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "large-pumpkin",
@@ -1145,7 +1185,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 10000,
+      "rank": 1,
+      "description": "Small gears, levers and bits of machinery. Not too big or high-quality, but still probably worth something.",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "medium-armor-repair-kit",
@@ -1211,7 +1259,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "Scraps of metal that can be recycled into something useful by able hands.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "mikhail-47",
@@ -1624,7 +1680,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A scrap of plastic that can maybe be recycled.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "plated-overcoat",
@@ -1653,7 +1717,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2000,
+      "rank": 1,
+      "description": "I’m not the type to pull someone’s teeth out. But what else is this thing for?",
+      "maxStack": 5,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "pm-12-70-long-extended",
@@ -1918,7 +1990,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A scrap of rubber which resisted the years. A very resilient material, and good for trading.",
+      "maxStack": 40,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "ruined-beret",
@@ -1986,7 +2066,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 2000,
+      "rank": 1,
+      "description": "A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it.",
+      "maxStack": 4,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "screws",
@@ -1995,7 +2083,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 100,
+      "rank": 1,
+      "description": "A bunch of metal screws, hard to find and pick up but valuable for the tinkering types.",
+      "maxStack": 10,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "security-helmet",
@@ -2317,7 +2413,15 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 250,
+      "rank": 1,
+      "description": "A lubricant bottle so old and busted I’d need lubricant to open it. Still valuable for the tinkerers in Zalesye.",
+      "maxStack": 4,
+      "source": {
+        "file": "evidence-inbox.zip / screenshots 2026-09-18",
+        "status": "screenshot-verified"
+      }
     },
     {
       "id": "winter-pants",
