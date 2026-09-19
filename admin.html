@@ -6,27 +6,34 @@
 </style></head><body><main class="admin-main"><div class="admin-head"><h1>Evidence Review</h1><button id="logout" class="btn hidden">Sign out</button></div>
 <section id="login" class="panel login"><h2>Admin sign in</h2><p>Authorized reviewers only.</p><input id="email" type="email" autocomplete="username" placeholder="Email"><input id="password" type="password" autocomplete="current-password" placeholder="Password"><button id="signin" class="btn">Sign in</button> <button id="forgot" class="btn" type="button">Reset password</button><p id="login-status" class="status"></p><div id="reset-box" class="hidden"><h3>Set a new password</h3><input id="new-password" type="password" autocomplete="new-password" minlength="10" placeholder="New password"><button id="save-password" class="btn" type="button">Save new password</button><p id="reset-status" class="status"></p></div></section>
 <section id="review" class="hidden"><div class="panel"><strong>Pending evidence</strong> <span id="count" class="status"></span></div><div id="cards" class="cards"></div></section></main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
+<script>
 const URL='https://demtoqsafufzmnhvaykj.supabase.co',KEY='sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH';
-const statusEl=document.getElementById('login-status');
-if(!window.supabase){statusEl.textContent='Admin login library failed to load. Refresh the page.';throw new Error('Supabase library unavailable')}
-const sb=window.supabase.createClient(URL,KEY),login=document.getElementById('login'),review=document.getElementById('review'),cards=document.getElementById('cards');
+const $=id=>document.getElementById(id), statusEl=$('login-status'), login=$('login'),review=$('review'),cards=$('cards');
+const headers={'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
+let accessToken=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-async function load(){
- const {data,error}=await sb.from('evidence_submissions').select('*').eq('status','pending').order('created_at',{ascending:false});
- if(error){document.getElementById('login-status').textContent='Signed in, but this account is not authorized as a SCAVLAND admin.';return}
- login.classList.add('hidden');review.classList.remove('hidden');document.getElementById('logout').classList.remove('hidden');document.getElementById('count').textContent='('+data.length+')';
- cards.innerHTML='';
- for(const x of data){const {data:u}=await sb.storage.from('evidence-submissions').createSignedUrl(x.screenshot_path,600);
-  const el=document.createElement('article');el.className='card';el.innerHTML='<div class="card-grid"><div>'+(u?.signedUrl?'<img class="shot" src="'+esc(u.signedUrl)+'" alt="Submitted evidence">':'Screenshot unavailable')+'</div><div><h2>'+esc(x.item_name)+'</h2><div class="meta"><b>Type</b><span>'+esc(x.submission_type)+'</span><b>Category</b><span>'+esc(x.category)+'</span><b>Submitted</b><span>'+esc(new Date(x.created_at).toLocaleString())+'</span><b>Notes</b><span>'+esc(x.notes||'—')+'</span></div><div class="actions"><button class="btn approve">Approve</button><button class="btn danger reject">Reject</button></div></div></div>';
-  el.querySelector('.approve').onclick=()=>decide(x.id,'approved');el.querySelector('.reject').onclick=()=>decide(x.id,'rejected');cards.appendChild(el);
- }
+async function api(path,opt={}){return fetch(URL+path,{...opt,headers:{...headers,...(opt.headers||{})}})}
+async function signIn(){
+ statusEl.textContent='Signing in…';
+ const r=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:$('email').value.trim(),password:$('password').value})});
+ const d=await r.json(); if(!r.ok){statusEl.textContent=(d.error_description||d.msg||d.message||'Sign-in failed.');return}
+ accessToken=d.access_token;statusEl.textContent='Signed in. Loading admin review…';await load();
 }
-async function decide(id,status){const {error}=await sb.from('evidence_submissions').update({status,reviewed_at:new Date().toISOString()}).eq('id',id);if(error)alert('Could not update submission.');else load()}
-document.getElementById('signin').onclick=async()=>{document.getElementById('login-status').textContent='Signing in…';const {error}=await sb.auth.signInWithPassword({email:document.getElementById('email').value,password:document.getElementById('password').value});if(error){document.getElementById('login-status').textContent=error.message==='Invalid login credentials'?'Email or password is incorrect.':('Sign-in failed: '+error.message)}else{document.getElementById('login-status').textContent='Signed in. Loading admin review…';load()}};
-document.getElementById('forgot').onclick=async()=>{const email=document.getElementById('email').value.trim();const st=document.getElementById('login-status');if(!email){st.textContent='Enter your admin email first.';return}st.textContent='Sending password reset email…';const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});st.textContent=error?'Reset failed: '+error.message:'Password reset email sent. Open the newest email.'};
-sb.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){document.getElementById('reset-box').classList.remove('hidden');document.getElementById('login-status').textContent='Recovery link accepted. Set your new password below.'}});
-document.getElementById('save-password').onclick=async()=>{const p=document.getElementById('new-password').value,st=document.getElementById('reset-status');if(p.length<10){st.textContent='Use at least 10 characters.';return}const {error}=await sb.auth.updateUser({password:p});if(error){st.textContent='Could not update password: '+error.message;return}st.textContent='Password updated. Loading admin review…';setTimeout(load,500)};
-document.getElementById('logout').onclick=async()=>{await sb.auth.signOut();location.reload()};
-sb.auth.getSession().then(({data})=>{if(data.session)load()});
+async function resetPassword(){
+ const email=$('email').value.trim();if(!email){statusEl.textContent='Enter your admin email first.';return}
+ statusEl.textContent='Sending password reset email…';
+ const r=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(location.origin+location.pathname),{method:'POST',body:JSON.stringify({email})});
+ if(r.ok)statusEl.textContent='Password reset email sent. Open the newest email.';else{const d=await r.json();statusEl.textContent=d.msg||d.message||'Could not send reset email.'}
+}
+async function load(){
+ const h={...headers,Authorization:'Bearer '+accessToken};
+ const r=await fetch(URL+'/rest/v1/evidence_submissions?status=eq.pending&order=created_at.desc',{headers:h});
+ if(!r.ok){statusEl.textContent='Signed in, but this account is not authorized as a SCAVLAND admin.';return}
+ const data=await r.json();login.classList.add('hidden');review.classList.remove('hidden');$('logout').classList.remove('hidden');$('count').textContent='('+data.length+')';cards.innerHTML='';
+ for(const x of data){const sr=await fetch(URL+'/storage/v1/object/sign/evidence-submissions/'+x.screenshot_path,{method:'POST',headers:h,body:JSON.stringify({expiresIn:600})});const sd=sr.ok?await sr.json():null;const image=sd?.signedURL?URL+'/storage/v1'+sd.signedURL:null;
+ const el=document.createElement('article');el.className='card';el.innerHTML='<div class="card-grid"><div>'+(image?'<img class="shot" src="'+esc(image)+'" alt="Submitted evidence">':'Screenshot unavailable')+'</div><div><h2>'+esc(x.item_name)+'</h2><div class="meta"><b>Type</b><span>'+esc(x.submission_type)+'</span><b>Category</b><span>'+esc(x.category)+'</span><b>Submitted</b><span>'+esc(new Date(x.created_at).toLocaleString())+'</span><b>Notes</b><span>'+esc(x.notes||'—')+'</span></div><div class="actions"><button class="btn approve">Approve</button><button class="btn danger reject">Reject</button></div></div></div>';el.querySelector('.approve').onclick=()=>decide(x.id,'approved');el.querySelector('.reject').onclick=()=>decide(x.id,'rejected');cards.appendChild(el)}
+}
+async function decide(id,status){const r=await fetch(URL+'/rest/v1/evidence_submissions?id=eq.'+encodeURIComponent(id),{method:'PATCH',headers:{...headers,Authorization:'Bearer '+accessToken,Prefer:'return=minimal'},body:JSON.stringify({status,reviewed_at:new Date().toISOString()})});if(r.ok)load();else alert('Could not update submission.')}
+$('signin').onclick=signIn;$('forgot').onclick=resetPassword;$('logout').onclick=()=>location.reload();
+statusEl.textContent='Admin login ready.';
 </script><script src="site-shell.js"></script></body></html>
