@@ -21,6 +21,9 @@ Whenever any website code, structured data, assets, navigation, UI, database con
 
 ## Handover — 19 September 2026
 
+- **Evidence image library/import workflow:** 417 raw screenshots were committed to GitHub under `evidence-inbox/` as the immutable source archive. Added public Supabase Storage bucket `evidence-library` (10 MB, PNG/JPEG/WebP) with write/update/delete restricted to authenticated SCAVLAND admins, plus admin-only `evidence-import.html` for bulk copying local screenshots into `raw/`. GitHub originals must remain untouched until visual classification/deduplication is complete. For comparable screenshots, newer timestamp wins; do not supersede armour resistance evidence unless the screenshot is 100% durability, and do not mix experimental-branch evidence into live canonical data. Importer commit `c94f3a112da80e4c6d30b222eef45ff0c7ee1351`; backend migration `create_evidence_library_bucket`.
+
+
 - **GitHub Pages HTTPS verified from repository settings:** site is live at the default `scavlandfanbase.github.io` domain, deployment source is `main` `/ (root)`, and **Enforce HTTPS** is enabled/required. Together with push protection, Dependabot/security settings and the active `Protect main` ruleset, the planned GitHub hardening pass is complete.
 
 - **GitHub main-branch hardening confirmed from repository settings:** active ruleset `Protect main` targets the default `main` branch, has an empty bypass list, blocks branch deletion and force pushes, while normal direct updates remain allowed. Account-level push protection and the selected code-security/Dependabot protections were also enabled manually in GitHub settings. A normal direct commit after enabling the ruleset is used below to verify our existing update workflow still works.
