@@ -1,8 +1,8 @@
 # SCAVLAND Website — Next Jobs
 
-Last reviewed: 18 September 2026
+Last reviewed: 19 September 2026
 
-This is the active project backlog. Work from the top unless a new game-data update or site bug takes priority.
+This is the active project backlog. Work from the top unless a new game-data update or site bug takes priority.\n\n## Handover — 19 September 2026\n\n- Repository: `scavlandfanbase/scavlandfanbase.github.io`, branch `main`.\n- **Strict evidence rule:** do not promote a value into canonical/master data unless it is confirmed by an in-game screenshot or another explicitly approved authoritative source. Existing HTML or migrated JSON is not proof by itself.\n- `source.status: screenshot-verified` means the record may be presented as **In-game verified**. Legacy statuses such as `existing-site-data`, `community-reported-correction`, or migration-derived data must not be silently treated as screenshot-confirmed.\n- If evidence is missing, conflicting or unreadable, leave the value unverified/`null` and flag it for review. Never fill gaps by inference.\n- Crafting: `crafting.html` currently contains 22 embedded recipes and `data/crafting.json` contains a migrated copy. They do not fully match. **Do not reconcile or promote the extra HTML ingredients until the crafting screenshots are processed.** A proposed reconciliation was deliberately stopped before any repository write.\n- Items navigation is already immediately after Map in `site-shell.js`.\n- `items.html` is already JSON-driven and now displays verification badges. It shows **✓ In-game verified** only when linked specialist records are explicitly `screenshot-verified`; otherwise it shows **Needs verification**. No game values were changed for this UI update.\n- Verification-badge commit: `a7ee0c7fb2de0b37543d357de5f936d2eb678a38`.\n- Continue safe UI/site functionality work when screenshots are unavailable; do not use that as a reason to alter unverified game data.\n
 
 ## Priority 1 — Process screenshot evidence
 
@@ -40,7 +40,7 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 
 ## Priority 4 — Database/site features
 
-- [ ] Build a dedicated Items database/search page from `data/items.json`.
+- [x] Build a dedicated Items database/search page from `data/items.json`.\n- [x] Add verification badges to Items so screenshot-verified records are visually distinct from records still needing verification.
 - [ ] Add item images/icons to cards and detail views where verified assets exist.
 - [ ] Add cross-links: vendor item → item record; crafting ingredient → item; weapon → ammo; faction → vendors.
 - [ ] Improve Areas page; it is currently under construction.
