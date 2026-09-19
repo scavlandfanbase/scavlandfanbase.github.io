@@ -1,0 +1,43 @@
+name: Tidy evidence inbox
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tidy-evidence-inbox.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  dedupe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove byte-identical duplicate screenshots
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('evidence-inbox')
+          groups={}
+          for p in root.iterdir():
+              if p.is_file():
+                  h=hashlib.sha256(p.read_bytes()).hexdigest()
+                  groups.setdefault(h,[]).append(p)
+          removed=[]
+          for paths in groups.values():
+              if len(paths)<2: continue
+              # Prefer the original-looking filename; exact bytes mean no evidence is lost.
+              paths=sorted(paths,key=lambda p:(('copy' in p.name.lower()),len(p.name),p.name.lower()))
+              for p in paths[1:]:
+                  p.unlink(); removed.append(str(p))
+          print(f'Removed {len(removed)} byte-identical duplicates')
+          Path('evidence-dedupe-report.txt').write_text('\n'.join(removed)+'\n',encoding='utf-8')
+          PY
+      - name: Commit cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A evidence-inbox evidence-dedupe-report.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "Remove byte-identical evidence duplicates"
+          git push
