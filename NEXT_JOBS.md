@@ -9,14 +9,14 @@ Current canonical verification state (20 September 2026):
 - Ammo: **13/13 screenshot-verified**, each linked to an exact organised evidence screenshot.
 - Crafting: **22/22 screenshot-verified**.
 - Armour: **3/30 screenshot-verified** under the strict 100%-durability rule: Old Tactical Vest, Riot Vest and Security Helmet.
-- Items: **174/258 screenshot-verified**.
+- Items: **175/255 screenshot-verified**.
 - `MK Slotted Mount Handguard` remains intentionally unverified because its screenshots conflict.
 - Svobodnik M4 is resolved from direct screenshot evidence: **17 damage / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload**.
 - Evidence root is clean: **0 opaque timestamp screenshots remain at `evidence-inbox/` root**. Two unidentified screenshots are deliberately preserved under `evidence-inbox/unresolved/`.
 - `items.html` verification badges now require persisted direct verification metadata; they no longer inherit a green badge merely from another matching dataset.
 
 Recommended next work:
-1. Audit the remaining **84/258 unverified item records** against any remaining valid evidence; do not bulk-promote without proof.
+1. Audit the remaining **80/255 unverified item records** against any remaining valid evidence; do not bulk-promote without proof.
 2. Obtain/identify a direct **base 2HMG** screenshot before marking it verified.
 3. Armour audit: only promote resistance values from screenshots showing **100% durability**.
 4. Continue clean display-image/icon work separately from evidence verification.
@@ -151,7 +151,7 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 
 ## Current confirmed baseline
 
-- 258 indexed item identities
+- 255 indexed item identities
 - 39 canonical weapon records currently in `data/weapons.json` (38 screenshot-verified; base 2HMG unverified)
 - 30 armour/gear records
 - 13 ammo records
