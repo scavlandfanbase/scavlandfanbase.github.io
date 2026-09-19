@@ -368,15 +368,16 @@
       "ammo": "Shotgun Ammo",
       "damage": 30,
       "rpm": 500,
-      "range": 18,
-      "accuracy": 10,
-      "recoil": 55,
-      "handling": 7,
-      "ergonomics": 10,
+      "range": 16,
+      "accuracy": 14,
+      "recoil": 52,
+      "handling": 8,
+      "ergonomics": 4,
       "reload": 1,
       "source": {
-        "file": "weapons.html",
-        "status": "existing-site-data"
+        "file": "user-provided screenshot (2026-09-19)",
+        "status": "screenshot-verified",
+        "note": "Borealis 12 verified separately from Borealis 12-TAK. Base beige stats and Repair Class used; green modifiers and durability excluded."
       }
     },
     {
