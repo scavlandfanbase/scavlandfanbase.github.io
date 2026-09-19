@@ -13,7 +13,12 @@
 const labels={weapon:'Weapons',armour:'Armour',ammunition:'Ammo','crafted-item':'Crafted','crafting-resource':'Crafting','vendor-item':'Vendor Items'};
 let items=[],active='all',weapons=[],armour=[],ammo=[],crafting=[],vendors=[];
 const norm=s=>clean(String(s||'')).toLowerCase();
-function sourceStatus(x){\n const n=norm(x.name),records=[weapons.find(v=>norm(v.name)===n),armour.find(v=>norm(v.name)===n),ammo.find(v=>norm(v.name)===n),crafting.find(v=>norm(v.name)===n)].filter(Boolean);\n const statuses=records.map(v=>v.source?.status).filter(Boolean);\n return statuses.length&&statuses.every(v=>v==='screenshot-verified')?{label:'✓ In-game verified',cls:'verified'}:{label:'Needs verification',cls:'review'};\n}\nfunction itemStats(x){
+function sourceStatus(x){
+ const n=norm(x.name),records=[weapons.find(v=>norm(v.name)===n),armour.find(v=>norm(v.name)===n),ammo.find(v=>norm(v.name)===n),crafting.find(v=>norm(v.name)===n)].filter(Boolean);
+ const statuses=records.map(v=>v.source?.status).filter(Boolean);
+ return statuses.length&&statuses.every(v=>v==='screenshot-verified')?{label:'✓ In-game verified',cls:'verified'}:{label:'Needs verification',cls:'review'};
+}
+function itemStats(x){
  const n=norm(x.name), bits=[];
  const w=weapons.find(v=>norm(v.name)===n); if(w){bits.push(['Tier',w.tier],['Damage',w.damage],['RPM',w.rpm],['Range',w.range],['Accuracy',w.accuracy],['Recoil',w.recoil],['Handling',w.handling],['Ergonomics',w.ergonomics],['Reload',w.reload],['Ammo',w.ammo]);}
  const a=armour.find(v=>norm(v.name)===n); if(a){bits.push(['Category',a.category],['Rank',a.vendorRank],['Price',a.price],['Ballistic',a.ballistic],['Slash',a.slash],['Radiation',a.radiation],['Repair',a.repairClass]);}
