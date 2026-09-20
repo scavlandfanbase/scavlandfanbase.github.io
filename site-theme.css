@@ -251,3 +251,6 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
 /* Canonical database cross-links */
 .data-link{color:var(--scav-gold-bright)!important;text-decoration:none!important;border-bottom:1px dotted rgba(255,204,102,.55)}
 .data-link:hover,.data-link:focus{text-decoration:none!important;border-bottom-style:solid;outline:none}
+
+.item-card.deep-linked{border-color:var(--scav-gold-bright)!important;box-shadow:0 0 0 2px rgba(255,204,102,.16),0 10px 28px rgba(0,0,0,.35)}
+.faction-vendors-link{display:inline-block;margin-top:4px;font-weight:700}
