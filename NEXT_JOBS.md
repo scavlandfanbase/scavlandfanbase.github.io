@@ -1,5 +1,14 @@
 # SCAVLAND Website — Next Jobs
 
+## DESKTOP HANDOVER — 20 September 2026 (latest)
+
+- **Armour page:** user confirmed the Armour page is now displaying correctly after the verification-card render fix. Earlier root cause was an undefined `verification` variable in `createArmourCard()`; fix commit `8dabbfb40ef08fef79c1244b2a8f726e0b1d78a3`. Treat Armour rendering as stable unless a new issue is observed.
+- **Crafting integrity re-check:** all **22 recipes** remain screenshot-verified: 8 Medical, 7 Weapon, 7 Armour. Checked duplicate recipe IDs, ingredient IDs, ingredient-name matches and referenced evidence paths: **0 discrepancies**. No canonical data change was needed.
+- **Weapon screenshot display:** user requested actual in-game weapon/stat screenshots on the Weapons page. `weapons.html` now displays `weapon.image` where present and otherwise falls back to a usable `source.file` when the record is screenshot-verified. Screenshot is lazy-loaded, mobile-responsive and tap/click opens the original full-size evidence. Initial implementation commit `6a98879011bdd81968aaeadf0e3e5261e67d5fa6`.
+- **Weapon render regression fixed:** the first screenshot-display edit accidentally inserted its CSS inside the JavaScript block. On iPhone the page shell/filters loaded but weapon cards did not render and the page jumped directly to Ammunition. CSS was moved into the actual `<style>` block in commit `5f0af04e1a988f836c08ee8109ab68386512e4fa`. **Desktop/mobile should verify the deployed Weapons page after GitHub Pages finishes serving this commit.** Expected result: weapon cards render normally with in-game screenshots and existing readable stats.
+- **Important screenshot rule:** never fabricate weapon imagery. Use dedicated `image` first; use an archived screenshot-verified evidence path as fallback; if neither exists, show the weapon card without an image.
+- **Next content task:** continue the **Areas** audit/improvement after confirming the repaired Weapons page is live. Do not redo Crafting reconciliation or the completed general responsive/link audit unless a new defect is observed.
+
 ## START HERE — current queue (20 September 2026)
 
 - **Map touch controls (20 Sept 2026):** added true multi-pointer handling: one-finger drag pans; two-finger pinch zooms around the finger midpoint; touch interaction stays inside the map via `touch-action:none`. Existing mouse-wheel zoom and toolbar controls remain. Physical iPhone/tablet interaction should still receive a final device check.
