@@ -1,6 +1,7 @@
 # SCAVLAND Website — Next Jobs
 
 ## START HERE — next session
+- **Mystery Pills and Medicinal Herb direct screenshots (20 Sept 2026):** Mystery Pills ~6000₽, Health +15, Radiation -30, Thirst +5, Max Stacks 5; Medicinal Herb ~50₽, Health +5, Thirst +3, Max Stacks 10. Both canonical item records now include structured `effects`, `estimatedPrice`, `maxStacks`, description and screenshot-verified status (`7a42f000615f33a9b607b424026499f0e6c82b05`). The uploaded PNGs still need permanent repo evidence paths because the GitHub connector cannot write binary files. Machine recount after this update is **172/255 screenshot-verified**; this corrects the earlier handover count of 175/255.
 - **20 Sept morning continuation:** recursive evidence index successfully analysed **300 images / 0 exact duplicate groups** but its first run failed only at `git push` because `main` advanced during OCR; workflow now rebases before push (`feb3f9eecac46b49f795b387b9b9e189a7a4a4af`). Recursive dedupe rerun completed successfully. Removed obsolete unreferenced root `ammo` prose dump because canonical ammo lives in `data/ammo.json` (`989312281ef6ecf24ea65ffcd2a910317217ba09`). Root `Antatoly.png` remains pending because binary equivalence to `images/vendors/anatoly.png` cannot be proven through the text-only GitHub connector; do not delete on assumption.
 - **Repository-wide QA audit (20 Sept 2026):** recursive Git tree contained **611 tracked files** at audit start. All canonical JSON parsed successfully; no duplicate stable IDs and no missing explicit JSON image/evidence paths were found. Fixed four true duplicate ammo identities in `items.json` by merging vendor/ammunition classifications (`15bbb032ed1b08aea95a53ef70e17ad32289ee28`). Added missing `Medicinal Herb` item identity as recipe-evidenced but deliberately not screenshot-verified, and synchronized `Riot Vest` spelling/provenance (`dd0075b93b420e0d9880576b5da8f9fe3efb6f89`). Current item registry: **255 unique identities, 175 screenshot-verified, 80 not screenshot-verified**. Fixed over-broad archive workflow so routine `data/**` edits are no longer copied into `evidence-archive/` (`fd1896f41d79a86c9f1251e13005ce0d82b275af`). Updated evidence dedupe and analysis workflows to recurse through organised subfolders (`068d4d215c3317f34f7d84ca762fbc6da6c30c21`, `6081cdac265532ba241143fed36deb6623d9806d`); dedupe found 0 duplicates but its first run hit a concurrent-push rejection, so it was further changed to avoid report commits when nothing is removed (`fd311c8113fccfb4bce51a1020bc1da3768f8cfd`). `MASTER_DATABASE.md` now has a strong legacy/stale-data warning (`65cf3aebca0692bf34db4e350f5cb25d36eccd70`). Legacy duplicate screenshot assets still exist under `images/items/`, `images/weapons/`, `images/crafting/`, `images/factions/`, and `images/armour/`; do not delete them until reference/byte-equivalence cleanup is done. Root `Antatoly.png` and legacy root `ammo` file appear unused by live pages but remain pending safe cleanup. Shared `site-shell.js` is the canonical nav and currently normalizes legacy hard-coded nav differences. Main ruleset remains active; recent Pages deployments succeed, with rapid intermediate deployments sometimes cancelled as superseded.
 
@@ -11,14 +12,14 @@ Current canonical verification state (20 September 2026):
 - Ammo: **13/13 screenshot-verified**, each linked to an exact organised evidence screenshot.
 - Crafting: **22/22 screenshot-verified**.
 - Armour: **3/30 screenshot-verified** under the strict 100%-durability rule: Old Tactical Vest, Riot Vest and Security Helmet.
-- Items: **175/255 screenshot-verified**.
+- Items: **172/255 screenshot-verified**.
 - `MK Slotted Mount Handguard` remains intentionally unverified because its screenshots conflict.
 - Svobodnik M4 is resolved from direct screenshot evidence: **17 damage / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload**.
 - Evidence root is clean: **0 opaque timestamp screenshots remain at `evidence-inbox/` root**. Two unidentified screenshots are deliberately preserved under `evidence-inbox/unresolved/`.
 - `items.html` verification badges now require persisted direct verification metadata; they no longer inherit a green badge merely from another matching dataset.
 
 Recommended next work:
-1. Audit the remaining **80/255 unverified item records** against any remaining valid evidence; do not bulk-promote without proof.
+1. Audit the remaining **83/255 non-screenshot-verified item records** against any remaining valid evidence; do not bulk-promote without proof.
 2. Obtain/identify a direct **base 2HMG** screenshot before marking it verified.
 3. Armour audit: only promote resistance values from screenshots showing **100% durability**.
 4. Continue clean display-image/icon work separately from evidence verification.
