@@ -728,6 +728,13 @@ footer {
 
 }
 
+
+.verification-row { margin: 0 0 12px; }
+.verification-badge { display:inline-block; padding:5px 8px; border-radius:4px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.35px; }
+.verification-badge.verified { color:#b9f6ca; background:rgba(46,125,50,.22); border:1px solid rgba(102,187,106,.55); }
+.verification-badge.review { color:#ffd59a; background:rgba(160,104,24,.18); border:1px solid rgba(255,204,102,.45); }
+.verification-note { max-width:900px; margin:14px auto 0; color:#aaa; font-size:12px; line-height:1.45; }
+
 </style>
 
 <link rel="stylesheet" href="site-theme.css">
@@ -813,6 +820,8 @@ footer {
         available throughout SCAVLAND. Resistance values shown
         represent the item's maximum stats when fully repaired.
     </p>
+
+    <p class="verification-note">Verified armour resistance values require direct in-game evidence at 100% durability. Legacy records remain visible but are marked as needing verification.</p>
 
     <div class="database-count">
 
@@ -1190,6 +1199,12 @@ function displayPrice(price) {
    CREATE ARMOUR CARD
    ========================================================= */
 
+function armourVerification(item) {
+    return item.source && item.source.status === "screenshot-verified"
+        ? { label: "✓ In-game verified", cls: "verified" }
+        : { label: "Needs verification", cls: "review" };
+}
+
 function createArmourCard(item) {
 
     const card =
@@ -1234,6 +1249,12 @@ function createArmourCard(item) {
 
         </div>
 
+
+        <div class="verification-row">
+            <span class="verification-badge ${verification.cls}">
+                ${verification.label}
+            </span>
+        </div>
 
         <div class="armour-info">
 
