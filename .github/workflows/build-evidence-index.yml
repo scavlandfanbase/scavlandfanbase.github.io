@@ -63,4 +63,5 @@ jobs:
           git add evidence-analysis.json
           git diff --cached --quiet && exit 0
           git commit -m "Build evidence screenshot analysis index"
+          git pull --rebase origin main
           git push
