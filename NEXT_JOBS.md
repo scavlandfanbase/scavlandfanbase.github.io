@@ -3,6 +3,8 @@
 
 ## Image previews — 20 September 2026
 
+Implementation commit: `ebcf87f6dc03f4a97d7a2af94cd1199b92fe6b08`.
+
 - Weapons, Armour and Items now share `image-viewer.js`: tap/click a preview to enlarge inside the page, then tap/click the enlarged image, Close, or empty background to return. Escape closes the dialog; keyboard activation, modal focus, opener focus restoration and page scroll restoration are included. No new browser tab/window is opened.
 - Added existing record-linked pictures to **173/255 Items** and **5/30 Armour** cards; **37/39 Weapons** have usable linked images. Prefer a dedicated `image`, otherwise use a screenshot-verified record's actual PNG/JPEG/WebP evidence path. Leave records with no usable image text-only. Broken preview images are hidden. Images remain separate from verification; no canonical JSON, game stats or provenance was changed.
 - Changed files: `weapons.html`, `armour.html`, `items.html`, `site-theme.css`, new `image-viewer.js`, and this handover. Existing filters and stats behavior are preserved.
