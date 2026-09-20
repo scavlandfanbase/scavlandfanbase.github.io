@@ -1,5 +1,11 @@
 # SCAVLAND Website — Next Jobs
 
+## Armour evidence batch — 20 September 2026
+
+- Added four supplied full-durability tooltip screenshots and verified the matching canonical records: Skull Mask (5,000 / 3 / 10 / 0 / Tattered), Panskiy Kask (15,000 / 8 / 13 / 10 / Scavenger), Balistic Kask (40,000 / 23 / 25 / 5 / Medium), and Stronghold Vest (65,000 / 38 / 35 / 15 / Medium). Existing numeric records matched every visible stat.
+- The Armour and Items pages now use the original screenshots as enlargeable previews, preserve the in-game descriptions, and mark these records as verified. Armour is **10/31 verified**; Items **180/256 verified**. Vendor rank remains unverified where the tooltip does not display it.
+- Validation: JSON parsed successfully; `node scripts/validate-evidence.cjs` passed; browser preview confirmed all four cards, stats, status badges, and source images with no visual regression.
+
 ## Armour review and vendor screenshots — 20 September 2026
 
 - Added Old Tactical Pants to Armour and Items from the supplied full-durability tooltip: approximate value 35,000, ballistic 20, slash 23, radiation 15, Medium repair class, not stackable. Added its original screenshot to the armour evidence archive.

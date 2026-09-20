@@ -39,14 +39,20 @@
       "category": "Helmets",
       "vendorRank": "-",
       "price": 40000,
+      "durability": 100,
       "ballistic": 23,
       "slash": 25,
       "radiation": 5,
       "repairClass": "Medium",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Direct in-game tooltip at 100% durability."
+      },
+      "image": "evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png",
+      "stackable": false,
+      "description": "One of the most common pieces of Pre-War soldier equipment, this cheaply mass-produced helmet is sturdy enough against bludgeon attacks, but will not stop a bullet."
     },
     {
       "id": "dusty-overcoat",
@@ -219,15 +225,20 @@
       "category": "Helmets",
       "vendorRank": "-",
       "price": 15000,
+      "durability": 100,
       "ballistic": 8,
       "slash": 13,
       "radiation": 10,
       "repairClass": "Scavenger",
       "description": "An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field.",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Direct in-game tooltip at 100% durability."
+      },
+      "image": "evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png",
+      "stackable": false
     },
     {
       "id": "parade-helmet",
@@ -419,14 +430,20 @@
       "category": "Gas Masks",
       "vendorRank": "-",
       "price": 5000,
+      "durability": 100,
       "ballistic": 3,
       "slash": 10,
       "radiation": 5,
       "repairClass": "Tattered",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Direct in-game tooltip at 100% durability."
+      },
+      "image": "evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png",
+      "stackable": false,
+      "description": "A menacing mask in the shape of a skull, worn by different folks for different reasons: some in respect and awe of the dead, others in order to intimidate and scare."
     },
     {
       "id": "stronghold-vest",
@@ -434,14 +451,20 @@
       "category": "Body Armour",
       "vendorRank": "-",
       "price": 65000,
+      "durability": 100,
       "ballistic": 38,
       "slash": 35,
       "radiation": 15,
       "repairClass": "Medium",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Direct in-game tooltip at 100% durability."
+      },
+      "image": "evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png",
+      "stackable": false,
+      "description": "A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility.\n\nThis combat-oriented vest is usually worn by those have proven themselves capable."
     },
     {
       "id": "vozhd-beret",

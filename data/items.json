@@ -534,8 +534,13 @@
       "classification": [
         "armour"
       ],
-      "image": null,
-      "notes": null
+      "image": "evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png",
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Armour record"
+      }
     },
     {
       "id": "bandage",
@@ -2360,8 +2365,13 @@
       "classification": [
         "armour"
       ],
-      "image": null,
-      "notes": null
+      "image": "evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png",
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Armour record"
+      }
     },
     {
       "id": "parade-helmet",
@@ -3075,8 +3085,13 @@
       "classification": [
         "armour"
       ],
-      "image": null,
-      "notes": null
+      "image": "evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png",
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Armour record"
+      }
     },
     {
       "id": "smg-railed-dust-cover",
@@ -3141,8 +3156,13 @@
       "classification": [
         "armour"
       ],
-      "image": null,
-      "notes": null
+      "image": "evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png",
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "note": "Verification synchronized from canonical Armour record"
+      }
     },
     {
       "id": "svarsh-drum-mag",
