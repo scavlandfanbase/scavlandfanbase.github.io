@@ -2,6 +2,7 @@
 
 ## START HERE — current queue (20 September 2026)
 
+- **Legacy shell cleanup (20 Sept 2026):** removed superseded global header/nav markup from Home, Weapons, Armour, Crafting, Factions and Areas, and removed dead `wasteland-banner.jpg` styling/references. `site-shell.js` remains the sole global shell; functional `weapon-nav`, `armour-nav` and `bench-nav` controls were preserved. No canonical game data changed.
 - **Visual structure cleanup (20 Sept 2026):** added a compact shared-theme normalization layer across all public pages: reduced oversized branding/hero/nav spacing, standardized content width/cards/controls, tightened crafting/vendor/item layouts, reduced Factions icon/body-text scale, and improved compact mobile spacing. Page logic and canonical game data are unchanged. Branch `ux/visual-structure-cleanup-2026-09-20`.
 - **Public UX copy cleanup (20 Sept 2026):** simplified user-facing copy across Home, Vendors, Weapons, Armour, Crafting, Items, Map and Areas. Internal audit/provenance explanations were removed from browsing surfaces while concise Verified/Unverified signals were retained. No canonical JSON, stats, evidence provenance or verification status changed. Branch `ux/public-copy-cleanup-2026-09-20`.
 ### Can complete from the repository
