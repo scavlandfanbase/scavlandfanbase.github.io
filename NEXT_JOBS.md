@@ -2,6 +2,8 @@
 
 ## Jasna vendor screenshot — 20 September 2026
 
+Implementation commit: `57c1d991723240b7f60226aafbe778a8a1faf815`.
+
 - Archived the user-supplied original screenshot as `evidence-inbox/vendors/jasna__shop-screen__2026-09-20_142506.png`; Jasna's portrait now uses it with screenshot-verified name/Acolytes identity. The previous historical image is retained. Portrait coverage remains 15/22 (8 directly verified, 7 legacy display).
 - The screenshot contains a shop grid, but item labels, prices and unlock ranks are absent. Preserve all 231 legacy inventory rows and existing provenance; do not infer verification from icons, stock quantities, or the player's displayed rank/reputation. This supersedes earlier statements that the archive has no shop-screen images at all.
 - Validation: desktop and 390×844 browser previews load the exact 1314-pixel-wide screenshot; click-to-close and Escape return to the still-open vendor modal. Vendor inline JavaScript syntax passes, with no browser errors observed.
