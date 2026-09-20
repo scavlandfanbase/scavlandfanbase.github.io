@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 302,
+  "count": 305,
   "exact_duplicate_groups": [],
   "files": [
     {
@@ -76,24 +76,34 @@
       "ocr": "Fil."
     },
     {
-      "file": "Screenshot 2026-09-20 083129.png",
-      "sha256": "e1483ff63e4129d634a5594290f6ad9811bd12000b3cf8da68b497e78d0b89ad",
-      "bytes": 107036,
-      "filename_timestamp": "2026-09-20T08:31:29",
+      "file": "Screenshot 2026-09-20 084304.png",
+      "sha256": "0f7e85468f4473d4999882012dcd569d08a29781d0e9e2b98fbe78cb2d5fb5c0",
+      "bytes": 280207,
+      "filename_timestamp": "2026-09-20T08:43:04",
       "width": 1015,
-      "height": 763,
-      "phash": "c0cb2f78879c1a5e",
-      "ocr": "=\" a ae _. a Medicinal Herb ~50P A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss ‘em in the pot anyway. Health: +5 Thirst: «3 a"
+      "height": 1203,
+      "phash": "d0b7276c33272c72",
+      "ocr": "ci Ekzoskelet Legs ~100000P A Mechanist's bizarre invention, the Ekzoskelet Legs are a heavy-duty lining of metal parts woven together with regular trousers. They're designed to offer great resistance and to actually improve the wearer's stamina, but they're still very clumsy to use. Durability DUUATUNUUTUATNTMIIT 100 Ballistic Res WU 30 Slash Res ATTTTT 35 Rad Res ill 20 Repair Class: Heavy -"
     },
     {
-      "file": "Screenshot 2026-09-20 083137.png",
-      "sha256": "32e41cc3d3a268b182ca184d89096943d341d05a62b96593d42eebc14f5ccc05",
-      "bytes": 84975,
-      "filename_timestamp": "2026-09-20T08:31:37",
-      "width": 1018,
-      "height": 831,
-      "phash": "e0a537600f4e7a9e",
-      "ocr": "- Mystery Pills ~6000P A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away. Health: +15 Radiation: -30 Thirst: +5 al"
+      "file": "Screenshot 2026-09-20 084312.png",
+      "sha256": "9dbc7b0c574c676a4e708a2ab6ac4744d7a2ae468bd9f0e89893da1bfeadedfd",
+      "bytes": 231992,
+      "filename_timestamp": "2026-09-20T08:43:12",
+      "width": 1015,
+      "height": 1059,
+      "phash": "d0b7272c39726cc3",
+      "ocr": "Riot Vest ~86000P This extra-sturdy, plated armor seems good enough to hold hack a crowd of people, and even withstand some fire. It is heavy and difficult to wear, but survival is worth a little struggle. Durability PUNTUAUNTUUUNINIIIIT 100 Ballistic Res Ud 40 Slash Res NTT 50 Rad Res ill 20 Repair Class: Heavy wl"
+    },
+    {
+      "file": "Screenshot 2026-09-20 084320.png",
+      "sha256": "e8ace5c2c846b3490116801f79bee232e2d2959d1d6a6a8d24d43b92a556b212",
+      "bytes": 307014,
+      "filename_timestamp": "2026-09-20T08:43:20",
+      "width": 1015,
+      "height": 1162,
+      "phash": "c087273c332d67cb",
+      "ocr": "- GP-4 Gas Mask ~25000P This widespread Gas Mask was issued to Civil Defense and civilians alike, during the times of War. Vultures and Bandits often wear these for days at a time, and the mask’s straps dig themselves painfully into the back of their heads. Durability PUNTUNVNTUUUNTHITIIT 100 Ballistic Res | 5 Slash Res I 8 Rad Res LUMI 30 Repair Class: Scavenger r."
     },
     {
       "file": "Shotgun AP Ammo pic.png",
@@ -2541,6 +2551,16 @@
       "ocr": "a Mechanical Components ~10000P PRank- Rank: 1 Small gears, levers and bits of machinery. Not too big or high- quality, but still probably worth something. a"
     },
     {
+      "file": "items/medicinal-herb__tooltip__2026-09-20_083129.png",
+      "sha256": "e1483ff63e4129d634a5594290f6ad9811bd12000b3cf8da68b497e78d0b89ad",
+      "bytes": 107036,
+      "filename_timestamp": "2026-09-20T08:31:29",
+      "width": 1015,
+      "height": 763,
+      "phash": "c0cb2f78879c1a5e",
+      "ocr": "=\" a ae _. a Medicinal Herb ~50P A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss ‘em in the pot anyway. Health: +5 Thirst: «3 a"
+    },
+    {
       "file": "items/metal-scrap__tooltip__2026-09-18_091713.png",
       "sha256": "4f48a4b8bd8112dc39cb8555aec680a0f1cea8729784b252d2c6ebcba5251b1e",
       "bytes": 54497,
@@ -2549,6 +2569,16 @@
       "height": 568,
       "phash": "f0a12fd0965a5a97",
       "ocr": "a a _ —— — Metal Scrap ~100P PRank. Rank: 1 Scraps of metal that can be recycled into something useful by able hands. -"
+    },
+    {
+      "file": "items/mystery-pills__tooltip__2026-09-20_083137.png",
+      "sha256": "32e41cc3d3a268b182ca184d89096943d341d05a62b96593d42eebc14f5ccc05",
+      "bytes": 84975,
+      "filename_timestamp": "2026-09-20T08:31:37",
+      "width": 1018,
+      "height": 831,
+      "phash": "e0a537600f4e7a9e",
+      "ocr": "- Mystery Pills ~6000P A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away. Health: +15 Radiation: -30 Thirst: +5 al"
     },
     {
       "file": "items/plastic-scrap__tooltip__2026-09-18_091720.png",
