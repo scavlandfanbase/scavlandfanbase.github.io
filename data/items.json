@@ -1044,7 +1044,13 @@
         "armour"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/ekzoskelet-legs__stats-100-durability__2026-09-20_084304.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json."
+      }
     },
     {
       "id": "elevated-red-dot-sight",
@@ -1176,7 +1182,13 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/gp-4-gas-mask__stats-100-durability__2026-09-20_084320.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json."
+      }
     },
     {
       "id": "green-rags",
@@ -2819,9 +2831,10 @@
       "image": null,
       "notes": null,
       "source": {
-        "file": "evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
+        "file": "evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-20_084312.png",
         "status": "screenshot-verified",
-        "note": "Verification synchronized from canonical armour record."
+        "lastVerified": "2026-09-20",
+        "note": "Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json."
       }
     },
     {
