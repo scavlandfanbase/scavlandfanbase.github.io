@@ -1425,11 +1425,29 @@ function escapeHTML(value) {
 }
 
 
+
+/* Weapon evidence preview */
+.weapon-screenshot { margin: 0 0 14px; border: 1px solid #3a3a3a; border-radius: 6px; overflow: hidden; background: #111; }
+.weapon-screenshot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #0b0b0b; cursor: zoom-in; }
+.weapon-screenshot a { display: block; }
+.weapon-screenshot-label { display: block; padding: 6px 9px; color: #999; font-size: 10px; text-transform: uppercase; letter-spacing: .5px; border-top: 1px solid #2f2f2f; }
+@media (max-width: 650px) { .weapon-screenshot img { aspect-ratio: auto; max-height: 330px; } }
+
 /* =========================================================
    CREATE WEAPON CARD
    ========================================================= */
 
 function createWeaponCard(weapon) {
+
+    const screenshotPath =
+        weapon.image ||
+        (weapon.source && weapon.source.status === "screenshot-verified" && weapon.source.file && !weapon.source.file.startsWith("user-provided")
+            ? weapon.source.file
+            : null);
+
+    const screenshotHTML = screenshotPath
+        ? `<div class="weapon-screenshot"><a href="${escapeHTML(screenshotPath)}" target="_blank" rel="noopener" aria-label="Open ${escapeHTML(weapon.name)} in-game screenshot"><img src="${escapeHTML(screenshotPath)}" alt="${escapeHTML(weapon.name)} in-game weapon and stats screenshot" loading="lazy"><span class="weapon-screenshot-label">In-game screenshot · tap to enlarge</span></a></div>`
+        : "";
 
     const card =
         document.createElement("article");
@@ -1455,6 +1473,7 @@ function createWeaponCard(weapon) {
 
         </div>
 
+        ${screenshotHTML}
 
         <div class="primary-stats">
 
