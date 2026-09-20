@@ -1,8 +1,49 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 306,
-  "exact_duplicate_groups": [],
+  "count": 317,
+  "exact_duplicate_groups": [
+    [
+      "Jasna.png",
+      "vendors/jasna__shop-screen__2026-09-20_142506.png"
+    ]
+  ],
   "files": [
+    {
+      "file": "Anatoly.png",
+      "sha256": "aa600342abd285c202e94749833d83468bfcee6d8e065d5052bfa31c3939aebd",
+      "bytes": 55754,
+      "width": 1321,
+      "height": 940,
+      "phash": "e897d47b4a19e08b",
+      "ocr": "| 16:05 | - Anatoly 7 - Reputation 902 F J Rank 3 Mechanists —E = _ —— | —- = : 20 | 20 cots BIG 5115 Fis ie ater SC Bb HR q q q . q | —*) &@ema & te"
+    },
+    {
+      "file": "AnatolyContinue.png",
+      "sha256": "6efedf22e49c81811d6d68e9e12103a7e9a1a6b5a3c4b3da1265194b5c339108",
+      "bytes": 15088,
+      "width": 1252,
+      "height": 412,
+      "phash": "e8393fc0703f8ac9",
+      "ocr": "1 sf : = < od b Ss ‘Say ©, Oa, @ be, a @ “y Sly"
+    },
+    {
+      "file": "Grigory.png",
+      "sha256": "f8b9d4e08ba8eeaf1dbd4c1d68d137bf5d801bde5ad6eef708e00dc364c40ed4",
+      "bytes": 52600,
+      "width": 1308,
+      "height": 934,
+      "phash": "eeafd7d40a49500b",
+      "ocr": "‘SB 18:24 *\" Grigor m4) a: ” Reputation 1200 ul Rank 3 “tr * Gunners alg 717 212 115 i. —, nm ee —— 7 SEER Geee a a F 30 | 30 i. Vi =n al ! PAD : — é fi ion 2Tdkh: é os, iL = vet oe c| “gy 3 ;"
+    },
+    {
+      "file": "GrigoryCOntinue.png",
+      "sha256": "0bfd6093a76e80bb7807c25025a46a27bb23ccfe0364454f6f89fc3a31982dbc",
+      "bytes": 14747,
+      "width": 1258,
+      "height": 628,
+      "phash": "f883930301b5f1fe",
+      "ocr": "= = ool — al Lal 20 | 20 30 | 30 | =) fea com F FF oF Fill @@ | | | | tt tf a e 2"
+    },
     {
       "file": "High Caliber Rifle AP ammo pic.png",
       "sha256": "a5eed7854f327ebc0392be1c4315e822ff643490b290db5f32ce0c860af2f42d",
@@ -29,6 +70,51 @@
       "height": 102,
       "phash": "854a3db6c6a5432f",
       "ocr": "vale | | Fas"
+    },
+    {
+      "file": "Jasna.png",
+      "sha256": "750087ce599b89167a13e4310543470550d7c7bba070ba0627a3c0770afd58d9",
+      "bytes": 36986,
+      "width": 1314,
+      "height": 621,
+      "phash": "ae95356949075b78",
+      "ocr": "| ; Che i: asia a Reputation 92 : 1 Rank 1 i ] Acolytes — Fs * &, at & & ] ] ] a) ©, €, 4 a || es) ! ! ! | ]"
+    },
+    {
+      "file": "Marko.png",
+      "sha256": "a2b995e9d78a8980401bde24c83e4c61b1f70c4bdc8555be2050c2aa2f77b354",
+      "bytes": 37656,
+      "width": 1306,
+      "height": 732,
+      "phash": "ee878568784f8746",
+      "ocr": "r a a, | — @ 55) ate il Marko Reputation 110 ghee | Rank 1 i Commonfolk — %, & fs: f, ayy 4q"
+    },
+    {
+      "file": "Nadja.png",
+      "sha256": "525ee0ee206e6c1fa92ff1880b683dae999377b820f7807986fbd0cffd60f71c",
+      "bytes": 46653,
+      "width": 1275,
+      "height": 735,
+      "phash": "8ca751587ac32ece",
+      "ocr": "js = : @ 16:22 Fi re oe Nadia Reputation 120 A i Rank _ J J Mechanist Oe 7 ~ a T sy a a 7 F oan aT 10 2 ‘ | | 10 me PT - 1 =n at ffi q _, q q"
+    },
+    {
+      "file": "Olga.png",
+      "sha256": "607e1115d356f524f4067fd1bad1854230359fd1981c021059f29e91301b07c3",
+      "bytes": 33006,
+      "width": 1311,
+      "height": 634,
+      "phash": "ee9fe33a4188c338",
+      "ocr": "= Olea & 16:44 o_o g Reputation 119 4 = = Rank 1 os Rada — a9 i | - Fs + eo, © oe"
+    },
+    {
+      "file": "Petar.png",
+      "sha256": "be0342a117ade628411b7b83e57b2ebee7347d50bad04baf6a5ab19290262088",
+      "bytes": 38426,
+      "width": 1273,
+      "height": 730,
+      "phash": "8f87807b78c906fc",
+      "ocr": "j phen ; @ iN | a ‘ Petar | Reputation 2 | - Rank fo Commonfolk —_ wa tT ud A” ony 4q ne a z - yy 7 F oan 2 ‘ aT 10 i 10 ates 4 W ™ 1"
     },
     {
       "file": "Pistol AP Ammo pic.png",
@@ -119,6 +205,24 @@
       "height": 712,
       "phash": "e0e52f682fc3d01e",
       "ocr": "al Special FM) Ammo ~1000P Special ammunition that can fit into different types of- weapons. Damage: 75 Penetration: 100% r"
+    },
+    {
+      "file": "Vesna.png",
+      "sha256": "b402dff87d071330d59d5aab3c1cadd8e7bf3edb5d877e3c0d695a20fd395360",
+      "bytes": 50064,
+      "width": 1315,
+      "height": 928,
+      "phash": "aeb7c5443ac80bc7",
+      "ocr": "r (@ 1753) Vesna Reputation 884 ’ Pad Rank 3 i ada as J —— yes * — 7 ns - J l Pots | . Re, = + MAT a Fag"
+    },
+    {
+      "file": "VesnaCOntinue.png",
+      "sha256": "4e80ce1a0236d34a8b19cd0a594ed2955f2f379aecb2d75747be5b2ad4914180",
+      "bytes": 18030,
+      "width": 1255,
+      "height": 615,
+      "phash": "cccc2670f8f83333",
+      "ocr": "= & @ fi eae | — . ' , “.R AS # ST aS"
     },
     {
       "file": "ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
