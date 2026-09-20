@@ -1,5 +1,14 @@
 # SCAVLAND Website — Next Jobs
 
+## Latest handover — 21 September 2026
+
+- **Public Roadmap:** added `roadmap.html` and made it the final global navigation link in `site-shell.js`. It shows only the public priorities: more in-game evidence, vendor shop galleries, clearer database cards; coming-up work on website layout, data corrections and mobile polish; and the two requested player-help prompts (clear tooltips and armour at 100% durability). The Evidence Guide link was deliberately removed from the Roadmap.
+- **Public evidence form:** `items.html` now requires only a screenshot. Submission type, category, item name and notes are optional. Blank fields are saved safely to the private review queue as `Unspecified` or `Unidentified screenshot`; screenshot type and 10 MB validation remain in place.
+- **Evidence contributor documentation:** `EVIDENCE_GUIDE.md` is the public guide for adding evidence to the repository. It covers the correct evidence folder, descriptive filenames, JSON image/source fields, and the different display rules for Items, Armour, Weapons, Crafting and Vendors.
+- **Future private editor handover:** `ADMIN_HUB_BUILD_GUIDE.md` is the build brief for another AI/developer. It scopes the first version to a private Items editor, preserves the existing JSON structure/evidence rules, requires a secure server-side GitHub publishing bridge, and lists the required tests. If another AI completes this, review its branch/PR and test it before publishing.
+- **Advanced Gun Repair Kit image lesson:** on an Items record, use the exact repository-relative image path in `image`, for example `evidence-inbox/items/filename.png`. `source.file` should also be the exact direct evidence path. Do not append a new path to an existing path; invalid/missing preview images are intentionally hidden by `image-viewer.js`.
+- **Validation:** `node scripts/validate-evidence.cjs` passes: 22 vendors, 231 inventory links, 319 evidence paths, unique IDs, armour links and page JavaScript. Current strict counts: **Armour 10/31 verified; Items 180/256 verified**.
+
 ## Armour evidence batch — 20 September 2026
 
 - Added four supplied full-durability tooltip screenshots and verified the matching canonical records: Skull Mask (5,000 / 3 / 10 / 0 / Tattered), Panskiy Kask (15,000 / 8 / 13 / 10 / Scavenger), Balistic Kask (40,000 / 23 / 25 / 5 / Medium), and Stronghold Vest (65,000 / 38 / 35 / 15 / Medium). Existing numeric records matched every visible stat.
@@ -217,4 +226,5 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
 
 - Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
+
 
