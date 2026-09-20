@@ -34,10 +34,10 @@ First add or confirm the item in `items.json`. Use its stable ID in any speciali
 As of 20 September 2026:
 
 - `weapons.html` reads `data/weapons.json`; **38/39** canonical weapon records are screenshot-verified. Base `2HMG` remains unverified because only Short/Long screenshots are archived.
-- `armour.html` reads `data/armour.json`; **3/30** records currently meet the screenshot-verification threshold. Armour resistance evidence requires a screenshot at **100% durability**.
+- `armour.html` reads `data/armour.json`; **10/31** records currently meet the screenshot-verification threshold. Armour resistance evidence requires a screenshot at **100% durability**.
 - `ammo.json`: **13/13** screenshot-verified with exact organised evidence paths.
 - `crafting.html` reads `data/crafting.json`; **22/22** recipes are screenshot-verified.
-- `items.html` reads the structured JSON sources. `data/items.json` currently has **172/255** screenshot-verified records.
+- `items.html` reads the structured JSON sources. `data/items.json` currently has **180/256** screenshot-verified records.
 - Item verification badges require persisted `source.status: "screenshot-verified"`; matching another verified dataset at runtime is not sufficient.
 - Evidence is organised under `evidence-inbox/` by category. Do not return to opaque timestamp-only filenames. Two genuinely unidentified screenshots remain deliberately under `evidence-inbox/unresolved/`.
 - `MK Slotted Mount Handguard` has conflicting screenshot evidence and must remain unverified until that conflict is resolved.
