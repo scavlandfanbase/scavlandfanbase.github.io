@@ -2,6 +2,8 @@
 
 This directory is the structured data layer for the SCAVLAND fan database.
 
+For a step-by-step guide to adding and displaying your own verified screenshots, see [`EVIDENCE_GUIDE.md`](../EVIDENCE_GUIDE.md).
+
 ## Editing rules
 
 1. **Use stable IDs.** IDs are lowercase slugs such as `metal-scrap`. Other files reference these IDs.
@@ -42,3 +44,4 @@ As of 20 September 2026:
 - Direct screenshot evidence supersedes community/legacy values. Example: Svobodnik M4 is verified at 17 damage / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload.
 
 For the active backlog and cross-device handover, see `../NEXT_JOBS.md`.
+
