@@ -160,6 +160,13 @@ body {
 .vendor-tools input { flex:1; min-width:220px; }
 .vendor-directory { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
 .vendor-section { margin:0; min-height:112px; overflow:hidden; }
+.vendor-header.has-portrait{display:grid;grid-template-columns:86px 1fr;grid-template-rows:auto auto auto;column-gap:12px;align-content:center}
+.vendor-portrait{width:86px;height:76px;object-fit:cover;object-position:center;border:1px solid #555;border-radius:5px;background:#111;grid-row:1/4}
+.vendor-name{align-self:end}
+.vendor-header.has-portrait::after{grid-column:2}
+.vendor-modal-profile{display:flex;gap:16px;align-items:center;margin:0 0 16px;padding:12px;background:#202020;border:1px solid #3b3b3b;border-radius:6px}
+.vendor-modal-portrait{width:min(260px,42vw);max-height:160px;object-fit:contain;border-radius:5px;background:#111}
+.vendor-modal-meta strong{display:block;color:#ffcc66;font-size:20px}.vendor-modal-meta span{color:#bbb}
 .vendor-header {
   height:100%; box-sizing:border-box; display:flex; flex-direction:column;
   justify-content:center; min-height:112px; border-bottom:0;
@@ -192,6 +199,7 @@ body {
 .vendor-modal-body .vendor-table { min-width:650px; }
 
 @media (max-width:650px){
+  .vendor-header.has-portrait{grid-template-columns:70px 1fr}.vendor-portrait{width:70px;height:64px}.vendor-modal-profile{align-items:flex-start}.vendor-modal-portrait{width:120px;max-height:120px}
   body{padding:12px}
   .nav-links{display:flex;gap:12px;overflow-x:auto}
   .nav-links a{margin:0;white-space:nowrap;font-size:15px}
@@ -269,6 +277,7 @@ function openVendor(id) {
   const copy = content.cloneNode(true);
   copy.removeAttribute('id');
   body.replaceChildren(copy);
+  if(section.dataset.portrait){const profile=document.createElement('div');profile.className='vendor-modal-profile';profile.innerHTML='<img class="vendor-modal-portrait" src="'+escapeVendorText(section.dataset.portrait)+'" alt="'+escapeVendorText(section.dataset.vendorName)+' character card"><div class="vendor-modal-meta"><strong>'+escapeVendorText(section.dataset.vendorName)+'</strong><span>'+escapeVendorText(section.dataset.faction)+'</span></div>';body.prepend(profile);}
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
   modal.querySelector('.vendor-modal-close').focus();
@@ -320,8 +329,9 @@ async function loadVendorDirectory() {
           vendor.inventory.map(item => '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(item.name) + '</a></td><td>' + escapeVendorText(item.rank) +
             '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>').join('') + '</tbody></table>'
         : '<div class="placeholder-note">Inventory coming soon.</div>';
-      return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '">' +
-        '<div class="vendor-header" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + escapeVendorText(name) +
+      const portrait = vendor.portrait?.status === 'screenshot-verified' ? vendor.portrait.file : '';
+      return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '"' + (portrait ? ' data-portrait="' + escapeVendorText(portrait) + '"' : '') + '>' +
+        '<div class="vendor-header' + (portrait ? ' has-portrait' : '') + '" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + (portrait ? '<img class="vendor-portrait" src="' + escapeVendorText(portrait) + '" alt="">' : '') + '<span class="vendor-name">' + escapeVendorText(name) + '</span>' +
         '<div class="vendor-faction">Faction: ' + escapeVendorText(faction) + '</div></div>' +
         '<div class="vendor-content" id="' + escapeVendorText(vendor.id) + '">' + content + '</div></div>';
     }).join('');
