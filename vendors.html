@@ -106,17 +106,17 @@ body {
 
 /* REUSABLE GLOBAL BADGE UTILITIES FOR FUTURE EXPANSIONS */
 .badge-group {
-    display: flex; 
-    gap: 6px; 
+    display: flex;
+    gap: 6px;
     flex-wrap: wrap;
     align-items: center;
 }
 
 .stat-badge {
-    background: #222; 
-    border: 1px solid #444; 
-    padding: 2px 8px; 
-    border-radius: 4px; 
+    background: #222;
+    border: 1px solid #444;
+    padding: 2px 8px;
+    border-radius: 4px;
     font-size: 13px;
     color: #ddd;
 }
@@ -239,7 +239,7 @@ function setupVendorDirectory() {
   tools.className = 'vendor-tools';
   tools.innerHTML = '<input id="vendorSearch" type="search" placeholder="Search vendors..." aria-label="Search vendors">' +
     '<select id="factionFilter" aria-label="Filter vendors by faction"><option value="">All Factions</option>' +
-    factions.map(f => '<option value="' + f.replace(/"/g,'&quot;') + '">' + f + '</option>').join('') + '</select>';
+    factions.map(f => '<option value="' + escapeVendorText(f) + '">' + escapeVendorText(f) + '</option>').join('') + '</select>';
   list.parentNode.insertBefore(tools, list);
 
   const filter = () => {
@@ -275,7 +275,9 @@ function openVendor(id) {
   const title = document.getElementById('vendorModalTitle');
   const body = document.getElementById('vendorModalBody');
   title.textContent = section.dataset.vendorName + ' — ' + section.dataset.faction;
-  body.innerHTML = content.outerHTML;
+  const copy = content.cloneNode(true);
+  copy.removeAttribute('id');
+  body.replaceChildren(copy);
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -287,7 +289,67 @@ function closeVendor() {
   document.body.style.overflow = '';
 }
 
-document.addEventListener('DOMContentLoaded', setupVendorDirectory);
+function escapeVendorText(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
+}
+
+// Canonical legacy details are plain text. Restore the existing badge presentation
+// without importing item-tooltip verification or maintaining a second stat database.
+function renderVendorDetails(details) {
+  const text = String(details ?? '');
+  const labels = /(?:Description|Max Stacks|Min Cond|Not usable below|Repair Class|Dmg|Damage|Pen|Penetration|Repair|Ergo|Recoil|Handling|Hand|Range|Acc|Health|Bleed|Rad|Radiation|Hunger|Thirst|Max):/g;
+  const matches = [...text.matchAll(labels)];
+  if (!matches.length) return '<span class="type-label">' + escapeVendorText(text) + '</span>';
+  const type = text.slice(0, matches[0].index).trim();
+  return '<div class="badge-group"><span class="type-label">' + escapeVendorText(type) + '</span>' +
+    matches.map((match, i) => '<span class="stat-badge"><b>' + escapeVendorText(match[0]) + '</b> ' +
+      escapeVendorText(text.slice(match.index + match[0].length, matches[i + 1]?.index ?? text.length).trim()) + '</span>').join('') + '</div>';
+}
+
+async function loadVendorDirectory() {
+  const list = document.getElementById('vendor-list');
+  const count = document.querySelector('.vendor-count');
+  try {
+    const response = await fetch('data/vendors.json', {cache: 'no-store'});
+    if (!response.ok) throw new Error('Vendor data request failed: ' + response.status);
+    const payload = await response.json();
+    if (!Array.isArray(payload.data) || !payload.data.length) throw new Error('Invalid vendor data');
+    const vendors = payload.data;
+    list.innerHTML = vendors.map(vendor => {
+      const name = vendor.name + (vendor.location ? ' — ' + vendor.location : '');
+      const faction = (vendor.factionId || 'unknown').replace(/(^|[- ])\w/g, part => part.replace('-', ' ').toUpperCase());
+      const content = vendor.inventoryDocumented
+        ? '<p class="placeholder-note">Needs verification — legacy inventory data. No direct shop-screen evidence is currently available; listings, ranks, prices and details are unverified.</p>' +
+          '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
+          vendor.inventory.map(item => '<tr><td>' + escapeVendorText(item.name) + '</td><td>' + escapeVendorText(item.rank) +
+            '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>').join('') + '</tbody></table>'
+        : '<div class="placeholder-note">Inventory data not documented yet.</div>';
+      return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '">' +
+        '<div class="vendor-header" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + escapeVendorText(name) +
+        '<div class="vendor-faction">Faction: ' + escapeVendorText(faction) + '</div></div>' +
+        '<div class="vendor-content" id="' + escapeVendorText(vendor.id) + '">' + content + '</div></div>';
+    }).join('');
+    const documented = vendors.filter(vendor => vendor.inventoryDocumented).length;
+    const rows = vendors.reduce((total, vendor) => total + vendor.inventory.length, 0);
+    count.textContent = `${vendors.length} vendors · ${documented} documented inventories / ${rows} legacy rows · ${vendors.length - documented} undocumented inventories. Inventory listings need verification.`;
+    setupVendorDirectory();
+    list.querySelectorAll('.vendor-header').forEach(header => {
+      header.addEventListener('click', () => openVendor(header.dataset.contentId));
+      header.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openVendor(header.dataset.contentId);
+        }
+      });
+    });
+  } catch (error) {
+    console.error('Unable to load vendors', error);
+    count.textContent = 'Vendor directory unavailable.';
+    list.textContent = 'Unable to load vendor data. Please reload the page to try again.';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadVendorDirectory);
 </script>
 
 <link rel="stylesheet" href="site-theme.css">
@@ -295,7 +357,7 @@ document.addEventListener('DOMContentLoaded', setupVendorDirectory);
 <body>
 
 <h1 style="color:#ffcc66;">SCAVLAND Vendors</h1>
-<p class="vendor-count">22 confirmed vendors · inventories are being documented from in-game data.</p>
+<p class="vendor-count">Loading vendor directory…</p>
 
 <section class="sell-guide" aria-labelledby="selling-guide-title">
   <h2 id="selling-guide-title">Vendor Selling Rates</h2>
@@ -326,939 +388,8 @@ document.addEventListener('DOMContentLoaded', setupVendorDirectory);
   </div>
 </section>
 
-<div id="vendor-list">
-
-<!-- VENDOR 1: GRIGORY -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('grigory')">
-        Grigory — The Mire
-        <div class="vendor-faction">Faction: Gunners</div>
-    </div>
-
-    <div class="vendor-content" id="grigory">
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-
-            <tr><td>PM Nikolay</td><td>1</td><td>2750</td><td><span class="type-label">Pistol</span></td></tr>
-            <tr><td>Leon 1895 (Long)</td><td>1</td><td>5250</td><td><span class="type-label">Rifle</span></td></tr>
-            <tr><td>Zavod 24 (Short)</td><td>1</td><td>9500</td><td><span class="type-label">Shotgun</span></td></tr>
-            <tr><td>Medved Monster</td><td>1</td><td>13250</td><td><span class="type-label">Rifle</span></td></tr>
-            <tr><td>Mikhail 74 U</td><td>2</td><td>36250</td><td><span class="type-label">SMG</span></td></tr>
-            <tr><td>PM 12-70 (Short)</td><td>2</td><td>16500</td><td><span class="type-label">Shotgun</span></td></tr>
-            <tr><td>Mikhail 47</td><td>3</td><td>47000</td><td><span class="type-label">Assault Rifle</span></td></tr>
-
-            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 10</span><span class="stat-badge"><b>Pen:</b> 0%</span></div></td></tr>
-            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 30</span><span class="stat-badge"><b>Pen:</b> 0%</span></div></td></tr>
-            <tr><td>Rifle FMJ Ammo</td><td>2</td><td>200</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 17</span><span class="stat-badge"><b>Pen:</b> 0%</span></div></td></tr>
-
-            <tr><td>Gun Lube</td><td>1</td><td>1500</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 5%</span><span class="stat-badge"><b>Min Cond:</b> 80%</span></div></td></tr>
-            <tr><td>Gun Cleaning Rod</td><td>1</td><td>3500</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 70%</span></div></td></tr>
-            <tr><td>Gun Field Tools</td><td>1</td><td>5000</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 60%</span></div></td></tr>
-            <tr><td>Scrap Gun Repair Kit</td><td>1</td><td>12000</td><td><div class="badge-group"><span class="type-label">Kit</span><span class="stat-badge"><b>Repair:</b> 20%</span><span class="stat-badge"><b>Min Cond:</b> 10%</span></div></td></tr>
-
-            <tr><td>Makeshift Large Steel Stick Mag</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -4</span></div></td></tr>
-            <tr><td>MK Steel-Polymer Mag (Brown)</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
-            <tr><td>MK Triangle Stock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -9</span></div></td></tr>
-            <tr><td>MK Underfolding Stock</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -6</span></div></td></tr>
-            <tr><td>MK Dust Cover</td><td>2</td><td>1250</td><td><span class="type-label">Receiver</span></td></tr>
-            <tr><td>MK Railed Dust Cover</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>MK Vert Grip Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4</span><span class="stat-badge"><b>Handling:</b> +4</span></div></td></tr>
-            <tr><td>MK Wood Handguard</td><td>2</td><td>750</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span></div></td></tr>
-            <tr><td>MK Railed Combination Handguard</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Handling:</b> +6</span></div></td></tr>
-            <tr><td>Short Tapered Vertical Foregrip</td><td>3</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Handling:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>MK Slant Muzzle Brake</td><td>2</td><td>2000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6.5</span></div></td></tr>
-            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Handling:</b> +4</span></div></td></tr>
-            <tr><td>Bakelite Pistol Grip Module</td><td>2</td><td>750</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Handling:</b> +2</span></div></td></tr>
-            <tr><td>Wooden Pistol Grip Module</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Handling:</b> +3</span></div></td></tr>
-            <tr><td>Vintage Red Dot Sight</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Sight</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span></div></td></tr>
-            <tr><td>Red Dot Sight</td><td>3</td><td>1250</td><td><div class="badge-group"><span class="type-label">Sight</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span></div></td></tr>
-
-            <tr><td>Bandage</td><td>1</td><td>250</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +5</span><span class="stat-badge"><b>Bleed:</b> -15</span></div></td></tr>
-            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +30</span><span class="stat-badge"><b>Rad:</b> -15</span></div></td></tr>
-
-            <tr><td>Basic Gun Repair Kit Blueprint</td><td>1</td><td>30000</td><td><span class="type-label">Blueprint</span></td></tr>
-        </table>
-    </div>
-</div>
-<!-- VENDOR 2: PETAR -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('petar')">
-        Petar — The Mire
-        <div class="vendor-faction">Faction: Commonfolk</div>
-    </div>
-    <div class="vendor-content" id="petar">
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-            <tr><td>Moonshine</td><td>1</td><td>2400</td><td><span class="type-label">Consumable</span></td></tr>
-            <tr><td>Overripe Potato</td><td>1</td><td>250</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>WG-40</td><td>1</td><td>250</td><td><span class="type-label">Material</span></td></tr>
-            <tr><td>Mechanical Components</td><td>1</td><td>10000</td><td><span class="type-label">Material</span></td></tr>
-            <tr><td>Metal Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
-            <tr><td>Fabric Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
-            <tr><td>Plastic Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
-            <tr><td>Rubber Scrap</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
-            <tr><td>Chemical Residue</td><td>1</td><td>100</td><td><span class="type-label">Scrap</span></td></tr>
-        </table>
-    </div>
-</div>
-
-<!-- VENDOR 3: BOGDAN -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('bogdan')">
-        Bogdan — The Mire
-        <div class="vendor-faction">Faction: Rada</div>
-    </div>
-    <div class="vendor-content" id="bogdan">
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-            <tr><td>Pistol HP Ammo</td><td>2</td><td>60</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
-            <tr><td>Shotgun HP Ammo</td><td>2</td><td>180</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
-            <tr><td>Rifle HP Ammo</td><td>3</td><td>280</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
-            <tr><td>High Caliber Rifle HP Ammo</td><td>3</td><td>250</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Hollow Point</b></span></div></td></tr>
-            <tr><td>Meat Drumstick</td><td>2</td><td>2400</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Meat Skewer</td><td>1</td><td>1800</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Dried Steak</td><td>1</td><td>1450</td><td><div class="badge-group"><span class="type-label">Food</span><span class="stat-badge"><b>Hunger:</b> -20</span><span class="stat-badge"><b>Radiation:</b> +5</span></div></td></tr>
-            <tr><td>Rabbit Meat</td><td>1</td><td>50</td><td><span class="type-label">Raw Food</span></td></tr>
-            <tr><td>Rat Meat</td><td>1</td><td>25</td><td><span class="type-label">Raw Food</span></td></tr>
-            <tr><td>Mutant Steak</td><td>1</td><td>100</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Worm Meat</td><td>1</td><td>100</td><td><span class="type-label">Raw Food</span></td></tr>
-        </table>
-    </div>
-</div>
-
-<!-- VENDOR 4: MARKO -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('marko')">
-        Marko — The Mire
-        <div class="vendor-faction">Faction: Commonfolk</div>
-    </div>
-
-    <div class="vendor-content" id="marko">
-        <img class="vendor-portrait" src="images/vendors/marko.png" alt="Marko Portrait">
-
-        <table class="vendor-table">
-
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-            <tr><td>Cigarettes</td><td>1</td><td>750</td><td><span class="type-label">Consumable</span></td></tr>
-            <tr><td>Mystery Pills</td><td>1</td><td>6000</td><td><span class="type-label">Medical</span></td></tr>
-            <tr><td>Moonshine</td><td>1</td><td>2400</td><td><span class="type-label">Consumable</span></td></tr>
-            <tr><td>Echelon - Killer Apple</td><td>1</td><td>3000</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Fresh Mushrooms</td><td>1</td><td>3000</td><td><span class="type-label">Food</span></td></tr>
-        </table>
-    </div>
-</div>
-<!-- VENDOR 5: JASNA -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('jasna')">
-        Jasna — The Mire
-        <div class="vendor-faction">Faction: Acolytes</div>
-    </div>
-    <div class="vendor-content" id="jasna">
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-            <tr><td>Canteen</td><td>1</td><td>480</td><td><span class="type-label">Water</span></td></tr>
-            <tr><td>Radish</td><td>1</td><td>150</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Russet Potato</td><td>1</td><td>800</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Dried Mushrooms</td><td>1</td><td>1000</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Large Pumpkin</td><td>2</td><td>3000</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Vegetable Soup</td><td>2</td><td>7500</td><td><div class="badge-group"><span class="type-label">Food</span><span class="stat-badge"><b>Hunger:</b> -40</span><span class="stat-badge"><b>Thirst:</b> -20</span></div></td></tr>
-        </table>
-    </div>
-</div>
-
-<!-- VENDOR 6: YEFIM -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('yefim')">
-        Yefim — East of Sontse Station
-        <div class="vendor-faction">Faction: Commonfolk</div>
-    </div>
-    
-    <div class="vendor-content" id="yefim">
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-            <tr><td>GP-4 Gas Mask</td><td>1</td><td>25000</td><td><span class="type-label">Gear</span></td></tr>
-            <tr><td>Armoured Rags</td><td>2</td><td>35000</td><td><span class="type-label">Armor</span></td></tr>
-            <tr><td>Plated Overcoat</td><td>3</td><td>45000</td><td><span class="type-label">Armor</span></td></tr>
-            <tr><td>Scrapyard Pants</td><td>2</td><td>22000</td><td><span class="type-label">Armor</span></td></tr>
-            <tr><td>Plated Ragged Pants</td><td>3</td><td>45000</td><td><span class="type-label">Armor</span></td></tr>
-            <tr><td>Bandage</td><td>1</td><td>250</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +5</span><span class="stat-badge"><b>Bleed:</b> -15</span></div></td></tr>
-            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +30</span><span class="stat-badge"><b>Rad:</b> -15</span><span class="stat-badge"><b>Thirst:</b> +3</span><span class="stat-badge"><b>Hunger:</b> +3</span></div></td></tr>
-            <tr><td>Canteen</td><td>1</td><td>480</td><td><span class="type-label">Water</span></td></tr>
-            <tr><td>Canned Beans</td><td>1</td><td>2100</td><td><span class="type-label">Food</span></td></tr>
-            <tr><td>Medium Armor Repair Kit Blueprint</td><td>2</td><td>50000</td><td><span class="type-label">Blueprint</span></td></tr>
-        </table>
-    </div>
-</div>
-
-<!-- VENDOR 7: ALEXEI -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('alexei')">
-        Alexei — North East of the Mire
-        <div class="vendor-faction">Faction: Acolytes</div>
-    </div>
-    <div class="vendor-content" id="alexei">
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-            <tr><td>Bandage</td><td>1</td><td>250</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +5</span><span class="stat-badge"><b>Bleed:</b> -15</span></div></td></tr>
-            <tr><td>Advanced Bandage</td><td>3</td><td>4000</td><td><span class="type-label">Meds</span></td></tr>
-            <tr><td>IFAK Medkit</td><td>3</td><td>12000</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +65</span><span class="stat-badge"><b>Bleed:</b> -50</span></div></td></tr>
-            <tr><td>Morphine</td><td>1</td><td>1250</td><td><span class="type-label">Infection</span></td></tr>
-            <tr><td>Stimpack</td><td>2</td><td>6000</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +35</span><span class="stat-badge"><b>Thirst:</b> +5</span><span class="stat-badge"><b>Hunger:</b> +5</span></div></td></tr>
-            <tr><td>Headache Pills</td><td>1</td><td>1500</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +15</span><span class="stat-badge"><b>Thirst:</b> +3</span></div></td></tr>
-            <tr><td>AI-2 Medkit</td><td>1</td><td>3200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +30</span><span class="stat-badge"><b>Rad:</b> -15</span><span class="stat-badge"><b>Thirst:</b> +3</span><span class="stat-badge"><b>Hunger:</b> +3</span></div></td></tr>
-            <tr><td>AI-2 Army Medkit</td><td>2</td><td>6200</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Health:</b> +40</span><span class="stat-badge"><b>Bleed:</b> -20</span><span class="stat-badge"><b>Rad:</b> -10</span><span class="stat-badge"><b>Thirst:</b> +3</span><span class="stat-badge"><b>Hunger:</b> +3</span></div></td></tr>
-            <tr><td>Pills</td><td>1</td><td>2500</td><td><span class="type-label">Meds</span></td></tr>
-            <tr><td>Splint</td><td>1</td><td>3000</td><td><div class="badge-group"><span class="type-label">Meds</span><span class="stat-badge"><b>Fracture:</b> -50</span></div></td></tr>
-            <tr><td>Canteen</td><td>1</td><td>480</td><td><span class="type-label">Water</span></td></tr>
-            <tr><td>Advanced Bandage Blueprint</td><td>1</td><td>15000</td><td><span class="type-label">Blueprint</span></td></tr>
-            <tr><td>Stimpack Blueprint</td><td>1</td><td>20000</td><td><span class="type-label">Blueprint</span></td></tr>
-            <tr><td>AI-2 Army Medkit Blueprint</td><td>2</td><td>30000</td><td><span class="type-label">Blueprint</span></td></tr>
-            <tr><td>IFAK Medkit Blueprint</td><td>3</td><td>50000</td><td><span class="type-label">Blueprint</span></td></tr>
-        </table>
-    </div>
-</div>
-
-
- <!-- VENDOR 8: ANATOLY -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('anatoly')">
-        Anatoly — The Mechanists
-        <div class="vendor-faction">Faction: Mechanists</div>
-    </div>
-
-    <div class="vendor-content" id="anatoly">
-        <img class="vendor-portrait" src="images/vendors/anatoly.png" alt="Anatoly Portrait">
-
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-
-            <!-- WEAPONS -->
-            <tr>
-                <td>Bortovka Tinker</td><td>1</td><td>13250₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Weapon</span>
-                        <span class="stat-badge"><b>Damage:</b> 30</span>
-                        <span class="stat-badge"><b>RPM:</b> 100</span>
-                        <span class="stat-badge"><b>Range:</b> 20</span>
-                        <span class="stat-badge"><b>Accuracy:</b> 52</span>
-                        <span class="stat-badge"><b>Recoil:</b> 41 - 11</span>
-                        <span class="stat-badge"><b>Handling:</b> 4 + 6</span>
-                        <span class="stat-badge"><b>Ergo:</b> 8 + 8</span>
-                        <span class="stat-badge"><b>Reload:</b> 1.0</span>
-                        <span class="stat-badge"><b>Durability:</b> 100</span>
-                        <span class="stat-badge"><b>Caliber:</b> High Caliber Rifle Ammo</span>
-                        <span class="stat-badge"><b>Repair Class:</b> Scrap</span>
-                        <span class="stat-badge"><b>Stacking:</b> Not Stackable</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Medved Monster</td><td>1</td><td>17250₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Weapon</span>
-                        <span class="stat-badge"><b>Damage:</b> 10</span>
-                        <span class="stat-badge"><b>RPM:</b> 450</span>
-                        <span class="stat-badge"><b>Range:</b> 16</span>
-                        <span class="stat-badge"><b>Accuracy:</b> 35</span>
-                        <span class="stat-badge"><b>Recoil:</b> 37 - 9</span>
-                        <span class="stat-badge"><b>Handling:</b> 14 + 8</span>
-                        <span class="stat-badge"><b>Ergo:</b> 12</span>
-                        <span class="stat-badge"><b>Reload:</b> 1.0</span>
-                        <span class="stat-badge"><b>Durability:</b> 100</span>
-                        <span class="stat-badge"><b>Caliber:</b> Pistol Ammo</span>
-                        <span class="stat-badge"><b>Repair Class:</b> Scrap</span>
-                        <span class="stat-badge"><b>Stacking:</b> Not Stackable</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Svarsh Miracle (Short)</td><td>2</td><td>35750₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Weapon</span>
-                        <span class="stat-badge"><b>Damage:</b> 30</span>
-                        <span class="stat-badge"><b>RPM:</b> 100</span>
-                        <span class="stat-badge"><b>Range:</b> 14</span>
-                        <span class="stat-badge"><b>Accuracy:</b> 13</span>
-                        <span class="stat-badge"><b>Recoil:</b> 65 - 14</span>
-                        <span class="stat-badge"><b>Handling:</b> 8 + 11</span>
-                        <span class="stat-badge"><b>Ergo:</b> 8 + 5</span>
-                        <span class="stat-badge"><b>Reload:</b> 1.0</span>
-                        <span class="stat-badge"><b>Durability:</b> 100</span>
-                        <span class="stat-badge"><b>Caliber:</b> Shotgun Ammo</span>
-                        <span class="stat-badge"><b>Repair Class:</b> Basic</span>
-                        <span class="stat-badge"><b>Stacking:</b> Not Stackable</span>
-                    </div>
-                </td>
-            </tr>
-
-            <!-- AMMO -->
-            <tr>
-                <td>Pistol FMJ Ammo</td><td>1</td><td>30₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Ammo</span>
-                        <span class="stat-badge"><b>Damage:</b> 10</span>
-                        <span class="stat-badge"><b>Penetration:</b> 0%</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 999</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Shotgun Buckshot Ammo</td><td>1</td><td>60₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Ammo</span>
-                        <span class="stat-badge"><b>Damage:</b> 6 × 5 = 30</span>
-                        <span class="stat-badge"><b>Penetration:</b> 0%</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 999</span>
-                    </div>
-                </td>
-            </tr>
-
-            <!-- ARMOR REPAIR KITS -->
-            <tr>
-                <td>Glue</td><td>1</td><td>3000₽ / 2699₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Armor Repair</span>
-                        <span class="stat-badge"><b>Repair:</b> 5%</span>
-                        <span class="stat-badge"><b>Not usable below:</b> 80% condition</span>
-                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Field Repair Kit</td><td>1</td><td>5000₽ / 4499₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Armor Repair</span>
-                        <span class="stat-badge"><b>Repair:</b> 15%</span>
-                        <span class="stat-badge"><b>Not usable below:</b> 70% condition</span>
-                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Tattered Armor Repair Kit</td><td>1</td><td>12000₽ / 10799₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Armor Repair</span>
-                        <span class="stat-badge"><b>Repair:</b> 25%</span>
-                        <span class="stat-badge"><b>Usable in any condition</b></span>
-                        <span class="stat-badge"><b>Repair Class:</b> Tattered</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <!-- WEAPON MAINTENANCE -->
-            <tr>
-                <td>Gun Lube</td><td>1</td><td>3000₽ / 2699₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Weapon Maintenance</span>
-                        <span class="stat-badge"><b>Repair:</b> 5%</span>
-                        <span class="stat-badge"><b>Not usable below:</b> 80% condition</span>
-                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Gun Cleaning Rod</td><td>1</td><td>5000₽ / 4499₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Weapon Maintenance</span>
-                        <span class="stat-badge"><b>Repair:</b> 15%</span>
-                        <span class="stat-badge"><b>Not usable below:</b> 70% condition</span>
-                        <span class="stat-badge"><b>Repair Class:</b> Global</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Scrap Gun Repair Kit</td><td>1</td><td>12000₽ / 10799₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Weapon Maintenance</span>
-                        <span class="stat-badge"><b>Repair:</b> 25%</span>
-                        <span class="stat-badge"><b>Usable in any condition</b></span>
-                        <span class="stat-badge"><b>Repair Class:</b> Scrap</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <!-- MEDICAL SUPPLIES -->
-            <tr>
-                <td>AI-2 Medkit</td><td>1</td><td>3200₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Medical</span>
-                        <span class="stat-badge"><b>Health:</b> +30</span>
-                        <span class="stat-badge"><b>Radiation:</b> -15</span>
-                        <span class="stat-badge"><b>Hunger:</b> +3</span>
-                        <span class="stat-badge"><b>Thirst:</b> +3</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>AI-2 Army Medkit</td><td>2</td><td>6200₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Medical</span>
-                        <span class="stat-badge"><b>Health:</b> +40</span>
-                        <span class="stat-badge"><b>Bleed:</b> -20</span>
-                        <span class="stat-badge"><b>Radiation:</b> -10</span>
-                        <span class="stat-badge"><b>Hunger:</b> +3</span>
-                        <span class="stat-badge"><b>Thirst:</b> +3</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>AI-2 Mechanist Medkit</td><td>3</td><td>9200₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Medical</span>
-                        <span class="stat-badge"><b>Health:</b> +50</span>
-                        <span class="stat-badge"><b>Bleed:</b> -30</span>
-                        <span class="stat-badge"><b>Radiation:</b> -50</span>
-                        <span class="stat-badge"><b>Hunger:</b> +3</span>
-                        <span class="stat-badge"><b>Thirst:</b> +3</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Bandage</td><td>1</td><td>250₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Medical</span>
-                        <span class="stat-badge"><b>Health:</b> +5</span>
-                        <span class="stat-badge"><b>Bleed:</b> -15</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Advanced Bandage</td><td>2</td><td>4000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Medical</span>
-                        <span class="stat-badge"><b>Health:</b> +10</span>
-                        <span class="stat-badge"><b>Bleed:</b> -33</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Stimpack</td><td>2</td><td>6000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Medical</span>
-                        <span class="stat-badge"><b>Health:</b> +35</span>
-                        <span class="stat-badge"><b>Hunger:</b> +5</span>
-                        <span class="stat-badge"><b>Thirst:</b> +5</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <!-- FOOD & DRINK -->
-            <tr>
-                <td>Canteen</td><td>1</td><td>480₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Food & Drink</span>
-                        <span class="stat-badge"><b>Thirst:</b> -33</span>
-                        <span class="stat-badge"><b>Radiation:</b> -5</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Canned Beans</td><td>1</td><td>2100₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Food & Drink</span>
-                        <span class="stat-badge"><b>Hunger:</b> -27</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-        </table>
-    </div>
-</div>
-
-<!-- VENDOR 9: NADJA -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('nadja')">
-        Nadja — The Mechanists
-        <div class="vendor-faction">Faction: Mechanists</div>
-    </div>
-
-    <div class="vendor-content" id="nadja">
-        <img class="vendor-portrait" src="images/vendors/nadja.png" alt="Nadja Portrait">
-
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-
-            <!-- 🛠️ HAND TOOLS -->
-
-            <tr>
-                <td>Hammer</td><td>1</td><td>2000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Hand Tool</span>
-                        <span class="stat-badge"><b>Description:</b> A simple and reliable tool, for all kinds of work I don't do. Not very handy in combat, as Mutants have sturdy bones. Maybe better against humans?</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 4</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Screwdriver</td><td>1</td><td>2000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Hand Tool</span>
-                        <span class="stat-badge"><b>Description:</b> A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 4</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Plier</td><td>1</td><td>2000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Hand Tool</span>
-                        <span class="stat-badge"><b>Description:</b> I'm not the type to pull someone's teeth out. But what else is this thing for?</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>WG-40</td><td>1</td><td>250₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Hand Tool</span>
-                        <span class="stat-badge"><b>Description:</b> A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 4</span>
-                    </div>
-                </td>
-            </tr>
-
-            <!-- 📦 CRAFTING & TRADE COMPONENTS -->
-            <tr>
-                <td>Chemical Residue</td><td>1</td><td>100₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Component</span>
-                        <span class="stat-badge"><b>Description:</b> Industrial waste from when Svarog Factories was still operational.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 40</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Metal Scrap</td><td>1</td><td>100₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Component</span>
-                        <span class="stat-badge"><b>Description:</b> Scraps of metal that can be recycled into something useful.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 40</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Plastic Scrap</td><td>1</td><td>100₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Component</span>
-                        <span class="stat-badge"><b>Description:</b> A scrap of plastic that can maybe be recycled.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 40</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Fabric Scrap</td><td>1</td><td>100₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Component</span>
-                        <span class="stat-badge"><b>Description:</b> Low-quality fabric scrap, useful for patching clothes.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 40</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Rubber Scrap</td><td>1</td><td>100₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Component</span>
-                        <span class="stat-badge"><b>Description:</b> A scrap of rubber which resisted the years. Good for trading.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 40</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Screws</td><td>1</td><td>100₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Component</span>
-                        <span class="stat-badge"><b>Description:</b> Hard-to-find metal screws, valuable for tinkerers.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 10</span>
-                    </div>
-                </td>
-            </tr>
-
-            <!-- ⚙️ ADVANCED COMPONENTS -->
-            <tr>
-                <td>Mechanical Components</td><td>1</td><td>10000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Advanced Component</span>
-                        <span class="stat-badge"><b>Description:</b> Small gears, levers and bits of machinery.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Advanced Mechanical Components</td><td>3</td><td>25000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Advanced Component</span>
-                        <span class="stat-badge"><b>Description:</b> High-grade machine parts, possibly reusable.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Kevlar Weave</td><td>2</td><td>10000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Armor Material</span>
-                        <span class="stat-badge"><b>Description:</b> High-impact resistant fabric used in bulletproof armor.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Armor Plate</td><td>3</td><td>25000₽</td>
-                <td>
-                    <div class="badge-group">
-                        <span class="type-label">Armor Material</span>
-                        <span class="stat-badge"><b>Description:</b> Rusty armor plate offering minimal protection — stopping even one bullet is good enough.</span>
-                        <span class="stat-badge"><b>Max Stacks:</b> 5</span>
-                    </div>
-                </td>
-            </tr>
-
-        </table>
-    </div>
-</div>
-
-
-<!-- VENDOR 9: VOLODYMYR (PART 1 OF 3) -->
-<div class="vendor-section">
-    <div class="vendor-header" onclick="toggleVendor('volodymyr')">
-        Volodymyr — Gunners Outpost
-        <div class="vendor-faction">Faction: Gunners</div>
-    </div>
-    <div class="vendor-content" id="volodymyr">
-        <table class="vendor-table">
-            <tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr>
-
-            <!-- Weapon Maintenance & Blueprints -->
-            <tr><td>Gun Lube</td><td>1</td><td>3000</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 5%</span><span class="stat-badge"><b>Min Cond:</b> 80%</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
-            <tr><td>Gun Cleaning Rod</td><td>1</td><td>5000</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 70%</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
-            <tr><td>Gun Field Tools</td><td>1</td><td>7500</td><td><div class="badge-group"><span class="type-label">Maint</span><span class="stat-badge"><b>Repair:</b> 15%</span><span class="stat-badge"><b>Min Cond:</b> 60%</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
-            <tr><td>Advanced Gun Repair Kit</td><td>2</td><td>60000</td><td><div class="badge-group"><span class="type-label">Kit</span><span class="stat-badge"><b>Repair:</b> 25%</span><span class="stat-badge"><b>Min Cond:</b> Any</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
-            <tr><td>Expert Gun Repair Kit</td><td>3</td><td>120000</td><td><div class="badge-group"><span class="type-label">Kit</span><span class="stat-badge"><b>Repair:</b> 25%</span><span class="stat-badge"><b>Min Cond:</b> Any</span><span class="stat-badge"><b>Stacks:</b> 5</span></div></td></tr>
-            <tr><td>Advanced Gun Repair Kit Blueprint</td><td>2</td><td>40000</td><td><span class="type-label">Unlocks crafting recipe for Advanced Kit</span></td></tr>
-            <tr><td>Expert Gun Repair Kit Blueprint</td><td>3</td><td>60000</td><td><span class="type-label">Unlocks crafting recipe for Expert Kit</span></td></tr>
-            
-            <!-- Ammunition -->
-            <tr><td>Pistol FMJ Ammo</td><td>1</td><td>30</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 10</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-            <tr><td>Shotgun Buckshot Ammo</td><td>1</td><td>60</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 30</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-            <tr><td>Rifle FMJ Ammo</td><td>1</td><td>120</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 17</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-            <tr><td>High Caliber Rifle FMJ Ammo</td><td>1</td><td>150</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 30</span><span class="stat-badge"><b>Pen:</b> 0%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-            <tr><td>Pistol AP Ammo</td><td>2</td><td>100</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 8</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-            <tr><td>Shotgun AP Ammo</td><td>2</td><td>400</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 24</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-            <tr><td>Rifle AP Ammo</td><td>3</td><td>240</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 14</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-            <tr><td>High Caliber Rifle AP Ammo</td><td>3</td><td>300</td><td><div class="badge-group"><span class="type-label">Ammo</span><span class="stat-badge"><b>Dmg:</b> 26</span><span class="stat-badge"><b>Pen:</b> 50%</span><span class="stat-badge"><b>Max:</b> 999</span></div></td></tr>
-
-            <!-- Sights & Scopes -->
-            <tr><td>Sidemounted 4x Scope</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +15</span><span class="stat-badge"><b>Acc:</b> +6</span><span class="stat-badge"><b>Ergo:</b> -6</span></div></td></tr>
-            <tr><td>Sniper 4x Scope</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +18</span><span class="stat-badge"><b>Acc:</b> +10</span><span class="stat-badge"><b>Ergo:</b> -10</span></div></td></tr>
-            <tr><td>Classic Scope</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +20</span><span class="stat-badge"><b>Acc:</b> +12</span><span class="stat-badge"><b>Ergo:</b> -12</span></div></td></tr>
-            <tr><td>Holographic Sight</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +3</span><span class="stat-badge"><b>Ergo:</b> -1</span></div></td></tr>
-            <tr><td>Red Dot Sight</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span></div></td></tr>
-            <tr><td>Vintage Red Dot Sight</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +2</span> <span class="stat-badge"><b>Ergo:</b> -1</span></div></td></tr>
-            <tr><td>Elevated Red Dot Sight</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +1</span><span class="stat-badge"><b>Acc:</b> +3</span><span class="stat-badge"><b>Ergo:</b> -1</span></div></td></tr>
-            <tr><td>Lightweight 2x Scope</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +4</span><span class="stat-badge"><b>Acc:</b> +5</span><span class="stat-badge"><b>Ergo:</b> -3</span></div></td></tr>
-            <tr><td>Lightweight 4x Scope</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Optic</span><span class="stat-badge"><b>Range:</b> +8</span><span class="stat-badge"><b>Acc:</b> +6</span><span class="stat-badge"><b>Ergo:</b> -4</span></div></td></tr>
-            
-            <!-- Muzzle Devices & Silencers -->
-            <tr><td>PM Small Compensator</td><td>1</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -5</span></div></td></tr>
-            <tr><td>PM Muzzle Brake</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -8</span></div></td></tr>
-            <tr><td>PM Silencer</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Acc:</b> +5</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> -4</span></div></td></tr>
-            <tr><td>MK Slant Muzzle Brake</td><td>1</td><td>2000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6.5</span></div></td></tr>
-            <tr><td>MK Upgraded Muzzle Brake</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -7</span></div></td></tr>
-            <tr><td>MK Compensator</td><td>2</td><td>10000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -9</span></div></td></tr>
-            <tr><td>MK Silencer</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Acc:</b> +4</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> -6</span></div></td></tr>
-            <tr><td>Dragoon 2-Slot Compensator</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Muzzle</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +4</span></div></td></tr>
-            
-            <!-- Weapon Magazines -->
-            <tr><td>Svarsh Drum Mag</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -3</span><span class="stat-badge"><b>Reload:</b> -6</span></div></td></tr>
-            <tr><td>MK Drum Mag</td><td>3</td><td>8000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -15</span><span class="stat-badge"><b>Reload:</b> -30</span></div></td></tr>
-            <tr><td>M4 Gen2 Drum Mag</td><td>3</td><td>8000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -10</span><span class="stat-badge"><b>Reload:</b> -30</span></div></td></tr>
-            <tr><td>Borealis Drum Mag</td><td>3</td><td>8000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -8</span><span class="stat-badge"><b>Reload:</b> -24</span></div></td></tr>
-            <tr><td>Medved Drum Mag</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Hand:</b> -10</span><span class="stat-badge"><b>Ergo:</b> -7</span><span class="stat-badge"><b>Reload:</b> -18</span></div></td></tr>
-            <tr><td>TC Polymer Large Mag (Black)</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
-            <tr><td>TC Polymer Mag (Black)</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> +2</span><span class="stat-badge"><b>Reload:</b> +12</span></div></td></tr>
-            <tr><td>MK Stamped Steel Mag</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
-            <tr><td>Makeshift Double Stacked Steel Stick Mag</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -4</span><span class="stat-badge"><b>Reload:</b> -8</span></div></td></tr>
-            <tr><td>M4 Large Aluminum Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
-            <tr><td>M4 Large Aluminum Mag (Tan)</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
-            <tr><td>Borealis Aluminum Mag</td><td>2</td><td>1500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span><span class="stat-badge"><b>Reload:</b> +12</span></div></td></tr>
-            <tr><td>Borealis Curved Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span><span class="stat-badge"><b>Reload:</b> -6</span></div></td></tr>
-            <tr><td>Borealis Long Curved Mag</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -6</span><span class="stat-badge"><b>Reload:</b> -12</span></div></td></tr>
-            <tr><td>PP Pristine Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span></div></td></tr>
-            <tr><td>Dragoon Steel Mag</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -4</span><span class="stat-badge"><b>Reload:</b> -10</span></div></td></tr>
-            <tr><td>Dragoon Large Steel Mag</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -2</span><span class="stat-badge"><b>Reload:</b> +16</span></div></td></tr>
-            <tr><td>Bahadir Ribbed Cylinder Mag</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Mag</span><span class="stat-badge"><b>Ergo:</b> -6</span><span class="stat-badge"><b>Reload:</b> -13</span></div></td></tr>
-
-              <!-- Weapon Stocks - Part 1 -->
-            <tr><td>Zavod Polymer Full Stock</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>TC Skeleton Stock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>TC Wood Stock</td><td>2</td><td>750</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>Makeshift Prosthetic Stock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>Makeshift Grated Stock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -8</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>PM Full Polymer Stock</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -10</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>PM Polymer Stock</td><td>1</td><td>750</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>MK Polymer Stock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -9</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-               
-            <!-- Weapon Stocks - Part 2 -->
-            <tr><td>MK Fixed Carbine Stock</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>Rifle Collapsible Stock Module</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -13</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +5</span></div></td></tr>
-            <tr><td>Makeshift Collapsible Stock Module</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -13</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +5</span></div></td></tr>
-            <tr><td>Borealis Adaptable Folding Stock</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -13</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>Borealis Skeleton Stock</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -11</span><span class="stat-badge"><b>Hand:</b> +10</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>MK Metal Stock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -14</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>Dragoon Polymer Stock</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -10</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>Dragoon Folding Stock</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -12</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>2HMG Modern Polymer Stock Module</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Stock</span><span class="stat-badge"><b>Recoil:</b> -10</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-
-                        <!-- Handguards, Grips & Dust Covers -->
-            <tr><td>2HMG Railed Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>Angled Foregrip</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>Bahadir Extended Handguard</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3.5</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>Bahadir Railed Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +5</span></div></td></tr>
-            <tr><td>Borealis Adaptable Railed Handguard</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>Borealis Lock Mount Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>Borealis Polymer Short Handguard</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>Borealis Railed Dust Cover</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>Dragoon Polymer Handguard</td><td>2</td><td>1250</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>Dragoon Railed Dust Cover</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>Dragoon Railed Handguard</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +12</span><span class="stat-badge"><b>Ergo:</b> +10</span></div></td></tr>
-            <tr><td>Forward Angled Foregrip</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>Handstop</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +1</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>M4 Adaptable Extended Handguard</td><td>2</td><td>8000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +5</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>M4 Ergonomic Pistol Grip Module</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>M4 Pistol Grip Module</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>M4 Ribbed Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2.5</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>M4 Railed Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3.5</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>M4 Slotted Mount Handguard</td><td>2</td><td>1250</td><td><span class="type-label">Guard</span></td></tr>
-            <tr><td>M4 Target Pistol Grip Module</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>MK Combination Handguard</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>MK Extended Railed Handguard</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +10</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>MK Extended Slotted Handguard</td><td>2</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>MK Railed Combination Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>MK Railed Dust Cover</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>MK Railed Polymer Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4.5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>MK Slotted Mount Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>MK Slotted Mount Handguard (Ext.)</td><td>3</td><td>4000</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -6</span><span class="stat-badge"><b>Hand:</b> +8</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>PM Flashlight Forestock</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -5</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>PM Polymer Beavertail Grip</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>PM Railed Forestock</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -4</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +6</span></div></td></tr>
-            <tr><td>Polymer Pistol Grip Module</td><td>1</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>Short Tapered Vertical Foregrip</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +3</span><span class="stat-badge"><b>Ergo:</b> +3</span></div></td></tr>
-            <tr><td>Short Vertical Foregrip</td><td>1</td><td>1250</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-            <tr><td>SMG Railed Dust Cover</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Receiver</span><span class="stat-badge"><b>Ergo:</b> +8</span></div></td></tr>
-            <tr><td>Tapered Vertical Foregrip</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>TC Handguard</td><td>1</td><td>750</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -2</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>TC Railed Dust Cover</td><td>2</td><td>2500</td><td><span class="type-label">Receiver</span></td></tr>
-            <tr><td>TC Railed Handguard</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -3</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>Vertical Foregrip</td><td>2</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +4</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>Zavod Polymer Handguard</td><td>1</td><td>750</td><td><div class="badge-group"><span class="type-label">Guard</span><span class="stat-badge"><b>Recoil:</b> -1.5</span><span class="stat-badge"><b>Hand:</b> +2</span><span class="stat-badge"><b>Ergo:</b> +2</span></div></td></tr>
-            <tr><td>2HMG Ergonomic Pistol Grip</td><td>3</td><td>2500</td><td><div class="badge-group"><span class="type-label">Grip</span><span class="stat-badge"><b>Hand:</b> +6</span><span class="stat-badge"><b>Ergo:</b> +4</span></div></td></tr>
-        </table>
-    </div>
-</div>
-
-
-<!-- PLACEHOLDER: RAISA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('raisa')">
-    Raisa
-    <div class="vendor-faction">Faction: Vultures</div>
-  </div>
-  <div class="vendor-content" id="raisa">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: MILA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('mila')">
-    Mila
-    <div class="vendor-faction">Faction: Rada</div>
-  </div>
-  <div class="vendor-content" id="mila">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: VESNA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('vesna')">
-    Vesna
-    <div class="vendor-faction">Faction: Rada</div>
-  </div>
-  <div class="vendor-content" id="vesna">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: OLGA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('olga')">
-    Olga
-    <div class="vendor-faction">Faction: Rada</div>
-  </div>
-  <div class="vendor-content" id="olga">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: ROSA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('rosa')">
-    Rosa
-    <div class="vendor-faction">Faction: Acolytes</div>
-  </div>
-  <div class="vendor-content" id="rosa">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: SASHA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('sasha')">
-    Sasha
-    <div class="vendor-faction">Faction: Palatines</div>
-  </div>
-  <div class="vendor-content" id="sasha">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: YELENA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('yelena')">
-    Yelena
-    <div class="vendor-faction">Faction: Palatines</div>
-  </div>
-  <div class="vendor-content" id="yelena">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: TAJRA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('tajra')">
-    Tajra
-    <div class="vendor-faction">Faction: Rada</div>
-  </div>
-  <div class="vendor-content" id="tajra">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: SNEZHANA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('snezhana')">
-    Snezhana
-    <div class="vendor-faction">Faction: Rada</div>
-  </div>
-  <div class="vendor-content" id="snezhana">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: ZHIVAN -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('zhivan')">
-    Zhivan
-    <div class="vendor-faction">Faction: Vultures</div>
-  </div>
-  <div class="vendor-content" id="zhivan">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: ILYA -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('ilya')">
-    Ilya
-    <div class="vendor-faction">Faction: Mudlarks</div>
-  </div>
-  <div class="vendor-content" id="ilya">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-<!-- PLACEHOLDER: GAVRON -->
-<div class="vendor-section placeholder">
-  <div class="vendor-header" onclick="toggleVendor('gavron')">
-    Gavron
-    <div class="vendor-faction">Faction: Mudlarks</div>
-  </div>
-  <div class="vendor-content" id="gavron">
-    <div class="placeholder-note">Inventory data not documented yet.</div>
-  </div>
-</div>
-
-</div> <!-- Closes #vendor-list -->
+<div id="vendor-list" aria-live="polite"><p class="placeholder-note">Loading vendors…</p></div>
+<noscript><p>Enable JavaScript to browse the vendor directory.</p></noscript>
 <script src="site-shell.js"></script>
 </body>
 </html>
