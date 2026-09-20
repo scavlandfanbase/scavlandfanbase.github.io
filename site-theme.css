@@ -232,3 +232,18 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
   .faction-grid,.faction-grid.focused{grid-template-columns:1fr!important}
   .faction-tile.centered{grid-column:auto}
 }
+
+/* Mobile database controls */
+@media(max-width:700px){
+  .weapon-nav,.armour-nav,.bench-nav{
+    justify-content:flex-start!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+  }
+  .weapon-nav a,.armour-nav a,.bench-btn{flex:0 0 auto;white-space:nowrap}
+  .controls{margin-bottom:20px!important}
+  .item-tools input{flex-basis:100%!important}
+  .item-tools .verify-toggle{flex:1 1 auto}
+}
