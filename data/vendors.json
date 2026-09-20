@@ -245,6 +245,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/grigory.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
@@ -321,6 +326,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/petar.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
@@ -411,6 +421,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/bogdan.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
@@ -459,6 +474,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/marko.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
@@ -514,6 +534,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/jasna.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
@@ -982,6 +1007,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/nadja.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
@@ -1799,6 +1829,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/vesna.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
@@ -1811,6 +1846,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "images/vendors/olga.png",
+        "status": "legacy-display",
+        "evidence": "historical-site-asset"
       }
     },
     {
