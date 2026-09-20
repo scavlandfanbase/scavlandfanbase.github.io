@@ -2,6 +2,7 @@
 
 ## START HERE — current queue (20 September 2026)
 
+- **Faction evidence audit (20 Sept 2026):** all 9 canonical faction descriptions are now provenance-linked to their direct in-game faction-page screenshots and marked `screenshot-verified`. Existing condensed lore text was retained; no OCR-only claims were added. Character-card evidence for Anatoly, Tajra, Snezhana, Volodymyr, Yefim, Yelena and Zhivan remains useful for vendor/faction identity cross-checks.
 - **Asset safety audit (20 Sept 2026):** live references confirmed for canonical weapon screenshots, faction icons, Old Tactical Vest icon and `images/scavland-banner.jpg.png`. No binary asset was deleted: reference absence is not sufficient duplicate proof, and the current GitHub text connector cannot byte-compare PNGs such as root `Antatoly.png` vs `images/vendors/anatoly.png`.
 - **Areas page (20 Sept 2026):** replaced the placeholder with a data-driven view of the 5 structured locations currently present in canonical vendor data and their known vendors. Broader place names mentioned only in faction/item prose were not promoted into a canonical Areas dataset; a dedicated evidence-backed location schema remains future work.
 - **Deep-link polish (20 Sept 2026):** item `?id=` links now highlight and scroll to the exact canonical card. Vendors accepts `?faction=<canonical-faction-id>` and Factions links to filtered vendor views for all 8 factions that currently have vendor records; Bandits intentionally has no vendor link because no canonical Bandit vendor exists.
@@ -17,7 +18,7 @@
 - [ ] Continue clean display-image/icon work separately from evidence verification; use existing organised evidence as the visual reference catalogue.
 - [ ] Review legacy duplicate screenshot assets under `images/items/`, `images/weapons/`, `images/crafting/`, `images/factions/` and `images/armour/`; delete only when byte-equivalence/reference safety is proven.
 - [ ] Review root `Antatoly.png` against `images/vendors/anatoly.png`; current GitHub text connector cannot decode/compare PNG bytes, so both must remain until binary/visual equivalence is proven.
-- [ ] Review faction screenshots for evidence beyond current faction data/icons.
+- [x] Review faction screenshots for evidence beyond current faction data/icons — 9/9 faction descriptions are now linked to direct screenshots; character cards retained for identity cross-checks.
 - [ ] Improve Areas page and test map/responsive behaviour across phone and desktop layouts.
 - [ ] Add useful cross-links where canonical IDs already exist (vendor item → item, crafting ingredient → item, weapon → ammo, faction → vendors).
 - [ ] Eventually regenerate `MASTER_DATABASE.md` from canonical JSON rather than maintaining historical duplicated tables.
