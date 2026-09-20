@@ -1,5 +1,14 @@
 # SCAVLAND Website — Next Jobs
 
+
+## Image previews — 20 September 2026
+
+- Weapons, Armour and Items now share `image-viewer.js`: tap/click a preview to enlarge inside the page, then tap/click the enlarged image, Close, or empty background to return. Escape closes the dialog; keyboard activation, modal focus, opener focus restoration and page scroll restoration are included. No new browser tab/window is opened.
+- Added existing record-linked pictures to **173/255 Items** and **5/30 Armour** cards; **37/39 Weapons** have usable linked images. Prefer a dedicated `image`, otherwise use a screenshot-verified record's actual PNG/JPEG/WebP evidence path. Leave records with no usable image text-only. Broken preview images are hidden. Images remain separate from verification; no canonical JSON, game stats or provenance was changed.
+- Changed files: `weapons.html`, `armour.html`, `items.html`, `site-theme.css`, new `image-viewer.js`, and this handover. Existing filters and stats behavior are preserved.
+- Validation: browser rendering at desktop and 390×844 phone viewport; click image to open/close, Close and Escape, keyboard opening, restored focus/scroll, and image behavior after weapon/item search. Cards render at 39 weapons, 30 armour and 255 items; no page errors observed. All 215 linked preview paths exist locally; helper path/escaping checks and inline JavaScript syntax checks pass. Physical iPhone/Safari touch testing remains a useful follow-up.
+- Remaining image work: link suitable evidence/display images for the 82 item and 25 armour records without a usable path, plus two weapon records; do not guess or fabricate images or promote verification status. Broader Areas work remains pending.
+
 ## DESKTOP HANDOVER — 20 September 2026 (latest)
 
 - **Armour page:** user confirmed the Armour page is now displaying correctly after the verification-card render fix. Earlier root cause was an undefined `verification` variable in `createArmourCard()`; fix commit `8dabbfb40ef08fef79c1244b2a8f726e0b1d78a3`. Treat Armour rendering as stable unless a new issue is observed.
@@ -177,3 +186,4 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
 
 - Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
+
