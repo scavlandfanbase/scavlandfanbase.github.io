@@ -1,7 +1,31 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 323,
+  "count": 358,
   "exact_duplicate_groups": [
+    [
+      "Screenshot 2026-09-20 201928.png",
+      "armour/old-tactical-pants__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "Screenshot 2026-09-20 202003.png",
+      "armour/old-tactical-vest__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "Screenshot 2026-09-20 204519.png",
+      "armour/skull-mask__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "Screenshot 2026-09-20 204527.png",
+      "armour/panskiy-kask__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "Screenshot 2026-09-20 204534.png",
+      "armour/balistic-kask__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "Screenshot 2026-09-20 204544.png",
+      "armour/stronghold-vest__stats-100-durability__2026-09-20.png"
+    ],
     [
       "vendors/jasna__shop-screen-part-1__2026-09-20.png",
       "vendors/jasna__shop-screen__2026-09-20_142506.png"
@@ -79,6 +103,356 @@
       "height": 108,
       "phash": "874a3d3e6ab14ab1",
       "ocr": "Fil."
+    },
+    {
+      "file": "Screenshot 2026-09-20 201928.png",
+      "sha256": "6468d95ae3779e07e627c6c0b3c149e79491b64fe7d777ca32edd336bafddaad",
+      "bytes": 237954,
+      "filename_timestamp": "2026-09-20T20:19:28",
+      "width": 535,
+      "height": 550,
+      "phash": "d497272c39336cc3",
+      "ocr": "a a ———— en a Old Tactical Pants ~35000P A pair of beat-up tactical pants worn by the armed men of pre-War times. Offers great mobility and is pretty comfortable, but doesn't protect against the rocky terrain of the wastes. Durability TIUATIANATIANIIINT 100 Ballistic Res Hl 20 Slash Res I 23 Rad Res Ill 15 Repair Class: Medium ul"
+    },
+    {
+      "file": "Screenshot 2026-09-20 201937.png",
+      "sha256": "e9cbcca49a349cca75cd296f3a422a035d8d05804a53a2d780f7bd281dfd35e4",
+      "bytes": 235707,
+      "filename_timestamp": "2026-09-20T20:19:37",
+      "width": 532,
+      "height": 547,
+      "phash": "d097276c39336cc3",
+      "ocr": "a | Old Tactical Pants ~35000P A pair of beat-up tactical pants worn by the armed men of pre-War times. Offers great mobility and is pretty comfortable, but doesn't protect against the rocky terrain of | the wastes. Durability TIUATIANATIANIIINT 100 Ballistic Res Hl 20 Slash Res I 23 Rad Res Ill 15 Repair Class: Medium"
+    },
+    {
+      "file": "Screenshot 2026-09-20 202003.png",
+      "sha256": "523312a02188ce05731a049c309c17f504d46259259d0cef5219735e79ae680e",
+      "bytes": 276833,
+      "filename_timestamp": "2026-09-20T20:20:03",
+      "width": 534,
+      "height": 609,
+      "phash": "c487273c1b676cd8",
+      "ocr": "i es ee Old Tactical Vest ~75000P A beat-up tactical vest worn by police forces of pre-Mist times. It offers great mobility and decent protection against weaker types of weapon fire. This vest is usually a reward for those with basic training and experience in the field. Durability TITTAUIANITANIIIHY 100 Ballistic Res HUTT 35 Slash Res I 25 Rad Res Ill 15 Repair Class: Medium as"
+    },
+    {
+      "file": "Screenshot 2026-09-20 204519.png",
+      "sha256": "853c733e1e57a7563a73564eacc52c800d8855e168a4ca753fec623bdf100588",
+      "bytes": 305974,
+      "filename_timestamp": "2026-09-20T20:45:19",
+      "width": 1015,
+      "height": 1003,
+      "phash": "d091276d399bcec2",
+      "ocr": "ro rs a, » Skull Mask ~5000P A menacing mask in the shape of a skull, worn by different folks for different reasons: some in respect and awe of the dead, others in order to intimidate and scare. Durability Te Ballistic Res | 3 Slash Res I| 10 Rad Res 0 Repair Class: Tattered 1}"
+    },
+    {
+      "file": "Screenshot 2026-09-20 204527.png",
+      "sha256": "9df42abd095a9ce5865206f321acc9df7b211169048951e3a2edb9367580cf59",
+      "bytes": 325632,
+      "filename_timestamp": "2026-09-20T20:45:27",
+      "width": 1015,
+      "height": 1098,
+      "phash": "c085273c99df6e62",
+      "ocr": "fal oe i i Panskiy Kask ~15000P | An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field. Durability PUAULNVANUNINIMIIINY § 100 Ballistic Res {| 8 Slash Res III 13 Rad Res ll 10 Repair Class: Scavenger a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 204534.png",
+      "sha256": "aa8b4da084ecdaf9a2bc873ca3a56f985304a9930bc6b8d15c1db46d09165193",
+      "bytes": 331923,
+      "filename_timestamp": "2026-09-20T20:45:34",
+      "width": 1018,
+      "height": 994,
+      "phash": "d095276c395b4ec6",
+      "ocr": "all | Ballistic Kask ~40000P One of the most common pieces of Pre-War soldier equipment, this cheaply mass-produced helmet is sturdy enough against bludgeon attacks, but will not stop a bullet. Durability LT Ballistic Res VIII 7} Slash Res WT 25 Rad Res | 5 | Repair Class: Medium -,"
+    },
+    {
+      "file": "Screenshot 2026-09-20 204544.png",
+      "sha256": "292dc28faffade8ad0e931e2ca68093611db775f538a005153a4d895f7444231",
+      "bytes": 387559,
+      "filename_timestamp": "2026-09-20T20:45:44",
+      "width": 991,
+      "height": 1131,
+      "phash": "d083272c3b636cdb",
+      "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205018.png",
+      "sha256": "e15b10354963de7352430181fa2d43fd2358c4b4ca434a87e6a849d07851621a",
+      "bytes": 41246,
+      "filename_timestamp": "2026-09-20T20:50:18",
+      "width": 1324,
+      "height": 634,
+      "phash": "ae955c601fcb852b",
+      "ocr": "| is. Alexei 2 | % Reputation 1015 | ye E Rank 3 _. | Acolytes CO a0 @,&, 7+ #¢ Ooo a = a 4 4 4 fi\" “y"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205210.png",
+      "sha256": "ac9a8bc5cc1445fcd7afb4bcabc2d42bd22d48fb0826ef4ca156a2b191aa6636",
+      "bytes": 14591,
+      "filename_timestamp": "2026-09-20T20:52:10",
+      "width": 327,
+      "height": 379,
+      "phash": "c0e09b07275b3e9e",
+      "ocr": "- H. Bandit"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205301.png",
+      "sha256": "504b73d6fa171f33f66d42bb5d5077e9d06a49ea40808383a2a6382ad7cc18d6",
+      "bytes": 18478,
+      "filename_timestamp": "2026-09-20T20:53:01",
+      "width": 325,
+      "height": 370,
+      "phash": "c79f1ce4341b6193",
+      "ocr": "@e pig"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205418.png",
+      "sha256": "c38512f7b27cdc4b47253fd319d7f15492b48dc76f6fa2be4f5314404232916f",
+      "bytes": 77081,
+      "filename_timestamp": "2026-09-20T20:54:18",
+      "width": 1015,
+      "height": 651,
+      "phash": "e0a13f780fc6d217",
+      "ocr": "“al Rat Meat ~25P Skewered meat from a Mora rat or two; a meager meal if ever there was one, and filthy to boot. Hunger: -5 Radiation: +25 a,"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205427.png",
+      "sha256": "b91460bcda426a79b3eb3f44f700cb9f37e30d6e86327db78053c1a761982741",
+      "bytes": 1526,
+      "filename_timestamp": "2026-09-20T20:54:27",
+      "width": 205,
+      "height": 175,
+      "phash": "9a3364cc93c76c63",
+      "ocr": "of"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205433.png",
+      "sha256": "d29ec9e0ca4a3f7bc779379314d46b204e6101f50c48aa17c1df9e86ad66f987",
+      "bytes": 33726,
+      "filename_timestamp": "2026-09-20T20:54:33",
+      "width": 1011,
+      "height": 420,
+      "phash": "c0e937cbcb163ec0",
+      "ocr": "SS eS Ee —— Rat Tail _ ~75P A tail. Few traders might be interested in this. a a! :"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205437.png",
+      "sha256": "597e424757e0cfe0c17b8bc214877c50626d00baae8215f4598213b801c15600",
+      "bytes": 1113,
+      "filename_timestamp": "2026-09-20T20:54:37",
+      "width": 93,
+      "height": 205,
+      "phash": "965968b4cb4bb4b8",
+      "ocr": "So)"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205443.png",
+      "sha256": "e1d77d2051330946b529249bd5a3eabe05cc74454f774738b0fe2bd3b43d52ad",
+      "bytes": 69746,
+      "filename_timestamp": "2026-09-20T20:54:43",
+      "width": 1012,
+      "height": 574,
+      "phash": "c4b52de69a1bc29a",
+      "ocr": "al Hammer ~2000P A simple and reliable tool, for all kinds of work | don't do. Not very handy in combat, as Mutants have sturdy bones. Maybe better against humans? a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205447.png",
+      "sha256": "783a9c3b05db72b329d4b9848a618a3781044ae3e8d0315d67a29370fbfc5c58",
+      "bytes": 1098,
+      "filename_timestamp": "2026-09-20T20:54:47",
+      "width": 93,
+      "height": 199,
+      "phash": "99d526596a782ba6",
+      "ocr": "T 1"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205647.png",
+      "sha256": "9bc187ca02a5755efaeeac1703dd7775bee37908328989743558ebeb3f8435c9",
+      "bytes": 300905,
+      "filename_timestamp": "2026-09-20T20:56:47",
+      "width": 2109,
+      "height": 1129,
+      "phash": "f0a92c631a786b5e",
+      "ocr": "al PM 12-70 (Long / Ext) ~28000P A multi-shot pump-action shotgun designed for security and for use by amateurs — if the target's close, it won't matter much who's pulling the trigger. Damage TTT 30 Handling Ill 4+ Fire Rate (RPM) | 90 Ergonomics lll 8+4 Range TTT 16 Reload Speed UT 1.0 Accuracy ill 14 Durability IMI 28 Recoil LUNANAUUTI 59- 8 Repair Class: Basic Caliber: Shotgun Ammo a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205752.png",
+      "sha256": "890dd2dfe360adff49c1617b7c7fadccd13adbaa950a66390ea1e0a70e3956ee",
+      "bytes": 19138,
+      "filename_timestamp": "2026-09-20T20:57:52",
+      "width": 331,
+      "height": 376,
+      "phash": "8695387833736ec6",
+      "ocr": "Ake G"
+    },
+    {
+      "file": "Screenshot 2026-09-20 205954.png",
+      "sha256": "5d7cf1c5b1f663cb86d27c61b1242c24566e3e1d458c79c02e8b00873cb7af8d",
+      "bytes": 63071,
+      "filename_timestamp": "2026-09-20T20:59:54",
+      "width": 1017,
+      "height": 654,
+      "phash": "e0852f691adada1b",
+      "ocr": "Advanced Bandage ~4000P High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 wl"
+    },
+    {
+      "file": "Screenshot 2026-09-20 210006.png",
+      "sha256": "26ead173453070f38b8bd1e2ba6f85c4893f82ae550001dc439eb4f973539229",
+      "bytes": 44850,
+      "filename_timestamp": "2026-09-20T21:00:06",
+      "width": 331,
+      "height": 367,
+      "phash": "84991a4f34746db7",
+      "ocr": "a a - i a Mother Mora"
+    },
+    {
+      "file": "Screenshot 2026-09-20 210924.png",
+      "sha256": "06efaaf4fe844943fe889ab435f5d947b0bab2df7dc7607be34b0dd082186068",
+      "bytes": 9184,
+      "filename_timestamp": "2026-09-20T21:09:24",
+      "width": 262,
+      "height": 321,
+      "phash": "d060073fcf279627",
+      "ocr": "= * Gunner"
+    },
+    {
+      "file": "Screenshot 2026-09-20 211045.png",
+      "sha256": "750eb56ced1abc498d7a90d772b93a210252fc188ccfa2c45ba0776a4e13d270",
+      "bytes": 145813,
+      "filename_timestamp": "2026-09-20T21:10:45",
+      "width": 1011,
+      "height": 1158,
+      "phash": "c085277c1b676d5a",
+      "ocr": "- Ashen Ushanka ~18000P A very common piece of headwear throughout Zalesye, and one of the first trades people make when they come into some money. Its comfy shape and texture are great against the cold, but don't offer much protection. Durability PUNTAAUATUUUNINITIIT 100 Ballistic Res I| 8 Slash Res I| 10 Rad Res I 8 Repair Class: Tattered al"
+    },
+    {
+      "file": "Screenshot 2026-09-20 211614.png",
+      "sha256": "daf2af92843768d5c7427bff697ac4fbadceaec5754787107266a27fa8208a6a",
+      "bytes": 314594,
+      "filename_timestamp": "2026-09-20T21:16:14",
+      "width": 2103,
+      "height": 1179,
+      "phash": "f0c82e32b37c27f0",
+      "ocr": "r Bortovka Tinker ~]000P This freakish gun is a home-brew combination of parts from different guns that were lost to history. Terrible accuracy, powerful shots, and noise that will be heard across the wastes. Damage WUUAUII 30 Handling III 4+8 Fire Rate (RPM) | 100 Ergonomics Ill 12+7 Range WT 18 Reload Speed §=—[IIIIIIII 1.0 Accuracy TTT 50 Durability UUNNUUAUUII 94 Recoil UINANAUTI 50- 13 Repair Class: Scrap Caliber: High Caliber Rifle Ammo _."
+    },
+    {
+      "file": "Screenshot 2026-09-20 211637.png",
+      "sha256": "558aa9cc7f0e664d4beddce8b90fccb3f5ce5a331b4ad2b5fd7ed6d996ed3588",
+      "bytes": 97634,
+      "filename_timestamp": "2026-09-20T21:16:37",
+      "width": 1012,
+      "height": 808,
+      "phash": "c0812f69877c7ad6",
+      "ocr": "a Russet Potato ~800P A common food throughout the Continent. Bland, but nutritious. Hard to eat uncooked. Better off trading these, or having someone prepare them. Hunger: -12 Thirst: -1 yl"
+    },
+    {
+      "file": "Screenshot 2026-09-20 211819.png",
+      "sha256": "a40726495e174479c78d05e660ca9246c3601c768139422fa0876aed4ed629de",
+      "bytes": 73223,
+      "filename_timestamp": "2026-09-20T21:18:19",
+      "width": 1017,
+      "height": 466,
+      "phash": "c5a52fc8da1a7ac8",
+      "ocr": "oil 7 Chemical Container ~1000P A chemical container for hazardous materials. Must have seemed like a big deal before the Mist. a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213057.png",
+      "sha256": "cebbd4b57caa143dc8aa7074d2e1a838f097b8fca2c6636a50fa5ce6c48c6585",
+      "bytes": 71860,
+      "filename_timestamp": "2026-09-20T21:30:57",
+      "width": 1377,
+      "height": 1873,
+      "phash": "ae85869597b8956a",
+      "ocr": "| ; 4 Mila Reputation 192 | | f Rank 1 | | Rada — | il | # Oh, hi there. Didn't notice you. = = ee | | 1. Talk | 2. Ask for Jobs |: _ 3. Bye t ! | = _——_ oe br"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213218.png",
+      "sha256": "431b1bcc8e2968cbdecb4481e4ea64a708cfbeb6c98b4b2f3dfda71ac10177ab",
+      "bytes": 41394,
+      "filename_timestamp": "2026-09-20T21:32:18",
+      "width": 1317,
+      "height": 1003,
+      "phash": "ee8695d52a3b5903",
+      "ocr": "| @ ile). Gavron rm Reputation 0 &. Rank 1 =a’ Mudlark i | a at us ze °F &, %, = = q F == Nc 2 ‘ aT o TH 10"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213224.png",
+      "sha256": "f13423168f946924bce9b99a156c0a3e2757178a919f1db0186b2e1b9dcdee0b",
+      "bytes": 196054,
+      "filename_timestamp": "2026-09-20T21:32:24",
+      "width": 1015,
+      "height": 912,
+      "phash": "e0e52f2d87e11e98",
+      "ocr": "a es Fresh Mushrooms ~3000P Dank. Rank: 1, Fresh mushrooms with little to no radiation. Tasty, chewy and nutritious — a rare find. These mushrooms can have drug-like effects when properly dried. Hunger: -5 Health: +10 -"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213230.png",
+      "sha256": "d1080f086d343fceb3719f7270a28af98dc03ca3160b77a1787937b921a437aa",
+      "bytes": 218400,
+      "filename_timestamp": "2026-09-20T21:32:30",
+      "width": 1012,
+      "height": 1083,
+      "phash": "e0a13f622799875e",
+      "ocr": "r Currant Berries ~50P Rank. Rank: 1 These berries are a common find in every region I’ve traveled. They grow even in areas full of Mist, but how this affects the fruit, | don’t know. Jobs ¢ Supply Run (Olga) 3/9 ¢ Supply Run (Olga) 0/12 Thirst: -2 Hunger: -2 -"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213237.png",
+      "sha256": "18c0c76c68585408a841c2e6612371f5e8b927d712b47da072f8daf50a58a6c7",
+      "bytes": 149583,
+      "filename_timestamp": "2026-09-20T21:32:37",
+      "width": 1017,
+      "height": 913,
+      "phash": "d0e12fb587689a96",
+      "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213243.png",
+      "sha256": "0b65043173be83b8a3a6be8f5d0b744163317965e45d0bbe77dea57e152794df",
+      "bytes": 53157,
+      "filename_timestamp": "2026-09-20T21:32:43",
+      "width": 1005,
+      "height": 576,
+      "phash": "e0e12fc4983ace97",
+      "ocr": "r ee i — Rubber Scrap ~100P Dank. Rank: 1 A scrap of rubber which resisted the years. A very resilient material, and good for trading. Fa a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213248.png",
+      "sha256": "1fb6c9d270b62e5acab926dc8ae9315e48a346a1f9c28db050f70503dfc19ea8",
+      "bytes": 55892,
+      "filename_timestamp": "2026-09-20T21:32:48",
+      "width": 1011,
+      "height": 514,
+      "phash": "c0e125c37a3eda17",
+      "ocr": "r Plastic Scrap ~100P PRank- Rank: 1 A scrap of plastic that can maybe be recycled. al"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213304.png",
+      "sha256": "b4045be932496e7dabfea7ba364486ab54f6278284cfe2b5418d132c5bf8ac48",
+      "bytes": 43732,
+      "filename_timestamp": "2026-09-20T21:33:04",
+      "width": 1321,
+      "height": 1017,
+      "phash": "ea8e97f1606819cb",
+      "ocr": "Raisa ke 13:3) ‘=a Reputation 0 =! Rank 1 - Vultures | i i eS a alg ele. . . . . . Z i oa al ial $260 a & a ( dle 41 | i | | | | | | | . . zo . . . . . . Z Z i"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213442.png",
+      "sha256": "e03d6a6d45005f8109326d6a332d0a9a486164cc648785809918a7cbd7c4a8b5",
+      "bytes": 74177,
+      "filename_timestamp": "2026-09-20T21:34:42",
+      "width": 1014,
+      "height": 519,
+      "phash": "c5a52fd2d25a5a1a",
+      "ocr": "al | Tactical Knife ~10000P 6000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 213516.png",
+      "sha256": "2fc6f4826b30003247acf0cbe46ff7a5269fca60032c656d91df2a7319b036f4",
+      "bytes": 129387,
+      "filename_timestamp": "2026-09-20T21:35:16",
+      "width": 1014,
+      "height": 831,
+      "phash": "e0852f698fc27a3a",
+      "ocr": "_ —_ — MK Underfolding Stock ~1250P 3750P Rank. Rank: 2, An adaptable underfolding stock for the Mikhail-47. Good for navigating difficult environments. Recoil: -7 Handling: +4 Ergonomics: +2 r."
     },
     {
       "file": "Shotgun AP Ammo pic.png",
