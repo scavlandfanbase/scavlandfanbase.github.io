@@ -2,87 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SCAVLAND Areas</title>
-
-<style>
-/* --- NAV BAR --- */
-.nav-bar {
-    background: #222;
-    padding: 15px 20px;
-    border-bottom: 2px solid #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #ffcc66;
-    margin-bottom: 8px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.nav-links a:hover {
-    color: #ffcc66;
-}
-
-/* --- PAGE STYLE --- */
-body {
-    background: #111;
-    color: #eee;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    text-align: center;
-}
-
-h1 {
-    color: #ffcc66;
-    margin-top: 40px;
-}
-
-.construction-box {
-    margin-top: 40px;
-    padding: 30px;
-    background: #222;
-    border: 2px solid #ffcc66;
-    border-radius: 8px;
-    display: inline-block;
-}
-
-.construction-box p {
-    font-size: 20px;
-    color: #ccc;
-}
-</style>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Areas | SCAVLAND</title>
 <link rel="stylesheet" href="site-theme.css">
+<style>
+.areas-main{width:min(1100px,calc(100% - 28px));margin:30px auto 55px}
+.areas-head{text-align:center;margin-bottom:22px}.areas-head h1{color:var(--scav-gold-bright);margin:0 0 6px;font-size:clamp(30px,3.2vw,42px)}.areas-head p{margin:0;color:var(--scav-muted)}
+.area-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.area-card{background:var(--scav-panel);border:1px solid var(--scav-line);border-radius:6px;padding:17px}
+.area-card h2{color:var(--scav-gold-bright);font-size:19px;margin:0 0 10px}.area-card p{margin:0 0 10px;color:var(--scav-muted);font-size:13px}
+.area-vendors{display:flex;gap:6px;flex-wrap:wrap}.area-vendors a{font-size:13px}
+.area-empty{grid-column:1/-1;text-align:center;padding:28px;color:var(--scav-muted)}
+</style>
 </head>
 <body>
-
-<!-- PAGE TITLE -->
-<h1>Areas</h1>
-
-<!-- UNDER CONSTRUCTION BOX -->
-<div class="construction-box">
-    <p>This page is currently under construction.</p>
-    <p>More SCAVLAND locations will be added soon.</p>
-</div>
-
+<main class="areas-main">
+<section class="areas-head"><h1>Areas</h1><p>Known locations from the SCAVLAND database.</p></section>
+<section class="area-grid" id="area-grid"><div class="area-empty">Loading locations…</div></section>
+</main>
+<script>
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
+fetch('data/vendors.json').then(r=>{if(!r.ok)throw new Error('Could not load locations');return r.json()}).then(payload=>{
+ const groups=new Map();
+ for(const vendor of payload.data||[]){if(!vendor.location)continue;if(!groups.has(vendor.location))groups.set(vendor.location,[]);groups.get(vendor.location).push(vendor)}
+ const grid=document.getElementById('area-grid');
+ const entries=[...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
+ grid.innerHTML=entries.length?entries.map(([location,vendors])=>'<article class="area-card"><h2>'+esc(location)+'</h2><p>'+vendors.length+' known vendor'+(vendors.length===1?'':'s')+'</p><div class="area-vendors">'+vendors.map(v=>'<a class="data-link" href="vendors.html?faction='+encodeURIComponent(v.factionId)+'">'+esc(v.name)+'</a>').join('')+'</div></article>').join(''):'<div class="area-empty">No structured locations available yet.</div>';
+}).catch(()=>{document.getElementById('area-grid').innerHTML='<div class="area-empty">Locations could not be loaded.</div>'});
+</script>
 <script src="site-shell.js"></script>
 </body>
 </html>
