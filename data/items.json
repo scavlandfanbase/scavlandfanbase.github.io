@@ -2269,7 +2269,8 @@
       "source": {
         "status": "screenshot-verified",
         "lastVerified": "2026-09-20",
-        "note": "Direct user-provided in-game tooltip screenshot (20 September 2026); supersedes older 13 September evidence. Repo evidence PNG still to be archived."
+        "note": "Direct in-game tooltip screenshot; newest verified evidence supersedes the preserved 13 September screenshot.",
+        "file": "evidence-inbox/items/mystery-pills__tooltip__2026-09-20_083137.png"
       },
       "estimatedPrice": 6000,
       "maxStacks": 5,
@@ -3541,7 +3542,8 @@
       "source": {
         "status": "screenshot-verified",
         "lastVerified": "2026-09-20",
-        "note": "Direct user-provided in-game tooltip screenshot (20 September 2026). Repo evidence PNG still to be archived."
+        "note": "Direct in-game tooltip screenshot.",
+        "file": "evidence-inbox/items/medicinal-herb__tooltip__2026-09-20_083129.png"
       },
       "estimatedPrice": 50,
       "maxStacks": 10,
