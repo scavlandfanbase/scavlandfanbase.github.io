@@ -315,7 +315,7 @@ async function loadVendorDirectory() {
       const content = vendor.inventoryDocumented
         ? '<p class="placeholder-note">Unverified inventory</p>' +
           '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
-          vendor.inventory.map(item => '<tr><td>' + escapeVendorText(item.name) + '</td><td>' + escapeVendorText(item.rank) +
+          vendor.inventory.map(item => '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(item.name) + '</a></td><td>' + escapeVendorText(item.rank) +
             '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>').join('') + '</tbody></table>'
         : '<div class="placeholder-note">Inventory coming soon.</div>';
       return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '">' +
