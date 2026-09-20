@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roadmap | SCAVLAND</title>
+<link rel="stylesheet" href="site-theme.css">
+<style>
+.roadmap-main{width:min(1080px,calc(100% - 28px));margin:30px auto 62px}.roadmap-head{text-align:center;margin:0 auto 24px;max-width:720px}.roadmap-head h1{margin:0 0 8px;font-size:clamp(30px,3.4vw,44px)}.roadmap-head p{margin:0;color:var(--scav-muted)}
+.roadmap-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.roadmap-column{background:var(--scav-panel);border:1px solid var(--scav-line);border-radius:7px;padding:18px}.roadmap-column h2{margin:0 0 14px;font-size:20px;color:var(--scav-gold-bright)}.roadmap-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}.roadmap-list li{padding:12px;background:rgba(7,9,9,.48);border-left:3px solid var(--scav-gold);border-radius:3px}.roadmap-list strong{display:block;font-size:15px}.roadmap-list span{display:block;margin-top:3px;color:var(--scav-muted);font-size:13px;line-height:1.4}.roadmap-column.next .roadmap-list li{border-left-color:#71879b}.roadmap-column.help .roadmap-list li{border-left-color:#78a65e}
+.roadmap-note{margin:16px auto 0;max-width:780px;padding:16px 18px;background:var(--scav-panel);border:1px solid var(--scav-line);border-radius:7px;color:var(--scav-muted);text-align:center;font-size:14px}.roadmap-note a{color:var(--scav-gold-bright)}
+@media(max-width:780px){.roadmap-grid{grid-template-columns:1fr}.roadmap-main{margin-top:22px}}
+</style>
+</head>
+<body>
+<main class="roadmap-main">
+  <section class="roadmap-head">
+    <h1>SCAVLAND Roadmap</h1>
+    <p>A look at the main improvements being made to the fan database.</p>
+  </section>
+  <section class="roadmap-grid" aria-label="Website roadmap">
+    <article class="roadmap-column">
+      <h2>In progress</h2>
+      <ul class="roadmap-list">
+        <li><strong>More in-game evidence</strong><span>Adding verified screenshots to item, armour, weapon and recipe records.</span></li>
+        <li><strong>Vendor shop galleries</strong><span>Organising shop screenshots so visitors can browse what each vendor screen looks like.</span></li>
+        <li><strong>Clearer database cards</strong><span>Linking trustworthy screenshots directly from cards where available.</span></li>
+      </ul>
+    </article>
+    <article class="roadmap-column next">
+      <h2>Coming up</h2>
+      <ul class="roadmap-list">
+        <li><strong>More locations and area details</strong><span>Expanding the Areas section as in-game location evidence is gathered.</span></li>
+        <li><strong>More complete equipment coverage</strong><span>Filling gaps in armour, attachments, weapons and useful item information.</span></li>
+        <li><strong>Ongoing mobile polish</strong><span>Keeping the database easy to use on phones as new content is added.</span></li>
+      </ul>
+    </article>
+    <article class="roadmap-column help">
+      <h2>How players can help</h2>
+      <ul class="roadmap-list">
+        <li><strong>Share clear tooltips</strong><span>Full screenshots with the exact name and visible stats are the most useful.</span></li>
+        <li><strong>Show 100% armour durability</strong><span>This is needed to verify normal armour resistance values.</span></li>
+        <li><strong>Capture shop labels and prices</strong><span>Vendor screens with readable item names, prices and ranks help confirm inventories.</span></li>
+      </ul>
+    </article>
+  </section>
+  <p class="roadmap-note">The database only labels information as verified when it has direct in-game evidence. Want to help add screenshots? See the <a href="EVIDENCE_GUIDE.md">evidence guide</a>.</p>
+</main>
+<script src="site-shell.js"></script>
+</body>
+</html>
+
+---SHELL---
+(function(){
+function buildShell(){
+ document.querySelectorAll('.scav-header,.site-nav,.nav-bar').forEach(el=>el.remove());
+ [...document.body.children].filter(el=>el.tagName==='HEADER'&&el.querySelector('nav')).forEach(el=>el.remove());
+ const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+ const links=[['index.html','Home'],['vendors.html','Vendors'],['weapons.html','Weapons'],['armour.html','Armour'],['crafting.html','Crafting'],['map.html','Map'],['items.html','Items'],['factions.html','Factions'],['areas.html','Areas'],['roadmap.html','Roadmap']];
+ const header=document.createElement('header');header.className='scav-site-header';
+ header.innerHTML='<img class="scav-site-logo" src="images/branding/Scavland_Logo_2025.png" alt="SCAVLAND"><div class="scav-site-subtitle">Wasteland Survival Database</div>';
+ const nav=document.createElement('nav');nav.className='scav-site-nav';nav.setAttribute('aria-label','Main navigation');
+ nav.innerHTML='<div class="scav-site-nav-inner">'+links.map(([href,label])=>'<a href="'+href+'"'+(page===href?' class="active" aria-current="page"':'')+'>'+label+'</a>').join('')+'</div>';
+ document.body.prepend(nav);document.body.prepend(header);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',buildShell);else buildShell();
+})();
+
