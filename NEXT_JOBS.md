@@ -2,6 +2,7 @@
 
 ## START HERE — next session
 
+- **Integrity audit continuation (20 Sept 2026):** vendor cross-reference confirms all **231 inventory rows** resolve to canonical IDs with **0 missing IDs and 0 name mismatches**; all vendor provenance remains `existing-site-data` pending direct shop-screen evidence. Crafting cross-reference confirms **22/22 screenshot-verified recipes** (8 Medical / 7 Weapon / 7 Armour), **0 duplicate recipe IDs, 0 missing ingredient IDs, 0 ingredient-name mismatches, and 0 invalid quantities**. `Overripe Potato` is correctly required by the verified Moonshine recipe but its item record remains independently unverified; recipe evidence must not be used to promote the item tooltip/status.
 - **Vendor single-source cleanup (20 Sept 2026):** `vendors.html` now fetches canonical `data/vendors.json` and renders all **22 vendors, 10 documented inventories / 231 rows, and 12 undocumented inventories**. Removed the duplicated directory/inventory HTML; retained card/table/badge styling, selling-rate guide, combined name/location search and faction filter, modal close button/backdrop/Escape behavior, and added keyboard activation plus loading/error messages. Counts are derived from JSON. Each documented inventory explicitly says **Needs verification**: the archive has no direct shop-screen proof of vendor/item relationships, ranks or prices. Canonical data and all `existing-site-data` provenance remain unchanged; item-tooltip verification must never be inherited by vendor inventory rows. Four Bogdan HP ammo references fixed in `8f52ef2026cefc0791f28c7804125dff924581a4` are preserved.
   - Implementation commit: `f035e14cf182382f2ad63415ab85343ce2c0cc98`.
   - Validation: browser opened all 22 vendor modals; 231 rendered rows and 12 placeholders confirmed; case/whitespace search, combined filters, keyboard activation and close controls checked; desktop modal visually reviewed. Script checks preserve all 231 legacy detail strings and confirm HTTP failure messaging; `git diff --check` passes. No game values promoted or changed.
@@ -19,7 +20,7 @@ Current canonical verification state (20 September 2026):
 - Weapons: **38/39 screenshot-verified**. Only base `2HMG` remains unverified; archived screenshots prove Short/Long only.
 - Ammo: **13/13 screenshot-verified**, each linked to an exact organised evidence screenshot.
 - Crafting: **22/22 screenshot-verified**.
-- Armour: **3/30 screenshot-verified** under the strict 100%-durability rule: Old Tactical Vest, Riot Vest and Security Helmet.
+- Armour: **5/30 screenshot-verified** under the strict 100%-durability rule. Current verified set includes Old Tactical Vest, Riot Vest, Security Helmet, Ekzoskelet Legs and GP-4 Gas Mask.
 - Items: **175/255 screenshot-verified**.
 - `MK Slotted Mount Handguard` remains intentionally unverified because its screenshots conflict.
 - Svobodnik M4 is resolved from direct screenshot evidence: **17 damage / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload**.
