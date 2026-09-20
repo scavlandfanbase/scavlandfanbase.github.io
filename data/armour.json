@@ -89,9 +89,13 @@
       "radiation": 20,
       "repairClass": "Heavy",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/ekzoskelet-legs__stats-100-durability__2026-09-20_084304.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Direct in-game screenshot at 100% durability."
+      },
+      "durability": 100,
+      "description": "A Mechanist's bizarre invention, the Ekzoskelet Legs are a heavy-duty lining of metal parts woven together with regular trousers. They're designed to offer great resistance and to actually improve the wearer's stamina, but they're still very clumsy to use."
     },
     {
       "id": "gp-4-gas-mask",
@@ -101,12 +105,16 @@
       "price": 25000,
       "ballistic": 5,
       "slash": 8,
-      "radiation": 20,
+      "radiation": 30,
       "repairClass": "Scavenger",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/gp-4-gas-mask__stats-100-durability__2026-09-20_084320.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Direct in-game screenshot at 100% durability."
+      },
+      "durability": 100,
+      "description": "This widespread Gas Mask was issued to Civil Defense and civilians alike, during the times of War. Vultures and Bandits often wear these for days at a time, and the mask’s straps dig themselves painfully into the back of their heads."
     },
     {
       "id": "green-rags",
@@ -333,10 +341,12 @@
       "radiation": 20,
       "repairClass": "Heavy",
       "source": {
-        "file": "evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
+        "file": "evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-20_084312.png",
         "status": "screenshot-verified",
-        "note": "100% durability screenshot evidence"
-      }
+        "lastVerified": "2026-09-20",
+        "note": "Direct in-game screenshot at 100% durability."
+      },
+      "durability": 100
     },
     {
       "id": "ruined-beret",
