@@ -331,28 +331,28 @@
       "inventoryDocumented": true,
       "inventory": [
         {
-          "itemId": "pistol-hp-ammo",
+          "itemId": "pistol-ammo-pistol-hp-ammo",
           "name": "Pistol HP Ammo",
           "rank": "2",
           "price": 60,
           "details": "Ammo Hollow Point"
         },
         {
-          "itemId": "shotgun-hp-ammo",
+          "itemId": "shotgun-ammo-shotgun-hp-ammo",
           "name": "Shotgun HP Ammo",
           "rank": "2",
           "price": 180,
           "details": "Ammo Hollow Point"
         },
         {
-          "itemId": "rifle-hp-ammo",
+          "itemId": "rifle-ammo-rifle-hp-ammo",
           "name": "Rifle HP Ammo",
           "rank": "3",
           "price": 280,
           "details": "Ammo Hollow Point"
         },
         {
-          "itemId": "high-caliber-rifle-hp-ammo",
+          "itemId": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
           "name": "High Caliber Rifle HP Ammo",
           "rank": "3",
           "price": 250,
