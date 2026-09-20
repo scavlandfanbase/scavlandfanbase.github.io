@@ -45,7 +45,9 @@
 <script>
 (function(){
  const viewport=document.getElementById('mapViewport'),stage=document.getElementById('mapStage'),img=document.getElementById('mapImage'),label=document.getElementById('zoomLabel');
- let scale=1,minScale=.05,maxScale=5,x=0,y=0,drag=false,startX=0,startY=0,startPanX=0,startPanY=0;
+ let scale=1,minScale=.05,maxScale=5,x=0,y=0;
+ const pointers=new Map();
+ let gesture=null;
 
  function apply(){
    stage.style.transform='translate('+x+'px,'+y+'px) scale('+scale+')';
@@ -80,10 +82,38 @@
  document.getElementById('fitMap').onclick=fit;
  document.getElementById('actualMap').onclick=()=>{scale=1;x=(viewport.clientWidth-img.naturalWidth)/2;y=(viewport.clientHeight-img.naturalHeight)/2;clampPan();apply()};
  viewport.addEventListener('wheel',e=>{e.preventDefault();const r=viewport.getBoundingClientRect();setScale(scale*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top)},{passive:false});
- viewport.addEventListener('pointerdown',e=>{drag=true;viewport.classList.add('dragging');viewport.setPointerCapture(e.pointerId);startX=e.clientX;startY=e.clientY;startPanX=x;startPanY=y});
- viewport.addEventListener('pointermove',e=>{if(!drag)return;x=startPanX+(e.clientX-startX);y=startPanY+(e.clientY-startY);clampPan();apply()});
- function stop(){drag=false;viewport.classList.remove('dragging')}
- viewport.addEventListener('pointerup',stop);viewport.addEventListener('pointercancel',stop);
+ function localPoint(e){const r=viewport.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}}
+ function beginGesture(){
+   const pts=[...pointers.values()];
+   if(pts.length===1){gesture={type:'pan',start:pts[0],x,y}}
+   else if(pts.length>=2){
+     const a=pts[0],b=pts[1],cx=(a.x+b.x)/2,cy=(a.y+b.y)/2;
+     gesture={type:'pinch',distance:Math.hypot(b.x-a.x,b.y-a.y),scale,cx,cy,imageX:(cx-x)/scale,imageY:(cy-y)/scale};
+   }
+ }
+ viewport.addEventListener('pointerdown',e=>{
+   pointers.set(e.pointerId,localPoint(e));viewport.setPointerCapture(e.pointerId);viewport.classList.add('dragging');beginGesture();
+ });
+ viewport.addEventListener('pointermove',e=>{
+   if(!pointers.has(e.pointerId))return;
+   pointers.set(e.pointerId,localPoint(e));
+   const pts=[...pointers.values()];
+   if(pts.length===1&&gesture?.type==='pan'){
+     x=gesture.x+(pts[0].x-gesture.start.x);y=gesture.y+(pts[0].y-gesture.start.y);clampPan();apply();
+   }else if(pts.length>=2){
+     const a=pts[0],b=pts[1],cx=(a.x+b.x)/2,cy=(a.y+b.y)/2;
+     if(gesture?.type!=='pinch')beginGesture();
+     const distance=Math.hypot(b.x-a.x,b.y-a.y);
+     const next=Math.max(minScale,Math.min(maxScale,gesture.scale*(distance/Math.max(1,gesture.distance))));
+     scale=next;x=cx-gesture.imageX*scale;y=cy-gesture.imageY*scale;clampPan();apply();
+   }
+ });
+ function stopPointer(e){
+   pointers.delete(e.pointerId);
+   if(!pointers.size){gesture=null;viewport.classList.remove('dragging')}
+   else beginGesture();
+ }
+ viewport.addEventListener('pointerup',stopPointer);viewport.addEventListener('pointercancel',stopPointer);
  window.addEventListener('resize',fit);
 })();
 </script>
