@@ -1,11 +1,7 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 358,
+  "count": 357,
   "exact_duplicate_groups": [
-    [
-      "Screenshot 2026-09-20 201928.png",
-      "armour/old-tactical-pants__stats-100-durability__2026-09-20.png"
-    ],
     [
       "Screenshot 2026-09-20 202003.png",
       "armour/old-tactical-vest__stats-100-durability__2026-09-20.png"
@@ -105,16 +101,6 @@
       "ocr": "Fil."
     },
     {
-      "file": "Screenshot 2026-09-20 201928.png",
-      "sha256": "6468d95ae3779e07e627c6c0b3c149e79491b64fe7d777ca32edd336bafddaad",
-      "bytes": 237954,
-      "filename_timestamp": "2026-09-20T20:19:28",
-      "width": 535,
-      "height": 550,
-      "phash": "d497272c39336cc3",
-      "ocr": "a a ———— en a Old Tactical Pants ~35000P A pair of beat-up tactical pants worn by the armed men of pre-War times. Offers great mobility and is pretty comfortable, but doesn't protect against the rocky terrain of the wastes. Durability TIUATIANATIANIIINT 100 Ballistic Res Hl 20 Slash Res I 23 Rad Res Ill 15 Repair Class: Medium ul"
-    },
-    {
       "file": "Screenshot 2026-09-20 201937.png",
       "sha256": "e9cbcca49a349cca75cd296f3a422a035d8d05804a53a2d780f7bd281dfd35e4",
       "bytes": 235707,
@@ -175,96 +161,6 @@
       "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
     },
     {
-      "file": "Screenshot 2026-09-20 205018.png",
-      "sha256": "e15b10354963de7352430181fa2d43fd2358c4b4ca434a87e6a849d07851621a",
-      "bytes": 41246,
-      "filename_timestamp": "2026-09-20T20:50:18",
-      "width": 1324,
-      "height": 634,
-      "phash": "ae955c601fcb852b",
-      "ocr": "| is. Alexei 2 | % Reputation 1015 | ye E Rank 3 _. | Acolytes CO a0 @,&, 7+ #¢ Ooo a = a 4 4 4 fi\" “y"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205210.png",
-      "sha256": "ac9a8bc5cc1445fcd7afb4bcabc2d42bd22d48fb0826ef4ca156a2b191aa6636",
-      "bytes": 14591,
-      "filename_timestamp": "2026-09-20T20:52:10",
-      "width": 327,
-      "height": 379,
-      "phash": "c0e09b07275b3e9e",
-      "ocr": "- H. Bandit"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205301.png",
-      "sha256": "504b73d6fa171f33f66d42bb5d5077e9d06a49ea40808383a2a6382ad7cc18d6",
-      "bytes": 18478,
-      "filename_timestamp": "2026-09-20T20:53:01",
-      "width": 325,
-      "height": 370,
-      "phash": "c79f1ce4341b6193",
-      "ocr": "@e pig"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205418.png",
-      "sha256": "c38512f7b27cdc4b47253fd319d7f15492b48dc76f6fa2be4f5314404232916f",
-      "bytes": 77081,
-      "filename_timestamp": "2026-09-20T20:54:18",
-      "width": 1015,
-      "height": 651,
-      "phash": "e0a13f780fc6d217",
-      "ocr": "“al Rat Meat ~25P Skewered meat from a Mora rat or two; a meager meal if ever there was one, and filthy to boot. Hunger: -5 Radiation: +25 a,"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205427.png",
-      "sha256": "b91460bcda426a79b3eb3f44f700cb9f37e30d6e86327db78053c1a761982741",
-      "bytes": 1526,
-      "filename_timestamp": "2026-09-20T20:54:27",
-      "width": 205,
-      "height": 175,
-      "phash": "9a3364cc93c76c63",
-      "ocr": "of"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205433.png",
-      "sha256": "d29ec9e0ca4a3f7bc779379314d46b204e6101f50c48aa17c1df9e86ad66f987",
-      "bytes": 33726,
-      "filename_timestamp": "2026-09-20T20:54:33",
-      "width": 1011,
-      "height": 420,
-      "phash": "c0e937cbcb163ec0",
-      "ocr": "SS eS Ee —— Rat Tail _ ~75P A tail. Few traders might be interested in this. a a! :"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205437.png",
-      "sha256": "597e424757e0cfe0c17b8bc214877c50626d00baae8215f4598213b801c15600",
-      "bytes": 1113,
-      "filename_timestamp": "2026-09-20T20:54:37",
-      "width": 93,
-      "height": 205,
-      "phash": "965968b4cb4bb4b8",
-      "ocr": "So)"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205443.png",
-      "sha256": "e1d77d2051330946b529249bd5a3eabe05cc74454f774738b0fe2bd3b43d52ad",
-      "bytes": 69746,
-      "filename_timestamp": "2026-09-20T20:54:43",
-      "width": 1012,
-      "height": 574,
-      "phash": "c4b52de69a1bc29a",
-      "ocr": "al Hammer ~2000P A simple and reliable tool, for all kinds of work | don't do. Not very handy in combat, as Mutants have sturdy bones. Maybe better against humans? a"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205447.png",
-      "sha256": "783a9c3b05db72b329d4b9848a618a3781044ae3e8d0315d67a29370fbfc5c58",
-      "bytes": 1098,
-      "filename_timestamp": "2026-09-20T20:54:47",
-      "width": 93,
-      "height": 199,
-      "phash": "99d526596a782ba6",
-      "ocr": "T 1"
-    },
-    {
       "file": "Screenshot 2026-09-20 205647.png",
       "sha256": "9bc187ca02a5755efaeeac1703dd7775bee37908328989743558ebeb3f8435c9",
       "bytes": 300905,
@@ -273,16 +169,6 @@
       "height": 1129,
       "phash": "f0a92c631a786b5e",
       "ocr": "al PM 12-70 (Long / Ext) ~28000P A multi-shot pump-action shotgun designed for security and for use by amateurs — if the target's close, it won't matter much who's pulling the trigger. Damage TTT 30 Handling Ill 4+ Fire Rate (RPM) | 90 Ergonomics lll 8+4 Range TTT 16 Reload Speed UT 1.0 Accuracy ill 14 Durability IMI 28 Recoil LUNANAUUTI 59- 8 Repair Class: Basic Caliber: Shotgun Ammo a"
-    },
-    {
-      "file": "Screenshot 2026-09-20 205752.png",
-      "sha256": "890dd2dfe360adff49c1617b7c7fadccd13adbaa950a66390ea1e0a70e3956ee",
-      "bytes": 19138,
-      "filename_timestamp": "2026-09-20T20:57:52",
-      "width": 331,
-      "height": 376,
-      "phash": "8695387833736ec6",
-      "ocr": "Ake G"
     },
     {
       "file": "Screenshot 2026-09-20 205954.png",
@@ -395,16 +281,6 @@
       "ocr": "r Currant Berries ~50P Rank. Rank: 1 These berries are a common find in every region I’ve traveled. They grow even in areas full of Mist, but how this affects the fruit, | don’t know. Jobs ¢ Supply Run (Olga) 3/9 ¢ Supply Run (Olga) 0/12 Thirst: -2 Hunger: -2 -"
     },
     {
-      "file": "Screenshot 2026-09-20 213237.png",
-      "sha256": "18c0c76c68585408a841c2e6612371f5e8b927d712b47da072f8daf50a58a6c7",
-      "bytes": 149583,
-      "filename_timestamp": "2026-09-20T21:32:37",
-      "width": 1017,
-      "height": 913,
-      "phash": "d0e12fb587689a96",
-      "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
-    },
-    {
       "file": "Screenshot 2026-09-20 213243.png",
       "sha256": "0b65043173be83b8a3a6be8f5d0b744163317965e45d0bbe77dea57e152794df",
       "bytes": 53157,
@@ -423,16 +299,6 @@
       "height": 514,
       "phash": "c0e125c37a3eda17",
       "ocr": "r Plastic Scrap ~100P PRank- Rank: 1 A scrap of plastic that can maybe be recycled. al"
-    },
-    {
-      "file": "Screenshot 2026-09-20 213304.png",
-      "sha256": "b4045be932496e7dabfea7ba364486ab54f6278284cfe2b5418d132c5bf8ac48",
-      "bytes": 43732,
-      "filename_timestamp": "2026-09-20T21:33:04",
-      "width": 1321,
-      "height": 1017,
-      "phash": "ea8e97f1606819cb",
-      "ocr": "Raisa ke 13:3) ‘=a Reputation 0 =! Rank 1 - Vultures | i i eS a alg ele. . . . . . Z i oa al ial $260 a & a ( dle 41 | i | | | | | | | . . zo . . . . . . Z Z i"
     },
     {
       "file": "Screenshot 2026-09-20 213516.png",
@@ -490,6 +356,16 @@
       "ocr": "al Special FM) Ammo ~1000P Special ammunition that can fit into different types of- weapons. Damage: 75 Penetration: 100% r"
     },
     {
+      "file": "Spoiled-Radish 2026-09-20 213237.png",
+      "sha256": "18c0c76c68585408a841c2e6612371f5e8b927d712b47da072f8daf50a58a6c7",
+      "bytes": 149583,
+      "filename_timestamp": "2026-09-20T21:32:37",
+      "width": 1017,
+      "height": 913,
+      "phash": "d0e12fb587689a96",
+      "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
+    },
+    {
       "file": "Tactical-Knife_2026-09-20 213442.png",
       "sha256": "e03d6a6d45005f8109326d6a332d0a9a486164cc648785809918a7cbd7c4a8b5",
       "bytes": 74177,
@@ -498,6 +374,16 @@
       "height": 519,
       "phash": "c5a52fd2d25a5a1a",
       "ocr": "al | Tactical Knife ~10000P 6000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. a"
+    },
+    {
+      "file": "alexei_shop-screen_2026-09-20 205018.png",
+      "sha256": "e15b10354963de7352430181fa2d43fd2358c4b4ca434a87e6a849d07851621a",
+      "bytes": 41246,
+      "filename_timestamp": "2026-09-20T20:50:18",
+      "width": 1324,
+      "height": 634,
+      "phash": "ae955c601fcb852b",
+      "ocr": "| is. Alexei 2 | % Reputation 1015 | ye E Rank 3 _. | Acolytes CO a0 @,&, 7+ #¢ Ooo a = a 4 4 4 fi\" “y"
     },
     {
       "file": "ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
@@ -1854,6 +1740,16 @@
       "ocr": "a Zavod Polymer Handguard ~]50P 3000P \"Rank. Rank: 1 A polymer handguard for easier handling of an over-under shotgun. Recoil: -1.5 Handling: +2 Ergonomics: +2 -,"
     },
     {
+      "file": "bandit-enemy_face-image_2026-09-20 205210.png",
+      "sha256": "ac9a8bc5cc1445fcd7afb4bcabc2d42bd22d48fb0826ef4ca156a2b191aa6636",
+      "bytes": 14591,
+      "filename_timestamp": "2026-09-20T20:52:10",
+      "width": 327,
+      "height": 379,
+      "phash": "c0e09b07275b3e9e",
+      "ocr": "- H. Bandit"
+    },
+    {
       "file": "blueprints/advanced-gun-repair-kit-blueprint__tooltip__2026-09-17_202103.png",
       "sha256": "38b28d3fea8fc4a2c9a74b7a6025d16e370bd8724f39560c848b5a477d0edf21",
       "bytes": 82126,
@@ -2302,6 +2198,36 @@
       "height": 282,
       "phash": "b0681f4969964fb6",
       "ocr": "Zhivan | * ae Vultures : J"
+    },
+    {
+      "file": "gunner-enemy_face-image_2026-09-20 205301.png",
+      "sha256": "504b73d6fa171f33f66d42bb5d5077e9d06a49ea40808383a2a6382ad7cc18d6",
+      "bytes": 18478,
+      "filename_timestamp": "2026-09-20T20:53:01",
+      "width": 325,
+      "height": 370,
+      "phash": "c79f1ce4341b6193",
+      "ocr": "@e pig"
+    },
+    {
+      "file": "hammer_image_2026-09-20 205447.png",
+      "sha256": "783a9c3b05db72b329d4b9848a618a3781044ae3e8d0315d67a29370fbfc5c58",
+      "bytes": 1098,
+      "filename_timestamp": "2026-09-20T20:54:47",
+      "width": 93,
+      "height": 199,
+      "phash": "99d526596a782ba6",
+      "ocr": "T 1"
+    },
+    {
+      "file": "hammer_tooltip_2026-09-20 205443.png",
+      "sha256": "e1d77d2051330946b529249bd5a3eabe05cc74454f774738b0fe2bd3b43d52ad",
+      "bytes": 69746,
+      "filename_timestamp": "2026-09-20T20:54:43",
+      "width": 1012,
+      "height": 574,
+      "phash": "c4b52de69a1bc29a",
+      "ocr": "al Hammer ~2000P A simple and reliable tool, for all kinds of work | don't do. Not very handy in combat, as Mutants have sturdy bones. Maybe better against humans? a"
     },
     {
       "file": "items/advanced-bandage__tooltip__2026-09-18_085054.png",
@@ -3132,6 +3058,66 @@
       "height": 307,
       "phash": "f935b640c2d7592c",
       "ocr": "HLAZ909. Fol, “dig 5 “35 se & fed aaa"
+    },
+    {
+      "file": "raisa_shop-screen_2026-09-20 213304.png",
+      "sha256": "b4045be932496e7dabfea7ba364486ab54f6278284cfe2b5418d132c5bf8ac48",
+      "bytes": 43732,
+      "filename_timestamp": "2026-09-20T21:33:04",
+      "width": 1321,
+      "height": 1017,
+      "phash": "ea8e97f1606819cb",
+      "ocr": "Raisa ke 13:3) ‘=a Reputation 0 =! Rank 1 - Vultures | i i eS a alg ele. . . . . . Z i oa al ial $260 a & a ( dle 41 | i | | | | | | | . . zo . . . . . . Z Z i"
+    },
+    {
+      "file": "rat-meat_image_2026-09-20 205427.png",
+      "sha256": "b91460bcda426a79b3eb3f44f700cb9f37e30d6e86327db78053c1a761982741",
+      "bytes": 1526,
+      "filename_timestamp": "2026-09-20T20:54:27",
+      "width": 205,
+      "height": 175,
+      "phash": "9a3364cc93c76c63",
+      "ocr": "of"
+    },
+    {
+      "file": "rat-meat_tooltip_2026-09-20 205418.png",
+      "sha256": "c38512f7b27cdc4b47253fd319d7f15492b48dc76f6fa2be4f5314404232916f",
+      "bytes": 77081,
+      "filename_timestamp": "2026-09-20T20:54:18",
+      "width": 1015,
+      "height": 651,
+      "phash": "e0a13f780fc6d217",
+      "ocr": "“al Rat Meat ~25P Skewered meat from a Mora rat or two; a meager meal if ever there was one, and filthy to boot. Hunger: -5 Radiation: +25 a,"
+    },
+    {
+      "file": "rat-tail_image_2026-09-20 205437.png",
+      "sha256": "597e424757e0cfe0c17b8bc214877c50626d00baae8215f4598213b801c15600",
+      "bytes": 1113,
+      "filename_timestamp": "2026-09-20T20:54:37",
+      "width": 93,
+      "height": 205,
+      "phash": "965968b4cb4bb4b8",
+      "ocr": "So)"
+    },
+    {
+      "file": "rat-tail_tooltip_2026-09-20 205433.png",
+      "sha256": "d29ec9e0ca4a3f7bc779379314d46b204e6101f50c48aa17c1df9e86ad66f987",
+      "bytes": 33726,
+      "filename_timestamp": "2026-09-20T20:54:33",
+      "width": 1011,
+      "height": 420,
+      "phash": "c0e937cbcb163ec0",
+      "ocr": "SS eS Ee —— Rat Tail _ ~75P A tail. Few traders might be interested in this. a a! :"
+    },
+    {
+      "file": "small-rat_face-image_2026-09-20 205752.png",
+      "sha256": "890dd2dfe360adff49c1617b7c7fadccd13adbaa950a66390ea1e0a70e3956ee",
+      "bytes": 19138,
+      "filename_timestamp": "2026-09-20T20:57:52",
+      "width": 331,
+      "height": 376,
+      "phash": "8695387833736ec6",
+      "ocr": "Ake G"
     },
     {
       "file": "unresolved/unresolved__2026-09-17_171835.png",
