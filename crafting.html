@@ -15,7 +15,7 @@ const labels={medical:"Medical Workbench",weapon:"Weapon Workbench",armour:"Armo
 function findRecipe(name){for(const b of Object.keys(data)){const r=data[b].find(x=>x[0].toLowerCase()===name.toLowerCase());if(r)return{bench:b,recipe:r}}return null}
 function sync(){document.querySelectorAll(".bench-btn").forEach(b=>b.classList.toggle("active",b.dataset.bench===bench))}
 function render(){const q=search.value.trim().toLowerCase(),recipes=data[bench].filter(r=>!q||r[0].toLowerCase().includes(q)||r[1].some(x=>x[0].toLowerCase().includes(q)));title.textContent=labels[bench]+" Recipes";list.innerHTML="";if(!recipes.length){list.innerHTML='<div class="empty">No recipes found.</div>';detail.innerHTML='<div class="empty">Try another search.</div>';return}if(!recipes.includes(selected))selected=recipes[0];recipes.forEach(r=>{const b=document.createElement("button");b.className="recipe-btn"+(r===selected?" active":"");b.textContent=r[0];b.onclick=()=>{selected=r;render()};list.appendChild(b)});renderDetail()}
-function renderDetail(){detail.innerHTML='<div class="detail-head"><small>'+labels[bench]+'</small><h2>'+selected[0]+'</h2></div><div class="resources"><h3>Required Resources</h3>'+selected[1].map(x=>{const c=findRecipe(x[0]);return '<div class="resource '+(c?'clickable':'')+'" data-name="'+encodeURIComponent(x[0])+'"><div><span class="resource-name">'+x[0]+'</span><span class="resource-note">'+(c?'Craftable · View recipe →':'Required material')+'</span></div><span class="qty">×'+x[1]+'</span></div>'}).join("")+'</div>';detail.querySelectorAll(".clickable").forEach(e=>e.onclick=()=>{const f=findRecipe(decodeURIComponent(e.dataset.name));if(f){bench=f.bench;selected=f.recipe;search.value="";sync();render()}})}
+function renderDetail(){detail.innerHTML='<div class="detail-head"><small>'+labels[bench]+'</small><h2>'+selected[0]+'</h2></div><div class="resources"><h3>Required Resources</h3>'+selected[1].map(x=>{const c=findRecipe(x[0]);return '<div class="resource '+(c?'clickable':'')+'" data-name="'+encodeURIComponent(x[0])+'"><div><span class="resource-name">'+x[0]+'</span><span class="resource-note">'+(c?'Craftable · View recipe →':'<a class="data-link" href="items.html?id='+encodeURIComponent(x[2])+'">View item →</a>')+'</span></div><span class="qty">×'+x[1]+'</span></div>'}).join("")+'</div>';detail.querySelectorAll(".clickable").forEach(e=>e.onclick=()=>{const f=findRecipe(decodeURIComponent(e.dataset.name));if(f){bench=f.bench;selected=f.recipe;search.value="";sync();render()}})}
 document.querySelectorAll(".bench-btn").forEach(b=>b.onclick=()=>{bench=b.dataset.bench;selected=data[bench][0];search.value="";sync();render()});search.addEventListener("input",render);
 async function loadCrafting(){
   try{
@@ -25,7 +25,7 @@ async function loadCrafting(){
     data={medical:[],weapon:[],armour:[]};
     (payload.data||[]).forEach(r=>{
       if(!data[r.workbench])return;
-      data[r.workbench].push([r.name,(r.ingredients||[]).map(i=>[i.name,i.quantity])]);
+      data[r.workbench].push([r.name,(r.ingredients||[]).map(i=>[i.name,i.quantity,i.itemId])]);
     });
     selected=data.medical[0]||null;
     document.querySelector(".database-count strong").textContent=(payload.data||[]).length;

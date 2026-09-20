@@ -247,3 +247,7 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
   .item-tools input{flex-basis:100%!important}
   .item-tools .verify-toggle{flex:1 1 auto}
 }
+
+/* Canonical database cross-links */
+.data-link{color:var(--scav-gold-bright)!important;text-decoration:none!important;border-bottom:1px dotted rgba(255,204,102,.55)}
+.data-link:hover,.data-link:focus{text-decoration:none!important;border-bottom-style:solid;outline:none}
