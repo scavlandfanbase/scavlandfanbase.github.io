@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 357,
+  "count": 356,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -29,7 +29,7 @@
   ],
   "files": [
     {
-      "file": "High Caliber Rifle AP ammo pic.png",
+      "file": "unresolved/high-caliber-rifle-ap-ammo__unresolved__2026-09-20.png",
       "sha256": "a5eed7854f327ebc0392be1c4315e822ff643490b290db5f32ce0c860af2f42d",
       "bytes": 1286,
       "width": 195,
@@ -38,7 +38,7 @@
       "ocr": "oo i"
     },
     {
-      "file": "High Caliber Rifle FMJ Ammo Pic.png",
+      "file": "unresolved/high-caliber-rifle-fmj-ammo__unresolved__2026-09-20.png",
       "sha256": "e04cf4db5af83467972c23fa949a273e7ee7f50555f05bc84ee147215e2fed0e",
       "bytes": 1368,
       "width": 202,
@@ -47,7 +47,7 @@
       "ocr": "|"
     },
     {
-      "file": "High Caliber Rifle HP Ammo pic.png",
+      "file": "unresolved/high-caliber-rifle-hp-ammo__unresolved__2026-09-20.png",
       "sha256": "ba63309812b2fdb35b20ed140cceeb69d6161f01dd6a84811b113587855cb7de",
       "bytes": 1432,
       "width": 205,
@@ -56,7 +56,7 @@
       "ocr": "vale | | Fas"
     },
     {
-      "file": "Pistol AP Ammo pic.png",
+      "file": "unresolved/pistol-ap-ammo__unresolved__2026-09-20.png",
       "sha256": "470836482e31505bed168bd1488263a869a66fdf6ad38f6e5b0e1102d966bbd4",
       "bytes": 1253,
       "width": 208,
@@ -65,7 +65,7 @@
       "ocr": "i: = “77"
     },
     {
-      "file": "Pistol HP Ammo pic.png",
+      "file": "unresolved/pistol-hp-ammo__unresolved__2026-09-20.png",
       "sha256": "94d4a00bc49758afc1c12afc93fbf453e5a2f0ab04a4e36983841dccfd866c24",
       "bytes": 1171,
       "width": 198,
@@ -74,7 +74,7 @@
       "ocr": "i aaa"
     },
     {
-      "file": "Rifle AP Ammo Pic.png",
+      "file": "unresolved/rifle-ap-ammo__unresolved__2026-09-20.png",
       "sha256": "0ed56701fc7449573a1b9915a099a0bd0275005342e28e9d44762b1fb52eeef6",
       "bytes": 1408,
       "width": 202,
@@ -83,7 +83,7 @@
       "ocr": "ii"
     },
     {
-      "file": "Rifle FMJ Ammo pic.png",
+      "file": "unresolved/rifle-fmj-ammo__unresolved__2026-09-20.png",
       "sha256": "18dad84bfd8166503483f9183ac8dcaa62c52990b73ea598533bfa40041d275f",
       "bytes": 1397,
       "width": 199,
@@ -92,23 +92,13 @@
       "ocr": "ei"
     },
     {
-      "file": "Rifle HP ammo pic.png",
+      "file": "unresolved/rifle-hp-ammo__unresolved__2026-09-20.png",
       "sha256": "2a8d329d19e3ebacc7e9da6ea31fa9dc83abc008ff1a597a8af60baa14af46ac",
       "bytes": 1433,
       "width": 202,
       "height": 108,
       "phash": "874a3d3e6ab14ab1",
       "ocr": "Fil."
-    },
-    {
-      "file": "Screenshot 2026-09-20 201937.png",
-      "sha256": "e9cbcca49a349cca75cd296f3a422a035d8d05804a53a2d780f7bd281dfd35e4",
-      "bytes": 235707,
-      "filename_timestamp": "2026-09-20T20:19:37",
-      "width": 532,
-      "height": 547,
-      "phash": "d097276c39336cc3",
-      "ocr": "a | Old Tactical Pants ~35000P A pair of beat-up tactical pants worn by the armed men of pre-War times. Offers great mobility and is pretty comfortable, but doesn't protect against the rocky terrain of | the wastes. Durability TIUATIANATIANIIINT 100 Ballistic Res Hl 20 Slash Res I 23 Rad Res Ill 15 Repair Class: Medium"
     },
     {
       "file": "Screenshot 2026-09-20 202003.png",
@@ -161,7 +151,7 @@
       "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
     },
     {
-      "file": "Screenshot 2026-09-20 205647.png",
+      "file": "weapons/pm-12-70__stats-30-damage__2026-09-20.png",
       "sha256": "9bc187ca02a5755efaeeac1703dd7775bee37908328989743558ebeb3f8435c9",
       "bytes": 300905,
       "filename_timestamp": "2026-09-20T20:56:47",
@@ -191,7 +181,7 @@
       "ocr": "a a - i a Mother Mora"
     },
     {
-      "file": "Screenshot 2026-09-20 210924.png",
+      "file": "factions/gunner__portrait__2026-09-20.png",
       "sha256": "06efaaf4fe844943fe889ab435f5d947b0bab2df7dc7607be34b0dd082186068",
       "bytes": 9184,
       "filename_timestamp": "2026-09-20T21:09:24",
@@ -251,7 +241,7 @@
       "ocr": "| ; 4 Mila Reputation 192 | | f Rank 1 | | Rada — | il | # Oh, hi there. Didn't notice you. = = ee | | 1. Talk | 2. Ask for Jobs |: _ 3. Bye t ! | = _——_ oe br"
     },
     {
-      "file": "Screenshot 2026-09-20 213218.png",
+      "file": "vendors/gavron__shop-screen__2026-09-20.png",
       "sha256": "431b1bcc8e2968cbdecb4481e4ea64a708cfbeb6c98b4b2f3dfda71ac10177ab",
       "bytes": 41394,
       "filename_timestamp": "2026-09-20T21:32:18",
@@ -261,7 +251,7 @@
       "ocr": "| @ ile). Gavron rm Reputation 0 &. Rank 1 =a’ Mudlark i | a at us ze °F &, %, = = q F == Nc 2 ‘ aT o TH 10"
     },
     {
-      "file": "Screenshot 2026-09-20 213224.png",
+      "file": "items/fresh-mushrooms__tooltip__2026-09-20.png",
       "sha256": "f13423168f946924bce9b99a156c0a3e2757178a919f1db0186b2e1b9dcdee0b",
       "bytes": 196054,
       "filename_timestamp": "2026-09-20T21:32:24",
@@ -271,7 +261,7 @@
       "ocr": "a es Fresh Mushrooms ~3000P Dank. Rank: 1, Fresh mushrooms with little to no radiation. Tasty, chewy and nutritious — a rare find. These mushrooms can have drug-like effects when properly dried. Hunger: -5 Health: +10 -"
     },
     {
-      "file": "Screenshot 2026-09-20 213230.png",
+      "file": "items/current-berries__tooltip__2026-09-20.png",
       "sha256": "d1080f086d343fceb3719f7270a28af98dc03ca3160b77a1787937b921a437aa",
       "bytes": 218400,
       "filename_timestamp": "2026-09-20T21:32:30",
@@ -291,7 +281,7 @@
       "ocr": "r ee i — Rubber Scrap ~100P Dank. Rank: 1 A scrap of rubber which resisted the years. A very resilient material, and good for trading. Fa a"
     },
     {
-      "file": "Screenshot 2026-09-20 213248.png",
+      "file": "items/plastic-scrap__tooltip__2026-09-20.png",
       "sha256": "1fb6c9d270b62e5acab926dc8ae9315e48a346a1f9c28db050f70503dfc19ea8",
       "bytes": 55892,
       "filename_timestamp": "2026-09-20T21:32:48",
@@ -301,7 +291,7 @@
       "ocr": "r Plastic Scrap ~100P PRank- Rank: 1 A scrap of plastic that can maybe be recycled. al"
     },
     {
-      "file": "Screenshot 2026-09-20 213516.png",
+      "file": "attachments/mk-underfolding-stock__tooltip__2026-09-20.png",
       "sha256": "2fc6f4826b30003247acf0cbe46ff7a5269fca60032c656d91df2a7319b036f4",
       "bytes": 129387,
       "filename_timestamp": "2026-09-20T21:35:16",
@@ -311,7 +301,7 @@
       "ocr": "_ —_ — MK Underfolding Stock ~1250P 3750P Rank. Rank: 2, An adaptable underfolding stock for the Mikhail-47. Good for navigating difficult environments. Recoil: -7 Handling: +4 Ergonomics: +2 r."
     },
     {
-      "file": "Shotgun AP Ammo pic.png",
+      "file": "unresolved/shotgun-ap-ammo__unresolved__2026-09-20.png",
       "sha256": "55ecfb02eeb1ff6285e5dd8080adc0c65002e31ce813fad91e6bf56c33c6d847",
       "bytes": 1361,
       "width": 202,
@@ -320,7 +310,7 @@
       "ocr": "al"
     },
     {
-      "file": "Shotgun Buckshoot Ammo pic.png",
+      "file": "unresolved/shotgun-buckshot-ammo__unresolved__2026-09-20.png",
       "sha256": "fe1a6718d115927f9f3474bb0e099835fded6217fbec73d69ea2e6203464fe77",
       "bytes": 1303,
       "width": 192,
@@ -329,7 +319,7 @@
       "ocr": "al"
     },
     {
-      "file": "Shotgun HP Ammo pic.png",
+      "file": "unresolved/shotgun-hp-ammo__unresolved__2026-09-20.png",
       "sha256": "cf2bcc20041b34913dfc3a43a4171580bb449f2e8814e297a31c64c00add20ec",
       "bytes": 1282,
       "width": 199,
@@ -338,7 +328,7 @@
       "ocr": "1."
     },
     {
-      "file": "Special FMJ Ammo pic.png",
+      "file": "unresolved/special-fmj-ammo__unresolved__2026-09-20.png",
       "sha256": "134381c5122d4e7d611d62e0a6953b3d2353a16f74c6f34c90a3c9db1354ab2d",
       "bytes": 1462,
       "width": 184,
@@ -347,7 +337,7 @@
       "ocr": "Fil"
     },
     {
-      "file": "Special FMJ Ammo.png",
+      "file": "unresolved/special-fmj-ammo__unresolved__2026-09-20-duplicate.png",
       "sha256": "2eb016b323df5e862ce169b78a3ff86204d02c7cb173149367866e1cd20178f4",
       "bytes": 75671,
       "width": 1017,
@@ -366,7 +356,7 @@
       "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
     },
     {
-      "file": "Tactical-Knife_2026-09-20 213442.png",
+      "file": "items/tactical-knife__tooltip__2026-09-20.png",
       "sha256": "e03d6a6d45005f8109326d6a332d0a9a486164cc648785809918a7cbd7c4a8b5",
       "bytes": 74177,
       "filename_timestamp": "2026-09-20T21:34:42",
@@ -376,7 +366,7 @@
       "ocr": "al | Tactical Knife ~10000P 6000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. a"
     },
     {
-      "file": "alexei_shop-screen_2026-09-20 205018.png",
+      "file": "factions/alexei__page__2026-09-20.png",
       "sha256": "e15b10354963de7352430181fa2d43fd2358c4b4ca434a87e6a849d07851621a",
       "bytes": 41246,
       "filename_timestamp": "2026-09-20T20:50:18",
@@ -1740,7 +1730,7 @@
       "ocr": "a Zavod Polymer Handguard ~]50P 3000P \"Rank. Rank: 1 A polymer handguard for easier handling of an over-under shotgun. Recoil: -1.5 Handling: +2 Ergonomics: +2 -,"
     },
     {
-      "file": "bandit-enemy_face-image_2026-09-20 205210.png",
+      "file": "factions/bandit__portrait__2026-09-20.png",
       "sha256": "ac9a8bc5cc1445fcd7afb4bcabc2d42bd22d48fb0826ef4ca156a2b191aa6636",
       "bytes": 14591,
       "filename_timestamp": "2026-09-20T20:52:10",
@@ -2210,7 +2200,7 @@
       "ocr": "@e pig"
     },
     {
-      "file": "hammer_image_2026-09-20 205447.png",
+      "file": "items/hammer__image__2026-09-20.png",
       "sha256": "783a9c3b05db72b329d4b9848a618a3781044ae3e8d0315d67a29370fbfc5c58",
       "bytes": 1098,
       "filename_timestamp": "2026-09-20T20:54:47",
@@ -2220,7 +2210,7 @@
       "ocr": "T 1"
     },
     {
-      "file": "hammer_tooltip_2026-09-20 205443.png",
+      "file": "items/hammer__tooltip__2026-09-20.png",
       "sha256": "e1d77d2051330946b529249bd5a3eabe05cc74454f774738b0fe2bd3b43d52ad",
       "bytes": 69746,
       "filename_timestamp": "2026-09-20T20:54:43",
@@ -3060,7 +3050,7 @@
       "ocr": "HLAZ909. Fol, “dig 5 “35 se & fed aaa"
     },
     {
-      "file": "raisa_shop-screen_2026-09-20 213304.png",
+      "file": "vendors/raisa__shop-screen__2026-09-20.png",
       "sha256": "b4045be932496e7dabfea7ba364486ab54f6278284cfe2b5418d132c5bf8ac48",
       "bytes": 43732,
       "filename_timestamp": "2026-09-20T21:33:04",
@@ -3070,7 +3060,7 @@
       "ocr": "Raisa ke 13:3) ‘=a Reputation 0 =! Rank 1 - Vultures | i i eS a alg ele. . . . . . Z i oa al ial $260 a & a ( dle 41 | i | | | | | | | . . zo . . . . . . Z Z i"
     },
     {
-      "file": "rat-meat_image_2026-09-20 205427.png",
+      "file": "items/rat-meat__image__2026-09-20.png",
       "sha256": "b91460bcda426a79b3eb3f44f700cb9f37e30d6e86327db78053c1a761982741",
       "bytes": 1526,
       "filename_timestamp": "2026-09-20T20:54:27",
@@ -3080,7 +3070,7 @@
       "ocr": "of"
     },
     {
-      "file": "rat-meat_tooltip_2026-09-20 205418.png",
+      "file": "items/rat-meat__tooltip__2026-09-20.png",
       "sha256": "c38512f7b27cdc4b47253fd319d7f15492b48dc76f6fa2be4f5314404232916f",
       "bytes": 77081,
       "filename_timestamp": "2026-09-20T20:54:18",
@@ -3090,7 +3080,7 @@
       "ocr": "“al Rat Meat ~25P Skewered meat from a Mora rat or two; a meager meal if ever there was one, and filthy to boot. Hunger: -5 Radiation: +25 a,"
     },
     {
-      "file": "rat-tail_image_2026-09-20 205437.png",
+      "file": "items/rat-tail__image__2026-09-20.png",
       "sha256": "597e424757e0cfe0c17b8bc214877c50626d00baae8215f4598213b801c15600",
       "bytes": 1113,
       "filename_timestamp": "2026-09-20T20:54:37",
@@ -3100,7 +3090,7 @@
       "ocr": "So)"
     },
     {
-      "file": "rat-tail_tooltip_2026-09-20 205433.png",
+      "file": "items/rat-tail__tooltip__2026-09-20.png",
       "sha256": "d29ec9e0ca4a3f7bc779379314d46b204e6101f50c48aa17c1df9e86ad66f987",
       "bytes": 33726,
       "filename_timestamp": "2026-09-20T20:54:33",
@@ -3110,7 +3100,7 @@
       "ocr": "SS eS Ee —— Rat Tail _ ~75P A tail. Few traders might be interested in this. a a! :"
     },
     {
-      "file": "small-rat_face-image_2026-09-20 205752.png",
+      "file": "unresolved/small-rat__unresolved__2026-09-20.png",
       "sha256": "890dd2dfe360adff49c1617b7c7fadccd13adbaa950a66390ea1e0a70e3956ee",
       "bytes": 19138,
       "filename_timestamp": "2026-09-20T20:57:52",
