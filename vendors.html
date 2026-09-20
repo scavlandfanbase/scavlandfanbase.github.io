@@ -308,7 +308,9 @@ async function loadVendorDirectory() {
     if (!response.ok) throw new Error('Vendor data request failed: ' + response.status);
     const payload = await response.json();
     if (!Array.isArray(payload.data) || !payload.data.length) throw new Error('Invalid vendor data');
-    const vendors = payload.data;
+    let vendors = payload.data;
+    const factionParam = new URLSearchParams(location.search).get('faction');
+    if (factionParam) vendors = vendors.filter(vendor => vendor.factionId === factionParam);
     list.innerHTML = vendors.map(vendor => {
       const name = vendor.name + (vendor.location ? ' — ' + vendor.location : '');
       const faction = (vendor.factionId || 'unknown').replace(/(^|[- ])\w/g, part => part.replace('-', ' ').toUpperCase());
@@ -325,7 +327,7 @@ async function loadVendorDirectory() {
     }).join('');
     const documented = vendors.filter(vendor => vendor.inventoryDocumented).length;
     const rows = vendors.reduce((total, vendor) => total + vendor.inventory.length, 0);
-    count.textContent = `${vendors.length} vendors`;
+    count.textContent = `${vendors.length} vendor${vendors.length === 1 ? '' : 's'}` + (factionParam ? ' in this faction' : '');
     setupVendorDirectory();
     list.querySelectorAll('.vendor-header').forEach(header => {
       header.addEventListener('click', () => openVendor(header.dataset.contentId));
