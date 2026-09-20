@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 356,
+  "count": 357,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -2027,6 +2027,16 @@
       "height": 754,
       "phash": "e0e52f6387d07a1a",
       "ocr": "o — a a Advanced Bandage ~4000P Rank Rank: 2. High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 a"
+    },
+    {
+      "file": "items/advanced-gun-repair-kit_tooltip_2026-09-20 235934.png",
+      "sha256": "28d2d9df1732757df73c4e32d31860a4f68f1fd83b783fc94e6204b94e43b196",
+      "bytes": 133677,
+      "filename_timestamp": "2026-09-20T23:59:34",
+      "width": 1020,
+      "height": 718,
+      "phash": "e1952d6c3bd2d21a",
+      "ocr": "all Advanced Gun Repair Kit ~60000P A case of pro-grade tools for repairing any weapon from any state. Worth a lot. Repair: 25% Usable in any item condition. Repair Class: Advanced ."
     },
     {
       "file": "items/advanced-mechanical-components__tooltip__2026-09-18_091907.png",
