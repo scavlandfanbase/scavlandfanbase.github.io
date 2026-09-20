@@ -2267,10 +2267,17 @@
       "image": null,
       "notes": null,
       "source": {
-        "file": "evidence-inbox/items/historical/mystery-pills__tooltip__2026-09-13_143915.png",
         "status": "screenshot-verified",
-        "lastVerified": "2026-09-13",
-        "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+        "lastVerified": "2026-09-20",
+        "note": "Direct user-provided in-game tooltip screenshot (20 September 2026); supersedes older 13 September evidence. Repo evidence PNG still to be archived."
+      },
+      "estimatedPrice": 6000,
+      "maxStacks": 5,
+      "description": "A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away.",
+      "effects": {
+        "health": 15,
+        "radiation": -30,
+        "thirst": 5
       }
     },
     {
@@ -3530,11 +3537,18 @@
         "crafting-resource"
       ],
       "image": null,
-      "notes": "Confirmed as a required crafting ingredient in screenshot-verified recipes; own item tooltip/stats still require direct evidence.",
+      "notes": null,
       "source": {
-        "file": "data/crafting.json",
-        "status": "recipe-evidenced",
-        "note": "Ingredient existence confirmed by screenshot-verified Advanced Bandage and Morphine recipes; not a direct item-tooltip verification."
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "note": "Direct user-provided in-game tooltip screenshot (20 September 2026). Repo evidence PNG still to be archived."
+      },
+      "estimatedPrice": 50,
+      "maxStacks": 10,
+      "description": "A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss 'em in the pot anyway.",
+      "effects": {
+        "health": 5,
+        "thirst": 3
       }
     }
   ]
