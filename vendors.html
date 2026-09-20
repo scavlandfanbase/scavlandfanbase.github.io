@@ -307,11 +307,11 @@ async function loadVendorDirectory() {
       const name = vendor.name + (vendor.location ? ' — ' + vendor.location : '');
       const faction = (vendor.factionId || 'unknown').replace(/(^|[- ])\w/g, part => part.replace('-', ' ').toUpperCase());
       const content = vendor.inventoryDocumented
-        ? '<p class="placeholder-note">Needs verification — legacy inventory data. No direct shop-screen evidence is currently available; listings, ranks, prices and details are unverified.</p>' +
+        ? '<p class="placeholder-note">Unverified inventory</p>' +
           '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
           vendor.inventory.map(item => '<tr><td>' + escapeVendorText(item.name) + '</td><td>' + escapeVendorText(item.rank) +
             '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>').join('') + '</tbody></table>'
-        : '<div class="placeholder-note">Inventory data not documented yet.</div>';
+        : '<div class="placeholder-note">Inventory coming soon.</div>';
       return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '">' +
         '<div class="vendor-header" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + escapeVendorText(name) +
         '<div class="vendor-faction">Faction: ' + escapeVendorText(faction) + '</div></div>' +
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', loadVendorDirectory);
 
 <section class="sell-guide" aria-labelledby="selling-guide-title">
   <h2 id="selling-guide-title">Vendor Selling Rates</h2>
-  <p>Developer-provided vendor buy-rate information.</p>
+  <p>Vendor buy rates.</p>
   <div class="sell-grid">
     <div class="sell-card">
       <strong>Vesna</strong>
