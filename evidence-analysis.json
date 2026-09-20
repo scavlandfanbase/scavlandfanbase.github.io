@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 319,
+  "count": 323,
   "exact_duplicate_groups": [
     [
       "vendors/jasna__shop-screen-part-1__2026-09-20.png",
@@ -286,6 +286,15 @@
       "ocr": "fc : f : — a ai (eS) i er , ES tt &, LU i F 4 + Special FMJ Ammo ~1000P \" i= BE Special ammunition that can fit into different types of weapons. 7 4q Damage: 75 Penetration: 100% “J z"
     },
     {
+      "file": "armour/balistic-kask__stats-100-durability__2026-09-20.png",
+      "sha256": "aa8b4da084ecdaf9a2bc873ca3a56f985304a9930bc6b8d15c1db46d09165193",
+      "bytes": 331923,
+      "width": 1018,
+      "height": 994,
+      "phash": "d095276c395b4ec6",
+      "ocr": "all | Ballistic Kask ~40000P One of the most common pieces of Pre-War soldier equipment, this cheaply mass-produced helmet is sturdy enough against bludgeon attacks, but will not stop a bullet. Durability LT Ballistic Res VIII 7} Slash Res WT 25 Rad Res | 5 | Repair Class: Medium -,"
+    },
+    {
       "file": "armour/ekzoskelet-legs__stats-100-durability__2026-09-20_084304.png",
       "sha256": "0f7e85468f4473d4999882012dcd569d08a29781d0e9e2b98fbe78cb2d5fb5c0",
       "bytes": 280207,
@@ -334,6 +343,15 @@
       "ocr": "i es ee Old Tactical Vest ~75000P A beat-up tactical vest worn by police forces of pre-Mist times. It offers great mobility and decent protection against weaker types of weapon fire. This vest is usually a reward for those with basic training and experience in the field. Durability TITTAUIANITANIIIHY 100 Ballistic Res HUTT 35 Slash Res I 25 Rad Res Ill 15 Repair Class: Medium as"
     },
     {
+      "file": "armour/panskiy-kask__stats-100-durability__2026-09-20.png",
+      "sha256": "9df42abd095a9ce5865206f321acc9df7b211169048951e3a2edb9367580cf59",
+      "bytes": 325632,
+      "width": 1015,
+      "height": 1098,
+      "phash": "c085273c99df6e62",
+      "ocr": "fal oe i i Panskiy Kask ~15000P | An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field. Durability PUAULNVANUNINIMIIINY § 100 Ballistic Res {| 8 Slash Res III 13 Rad Res ll 10 Repair Class: Scavenger a"
+    },
+    {
       "file": "armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
       "sha256": "cbb73e8101db23ba162505a4ad0ad6040dd34b7f503a07d3aff3435ec004b2d1",
       "bytes": 637984,
@@ -362,6 +380,24 @@
       "height": 987,
       "phash": "c087276d39736cc3",
       "ocr": "al Security Helmet ~89000P A reinforced metal helmet with an armored visor, designed for heavy-duty security work. Offers great protection, but is exhaustive to wear for long periods. Durability DUUULUUATUITNIMIINT° 100 Ballistic Res UAT 35 Slash Res UAT 35 Rad Res ill 20 Repair Class: Heavy"
+    },
+    {
+      "file": "armour/skull-mask__stats-100-durability__2026-09-20.png",
+      "sha256": "853c733e1e57a7563a73564eacc52c800d8855e168a4ca753fec623bdf100588",
+      "bytes": 305974,
+      "width": 1015,
+      "height": 1003,
+      "phash": "d091276d399bcec2",
+      "ocr": "ro rs a, » Skull Mask ~5000P A menacing mask in the shape of a skull, worn by different folks for different reasons: some in respect and awe of the dead, others in order to intimidate and scare. Durability Te Ballistic Res | 3 Slash Res I| 10 Rad Res 0 Repair Class: Tattered 1}"
+    },
+    {
+      "file": "armour/stronghold-vest__stats-100-durability__2026-09-20.png",
+      "sha256": "292dc28faffade8ad0e931e2ca68093611db775f538a005153a4d895f7444231",
+      "bytes": 387559,
+      "width": 991,
+      "height": 1131,
+      "phash": "d083272c3b636cdb",
+      "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
     },
     {
       "file": "attachments/2hmg-ergonomic-pistol-grip__tooltip__2026-09-17_201901.png",
