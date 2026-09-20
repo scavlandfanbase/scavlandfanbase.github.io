@@ -221,3 +221,14 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
   .faction-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:18px auto!important}
   .faction-icon{width:min(150px,38vw)!important;height:min(150px,38vw)!important}
 }
+
+/* Visitor functionality fixes */
+@media(max-width:900px){
+  .faction-grid.focused{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  .faction-tile.side-left,.faction-tile.side-right,.faction-tile.centered{transform:none!important;opacity:1!important}
+  .faction-tile.centered{order:-1;grid-column:1/-1}
+}
+@media(max-width:520px){
+  .faction-grid,.faction-grid.focused{grid-template-columns:1fr!important}
+  .faction-tile.centered{grid-column:auto}
+}

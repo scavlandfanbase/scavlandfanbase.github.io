@@ -255,7 +255,10 @@ function setupVendorDirectory() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVendor(); });
 }
 
+let vendorReturnFocus = null;
+
 function openVendor(id) {
+  vendorReturnFocus = document.activeElement;
   const content = document.getElementById(id);
   if (!content) return;
   const section = content.closest('.vendor-section');
@@ -268,6 +271,7 @@ function openVendor(id) {
   body.replaceChildren(copy);
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+  modal.querySelector('.vendor-modal-close').focus();
 }
 
 function closeVendor() {
@@ -275,6 +279,8 @@ function closeVendor() {
   if (!modal) return;
   modal.classList.remove('open');
   document.body.style.overflow = '';
+  if (vendorReturnFocus && typeof vendorReturnFocus.focus === 'function') vendorReturnFocus.focus();
+  vendorReturnFocus = null;
 }
 
 function escapeVendorText(value) {
@@ -319,7 +325,7 @@ async function loadVendorDirectory() {
     }).join('');
     const documented = vendors.filter(vendor => vendor.inventoryDocumented).length;
     const rows = vendors.reduce((total, vendor) => total + vendor.inventory.length, 0);
-    count.textContent = `${vendors.length} vendors · ${documented} documented inventories / ${rows} legacy rows · ${vendors.length - documented} undocumented inventories. Inventory listings need verification.`;
+    count.textContent = `${vendors.length} vendors`;
     setupVendorDirectory();
     list.querySelectorAll('.vendor-header').forEach(header => {
       header.addEventListener('click', () => openVendor(header.dataset.contentId));
