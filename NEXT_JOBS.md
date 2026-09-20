@@ -2,6 +2,7 @@
 
 ## START HERE — current queue (20 September 2026)
 
+- **Asset safety audit (20 Sept 2026):** live references confirmed for canonical weapon screenshots, faction icons, Old Tactical Vest icon and `images/scavland-banner.jpg.png`. No binary asset was deleted: reference absence is not sufficient duplicate proof, and the current GitHub text connector cannot byte-compare PNGs such as root `Antatoly.png` vs `images/vendors/anatoly.png`.
 - **Areas page (20 Sept 2026):** replaced the placeholder with a data-driven view of the 5 structured locations currently present in canonical vendor data and their known vendors. Broader place names mentioned only in faction/item prose were not promoted into a canonical Areas dataset; a dedicated evidence-backed location schema remains future work.
 - **Deep-link polish (20 Sept 2026):** item `?id=` links now highlight and scroll to the exact canonical card. Vendors accepts `?faction=<canonical-faction-id>` and Factions links to filtered vendor views for all 8 factions that currently have vendor records; Bandits intentionally has no vendor link because no canonical Bandit vendor exists.
 - **Canonical cross-links (20 Sept 2026):** added `items.html?id=<canonical-id>` deep-link support; vendor inventory names now link to their canonical item records; non-craftable crafting ingredients link to canonical items while craftable ingredients retain direct recipe navigation. Validated 231 vendor links and 69 crafting ingredient references against all 255 item IDs with 0 missing targets. Weapon ammo families were deliberately not forced into one-to-one ammo IDs.
@@ -15,7 +16,7 @@
 - [ ] Audit remaining internal links, local asset references and responsive layout issues without changing game data.
 - [ ] Continue clean display-image/icon work separately from evidence verification; use existing organised evidence as the visual reference catalogue.
 - [ ] Review legacy duplicate screenshot assets under `images/items/`, `images/weapons/`, `images/crafting/`, `images/factions/` and `images/armour/`; delete only when byte-equivalence/reference safety is proven.
-- [ ] Review root `Antatoly.png` against `images/vendors/anatoly.png`; do not delete without binary/visual proof.
+- [ ] Review root `Antatoly.png` against `images/vendors/anatoly.png`; current GitHub text connector cannot decode/compare PNG bytes, so both must remain until binary/visual equivalence is proven.
 - [ ] Review faction screenshots for evidence beyond current faction data/icons.
 - [ ] Improve Areas page and test map/responsive behaviour across phone and desktop layouts.
 - [ ] Add useful cross-links where canonical IDs already exist (vendor item → item, crafting ingredient → item, weapon → ammo, faction → vendors).
@@ -115,7 +116,7 @@
 - [ ] Review duplicated weapon/item screenshot SHAs that appear in both `images/items/` and `images/weapons/` and retain one canonical evidence location where appropriate.
 - [ ] Review root `Antatoly.png` against `images/vendors/anatoly.png`; remove the root file if confirmed obsolete.
 - [ ] Decide whether the legacy root `ammo` documentation file can be retired after ammo JSON/evidence is fully verified.
-- [ ] Review old `images/scavland-banner.jpg.png` now that the official logo is used in the shared header.
+- [x] Keep `images/scavland-banner.jpg.png`: confirmed live as the shared header background in `site-theme.css`; the official logo is layered over it.
 - [ ] Keep `images/branding/Scavland_Logo_2025.png` as the shared header logo.
 
 ## Priority 3 — Make JSON the live source
