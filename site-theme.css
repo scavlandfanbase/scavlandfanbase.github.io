@@ -157,3 +157,67 @@ body>.construction-box{display:block!important;width:min(760px,calc(100% - 30px)
   .scav-site-logo{width:min(92vw,560px);max-height:145px}
   .scav-site-header:has(.scav-site-logo){min-height:180px!important;padding:24px 12px!important}
 }
+
+
+/* 20 Sept 2026 — compact public UI normalization */
+.scav-site-header,
+.scav-site-header:has(.scav-site-logo){
+  min-height:150px!important;
+  padding:22px 16px 18px!important;
+}
+.scav-site-logo{width:min(500px,72vw)!important;max-height:112px!important}
+.scav-site-subtitle{margin-top:4px!important;font-size:.82rem!important;letter-spacing:.16em!important}
+.scav-site-nav-inner{max-width:1320px!important;padding:8px 12px!important;gap:4px!important}
+.scav-site-nav a{font-size:14px!important;padding:7px 10px!important;border-radius:4px!important}
+.hero{padding:28px 18px 22px!important}
+.hero h1{font-size:clamp(30px,3.2vw,42px)!important;margin:0 0 6px!important}
+.hero p{font-size:15px!important;line-height:1.45!important;max-width:760px!important}
+.database-count{margin-top:10px!important}
+main,.container{max-width:1320px!important}
+.container{padding-top:24px!important;padding-bottom:48px!important}
+.grid{max-width:1320px!important;margin:0 auto!important;gap:14px!important;padding:24px 18px!important}
+.card{padding:18px!important;min-height:0!important}
+.card h3{font-size:19px!important;margin:0 0 6px!important}
+.card p{font-size:14px!important;line-height:1.4!important;margin:0!important}
+.controls,.item-tools{padding:14px!important;margin-bottom:12px!important}
+.weapon-nav,.armour-nav,.bench-nav{padding:9px 12px!important;gap:6px!important}
+.weapon-nav a,.armour-nav a,.bench-btn{padding:8px 11px!important;font-size:13px!important}
+.panel-heading{font-size:16px!important;padding:14px 16px!important}
+.recipe-btn{font-size:15px!important;padding:13px 16px!important}
+.detail-head{padding:20px!important}.detail-head h2{font-size:28px!important}
+.resources{padding:16px 20px 22px!important}.resource{padding:12px!important;font-size:15px!important}
+.vendor-directory{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))!important;gap:10px!important}
+.vendor-section,.vendor-header{min-height:92px!important}
+.vendor-header{font-size:18px!important;padding:12px!important}
+.sell-guide{padding:14px!important;margin-top:12px!important;margin-bottom:18px!important}
+.items-main{width:min(1320px,calc(100% - 28px))!important;margin:28px auto 50px!important}
+.items-head{margin-bottom:18px!important}.items-head h1{font-size:clamp(30px,3.2vw,42px)!important}
+.evidence-box{margin-top:12px!important;padding:13px!important}
+.category-overview{gap:8px!important;margin-bottom:12px!important}.category-card{padding:11px!important}
+.verify-tools{margin-bottom:12px!important}
+.updates{padding:24px 18px!important}.update-box{padding:16px!important}
+footer{padding:18px!important;margin-top:28px!important;font-size:13px!important}
+body>h1:first-of-type{margin:28px auto 12px!important}
+body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
+.faction-grid{gap:22px!important;margin:28px auto!important}
+.faction-icon{width:180px!important;height:180px!important}
+.faction-tile h2{font-size:1.3rem!important;margin-top:8px!important}
+.faction-box{max-width:1000px!important;padding:16px!important;margin:12px auto!important}
+.faction-text{font-size:1rem!important;line-height:1.55!important}
+.map-intro{padding:18px 14px 12px!important}
+.map-toolbar{padding:7px!important}.map-toolbar button{padding:7px 11px!important}
+.map-viewport{margin-top:8px!important}
+@media(max-width:700px){
+  .scav-site-header,.scav-site-header:has(.scav-site-logo){min-height:112px!important;padding:14px 10px!important}
+  .scav-site-logo{width:min(420px,88vw)!important;max-height:82px!important}
+  .scav-site-subtitle{font-size:.7rem!important}
+  .scav-site-nav-inner{padding:7px 8px!important}
+  .scav-site-nav a{font-size:13px!important;padding:7px 9px!important}
+  .hero{padding:22px 12px 18px!important}
+  .container{width:calc(100% - 18px)!important;padding-top:16px!important}
+  .grid{padding:16px 10px!important;gap:10px!important}
+  .items-main{width:calc(100% - 18px)!important;margin-top:20px!important}
+  .evidence-form{grid-template-columns:1fr!important}
+  .faction-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:18px auto!important}
+  .faction-icon{width:min(150px,38vw)!important;height:min(150px,38vw)!important}
+}
