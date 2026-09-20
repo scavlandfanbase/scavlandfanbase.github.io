@@ -575,7 +575,16 @@
         "vendor-item"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "estimatedPrice": 30000,
+      "rank": 1,
+      "description": "With this, I can learn to set up a small kit for basic gun repairs.",
+      "source": {
+        "file": "evidence-inbox/blueprints/basic-gun-repair-kit-blueprint__tooltip__2026-09-13_141943.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-13",
+        "note": "Direct in-game blueprint tooltip screenshot."
+      }
     },
     {
       "id": "borealis-12",
