@@ -329,7 +329,7 @@ async function loadVendorDirectory() {
           vendor.inventory.map(item => '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(item.name) + '</a></td><td>' + escapeVendorText(item.rank) +
             '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>').join('') + '</tbody></table>'
         : '<div class="placeholder-note">Inventory coming soon.</div>';
-      const portrait = vendor.portrait?.status === 'screenshot-verified' ? vendor.portrait.file : '';
+      const portrait = vendor.portrait?.file || '';
       return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '"' + (portrait ? ' data-portrait="' + escapeVendorText(portrait) + '"' : '') + '>' +
         '<div class="vendor-header' + (portrait ? ' has-portrait' : '') + '" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + (portrait ? '<img class="vendor-portrait" src="' + escapeVendorText(portrait) + '" alt="">' : '') + '<span class="vendor-name">' + escapeVendorText(name) + '</span>' +
         '<div class="vendor-faction">Faction: ' + escapeVendorText(faction) + '</div></div>' +
