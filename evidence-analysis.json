@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 300,
+  "count": 302,
   "exact_duplicate_groups": [],
   "files": [
     {
@@ -74,6 +74,26 @@
       "height": 108,
       "phash": "874a3d3e6ab14ab1",
       "ocr": "Fil."
+    },
+    {
+      "file": "Screenshot 2026-09-20 083129.png",
+      "sha256": "e1483ff63e4129d634a5594290f6ad9811bd12000b3cf8da68b497e78d0b89ad",
+      "bytes": 107036,
+      "filename_timestamp": "2026-09-20T08:31:29",
+      "width": 1015,
+      "height": 763,
+      "phash": "c0cb2f78879c1a5e",
+      "ocr": "=\" a ae _. a Medicinal Herb ~50P A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss ‘em in the pot anyway. Health: +5 Thirst: «3 a"
+    },
+    {
+      "file": "Screenshot 2026-09-20 083137.png",
+      "sha256": "32e41cc3d3a268b182ca184d89096943d341d05a62b96593d42eebc14f5ccc05",
+      "bytes": 84975,
+      "filename_timestamp": "2026-09-20T08:31:37",
+      "width": 1018,
+      "height": 831,
+      "phash": "e0a537600f4e7a9e",
+      "ocr": "- Mystery Pills ~6000P A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away. Health: +15 Radiation: -30 Thirst: +5 al"
     },
     {
       "file": "Shotgun AP Ammo pic.png",
