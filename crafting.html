@@ -7,10 +7,10 @@
 </head><body>
 <header class="scav-header"><div class="scav-title">SCAVLAND</div><div class="scav-subtitle">Wasteland Survival Database</div></header>
 <header class="site-nav"><nav><a href="index.html">Home</a><a href="vendors.html">Vendors</a><a href="weapons.html">Weapons</a><a href="armour.html">Armour</a><a href="crafting.html" class="active">Crafting</a><a href="map.html">Map</a><a href="factions.html">Factions</a><a href="areas.html">Areas</a></nav></header>
-<section class="hero"><h1>Crafting Database</h1><p>Browse Medical, Weapon and Armour Workbench recipes and the resources required to craft them throughout SCAVLAND.</p><div class="database-count"><strong>22</strong> Confirmed Recipes</div></section>
+<section class="hero"><h1>Crafting Database</h1><p>Workbench recipes and required resources.</p><div class="database-count"><strong>22</strong> Confirmed Recipes</div></section>
 <nav class="bench-nav"><button class="bench-btn active" data-bench="medical">Medical Workbench · 8</button><button class="bench-btn" data-bench="weapon">Weapon Workbench · 7</button><button class="bench-btn" data-bench="armour">Armour Workbench · 7</button></nav>
 <main class="container"><div class="controls"><input id="search" type="search" placeholder="Search recipes or required resources..." autocomplete="off"></div><div class="crafting-layout"><section class="panel"><h2 class="panel-heading" id="panelTitle"></h2><div id="recipeList"></div></section><article class="panel detail" id="detail"></article></div></main>
-<footer>SCAVLAND Fan Database · Crafting requirements transcribed from in-game workbenches.</footer>
+<footer>SCAVLAND Fan Database © 2026</footer>
 <script>
 let data={medical:[],weapon:[],armour:[]};
 const labels={medical:"Medical Workbench",weapon:"Weapon Workbench",armour:"Armour Workbench"};let bench="medical",selected=data.medical[0];const list=document.getElementById("recipeList"),detail=document.getElementById("detail"),search=document.getElementById("search"),title=document.getElementById("panelTitle");
