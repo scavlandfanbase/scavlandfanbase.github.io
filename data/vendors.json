@@ -536,9 +536,11 @@
         "status": "existing-site-data"
       },
       "portrait": {
-        "file": "images/vendors/jasna.png",
-        "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "file": "evidence-inbox/vendors/jasna__shop-screen__2026-09-20_142506.png",
+        "status": "screenshot-verified",
+        "evidence": "direct-shop-screen",
+        "position": "left center",
+        "note": "Name and Acolytes identity visible. Inventory item names, prices and unlock ranks are not shown; inventory remains existing-site-data."
       }
     },
     {

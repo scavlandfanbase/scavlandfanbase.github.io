@@ -207,6 +207,8 @@ body {
   .vendor-table{font-size:13px}
   .vendor-table th,.vendor-table td{padding:7px 5px}
 }
+.vendor-modal-profile .scav-image-preview{width:min(260px,42vw);flex-shrink:0;margin:0}
+.vendor-modal-profile .scav-image-preview img{height:auto;max-height:160px}
 </style>
 
 <script>
@@ -261,7 +263,7 @@ function setupVendorDirectory() {
   document.body.appendChild(modal);
   modal.querySelector('.vendor-modal-close').addEventListener('click', closeVendor);
   modal.addEventListener('click', e => { if (e.target === modal) closeVendor(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVendor(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !document.querySelector('.scav-image-viewer[open]')) closeVendor(); });
 }
 
 let vendorReturnFocus = null;
@@ -278,7 +280,7 @@ function openVendor(id) {
   const copy = content.cloneNode(true);
   copy.removeAttribute('id');
   body.replaceChildren(copy);
-  if(section.dataset.portrait){const profile=document.createElement('div');profile.className='vendor-modal-profile';profile.innerHTML='<img class="vendor-modal-portrait" src="'+escapeVendorText(section.dataset.portrait)+'" alt="'+escapeVendorText(section.dataset.vendorName)+' character card"><div class="vendor-modal-meta"><strong>'+escapeVendorText(section.dataset.vendorName)+'</strong><span>'+escapeVendorText(section.dataset.faction)+'</span></div>';body.prepend(profile);}
+  if(section.dataset.portrait){const profile=document.createElement('div');profile.className='vendor-modal-profile';profile.innerHTML=ScavImages.preview({name:section.dataset.vendorName,image:section.dataset.portrait})+'<div class="vendor-modal-meta"><strong>'+escapeVendorText(section.dataset.vendorName)+'</strong><span>'+escapeVendorText(section.dataset.faction)+'</span></div>';body.prepend(profile);}
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
   modal.querySelector('.vendor-modal-close').focus();
@@ -332,7 +334,7 @@ async function loadVendorDirectory() {
         : '<div class="placeholder-note">Inventory coming soon.</div>';
       const portrait = vendor.portrait?.file || '';
       return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '"' + (portrait ? ' data-portrait="' + escapeVendorText(portrait) + '"' : '') + '>' +
-        '<div class="vendor-header' + (portrait ? ' has-portrait' : '') + '" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + (portrait ? '<img class="vendor-portrait" src="' + escapeVendorText(portrait) + '" alt="">' : '') + '<span class="vendor-name">' + escapeVendorText(name) + '</span>' +
+        '<div class="vendor-header' + (portrait ? ' has-portrait' : '') + '" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + (portrait ? '<img class="vendor-portrait"' + (vendor.portrait?.position === 'left center' ? ' style="object-position:left center"' : '') + ' src="' + escapeVendorText(portrait) + '" alt="">' : '') + '<span class="vendor-name">' + escapeVendorText(name) + '</span>' +
         '<div class="vendor-faction">Faction: ' + escapeVendorText(faction) + '</div></div>' +
         '<div class="vendor-content" id="' + escapeVendorText(vendor.id) + '">' + content + '</div></div>';
     }).join('');
@@ -360,6 +362,7 @@ document.addEventListener('DOMContentLoaded', loadVendorDirectory);
 </script>
 
 <link rel="stylesheet" href="site-theme.css">
+<script src="image-viewer.js"></script>
 </head>
 <body>
 
