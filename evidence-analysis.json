@@ -435,16 +435,6 @@
       "ocr": "Raisa ke 13:3) ‘=a Reputation 0 =! Rank 1 - Vultures | i i eS a alg ele. . . . . . Z i oa al ial $260 a & a ( dle 41 | i | | | | | | | . . zo . . . . . . Z Z i"
     },
     {
-      "file": "Screenshot 2026-09-20 213442.png",
-      "sha256": "e03d6a6d45005f8109326d6a332d0a9a486164cc648785809918a7cbd7c4a8b5",
-      "bytes": 74177,
-      "filename_timestamp": "2026-09-20T21:34:42",
-      "width": 1014,
-      "height": 519,
-      "phash": "c5a52fd2d25a5a1a",
-      "ocr": "al | Tactical Knife ~10000P 6000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. a"
-    },
-    {
       "file": "Screenshot 2026-09-20 213516.png",
       "sha256": "2fc6f4826b30003247acf0cbe46ff7a5269fca60032c656d91df2a7319b036f4",
       "bytes": 129387,
@@ -498,6 +488,16 @@
       "height": 712,
       "phash": "e0e52f682fc3d01e",
       "ocr": "al Special FM) Ammo ~1000P Special ammunition that can fit into different types of- weapons. Damage: 75 Penetration: 100% r"
+    },
+    {
+      "file": "Tactical-Knife_2026-09-20 213442.png",
+      "sha256": "e03d6a6d45005f8109326d6a332d0a9a486164cc648785809918a7cbd7c4a8b5",
+      "bytes": 74177,
+      "filename_timestamp": "2026-09-20T21:34:42",
+      "width": 1014,
+      "height": 519,
+      "phash": "c5a52fd2d25a5a1a",
+      "ocr": "al | Tactical Knife ~10000P 6000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. a"
     },
     {
       "file": "ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
