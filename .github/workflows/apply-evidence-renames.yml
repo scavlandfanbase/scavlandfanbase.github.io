@@ -26,4 +26,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A evidence-inbox
           git commit -m "Apply reviewed evidence archive renames"
+          git pull --rebase origin main
           git push
