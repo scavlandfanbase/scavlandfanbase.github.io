@@ -2,6 +2,7 @@
 
 ## START HERE — current queue (20 September 2026)
 
+- **Public UX copy cleanup (20 Sept 2026):** simplified user-facing copy across Home, Vendors, Weapons, Armour, Crafting, Items, Map and Areas. Internal audit/provenance explanations were removed from browsing surfaces while concise Verified/Unverified signals were retained. No canonical JSON, stats, evidence provenance or verification status changed. Branch `ux/public-copy-cleanup-2026-09-20`.
 ### Can complete from the repository
 - [ ] Continue the safe website structural cleanup: remove superseded legacy header/nav CSS and dead `wasteland-banner.jpg` references page-by-page while preserving `site-shell.js` as the canonical navigation.
 - [ ] Audit remaining internal links, local asset references and responsive layout issues without changing game data.
