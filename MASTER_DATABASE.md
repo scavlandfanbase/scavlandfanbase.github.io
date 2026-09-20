@@ -2,7 +2,7 @@
 
 # SCAVLAND MASTER DATABASE
 
-> **LEGACY SNAPSHOT — NOT CURRENT CANONICAL DATA.** This file was generated from older embedded website data and may contain values from before screenshot verification. Do not use it to overwrite `data/*.json` or to mark values verified. Current screenshot evidence and records explicitly marked `screenshot-verified` take precedence. See `NEXT_JOBS.md` and `data/README.md` for active rules.\n\n> **19 September 2026 audit:** this snapshot contains known stale weapon ammo labels/stats and must not be used to fill crafting gaps. Regenerate it from verified canonical JSON after migration and verification are complete.
+> **LEGACY SNAPSHOT — NOT CURRENT CANONICAL DATA.** This file was generated from older embedded website data and may contain values from before screenshot verification. Do not use it to overwrite `data/*.json` or to mark values verified. Current screenshot evidence and records explicitly marked `screenshot-verified` take precedence. See `NEXT_JOBS.md` and `data/README.md` for active rules.\n\n> **20 September 2026 status:** this file remains a historical snapshot only. The live Weapons, Armour, Crafting and Vendors pages now read their canonical `data/*.json` sources. Do not use the historical tables below to overwrite canonical JSON; regenerate this document from verified canonical data before treating any table here as current.
 
 ## Source coverage
 
@@ -977,7 +977,7 @@ The repository now contains a parallel structured data layer under `data/`:
 | `data/crafting.json` | 22 recipes |
 | `data/vendor-selling-rates.json` | Developer-provided selling modifiers |
 
-The HTML pages still contain their operational embedded data. The JSON files are not yet the live canonical source. Migration should be done page-by-page after verification.
+The tables below are historical snapshot content. Several live pages have since migrated to canonical JSON sources; consult `data/README.md` and `NEXT_JOBS.md` for current integration and verification status.
 
 ### Image/evidence layout
 
