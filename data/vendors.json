@@ -597,6 +597,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/yefim-commonfolk__character-card__2026-09-18_211846.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card"
       }
     },
     {
@@ -861,6 +866,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/anatoly-mechanists__character-card__2026-09-18_085411.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card"
       }
     },
     {
@@ -1748,6 +1758,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/volodymyr-gunners__character-card__2026-09-17_202418.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card"
       }
     },
     {
@@ -1832,6 +1847,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/yelena-palatines__character-card__2026-09-18_211816.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card"
       }
     },
     {
@@ -1844,6 +1864,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/tajra-rada__character-card__2026-09-18_211831.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card"
       }
     },
     {
@@ -1856,6 +1881,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/snezhana-rada__character-card__2026-09-18_211839.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card"
       }
     },
     {
@@ -1868,6 +1898,11 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/zhivan-vultures__character-card__2026-09-13_212725.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card"
       }
     },
     {
