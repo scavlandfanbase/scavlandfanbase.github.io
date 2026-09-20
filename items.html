@@ -53,6 +53,7 @@ async function loadJson(name,required=false){
   return {data:[]};
  }
 }
+function applyUrlState(){const params=new URLSearchParams(location.search);const q=params.get('q');const id=params.get('id');if(q)document.getElementById('item-search').value=q;if(id){const match=items.find(x=>x.id===id);if(match)document.getElementById('item-search').value=clean(match.name)}}
 async function loadItems(){
  try{
   const i=await loadJson('items',true);
@@ -60,7 +61,7 @@ async function loadItems(){
   const [w,a,m,c,v]=await Promise.all(['weapons','armour','ammo','crafting','vendors'].map(n=>loadJson(n)));
   weapons=w.data||[];armour=a.data||[];ammo=m.data||[];crafting=c.data||[];vendors=v.data||[];
   items.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));
-  renderFilters();render();
+  applyUrlState();renderFilters();render();
  }catch(err){
   document.getElementById('item-count').textContent='Unable to load item data. Please refresh the page.';
   document.getElementById('item-grid').innerHTML='<div class="empty">The item database could not be loaded.</div>';
