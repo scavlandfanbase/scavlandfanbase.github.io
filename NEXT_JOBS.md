@@ -1,58 +1,37 @@
 # SCAVLAND Website — Next Jobs
 
-## START HERE — next session
+## START HERE — current queue (20 September 2026)
 
-- **Integrity audit continuation (20 Sept 2026):** vendor cross-reference confirms all **231 inventory rows** resolve to canonical IDs with **0 missing IDs and 0 name mismatches**; all vendor provenance remains `existing-site-data` pending direct shop-screen evidence. Crafting cross-reference confirms **22/22 screenshot-verified recipes** (8 Medical / 7 Weapon / 7 Armour), **0 duplicate recipe IDs, 0 missing ingredient IDs, 0 ingredient-name mismatches, and 0 invalid quantities**. `Overripe Potato` is correctly required by the verified Moonshine recipe but its item record remains independently unverified; recipe evidence must not be used to promote the item tooltip/status.
-- **Vendor single-source cleanup (20 Sept 2026):** `vendors.html` now fetches canonical `data/vendors.json` and renders all **22 vendors, 10 documented inventories / 231 rows, and 12 undocumented inventories**. Removed the duplicated directory/inventory HTML; retained card/table/badge styling, selling-rate guide, combined name/location search and faction filter, modal close button/backdrop/Escape behavior, and added keyboard activation plus loading/error messages. Counts are derived from JSON. Each documented inventory explicitly says **Needs verification**: the archive has no direct shop-screen proof of vendor/item relationships, ranks or prices. Canonical data and all `existing-site-data` provenance remain unchanged; item-tooltip verification must never be inherited by vendor inventory rows. Four Bogdan HP ammo references fixed in `8f52ef2026cefc0791f28c7804125dff924581a4` are preserved.
-  - Implementation commit: `f035e14cf182382f2ad63415ab85343ce2c0cc98`.
-  - Validation: browser opened all 22 vendor modals; 231 rendered rows and 12 placeholders confirmed; case/whitespace search, combined filters, keyboard activation and close controls checked; desktop modal visually reviewed. Script checks preserve all 231 legacy detail strings and confirm HTTP failure messaging; `git diff --check` passes. No game values promoted or changed.
-  - Next vendor work: obtain direct shop-screen evidence before reconciling or verifying inventory rows; document the remaining 12 inventories only from suitable evidence.
-- **New 100%-durability armour evidence (20 Sept 2026):** organised and verified `Ekzoskelet Legs` (~100,000₽; 30/35/20; Heavy), newer `Riot Vest` (~86,000₽; 40/50/20; Heavy), and `GP-4 Gas Mask` (~25,000₽; 5/8/**30**; Scavenger). GP-4 radiation was corrected from legacy 20 → **30**. Canonical armour is now **5/30 screenshot-verified** (`e737173ff0f51c3806467dfb6edae0a2266b77d8`). Evidence files are permanently organised under `evidence-inbox/armour/`. Rename workflow concurrency protection added (`5740332d523887c14430fd4a383bd156b6532448`) and retry succeeded. Matching item identities synchronized (`14dea67c178e71fea55d5824e427fbb8668b22bd`), making Items **175/255 screenshot-verified; 80/255 remaining**.
-- **Base 2HMG recheck (20 Sept 2026):** recursive evidence index still contains only 2HMG Short/Long weapon screenshots plus attachment tooltips; no exact base `2HMG` stat screenshot exists. Base record remains `existing-site-data` and must not inherit Short/Long values.
-- **Exact remaining-item evidence pass (20 Sept 2026):** after linking the new Medicinal Herb/Mystery Pills files (`aa45edd29fb16f01a8388e313b53f04e35811cc7`), the recursive 300-image evidence index was matched against every non-screenshot-verified item. Only three exact-name matches remained: Basic Gun Repair Kit Blueprint, MK Slotted Mount Handguard, and Old GP-4 Gas Mask. Basic Gun Repair Kit Blueprint is now directly verified at ~30,000₽ / Rank 1 with description from `evidence-inbox/blueprints/basic-gun-repair-kit-blueprint__tooltip__2026-09-13_141943.png` (`a95d70eaa39095daaeaaf7351691b167b05a8d2d`). MK Slotted remains intentionally unverified due conflicting screenshots; Old GP-4 remains unverified because its armour screenshot does not establish 100% durability. Current machine count: **175/255 screenshot-verified; 80/255 not screenshot-verified**. No other remaining item has an exact-name match in the current organised 300-image evidence index.
-- **Mystery Pills and Medicinal Herb direct screenshots (20 Sept 2026):** Mystery Pills ~6000₽, Health +15, Radiation -30, Thirst +5, Max Stacks 5; Medicinal Herb ~50₽, Health +5, Thirst +3, Max Stacks 10. Both canonical item records now include structured `effects`, `estimatedPrice`, `maxStacks`, description and screenshot-verified status (`7a42f000615f33a9b607b424026499f0e6c82b05`). The uploaded PNGs still need permanent repo evidence paths because the GitHub connector cannot write binary files. Machine recount after this update is **175/255 screenshot-verified**; this corrects the earlier handover count of 175/255.
-- **20 Sept morning continuation:** recursive evidence index successfully analysed **300 images / 0 exact duplicate groups** but its first run failed only at `git push` because `main` advanced during OCR; workflow now rebases before push (`feb3f9eecac46b49f795b387b9b9e189a7a4a4af`). Recursive dedupe rerun completed successfully. Removed obsolete unreferenced root `ammo` prose dump because canonical ammo lives in `data/ammo.json` (`989312281ef6ecf24ea65ffcd2a910317217ba09`). Root `Antatoly.png` remains pending because binary equivalence to `images/vendors/anatoly.png` cannot be proven through the text-only GitHub connector; do not delete on assumption.
-- **Repository-wide QA audit (20 Sept 2026):** recursive Git tree contained **611 tracked files** at audit start. All canonical JSON parsed successfully; no duplicate stable IDs and no missing explicit JSON image/evidence paths were found. Fixed four true duplicate ammo identities in `items.json` by merging vendor/ammunition classifications (`15bbb032ed1b08aea95a53ef70e17ad32289ee28`). Added missing `Medicinal Herb` item identity as recipe-evidenced but deliberately not screenshot-verified, and synchronized `Riot Vest` spelling/provenance (`dd0075b93b420e0d9880576b5da8f9fe3efb6f89`). Current item registry: **255 unique identities, 175 screenshot-verified, 80 not screenshot-verified**. Fixed over-broad archive workflow so routine `data/**` edits are no longer copied into `evidence-archive/` (`fd1896f41d79a86c9f1251e13005ce0d82b275af`). Updated evidence dedupe and analysis workflows to recurse through organised subfolders (`068d4d215c3317f34f7d84ca762fbc6da6c30c21`, `6081cdac265532ba241143fed36deb6623d9806d`); dedupe found 0 duplicates but its first run hit a concurrent-push rejection, so it was further changed to avoid report commits when nothing is removed (`fd311c8113fccfb4bce51a1020bc1da3768f8cfd`). `MASTER_DATABASE.md` now has a strong legacy/stale-data warning (`65cf3aebca0692bf34db4e350f5cb25d36eccd70`). Legacy duplicate screenshot assets still exist under `images/items/`, `images/weapons/`, `images/crafting/`, `images/factions/`, and `images/armour/`; do not delete them until reference/byte-equivalence cleanup is done. Root `Antatoly.png` and legacy root `ammo` file appear unused by live pages but remain pending safe cleanup. Shared `site-shell.js` is the canonical nav and currently normalizes legacy hard-coded nav differences. Main ruleset remains active; recent Pages deployments succeed, with rapid intermediate deployments sometimes cancelled as superseded.
+### Can complete from the repository
+- [ ] Continue the safe website structural cleanup: remove superseded legacy header/nav CSS and dead `wasteland-banner.jpg` references page-by-page while preserving `site-shell.js` as the canonical navigation.
+- [ ] Audit remaining internal links, local asset references and responsive layout issues without changing game data.
+- [ ] Continue clean display-image/icon work separately from evidence verification; use existing organised evidence as the visual reference catalogue.
+- [ ] Review legacy duplicate screenshot assets under `images/items/`, `images/weapons/`, `images/crafting/`, `images/factions/` and `images/armour/`; delete only when byte-equivalence/reference safety is proven.
+- [ ] Review root `Antatoly.png` against `images/vendors/anatoly.png`; do not delete without binary/visual proof.
+- [ ] Review faction screenshots for evidence beyond current faction data/icons.
+- [ ] Improve Areas page and test map/responsive behaviour across phone and desktop layouts.
+- [ ] Add useful cross-links where canonical IDs already exist (vendor item → item, crafting ingredient → item, weapon → ammo, faction → vendors).
+- [ ] Eventually regenerate `MASTER_DATABASE.md` from canonical JSON rather than maintaining historical duplicated tables.
 
-Evidence archive organisation is complete. Do **not** repeat the rename/archive pass.
+### Requires new or better in-game evidence
+- [ ] Vendor inventories: obtain direct shop-screen screenshots. Existing **231 rows / 10 documented vendors** are structurally valid but remain `existing-site-data`; **12 vendor inventories** are undocumented.
+- [ ] Base `2HMG`: obtain a direct base-weapon stat screenshot. Short/Long screenshots do not verify the base record.
+- [ ] Armour: continue only from screenshots showing **100% durability**. Current strict state is **5/30 screenshot-verified**.
+- [ ] Items: obtain direct evidence for the remaining **80/255** non-screenshot-verified records; do not bulk-promote from recipe/vendor relationships.
+- [ ] `MK Slotted Mount Handguard`: resolve conflicting archived screenshots before promotion.
+- [ ] Preserve ambiguous/unreadable evidence as unresolved rather than guessing.
 
-Current canonical verification state (20 September 2026):
-- Weapons: **38/39 screenshot-verified**. Only base `2HMG` remains unverified; archived screenshots prove Short/Long only.
-- Ammo: **13/13 screenshot-verified**, each linked to an exact organised evidence screenshot.
-- Crafting: **22/22 screenshot-verified**.
-- Armour: **5/30 screenshot-verified** under the strict 100%-durability rule. Current verified set includes Old Tactical Vest, Riot Vest, Security Helmet, Ekzoskelet Legs and GP-4 Gas Mask.
-- Items: **175/255 screenshot-verified**.
-- `MK Slotted Mount Handguard` remains intentionally unverified because its screenshots conflict.
-- Svobodnik M4 is resolved from direct screenshot evidence: **17 damage / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload**.
-- Evidence root is clean: **0 opaque timestamp screenshots remain at `evidence-inbox/` root**. Two unidentified screenshots are deliberately preserved under `evidence-inbox/unresolved/`.
-- `items.html` verification badges now require persisted direct verification metadata; they no longer inherit a green badge merely from another matching dataset.
-
-Recommended next work:
-1. Audit the remaining **80/255 non-screenshot-verified item records** against any remaining valid evidence; do not bulk-promote without proof.
-2. Obtain/identify a direct **base 2HMG** screenshot before marking it verified.
-3. Armour audit: only promote resistance values from screenshots showing **100% durability**.
-4. Continue clean display-image/icon work separately from evidence verification.
-5. Verify the public site after data changes and keep this handover updated in the same session.
-
-
-Last reviewed: 19 September 2026
-
-This is the active project backlog. Work from the top unless a new game-data update or site bug takes priority.\n\n## Permanent cross-device documentation rule
-
-**This rule applies to every future repository change, regardless of device or chat session.**
-
-Whenever any website code, structured data, assets, navigation, UI, database content, verification status, or project configuration is changed:
-
-1. Update the project documentation **in the same work session** before considering the task complete.
-2. Record what changed and which files/areas were affected.
-3. Record whether game data involved is screenshot-verified, unverified, community-sourced, or otherwise pending evidence.
-4. Record important decisions or rules that a future session must preserve.
-5. Record the relevant commit SHA/reference when useful.
-6. Update completed/remaining jobs so the next session knows exactly where to resume.
-7. Never leave a repo change undocumented simply because it was small.
-8. If a change is reverted, abandoned, or deliberately not made, document that too when it affects the expected project state.
-
-**Purpose:** a new ChatGPT session on phone, PC, or another device must be able to inspect the repository documentation and continue the SCAVLAND project without relying on the previous chat transcript.
+### Completed / do not repeat
+- [x] Evidence archive organisation: 0 opaque timestamp screenshots remain at the evidence root; two unresolved screenshots are intentionally preserved.
+- [x] Ammo: 13/13 screenshot-verified with organised evidence.
+- [x] Crafting: 22/22 screenshot-verified; integrity audit found 0 duplicate recipe IDs, missing ingredient IDs, name mismatches or invalid quantities.
+- [x] Weapons: 38/39 screenshot-verified; only base 2HMG remains.
+- [x] Vendor JSON integrity: all 231 current inventory rows resolve to canonical IDs with 0 name mismatches; this does **not** verify vendor relationships/prices/ranks.
+- [x] Vendor page is JSON-driven and includes search/filter/modal keyboard handling.
+- [x] Root legacy `ammo` prose file was removed.
+- [x] Public evidence submission uses durable Supabase storage/private uploads; do not restore the abandoned email/FormSubmit flow.
+- [x] Shared `site-shell.js` is the canonical navigation.
+- [x] `MASTER_DATABASE.md` is explicitly marked as a legacy snapshot and must not overwrite canonical JSON.
 
 ## Handover — 19 September 2026
 - **Verification continuation (20 Sept 2026):** `Svobodnik M4` reconciled against direct 19 Sept screenshot and corrected to base values **17 dmg / 700 RPM / 19 range / 65 accuracy / 44 recoil / 22 handling / 18 ergonomics / 1.0 reload**, Advanced/Rifle Ammo; spelling corrected from `M4 Svodbonik` and source promoted (`27c219b37dd4ee1f477ce223006d4fa44246a18f`). Weapons are now **38/39** screenshot-verified; only base `2HMG` remains unverified because archive evidence is Short/Long only. Items rose to **174/258** verified: M4 sync (`e2c1efafd2d4a58080e10dc0adf3cd43dc58ff60`), three direct consumables (`31d5f5ac572a000cc47b2ed05acc986246d1e3fb`), 45 exact attachment tooltip matches (`ec5555d49e49dbe45f552d3b90a6742736631bf7`), and four exact older consumable screenshots with no newer conflict (`e4f2fc67ba04a5dfd02ec8968aa89a8ddc204ca7`). `MK Slotted Mount Handguard` intentionally remains unverified because its archived evidence conflicts. Remaining item records must not be bulk-promoted without direct evidence.
