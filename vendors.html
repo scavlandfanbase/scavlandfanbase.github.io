@@ -163,6 +163,12 @@ body {
 .vendor-section { margin:0; min-height:112px; overflow:hidden; }
 .vendor-header.has-portrait{display:grid;grid-template-columns:86px 1fr;grid-template-rows:auto auto auto;column-gap:12px;align-content:center}
 .vendor-portrait{width:86px;height:76px;object-fit:cover;object-position:center;border:1px solid #555;border-radius:5px;background:#111;grid-row:1/4}
+.vendor-portrait.vendor-face{display:block;position:relative;overflow:hidden;height:86px;flex-shrink:0}
+.vendor-face img{position:absolute;max-width:none!important;max-height:none!important;height:auto!important;object-fit:initial}
+.vendor-face-preview{padding:0;border:0;background:none;cursor:zoom-in;flex-shrink:0}
+.vendor-face-preview .vendor-face{width:120px;height:120px}
+.sell-card strong{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sell-card .vendor-face{width:58px;height:58px}
 .vendor-name{align-self:end}
 .vendor-header.has-portrait::after{grid-column:2}
 .vendor-modal-profile{display:flex;gap:16px;align-items:center;margin:0 0 16px;padding:12px;background:#202020;border:1px solid #3b3b3b;border-radius:6px}
@@ -209,6 +215,11 @@ body {
 }
 .vendor-modal-profile .scav-image-preview{width:min(260px,42vw);flex-shrink:0;margin:0}
 .vendor-modal-profile .scav-image-preview img{height:auto;max-height:160px}
+.vendor-shop-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0 20px}
+.vendor-shop-gallery figure{margin:0;min-width:0}.vendor-shop-gallery .scav-image-preview{width:100%;margin:0}
+.vendor-shop-gallery img{width:100%;height:180px;object-fit:contain}.vendor-shop-gallery figcaption{color:#bbb;margin-top:6px}
+@media(max-width:480px){.vendor-shop-gallery{grid-template-columns:1fr}}
+@media(max-width:650px){.vendor-header .vendor-face{width:70px;height:70px}}
 </style>
 
 <script>
@@ -280,7 +291,7 @@ function openVendor(id) {
   const copy = content.cloneNode(true);
   copy.removeAttribute('id');
   body.replaceChildren(copy);
-  if(section.dataset.portrait){const profile=document.createElement('div');profile.className='vendor-modal-profile';profile.innerHTML=ScavImages.preview({name:section.dataset.vendorName,image:section.dataset.portrait})+'<div class="vendor-modal-meta"><strong>'+escapeVendorText(section.dataset.vendorName)+'</strong><span>'+escapeVendorText(section.dataset.faction)+'</span></div>';body.prepend(profile);}
+  if(section.dataset.portrait){const profile=document.createElement('div');profile.className='vendor-modal-profile';const face=section.querySelector('.vendor-face');profile.innerHTML=(face ? '<button type="button" class="vendor-face-preview" data-image-preview aria-haspopup="dialog" aria-label="Enlarge '+escapeVendorText(section.dataset.vendorName)+' image">'+face.outerHTML+'</button>' : ScavImages.preview({name:section.dataset.vendorName,image:section.dataset.portrait}))+'<div class="vendor-modal-meta"><strong>'+escapeVendorText(section.dataset.vendorName)+'</strong><span>'+escapeVendorText(section.dataset.faction)+'</span></div>';body.prepend(profile);}
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
   modal.querySelector('.vendor-modal-close').focus();
@@ -312,6 +323,17 @@ function renderVendorDetails(details) {
       escapeVendorText(text.slice(match.index + match[0].length, matches[i + 1]?.index ?? text.length).trim()) + '</span>').join('') + '</div>';
 }
 
+function renderVendorPortrait(vendor) {
+  const portrait = vendor.portrait;
+  if (!portrait?.file) return '';
+  const c = portrait.crop;
+  if (c && [c.x,c.y,c.size,portrait.sourceWidth].every(Number.isFinite) && c.size > 0) {
+    const style = 'width:'+(100*portrait.sourceWidth/c.size)+'%;left:'+(-100*c.x/c.size)+'%;top:'+(-100*c.y/c.size)+'%;';
+    return '<span class="vendor-portrait vendor-face"><img src="'+escapeVendorText(portrait.file)+'" alt="'+escapeVendorText(vendor.name)+'" style="'+style+'"></span>';
+  }
+  return '<img class="vendor-portrait" src="'+escapeVendorText(portrait.file)+'" alt="">';
+}
+
 async function loadVendorDirectory() {
   const list = document.getElementById('vendor-list');
   const count = document.querySelector('.vendor-count');
@@ -320,21 +342,30 @@ async function loadVendorDirectory() {
     if (!response.ok) throw new Error('Vendor data request failed: ' + response.status);
     const payload = await response.json();
     if (!Array.isArray(payload.data) || !payload.data.length) throw new Error('Invalid vendor data');
+    document.querySelectorAll('.sell-card[data-vendor-id]').forEach(card => {
+      const vendor = payload.data.find(v => v.id === card.dataset.vendorId);
+      if (vendor) card.querySelector('strong').innerHTML = renderVendorPortrait(vendor) + '<span>' + escapeVendorText(vendor.name) + '</span>';
+    });
     let vendors = payload.data;
     const factionParam = new URLSearchParams(location.search).get('faction');
     if (factionParam) vendors = vendors.filter(vendor => vendor.factionId === factionParam);
     list.innerHTML = vendors.map(vendor => {
       const name = vendor.name + (vendor.location ? ' — ' + vendor.location : '');
       const faction = (vendor.factionId || 'unknown').replace(/(^|[- ])\w/g, part => part.replace('-', ' ').toUpperCase());
-      const content = vendor.inventoryDocumented
+      const screenshots = vendor.shopEvidence?.screenshots || [];
+      const shopGallery = screenshots.length ? '<h3>Shop screenshots</h3><div class="vendor-shop-gallery">' +
+        screenshots.map((shot, i) => '<figure>' + ScavImages.preview({name:vendor.name + ' shop, part ' + (i + 1),image:shot.file}) +
+          '<figcaption>Part ' + (i + 1) + ' of ' + screenshots.length + '</figcaption></figure>').join('') +
+        '</div><p class="placeholder-note">Item names, prices and unlock ranks still need confirmation.</p>' : '';
+      const content = shopGallery + (vendor.inventoryDocumented
         ? '<p class="placeholder-note">Unverified inventory</p>' +
           '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
           vendor.inventory.map(item => '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(item.name) + '</a></td><td>' + escapeVendorText(item.rank) +
             '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>').join('') + '</tbody></table>'
-        : '<div class="placeholder-note">Inventory coming soon.</div>';
+        : '<div class="placeholder-note">' + (screenshots.length ? 'Item list awaiting confirmation. See the shop screenshots above.' : 'Inventory coming soon.') + '</div>');
       const portrait = vendor.portrait?.file || '';
-      return '<div class="vendor-section' + (vendor.inventoryDocumented ? '' : ' placeholder') + '"' + (portrait ? ' data-portrait="' + escapeVendorText(portrait) + '"' : '') + '>' +
-        '<div class="vendor-header' + (portrait ? ' has-portrait' : '') + '" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + (portrait ? '<img class="vendor-portrait"' + (vendor.portrait?.position === 'left center' ? ' style="object-position:left center"' : '') + ' src="' + escapeVendorText(portrait) + '" alt="">' : '') + '<span class="vendor-name">' + escapeVendorText(name) + '</span>' +
+      return '<div class="vendor-section' + (vendor.inventoryDocumented || screenshots.length ? '' : ' placeholder') + '"' + (portrait ? ' data-portrait="' + escapeVendorText(portrait) + '"' : '') + '>' +
+        '<div class="vendor-header' + (portrait ? ' has-portrait' : '') + '" role="button" tabindex="0" data-content-id="' + escapeVendorText(vendor.id) + '">' + renderVendorPortrait(vendor) + '<span class="vendor-name">' + escapeVendorText(name) + '</span>' +
         '<div class="vendor-faction">Faction: ' + escapeVendorText(faction) + '</div></div>' +
         '<div class="vendor-content" id="' + escapeVendorText(vendor.id) + '">' + content + '</div></div>';
     }).join('');
@@ -373,25 +404,25 @@ document.addEventListener('DOMContentLoaded', loadVendorDirectory);
   <h2 id="selling-guide-title">Vendor Selling Rates</h2>
   <p>Vendor buy rates.</p>
   <div class="sell-grid">
-    <div class="sell-card">
+    <div class="sell-card" data-vendor-id="vesna">
       <strong>Vesna</strong>
       <div>Common items — <span class="sell-rate">30%</span></div>
       <div>Clothing — <span class="sell-rate">60%</span></div>
     </div>
-    <div class="sell-card">
+    <div class="sell-card" data-vendor-id="grigory">
       <strong>Grigory</strong>
       <div>Common items — <span class="sell-rate">50%</span></div>
     </div>
-    <div class="sell-card">
+    <div class="sell-card" data-vendor-id="zhivan">
       <strong>Zhivan</strong>
       <div>Common items — <span class="sell-rate">140%</span> value</div>
     </div>
-    <div class="sell-card">
+    <div class="sell-card" data-vendor-id="nadja">
       <strong>Nadja</strong>
       <div>Common items — <span class="sell-rate">90%</span></div>
       <div>Crafting items — <span class="sell-rate">80%</span></div>
     </div>
-    <div class="sell-card">
+    <div class="sell-card" data-vendor-id="bogdan">
       <strong>Bogdan</strong>
       <div>Pays <span class="sell-rate">40% more</span> for Mutant Parts</div>
     </div>

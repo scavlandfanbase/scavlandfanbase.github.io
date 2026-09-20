@@ -1,5 +1,18 @@
 # SCAVLAND Website — Next Jobs
 
+## Armour review and vendor screenshots — 20 September 2026
+
+- Added Old Tactical Pants to Armour and Items from the supplied full-durability tooltip: approximate value 35,000, ballistic 20, slash 23, radiation 15, Medium repair class, not stackable. Added its original screenshot to the armour evidence archive.
+- Replaced Old Tactical Vest's placeholder evidence reference with the supplied archived tooltip. Existing 75,000 / 35 / 25 / 15 / Medium values match; added the description. Its card now displays the stats screenshot as requested. Unknown vendor ranks render as a dash and match the No Vendor Rank filter.
+- Both corresponding Supabase review submissions were already approved when inspected; no review statuses were changed. Submission IDs are linked in the canonical sources. Armour is now **6/31 verified**; Items **176/256 verified**, with 80 remaining.
+- Reviewed and organised all 11 newly uploaded vendor screenshots: Anatoly (2), Grigory (2), Jasna, Marko, Nadja, Olga, Petar and Vesna (2). Canonical `shopEvidence` preserves original upload names, ordered parts, review limitations, and user-labelled continuation associations. All eight galleries are available in vendor modals, including Olga and Vesna.
+- No item labels, prices or individual unlock ranks appear in these grids. All **231 existing inventory rows across 10 vendors** remain unchanged and unverified; 12 item lists remain undocumented. Do not infer identities from similar icons or unlock ranks from player rank/stock counts. Next required evidence: labelled shop item tooltips, with visible price and rank where those facts are to be verified. The screenshot-processing pass is complete; inventory transcription/verification remains blocked on this evidence.
+- All 15 existing vendor portraits now use individually positioned face crops in CSS, preserving original screenshots. Six historical portraits gained direct identity evidence (Grigory, Petar, Marko, Nadja, Vesna and Olga); Bogdan remains legacy-display. Modal portrait buttons still open the full source image, and shop galleries keep full inventory images.
+- Added the same canonical face portraits to all five Vendor Selling Rates cards (Vesna, Grigory, Zhivan, Nadja and Bogdan); percentages are unchanged.
+- Validation: `node scripts/validate-evidence.cjs` checks IDs, all 231 vendor item links, all 319 evidence paths, armour/item source agreement, and page JavaScript. Browser checks covered all eight galleries, search, continuation enlargement/Escape return, a 390x844 phone layout and armour search. No browser console errors observed. Evidence index paths were updated with the renames; the normal workflow will refresh OCR/hashes after push.
+
+Older counts and statements below are historical and superseded by this section.
+
 ## Jasna vendor screenshot — 20 September 2026
 
 Implementation commit: `57c1d991723240b7f60226aafbe778a8a1faf815`.

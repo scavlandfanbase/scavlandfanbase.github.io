@@ -2335,12 +2335,14 @@
       "classification": [
         "armour"
       ],
-      "image": "images/armour/old-tactical-vest-icon.webp",
+      "image": "evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
       "notes": null,
       "source": {
-        "file": "user-submitted in-game screenshot 2026-09-19",
+        "file": "evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
         "status": "screenshot-verified",
-        "note": "Verification synchronized from canonical Body Armour record"
+        "lastVerified": "2026-09-20",
+        "submissionId": "d9f30f35-7ef4-424c-bad7-1779df0ec224",
+        "note": "Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown."
       }
     },
     {
@@ -3573,6 +3575,22 @@
       "effects": {
         "health": 5,
         "thirst": 3
+      }
+    },
+    {
+      "id": "old-tactical-pants",
+      "name": "Old Tactical Pants",
+      "classification": [
+        "armour"
+      ],
+      "image": null,
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/old-tactical-pants__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "submissionId": "da5dec43-ea75-48da-a057-1f8be2b1d2af",
+        "note": "Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown."
       }
     }
   ]

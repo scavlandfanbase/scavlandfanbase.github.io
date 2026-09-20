@@ -202,12 +202,16 @@
       "slash": 25,
       "radiation": 15,
       "repairClass": "Medium",
-      "image": "images/armour/old-tactical-vest-icon.webp",
+      "image": "evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
       "stackable": false,
       "source": {
-        "file": "user-submitted in-game screenshot 2026-09-19",
-        "status": "screenshot-verified"
-      }
+        "file": "evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "submissionId": "d9f30f35-7ef4-424c-bad7-1779df0ec224",
+        "note": "Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown."
+      },
+      "description": "A beat-up tactical vest worn by police forces of pre-Mist times. It offers great mobility and decent protection against weaker types of weapon fire.\n\nThis vest is usually a reward for those with basic training and experience in the field."
     },
     {
       "id": "panskiy-kask",
@@ -467,6 +471,27 @@
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
+      }
+    },
+    {
+      "id": "old-tactical-pants",
+      "name": "Old Tactical Pants",
+      "category": "Pants",
+      "vendorRank": null,
+      "price": 35000,
+      "durability": 100,
+      "ballistic": 20,
+      "slash": 23,
+      "radiation": 15,
+      "repairClass": "Medium",
+      "stackable": false,
+      "description": "A pair of beat-up tactical pants worn by the armed men of pre-War times. Offers great mobility and is pretty comfortable, but doesn't protect against the rocky terrain of the wastes.",
+      "source": {
+        "file": "evidence-inbox/armour/old-tactical-pants__stats-100-durability__2026-09-20.png",
+        "status": "screenshot-verified",
+        "lastVerified": "2026-09-20",
+        "submissionId": "da5dec43-ea75-48da-a057-1f8be2b1d2af",
+        "note": "Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown."
       }
     }
   ]

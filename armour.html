@@ -1138,7 +1138,7 @@ function createArmourCard(item) {
 
                 <span class="info-value">
                     ${
-                        item.vendorRank === "-"
+                        item.vendorRank == null || item.vendorRank === "-"
                             ? "—"
                             : escapeHTML(item.vendorRank)
                     }
@@ -1262,7 +1262,7 @@ function renderArmour() {
 
                         const matchesVendor =
                             selectedVendor === "all" ||
-                            item.vendorRank === selectedVendor;
+                            (item.vendorRank ?? "-") === selectedVendor;
 
 
                         return (

@@ -247,9 +247,38 @@
         "status": "existing-site-data"
       },
       "portrait": {
-        "file": "images/vendors/grigory.png",
-        "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "file": "evidence-inbox/vendors/grigory__shop-screen-part-1__2026-09-20.png",
+        "status": "screenshot-verified",
+        "evidence": "direct-shop-screen",
+        "note": "Vendor name and faction visible; inventory facts have separate provenance.",
+        "crop": {
+          "x": 16,
+          "y": 20,
+          "size": 240
+        },
+        "sourceWidth": 1308
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/grigory__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Grigory.png",
+            "association": "visible-vendor-header"
+          },
+          {
+            "file": "evidence-inbox/vendors/grigory__shop-screen-part-2__2026-09-20.png",
+            "part": 2,
+            "originalFilename": "GrigoryCOntinue.png",
+            "association": "user-labelled-continuation"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -328,9 +357,32 @@
         "status": "existing-site-data"
       },
       "portrait": {
-        "file": "images/vendors/petar.png",
-        "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "file": "evidence-inbox/vendors/petar__shop-screen-part-1__2026-09-20.png",
+        "status": "screenshot-verified",
+        "evidence": "direct-shop-screen",
+        "note": "Vendor name and faction visible; inventory facts have separate provenance.",
+        "crop": {
+          "x": 17,
+          "y": 27,
+          "size": 240
+        },
+        "sourceWidth": 1273
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/petar__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Petar.png",
+            "association": "visible-vendor-header"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -425,7 +477,13 @@
       "portrait": {
         "file": "images/vendors/bogdan.png",
         "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "evidence": "historical-site-asset",
+        "crop": {
+          "x": 17,
+          "y": 19,
+          "size": 240
+        },
+        "sourceWidth": 754
       }
     },
     {
@@ -476,9 +534,32 @@
         "status": "existing-site-data"
       },
       "portrait": {
-        "file": "images/vendors/marko.png",
-        "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "file": "evidence-inbox/vendors/marko__shop-screen-part-1__2026-09-20.png",
+        "status": "screenshot-verified",
+        "evidence": "direct-shop-screen",
+        "note": "Vendor name and faction visible; inventory facts have separate provenance.",
+        "crop": {
+          "x": 17,
+          "y": 32,
+          "size": 240
+        },
+        "sourceWidth": 1306
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/marko__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Marko.png",
+            "association": "visible-vendor-header"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -540,7 +621,29 @@
         "status": "screenshot-verified",
         "evidence": "direct-shop-screen",
         "position": "left center",
-        "note": "Name and Acolytes identity visible. Inventory item names, prices and unlock ranks are not shown; inventory remains existing-site-data."
+        "note": "Name and Acolytes identity visible. Inventory item names, prices and unlock ranks are not shown; inventory remains existing-site-data.",
+        "crop": {
+          "x": 19,
+          "y": 30,
+          "size": 240
+        },
+        "sourceWidth": 1314
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/jasna__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Jasna.png",
+            "association": "visible-vendor-header"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -628,7 +731,13 @@
       "portrait": {
         "file": "evidence-inbox/factions/yefim-commonfolk__character-card__2026-09-18_211846.png",
         "status": "screenshot-verified",
-        "evidence": "character-card"
+        "evidence": "character-card",
+        "crop": {
+          "x": 25,
+          "y": 41,
+          "size": 56
+        },
+        "sourceWidth": 220
       }
     },
     {
@@ -897,7 +1006,35 @@
       "portrait": {
         "file": "evidence-inbox/factions/anatoly-mechanists__character-card__2026-09-18_085411.png",
         "status": "screenshot-verified",
-        "evidence": "character-card"
+        "evidence": "character-card",
+        "crop": {
+          "x": 11,
+          "y": 21,
+          "size": 240
+        },
+        "sourceWidth": 618
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/anatoly__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Anatoly.png",
+            "association": "visible-vendor-header"
+          },
+          {
+            "file": "evidence-inbox/vendors/anatoly__shop-screen-part-2__2026-09-20.png",
+            "part": 2,
+            "originalFilename": "AnatolyContinue.png",
+            "association": "user-labelled-continuation"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -1011,9 +1148,32 @@
         "status": "existing-site-data"
       },
       "portrait": {
-        "file": "images/vendors/nadja.png",
-        "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "file": "evidence-inbox/vendors/nadja__shop-screen-part-1__2026-09-20.png",
+        "status": "screenshot-verified",
+        "evidence": "direct-shop-screen",
+        "note": "Vendor name and faction visible; inventory facts have separate provenance.",
+        "crop": {
+          "x": 17,
+          "y": 26,
+          "size": 240
+        },
+        "sourceWidth": 1275
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/nadja__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Nadja.png",
+            "association": "visible-vendor-header"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -1794,7 +1954,13 @@
       "portrait": {
         "file": "evidence-inbox/factions/volodymyr-gunners__character-card__2026-09-17_202418.png",
         "status": "screenshot-verified",
-        "evidence": "character-card"
+        "evidence": "character-card",
+        "crop": {
+          "x": 17,
+          "y": 24,
+          "size": 240
+        },
+        "sourceWidth": 657
       }
     },
     {
@@ -1833,9 +1999,38 @@
         "status": "existing-site-data"
       },
       "portrait": {
-        "file": "images/vendors/vesna.png",
-        "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "file": "evidence-inbox/vendors/vesna__shop-screen-part-1__2026-09-20.png",
+        "status": "screenshot-verified",
+        "evidence": "direct-shop-screen",
+        "note": "Vendor name and faction visible; inventory facts have separate provenance.",
+        "crop": {
+          "x": 16,
+          "y": 33,
+          "size": 240
+        },
+        "sourceWidth": 1315
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/vesna__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Vesna.png",
+            "association": "visible-vendor-header"
+          },
+          {
+            "file": "evidence-inbox/vendors/vesna__shop-screen-part-2__2026-09-20.png",
+            "part": 2,
+            "originalFilename": "VesnaCOntinue.png",
+            "association": "user-labelled-continuation"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -1850,9 +2045,32 @@
         "status": "existing-site-data"
       },
       "portrait": {
-        "file": "images/vendors/olga.png",
-        "status": "legacy-display",
-        "evidence": "historical-site-asset"
+        "file": "evidence-inbox/vendors/olga__shop-screen-part-1__2026-09-20.png",
+        "status": "screenshot-verified",
+        "evidence": "direct-shop-screen",
+        "note": "Vendor name and faction visible; inventory facts have separate provenance.",
+        "crop": {
+          "x": 18,
+          "y": 31,
+          "size": 240
+        },
+        "sourceWidth": 1311
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-20",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/olga__shop-screen-part-1__2026-09-20.png",
+            "part": 1,
+            "originalFilename": "Olga.png",
+            "association": "visible-vendor-header"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grids visually reviewed. Item labels, prices and item unlock ranks are absent; stock quantities and player rank do not verify these fields. Continuation association supplied by the uploader; inventory completeness is not independently established."
       }
     },
     {
@@ -1893,7 +2111,13 @@
       "portrait": {
         "file": "evidence-inbox/factions/yelena-palatines__character-card__2026-09-18_211816.png",
         "status": "screenshot-verified",
-        "evidence": "character-card"
+        "evidence": "character-card",
+        "crop": {
+          "x": 64,
+          "y": 89,
+          "size": 54
+        },
+        "sourceWidth": 226
       }
     },
     {
@@ -1910,7 +2134,13 @@
       "portrait": {
         "file": "evidence-inbox/factions/tajra-rada__character-card__2026-09-18_211831.png",
         "status": "screenshot-verified",
-        "evidence": "character-card"
+        "evidence": "character-card",
+        "crop": {
+          "x": 37,
+          "y": 35,
+          "size": 55
+        },
+        "sourceWidth": 238
       }
     },
     {
@@ -1927,7 +2157,13 @@
       "portrait": {
         "file": "evidence-inbox/factions/snezhana-rada__character-card__2026-09-18_211839.png",
         "status": "screenshot-verified",
-        "evidence": "character-card"
+        "evidence": "character-card",
+        "crop": {
+          "x": 20,
+          "y": 21,
+          "size": 55
+        },
+        "sourceWidth": 199
       }
     },
     {
@@ -1944,7 +2180,13 @@
       "portrait": {
         "file": "evidence-inbox/factions/zhivan-vultures__character-card__2026-09-13_212725.png",
         "status": "screenshot-verified",
-        "evidence": "character-card"
+        "evidence": "character-card",
+        "crop": {
+          "x": 20,
+          "y": 26,
+          "size": 240
+        },
+        "sourceWidth": 675
       }
     },
     {
