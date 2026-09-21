@@ -2157,16 +2157,16 @@
         "lastVerified": "2026-06-21"
       },
       "portrait": {
-        "file": "evidence-inbox/vendors/olga__shop-screen-part-1__2026-09-20.png",
+        "file": "images/vendors/olga.png",
         "status": "screenshot-verified",
         "evidence": "direct-shop-screen",
         "note": "Vendor name and faction visible; inventory facts have separate provenance.",
         "crop": {
-          "x": 0,
-          "y": 0,
-          "size": 634
+          "x": 24,
+          "y": 40,
+          "size": 246
         },
-        "sourceWidth": 1311
+        "sourceWidth": 697
       },
       "shopEvidence": {
         "status": "reviewed",
