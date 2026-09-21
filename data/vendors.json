@@ -1140,7 +1140,7 @@
     {
       "id": "nadja",
       "name": "Nadja",
-      "location": "The Mechanists",
+      "location": "Sontse Station",
       "factionId": "mechanists",
       "inventoryDocumented": true,
       "inventory": [
@@ -1148,99 +1148,183 @@
           "itemId": "hammer",
           "name": "Hammer",
           "rank": "1",
-          "price": "2000₽",
-          "details": "Hand Tool Description: A simple and reliable tool, for all kinds of work I don't do. Not very handy in combat, as Mutants have sturdy bones. Maybe better against humans? Max Stacks: 4"
+          "price": 2000,
+          "details": "Hand Tool Description: A simple and reliable tool, for all kinds of work I don't do. Not very handy in combat, as Mutants have sturdy bones. Maybe better against humans? Max Stacks: 4",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items, existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "screwdriver",
           "name": "Screwdriver",
           "rank": "1",
-          "price": "2000₽",
-          "details": "Hand Tool Description: A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it. Max Stacks: 4"
+          "price": 2000,
+          "details": "Hand Tool Description: A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it. Max Stacks: 4",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "plier",
           "name": "Plier",
           "rank": "1",
-          "price": "2000₽",
-          "details": "Hand Tool Description: I'm not the type to pull someone's teeth out. But what else is this thing for? Max Stacks: 5"
+          "price": 2000,
+          "details": "Hand Tool Description: I'm not the type to pull someone's teeth out. But what else is this thing for? Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "wg-40",
           "name": "WG-40",
           "rank": "1",
-          "price": "250₽",
-          "details": "Hand Tool Description: A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. Max Stacks: 4"
+          "price": 250,
+          "details": "Hand Tool Description: A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. Max Stacks: 4",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "chemical-residue",
           "name": "Chemical Residue",
           "rank": "1",
-          "price": "100₽",
-          "details": "Component Description: Industrial waste from when Svarog Factories was still operational. Max Stacks: 40"
+          "price": 100,
+          "details": "Component Description: Industrial waste from when Svarog Factories was still operational. Max Stacks: 40",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "metal-scrap",
           "name": "Metal Scrap",
           "rank": "1",
-          "price": "100₽",
-          "details": "Component Description: Scraps of metal that can be recycled into something useful. Max Stacks: 40"
+          "price": 100,
+          "details": "Component Description: Scraps of metal that can be recycled into something useful. Max Stacks: 40",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "plastic-scrap",
           "name": "Plastic Scrap",
           "rank": "1",
-          "price": "100₽",
-          "details": "Component Description: A scrap of plastic that can maybe be recycled. Max Stacks: 40"
+          "price": 100,
+          "details": "Component Description: A scrap of plastic that can maybe be recycled. Max Stacks: 40",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "fabric-scrap",
           "name": "Fabric Scrap",
           "rank": "1",
-          "price": "100₽",
-          "details": "Component Description: Low-quality fabric scrap, useful for patching clothes. Max Stacks: 40"
+          "price": 100,
+          "details": "Component Description: Low-quality fabric scrap, useful for patching clothes. Max Stacks: 40",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "rubber-scrap",
           "name": "Rubber Scrap",
           "rank": "1",
-          "price": "100₽",
-          "details": "Component Description: A scrap of rubber which resisted the years. Good for trading. Max Stacks: 40"
+          "price": 100,
+          "details": "Component Description: A scrap of rubber which resisted the years. Good for trading. Max Stacks: 40",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "screws",
           "name": "Screws",
           "rank": "1",
-          "price": "100₽",
-          "details": "Component Description: Hard-to-find metal screws, valuable for tinkerers. Max Stacks: 10"
+          "price": 100,
+          "details": "Component Description: Hard-to-find metal screws, valuable for tinkerers. Max Stacks: 10",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "mechanical-components",
           "name": "Mechanical Components",
           "rank": "1",
-          "price": "10000₽",
-          "details": "Advanced Component Description: Small gears, levers and bits of machinery. Max Stacks: 5"
+          "price": 10000,
+          "details": "Advanced Component Description: Small gears, levers and bits of machinery. Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "advanced-mechanical-components",
           "name": "Advanced Mechanical Components",
           "rank": "3",
-          "price": "25000₽",
-          "details": "Advanced Component Description: High-grade machine parts, possibly reusable. Max Stacks: 5"
+          "price": 25000,
+          "details": "Advanced Component Description: High-grade machine parts, possibly reusable. Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "kevlar-weave",
           "name": "Kevlar Weave",
           "rank": "2",
-          "price": "10000₽",
-          "details": "Armor Material Description: High-impact resistant fabric used in bulletproof armor. Max Stacks: 5"
+          "price": 10000,
+          "details": "Armor Material Description: High-impact resistant fabric used in bulletproof armor. Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "armor-plate",
           "name": "Armor Plate",
           "rank": "3",
-          "price": "25000₽",
-          "details": "Armor Material Description: Rusty armor plate offering minimal protection — stopping even one bullet is good enough. Max Stacks: 5"
+          "price": 25000,
+          "details": "Armor Material Description: Rusty armor plate offering minimal protection — stopping even one bullet is good enough. Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         }
       ],
       "source": {
