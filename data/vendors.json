@@ -2038,11 +2038,79 @@
       "name": "Olga",
       "location": "The Mire",
       "factionId": "rada",
-      "inventoryDocumented": false,
-      "inventory": [],
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "medicinal-herb",
+          "name": "Medicinal Herb",
+          "rank": "1",
+          "price": 50,
+          "details": "A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss 'em in the pot anyway.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "bread",
+          "name": "Bread",
+          "rank": "",
+          "price": 480,
+          "details": "Hunger: -12 Thirst: +1 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "rank": "1",
+          "price": 480,
+          "details": "Radiation: -5 Thirst: -33",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "salt",
+          "name": "Salt",
+          "rank": "",
+          "price": 3000,
+          "details": "Hunger: -2 Thirst: +20 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "butter",
+          "name": "Butter",
+          "rank": "1",
+          "price": 2100,
+          "details": "A great condiment which goes with any meal. Hard to make, rare to come by, and it goes bad pretty fast.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        }
+      ],
       "source": {
         "file": "vendors.html",
-        "status": "existing-site-data"
+        "status": "existing-site-data",
+        "note": null,
+        "lastVerified": "2026-06-21"
       },
       "portrait": {
         "file": "evidence-inbox/vendors/olga__shop-screen-part-1__2026-09-20.png",
