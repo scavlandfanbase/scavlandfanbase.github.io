@@ -2076,13 +2076,127 @@
     {
       "id": "rosa",
       "name": "Rosa",
-      "location": null,
+      "location": "Church of St. Dmitri",
       "factionId": "acolytes",
-      "inventoryDocumented": false,
-      "inventory": [],
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "rank": "1",
+          "price": 480,
+          "details": "",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "salt",
+          "name": "Salt",
+          "rank": "",
+          "price": 3000,
+          "details": "",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "butter",
+          "name": "Butter",
+          "rank": "1",
+          "price": 2100,
+          "details": "A great condiment which goes with any meal. Hard to make, rare to come by, and it goes bad pretty fast.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "berry-puree",
+          "name": "Berry Puree",
+          "rank": "1",
+          "price": 5000,
+          "details": "Mudlarks created this dish that only a few merchants dared taste. They believe it enhances one's awareness of the Mist...",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "whole-roasted-fish",
+          "name": "Whole Roasted Fish",
+          "rank": "1",
+          "price": 4000,
+          "details": "The sharp crackle of fish bones against my teeth keeps me on edge, but does nothing for nutrition. This thing came from the dirty waters of Lake Pavlie. I should eat these sparingly.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "vegetable-soup",
+          "name": "Vegetable Soup",
+          "rank": "2",
+          "price": 7500,
+          "details": "Food Hunger: -40 Thirst: -20",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "fish-soup",
+          "name": "Fish Soup",
+          "rank": "1",
+          "price": 7500,
+          "details": "An eccentric fish soup that's definitely an acquired taste. The secret is to cook it for so long that it's almost not radioactive at all.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        }
+      ],
       "source": {
-        "file": "vendors.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/factions/rosa__shop-screen__2026-09-21.png",
+        "status": "existing-site-data",
+        "note": null,
+        "lastVerified": "2026-09-21"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/rosa__character-card__2026-09-21.png",
+        "sourceWidth": 649,
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "size": 280
+        }
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/factions/rosa__shop-screen__2026-09-21.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     },
     {
