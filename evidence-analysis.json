@@ -2084,12 +2084,12 @@
     },
     {
       "file": "items/berry-puree__icon__2026-09-21.png",
-      "sha256": "1da4d7cf4f5832abf8c6fec21dfd4b14a02a42e96f66fcb8856f6df2f8149f21",
-      "bytes": 1542,
-      "width": 199,
-      "height": 192,
-      "phash": "8b553877c3d51839",
-      "ocr": "aie"
+      "sha256": "cc6a5958b29829b92bcb5338ee2173783a910882a66aebd0f947d5d1c3ec0f4e",
+      "bytes": 1549,
+      "width": 202,
+      "height": 189,
+      "phash": "99d564769acc9992",
+      "ocr": "® q"
     },
     {
       "file": "items/berry-puree__tooltip__2026-09-21.png",
@@ -2276,12 +2276,12 @@
     },
     {
       "file": "items/cigarettes__icon__2026-09-21.png",
-      "sha256": "0878fb98513e0025d44e76b3d482e5210dac2f4858072f7d08320f079443fe98",
-      "bytes": 832,
-      "width": 97,
-      "height": 105,
-      "phash": "98de266169b173a6",
-      "ocr": "F"
+      "sha256": "9411f18c39aaf20610df88dfa5b6190d15dc8a67ed8d48ca3991e005a08aaccf",
+      "bytes": 902,
+      "width": 109,
+      "height": 108,
+      "phash": "9fda213564e6c689",
+      "ocr": "%."
     },
     {
       "file": "items/cigarettes__tooltip__2026-09-21.png",
@@ -2303,12 +2303,12 @@
     },
     {
       "file": "items/dried-mushrooms__icon__2026-09-21.png",
-      "sha256": "49daa8828a8272267894273d619a4d04f4147c73cdc5e4351859138efcb3fff2",
-      "bytes": 678,
-      "width": 93,
-      "height": 100,
-      "phash": "8e542945cfbcdaa1",
-      "ocr": "ae"
+      "sha256": "84b098a8294d22a36b18887833836b3fe78862ec93435ea273768bb6c3aa8cfc",
+      "bytes": 813,
+      "width": 94,
+      "height": 93,
+      "phash": "8dc42e3f7aa57029",
+      "ocr": "& “Yy"
     },
     {
       "file": "items/dried-mushrooms__tooltip__2026-09-21.png",
@@ -2321,12 +2321,12 @@
     },
     {
       "file": "items/echelon-killer-apple__icon__2026-09-21.png",
-      "sha256": "b5a58cdff0e7132223c6f85bb59fccf36b89b7fadd49f03f4e992cb4f1876e43",
-      "bytes": 803,
-      "width": 96,
-      "height": 102,
-      "phash": "87563c694b8dd634",
-      "ocr": "e,"
+      "sha256": "0878fb98513e0025d44e76b3d482e5210dac2f4858072f7d08320f079443fe98",
+      "bytes": 832,
+      "width": 97,
+      "height": 105,
+      "phash": "98de266169b173a6",
+      "ocr": "F"
     },
     {
       "file": "items/echelon-killer-apple__tooltip__2026-09-21.png",
@@ -2377,12 +2377,12 @@
     },
     {
       "file": "items/fish-soup__icon__2026-09-21.png",
-      "sha256": "9411f18c39aaf20610df88dfa5b6190d15dc8a67ed8d48ca3991e005a08aaccf",
-      "bytes": 902,
-      "width": 109,
-      "height": 108,
-      "phash": "9fda213564e6c689",
-      "ocr": "%."
+      "sha256": "47dd33670b4d1306904ec7a37668bdc19c703053901bc7e9cc4be1c33a88e51e",
+      "bytes": 1761,
+      "width": 198,
+      "height": 202,
+      "phash": "8ac72c588276cfcb",
+      "ocr": "@"
     },
     {
       "file": "items/fish-soup__tooltip__2026-09-21.png",
@@ -3151,12 +3151,12 @@
     },
     {
       "file": "items/radish__icon__2026-09-21.png",
-      "sha256": "84b098a8294d22a36b18887833836b3fe78862ec93435ea273768bb6c3aa8cfc",
-      "bytes": 813,
-      "width": 94,
-      "height": 93,
-      "phash": "8dc42e3f7aa57029",
-      "ocr": "& “Yy"
+      "sha256": "b5a58cdff0e7132223c6f85bb59fccf36b89b7fadd49f03f4e992cb4f1876e43",
+      "bytes": 803,
+      "width": 96,
+      "height": 102,
+      "phash": "87563c694b8dd634",
+      "ocr": "e,"
     },
     {
       "file": "items/radish__tooltip__2026-09-21.png",
@@ -3224,12 +3224,12 @@
     },
     {
       "file": "items/russet-potato__icon__2026-09-21.png",
-      "sha256": "71d999bf36786097d641c39c6fbdbb014ad741d47a4423a566648f2c8a7f4844",
-      "bytes": 756,
-      "width": 94,
-      "height": 96,
-      "phash": "8e7238cd652cd6a3",
-      "ocr": "+."
+      "sha256": "49daa8828a8272267894273d619a4d04f4147c73cdc5e4351859138efcb3fff2",
+      "bytes": 678,
+      "width": 93,
+      "height": 100,
+      "phash": "8e542945cfbcdaa1",
+      "ocr": "ae"
     },
     {
       "file": "items/russet-potato__tooltip__2026-09-20.png",
@@ -3248,15 +3248,6 @@
       "height": 910,
       "phash": "e0e12de587784ad6",
       "ocr": "a 7 Russet Potato ~800P FPank: Rank: 1 A common food throughout the Continent. Bland, but nutritious. Hard to eat uncooked. Better off trading these, or having someone prepare them. Hunger: -12 Thirst: -1 -"
-    },
-    {
-      "file": "items/sardines__icon__2026-09-21.png",
-      "sha256": "cc6a5958b29829b92bcb5338ee2173783a910882a66aebd0f947d5d1c3ec0f4e",
-      "bytes": 1549,
-      "width": 202,
-      "height": 189,
-      "phash": "99d564769acc9992",
-      "ocr": "® q"
     },
     {
       "file": "items/sardines__tooltip__2026-09-21.png",
@@ -3474,12 +3465,12 @@
     },
     {
       "file": "items/whole-roasted-fish__icon__2026-09-21.png",
-      "sha256": "47dd33670b4d1306904ec7a37668bdc19c703053901bc7e9cc4be1c33a88e51e",
-      "bytes": 1761,
-      "width": 198,
-      "height": 202,
-      "phash": "8ac72c588276cfcb",
-      "ocr": "@"
+      "sha256": "1da4d7cf4f5832abf8c6fec21dfd4b14a02a42e96f66fcb8856f6df2f8149f21",
+      "bytes": 1542,
+      "width": 199,
+      "height": 192,
+      "phash": "8b553877c3d51839",
+      "ocr": "aie"
     },
     {
       "file": "items/whole-roasted-fish__tooltip__2026-09-21.png",
@@ -3536,6 +3527,16 @@
       "height": 102,
       "phash": "854a3db6c6a5432f",
       "ocr": "vale | | Fas"
+    },
+    {
+      "file": "unresolved/item-icon__2026-09-21_155515.png",
+      "sha256": "71d999bf36786097d641c39c6fbdbb014ad741d47a4423a566648f2c8a7f4844",
+      "bytes": 756,
+      "filename_timestamp": "2026-09-21T15:55:15",
+      "width": 94,
+      "height": 96,
+      "phash": "8e7238cd652cd6a3",
+      "ocr": "+."
     },
     {
       "file": "unresolved/pistol-ap-ammo__unresolved__2026-09-20.png",
