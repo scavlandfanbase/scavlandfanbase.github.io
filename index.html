@@ -155,6 +155,26 @@ footer {
     color: #777;
     border-top: 1px solid #333;
 }
+
+.admin-entry {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 950;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #8d6914;
+    border-radius: 50%;
+    background: rgba(16, 18, 17, .94);
+    color: #ffcc66;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+}
+
+.admin-entry:hover, .admin-entry:focus-visible { background: #ffcc66; color: #171713; }
 </style>
 
 <link rel="stylesheet" href="site-theme.css">
@@ -218,6 +238,8 @@ footer {
 <footer>
     SCAVLAND Fan Database © 2026
 </footer>
+
+<a class="admin-entry" href="admin.html" aria-label="Admin sign in" title="Admin sign in">⚙</a>
 
 <script>
 fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavland-updates.json")
