@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "description": "Named asset manifest for supplied junk-loot icons. Add each supplied icon at the listed path, then set the matching data/items.json image field.",
+  "data": [
+    {
+      "itemId": "pre-mist-gold-wristwatch",
+      "name": "Pre-Mist Gold Wristwatch",
+      "expectedPath": "images/items/junk/pre-mist-gold-wristwatch.png",
+      "status": "awaiting-icon-upload"
+    },
+    {
+      "itemId": "cassette-tape",
+      "name": "Cassette Tape",
+      "expectedPath": "images/items/junk/cassette-tape.png",
+      "status": "awaiting-icon-upload"
+    },
+    {
+      "itemId": "square-battery",
+      "name": "Square Battery",
+      "expectedPath": "evidence-inbox/items/historical/square-battery__tooltip__2026-09-13_144010.png",
+      "status": "available-in-repository"
+    },
+    {
+      "itemId": "floppy-disk",
+      "name": "Floppy Disk",
+      "expectedPath": "images/items/junk/floppy-disk.png",
+      "status": "awaiting-icon-upload"
+    },
+    {
+      "itemId": "light-bulb",
+      "name": "Light Bulb",
+      "expectedPath": "images/items/junk/light-bulb.png",
+      "status": "awaiting-icon-upload"
+    },
+    {
+      "itemId": "t-plug",
+      "name": "T Plug",
+      "expectedPath": "images/items/junk/t-plug.png",
+      "status": "awaiting-icon-upload"
+    },
+    {
+      "itemId": "camera",
+      "name": "Camera",
+      "expectedPath": "images/items/junk/camera.png",
+      "status": "awaiting-icon-upload"
+    }
+  ]
+}
