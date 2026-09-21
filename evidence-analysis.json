@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 372,
+  "count": 392,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -2108,6 +2108,60 @@
       "ocr": "r Bandage ~250P Dank. Rank: 1 These tattered bandages look like they'll infect my wounds rather than protect them. Still, it’s better than nothing — and I've used worse. Health: +5 Bleed: -15 -"
     },
     {
+      "file": "items/big-filter__icon__2026-09-21.png",
+      "sha256": "adb4233ed38df9abccbae33c4a697ac8bdde82b8315ea2d22379e89c31280cc9",
+      "bytes": 870,
+      "width": 94,
+      "height": 100,
+      "phash": "8b57283d383346cf",
+      "ocr": "cad Ln"
+    },
+    {
+      "file": "items/big-filter__tooltip__2026-09-21.png",
+      "sha256": "99bae20784f3109a0be58ff1868e06c9c8316b212a437f2754aa1ffca493df9c",
+      "bytes": 41792,
+      "width": 1012,
+      "height": 469,
+      "phash": "e0a53dc2d21e7ee0",
+      "ocr": "a an Big Filter ~3000P A large filter for some sort of liquid; most likely an automobile part. wl"
+    },
+    {
+      "file": "items/broken-mk-receiver__icon__2026-09-21.png",
+      "sha256": "730240b3ed3463ad7d5c66114f8bbd0c770a4cbb5e151990b1bb3740e1c3dd93",
+      "bytes": 879,
+      "width": 201,
+      "height": 106,
+      "phash": "87d428685bcbc7b4",
+      "ocr": "—-— 7 5"
+    },
+    {
+      "file": "items/broken-mk-receiver__tooltip__2026-09-21.png",
+      "sha256": "ace333f235bf5dfdbf371b4511ee36e17c05cd873f8ebabcb0c1af83ff043007",
+      "bytes": 46652,
+      "width": 1014,
+      "height": 468,
+      "phash": "e0c52f70da1e3a78",
+      "ocr": "al Broken MK Receiver ~500P The broken body of an MK series weapon. Should be salvageable. a,"
+    },
+    {
+      "file": "items/butcher-knife__icon__2026-09-21.png",
+      "sha256": "9ae31049889f8fe1ed943b6967d170f0e5da39be0c7f09445d8a9efbd807886b",
+      "bytes": 866,
+      "width": 208,
+      "height": 103,
+      "phash": "99d56a6a9195656a",
+      "ocr": "= oe 5"
+    },
+    {
+      "file": "items/butcher-knife__tooltip__2026-09-21.png",
+      "sha256": "423570e4c02e389954bbf139131d8e59e387099e2e857c2c6f860beec9a50a21",
+      "bytes": 54125,
+      "width": 1012,
+      "height": 466,
+      "phash": "c1a12ddada1e5aca",
+      "ocr": "i Butcher Knife ~1000P A common butcher's knife, reappropriated for field use out of desperation. The wooden handle is rotting off. a"
+    },
+    {
       "file": "items/camera__icon__2026-09-21.png",
       "sha256": "ef0c54f4c5d1e5ba2ddb88ffe51ad7b7ec82de9d280bfbd60a49452f190b848e",
       "bytes": 902,
@@ -2164,6 +2218,24 @@
       "ocr": "r . Cassette Tape ~1500P A tape used to store sounds and music. Been decades since last | heard one. Don't think I'll find a working device to play this on... a"
     },
     {
+      "file": "items/chemical-container__icon__2026-09-21.png",
+      "sha256": "0342e227e08ef5660f4846f26a57c5a5c7e7c9df09f9e4cbf4b56190cf23f926",
+      "bytes": 1699,
+      "width": 207,
+      "height": 210,
+      "phash": "9ad36b6565949493",
+      "ocr": "B"
+    },
+    {
+      "file": "items/chemical-container__tooltip__2026-09-21.png",
+      "sha256": "9899749aaaa9e7f072e50c97634a9d5d19f975b378629bec56cdf49fe4b64fd9",
+      "bytes": 55568,
+      "width": 1014,
+      "height": 466,
+      "phash": "c5a52fcada1a5ac8",
+      "ocr": "- Chemical Container ~1000P A chemical container for hazardous materials. Must have seemed like a big deal before the Mist. _."
+    },
+    {
       "file": "items/chemical-residue__tooltip__2026-09-18_091704.png",
       "sha256": "ab3ff3c2fd2cdc8268a25fd8a8b7133c7cf0100bc3695e7e97dfb994b62469d5",
       "bytes": 72935,
@@ -2181,6 +2253,24 @@
       "height": 1083,
       "phash": "e0a13f622799875e",
       "ocr": "r Currant Berries ~50P Rank. Rank: 1 These berries are a common find in every region I’ve traveled. They grow even in areas full of Mist, but how this affects the fruit, | don’t know. Jobs ¢ Supply Run (Olga) 3/9 ¢ Supply Run (Olga) 0/12 Thirst: -2 Hunger: -2 -"
+    },
+    {
+      "file": "items/electric-wires__icon__2026-09-21.png",
+      "sha256": "2aedd0f81da1ccbbec297adde0b9dab6f2c6a5b56839de071931cfbaee8cbbab",
+      "bytes": 1037,
+      "width": 201,
+      "height": 97,
+      "phash": "81542a798fced335",
+      "ocr": "se"
+    },
+    {
+      "file": "items/electric-wires__tooltip__2026-09-21.png",
+      "sha256": "6f946fba3b8489cf44390ba5b93683df45b2d5ca24155b1a391e4d7c065fd398",
+      "bytes": 76585,
+      "width": 1009,
+      "height": 469,
+      "phash": "e1a12f72d01e7af0",
+      "ocr": "- _ — —_ Electric Wires ~500P A bundle of electric wires that should be reasonably valuable for a Mechanist. ail"
     },
     {
       "file": "items/fabric-scrap__tooltip__2026-09-18_091726.png",
@@ -2836,6 +2926,24 @@
       "ocr": "=\" a ae _. a Medicinal Herb ~50P A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss ‘em in the pot anyway. Health: +5 Thirst: «3 a"
     },
     {
+      "file": "items/metal-pipe__icon__2026-09-21.png",
+      "sha256": "1253de7801151f2ca181dbe4eabaf414b9d15db4caa7dfcb91b4c09090d0c66c",
+      "bytes": 1398,
+      "width": 204,
+      "height": 201,
+      "phash": "8e54296dcd99b332",
+      "ocr": "eo"
+    },
+    {
+      "file": "items/metal-pipe__tooltip__2026-09-21.png",
+      "sha256": "6c0070cfecba0632c3d4a4260c679583fb7f56ec0cefcbd5d664837a5cf639cf",
+      "bytes": 47608,
+      "width": 1012,
+      "height": 472,
+      "phash": "c0b13fced21e0ec6",
+      "ocr": "\"el an —— i ne Metal Pipe ~500P A metal pipe left over from some sort of equipment or construction. Good for trading. r."
+    },
+    {
       "file": "items/metal-scrap__tooltip__2026-09-18_091713.png",
       "sha256": "4f48a4b8bd8112dc39cb8555aec680a0f1cea8729784b252d2c6ebcba5251b1e",
       "bytes": 54497,
@@ -2989,6 +3097,24 @@
       "ocr": "a Screws ~100P PRank Rank: 1 A bunch of metal screws, hard to find and pick up but valuable for the tinkering types. -"
     },
     {
+      "file": "items/small-filter__icon__2026-09-21.png",
+      "sha256": "fc0349e26185391ec5ff787c2899b436b8889df3c8e2218c1ba6e27b2a7f85d9",
+      "bytes": 784,
+      "width": 96,
+      "height": 94,
+      "phash": "874a2d383326cecf",
+      "ocr": "“4 5"
+    },
+    {
+      "file": "items/small-filter__tooltip__2026-09-21.png",
+      "sha256": "0aaf1f6568e1b0712a607334cabba2e648d7cdebff0e8431c3c6d9de3f530a78",
+      "bytes": 36904,
+      "width": 1011,
+      "height": 415,
+      "phash": "a1e13fd6921e5ac1",
+      "ocr": "2 i a a ee ee — Small Filter ~500P A small filter, probably from an old machine or automobile. wl"
+    },
+    {
       "file": "items/square-battery__icon__2026-09-21.png",
       "sha256": "5249fee61634b43b93cc4b9306566b349c35b54d04340a58b52fb89b119a2734",
       "bytes": 847,
@@ -3035,6 +3161,15 @@
       "ocr": "a T Plug ~500P A small piece of plastic used-to fit plugs into other plugs... Or something? Looks pretty worthless. al"
     },
     {
+      "file": "items/tactical-knife__icon__2026-09-21.png",
+      "sha256": "49b7b2a0bc92e1effa848c173558154498ed0d2ce079fcf14e1c232f930a45dc",
+      "bytes": 830,
+      "width": 204,
+      "height": 102,
+      "phash": "95956a6a91956d6a",
+      "ocr": "— ="
+    },
+    {
       "file": "items/tactical-knife__tooltip__2026-09-20.png",
       "sha256": "e03d6a6d45005f8109326d6a332d0a9a486164cc648785809918a7cbd7c4a8b5",
       "bytes": 74177,
@@ -3042,6 +3177,15 @@
       "height": 519,
       "phash": "c5a52fd2d25a5a1a",
       "ocr": "al | Tactical Knife ~10000P 6000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. a"
+    },
+    {
+      "file": "items/tactical-knife__tooltip__2026-09-21.png",
+      "sha256": "f583f0bbac4470704e448cc1b308f4503dd4d911faab5becd262f5c61f4b9dc2",
+      "bytes": 100777,
+      "width": 1017,
+      "height": 523,
+      "phash": "95a52fd4d25a5a1a",
+      "ocr": "i — — — —_ Tactical Knife ~10000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. wl"
     },
     {
       "file": "items/tattered-armor-repair-kit__tooltip__2026-09-18_084830.png",
@@ -3054,6 +3198,33 @@
       "ocr": "al Tattered Armor Repair Kit ~12000P 10799P Dank. Rank: 1 A repair kit for clothes that have seen better days. Used to fix up scrap armor by some of the poorest scavengers in Rhos. Repair: 25% Usable in any item condition. Repair Class: Tattered | a"
     },
     {
+      "file": "items/toilet-paper__icon__2026-09-21.png",
+      "sha256": "d2d1f924aadbfb0d3c975232e94ec55320892a8744025d7fea22b567d8955fb9",
+      "bytes": 1145,
+      "width": 205,
+      "height": 103,
+      "phash": "8745389393badc69",
+      "ocr": "en."
+    },
+    {
+      "file": "items/toilet-paper__tooltip__2026-09-21.png",
+      "sha256": "1703544b1c600b7be3f3d47fd17454ced6936b855562e4b0493377a0d6c3b1d9",
+      "bytes": 48639,
+      "width": 1008,
+      "height": 466,
+      "phash": "c1a13bc6d61e4ec6",
+      "ocr": "f Toilet Paper ~500P If | could find one of these that didn't feel like a sand file, I'd be the richest man in Zalesye. yl"
+    },
+    {
+      "file": "items/wg-40__icon__2026-09-21.png",
+      "sha256": "321091dd010f4f8b0f4add7820a9e30e738ddcae926805ebc797e430a6cd6f53",
+      "bytes": 1286,
+      "width": 97,
+      "height": 207,
+      "phash": "9856675d26969c63",
+      "ocr": "4"
+    },
+    {
       "file": "items/wg-40__tooltip__2026-09-18_091658.png",
       "sha256": "581e8b31940e70471a4f485ed380079f630830c97acf824822150eb9d4681afb",
       "bytes": 82570,
@@ -3062,6 +3233,15 @@
       "height": 673,
       "phash": "e0b02fcbb7d05a16",
       "ocr": "- WG-40 ~250P FRank Rank: 1 A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. a"
+    },
+    {
+      "file": "items/wg-40__tooltip__2026-09-21.png",
+      "sha256": "d7569bb50a2a6f8f927ab783d54ab872d787f67561a4b55d1b74aacafdfa7345",
+      "bytes": 45570,
+      "width": 1012,
+      "height": 571,
+      "phash": "c1b52d4b3e96c21e",
+      "ocr": "al WG-40 ~250P A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. al"
     },
     {
       "file": "map/full-map__context__2026-09-18_211740.png",
