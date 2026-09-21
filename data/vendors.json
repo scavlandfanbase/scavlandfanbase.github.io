@@ -1154,7 +1154,7 @@
         "note": "Vendor name and faction visible; inventory facts have separate provenance.",
         "crop": {
           "x": 17,
-          "y": 29,
+          "y": 31,
           "size": 240
         },
         "sourceWidth": 1275
