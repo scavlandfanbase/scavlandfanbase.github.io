@@ -36,6 +36,8 @@
         {
           "id": "latest-update",
           "title": "Latest Update",
+          "summary": "The SCAVLAND fan database is now linked to this live update feed.",
+          "url": "https://store.steampowered.com/news/app/3373500",
           "source": "scavland-updates.json"
         }
       ]
