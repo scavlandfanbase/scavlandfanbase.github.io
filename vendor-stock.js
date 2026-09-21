@@ -22,7 +22,10 @@
     }
     const price=choose([[item.estimatedPrice,'Items'],[armour?.price,'armour data'],[ammo?.estimatedPrice,'ammunition data']],'price',priceNumber);
     const rank=choose([[item.rank,'Items'],[armour?.vendorRank,'armour data']],'rank',String);
-    const details=choose([[item.description,'Items'],[armour?.description,'armour data'],[ammo?.description,'ammunition data'],[weapon?.category,'weapon data'],[armour?.category,'armour data']],'details',String)||'';
+    const effectLabels={health:'Health',bleed:'Bleed',radiation:'Radiation',hunger:'Hunger',thirst:'Thirst'};
+    const effectDetails=Object.entries(item.effects||{}).map(([key,value])=>effectLabels[key]?effectLabels[key]+': '+(value>0?'+':'')+value:null).filter(Boolean);
+    if(item.maxStack!=null)effectDetails.push('Max Stacks: '+item.maxStack);
+    const details=choose([[item.description,'Items'],[armour?.description,'armour data'],[ammo?.description,'ammunition data'],[weapon?.category,'weapon data'],[armour?.category,'armour data']],'details',String)||effectDetails.join(' ');
     const note=(origins.size?'Suggested values from '+[...origins].join(', ')+'. ':'')+'Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.';
     return {itemId:item.id,name:item.name,rank:rank??'',price:Number.isFinite(price)?price:null,details,
       source:{file:null,status:'pending-review',note,lastVerified:null}};

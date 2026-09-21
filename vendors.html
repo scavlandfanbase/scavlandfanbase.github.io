@@ -312,8 +312,16 @@ function escapeVendorText(value) {
 
 // Canonical legacy details are plain text. Restore the existing badge presentation
 // without importing item-tooltip verification or maintaining a second stat database.
-function renderVendorDetails(details) {
-  const text = String(details ?? '');
+function renderVendorDetails(details, item, catalog = {}) {
+  const parts = [String(details ?? '').trim()];
+  const add = (label, value) => { if (value !== null && value !== undefined && value !== '' && !parts.join(' ').toLowerCase().includes(label.toLowerCase() + ':')) parts.push(label + ': ' + value); };
+  for (const [key, label] of [['health','Health'],['bleed','Bleed'],['radiation','Radiation'],['hunger','Hunger'],['thirst','Thirst']]) add(label, item?.effects?.[key]);
+  add('Max Stacks', item?.maxStack);
+  const weapon = catalog.weapons?.get(item?.id), armour = catalog.armour?.get(item?.id), ammo = catalog.ammo?.get(item?.id);
+  if (weapon) for (const [key, label] of [['damage','Damage'],['rpm','RPM'],['range','Range'],['accuracy','Acc'],['recoil','Recoil'],['handling','Handling'],['ergonomics','Ergo'],['reload','Reload']]) add(label, weapon[key]);
+  if (armour) for (const [key, label] of [['durability','Durability'],['ballistic','Ballistic'],['slash','Slash'],['radiation','Radiation'],['repairClass','Repair Class']]) add(label, armour[key]);
+  if (ammo) for (const [key, label] of [['damage','Damage'],['penetrationPercent','Penetration'],['maxStack','Max Stacks']]) add(label, ammo[key] == null ? null : key === 'penetrationPercent' ? ammo[key] + '%' : ammo[key]);
+  const text = parts.filter(Boolean).join(' ');
   const labels = /(?:Description|Max Stacks|Min Cond|Not usable below|Repair Class|Dmg|Damage|Pen|Penetration|Repair|Ergo|Recoil|Handling|Hand|Range|Acc|Health|Bleed|Rad|Radiation|Hunger|Thirst|Max):/g;
   const matches = [...text.matchAll(labels)];
   if (!matches.length) return '<span class="type-label">' + escapeVendorText(text) + '</span>';
@@ -338,11 +346,12 @@ async function loadVendorDirectory() {
   const list = document.getElementById('vendor-list');
   const count = document.querySelector('.vendor-count');
   try {
-    const [response, itemResponse] = await Promise.all([fetch('data/vendors.json', {cache: 'no-store'}), fetch('data/items.json', {cache: 'no-store'})]);
+    const [response, itemResponse, weaponsResponse, armourResponse, ammoResponse] = await Promise.all([fetch('data/vendors.json', {cache: 'no-store'}), fetch('data/items.json', {cache: 'no-store'}), fetch('data/weapons.json', {cache: 'no-store'}), fetch('data/armour.json', {cache: 'no-store'}), fetch('data/ammo.json', {cache: 'no-store'})]);
     if (!response.ok) throw new Error('Vendor data request failed: ' + response.status);
     const payload = await response.json();
     const itemPayload = itemResponse.ok ? await itemResponse.json() : {data: []};
     const itemsById = new Map((itemPayload.data || []).map(item => [item.id, item]));
+    const catalog = {weapons: new Map(((weaponsResponse.ok ? await weaponsResponse.json() : {data: []}).data || []).map(item => [item.id, item])), armour: new Map(((armourResponse.ok ? await armourResponse.json() : {data: []}).data || []).map(item => [item.id, item])), ammo: new Map(((ammoResponse.ok ? await ammoResponse.json() : {data: []}).data || []).map(item => [item.id, item]))};
     if (new URLSearchParams(location.search).get('adminPreview') === 'vendor') {
       try { const preview = JSON.parse(localStorage.getItem('scavland-vendor-preview') || 'null'); const index = (payload.data || []).findIndex(vendor => vendor.id === preview?.id); if (index >= 0) payload.data[index] = {...payload.data[index], ...preview.record}; } catch (err) { console.warn('SCAVLAND vendor preview unavailable:', err); }
     }
@@ -366,7 +375,7 @@ async function loadVendorDirectory() {
         ? '<p class="placeholder-note">Unverified inventory</p>' +
           '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
           vendor.inventory.map(item => { const shared = itemsById.get(item.itemId); const displayName = shared?.name || item.name; return '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(displayName) + '</a></td><td>' + escapeVendorText(item.rank) +
-            '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>'; }).join('') + '</tbody></table>'
+            '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details, shared, catalog) + '</td></tr>'; }).join('') + '</tbody></table>'
         : '<div class="placeholder-note">' + (screenshots.length ? 'Item list awaiting confirmation. See the shop screenshots above.' : 'Inventory coming soon.') + '</div>');
       const portrait = vendor.portrait?.file || '';
       return '<div class="vendor-section' + (vendor.inventoryDocumented || screenshots.length ? '' : ' placeholder') + '"' + (portrait ? ' data-portrait="' + escapeVendorText(portrait) + '"' : '') + '>' +
