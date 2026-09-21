@@ -3250,6 +3250,16 @@
       "ocr": "a 7 Russet Potato ~800P FPank: Rank: 1 A common food throughout the Continent. Bland, but nutritious. Hard to eat uncooked. Better off trading these, or having someone prepare them. Hunger: -12 Thirst: -1 -"
     },
     {
+      "file": "items/salt-icon__2026-09-21_155515.png",
+      "sha256": "71d999bf36786097d641c39c6fbdbb014ad741d47a4423a566648f2c8a7f4844",
+      "bytes": 756,
+      "filename_timestamp": "2026-09-21T15:55:15",
+      "width": 94,
+      "height": 96,
+      "phash": "8e7238cd652cd6a3",
+      "ocr": "+."
+    },
+    {
       "file": "items/sardines__tooltip__2026-09-21.png",
       "sha256": "568a574b0c1d27ff75e1a44d2f13713731ecf4c5b59f305b2f696ba06d3b974a",
       "bytes": 153301,
@@ -3527,16 +3537,6 @@
       "height": 102,
       "phash": "854a3db6c6a5432f",
       "ocr": "vale | | Fas"
-    },
-    {
-      "file": "items/salt-icon__2026-09-21_155515.png",
-      "sha256": "71d999bf36786097d641c39c6fbdbb014ad741d47a4423a566648f2c8a7f4844",
-      "bytes": 756,
-      "filename_timestamp": "2026-09-21T15:55:15",
-      "width": 94,
-      "height": 96,
-      "phash": "8e7238cd652cd6a3",
-      "ocr": "+."
     },
     {
       "file": "unresolved/pistol-ap-ammo__unresolved__2026-09-20.png",
