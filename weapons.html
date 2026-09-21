@@ -2101,7 +2101,11 @@ async function loadWeaponMaster() {
         renderWeapons();
         if (ammoResponse.ok) {
             const ammoPayload = await ammoResponse.json();
-            const currentAmmo = new Map((ammoPayload.data || []).map(item => [item.name.toLowerCase(), item]));
+            const preview = new URLSearchParams(location.search).get('adminPreview') === 'ammunition' ? JSON.parse(localStorage.getItem('scavland-specialist-preview') || 'null') : null;
+            const previewOriginal = preview?.id ? (ammoPayload.data || []).find(item => item.id === preview.id) : null;
+            const ammoRecords = (ammoPayload.data || []).map(item => item.id === preview?.id ? {...item, ...preview.record} : item);
+            const currentAmmo = new Map(ammoRecords.map(item => [item.name.toLowerCase(), item]));
+            if (previewOriginal && preview.record) currentAmmo.set(previewOriginal.name.toLowerCase(), {...previewOriginal, ...preview.record});
             ammunition = ammunition.map(item => {
                 const source = currentAmmo.get(item.name.toLowerCase());
                 if (!source) return item;
