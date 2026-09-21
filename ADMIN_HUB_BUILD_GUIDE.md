@@ -211,14 +211,16 @@ When the build is complete, provide:
 
 Do not merge or publish final changes until the owner has reviewed the result, unless they explicitly ask for publication.
 
-## Phase two, after this works
+## Phase two implementation status
 
-Only after the Items Admin Hub is reliable, add separate specialist editors:
+The first specialist editor phase is now implemented through `specialist-admin.html` and the protected `publish-specialist` Edge Function. The Admin Hub exposes Weapons, Armour, and Crafting. Specialist stats and recipes remain in their dedicated JSON files, while shared names/images resolve from `data/items.json` by stable ID where the public pages support that link.
 
-1. Armour editor for resistance, repair class and durability evidence.
-2. Weapon editor for weapon stats and ammunition.
-3. Crafting editor for recipes and ingredients.
-4. Vendor editor for inventories, ranks, prices, portraits and shop galleries.
+1. Armour editor: implemented for resistance, repair class, durability, image, description, and evidence fields.
+2. Weapon editor: implemented for weapon stats, ammunition, image, and evidence fields.
+3. Crafting editor: implemented for workbench, ingredients JSON, and evidence fields.
+4. Vendor editor: implemented for inventories, ranks, prices, portraits, crops, and shop galleries.
+
+Continue testing each specialist editor with approved disposable records before treating every field as production-verified.
 
 Each specialist editor must update its dedicated JSON file, preserve evidence status rules and avoid overwriting unrelated data.
 
