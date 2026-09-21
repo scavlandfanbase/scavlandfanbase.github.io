@@ -3,7 +3,7 @@ import '../../../vendor-stock.js';
 export const paths = {items:'data/items.json',weapons:'data/weapons.json',armour:'data/armour.json',ammunition:'data/ammo.json',crafting:'data/crafting.json',vendors:'data/vendors.json'};
 const sharedFields = ['name','image','description','estimatedPrice','maxStack','stackable','notes'];
 const fields = {
-  items:[...sharedFields,'classification','rank','source'],
+  items:[...sharedFields,'classification','rank','effects','source'],
   weapons:['name','category','tier','ammo','damage','rpm','range','accuracy','recoil','handling','ergonomics','reload','image','source'],
   armour:['name','category','vendorRank','price','durability','ballistic','slash','radiation','repairClass','image','stackable','description','source'],
   ammunition:['name','category','estimatedPrice','description','damage','penetrationPercent','maxStack','image','source'],
@@ -50,7 +50,7 @@ export function prepare(body, docs) {
   if (create && previous) fail('This record already exists. Search for it and edit it instead.',409);
   if (!create && !previous) fail('The record could not be found. Reload the editor.',404);
   if (!create && body.original && !same(previous,body.original)) fail('This record changed since you opened it. Reload it before saving.',409);
-  const defaults = kind==='vendors' ? {location:'',inventoryDocumented:false,inventory:[],portrait:null} : kind==='items' ? {classification:[],image:null,notes:null} : {};
+  const defaults = kind==='vendors' ? {location:'',inventoryDocumented:false,inventory:[],portrait:null} : kind==='items' ? {classification:[],image:null,notes:null,effects:null} : {};
   const record={...(previous || {id,...defaults,source:{file:null,status:'pending-review',note:null}}),...changes,id};
   if (typeof record.name !== 'string' || !record.name.trim() || record.name.length>160) fail('Enter a name of 160 characters or fewer.');
   record.name=record.name.trim();
@@ -65,6 +65,12 @@ export function prepare(body, docs) {
     if (['price','estimatedPrice','maxStack','rank'].includes(key) && !Number.isInteger(value)) fail(key+' must be a whole number.');
   }
   if ('stackable' in changes && changes.stackable!==null && typeof changes.stackable!=='boolean') fail('Choose whether the item stacks.');
+  if ('effects' in changes && record.effects!==null) {
+    if (!record.effects || typeof record.effects!=='object' || Array.isArray(record.effects)) fail('Item effects are invalid.');
+    const allowedEffects=['health','bleed','radiation','hunger','thirst'];
+    if (Object.keys(record.effects).some(key=>!allowedEffects.includes(key))) fail('Item effects contain an unsupported field.');
+    for (const value of Object.values(record.effects)) if (typeof value!=='number'||!Number.isFinite(value)) fail('Item effects must be numbers.');
+  }
   if (kind==='items' && (!Array.isArray(record.classification)||!record.classification.length||record.classification.some(x=>!classes.includes(x)))) fail('Choose at least one item type.');
   if (kind==='crafting' && !['medical','weapon','armour'].includes(record.workbench)) fail('Choose a workbench.');
   if (['weapons','armour'].includes(kind) && !list.some(x=>x.category===record.category)) fail('Choose an existing category.');
