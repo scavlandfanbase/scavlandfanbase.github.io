@@ -20,6 +20,13 @@ const fs=require('fs'),path=require('path'),http=require('http'),assert=require(
   await frame.locator('#search').fill('Ilya');await frame.locator('.choice').click();await frame.locator('#preview').click();
   assert.ok((await frame.locator('#preview-panel').innerText()).includes('Ilya'));
   console.log('PASS repaired data: 22 vendors load, search, open and preview');
+  await frame.locator('#main-picture .picture-search').fill('snez');
+  const portrait='evidence-inbox/vendors/snezhana__portrait__2026-09-21_230105.png';
+  await frame.locator('#main-picture .picture-result').filter({hasText:'snezhana__portrait__'}).click();
+  assert.equal(await frame.locator('#main-picture .picture-path').inputValue(),portrait);
+  assert.ok(await frame.locator('#main-picture img').evaluate(img=>img.complete&&img.naturalWidth>0));
+  console.log('PASS nested evidence picture search, selection and image preview');
+
   await page.route('**/data/vendors.json',route=>route.fulfill({contentType:'application/json',body:'{"location": The Mire}'}));
   await page.goto(url);frame=page.frameLocator('#editor');await frame.locator('#session-status').filter({hasText:'Its data format is invalid'}).waitFor();
   assert.ok((await frame.locator('#session-status').innerText()).includes('data/vendors.json'));

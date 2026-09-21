@@ -1,5 +1,12 @@
 # SCAVLAND Website — Next Jobs
 
+## Picture library refresh — 21 September 2026
+
+- Rebuilt `data/admin-images.json` from all nested `evidence-inbox/` and `images/` folders (694 pictures), including the new Snezhana portrait and shop screen.
+- `scripts/build-admin-images.cjs` recursively rebuilds the list; `.github/workflows/build-admin-images.yml` runs on image uploads, renames, and deletions, separately from slow OCR analysis.
+- All editors load the picture list without browser caching. Save unsaved changes before refreshing an already-open editor.
+- Browser regression confirms filename search finds the nested Snezhana portrait, selects its path, and displays the image.
+
 ## Vendor editor loading repair — 21 September 2026
 
 - Restored missing JSON quotation marks around Vesna’s The Mire and Snezhana’s Microrayon locations, preserving the entered values.

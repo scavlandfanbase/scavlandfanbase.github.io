@@ -1,0 +1,36 @@
+name: Update admin picture library
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'evidence-inbox/**'
+      - 'images/**'
+      - 'scripts/build-admin-images.cjs'
+      - '.github/workflows/build-admin-images.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: admin-picture-library
+  cancel-in-progress: false
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Refresh picture library
+        run: |
+          node scripts/build-admin-images.cjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/admin-images.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Update admin picture library"
+          git pull --rebase origin main
+          git push origin HEAD:main
