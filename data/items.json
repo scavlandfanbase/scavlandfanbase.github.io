@@ -4285,6 +4285,30 @@
         "hunger": -2,
         "thirst": 20
       }
+    },
+    {
+      "id": "bread",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/historical/bread__tooltip__2026-09-13_141058.png",
+      "notes": null,
+      "effects": {
+        "hunger": -12,
+        "thirst": 1
+      },
+      "source": {
+        "file": null,
+        "status": "pending-review",
+        "note": null,
+        "lastVerified": null
+      },
+      "name": "Bread",
+      "estimatedPrice": 480,
+      "rank": null,
+      "maxStack": 5,
+      "stackable": true,
+      "description": null
     }
   ]
 }
