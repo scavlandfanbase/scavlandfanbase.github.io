@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 357,
+  "count": 358,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -1849,6 +1849,15 @@
       "height": 277,
       "phash": "b01c0fc34fb74785",
       "ocr": "os Anatoly « get z é! Mechanists"
+    },
+    {
+      "file": "factions/anatoly_face.png",
+      "sha256": "b97fb7bdf3566894cf186e88f1cd1e63fb6aa29fd3d23b2dec46b57d3f14a594",
+      "bytes": 2336,
+      "width": 168,
+      "height": 164,
+      "phash": "c4637e9e3c383493",
+      "ocr": "&"
     },
     {
       "file": "factions/bandit__portrait__2026-09-20.png",
