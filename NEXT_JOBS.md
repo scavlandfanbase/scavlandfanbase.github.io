@@ -1,5 +1,7 @@
 # SCAVLAND Website — Next Jobs
 
+The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_CMS_PLAN.md`. It is intentionally separate from the current editor handover because it requires staged page migrations and new content publishing infrastructure.
+
 ## Latest handover — 21 September 2026
 
 - **Admin Hub repair:** replaced the fragmented `admin.html` dashboard/timer/tab initializers with one explicit login, hub, Evidence Review, Items, Vendors and Page Settings view controller. The hub appears only after `is_scavland_admin` returns true; evidence errors or empty queues no longer block the other editors; evidence status tabs and screenshot enlargement remain available; every editor has an Admin Hub return button; and Weapons/Armour are not presented because no such admin editor pages exist.
