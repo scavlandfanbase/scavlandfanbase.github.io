@@ -18,6 +18,8 @@ Admin login
 
 ## Current State
 
+Stage 1 has started. `data/site-content.json` now captures the current global navigation, footer, Home page hero, feature cards, and latest-update section without changing public rendering yet.
+
 Already working:
 
 - Admin Hub authentication and admin allowlist check.

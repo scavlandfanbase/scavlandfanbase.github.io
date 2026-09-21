@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "global": {
+    "navigation": [
+      { "page": "index.html", "label": "Home" },
+      { "page": "vendors.html", "label": "Vendors" },
+      { "page": "weapons.html", "label": "Weapons" },
+      { "page": "armour.html", "label": "Armour" },
+      { "page": "crafting.html", "label": "Crafting" },
+      { "page": "map.html", "label": "Map" },
+      { "page": "items.html", "label": "Items" },
+      { "page": "factions.html", "label": "Factions" },
+      { "page": "areas.html", "label": "Areas" },
+      { "page": "roadmap.html", "label": "Roadmap" }
+    ],
+    "footerText": "SCAVLAND Fan Database © 2026"
+  },
+  "pages": {
+    "index.html": {
+      "title": "Welcome to SCAVLAND",
+      "intro": "Weapons, armour, vendors, crafting, items and more.",
+      "sections": [
+        {
+          "id": "feature-grid",
+          "title": null,
+          "cards": [
+            { "id": "vendors-card", "title": "Vendors", "description": "Discover traders, their stock, and where to find them.", "href": "vendors.html", "image": null },
+            { "id": "weapons-card", "title": "Weapons", "description": "Browse the full arsenal of firearms and melee weapons.", "href": "weapons.html", "image": null },
+            { "id": "armour-card", "title": "Armour", "description": "Compare protective gear and survival outfits.", "href": "armour.html", "image": null },
+            { "id": "crafting-card", "title": "Crafting", "description": "Learn recipes, materials, and upgrade paths.", "href": "crafting.html", "image": null },
+            { "id": "map-card", "title": "Map", "description": "Find hidden shelters, loot spots, and underground safe havens.", "href": "map.html", "image": null },
+            { "id": "areas-card", "title": "Areas", "description": "Explore every zone, region, and dangerous territory.", "href": "areas.html", "image": null },
+            { "id": "factions-card", "title": "Factions", "description": "Meet the groups that rule the wasteland.", "href": "factions.html", "image": null }
+          ]
+        },
+        {
+          "id": "latest-update",
+          "title": "Latest Update",
+          "source": "scavland-updates.json"
+        }
+      ]
+    }
+  }
+}
