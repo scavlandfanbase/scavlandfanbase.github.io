@@ -1966,13 +1966,35 @@
     {
       "id": "raisa",
       "name": "Raisa",
-      "location": null,
+      "location": "Ruined housing area WEST of The Mire",
       "factionId": "vultures",
       "inventoryDocumented": false,
       "inventory": [],
       "source": {
-        "file": "vendors.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/vendors/raisa__shop-screen__2026-09-20.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-06-21"
+      },
+      "portrait": {
+        "file": "evidence-inbox/vendors/Raisha_character-card_2026-09-21 183939.png",
+        "sourceWidth": 244,
+        "crop": {
+          "x": 0,
+          "y": 5,
+          "size": 241
+        }
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/raisa__shop-screen__2026-09-20.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     },
     {
