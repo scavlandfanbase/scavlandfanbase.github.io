@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 429,
+  "count": 430,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -3687,6 +3687,16 @@
       "height": 336,
       "phash": "f5414ac01e1a1ffe",
       "ocr": "pda"
+    },
+    {
+      "file": "vendors/Raisha_character-card_2026-09-21 183939.png",
+      "sha256": "0615ac5b7494920351a86e564d53e8985e34c348fafafba2817ac1e0dc127faa",
+      "bytes": 4110,
+      "filename_timestamp": "2026-09-21T18:39:39",
+      "width": 244,
+      "height": 250,
+      "phash": "c03070c797e39f9c",
+      "ocr": "nT é (eer = i"
     },
     {
       "file": "vendors/anatoly__shop-screen-part-1__2026-09-20.png",
