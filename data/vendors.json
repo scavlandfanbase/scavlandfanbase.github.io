@@ -2202,7 +2202,7 @@
     {
       "id": "sasha",
       "name": "Sasha",
-      "location": null,
+      "location": "Church of St. Dmitri",
       "factionId": "palatines",
       "inventoryDocumented": false,
       "inventory": [],
