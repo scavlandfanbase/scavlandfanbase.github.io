@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 433,
+  "count": 450,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -1985,6 +1985,26 @@
       "ocr": "= “ Acid Gland ~150P A fluid-filled sac that bursts on impact, spilling a burning slime used by Woundworts to dissolve aggressors. Handle with care — or don't handle at all. a"
     },
     {
+      "file": "items/acolytes-gospel__icon__2026-09-21_224846.png",
+      "sha256": "37afa011c69772eb46d0182546500a4ea21a01bc5e0e7aca97f997e8700dadd7",
+      "bytes": 1989,
+      "filename_timestamp": "2026-09-21T22:48:46",
+      "width": 199,
+      "height": 210,
+      "phash": "9a316cc7b2ccd932",
+      "ocr": "Gg"
+    },
+    {
+      "file": "items/acolytes-gospel__tooltip__2026-09-21_224842.png",
+      "sha256": "bb557daf6aee3b7f37ed82c12485606be0fe1df8a1bb9d8f0a475aa540f32feb",
+      "bytes": 73253,
+      "filename_timestamp": "2026-09-21T22:48:42",
+      "width": 1014,
+      "height": 463,
+      "phash": "c1e12fd2d21a5ad6",
+      "ocr": "all Acolyte's Gospel ~1500P A pre-War pocket gospel book, containing texts which are apparently very important for Acolytes and their Church. -"
+    },
+    {
       "file": "items/advanced-bandage__tooltip__2026-09-18_085054.png",
       "sha256": "db97224576ce8511d5f30b0464e23496237960e2bd7fd59cc21f30b865d4f9b6",
       "bytes": 88838,
@@ -2072,6 +2092,26 @@
       "height": 856,
       "phash": "f0a53d3887e49e1a",
       "ocr": "r Bandage ~250P Dank. Rank: 1 These tattered bandages look like they'll infect my wounds rather than protect them. Still, it’s better than nothing — and I've used worse. Health: +5 Bleed: -15 -"
+    },
+    {
+      "file": "items/beans-soup__icon__2026-09-21_225235.png",
+      "sha256": "89ce3bb2906378a1fef7118daafffd9e1ba59b3080bf2bc04eb0c331cad27450",
+      "bytes": 1780,
+      "filename_timestamp": "2026-09-21T22:52:35",
+      "width": 205,
+      "height": 208,
+      "phash": "92d46959b666c99a",
+      "ocr": "a!"
+    },
+    {
+      "file": "items/beans-soup__tooltip__2026-09-21_225231.png",
+      "sha256": "e937da0cb69434f2625fa984d46682538590e588aab2da723a93aff59290850c",
+      "bytes": 93151,
+      "filename_timestamp": "2026-09-21T22:52:31",
+      "width": 1009,
+      "height": 799,
+      "phash": "c0a53d61877a3ace",
+      "ocr": "r Beans Soup ~10000P A very tasty (and expensive) soup made from beans, berries and meat. The stew is so thick that I’m more than full by the time | finish eating. Makes me drowsy. Hunger: -70 Thirst: -10 a"
     },
     {
       "file": "items/berry-puree__icon__2026-09-21.png",
@@ -2284,6 +2324,26 @@
       "ocr": "al Cigarettes ~750P Dank. Rank: 1 A time-tested drug which at once relaxes and keeps us alert. Not even the Mist can prevent a Vulture from taking these out in the middle of a scavenge. Health: -1 Thirst: +3 Radiation: -15 a,"
     },
     {
+      "file": "items/currant-berries__icon__2026-09-21_224514.png",
+      "sha256": "b34b1a1e13e57f55ddeab70cfe529c6cafb900021ded44f222707dae2877ddf7",
+      "bytes": 867,
+      "filename_timestamp": "2026-09-21T22:45:14",
+      "width": 97,
+      "height": 103,
+      "phash": "844f39b247e91ec9",
+      "ocr": "aa LF"
+    },
+    {
+      "file": "items/currant-berries__tooltip__2026-09-21_224521.png",
+      "sha256": "b037fdda3b37c43cbd022446157e8e5a88d64fbb1a80a09049d1aa9079f02ff5",
+      "bytes": 107216,
+      "filename_timestamp": "2026-09-21T22:45:21",
+      "width": 1018,
+      "height": 988,
+      "phash": "e0853f666b3887c6",
+      "ocr": "Currant Berries ~50P These berries are a common find in every region I’ve traveled. They grow even in areas full of Mist, but how this affects the fruit, | don’t know. | Jobs | ¢ Supply Run (Olga)-4/9 ¢ Supply Run (Olga) 1/12 | Thirst: -2 Hunger: -2 | r"
+    },
+    {
       "file": "items/current-berries__tooltip__2026-09-20.png",
       "sha256": "d1080f086d343fceb3719f7270a28af98dc03ca3160b77a1787937b921a437aa",
       "bytes": 218400,
@@ -2291,6 +2351,26 @@
       "height": 1083,
       "phash": "e0a13f622799875e",
       "ocr": "r Currant Berries ~50P Rank. Rank: 1 These berries are a common find in every region I’ve traveled. They grow even in areas full of Mist, but how this affects the fruit, | don’t know. Jobs ¢ Supply Run (Olga) 3/9 ¢ Supply Run (Olga) 0/12 Thirst: -2 Hunger: -2 -"
+    },
+    {
+      "file": "items/diamond-ring__icon__2026-09-21_225245.png",
+      "sha256": "69559b6a2f5208d63e82ca121f08f901e31e342dda2a9d354c17987f5f840cf1",
+      "bytes": 744,
+      "filename_timestamp": "2026-09-21T22:52:45",
+      "width": 91,
+      "height": 90,
+      "phash": "c7c37934251e9cc9",
+      "ocr": "0"
+    },
+    {
+      "file": "items/diamond-ring__tooltip__2026-09-21_225251.png",
+      "sha256": "e3c09d715ccd54467a25b868d00cdeb19d78f5df6e23989e2375d9237015ae7a",
+      "bytes": 96972,
+      "filename_timestamp": "2026-09-21T22:52:51",
+      "width": 1015,
+      "height": 627,
+      "phash": "e1a52f700e5ada1e",
+      "ocr": "yi : Diamond Ring ~10000P A diamond ring which probably symbolized some sort of love or marriage. Priceless before the War; could someone in Zalesye still be interested? -"
     },
     {
       "file": "items/dried-mushrooms__icon__2026-09-21.png",
@@ -2420,6 +2500,26 @@
       "height": 826,
       "phash": "e0bd2f698fc05a32",
       "ocr": "a a _— | | Glue ~3000P 2699P \"Rank. Rank: 1 A small tub of glue used to quickly patch holes in clothing. Useful to have while out in the field. Repair: 5% Not usable below item condition: 80% Repair Class: Global af"
+    },
+    {
+      "file": "items/gold-chain__icon__2026-09-21_224536.png",
+      "sha256": "39f2b66c37a01da1191c60fb2b47d08b39146f29427341f54f510105c2ca5258",
+      "bytes": 982,
+      "filename_timestamp": "2026-09-21T22:45:36",
+      "width": 202,
+      "height": 102,
+      "phash": "8798786b33676c98",
+      "ocr": "cc"
+    },
+    {
+      "file": "items/gold-chain__tooltip__2026-09-21_224530.png",
+      "sha256": "e4c9a3d089d0757bc8db2a6d7272d573e263f9b32e8fb869d42bcdc6ee81a1cb",
+      "bytes": 57810,
+      "filename_timestamp": "2026-09-21T22:45:30",
+      "width": 1018,
+      "height": 472,
+      "phash": "80a52fdada1e5aca",
+      "ocr": "a | Gold Chain ~10000P | A gold chain, meant to adorn one's neck. Should be a valuable trade, even if they just melt it down to get the gold. af"
     },
     {
       "file": "items/gun-cleaning-rod__tooltip__2026-09-18_084846.png",
@@ -3064,6 +3164,16 @@
       "ocr": "a a _ —— — Metal Scrap ~100P PRank. Rank: 1 Scraps of metal that can be recycled into something useful by able hands. -"
     },
     {
+      "file": "items/morphine__icon__2026-09-21_224457.png",
+      "sha256": "f4d8af720c197ca315584c54614ab66ad2cff193dd3303a8f9d3843eeaa7d042",
+      "bytes": 999,
+      "filename_timestamp": "2026-09-21T22:44:57",
+      "width": 109,
+      "height": 207,
+      "phash": "874a351a9fcee0b1",
+      "ocr": "~"
+    },
+    {
       "file": "items/mutated-stick_icon_2026-09-21 132014.png",
       "sha256": "a3a0aa376edeb9c19bb5384568f24425744d25519c8fefb8dbaa615ac9552f26",
       "bytes": 950,
@@ -3092,6 +3202,26 @@
       "height": 831,
       "phash": "e0a537600f4e7a9e",
       "ocr": "- Mystery Pills ~6000P A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away. Health: +15 Radiation: -30 Thirst: +5 al"
+    },
+    {
+      "file": "items/old-canteen__icon__2026-09-21_224832.png",
+      "sha256": "3d477294953219bd63df3b7aa1ceed352ff943bbd2cc14d0c03379b2fc7cb213",
+      "bytes": 997,
+      "filename_timestamp": "2026-09-21T22:48:32",
+      "width": 94,
+      "height": 106,
+      "phash": "86b53a7941ca575a",
+      "ocr": "ce ee"
+    },
+    {
+      "file": "items/old-canteen__tooltip__2026-09-21_224837.png",
+      "sha256": "3f56fcba7513d174056176a155d100be5f66615f8e185339fa0b13dd4608b53b",
+      "bytes": 75829,
+      "filename_timestamp": "2026-09-21T22:48:37",
+      "width": 1011,
+      "height": 652,
+      "phash": "e0a12f780fc2de1e",
+      "ocr": "= Old Canteen ~100P An old and rusty canteen. Contains a bit of dirty water inside. Probably radioactive... Thirst: -15 Radiation: +4 -"
     },
     {
       "file": "items/plastic-scrap__tooltip__2026-09-18_091720.png",
@@ -3139,6 +3269,26 @@
       "height": 472,
       "phash": "c5e53fcad2326ac0",
       "ocr": "Pre-Mist Gold Wristwatch ~10000P | A glistening memento from the world before it ended. This country must've been full of rich folks. wl"
+    },
+    {
+      "file": "items/pre-mist-money-stack__icon__2026-09-21_224548.png",
+      "sha256": "e6060fd7ef0f18fc3b7e9283e8f7e9de3c5f59715bb42dc8c5423d0d02c54965",
+      "bytes": 1043,
+      "filename_timestamp": "2026-09-21T22:45:48",
+      "width": 103,
+      "height": 111,
+      "phash": "97973a6ac2c92d2c",
+      "ocr": "="
+    },
+    {
+      "file": "items/pre-mist-money-stack__tooltip__2026-09-21_224542.png",
+      "sha256": "4b40fe78da0e343e320b5e2f9c7abfbeefb2ba1c4ad697eccd202d11aeacd62d",
+      "bytes": 54703,
+      "filename_timestamp": "2026-09-21T22:45:42",
+      "width": 1011,
+      "height": 466,
+      "phash": "c5a52ddad21a5aca",
+      "ocr": "al = Pre-Mist Money Stack ~20000P A stack of paper bills that were used as money before the War broke out. Wish it had the same value today. a"
     },
     {
       "file": "items/radish__icon__2026-09-21.png",
@@ -3290,6 +3440,16 @@
       "ocr": "“il Screwdriver ~2000P Dank. Rank: 1 A handy tool and it looks well-made. Could stab something with it in a pinch... Should probably just sell it. al"
     },
     {
+      "file": "items/screws__icon__2026-09-21_224451.png",
+      "sha256": "e98f998f2d99c8355ff7f4a426fe59006bd0df7b15acac8d2705f5680df6dca1",
+      "bytes": 791,
+      "filename_timestamp": "2026-09-21T22:44:51",
+      "width": 103,
+      "height": 105,
+      "phash": "944a2d3272b74bad",
+      "ocr": "Ca oo fy"
+    },
+    {
       "file": "items/screws__tooltip__2026-09-18_091739.png",
       "sha256": "b57b78ba0232b1da20d8f55826b64fa71abd5c9a18a140bdeef3c60d470a3c0f",
       "bytes": 61091,
@@ -3316,6 +3476,16 @@
       "height": 415,
       "phash": "a1e13fd6921e5ac1",
       "ocr": "2 i a a ee ee — Small Filter ~500P A small filter, probably from an old machine or automobile. wl"
+    },
+    {
+      "file": "items/spoiled-radish__icon__2026-09-21_224508.png",
+      "sha256": "f8f372b31e6f36b7b6f3ed234a9959b06b39d97a66ee8d5f7a86ae1e0b0221e8",
+      "bytes": 804,
+      "filename_timestamp": "2026-09-21T22:45:08",
+      "width": 94,
+      "height": 109,
+      "phash": "98656296cd4b7566",
+      "ocr": "a"
     },
     {
       "file": "items/square-battery__icon__2026-09-21.png",
