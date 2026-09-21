@@ -16,3 +16,6 @@ Thumbs.db
 
 # Supabase CLI local project metadata
 supabase/.temp/
+
+# Local rollback archives; never publish these with GitHub Pages
+backups/
