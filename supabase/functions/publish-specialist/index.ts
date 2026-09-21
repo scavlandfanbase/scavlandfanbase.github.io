@@ -18,6 +18,7 @@ const allowed = {
 const githubHeaders = () => ({ Accept: "application/vnd.github+json", Authorization: `Bearer ${githubToken}`, "X-GitHub-Api-Version": "2022-11-28" });
 const decode = (value: string) => new TextDecoder().decode(Uint8Array.from(atob(value.replace(/\n/g, "")), char => char.charCodeAt(0)));
 const encode = (value: string) => { let binary = ""; for (const byte of new TextEncoder().encode(value)) binary += String.fromCharCode(byte); return btoa(binary); };
+const sharedClassification = { weapons: "weapon", armour: "armour", ammunition: "ammunition", crafting: "crafted-item" } as const;
 const validPath = (value: unknown) => typeof value === "string" && /^(images|evidence-inbox)\/(?:[A-Za-z0-9._ ()-]+\/)*[A-Za-z0-9._ ()-]+\.(png|jpe?g|webp)$/i.test(value) && !value.includes("..");
 const validSource = (value: unknown) => value === undefined || (!!value && typeof value === "object" && !Array.isArray(value));
 const validIngredients = (value: unknown) => Array.isArray(value) && value.every(row => row && typeof row === "object" && typeof (row as any).itemId === "string" && typeof (row as any).name === "string" && Number.isInteger((row as any).quantity) && (row as any).quantity > 0);
@@ -45,9 +46,31 @@ Deno.serve(async request => {
   const file = await current.json(); let document: any; try { document = JSON.parse(decode(file.content)); } catch { return respond({ error: "Current specialist data is invalid JSON." }, 502); }
   const rows = Array.isArray(document) ? document : document.data;
   if (!Array.isArray(rows)) return respond({ error: "Specialist data has no records." }, 502);
-  const matches = rows.filter((row: any) => row?.id === id); if (matches.length !== 1) return respond({ error: "Specialist ID did not match exactly one record." }, 400);
-  const index = rows.indexOf(matches[0]); rows[index] = { ...rows[index], ...changes }; const updated = Array.isArray(document) ? rows : { ...document, data: rows };
-  const commit = await fetch(`https://api.github.com/repos/${repository}/contents/${path}`, { method: "PUT", headers: { ...githubHeaders(), "Content-Type": "application/json" }, body: JSON.stringify({ message: `Update ${kind}: ${rows[index].name}`, content: encode(JSON.stringify(updated, null, 2) + "\n"), sha: file.sha, branch: "main" }) });
+  const matches = rows.filter((row: any) => row?.id === id); let record: any;
+  if (body.create) {
+    if (matches.length) return respond({ error: "That record ID already exists." }, 409);
+    if (!changes.name) return respond({ error: "New records require a name." }, 400);
+    record = { id, ...changes }; rows.push(record);
+  } else {
+    if (matches.length !== 1) return respond({ error: "Specialist ID did not match exactly one record." }, 400);
+    const index = rows.indexOf(matches[0]); rows[index] = { ...rows[index], ...changes }; record = rows[index];
+  }
+  const updated = Array.isArray(document) ? rows : { ...document, data: rows };
+  const commit = await fetch(`https://api.github.com/repos/${repository}/contents/${path}`, { method: "PUT", headers: { ...githubHeaders(), "Content-Type": "application/json" }, body: JSON.stringify({ message: `${body.create ? "Add" : "Update"} ${kind}: ${record.name}`, content: encode(JSON.stringify(updated, null, 2) + "\n"), sha: file.sha, branch: "main" }) });
   if (!commit.ok) return respond({ error: "GitHub did not accept the specialist update." }, 502);
-  const result = await commit.json(); return respond({ commitUrl: result.commit?.html_url || null, sha: result.commit?.sha || null });
+  const result = await commit.json();
+  if (body.create) {
+    const itemsPath = "data/items.json";
+    const itemsResponse = await fetch(`https://api.github.com/repos/${repository}/contents/${itemsPath}?ref=main`, { headers: githubHeaders() });
+    if (!itemsResponse.ok) return respond({ error: "Specialist was published, but the shared item registry could not be read." }, 502);
+    const itemsFile = await itemsResponse.json(); let itemsDocument: any;
+    try { itemsDocument = JSON.parse(decode(itemsFile.content)); } catch { return respond({ error: "Specialist was published, but the shared item registry is invalid JSON." }, 502); }
+    if (!Array.isArray(itemsDocument.data)) return respond({ error: "Specialist was published, but the shared item registry has no data array." }, 502);
+    const shared = { id, name: record.name, classification: [sharedClassification[kind as keyof typeof sharedClassification]], image: changes.image || null, notes: null, source: changes.source || null };
+    const existingIndex = itemsDocument.data.findIndex((item: any) => item?.id === id);
+    if (existingIndex < 0) itemsDocument.data.push(shared); else itemsDocument.data[existingIndex] = { ...itemsDocument.data[existingIndex], ...shared };
+    const registryCommit = await fetch(`https://api.github.com/repos/${repository}/contents/${itemsPath}`, { method: "PUT", headers: { ...githubHeaders(), "Content-Type": "application/json" }, body: JSON.stringify({ message: `Add shared item: ${record.name}`, content: encode(JSON.stringify(itemsDocument, null, 2) + "\n"), sha: itemsFile.sha, branch: "main" }) });
+    if (!registryCommit.ok) return respond({ error: "Specialist was published, but the shared item registry commit failed." }, 502);
+  }
+  return respond({ commitUrl: result.commit?.html_url || null, sha: result.commit?.sha || null });
 });

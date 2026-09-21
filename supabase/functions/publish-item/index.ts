@@ -67,11 +67,16 @@ Deno.serve(async request => {
   try { document = JSON.parse(decodeBase64(current.content)); } catch { return json({ error: "The current item data is not valid JSON." }, 502); }
   if (!Array.isArray(document.data)) return json({ error: "The current item data has no data array." }, 502);
   const matches = document.data.filter((item: any) => item?.id === body.itemId);
-  if (matches.length !== 1) return json({ error: "Item ID did not match exactly one record." }, 400);
-  const index = document.data.indexOf(matches[0]);
-  const updated = { ...matches[0], ...changes, ...(changes.source ? { source: { ...matches[0].source, ...changes.source } } : {}) };
-  document.data[index] = updated;
-  const name = String(updated.name).trim();
+  if (body.create) {
+    if (matches.length) return json({ error: "That item ID already exists." }, 409);
+    if (!changes.name || !changes.classification) return json({ error: "New items require a name and classification." }, 400);
+    document.data.push({ id: body.itemId, ...changes });
+  } else {
+    if (matches.length !== 1) return json({ error: "Item ID did not match exactly one record." }, 400);
+    const index = document.data.indexOf(matches[0]);
+    document.data[index] = { ...matches[0], ...changes, ...(changes.source ? { source: { ...matches[0].source, ...changes.source } } : {}) };
+  }
+  const name = String(changes.name).trim();
   const commit = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, { method: "PUT", headers: { ...githubHeaders(), "Content-Type": "application/json" }, body: JSON.stringify({ message: `Update item: ${name}`, content: encodeBase64(JSON.stringify(document, null, 2) + "\n"), sha: current.sha, branch: BRANCH }) });
   if (!commit.ok) return json({ error: "GitHub did not accept the commit." }, 502);
   const result = await commit.json();

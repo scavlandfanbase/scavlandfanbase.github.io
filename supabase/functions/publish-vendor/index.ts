@@ -125,7 +125,7 @@ Deno.serve(async (request) => {
   if (!githubToken || !supabaseUrl || !anonKey) return respond({ error: "Publish service is not configured." }, 503);
   if (!await isAdmin(request)) return respond({ error: "Authorized SCAVLAND admin access is required." }, 403);
 
-  let body: { vendorId?: unknown; changes?: unknown };
+  let body: { vendorId?: unknown; changes?: unknown; create?: boolean };
   try { body = await request.json(); } catch { return respond({ error: "Request must be valid JSON." }, 400); }
   if (typeof body.vendorId !== "string" || !body.changes || typeof body.changes !== "object" || Array.isArray(body.changes)) {
     return respond({ error: "Invalid vendor update request." }, 400);
@@ -160,15 +160,21 @@ Deno.serve(async (request) => {
   const vendors = Array.isArray(document) ? document : (document as { data?: unknown }).data;
   if (!Array.isArray(vendors)) return respond({ error: "Vendor data has no list." }, 502);
   const index = vendors.findIndex((vendor) => vendor && typeof vendor === "object" && (vendor as { id?: unknown }).id === body.vendorId);
-  if (index < 0) return respond({ error: "Vendor ID was not found." }, 404);
-
-  vendors[index] = { ...(vendors[index] as Record<string, unknown>), ...changes };
+  if (body.create) {
+    if (index >= 0) return respond({ error: "That vendor ID already exists." }, 409);
+    if (!changes.name || !changes.factionId) return respond({ error: "New vendors require a name and faction." }, 400);
+    vendors.push({ id: body.vendorId, ...changes });
+  } else {
+    if (index < 0) return respond({ error: "Vendor ID was not found." }, 404);
+    vendors[index] = { ...(vendors[index] as Record<string, unknown>), ...changes };
+  }
+  const record = body.create ? vendors[vendors.length - 1] : vendors[index];
   const updated = Array.isArray(document) ? vendors : { ...(document as Record<string, unknown>), data: vendors };
   const commit = await fetch(`https://api.github.com/repos/${repository}/contents/${vendorsPath}`, {
     method: "PUT",
     headers: { ...githubHeaders(), "Content-Type": "application/json" },
     body: JSON.stringify({
-      message: `Update vendor: ${(vendors[index] as { name: string }).name}`,
+      message: `${body.create ? "Add" : "Update"} vendor: ${(record as { name: string }).name}`,
       content: encodeBase64(JSON.stringify(updated, null, 2) + "\n"),
       sha: file.sha,
       branch: "main",
