@@ -1988,7 +1988,7 @@
     {
       "id": "raisa",
       "name": "Raisa",
-      "location": "Ruined housing area WEST of The Mire",
+      "location": "WEST of The Mire",
       "factionId": "vultures",
       "inventoryDocumented": false,
       "inventory": [],
@@ -2034,7 +2034,7 @@
     {
       "id": "vesna",
       "name": "Vesna",
-      "location": null,
+      "location": The Mire,
       "factionId": "rada",
       "inventoryDocumented": false,
       "inventory": [],
@@ -2400,7 +2400,7 @@
     {
       "id": "snezhana",
       "name": "Snezhana",
-      "location": null,
+      "location": Microrayon,
       "factionId": "rada",
       "inventoryDocumented": false,
       "inventory": [],
