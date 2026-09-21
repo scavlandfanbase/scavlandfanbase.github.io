@@ -34,6 +34,7 @@ function buildShell(){
   if(page==='factions.html')pageContent.sections?.flatMap(section=>section.cards||[]).forEach(card=>{const box=document.getElementById(card.id);if(!box)return;box.querySelector('.faction-title')?.replaceChildren(document.createTextNode(card.title||''));box.querySelector('.faction-text')?.replaceChildren(document.createTextNode(card.description||''))});
   if(page==='areas.html'){const heading=document.querySelector('.areas-head h1'),intro=document.querySelector('.areas-head p');if(pageContent.title&&heading)heading.textContent=pageContent.title;if(pageContent.intro&&intro)intro.textContent=pageContent.intro}
   if(page==='map.html'){const heading=document.querySelector('.map-intro h1,main h1,body>h1');const intro=document.querySelector('.map-intro p,main>section>p');if(pageContent.title&&heading)heading.textContent=pageContent.title;if(pageContent.intro&&intro)intro.textContent=pageContent.intro}
+  if(['vendors.html','weapons.html','armour.html','crafting.html','items.html'].includes(page)){const heading=document.querySelector('.hero h1,main h1,body>h1'),intro=document.querySelector('.hero p,main>section>p,main>p');if(pageContent.title&&heading)heading.textContent=pageContent.title;if(pageContent.intro&&intro)intro.textContent=pageContent.intro}
   if(new URLSearchParams(location.search).has('adminPreview'))window.addEventListener('storage',e=>{if(e.key===previewKey)location.reload()});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',buildShell);else buildShell();

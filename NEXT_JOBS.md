@@ -8,6 +8,7 @@ The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_
 - **Public CMS Factions slice:** faction description cards are now modeled with stable IDs, editable through the Content Editor, and applied to the public Factions page with existing markup fallback.
 - **Public CMS Areas slice:** Areas title and intro now apply from `data/site-content.json`; location cards remain safely data-driven from vendor records.
 - **Public CMS Map slice:** Map title and intro now apply from `data/site-content.json`; interactive map behavior remains unchanged.
+- **Public CMS database-page slice:** Vendors, Weapons, Armour, Crafting, and Items titles/intros now apply from `data/site-content.json`; their specialist cards and data-driven content remain controlled by the existing dedicated datasets/editors.
 
 ## Latest handover — 21 September 2026
 
