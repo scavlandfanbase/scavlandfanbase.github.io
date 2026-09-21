@@ -88,7 +88,8 @@
         state.value=path||null;select.value=path;show();sizePortrait();changed();
       }catch(error){pathInput.setCustomValidity(error.message);pathStatus.textContent=error.message;}
     };
-    searchInput.oninput=()=>{const query=searchInput.value.trim().toLowerCase();const match=list.find(path=>path.split('/').pop().toLowerCase()===query)||list.find(path=>path.toLowerCase()===query);if(!query){state.value=null;select.value='';show();changed();return}if(match){state.value=match;select.value=match;show();sizePortrait();changed();}};
+    function renderPictureOptions(query=''){const needle=query.trim().toLowerCase(),matches=list.filter(path=>!needle||path.split('/').pop().toLowerCase().includes(needle)||path.toLowerCase().includes(needle));select.innerHTML='<option value="">No picture</option>'+matches.map(path=>'<option value="'+esc(path)+'"'+(path===state.value?' selected':'')+'>'+esc(path.split('/').pop().replaceAll('__',' · ').replaceAll('-',' '))+'</option>').join('');return matches;}
+    searchInput.oninput=()=>{const query=searchInput.value,match=renderPictureOptions(query).find(path=>path.split('/').pop().toLowerCase()===query.trim().toLowerCase());if(match){state.value=match;select.value=match;show();sizePortrait();changed();}else pathStatus.textContent=query.trim()?'Choose a matching picture from the filtered list.':'';};
     show();
     async function sizePortrait(){if(!portrait||!state.value)return;try{await img.decode();$('f-crop-x').value=0;$('f-crop-y').value=0;$('f-crop-size').value=Math.min(img.naturalWidth,img.naturalHeight);$('f-crop-sourceWidth').value=img.naturalWidth;cropPreview();changed();}catch{$('message').textContent='Could not load this picture. Choose another.';}}
     select.onchange=()=>{state.value=select.value||null;show();sizePortrait();changed();};
