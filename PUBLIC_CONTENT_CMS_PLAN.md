@@ -103,7 +103,8 @@ Rules:
 - [x] Add friendly section/card editing for every modeled page.
 - [x] Add full-page unsaved preview from the Content Editor.
 - [ ] Migrate remaining hardcoded public sections and page copy.
-- [ ] Run final cross-page smoke tests and document the completed migration.
+- [x] Run deployed cross-page smoke tests and document the completed migration.
+- [ ] Complete authenticated owner acceptance tests for each editor and publish a controlled content change.
 
 ### Stage 1: Model and backup
 
