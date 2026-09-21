@@ -6,10 +6,11 @@
     "subtitle": "Wasteland Survival Database",
     "fontFamily": "Arial, Helvetica, sans-serif",
     "fontSize": "20px",
-    "accentColor": "#000000",
-    "textColor": "#000000",
-    "panelColor": "#000000",
-    "navColor": "#000000"
+    "accentColor": "#ffcc66",
+    "textColor": "#e8e5dc",
+    "panelColor": "#141615",
+    "navColor": "#0c0e0d",
+    "radius": "6px"
   },
   "pages": {}
 }
