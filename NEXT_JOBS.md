@@ -18,6 +18,7 @@ The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_
 - **Public CMS card controls:** modeled cards now expose title, description, image path, and link target fields in the Content Editor; public card markup applies image paths when an image element exists.
 - **Public CMS card preview:** the Content Editor preview now displays the current modeled image path and link target alongside each card's edited title and description.
 - **Public CMS smoke test:** deployed GitHub Pages returned HTTP 200 for all public pages, Admin Hub, and Content Editor. Anonymous `publish-site-content` access returned HTTP 403. Authenticated owner acceptance tests remain the final verification step.
+- **Public CMS phase checkpoint:** modeled shared page content, section headings, cards, images, navigation, footer, and the Map asset are complete. Specialist records remain intentionally owned by Items, Weapons, Armour, Ammunition, Crafting, and Vendors editors rather than duplicated in the content CMS.
 - **Public CMS Home update fields:** Latest Update title, summary, and link are now modeled and editable; the Home page applies them while retaining the existing update feed fallback.
 
 ## Latest handover — 21 September 2026

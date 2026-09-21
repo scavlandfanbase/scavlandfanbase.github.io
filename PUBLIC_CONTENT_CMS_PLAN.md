@@ -102,7 +102,7 @@ Rules:
 - [x] Migrate Areas, Map, Items, Vendors, Weapons, Armour, and Crafting page headings/intros.
 - [x] Add friendly section/card editing for every modeled page.
 - [x] Add full-page unsaved preview from the Content Editor.
-- [ ] Migrate remaining hardcoded public sections and page copy.
+- [x] Migrate modeled public sections and page copy; specialist record bodies remain in their dedicated data editors by design.
 - [x] Run deployed cross-page smoke tests and document the completed migration.
 - [ ] Complete authenticated owner acceptance tests for each editor and publish a controlled content change.
 
