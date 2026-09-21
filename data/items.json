@@ -4355,6 +4355,28 @@
       "maxStack": null,
       "stackable": false,
       "description": null
+    },
+    {
+      "id": "diamond-ring",
+      "classification": [
+        "vendor-item",
+        "junk-item"
+      ],
+      "image": "evidence-inbox/items/diamond-ring__icon__2026-09-21_225245.png",
+      "notes": null,
+      "effects": null,
+      "source": {
+        "file": "evidence-inbox/items/diamond-ring__tooltip__2026-09-21_225251.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-09-21"
+      },
+      "name": "Diamond Ring",
+      "estimatedPrice": 10000,
+      "rank": null,
+      "maxStack": null,
+      "stackable": false,
+      "description": null
     }
   ]
 }
