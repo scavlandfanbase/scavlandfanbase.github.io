@@ -160,7 +160,20 @@ Avoid a large dashboard. The first page should make one item edit easy and safe.
 
 Before handover, complete and report these checks:
 
-1. Run the repository’s `validate-evidence.cjs` validation if applicable and ensure JSON remains valid.
+## Items Admin deployment
+
+The static page is `items-admin.html`. Deploy the publish function from the repository root with the Supabase CLI after linking project `demtoqsafufzmnhvaykj`:
+
+```text
+supabase login
+supabase link --project-ref demtoqsafufzmnhvaykj
+supabase secrets set GITHUB_TOKEN=<fine-grained-token>
+supabase functions deploy publish-item --no-verify-jwt
+```
+
+Use a fine-grained GitHub token restricted to this repository with Contents: Read and write only. `SUPABASE_URL` and `SUPABASE_ANON_KEY` are provided by the Supabase function environment; do not add them or `GITHUB_TOKEN` to the repository. The function itself verifies the bearer token and calls `is_scavland_admin`, so `--no-verify-jwt` is used only because the function performs the authorization check and returns the appropriate CORS response. Review the function URL and browser origin before publishing the page.
+
+1. Run the repository's `validate-evidence.cjs` validation if applicable and ensure JSON remains valid.
 2. Confirm the public Items page still loads and searches correctly.
 3. Confirm an existing item image still previews correctly.
 4. Confirm an image with an invalid path is rejected before publish.
