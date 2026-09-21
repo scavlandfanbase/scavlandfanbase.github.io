@@ -2482,8 +2482,14 @@
       "classification": [
         "armour"
       ],
-      "image": null,
-      "notes": null
+      "image": "evidence-inbox/armour/old-gp-4-gas-mask__stats__2026-09-13_230420.png",
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/armour/old-gp-4-gas-mask__stats__2026-09-13_230420.png",
+        "status": "user-provided",
+        "note": null,
+        "lastVerified": "2026-09-12"
+      }
     },
     {
       "id": "old-kepka",
