@@ -2,13 +2,17 @@
 
 ## Admin record entry — 21 September 2026
 
+- All New item tags now control public destinations. Shared `item-catalog.js` joins tagged Items with known specialist records: weapon → Weapons, armour → Armour, ammunition → Ammo, crafted-item → Crafting. Missing stats/recipes appear as details pending without fabricated or verified data. Untagging hides the public specialist entry while preserving its stored details.
+- Tagged-only records also appear in specialist editors. Completing their details creates the specialist record linked to the existing Items ID; subsequent saves update it without duplicates. Completing or renaming a tagged-only record preserves its existing Items ID. Crafting resources appear under Crafting materials. Vendor items with no recorded seller appear in a separate list on Vendors; a tag never assigns stock to a particular vendor. Vendor identities still use Add new vendor.
+- Browser checks create a local fixture through New item with all seven tags, verify every public destination, then add/edit specialist details on the same ID. Canonical datasets were not rewritten for this change.
+
 - Junk loot table now reads Items tagged `junk-item` directly, including new admin additions and current names, pictures and estimated prices. Removing the tag removes the item from the table. Rubber Scrap and Screws were already in the legacy confirmed-junk list; their existing classifications now also include the junk tag. The legacy junk-loot file no longer controls public table membership.
 
 - Picture picker follow-up: every picture field now accepts a repository path or a GitHub/raw file link from this repository on main. It previews the selection and rejects unsupported paths/foreign links before saving. Existing dropdown and upload options remain available; browser checks cover link normalization and switching back to the dropdown.
 
 Implementation commit: `20ddd8e` (branch `improve-admin-entry`).
 
-**Deployment approved and saving services deployed:** owner approved on 21 September 2026. Active versions: publish-item v4, publish-specialist v6, publish-vendor v5. All three live endpoints return HTTP 403 to unauthenticated save requests. Frontend release is tracked in PR #17.
+**Deployment approved and saving services deployed:** owner approved on 21 September 2026. Active versions after tag routing: publish-item v5, publish-specialist v7, publish-vendor v6. All three live endpoints return HTTP 403 to unauthenticated save requests. Frontend release is tracked in PR #17.
 
 - Items, Weapons, Armour, Ammunition, Crafting and Vendors now share a form-based editor: Add new, Preview, Save and publish. No IDs, JSON or repository paths are required.
 - Picture library and PNG/JPG/WebP uploads (5 MB each, 12 MB per save); evidence notes/status/date are normal fields. Recipes and vendor inventories use item pickers and numeric inputs. Portraits are optional.

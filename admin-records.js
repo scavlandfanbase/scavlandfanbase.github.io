@@ -23,7 +23,7 @@
   async function json(url,options={}){const r=await fetch(url,options);const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not load the editor. Please try again.');return d;}
   async function load(){
     const [data,registry,groups,library]=await Promise.all([json('data/'+config.file+'.json',{cache:'no-store'}),json('data/items.json',{cache:'no-store'}),json('data/factions.json'),json('data/admin-images.json')]);
-    records=data.data||data;items=registry.data||registry;factions=groups.data||groups;pictures=library;renderList();
+    items=registry.data||registry;records=globalThis.ScavCatalog?ScavCatalog.records(kind,items,data.data||data,{editor:true}):data.data||data;factions=groups.data||groups;pictures=library;renderList();
   }
   async function enter(candidate){
     if(initializing)return;initializing=true;
@@ -38,7 +38,7 @@
     if(type==='boolean')control='<select'+attrs+'>'+[['','Unknown'],['true','Yes'],['false','No']].map(([v,l])=>'<option value="'+v+'"'+(String(value??'')===v?' selected':'')+'>'+l+'</option>').join('')+'</select>';
     else if(type==='faction')control='<select'+attrs+' required><option value="">Choose a faction</option>'+factions.map(f=>'<option value="'+esc(f.id)+'"'+(value===f.id?' selected':'')+'>'+esc(f.name)+'</option>').join('')+'</select>';
     else if(type==='suggest' && ['category','tier'].includes(key))control='<select'+attrs+' required>'+options(records.map(r=>r[key]).filter(Boolean),value)+'</select>';
-    else if(type==='workbench')control='<select'+attrs+' required>'+options(records.map(r=>r.workbench),value)+'</select>';
+    else if(type==='workbench')control='<select'+attrs+' required>'+options(records.map(r=>r.workbench).filter(Boolean),value)+'</select>';
     else if(type==='textarea')control='<textarea'+attrs+' rows="3">'+esc(value)+'</textarea>';
     else {const number=['integer','number','signed'].includes(type);control='<input'+attrs+' type="'+(number?'number':'text')+'"'+(number?' step="'+(type==='integer'?'1':'any')+'"'+(type!=='signed'?' min="0"':''):'')+' value="'+esc(value)+'"'+(type==='suggest'?' list="suggest-'+key+'"':'')+'>';if(type==='suggest')control+='<datalist id="suggest-'+key+'">'+options(records.map(r=>r[key]).filter(Boolean),value)+'</datalist>';}
     return '<label class="record-field '+(type==='textarea'?'record-wide':'')+'" for="f-'+key+'">'+esc(label)+control+'</label>';
@@ -46,12 +46,12 @@
   function sourceForm(source){return '<details class="record-wide" id="evidence-details"><summary>Evidence and verification</summary><p class="help">A picture alone does not verify its stats. Only mark verified when the screenshot supports the values you entered.'+(kind==='armour'?' Armour evidence must show 100% durability.':'')+'</p><div class="record-grid"><label class="record-field">Verification<select id="evidence-status">'+options(['pending-review','unverified','user-provided','screenshot-verified','not-verified','existing-site-data',source?.status].filter(Boolean),source?.status||'pending-review')+'</select></label><label class="record-field">Date checked<input id="evidence-date" type="date" value="'+esc(source?.lastVerified)+'"></label><label class="record-field record-wide">Evidence notes<textarea id="evidence-note" rows="3">'+esc(source?.note)+'</textarea></label><div class="record-wide" id="evidence-picture"></div></div></details>';}
   function open(record){
     if(!canLeave())return;
-    selected=record?clone(record):{name:'',source:{file:null,status:'pending-review',note:null},...(kind==='vendors'?{inventory:[],inventoryDocumented:false,portrait:null}:{})};original=record?clone(record):null;uploads.clear();committedUploads.clear();pictureControls.clear();dirty=false;
+    selected=record?clone(record):{name:'',source:{file:null,status:'pending-review',note:null},...(kind==='vendors'?{inventory:[],inventoryDocumented:false,portrait:null}:{})};original=record&&!record._catalogOnly?clone(record):null;uploads.clear();committedUploads.clear();pictureControls.clear();dirty=false;
     ingredients=clone(selected.ingredients||[]);stock=clone(selected.inventory||[]);shots=clone(selected.shopEvidence?.screenshots||[]);
     $('title').textContent=record?'Edit '+record.name:'Add new '+config.label;
     let html='<label class="record-field record-wide">Name<input id="f-name" required maxlength="160" value="'+esc(selected.name)+'"></label>';
     if(!record&&['weapons','armour','ammunition','crafting'].includes(kind))html+='<p class="help record-wide">A matching Items entry is created automatically. If this name already exists in Items, it will be linked.</p>';
-    if(kind==='items')html+='<fieldset class="record-wide"><legend>Item type</legend><p class="help">For a new weapon, armour piece, ammunition or recipe, use its editor to include the specialist details automatically.</p><div class="checks">'+['weapon','armour','ammunition','crafted-item','crafting-resource','vendor-item','junk-item'].map(c=>'<label><input type="checkbox" name="classification" value="'+c+'"'+(selected.classification?.includes(c)?' checked':'')+'> '+esc(c.replaceAll('-',' '))+'</label>').join('')+'</div></fieldset>';
+    if(kind==='items')html+='<fieldset class="record-wide"><legend>Item type</legend><p class="help">Tags control where this item appears: weapon → Weapons; armour → Armour; ammunition → Ammo; crafted item → Crafting; crafting resource → Crafting materials; vendor item → Vendor items; junk item → Junk loot. Add specialist stats or a recipe later in its editor. A vendor item is stock, not a new vendor.</p><div class="checks">'+['weapon','armour','ammunition','crafted-item','crafting-resource','vendor-item','junk-item'].map(c=>'<label><input type="checkbox" name="classification" value="'+c+'"'+(selected.classification?.includes(c)?' checked':'')+'> '+esc(c.replaceAll('-',' '))+'</label>').join('')+'</div></fieldset>';
     html+=config.fields.map(([k,l,t])=>field(k,l,t,selected[k]??(k==='inventoryDocumented'?false:null))).join('');
     html+='<fieldset class="record-wide"><legend>'+(kind==='vendors'?'Portrait':'Picture')+'</legend><div id="main-picture"></div>'+(kind==='vendors'?'<details><summary>Adjust portrait crop</summary><div class="record-grid">'+[['x','Left edge'],['y','Top edge'],['size','Square size'],['sourceWidth','Picture width']].map(([k,l])=>field('crop-'+k,l+' (pixels)','integer',k==='sourceWidth'?selected.portrait?.sourceWidth:selected.portrait?.crop?.[k])).join('')+'</div></details><div id="crop-preview" class="crop-preview" hidden><img alt="Portrait preview"></div>':'')+'</fieldset>';
     if(kind==='crafting')html+='<fieldset class="record-wide"><legend>Ingredients</legend><div id="ingredients"></div><button id="add-ingredient" type="button">Add ingredient</button></fieldset>';
@@ -119,7 +119,7 @@
     const next=collect(),changes=original?Object.fromEntries(Object.entries(next).filter(([k,v])=>!equal(v,baseline[k]))):next;
     if(!Object.keys(changes).length){$('message').textContent='No changes to save.';return;}
     if(!slug(next.name)){$('message').textContent='Enter a name containing letters or numbers.';return;}
-    if(!original&&records.some(r=>slug(r.name)===slug(next.name))){$('message').textContent='This name already exists. Find it in the list and edit it instead.';return;}
+    if(!original&&records.some(r=>r.id!==selected.id&&slug(r.name)===slug(next.name))){$('message').textContent='This name already exists. Find it in the list and edit it instead.';return;}
     const refs=new Set();function find(value){if(typeof value==='string')refs.add(value);else if(value&&typeof value==='object')Object.values(value).forEach(find);}find(changes);
     const attachments=[...uploads.values()].filter(u=>refs.has(u.path)&&!committedUploads.has(u.path)).map(({path,content})=>({path,content}));
     const body={kind,id:selected.id,create:!original,original,changes,uploads:attachments};

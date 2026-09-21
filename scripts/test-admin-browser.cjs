@@ -46,6 +46,22 @@ const fs=require('fs'),path=require('path'),http=require('http'),assert=require(
   console.log('PASS pictures: upload then edit; mobile has no horizontal overflow');
   // The live ammunition page must render an added record, not just the old hard-coded list.
   await page.goto(base+'/weapons.html');await page.locator('.ammo-card').filter({hasText:'Browser ammunition edited'}).waitFor({state:'attached'});
+  // Add through Items tags only, then verify every public destination.
+  f=await editor('items-admin.html?embed=1');await f.locator('#new-record').click();await f.locator('#f-name').fill('Tagged universal item');
+  for(const tag of ['weapon','armour','ammunition','crafted-item','crafting-resource','vendor-item','junk-item'])await f.locator('[value="'+tag+'"]').check();
+  await f.locator('#save').click();await savedMessage(f);
+  await page.goto(base+'/weapons.html');await page.locator('.weapon-card').filter({hasText:'Tagged universal item'}).waitFor();await page.locator('.ammo-card').filter({hasText:'Tagged universal item'}).waitFor({state:'attached'});
+  await page.goto(base+'/armour.html');await page.locator('.armour-card').filter({hasText:'Tagged universal item'}).waitFor();
+  await page.goto(base+'/crafting.html');await page.locator('[data-bench="pending"]').click();await page.locator('#recipeList').getByRole('button',{name:'Tagged universal item',exact:true}).click();assert.match(await page.locator('#detail').innerText(),/not been recorded/);await page.locator('#crafting-materials').getByRole('link',{name:'Tagged universal item',exact:true}).waitFor();
+  await page.goto(base+'/vendors.html');await page.locator('#unassigned-vendor-item-list').getByRole('link',{name:'Tagged universal item',exact:true}).waitFor();
+  await page.goto(base+'/items.html');await page.locator('#junk-loot').getByRole('link',{name:'Tagged universal item',exact:true}).waitFor();
+  console.log('PASS all seven Items tags appear on their public destinations without invented stats or vendor associations');
+  // Complete the existing tagged entry in a specialist editor; do not duplicate it.
+  f=await editor('specialist-admin.html?type=weapons&embed=1');await f.locator('#search').fill('Tagged universal item');await f.locator('.choice').click();await f.locator('#f-category').selectOption('Pistols');await f.locator('#f-tier').selectOption('Scrap');await f.locator('#f-name').fill('Tagged renamed item');await f.locator('#f-damage').fill('17');await f.locator('#save').click();await savedMessage(f);
+  assert.equal(docs['data/weapons.json'].data.filter(x=>x.id==='tagged-universal-item').length,1);assert.equal(docs['data/items.json'].data.filter(x=>x.id==='tagged-universal-item').length,1);
+  await f.locator('#f-damage').fill('18');await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).create,false);
+  await page.goto(base+'/weapons.html');assert.equal(await page.locator('.weapon-card').filter({hasText:'Tagged renamed item'}).count(),1);
+  console.log('PASS tagged weapon can acquire specialist stats and be edited again without duplication');
   await page.goto(base+'/admin.html');await page.locator('#email').fill('local-test@example.invalid');await page.locator('#password').fill('test-only');await page.locator('#signin').click();await page.locator('[data-view=items]').click();await page.frameLocator('#items-frame').locator('#new-record').waitFor();console.log('PASS actual Admin Hub: sign-in and editor handshake');
   assert.deepEqual(errors,[]);console.log('PASS public ammunition: newly added record rendered; no browser errors');
  }finally{if(browser)await browser.close();server.close();}

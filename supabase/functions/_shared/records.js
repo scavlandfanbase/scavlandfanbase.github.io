@@ -39,7 +39,11 @@ export function prepare(body, docs) {
   const create=body.create === true;
   let id=body.id || body.itemId || body.vendorId;
   const matchingItem=items.find(x=>slug(x.name)===slug(changes.name));
-  if (create) id = kind !== 'items' && kind !== 'vendors' && matchingItem ? matchingItem.id : slug(changes.name);
+  if (create) {
+    const linkedItem = classifications[kind] ? items.find(item=>item.id===id) || matchingItem : null;
+    if (linkedItem && matchingItem && linkedItem.id!==matchingItem.id) fail('Another item already uses this name.',409);
+    id = linkedItem ? linkedItem.id : slug(changes.name);
+  }
   if (typeof id !== 'string' || !/^[a-z0-9][a-z0-9._-]*$/i.test(id)) fail('Enter a name containing letters or numbers.');
   let previous=list.find(x=>x.id===id);
   if (create && previous) fail('This record already exists. Search for it and edit it instead.',409);

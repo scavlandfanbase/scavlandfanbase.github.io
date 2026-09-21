@@ -786,7 +786,7 @@ footer {
 </style>
 
 <link rel="stylesheet" href="site-theme.css">
-<script src="image-viewer.js"></script>
+<script src="item-catalog.js"></script><script src="image-viewer.js"></script>
 </head>
 
 
@@ -912,6 +912,7 @@ footer {
                 All Categories
             </option>
 
+            <option value="Details pending">Details pending</option>
             <option value="Pistols">
                 Pistols
             </option>
@@ -1334,6 +1335,7 @@ let ammunition = [
    ========================================================= */
 
 const weaponCategories = [
+    {name: "Details pending", id: "weapon-details-pending"},
 
     {
         name: "Pistols",
@@ -1419,7 +1421,7 @@ document.getElementById("ammoTotal").textContent =
 
 function escapeHTML(value) {
 
-    return String(value)
+    return String(value == null ? "Unknown" : value)
 
         .replaceAll("&", "&amp;")
 
@@ -2095,7 +2097,7 @@ async function loadWeaponMaster() {
         const master = await response.json();
         const itemsPayload = itemsResponse.ok ? await itemsResponse.json() : { data: [] };
         sharedItems = new Map((itemsPayload.data || []).map(item => [item.id, item]));
-        weapons = (Array.isArray(master.data) ? master.data : []).map(weapon => { const shared = sharedItems.get(weapon.id); return shared ? {...weapon, name: shared.name, image: shared.image || weapon.image} : weapon; });
+        weapons = ScavCatalog.records('weapons', itemsPayload.data || [], master.data || []);
         if(new URLSearchParams(location.search).get('adminPreview')==='weapons'){try{const preview=JSON.parse(localStorage.getItem('scavland-specialist-preview')||'null');const index=weapons.findIndex(item=>item.id===preview?.id);if(index>=0)weapons[index]={...weapons[index],...preview.record}}catch(err){console.warn('SCAVLAND weapon preview unavailable:',err)}}
         document.getElementById("weaponTotal").textContent = weapons.length;
         renderWeapons();
@@ -2103,7 +2105,7 @@ async function loadWeaponMaster() {
             const ammoPayload = await ammoResponse.json();
             const preview = new URLSearchParams(location.search).get('adminPreview') === 'ammunition' ? JSON.parse(localStorage.getItem('scavland-specialist-preview') || 'null') : null;
             const previewOriginal = preview?.id ? (ammoPayload.data || []).find(item => item.id === preview.id) : null;
-            const ammoRecords = (ammoPayload.data || []).map(item => item.id === preview?.id ? {...item, ...preview.record} : item);
+            const ammoRecords = ScavCatalog.records('ammunition', itemsPayload.data || [], ammoPayload.data || []).map(item => item.id === preview?.id ? {...item, ...preview.record} : item);
             ammunition = ammoRecords.map(source => ({...source,
                 price: source.estimatedPrice ?? 'Unknown',
                 description: source.description || '', damage: source.damage ?? 'Unknown',
