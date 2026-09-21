@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 358,
+  "count": 372,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -2108,6 +2108,24 @@
       "ocr": "r Bandage ~250P Dank. Rank: 1 These tattered bandages look like they'll infect my wounds rather than protect them. Still, it’s better than nothing — and I've used worse. Health: +5 Bleed: -15 -"
     },
     {
+      "file": "items/camera__icon__2026-09-21.png",
+      "sha256": "ef0c54f4c5d1e5ba2ddb88ffe51ad7b7ec82de9d280bfbd60a49452f190b848e",
+      "bytes": 902,
+      "width": 100,
+      "height": 105,
+      "phash": "96ce6433cbc98c36",
+      "ocr": "oa"
+    },
+    {
+      "file": "items/camera__tooltip__2026-09-21.png",
+      "sha256": "222ae0a2296f3d239e1e775d8b1716e6f859a7312d3a9ce5d2d69f912d4016bd",
+      "bytes": 69744,
+      "width": 1005,
+      "height": 628,
+      "phash": "e0bd2f633a4ac21e",
+      "ocr": "a Camera ~10000P The world used to be so-beautiful that it was worth recording and revisiting. The thought lingers as | struggle to connect it with this broken camera husk. r"
+    },
+    {
       "file": "items/canned-beans__tooltip__2026-09-18_085113.png",
       "sha256": "810c5704e47134e83ba9d1e3b6b3a58ed897a048b81487f80e9cfdf01992bf36",
       "bytes": 162768,
@@ -2126,6 +2144,24 @@
       "height": 862,
       "phash": "e0b13de987911eca",
       "ocr": "¥ a 7 Canteen ~480P \"Rank. Rank: 1 The water around here has a taste. The implication isn’t good. | should drink this in small swigs throughout the day — lessen the risk of radiation poisoning. Thirst: -33 Radiation: -5 a"
+    },
+    {
+      "file": "items/cassette-tape__icon__2026-09-21.png",
+      "sha256": "1cdf3681520204d6e73e24c07fd49124853d15324294eb4e4d03386fbd2d93b2",
+      "bytes": 883,
+      "width": 102,
+      "height": 99,
+      "phash": "87d2387862674ecd",
+      "ocr": "ce"
+    },
+    {
+      "file": "items/cassette-tape__tooltip__2026-09-21.png",
+      "sha256": "8c22863adf08b51440a3ae8b5d7ab0789ee3894b6be650b9d0645abedd3d90cc",
+      "bytes": 76650,
+      "width": 1008,
+      "height": 517,
+      "phash": "e5a12b78949e7a1a",
+      "ocr": "r . Cassette Tape ~1500P A tape used to store sounds and music. Been decades since last | heard one. Don't think I'll find a working device to play this on... a"
     },
     {
       "file": "items/chemical-residue__tooltip__2026-09-18_091704.png",
@@ -2165,6 +2201,24 @@
       "height": 802,
       "phash": "e0a527693fc2587a",
       "ocr": "a Field Repair Kit ~5000P 4499P Rank. Rank: 1 A spool of threads used to stich together broken armor bits and fabric. Repair: 15% Not usable below item condition: 70% Repair Class: Global"
+    },
+    {
+      "file": "items/floppy-disk__icon__2026-09-21.png",
+      "sha256": "bbe750c3f60794765693d9537ef0ce23cd79e8bed551ed2fe89f4e2418d1e89c",
+      "bytes": 756,
+      "width": 102,
+      "height": 103,
+      "phash": "9f5269866629d699",
+      "ocr": ""
+    },
+    {
+      "file": "items/floppy-disk__tooltip__2026-09-21.png",
+      "sha256": "af14b605f4b5b907ed00832ee8672453516165a19dc03f1809d9afbcb62a7f45",
+      "bytes": 85594,
+      "width": 1005,
+      "height": 616,
+      "phash": "e0a12f690b5ad69e",
+      "ocr": "r Floppy Disk ~3000P Information of some sort used to be stored in these, but | don't know how. Lots of things we used to know have been unlearned; what was the point?"
     },
     {
       "file": "items/fresh-mushrooms__tooltip__2026-09-20.png",
@@ -2744,6 +2798,24 @@
       "ocr": "al Kevlar Weave ~10000P FRank. Rank: 2, A fabric designed for high impact resistance, usually sewn onto armor to make it bulletproof. a r."
     },
     {
+      "file": "items/light-bulb__icon__2026-09-21.png",
+      "sha256": "9b6b3513e3cf623b79d2860b83f98160b955b10131347a941a70bf55bc269fd8",
+      "bytes": 898,
+      "width": 97,
+      "height": 97,
+      "phash": "9d9a735236644a7c",
+      "ocr": "£"
+    },
+    {
+      "file": "items/light-bulb__tooltip__2026-09-21.png",
+      "sha256": "cb259af6b0f9dc6519c4b111169c4659fea4ca1c4fd1b23b7f4c44e4df5f5515",
+      "bytes": 54669,
+      "width": 1012,
+      "height": 517,
+      "phash": "c0b12d4dde964a1f",
+      "ocr": "ro . Light Bulb ~750P A light bulb that seems to have stood the test of time: Might be worth offering to a Mechanist. a."
+    },
+    {
       "file": "items/mechanical-components__tooltip__2026-09-18_091859.png",
       "sha256": "c81cb37cd78ea2fa66e21eac66231cdbfa078b79f33ed1c012b2fd1ed7e3abfc",
       "bytes": 67401,
@@ -2811,6 +2883,24 @@
       "height": 567,
       "phash": "f0ad2fc1d25a4297",
       "ocr": "- Plier ~2000P \"Rank Rank: 1 I’m not the type to pull someone’s teeth out. But what else is this thing for? a"
+    },
+    {
+      "file": "items/pre-mist-gold-wristwatch__icon__2026-09-21.png",
+      "sha256": "0cef5c24260ccefa98ce097dc64144e53496576313863a129b694ab43dac8e85",
+      "bytes": 975,
+      "width": 96,
+      "height": 94,
+      "phash": "c19f3e702ee93027",
+      "ocr": "= ie"
+    },
+    {
+      "file": "items/pre-mist-gold-wristwatch__tooltip__2026-09-21.png",
+      "sha256": "f72cd7f5eca184b15a90e6e3ea3166ff738314256dba5c8d60ef249f44bb4ddc",
+      "bytes": 82349,
+      "width": 1032,
+      "height": 472,
+      "phash": "c5e53fcad2326ac0",
+      "ocr": "Pre-Mist Gold Wristwatch ~10000P | A glistening memento from the world before it ended. This country must've been full of rich folks. wl"
     },
     {
       "file": "items/rat-meat__image__2026-09-20.png",
@@ -2899,6 +2989,24 @@
       "ocr": "a Screws ~100P PRank Rank: 1 A bunch of metal screws, hard to find and pick up but valuable for the tinkering types. -"
     },
     {
+      "file": "items/square-battery__icon__2026-09-21.png",
+      "sha256": "5249fee61634b43b93cc4b9306566b349c35b54d04340a58b52fb89b119a2734",
+      "bytes": 847,
+      "width": 97,
+      "height": 100,
+      "phash": "85d23a4a52af4dad",
+      "ocr": "£."
+    },
+    {
+      "file": "items/square-battery__tooltip__2026-09-21.png",
+      "sha256": "eb902064ce18eb373cef6521718bd30cdfbc99f1aab2f2396e168d84e3947518",
+      "bytes": 77966,
+      "width": 1011,
+      "height": 471,
+      "phash": "85a52fda9a1e5ad0",
+      "ocr": "a ————————— Square Battery ~1500P Dried-up batteries — often leaky, sometimes toxic. They come in a variety of formats, from Button Cells to big C-Types. .,"
+    },
+    {
       "file": "items/stimpack__tooltip__2026-09-18_085101.png",
       "sha256": "cb9f7581daca5a3ac79a4bdd350dd71d3483a883f8ca957b42bfaa2106a73487",
       "bytes": 99295,
@@ -2907,6 +3015,24 @@
       "height": 874,
       "phash": "e0a53f6887959c5a",
       "ocr": "aa 5 Stimpack ~6000P Dank. Rank: 2. A complex mixture of drugs which can be quickly injected and discarded to numb pain, increase adrenaline and get me out of desperate situations. Health: +35 Hunger: «5 Thirst: «5 J"
+    },
+    {
+      "file": "items/t-plug__icon__2026-09-21.png",
+      "sha256": "83cf3ce744649658a3560b062cd595d5c49d0d16218b625cfee411be60b4b580",
+      "bytes": 841,
+      "width": 94,
+      "height": 93,
+      "phash": "94df297879256323",
+      "ocr": "ta \"on"
+    },
+    {
+      "file": "items/t-plug__tooltip__2026-09-21.png",
+      "sha256": "4ee82b4df97f0f3c31f9f909b6e0b0fbdc8240a1ed7e3dfe5017a0d87fe188ca",
+      "bytes": 58491,
+      "width": 1012,
+      "height": 568,
+      "phash": "e0bd2f6b1892c31e",
+      "ocr": "a T Plug ~500P A small piece of plastic used-to fit plugs into other plugs... Or something? Looks pretty worthless. al"
     },
     {
       "file": "items/tactical-knife__tooltip__2026-09-20.png",
