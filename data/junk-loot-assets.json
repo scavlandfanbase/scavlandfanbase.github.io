@@ -5,44 +5,44 @@
     {
       "itemId": "pre-mist-gold-wristwatch",
       "name": "Pre-Mist Gold Wristwatch",
-      "expectedPath": "images/items/junk/pre-mist-gold-wristwatch.png",
-      "status": "awaiting-icon-upload"
+      "expectedPath": "evidence-inbox/items/pre-mist-gold-wristwatch__icon__2026-09-21.png",
+      "status": "available-in-repository"
     },
     {
       "itemId": "cassette-tape",
       "name": "Cassette Tape",
-      "expectedPath": "images/items/junk/cassette-tape.png",
-      "status": "awaiting-icon-upload"
+      "expectedPath": "evidence-inbox/items/cassette-tape__icon__2026-09-21.png",
+      "status": "available-in-repository"
     },
     {
       "itemId": "square-battery",
       "name": "Square Battery",
-      "expectedPath": "evidence-inbox/items/historical/square-battery__tooltip__2026-09-13_144010.png",
+      "expectedPath": "evidence-inbox/items/square-battery__icon__2026-09-21.png",
       "status": "available-in-repository"
     },
     {
       "itemId": "floppy-disk",
       "name": "Floppy Disk",
-      "expectedPath": "images/items/junk/floppy-disk.png",
-      "status": "awaiting-icon-upload"
+      "expectedPath": "evidence-inbox/items/floppy-disk__icon__2026-09-21.png",
+      "status": "available-in-repository"
     },
     {
       "itemId": "light-bulb",
       "name": "Light Bulb",
-      "expectedPath": "images/items/junk/light-bulb.png",
-      "status": "awaiting-icon-upload"
+      "expectedPath": "evidence-inbox/items/light-bulb__icon__2026-09-21.png",
+      "status": "available-in-repository"
     },
     {
       "itemId": "t-plug",
       "name": "T Plug",
-      "expectedPath": "images/items/junk/t-plug.png",
-      "status": "awaiting-icon-upload"
+      "expectedPath": "evidence-inbox/items/t-plug__icon__2026-09-21.png",
+      "status": "available-in-repository"
     },
     {
       "itemId": "camera",
       "name": "Camera",
-      "expectedPath": "images/items/junk/camera.png",
-      "status": "awaiting-icon-upload"
+      "expectedPath": "evidence-inbox/items/camera__icon__2026-09-21.png",
+      "status": "available-in-repository"
     }
   ]
 }
