@@ -66,6 +66,19 @@ function validPortrait(value: unknown) {
     && Number.isInteger((crop as Record<string, unknown>).size) && Number((crop as Record<string, unknown>).size) > 0;
 }
 
+function validSource(value: unknown) {
+  return value === null || (!!value && typeof value === "object" && !Array.isArray(value));
+}
+
+function validShopEvidence(value: unknown) {
+  if (value === null) return true;
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const evidence = value as Record<string, unknown>;
+  return (evidence.status === undefined || typeof evidence.status === "string")
+    && (evidence.reviewedAt === undefined || typeof evidence.reviewedAt === "string")
+    && (evidence.screenshots === undefined || (Array.isArray(evidence.screenshots) && evidence.screenshots.every((shot) => shot && typeof shot === "object" && validImagePath((shot as Record<string, unknown>).file))));
+}
+
 async function isAdmin(request: Request) {
   const authorization = request.headers.get("Authorization") || "";
   if (!authorization.startsWith("Bearer ")) return false;
@@ -128,7 +141,9 @@ Deno.serve(async (request) => {
     || ("factionId" in changes && typeof changes.factionId !== "string")
     || ("inventoryDocumented" in changes && typeof changes.inventoryDocumented !== "boolean")
     || ("inventory" in changes && !validInventory(changes.inventory))
-    || ("portrait" in changes && !validPortrait(changes.portrait))) {
+    || ("portrait" in changes && !validPortrait(changes.portrait))
+    || ("source" in changes && !validSource(changes.source))
+    || ("shopEvidence" in changes && !validShopEvidence(changes.shopEvidence))) {
     return respond({ error: "Vendor details or stock rows are invalid." }, 400);
   }
 
