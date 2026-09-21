@@ -2440,12 +2440,18 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/historical/morphine__tooltip__2026-09-13_142950.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/medical/morphine__recipe__2026-09-18_205050.png",
-        "status": "screenshot-verified",
-        "note": "Verification synchronized from canonical database record"
+        "status": "pending-review",
+        "note": "Verification synchronized from canonical database record",
+        "lastVerified": null
+      },
+      "effects": {
+        "health": 12,
+        "hunger": 3,
+        "thirst": 3
       }
     },
     {
