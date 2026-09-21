@@ -883,7 +883,7 @@
     {
       "id": "anatoly",
       "name": "Anatoly",
-      "location": "The Mechanists",
+      "location": "Sontse Station",
       "factionId": "mechanists",
       "inventoryDocumented": true,
       "inventory": [
@@ -891,134 +891,212 @@
           "itemId": "bortovka-tinker",
           "name": "Bortovka Tinker",
           "rank": "1",
-          "price": "13250₽",
-          "details": "Weapon Damage: 30 RPM: 100 Range: 20 Accuracy: 52 Recoil: 41 - 11 Handling: 4 + 6 Ergo: 8 + 8 Reload: 1.0 Durability: 100 Caliber: High Caliber Rifle Ammo Repair Class: Scrap Stacking: Not Stackable"
+          "price": 13250,
+          "details": "Weapon Damage: 30 RPM: 100 Range: 20 Accuracy: 52 Recoil: 41 - 11 Handling: 4 + 6 Ergo: 8 + 8 Reload: 1.0 Durability: 100 Caliber: High Caliber Rifle Ammo Repair Class: Scrap Stacking: Not Stackable",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings, weapon data. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "medved-monster",
           "name": "Medved Monster",
           "rank": "1",
-          "price": "17250₽",
+          "price": null,
           "details": "Weapon Damage: 10 RPM: 450 Range: 16 Accuracy: 35 Recoil: 37 - 9 Handling: 14 + 8 Ergo: 12 Reload: 1.0 Durability: 100 Caliber: Pistol Ammo Repair Class: Scrap Stacking: Not Stackable"
         },
         {
           "itemId": "svarsh-miracle-short",
           "name": "Svarsh Miracle (Short)",
           "rank": "2",
-          "price": "35750₽",
-          "details": "Weapon Damage: 30 RPM: 100 Range: 14 Accuracy: 13 Recoil: 65 - 14 Handling: 8 + 11 Ergo: 8 + 5 Reload: 1.0 Durability: 100 Caliber: Shotgun Ammo Repair Class: Basic Stacking: Not Stackable"
+          "price": 35750,
+          "details": "Weapon Damage: 30 RPM: 100 Range: 14 Accuracy: 13 Recoil: 65 - 14 Handling: 8 + 11 Ergo: 8 + 5 Reload: 1.0 Durability: 100 Caliber: Shotgun Ammo Repair Class: Basic Stacking: Not Stackable",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings, weapon data. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "pistol-fmj-ammo",
           "name": "Pistol FMJ Ammo",
           "rank": "1",
-          "price": "30₽",
-          "details": "Ammo Damage: 10 Penetration: 0% Max Stacks: 999"
+          "price": 30,
+          "details": "Ammo Damage: 10 Penetration: 0% Max Stacks: 999",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items, ammunition data. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "shotgun-buckshot-ammo",
           "name": "Shotgun Buckshot Ammo",
           "rank": "1",
-          "price": "60₽",
-          "details": "Ammo Damage: 6 × 5 = 30 Penetration: 0% Max Stacks: 999"
+          "price": 60,
+          "details": "Ammo Damage: 6 × 5 = 30 Penetration: 0% Max Stacks: 999",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items, ammunition data. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "glue",
           "name": "Glue",
           "rank": "1",
-          "price": "3000₽ / 2699₽",
+          "price": null,
           "details": "Armor Repair Repair: 5% Not usable below: 80% condition Repair Class: Global Max Stacks: 5"
         },
         {
           "itemId": "field-repair-kit",
           "name": "Field Repair Kit",
           "rank": "1",
-          "price": "5000₽ / 4499₽",
+          "price": null,
           "details": "Armor Repair Repair: 15% Not usable below: 70% condition Repair Class: Global Max Stacks: 5"
         },
         {
           "itemId": "tattered-armor-repair-kit",
           "name": "Tattered Armor Repair Kit",
           "rank": "1",
-          "price": "12000₽ / 10799₽",
+          "price": null,
           "details": "Armor Repair Repair: 25% Usable in any condition Repair Class: Tattered Max Stacks: 5"
         },
         {
           "itemId": "gun-lube",
           "name": "Gun Lube",
           "rank": "1",
-          "price": "3000₽ / 2699₽",
+          "price": null,
           "details": "Weapon Maintenance Repair: 5% Not usable below: 80% condition Repair Class: Global Max Stacks: 5"
         },
         {
           "itemId": "gun-cleaning-rod",
           "name": "Gun Cleaning Rod",
           "rank": "1",
-          "price": "5000₽ / 4499₽",
+          "price": null,
           "details": "Weapon Maintenance Repair: 15% Not usable below: 70% condition Repair Class: Global Max Stacks: 5"
         },
         {
           "itemId": "scrap-gun-repair-kit",
           "name": "Scrap Gun Repair Kit",
           "rank": "1",
-          "price": "12000₽ / 10799₽",
-          "details": "Weapon Maintenance Repair: 25% Usable in any condition Repair Class: Scrap Max Stacks: 5"
+          "price": 12000,
+          "details": "Weapon Maintenance Repair: 25% Usable in any condition Repair Class: Scrap Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "ai-2-medkit",
           "name": "AI-2 Medkit",
           "rank": "1",
-          "price": "3200₽",
-          "details": "Medical Health: +30 Radiation: -15 Hunger: +3 Thirst: +3 Max Stacks: 5"
+          "price": 3200,
+          "details": "Medical Health: +30 Radiation: -15 Hunger: +3 Thirst: +3 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "ai-2-army-medkit",
           "name": "AI-2 Army Medkit",
           "rank": "2",
-          "price": "6200₽",
-          "details": "Medical Health: +40 Bleed: -20 Radiation: -10 Hunger: +3 Thirst: +3 Max Stacks: 5"
+          "price": 6200,
+          "details": "Medical Health: +40 Bleed: -20 Radiation: -10 Hunger: +3 Thirst: +3 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "ai-2-mechanist-medkit",
           "name": "AI-2 Mechanist Medkit",
           "rank": "3",
-          "price": "9200₽",
-          "details": "Medical Health: +50 Bleed: -30 Radiation: -50 Hunger: +3 Thirst: +3 Max Stacks: 5"
+          "price": 9200,
+          "details": "Medical Health: +50 Bleed: -30 Radiation: -50 Hunger: +3 Thirst: +3 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items, existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "bandage",
           "name": "Bandage",
           "rank": "1",
-          "price": "250₽",
-          "details": "Medical Health: +5 Bleed: -15 Max Stacks: 5"
+          "price": 250,
+          "details": "Medical Health: +5 Bleed: -15 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "advanced-bandage",
           "name": "Advanced Bandage",
           "rank": "2",
-          "price": "4000₽",
-          "details": "Medical Health: +10 Bleed: -33 Max Stacks: 5"
+          "price": 4000,
+          "details": "Medical Health: +10 Bleed: -33 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "stimpack",
           "name": "Stimpack",
           "rank": "2",
-          "price": "6000₽",
-          "details": "Medical Health: +35 Hunger: +5 Thirst: +5 Max Stacks: 5"
+          "price": 6000,
+          "details": "Medical Health: +35 Hunger: +5 Thirst: +5 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "canteen",
           "name": "Canteen",
           "rank": "1",
-          "price": "480₽",
-          "details": "Food & Drink Thirst: -33 Radiation: -5 Max Stacks: 5"
+          "price": 480,
+          "details": "Food & Drink Thirst: -33 Radiation: -5 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "canned-beans",
           "name": "Canned Beans",
           "rank": "1",
-          "price": "2100₽",
-          "details": "Food & Drink Hunger: -27 Max Stacks: 5"
+          "price": 2100,
+          "details": "Food & Drink Hunger: -27 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         }
       ],
       "source": {
