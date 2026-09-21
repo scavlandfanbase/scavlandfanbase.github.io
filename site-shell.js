@@ -1,4 +1,12 @@
 (function(){
+const analyticsUrl='https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/track-site-session';
+function trackPublicSession(){
+ if(/admin(?:\.html|-admin\.html)$/.test(location.pathname))return;
+ let sessionId;
+ try{sessionId=sessionStorage.getItem('scavland-session-id')||crypto.randomUUID();sessionStorage.setItem('scavland-session-id',sessionId)}catch{return}
+ const send=()=>fetch(analyticsUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId,page:location.pathname||'/'})}).catch(()=>{});
+ send();setInterval(send,120000);
+}
 function buildShell(){
  document.querySelectorAll('.scav-header,.site-nav,.nav-bar').forEach(el=>el.remove());
  [...document.body.children].filter(el=>el.tagName==='HEADER'&&el.querySelector('nav')).forEach(el=>el.remove());
@@ -47,5 +55,6 @@ function buildShell(){
   if(new URLSearchParams(location.search).has('adminPreview')||new URLSearchParams(location.search).has('adminContentPreview'))window.addEventListener('storage',e=>{if(e.key===previewKey||e.key==='scavland-content-preview')location.reload()});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',buildShell);else buildShell();
+trackPublicSession();
 })();
 
