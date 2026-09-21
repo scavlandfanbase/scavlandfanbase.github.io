@@ -15,7 +15,8 @@
         "file": "evidence-inbox/ammo/special-fmj-ammo__stats__2026-09-16_115812.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 1000
     },
     {
       "id": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
@@ -30,7 +31,8 @@
         "file": "evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 350
     },
     {
       "id": "pistol-ammo-pistol-hp-ammo",
@@ -45,7 +47,8 @@
         "file": "evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 60
     },
     {
       "id": "rifle-ammo-rifle-hp-ammo",
@@ -60,7 +63,8 @@
         "file": "evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 280
     },
     {
       "id": "shotgun-ammo-shotgun-hp-ammo",
@@ -75,7 +79,8 @@
         "file": "evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 180
     },
     {
       "id": "2hmg",
@@ -98,7 +103,8 @@
         "file": "evidence-inbox/weapons/2hmg-long__stats__2026-09-19_084756.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical High Caliber Rifles record"
-      }
+      },
+      "estimatedPrice": 100000
     },
     {
       "id": "2hmg-short",
@@ -112,7 +118,8 @@
         "file": "evidence-inbox/weapons/2hmg-short__stats__2026-09-19_084341.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical High Caliber Rifles record"
-      }
+      },
+      "estimatedPrice": 100000
     },
     {
       "id": "2hmg-ergonomic-pistol-grip",
@@ -173,7 +180,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "3-line-nagant-full-stock",
@@ -259,6 +268,12 @@
         "file": "evidence-inbox/items/advanced-bandage__tooltip__2026-09-18_085054.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
+      },
+      "estimatedPrice": 4000,
+      "rank": 2,
+      "effects": {
+        "health": 10,
+        "bleed": -33
       }
     },
     {
@@ -284,7 +299,8 @@
         "file": "evidence-inbox/items/advanced-gun-repair-kit_tooltip_2026-09-20 235934.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 60000
     },
     {
       "id": "advanced-gun-repair-kit-blueprint",
@@ -336,6 +352,15 @@
         "file": "evidence-inbox/items/ai-2-army-medkit__tooltip__2026-09-18_085021.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
+      },
+      "estimatedPrice": 6200,
+      "rank": 2,
+      "effects": {
+        "health": 40,
+        "bleed": -20,
+        "radiation": -10,
+        "hunger": 3,
+        "thirst": 3
       }
     },
     {
@@ -359,6 +384,15 @@
         "file": "evidence-inbox/items/ai-2-mechanist-medkit__tooltip__2026-09-18_085027.png",
         "status": "screenshot-verified",
         "lastVerified": "2026-09-18"
+      },
+      "estimatedPrice": 9200,
+      "rank": 3,
+      "effects": {
+        "health": 50,
+        "bleed": -30,
+        "radiation": -50,
+        "hunger": 3,
+        "thirst": 3
       }
     },
     {
@@ -375,6 +409,14 @@
         "file": "evidence-inbox/items/ai-2-medkit__tooltip__2026-09-18_085015.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
+      },
+      "estimatedPrice": 3200,
+      "rank": 1,
+      "effects": {
+        "health": 30,
+        "radiation": -15,
+        "hunger": 3,
+        "thirst": 3
       }
     },
     {
@@ -501,7 +543,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 3
     },
     {
       "id": "bahadir-railed-handguard",
@@ -516,7 +560,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "bahadir-ribbed-cylinder-mag",
@@ -531,7 +577,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "bakelite-pistol-grip-module",
@@ -554,7 +602,8 @@
         "file": "evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Armour record"
-      }
+      },
+      "estimatedPrice": 40000
     },
     {
       "id": "bandage",
@@ -570,6 +619,12 @@
         "file": "evidence-inbox/items/bandage__tooltip__2026-09-18_085034.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
+      },
+      "estimatedPrice": 250,
+      "rank": 1,
+      "effects": {
+        "health": 5,
+        "bleed": -15
       }
     },
     {
@@ -617,7 +672,8 @@
         "file": "evidence-inbox/weapons/borealis-12__stats__2026-09-19_141353.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Shotguns record"
-      }
+      },
+      "estimatedPrice": 75000
     },
     {
       "id": "borealis-12-tak",
@@ -646,7 +702,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 2
     },
     {
       "id": "borealis-adaptable-railed-handguard",
@@ -661,7 +719,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 2
     },
     {
       "id": "borealis-aluminum-mag",
@@ -676,7 +736,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1500,
+      "rank": 2
     },
     {
       "id": "borealis-curved-mag",
@@ -691,7 +753,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "borealis-drum-mag",
@@ -706,7 +770,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 8000,
+      "rank": 3
     },
     {
       "id": "borealis-lock-mount-handguard",
@@ -721,7 +787,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "borealis-long-curved-mag",
@@ -736,7 +804,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 2
     },
     {
       "id": "borealis-polymer-short-handguard",
@@ -751,7 +821,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 1
     },
     {
       "id": "borealis-railed-dust-cover",
@@ -766,7 +838,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "borealis-skeleton-stock",
@@ -781,7 +855,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 1
     },
     {
       "id": "bortovka-tinker",
@@ -838,6 +914,11 @@
         "file": "evidence-inbox/items/canned-beans__tooltip__2026-09-18_085113.png",
         "status": "screenshot-verified",
         "lastVerified": "2026-09-18"
+      },
+      "estimatedPrice": 2100,
+      "rank": 1,
+      "effects": {
+        "hunger": -27
       }
     },
     {
@@ -853,6 +934,12 @@
         "file": "evidence-inbox/items/canteen__tooltip__2026-09-18_085107.png",
         "status": "screenshot-verified",
         "lastVerified": "2026-09-18"
+      },
+      "estimatedPrice": 480,
+      "rank": 1,
+      "effects": {
+        "radiation": -5,
+        "thirst": -33
       }
     },
     {
@@ -886,6 +973,11 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-13",
         "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+      },
+      "effects": {
+        "health": -1,
+        "radiation": -15,
+        "thirst": 3
       }
     },
     {
@@ -919,7 +1011,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 2
     },
     {
       "id": "dragoon-large-steel-mag",
@@ -934,7 +1028,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 3
     },
     {
       "id": "dragoon-polymer-handguard",
@@ -949,7 +1045,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "dragoon-polymer-stock",
@@ -964,7 +1062,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "dragoon-railed-dust-cover",
@@ -979,7 +1079,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 1
     },
     {
       "id": "dragoon-railed-handguard",
@@ -994,7 +1096,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 3
     },
     {
       "id": "dragoon-steel-mag",
@@ -1009,7 +1113,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "dried-mushrooms",
@@ -1069,7 +1175,8 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-20",
         "note": "Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json."
-      }
+      },
+      "estimatedPrice": 100000
     },
     {
       "id": "elevated-red-dot-sight",
@@ -1207,7 +1314,8 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-20",
         "note": "Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json."
-      }
+      },
+      "estimatedPrice": 25000
     },
     {
       "id": "green-rags",
@@ -1277,7 +1385,9 @@
       "source": {
         "file": "evidence-inbox/items/hammer__tooltip__2026-09-18_091636.png",
         "status": "screenshot-verified"
-      }
+      },
+      "estimatedPrice": 2000,
+      "rank": 1
     },
     {
       "id": "handstop",
@@ -1314,6 +1424,11 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-13",
         "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+      },
+      "estimatedPrice": 1500,
+      "effects": {
+        "health": 15,
+        "thirst": 3
       }
     },
     {
@@ -1343,7 +1458,8 @@
         "file": "evidence-inbox/ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 500
     },
     {
       "id": "high-caliber-rifle-fmj-ammo",
@@ -1358,7 +1474,8 @@
         "file": "evidence-inbox/ammo/high-caliber-rifle-fmj-ammo__stats__2026-09-19_221757.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 150
     },
     {
       "id": "holographic-sight",
@@ -1373,7 +1490,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 60000,
+      "rank": 2
     },
     {
       "id": "ifak-medkit",
@@ -1500,7 +1619,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 8000,
+      "rank": 2
     },
     {
       "id": "m4-ergonomic-pistol-grip-module",
@@ -1536,7 +1657,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 8000,
+      "rank": 3
     },
     {
       "id": "m4-large-aluminum-mag",
@@ -1634,7 +1757,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "m4-svodbonik",
@@ -1649,7 +1774,8 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-19",
         "note": "Verification synchronized from canonical weapon record"
-      }
+      },
+      "estimatedPrice": 80000
     },
     {
       "id": "m4-target-pistol-grip-module",
@@ -1685,7 +1811,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "makeshift-double-stacked-steel-stick-mag",
@@ -1700,7 +1828,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 1
     },
     {
       "id": "makeshift-grated-stock",
@@ -1715,7 +1845,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 1
     },
     {
       "id": "makeshift-large-steel-stick-mag",
@@ -1739,7 +1871,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 1
     },
     {
       "id": "meat-drumstick",
@@ -1814,7 +1948,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 2
     },
     {
       "id": "medved-monster",
@@ -1843,7 +1979,8 @@
         "file": "evidence-inbox/weapons/medved-monster-silenced__stats__2026-09-19_144317.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Pistols record"
-      }
+      },
+      "estimatedPrice": 15000
     },
     {
       "id": "metal-breastplate",
@@ -1899,7 +2036,8 @@
         "file": "evidence-inbox/weapons/mikhail-50__stats__2026-09-19_084710.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Special Weapons record"
-      }
+      },
+      "estimatedPrice": 100000
     },
     {
       "id": "mikhail-50-pristine",
@@ -1913,7 +2051,8 @@
         "file": "evidence-inbox/weapons/mikhail-50-pristine__stats__2026-09-19_084409.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Special Weapons record"
-      }
+      },
+      "estimatedPrice": 100000
     },
     {
       "id": "mikhail-50-prototype",
@@ -1927,7 +2066,8 @@
         "file": "evidence-inbox/weapons/mikhail-50-prototype__stats__2026-09-19_084730.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Special Weapons record"
-      }
+      },
+      "estimatedPrice": 80000
     },
     {
       "id": "mikhail-74-u",
@@ -1988,7 +2128,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 8000,
+      "rank": 3
     },
     {
       "id": "mk-dust-cover",
@@ -2043,7 +2185,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "mk-metal-stock",
@@ -2202,7 +2346,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 2
     },
     {
       "id": "mk-steel-polymer-mag-brown",
@@ -2313,7 +2459,7 @@
         "file": "evidence-inbox/items/mystery-pills__tooltip__2026-09-20_083137.png"
       },
       "estimatedPrice": 6000,
-      "maxStacks": 5,
+      "maxStack": 5,
       "description": "A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away.",
       "effects": {
         "health": 15,
@@ -2362,7 +2508,8 @@
         "lastVerified": "2026-09-20",
         "submissionId": "d9f30f35-7ef4-424c-bad7-1779df0ec224",
         "note": "Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown."
-      }
+      },
+      "estimatedPrice": 75000
     },
     {
       "id": "overripe-potato",
@@ -2385,7 +2532,8 @@
         "file": "evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Armour record"
-      }
+      },
+      "estimatedPrice": 15000
     },
     {
       "id": "parade-helmet",
@@ -2418,6 +2566,11 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-13",
         "note": "Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+      },
+      "estimatedPrice": 2500,
+      "effects": {
+        "radiation": -25,
+        "thirst": 5
       }
     },
     {
@@ -2433,7 +2586,8 @@
         "file": "evidence-inbox/ammo/pistol-ap__stats__2026-09-13_141636.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 100
     },
     {
       "id": "pistol-fmj-ammo",
@@ -2448,7 +2602,9 @@
         "file": "evidence-inbox/ammo/pistol-fmj-ammo__stats__2026-09-18_084728.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 30,
+      "rank": 1
     },
     {
       "id": "plastic-scrap",
@@ -2582,7 +2738,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 1
     },
     {
       "id": "pm-muzzle-brake",
@@ -2597,7 +2755,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 120,
+      "rank": 1
     },
     {
       "id": "pm-nikolay",
@@ -2662,7 +2822,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 150,
+      "rank": 1
     },
     {
       "id": "pm-railed-forestock",
@@ -2738,7 +2900,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "rabbit-meat",
@@ -2816,7 +2980,8 @@
         "file": "evidence-inbox/ammo/rifle-ap__stats__2026-09-13_141731.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 400
     },
     {
       "id": "rifle-collapsible-stock-module",
@@ -2831,7 +2996,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "rifle-fmj-ammo",
@@ -2846,7 +3013,8 @@
         "file": "evidence-inbox/ammo/rifle-fmj-ammo__stats__2026-09-19_221953.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 120
     },
     {
       "id": "roit-vest",
@@ -2861,7 +3029,8 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-20",
         "note": "Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json."
-      }
+      },
+      "estimatedPrice": 86000
     },
     {
       "id": "rubber-scrap",
@@ -2997,7 +3166,8 @@
         "file": "evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Helmets record"
-      }
+      },
+      "estimatedPrice": 89000
     },
     {
       "id": "sewing-kit",
@@ -3069,7 +3239,8 @@
         "file": "evidence-inbox/ammo/shotgun-ap__stats__2026-09-13_141705.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 400
     },
     {
       "id": "shotgun-buckshot-ammo",
@@ -3084,7 +3255,9 @@
         "file": "evidence-inbox/ammo/shotgun-buckshot-ammo__stats__2026-09-18_084734.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical database record"
-      }
+      },
+      "estimatedPrice": 60,
+      "rank": 1
     },
     {
       "id": "sidemounted-4x-scope",
@@ -3107,7 +3280,8 @@
         "file": "evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Armour record"
-      }
+      },
+      "estimatedPrice": 5000
     },
     {
       "id": "smg-railed-dust-cover",
@@ -3122,7 +3296,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "sniper-4x-scope",
@@ -3178,7 +3354,8 @@
         "file": "evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Armour record"
-      }
+      },
+      "estimatedPrice": 65000
     },
     {
       "id": "svarsh-drum-mag",
@@ -3193,7 +3370,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 4000,
+      "rank": 2
     },
     {
       "id": "svarsh-miracle-long",
@@ -3310,7 +3489,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "tc-polymer-mag-black",
@@ -3325,7 +3506,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 1
     },
     {
       "id": "tc-railed-dust-cover",
@@ -3380,7 +3563,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 2500,
+      "rank": 2
     },
     {
       "id": "tc-wood-stock",
@@ -3395,7 +3580,8 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "rank": 2
     },
     {
       "id": "thread-cutter",
@@ -3409,7 +3595,8 @@
         "file": "evidence-inbox/weapons/thread-cutter__stats__2026-09-19_084742.png",
         "status": "screenshot-verified",
         "note": "Verification synchronized from canonical Rifles record"
-      }
+      },
+      "estimatedPrice": 80000
     },
     {
       "id": "thread-cutter-short",
@@ -3738,7 +3925,9 @@
         "status": "screenshot-verified",
         "lastVerified": "2026-09-17",
         "note": "Direct in-game attachment tooltip screenshot."
-      }
+      },
+      "estimatedPrice": 1250,
+      "rank": 1
     },
     {
       "id": "zavod-polymer-handguard",
@@ -3782,7 +3971,8 @@
       "effects": {
         "health": 5,
         "thirst": 3
-      }
+      },
+      "rank": 1
     },
     {
       "id": "acid-gland",
@@ -3817,6 +4007,9 @@
         "file": "evidence-inbox/items/berry-puree__tooltip__2026-09-21.png",
         "status": "screenshot-verified",
         "note": "Direct in-game tooltip and icon screenshot."
+      },
+      "effects": {
+        "hunger": -25
       }
     },
     {
@@ -3835,6 +4028,9 @@
         "file": "evidence-inbox/items/butter__tooltip__2026-09-21.png",
         "status": "screenshot-verified",
         "note": "Direct in-game tooltip and icon screenshot."
+      },
+      "effects": {
+        "hunger": -15
       }
     },
     {
@@ -3853,6 +4049,10 @@
         "file": "evidence-inbox/items/fish-soup__tooltip__2026-09-21.png",
         "status": "screenshot-verified",
         "note": "Direct in-game tooltip and icon screenshot."
+      },
+      "effects": {
+        "hunger": -30,
+        "thirst": -15
       }
     },
     {
@@ -3888,6 +4088,10 @@
         "file": "evidence-inbox/items/whole-roasted-fish__tooltip__2026-09-21.png",
         "status": "screenshot-verified",
         "note": "Direct in-game tooltip and icon screenshot."
+      },
+      "effects": {
+        "radiation": 5,
+        "hunger": -30
       }
     },
     {
@@ -4035,7 +4239,8 @@
         "lastVerified": "2026-09-20",
         "submissionId": "da5dec43-ea75-48da-a057-1f8be2b1d2af",
         "note": "Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown."
-      }
+      },
+      "estimatedPrice": 35000
     },
     {
       "id": "mutated-stick",
@@ -4075,7 +4280,11 @@
       "rank": null,
       "maxStack": 5,
       "stackable": true,
-      "description": null
+      "description": null,
+      "effects": {
+        "hunger": -2,
+        "thirst": 20
+      }
     }
   ]
 }
