@@ -2,6 +2,10 @@
 
 ## Admin record entry — 21 September 2026
 
+Implementation commit: `20ddd8e` (branch `improve-admin-entry`).
+
+**Deployment pending:** automatic approval review rejected the live Supabase deployment and requires explicit owner approval. No publishing functions have been changed; the new frontend must not go live before the three functions are deployed.
+
 - Items, Weapons, Armour, Ammunition, Crafting and Vendors now share a form-based editor: Add new, Preview, Save and publish. No IDs, JSON or repository paths are required.
 - Picture library and PNG/JPG/WebP uploads (5 MB each, 12 MB per save); evidence notes/status/date are normal fields. Recipes and vendor inventories use item pickers and numeric inputs. Portraits are optional.
 - Server-generated stable IDs, duplicate checks, stale-record conflicts and one non-forced Git commit for all related data and uploaded images. New specialist entries automatically create/link the Items registry. Subsequent saves update the saved ID.

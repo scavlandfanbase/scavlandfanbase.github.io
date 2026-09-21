@@ -45,4 +45,3 @@ const fs=require('fs'),path=require('path'),http=require('http'),assert=require(
   assert.deepEqual(errors,[]);console.log('PASS public ammunition: newly added record rendered; no browser errors');
  }finally{if(browser)await browser.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
-
