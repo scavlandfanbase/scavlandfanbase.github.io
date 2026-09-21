@@ -12,6 +12,7 @@ The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_
 - **Public CMS section controls:** the Content Editor now supports section title/intro fields and the public adapter can apply them to targeted Vendor, Weapons, and Armour sections without replacing their interactive/data-driven bodies.
 - **Public CMS global controls:** the Content Editor now includes a Global site content entry for footer text and navigation labels; `publish-site-content` validates and publishes global content, and the public shell applies it.
 - **Public CMS card controls:** modeled cards now expose title, description, image path, and link target fields in the Content Editor; public card markup applies image paths when an image element exists.
+- **Public CMS card preview:** the Content Editor preview now displays the current modeled image path and link target alongside each card's edited title and description.
 - **Public CMS Home update fields:** Latest Update title, summary, and link are now modeled and editable; the Home page applies them while retaining the existing update feed fallback.
 
 ## Latest handover — 21 September 2026
