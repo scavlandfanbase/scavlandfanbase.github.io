@@ -3,27 +3,27 @@
   "count": 403,
   "exact_duplicate_groups": [
     [
-      "Screenshot 2026-09-20 202003.png",
+      "armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
       "armour/old-tactical-vest__stats-100-durability__2026-09-20.png"
     ],
     [
-      "Screenshot 2026-09-20 204519.png",
+      "armour/skull-mask__stats-100-durability__2026-09-20.png",
       "armour/skull-mask__stats-100-durability__2026-09-20.png"
     ],
     [
-      "Screenshot 2026-09-20 204527.png",
+      "armour/panskiy-kask__stats-100-durability__2026-09-20.png",
       "armour/panskiy-kask__stats-100-durability__2026-09-20.png"
     ],
     [
-      "Screenshot 2026-09-20 204534.png",
+      "armour/balistic-kask__stats-100-durability__2026-09-20.png",
       "armour/balistic-kask__stats-100-durability__2026-09-20.png"
     ],
     [
-      "Screenshot 2026-09-20 204544.png",
+      "armour/stronghold-vest__stats-100-durability__2026-09-20.png",
       "armour/stronghold-vest__stats-100-durability__2026-09-20.png"
     ],
     [
-      "Screenshot 2026-09-20 211045.png",
+      "armour/ashen-ushanka__stats-100-durability__2026-09-20.png",
       "armour/ashen-ushanka_2026-09-20 211045.png"
     ],
     [
@@ -35,7 +35,7 @@
       "items/mutated-stick_tooltip_2026-09-21 132009.png"
     ],
     [
-      "vendors/Screenshot 2026-09-20 213218.png",
+      "vendors/gavron__shop-screen-part-2__2026-09-20.png",
       "vendors/gavron__shop-screen__2026-09-20.png"
     ],
     [
@@ -45,7 +45,7 @@
   ],
   "files": [
     {
-      "file": "Screenshot 2026-09-20 202003.png",
+      "file": "armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
       "sha256": "523312a02188ce05731a049c309c17f504d46259259d0cef5219735e79ae680e",
       "bytes": 276833,
       "filename_timestamp": "2026-09-20T20:20:03",
@@ -55,7 +55,7 @@
       "ocr": "i es ee Old Tactical Vest ~75000P A beat-up tactical vest worn by police forces of pre-Mist times. It offers great mobility and decent protection against weaker types of weapon fire. This vest is usually a reward for those with basic training and experience in the field. Durability TITTAUIANITANIIIHY 100 Ballistic Res HUTT 35 Slash Res I 25 Rad Res Ill 15 Repair Class: Medium as"
     },
     {
-      "file": "Screenshot 2026-09-20 204519.png",
+      "file": "armour/skull-mask__stats-100-durability__2026-09-20.png",
       "sha256": "853c733e1e57a7563a73564eacc52c800d8855e168a4ca753fec623bdf100588",
       "bytes": 305974,
       "filename_timestamp": "2026-09-20T20:45:19",
@@ -65,7 +65,7 @@
       "ocr": "ro rs a, » Skull Mask ~5000P A menacing mask in the shape of a skull, worn by different folks for different reasons: some in respect and awe of the dead, others in order to intimidate and scare. Durability Te Ballistic Res | 3 Slash Res I| 10 Rad Res 0 Repair Class: Tattered 1}"
     },
     {
-      "file": "Screenshot 2026-09-20 204527.png",
+      "file": "armour/panskiy-kask__stats-100-durability__2026-09-20.png",
       "sha256": "9df42abd095a9ce5865206f321acc9df7b211169048951e3a2edb9367580cf59",
       "bytes": 325632,
       "filename_timestamp": "2026-09-20T20:45:27",
@@ -75,7 +75,7 @@
       "ocr": "fal oe i i Panskiy Kask ~15000P | An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field. Durability PUAULNVANUNINIMIIINY § 100 Ballistic Res {| 8 Slash Res III 13 Rad Res ll 10 Repair Class: Scavenger a"
     },
     {
-      "file": "Screenshot 2026-09-20 204534.png",
+      "file": "armour/balistic-kask__stats-100-durability__2026-09-20.png",
       "sha256": "aa8b4da084ecdaf9a2bc873ca3a56f985304a9930bc6b8d15c1db46d09165193",
       "bytes": 331923,
       "filename_timestamp": "2026-09-20T20:45:34",
@@ -85,7 +85,7 @@
       "ocr": "all | Ballistic Kask ~40000P One of the most common pieces of Pre-War soldier equipment, this cheaply mass-produced helmet is sturdy enough against bludgeon attacks, but will not stop a bullet. Durability LT Ballistic Res VIII 7} Slash Res WT 25 Rad Res | 5 | Repair Class: Medium -,"
     },
     {
-      "file": "Screenshot 2026-09-20 204544.png",
+      "file": "armour/stronghold-vest__stats-100-durability__2026-09-20.png",
       "sha256": "292dc28faffade8ad0e931e2ca68093611db775f538a005153a4d895f7444231",
       "bytes": 387559,
       "filename_timestamp": "2026-09-20T20:45:44",
@@ -95,7 +95,7 @@
       "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
     },
     {
-      "file": "Screenshot 2026-09-20 205954.png",
+      "file": "items/advanced-bandage__tooltip__2026-09-20.png",
       "sha256": "5d7cf1c5b1f663cb86d27c61b1242c24566e3e1d458c79c02e8b00873cb7af8d",
       "bytes": 63071,
       "filename_timestamp": "2026-09-20T20:59:54",
@@ -105,7 +105,7 @@
       "ocr": "Advanced Bandage ~4000P High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 wl"
     },
     {
-      "file": "Screenshot 2026-09-20 210006.png",
+      "file": "factions/mother-mora__character-card__2026-09-20.png",
       "sha256": "26ead173453070f38b8bd1e2ba6f85c4893f82ae550001dc439eb4f973539229",
       "bytes": 44850,
       "filename_timestamp": "2026-09-20T21:00:06",
@@ -115,7 +115,7 @@
       "ocr": "a a - i a Mother Mora"
     },
     {
-      "file": "Screenshot 2026-09-20 211045.png",
+      "file": "armour/ashen-ushanka__stats-100-durability__2026-09-20.png",
       "sha256": "750eb56ced1abc498d7a90d772b93a210252fc188ccfa2c45ba0776a4e13d270",
       "bytes": 145813,
       "filename_timestamp": "2026-09-20T21:10:45",
@@ -125,7 +125,7 @@
       "ocr": "- Ashen Ushanka ~18000P A very common piece of headwear throughout Zalesye, and one of the first trades people make when they come into some money. Its comfy shape and texture are great against the cold, but don't offer much protection. Durability PUNTAAUATUUUNINITIIT 100 Ballistic Res I| 8 Slash Res I| 10 Rad Res I 8 Repair Class: Tattered al"
     },
     {
-      "file": "Screenshot 2026-09-20 211614.png",
+      "file": "weapons/bortovka-tinker__stats__2026-09-20.png",
       "sha256": "daf2af92843768d5c7427bff697ac4fbadceaec5754787107266a27fa8208a6a",
       "bytes": 314594,
       "filename_timestamp": "2026-09-20T21:16:14",
@@ -135,7 +135,7 @@
       "ocr": "r Bortovka Tinker ~]000P This freakish gun is a home-brew combination of parts from different guns that were lost to history. Terrible accuracy, powerful shots, and noise that will be heard across the wastes. Damage WUUAUII 30 Handling III 4+8 Fire Rate (RPM) | 100 Ergonomics Ill 12+7 Range WT 18 Reload Speed §=—[IIIIIIII 1.0 Accuracy TTT 50 Durability UUNNUUAUUII 94 Recoil UINANAUTI 50- 13 Repair Class: Scrap Caliber: High Caliber Rifle Ammo _."
     },
     {
-      "file": "Screenshot 2026-09-20 211637.png",
+      "file": "items/russet-potato__tooltip__2026-09-20.png",
       "sha256": "558aa9cc7f0e664d4beddce8b90fccb3f5ce5a331b4ad2b5fd7ed6d996ed3588",
       "bytes": 97634,
       "filename_timestamp": "2026-09-20T21:16:37",
@@ -145,7 +145,7 @@
       "ocr": "a Russet Potato ~800P A common food throughout the Continent. Bland, but nutritious. Hard to eat uncooked. Better off trading these, or having someone prepare them. Hunger: -12 Thirst: -1 yl"
     },
     {
-      "file": "Screenshot 2026-09-20 211819.png",
+      "file": "items/chemical-container__tooltip__2026-09-20.png",
       "sha256": "a40726495e174479c78d05e660ca9246c3601c768139422fa0876aed4ed629de",
       "bytes": 73223,
       "filename_timestamp": "2026-09-20T21:18:19",
@@ -155,7 +155,7 @@
       "ocr": "oil 7 Chemical Container ~1000P A chemical container for hazardous materials. Must have seemed like a big deal before the Mist. a"
     },
     {
-      "file": "Screenshot 2026-09-20 213057.png",
+      "file": "unresolved/unknown__screen__2026-09-20_213057.png",
       "sha256": "cebbd4b57caa143dc8aa7074d2e1a838f097b8fca2c6636a50fa5ce6c48c6585",
       "bytes": 71860,
       "filename_timestamp": "2026-09-20T21:30:57",
@@ -165,7 +165,7 @@
       "ocr": "| ; 4 Mila Reputation 192 | | f Rank 1 | | Rada — | il | # Oh, hi there. Didn't notice you. = = ee | | 1. Talk | 2. Ask for Jobs |: _ 3. Bye t ! | = _——_ oe br"
     },
     {
-      "file": "Screenshot 2026-09-20 213243.png",
+      "file": "items/rubber-scrap__tooltip__2026-09-20.png",
       "sha256": "0b65043173be83b8a3a6be8f5d0b744163317965e45d0bbe77dea57e152794df",
       "bytes": 53157,
       "filename_timestamp": "2026-09-20T21:32:43",
@@ -3504,7 +3504,7 @@
       "ocr": "pda"
     },
     {
-      "file": "vendors/Screenshot 2026-09-20 213218.png",
+      "file": "vendors/gavron__shop-screen-part-2__2026-09-20.png",
       "sha256": "431b1bcc8e2968cbdecb4481e4ea64a708cfbeb6c98b4b2f3dfda71ac10177ab",
       "bytes": 41394,
       "filename_timestamp": "2026-09-20T21:32:18",
