@@ -285,7 +285,7 @@ body {
 }
 
 .section-count {
-    color: #888;
+            EDIT WEAPON STATS HERE. 
 
     font-size: 12px;
 
@@ -821,14 +821,14 @@ footer {
             40
         </strong>
 
-        Weapons
+            /* =========================================================
 
         &nbsp;•&nbsp;
 
         <strong id="ammoTotal">
             13
         </strong>
-
+                    ammunition.length; 
         Ammo Types
 
     </div>
@@ -1078,7 +1078,7 @@ let weapons = [], sharedItems = new Map();
 // Weapon records are loaded from the single authoritative master dataset.
 // Do not duplicate weapon stats in this HTML file.
 
-const ammunition = [
+let ammunition = [
 
 
 /* =========================================================
@@ -2090,7 +2090,7 @@ document
 
 async function loadWeaponMaster() {
     try {
-        const [response, itemsResponse] = await Promise.all([fetch("data/weapons.json", { cache: "no-store" }), fetch("data/items.json", { cache: "no-store" })]);
+        const [response, itemsResponse, ammoResponse] = await Promise.all([fetch("data/weapons.json", { cache: "no-store" }), fetch("data/items.json", { cache: "no-store" }), fetch("data/ammo.json", { cache: "no-store" })]);
         if (!response.ok) throw new Error("HTTP " + response.status);
         const master = await response.json();
         const itemsPayload = itemsResponse.ok ? await itemsResponse.json() : { data: [] };
@@ -2098,6 +2098,17 @@ async function loadWeaponMaster() {
         weapons = (Array.isArray(master.data) ? master.data : []).map(weapon => { const shared = sharedItems.get(weapon.id); return shared ? {...weapon, name: shared.name, image: shared.image || weapon.image} : weapon; });
         document.getElementById("weaponTotal").textContent = weapons.length;
         renderWeapons();
+        if (ammoResponse.ok) {
+            const ammoPayload = await ammoResponse.json();
+            const currentAmmo = new Map((ammoPayload.data || []).map(item => [item.name.toLowerCase(), item]));
+            ammunition = ammunition.map(item => {
+                const source = currentAmmo.get(item.name.toLowerCase());
+                if (!source) return item;
+                return {...item, name: source.name, price: source.estimatedPrice == null ? item.price : source.estimatedPrice, description: source.description || item.description, damage: source.damage ?? item.damage, penetration: source.penetrationPercent == null ? item.penetration : source.penetrationPercent + '%', stacks: source.maxStack ?? item.stacks};
+            });
+        }
+        document.getElementById("ammoTotal").textContent = ammunition.length;
+        renderAmmo();
     } catch (error) {
         console.error("Unable to load weapon master data:", error);
         noResults.style.display = "block";
@@ -2106,8 +2117,6 @@ async function loadWeaponMaster() {
 }
 
 loadWeaponMaster();
-
-renderAmmo();
 
 </script>
 
