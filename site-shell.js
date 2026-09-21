@@ -22,6 +22,10 @@ function buildShell(){
     if(values.navColor)root.setProperty('--site-nav-color',values.navColor);
     if(values.radius)root.setProperty('--site-radius',values.radius);
   if(values.subtitle)header.querySelector('.scav-site-subtitle').textContent=values.subtitle;
+    if(values.pageTitle){const title=document.querySelector('.hero h1,main h1,body>h1');if(title)title.textContent=values.pageTitle}
+    if(values.pageIntro){const intro=document.querySelector('.hero p,main>section>p,main>p');if(intro)intro.textContent=values.pageIntro}
+    if(values.footerText){const footer=document.querySelector('footer');if(footer)footer.textContent=values.footerText}
+    if(values.navLabels&&typeof values.navLabels==='object')nav.querySelectorAll('a').forEach(link=>{const label=values.navLabels[link.getAttribute('href')];if(label)link.textContent=label});
  };
  fetch('data/site-settings.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(settings=>{if(settings)applySettings(settings)}).catch(()=>{});
 }
