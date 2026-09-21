@@ -854,8 +854,30 @@
         }
       ],
       "source": {
-        "file": "vendors.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/factions/alexei__page__2026-09-20.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-09-21"
+      },
+      "portrait": {
+        "file": "evidence-inbox/vendors/Alexei_character-card_2026-09-21 185026.png",
+        "sourceWidth": 246,
+        "crop": {
+          "x": 3,
+          "y": 8,
+          "size": 242
+        }
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/factions/alexei__page__2026-09-20.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     },
     {
