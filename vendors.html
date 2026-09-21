@@ -343,6 +343,9 @@ async function loadVendorDirectory() {
     const payload = await response.json();
     const itemPayload = itemResponse.ok ? await itemResponse.json() : {data: []};
     const itemsById = new Map((itemPayload.data || []).map(item => [item.id, item]));
+    if (new URLSearchParams(location.search).get('adminPreview') === 'vendor') {
+      try { const preview = JSON.parse(localStorage.getItem('scavland-vendor-preview') || 'null'); const index = (payload.data || []).findIndex(vendor => vendor.id === preview?.id); if (index >= 0) payload.data[index] = {...payload.data[index], ...preview.record}; } catch (err) { console.warn('SCAVLAND vendor preview unavailable:', err); }
+    }
     if (!Array.isArray(payload.data) || !payload.data.length) throw new Error('Invalid vendor data');
     document.querySelectorAll('.sell-card[data-vendor-id]').forEach(card => {
       const vendor = payload.data.find(v => v.id === card.dataset.vendorId);
