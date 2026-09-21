@@ -3928,6 +3928,26 @@
         "submissionId": "da5dec43-ea75-48da-a057-1f8be2b1d2af",
         "note": "Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown."
       }
+    },
+    {
+      "id": "mutated-stick",
+      "classification": [
+        "junk-item"
+      ],
+      "image": "evidence-inbox/admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
+      "notes": null,
+      "source": {
+        "file": null,
+        "status": "pending-review",
+        "note": null,
+        "lastVerified": null
+      },
+      "name": "Mutated Stick",
+      "estimatedPrice": 50,
+      "rank": null,
+      "maxStack": 10,
+      "stackable": true,
+      "description": null
     }
   ]
 }
