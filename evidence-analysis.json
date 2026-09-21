@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 393,
+  "count": 395,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -2966,6 +2966,26 @@
       "height": 568,
       "phash": "f0a12fd0965a5a97",
       "ocr": "a a _ —— — Metal Scrap ~100P PRank. Rank: 1 Scraps of metal that can be recycled into something useful by able hands. -"
+    },
+    {
+      "file": "items/mutated-stick_icon_2026-09-21 132014.png",
+      "sha256": "a3a0aa376edeb9c19bb5384568f24425744d25519c8fefb8dbaa615ac9552f26",
+      "bytes": 950,
+      "filename_timestamp": "2026-09-21T13:20:14",
+      "width": 204,
+      "height": 100,
+      "phash": "a9552a549db365ca",
+      "ocr": "one Sg"
+    },
+    {
+      "file": "items/mutated-stick_tooltip_2026-09-21 132009.png",
+      "sha256": "d01a3305e505b5a9b31cd0da1bf47763b041c08f37079ca3a26abf8b25a175d6",
+      "bytes": 102290,
+      "filename_timestamp": "2026-09-21T13:20:09",
+      "width": 1023,
+      "height": 675,
+      "phash": "c0e13f694ed4921f",
+      "ocr": "tai | Mutated Stick ~50P A warped and splintered stick harvested from mutated vegetation. Too brittle for tools or weapons, but strange properties remain in its fibers. It twitches slightly when held — whatever grew this, it’s still half-alive. -"
     },
     {
       "file": "items/mystery-pills__tooltip__2026-09-20_083137.png",
