@@ -4334,6 +4334,27 @@
       "maxStack": 5,
       "stackable": true,
       "description": null
+    },
+    {
+      "id": "pre-mist-money-stack",
+      "classification": [
+        "junk-item"
+      ],
+      "image": "evidence-inbox/items/pre-mist-money-stack__icon__2026-09-21_224548.png",
+      "notes": null,
+      "effects": null,
+      "source": {
+        "file": "evidence-inbox/items/pre-mist-money-stack__tooltip__2026-09-21_224542.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-06-21"
+      },
+      "name": "Pre-Mist Money Stack",
+      "estimatedPrice": 20000,
+      "rank": null,
+      "maxStack": null,
+      "stackable": false,
+      "description": null
     }
   ]
 }
