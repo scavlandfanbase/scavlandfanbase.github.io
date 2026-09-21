@@ -4,7 +4,7 @@
 
 Implementation commit: `20ddd8e` (branch `improve-admin-entry`).
 
-**Deployment pending:** automatic approval review rejected the live Supabase deployment and requires explicit owner approval. No publishing functions have been changed; the new frontend must not go live before the three functions are deployed.
+**Deployment approved and saving services deployed:** owner approved on 21 September 2026. Active versions: publish-item v4, publish-specialist v6, publish-vendor v5. All three live endpoints return HTTP 403 to unauthenticated save requests. Frontend release is tracked in PR #17.
 
 - Items, Weapons, Armour, Ammunition, Crafting and Vendors now share a form-based editor: Add new, Preview, Save and publish. No IDs, JSON or repository paths are required.
 - Picture library and PNG/JPG/WebP uploads (5 MB each, 12 MB per save); evidence notes/status/date are normal fields. Recipes and vendor inventories use item pickers and numeric inputs. Portraits are optional.
@@ -13,7 +13,7 @@ Implementation commit: `20ddd8e` (branch `improve-admin-entry`).
 - Public ammunition now renders the canonical list, including new entries. Fixed the admin iframe ready handshake and the out-of-scope pageContent error in site-shell.js found by browser tests.
 - Checks: `node scripts/test-admin-records.mjs`; `node scripts/test-admin-browser.cjs` with Playwright available through NODE_PATH and a local Edge browser (PLAYWRIGHT_CHANNEL can override); `node scripts/validate-evidence.cjs`. Browser publishing uses local fixtures only, with no fake records written to production.
 - Database counts remain unchanged: 22 vendors / 231 stock rows; 31 armour; 272 Items. Existing records and screenshots are not rewritten by this change.
-- Deployment: deploy publish-item, publish-specialist and publish-vendor with the shared `_shared/records.js` dependency before using the new frontend. Existing custom user/admin authorization remains in place.
+- Deployment: all three publishing functions include the shared `_shared/records.js` dependency. Existing custom user/admin authorization remains in place.
 - Owner acceptance: use the admin page for the next real addition. Full authenticated production publishing is not tested with a fabricated record.
 
 The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_CMS_PLAN.md`. It is intentionally separate from the current editor handover because it requires staged page migrations and new content publishing infrastructure.
