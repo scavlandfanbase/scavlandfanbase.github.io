@@ -2096,6 +2096,7 @@ async function loadWeaponMaster() {
         const itemsPayload = itemsResponse.ok ? await itemsResponse.json() : { data: [] };
         sharedItems = new Map((itemsPayload.data || []).map(item => [item.id, item]));
         weapons = (Array.isArray(master.data) ? master.data : []).map(weapon => { const shared = sharedItems.get(weapon.id); return shared ? {...weapon, name: shared.name, image: shared.image || weapon.image} : weapon; });
+        if(new URLSearchParams(location.search).get('adminPreview')==='weapons'){try{const preview=JSON.parse(localStorage.getItem('scavland-specialist-preview')||'null');const index=weapons.findIndex(item=>item.id===preview?.id);if(index>=0)weapons[index]={...weapons[index],...preview.record}}catch(err){console.warn('SCAVLAND weapon preview unavailable:',err)}}
         document.getElementById("weaponTotal").textContent = weapons.length;
         renderWeapons();
         if (ammoResponse.ok) {

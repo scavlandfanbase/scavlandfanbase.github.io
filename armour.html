@@ -1508,6 +1508,7 @@ async function loadArmourMaster() {
         const itemsPayload = itemsResponse.ok ? await itemsResponse.json() : { data: [] };
         sharedItems = new Map((itemsPayload.data || []).map(item => [item.id, item]));
         armour = (Array.isArray(master.data) ? master.data : []).map(item => { const shared = sharedItems.get(item.id); return shared ? {...item, name: shared.name, image: shared.image || item.image} : item; });
+        if(new URLSearchParams(location.search).get('adminPreview')==='armour'){try{const preview=JSON.parse(localStorage.getItem('scavland-specialist-preview')||'null');const index=armour.findIndex(item=>item.id===preview?.id);if(index>=0)armour[index]={...armour[index],...preview.record}}catch(err){console.warn('SCAVLAND armour preview unavailable:',err)}}
         document.getElementById("armourTotal").textContent = armour.length;
         renderArmour();
     } catch (error) {
