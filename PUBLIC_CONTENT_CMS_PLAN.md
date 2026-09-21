@@ -91,6 +91,20 @@ Rules:
 
 ## Implementation Stages
 
+## Execution Checklist
+
+- [x] Create the central public content model.
+- [x] Deploy the secure public-content publisher.
+- [x] Add the Content Editor to the Admin Hub.
+- [x] Migrate Home content.
+- [x] Migrate Roadmap content.
+- [x] Migrate Factions content.
+- [x] Migrate Areas, Map, Items, Vendors, Weapons, Armour, and Crafting page headings/intros.
+- [x] Add friendly section/card editing for every modeled page.
+- [x] Add full-page unsaved preview from the Content Editor.
+- [ ] Migrate remaining hardcoded public sections and page copy.
+- [ ] Run final cross-page smoke tests and document the completed migration.
+
 ### Stage 1: Model and backup
 
 - Create a dated rollback archive from a clean `main` commit.
