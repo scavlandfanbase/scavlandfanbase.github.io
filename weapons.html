@@ -2104,13 +2104,12 @@ async function loadWeaponMaster() {
             const preview = new URLSearchParams(location.search).get('adminPreview') === 'ammunition' ? JSON.parse(localStorage.getItem('scavland-specialist-preview') || 'null') : null;
             const previewOriginal = preview?.id ? (ammoPayload.data || []).find(item => item.id === preview.id) : null;
             const ammoRecords = (ammoPayload.data || []).map(item => item.id === preview?.id ? {...item, ...preview.record} : item);
-            const currentAmmo = new Map(ammoRecords.map(item => [item.name.toLowerCase(), item]));
-            if (previewOriginal && preview.record) currentAmmo.set(previewOriginal.name.toLowerCase(), {...previewOriginal, ...preview.record});
-            ammunition = ammunition.map(item => {
-                const source = currentAmmo.get(item.name.toLowerCase());
-                if (!source) return item;
-                return {...item, name: source.name, category: source.category || item.category, price: source.estimatedPrice == null ? item.price : source.estimatedPrice, description: source.description || item.description, damage: source.damage ?? item.damage, penetration: source.penetrationPercent == null ? item.penetration : source.penetrationPercent + '%', stacks: source.maxStack ?? item.stacks};
-            });
+            ammunition = ammoRecords.map(source => ({...source,
+                price: source.estimatedPrice ?? 'Unknown',
+                description: source.description || '', damage: source.damage ?? 'Unknown',
+                penetration: source.penetrationPercent == null ? 'Unknown' : source.penetrationPercent + '%',
+                stacks: source.maxStack ?? 'Unknown'
+            }));
         }
         document.getElementById("ammoTotal").textContent = ammunition.length;
         renderAmmo();
