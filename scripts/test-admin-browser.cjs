@@ -11,6 +11,7 @@ const fs=require('fs'),path=require('path'),http=require('http'),assert=require(
   browser=await chromium.launch({headless:true,channel:process.env.PLAYWRIGHT_CHANNEL||'msedge'});const page=await browser.newPage({viewport:{width:1365,height:1000}});const errors=[],saved=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
   await page.route('**/data/*.json',async route=>{const p=new URL(route.request().url()).pathname.slice(1);if(docs[p])return route.fulfill({json:docs[p]});return route.continue();});
+  await page.route('https://raw.githubusercontent.com/**/data/admin-images.json',route=>route.fulfill({contentType:'application/json',body:fs.readFileSync(path.join(root,'data/admin-images.json'),'utf8')}));
   await page.route('https://demtoqsafufzmnhvaykj.supabase.co/**',async route=>{
     const url=route.request().url();if(url.includes('/rpc/'))return route.fulfill({json:true});if(url.includes('/auth/v1/token'))return route.fulfill({json:{access_token:'test-session'}});
     const body=route.request().postDataJSON();saved.push(structuredClone(body));

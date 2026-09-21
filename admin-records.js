@@ -23,7 +23,7 @@
   if(params.has('embed'))document.body.classList.add('embed');
   async function json(url,options={}){const r=await fetch(url,options);let d;try{d=await r.json();}catch{throw new Error('Could not read '+url.split('?')[0]+'. Its data format is invalid. Please check the most recent edit.');}if(!r.ok)throw new Error(d.error||'Could not load the editor. Please try again.');return d;}
   async function load(){
-    const [data,registry,groups,library]=await Promise.all([json('data/'+config.file+'.json',{cache:'no-store'}),json('data/items.json',{cache:'no-store'}),json('data/factions.json'),json('data/admin-images.json',{cache:'no-store'})]);
+    const [data,registry,groups,library]=await Promise.all([json('data/'+config.file+'.json',{cache:'no-store'}),json('data/items.json',{cache:'no-store'}),json('data/factions.json'),json('https://raw.githubusercontent.com/scavlandfanbase/scavlandfanbase.github.io/main/data/admin-images.json',{cache:'no-store'}).catch(()=>json('data/admin-images.json',{cache:'no-store'}))]);
     items=registry.data||registry;records=globalThis.ScavCatalog?ScavCatalog.records(kind,items,data.data||data,{editor:true}):data.data||data;factions=groups.data||groups;pictures=library;
     if(kind==='vendors'){const names=['weapons','armour','ammo'];const datasets=await Promise.all(names.map(name=>json('data/'+name+'.json',{cache:'no-store'}).catch(()=>({data:[]}))));stockCatalog=Object.fromEntries(names.map((name,i)=>[name,datasets[i].data||[]]));}
     renderList();

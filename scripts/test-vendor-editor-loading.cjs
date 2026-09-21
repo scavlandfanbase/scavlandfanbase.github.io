@@ -13,6 +13,7 @@ const fs=require('fs'),path=require('path'),http=require('http'),assert=require(
  try{
   browser=await chromium.launch({headless:true,channel:'msedge'});
   const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.route('https://raw.githubusercontent.com/**/data/admin-images.json',route=>route.fulfill({contentType:'application/json',body:fs.readFileSync(path.join(root,'data/admin-images.json'),'utf8')}));
   await page.route('https://demtoqsafufzmnhvaykj.supabase.co/**',route=>route.fulfill({json:true}));
   const url='http://127.0.0.1:'+server.address().port+'/harness';
   await page.goto(url);let frame=page.frameLocator('#editor');await frame.locator('#new-record').waitFor();
