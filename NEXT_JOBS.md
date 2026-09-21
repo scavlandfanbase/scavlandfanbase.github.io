@@ -2,6 +2,8 @@
 
 ## Admin record entry — 21 September 2026
 
+- Junk loot table now reads Items tagged `junk-item` directly, including new admin additions and current names, pictures and estimated prices. Removing the tag removes the item from the table. Rubber Scrap and Screws were already in the legacy confirmed-junk list; their existing classifications now also include the junk tag. The legacy junk-loot file no longer controls public table membership.
+
 - Picture picker follow-up: every picture field now accepts a repository path or a GitHub/raw file link from this repository on main. It previews the selection and rejects unsupported paths/foreign links before saving. Existing dropdown and upload options remain available; browser checks cover link normalization and switching back to the dropdown.
 
 Implementation commit: `20ddd8e` (branch `improve-admin-entry`).

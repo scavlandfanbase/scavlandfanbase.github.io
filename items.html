@@ -43,7 +43,15 @@ function renderFilters(){
  document.querySelectorAll('.item-filter').forEach(b=>b.onclick=()=>setCategory(b.dataset.filter));
 }
 function render(){const q=document.getElementById('item-search').value.trim().toLowerCase();const list=items.filter(x=>(active==='all'||(x.classification||[]).includes(active))&&(!verifiedOnly||sourceStatus(x).cls==='verified')&&(!needsReview||sourceStatus(x).cls==='review')&&clean(x.name).toLowerCase().includes(q));document.getElementById('item-count').textContent=list.length+' of '+items.length+' items';document.getElementById('item-grid').innerHTML=list.length?list.map(x=>{const stats=itemStats(x);const verify=sourceStatus(x);return '<article class="item-card'+(x.id===targetItemId?' deep-linked':'')+'" data-item-id="'+esc(x.id)+'"><h2>'+esc(clean(x.name))+'</h2>'+ScavImages.preview(x)+(stats.length?'<div class="item-stats">'+stats.map(([k,v])=>'<div class="item-stat"><span>'+esc(k)+'</span><b>'+esc(v)+'</b></div>').join('')+'</div>':'<div class="item-note">No verified stats recorded yet.</div>')+'<div class="item-tags"><span class="verify-badge '+verify.cls+'">'+verify.label+'</span>'+(x.classification||[]).map(c=>'<span class="item-tag">'+esc(labels[c]||c.replaceAll('-',' '))+'</span>').join('')+'</div></article>'}).join(''):'<div class="empty">No items match this search.</div>'}
-function renderJunk(data){const rows=data.data||[],byId=new Map(items.map(item=>[item.id,item]));document.getElementById('junk-loot').className='junk-grid';document.getElementById('junk-loot').innerHTML=rows.length?rows.map(x=>{const item=byId.get(x.itemId),icon=item?.image?'<img class="junk-icon" src="'+esc(item.image)+'" alt="">':'';return '<div class="junk-card"><a class="data-link" href="items.html?id='+encodeURIComponent(x.itemId)+'">'+icon+esc(x.name)+'</a><span class="junk-price">'+esc(x.sellPrice)+'₽</span></div>'}).join(''):'<p class="status">No junk items have been identified.</p>'}
+function renderJunk(){
+ const rows=items.filter(item=>(item.classification||[]).includes('junk-item'));
+ const table=document.getElementById('junk-loot');table.className='junk-grid';
+ table.innerHTML=rows.length?rows.map(item=>{
+  const icon=item.image?'<img class="junk-icon" src="'+esc(item.image)+'" alt="">':'';
+  const price=item.estimatedPrice==null?'Price unknown':esc(item.estimatedPrice)+'₽';
+  return '<div class="junk-card"><a class="data-link" href="items.html?id='+encodeURIComponent(item.id)+'">'+icon+esc(item.name)+'</a><span class="junk-price" title="Estimated price">'+price+'</span></div>';
+ }).join(''):'<p class="status">No items are tagged as junk.</p>';
+}
 async function loadJson(name,required=false){
  try{
   const r=await fetch('data/'+name+'.json',{cache:'no-store'});
@@ -61,9 +69,9 @@ async function loadItems(){
   const i=await loadJson('items',true);
   items=i.data||[];
   if(new URLSearchParams(location.search).has('adminPreview')){try{const preview=JSON.parse(localStorage.getItem('scavland-item-preview')||'null');if(preview?.item&&preview.id){const index=items.findIndex(item=>item.id===preview.id);if(index>=0)items[index]={...items[index],...preview.item}}}catch(err){console.warn('SCAVLAND item preview unavailable:',err)}}
-  const [w,a,m,c,v,j]=await Promise.all(['weapons','armour','ammo','crafting','vendors'].map(n=>loadJson(n)).concat([loadJson('junk-loot')]));
+  const [w,a,m,c,v]=await Promise.all(['weapons','armour','ammo','crafting','vendors'].map(n=>loadJson(n)));
   weapons=w.data||[];armour=a.data||[];ammo=m.data||[];crafting=c.data||[];vendors=v.data||[];
-  items.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));renderJunk(j);
+  items.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));renderJunk();
   applyUrlState();renderFilters();render();if(targetItemId){requestAnimationFrame(()=>{const card=document.querySelector('[data-item-id="'+CSS.escape(targetItemId)+'"]');if(card)card.scrollIntoView({behavior:'smooth',block:'center'})})}
  }catch(err){
   document.getElementById('item-count').textContent='Unable to load item data. Please refresh the page.';

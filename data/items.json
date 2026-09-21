@@ -2867,7 +2867,8 @@
       "id": "rubber-scrap",
       "name": "Rubber Scrap",
       "classification": [
-        "vendor-item"
+        "vendor-item",
+        "junk-item"
       ],
       "image": null,
       "notes": null,
@@ -2970,7 +2971,8 @@
       "id": "screws",
       "name": "Screws",
       "classification": [
-        "vendor-item"
+        "vendor-item",
+        "junk-item"
       ],
       "image": null,
       "notes": null,
