@@ -233,7 +233,10 @@
     "items.html": {
       "title": "Items Database",
       "intro": "Search items, equipment, ammo and crafting resources.",
-      "sections": []
+      "sections": [
+        {"id":"junk-table","target":".junk-table summary","title":"Junk loot: current items with no known use","intro":"These items are currently marked as having no known use. Sell only when you are comfortable with that risk; future game updates may add uses."},
+        {"id":"item-browser","target":"#item-browser summary","title":"Browse selected category"}
+      ]
     },
     "vendors.html": {
       "title": "SCAVLAND Vendors",
