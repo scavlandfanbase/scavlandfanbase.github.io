@@ -246,7 +246,14 @@
           "id": "selling-guide",
           "target": "#selling-guide-title",
           "title": "Vendor Selling Rates",
-          "intro": "Vendor buy rates."
+          "intro": "Vendor buy rates.",
+          "cards": [
+            {"id":"vesna-rates","vendorId":"vesna","title":"Vesna","description":"Common items — 30%\nClothing — 60%"},
+            {"id":"grigory-rates","vendorId":"grigory","title":"Grigory","description":"Common items — 50%"},
+            {"id":"zhivan-rates","vendorId":"zhivan","title":"Zhivan","description":"Common items — 140% value"},
+            {"id":"nadja-rates","vendorId":"nadja","title":"Nadja","description":"Common items — 90%\nCrafting items — 80%"},
+            {"id":"bogdan-rates","vendorId":"bogdan","title":"Bogdan","description":"Pays 40% more for Mutant Parts"}
+          ]
         }
       ]
     },
