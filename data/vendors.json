@@ -2095,6 +2095,34 @@
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/factions/sasha__character-card__2026-09-21.png",
+        "status": "screenshot-verified",
+        "evidence": "character-card",
+        "note": "Sasha and Palatine faction are visible in the character card.",
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "size": 265
+        },
+        "sourceWidth": 781
+      },
+      "shopEvidence": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-21",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/factions/sasha__shop-screen__2026-09-21.png",
+            "part": 1,
+            "originalFilename": "Sasha shop screen.png",
+            "association": "visible-vendor-header"
+          }
+        ],
+        "itemIdentification": "needs-labelled-tooltips",
+        "pricesVerified": false,
+        "unlockRanksVerified": false,
+        "note": "Shop grid visually reviewed. Item labels, prices and unlock ranks are not readable enough to create inventory records from this screenshot."
       }
     },
     {
