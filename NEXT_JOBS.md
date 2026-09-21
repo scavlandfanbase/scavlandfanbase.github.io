@@ -2,6 +2,8 @@
 
 ## Admin record entry — 21 September 2026
 
+- Vendor stock picker searches the full Items registry (all weapons, attachments, armour, ammo and other items). Selection fills name, estimated price, rank and details from Items, with specialist data and consistent existing vendor listings as fallbacks. Existing custom rows are untouched until a different item is selected; all suggestions remain editable and pending review. Conflicting/missing values stay blank. Selecting stock also enables its public stock list. Tests: `node scripts/test-vendor-stock.cjs` and the extended admin browser checks.
+
 - All New item tags now control public destinations. Shared `item-catalog.js` joins tagged Items with known specialist records: weapon → Weapons, armour → Armour, ammunition → Ammo, crafted-item → Crafting. Missing stats/recipes appear as details pending without fabricated or verified data. Untagging hides the public specialist entry while preserving its stored details.
 - Tagged-only records also appear in specialist editors. Completing their details creates the specialist record linked to the existing Items ID; subsequent saves update it without duplicates. Completing or renaming a tagged-only record preserves its existing Items ID. Crafting resources appear under Crafting materials. Vendor items with no recorded seller appear in a separate list on Vendors; a tag never assigns stock to a particular vendor. Vendor identities still use Add new vendor.
 - Browser checks create a local fixture through New item with all seven tags, verify every public destination, then add/edit specialist details on the same ID. Canonical datasets were not rewritten for this change.
