@@ -6,7 +6,7 @@
 <title>SCAVLAND Map</title>
 <link rel="stylesheet" href="site-theme.css">
 <style>
-.map-page{width:100%;margin:0 auto;padding:0 0 30px}
+.map-page{width:100%;max-width:none!important;margin:0;padding:0 0 12px}
 .map-intro{text-align:center;padding:24px 20px 18px;background:rgba(18,20,19,.94);border-bottom:1px solid var(--scav-line)}
 .map-intro h1{margin:0 0 6px;color:var(--scav-gold-bright);font-size:clamp(30px,3vw,48px)}
 .map-intro p{margin:0;color:#bbb;font-size:clamp(14px,1.2vw,18px)}
@@ -15,7 +15,7 @@
 .map-toolbar button:hover{background:var(--scav-gold-bright);color:#111;border-color:var(--scav-gold-bright)}
 #zoomLabel{min-width:64px;text-align:center;color:var(--scav-gold-bright);font-weight:700}
 .map-help{color:#999;font-size:13px;margin-left:8px}
-.map-viewport{position:relative;width:calc(100vw - 24px);height:clamp(650px,82vh,1250px);margin:14px 12px 30px;overflow:hidden;background:#090a09;border:1px solid var(--scav-line);box-shadow:0 12px 35px rgba(0,0,0,.45);cursor:grab;touch-action:none}
+.map-viewport{position:relative;width:calc(100% - 24px);height:var(--map-height,65vh);margin:8px 12px 0;overflow:hidden;background:#090a09;border:1px solid var(--scav-line);box-shadow:0 12px 35px rgba(0,0,0,.45);cursor:grab;touch-action:none}
 .map-viewport.dragging{cursor:grabbing;user-select:none}
 .map-stage{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
 .map-img{display:block;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;border:0!important;box-shadow:none!important;user-select:none;-webkit-user-drag:none}
@@ -23,7 +23,7 @@
 .map-intro{padding:18px 12px 14px}
 .map-toolbar{position:static;gap:6px}
 .map-toolbar button{flex:1 1 auto;min-width:86px}
-.map-viewport{width:calc(100vw - 8px);height:68vh;margin:6px 4px 24px}
+.map-viewport{width:calc(100% - 8px);margin:8px 4px 0}
 }
 </style>
 </head>
@@ -114,7 +114,19 @@
    else beginGesture();
  }
  viewport.addEventListener('pointerup',stopPointer);viewport.addEventListener('pointercancel',stopPointer);
- window.addEventListener('resize',fit);
+ // Recalculate after the shared header is inserted and whenever its size changes.
+ function sizeViewer(){
+   const top=viewport.getBoundingClientRect().top+window.scrollY;
+   viewport.style.setProperty('--map-height',Math.max(280,window.innerHeight-top-12)+'px');
+ }
+ function observeLayout(){
+   const layoutObserver=new ResizeObserver(sizeViewer);
+   document.querySelectorAll('.scav-site-header,.scav-site-nav,.map-intro,.map-toolbar').forEach(el=>layoutObserver.observe(el));
+   new ResizeObserver(fit).observe(viewport);
+   sizeViewer();fit();
+ }
+ window.addEventListener('resize',sizeViewer);
+ window.addEventListener('load',observeLayout);
 })();
 </script>
 <script src="site-shell.js"></script>
