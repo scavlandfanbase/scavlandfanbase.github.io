@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 399,
+  "count": 401,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -3468,6 +3468,26 @@
       "height": 1369,
       "phash": "d5d526ec27936834",
       "ocr": "ae 2HMG (Long) ~100000P A heavy machine gun, unreliable but intimidating. Can mow down enemies with ease — and attract a whole lot more. Damage ATT] 33 Handling ATT 20 +14 Fire Rate (RPM) —_||||||| 700 Ergonomics | 5+2 Range LUULIL 18 Reload Speed TTT 10- 0.1 Accuracy LUMI 40 Durability LUNATUUTI 4] Recoil WMI 27- 14 Repair Class: Expert = | Caliber: High Caliber Rifle Ammo ao - “i ——, Nes © =. Small Military it ; i Box % _if 4 loant All 0 | 100"
+    },
+    {
+      "file": "vendors/IIya_character-shop_part-1_2026-09-21 131338.png",
+      "sha256": "8f8aabd5c7e37786c20a76a65038b7e5b3098e25f3c6a8a77cd1af310eb8e775",
+      "bytes": 38208,
+      "filename_timestamp": "2026-09-21T13:13:38",
+      "width": 1323,
+      "height": 736,
+      "phash": "ee87956a207bcf40",
+      "ocr": "| a @ Oe ‘Gf | Le Reputation g a ys 3 Mudlarks ’ i ‘. o A al ws F ee ze = i0"
+    },
+    {
+      "file": "vendors/IIya_character-tag_2026-09-21 151649.png",
+      "sha256": "4b42fab50f086622e4fcf3aebb5478cd5ee84455c11997ba6d4c60464c0fb4d5",
+      "bytes": 4797,
+      "filename_timestamp": "2026-09-21T15:16:49",
+      "width": 340,
+      "height": 336,
+      "phash": "f5414ac01e1a1ffe",
+      "ocr": "pda"
     },
     {
       "file": "vendors/anatoly__shop-screen-part-1__2026-09-20.png",
