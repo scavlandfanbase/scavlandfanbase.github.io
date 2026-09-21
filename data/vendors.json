@@ -2585,7 +2585,7 @@
     {
       "id": "gavron",
       "name": "Gavron",
-      "location": null,
+      "location": "WEST of The Mire",
       "factionId": "mudlarks",
       "inventoryDocumented": true,
       "inventory": [],
