@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "description": "Conservative junk-loot candidates derived by elimination. These records are not confirmed junk until direct gameplay evidence confirms they have no crafting, equipment, medical, food, ammunition, or other use.",
+  "method": "Excluded crafting records and ingredients, weapons, armour, ammunition, weapon-mod naming patterns, blueprints, food, medical items, and other identifiable gameplay records. Remaining candidates are flagged for review.",
+  "data": [
+    {
+      "itemId": "rubber-scrap",
+      "name": "Rubber Scrap",
+      "sellPrice": 100,
+      "status": "candidate-unverified",
+      "note": "Not found in current crafting recipes or specialist datasets; vendor evidence describes it as good for trading. Confirm no hidden use before treating as junk."
+    },
+    {
+      "itemId": "screws",
+      "name": "Screws",
+      "sellPrice": 100,
+      "status": "candidate-unverified",
+      "note": "Not found in current crafting recipes or specialist datasets; vendor evidence describes it as valuable for tinkerers. Confirm no hidden use before treating as junk."
+    }
+  ]
+}
