@@ -8,13 +8,13 @@ These are evidence candidates, not yet added to the public Items database. Confi
 
 | Item | Evidence |
 | --- | --- |
-| Acid Gland | `evidence-inbox/items/acid-gland__icon__2026-09-21.png`; `evidence-inbox/items/acid-gland__tooltip__2026-09-21.png` |
-| Berry Puree | `evidence-inbox/items/berry-puree__icon__2026-09-21.png`; `evidence-inbox/items/berry-puree__tooltip__2026-09-21.png` |
-| Butter | `evidence-inbox/items/butter__icon__2026-09-21.png`; `evidence-inbox/items/butter__tooltip__2026-09-21.png`; older tooltip also exists |
-| Fish Soup | `evidence-inbox/items/fish-soup__icon__2026-09-21.png`; `evidence-inbox/items/fish-soup__tooltip__2026-09-21.png` |
-| Medical Herb | `evidence-inbox/items/medical-herb__icon__2026-09-21.png`; `evidence-inbox/items/medical-herb__tooltip__2026-09-21.png` |
-| Undead Arm | `evidence-inbox/items/undead-arm__icon__2026-09-21.png`; `evidence-inbox/items/undead-arm__tooltip__2026-09-21.png` |
-| Whole Roasted Fish | `evidence-inbox/items/whole-roasted-fish__icon__2026-09-21.png`; `evidence-inbox/items/whole-roasted-fish__tooltip__2026-09-21.png` |
+| Acid Gland | Added to `data/items.json` as `vendor-item`. |
+| Berry Puree | Added to `data/items.json` as `vendor-item`. |
+| Butter | Added to `data/items.json` as `vendor-item`. |
+| Fish Soup | Added to `data/items.json` as `vendor-item`. |
+| Medicinal Herb | Existing record updated with the confirmed spelling and newer pair. |
+| Undead Arm | Added to `data/items.json` as `vendor-item`. |
+| Whole Roasted Fish | Added to `data/items.json` as `vendor-item`. |
 
 ## Tooltip evidence only
 
@@ -32,7 +32,7 @@ These are evidence candidates, not yet added to the public Items database. Confi
 
 ## Review notes
 
-- `Medical Herb` and the older `Medicinal Herb` evidence may refer to the same item. Confirm the in-game spelling before creating a record.
+- The tooltip confirms the exact in-game spelling is `Medicinal Herb`; it uses the existing `medicinal-herb` record rather than creating a duplicate.
 - `Sardines` has two tooltip screenshots and no icon currently assigned.
 - These candidates are general Items. Attachment, weapon, armour, ammunition, blueprint, and crafting evidence was excluded from this list.
 - The public site will not display these until records are added to `data/items.json` with at least a stable ID, name, classification, and evidence source.

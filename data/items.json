@@ -3768,20 +3768,126 @@
       "classification": [
         "crafting-resource"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/medicinal-herb__icon__2026-09-21.png",
       "notes": null,
       "source": {
         "status": "screenshot-verified",
         "lastVerified": "2026-09-20",
         "note": "Direct in-game tooltip screenshot.",
-        "file": "evidence-inbox/items/medicinal-herb__tooltip__2026-09-20_083129.png"
+        "file": "evidence-inbox/items/medicinal-herb__tooltip__2026-09-21.png"
       },
       "estimatedPrice": 50,
-      "maxStacks": 10,
+      "maxStack": 10,
       "description": "A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss 'em in the pot anyway.",
       "effects": {
         "health": 5,
         "thirst": 3
+      }
+    },
+    {
+      "id": "acid-gland",
+      "name": "Acid Gland",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/acid-gland__icon__2026-09-21.png",
+      "notes": null,
+      "estimatedPrice": 150,
+      "maxStack": 10,
+      "description": "A fluid-filled sac that bursts on impact, spilling a burning slime used by Woundworts to dissolve aggressors. Handle with care — or don't handle at all.",
+      "source": {
+        "file": "evidence-inbox/items/acid-gland__tooltip__2026-09-21.png",
+        "status": "screenshot-verified",
+        "note": "Direct in-game tooltip and icon screenshot."
+      }
+    },
+    {
+      "id": "berry-puree",
+      "name": "Berry Puree",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/berry-puree__icon__2026-09-21.png",
+      "notes": null,
+      "estimatedPrice": 5000,
+      "rank": 1,
+      "maxStack": 5,
+      "description": "Mudlarks created this dish that only a few merchants dared taste. They believe it enhances one's awareness of the Mist...",
+      "source": {
+        "file": "evidence-inbox/items/berry-puree__tooltip__2026-09-21.png",
+        "status": "screenshot-verified",
+        "note": "Direct in-game tooltip and icon screenshot."
+      }
+    },
+    {
+      "id": "butter",
+      "name": "Butter",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/butter__icon__2026-09-21.png",
+      "notes": null,
+      "estimatedPrice": 2100,
+      "rank": 1,
+      "maxStack": 5,
+      "description": "A great condiment which goes with any meal. Hard to make, rare to come by, and it goes bad pretty fast.",
+      "source": {
+        "file": "evidence-inbox/items/butter__tooltip__2026-09-21.png",
+        "status": "screenshot-verified",
+        "note": "Direct in-game tooltip and icon screenshot."
+      }
+    },
+    {
+      "id": "fish-soup",
+      "name": "Fish Soup",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/fish-soup__icon__2026-09-21.png",
+      "notes": null,
+      "estimatedPrice": 7500,
+      "rank": 1,
+      "maxStack": 5,
+      "description": "An eccentric fish soup that's definitely an acquired taste. The secret is to cook it for so long that it's almost not radioactive at all.",
+      "source": {
+        "file": "evidence-inbox/items/fish-soup__tooltip__2026-09-21.png",
+        "status": "screenshot-verified",
+        "note": "Direct in-game tooltip and icon screenshot."
+      }
+    },
+    {
+      "id": "undead-arm",
+      "name": "Undead Arm",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/undead-arm__icon__2026-09-21.png",
+      "notes": null,
+      "estimatedPrice": 300,
+      "maxStack": 10,
+      "description": "A human arm, still twitching from whatever monstrous properties the Mist has given to its unlucky previous owner.",
+      "source": {
+        "file": "evidence-inbox/items/undead-arm__tooltip__2026-09-21.png",
+        "status": "screenshot-verified",
+        "note": "Direct in-game tooltip and icon screenshot."
+      }
+    },
+    {
+      "id": "whole-roasted-fish",
+      "name": "Whole Roasted Fish",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/whole-roasted-fish__icon__2026-09-21.png",
+      "notes": null,
+      "estimatedPrice": 4000,
+      "rank": 1,
+      "maxStack": 4,
+      "description": "The sharp crackle of fish bones against my teeth keeps me on edge, but does nothing for nutrition. This thing came from the dirty waters of Lake Pavlie. I should eat these sparingly.",
+      "source": {
+        "file": "evidence-inbox/items/whole-roasted-fish__tooltip__2026-09-21.png",
+        "status": "screenshot-verified",
+        "note": "Direct in-game tooltip and icon screenshot."
       }
     },
     {

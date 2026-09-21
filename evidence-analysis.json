@@ -3017,7 +3017,7 @@
       "ocr": "a Mechanical Components ~10000P PRank- Rank: 1 Small gears, levers and bits of machinery. Not too big or high- quality, but still probably worth something. a"
     },
     {
-      "file": "items/medical-herb__icon__2026-09-21.png",
+      "file": "items/medicinal-herb__icon__2026-09-21.png",
       "sha256": "b98165882862b9f52c6b02971531680f4b7b3a7681ee0e3378570151824375c7",
       "bytes": 1159,
       "width": 102,
@@ -3026,7 +3026,7 @@
       "ocr": "y"
     },
     {
-      "file": "items/medical-herb__tooltip__2026-09-21.png",
+      "file": "items/medicinal-herb__tooltip__2026-09-21.png",
       "sha256": "1e681a196499d6cc86673cf7793b801d0d5a51a88b3d47e2b02082194d6cfcf3",
       "bytes": 147171,
       "width": 1009,
