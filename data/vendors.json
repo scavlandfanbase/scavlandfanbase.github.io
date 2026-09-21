@@ -2205,13 +2205,35 @@
     {
       "id": "ilya",
       "name": "Ilya",
-      "location": null,
+      "location": "Dazbog Hollow",
       "factionId": "mudlarks",
       "inventoryDocumented": false,
       "inventory": [],
       "source": {
-        "file": "vendors.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/vendors/IIya_character-shop_part-1_2026-09-21 131338.png",
+        "status": "existing-site-data",
+        "note": null,
+        "lastVerified": "2026-09-21"
+      },
+      "portrait": {
+        "file": "evidence-inbox/vendors/IIya_character-tag_2026-09-21 151649.png",
+        "sourceWidth": 340,
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "size": 336
+        }
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/IIya_character-shop_part-1_2026-09-21 131338.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     },
     {
