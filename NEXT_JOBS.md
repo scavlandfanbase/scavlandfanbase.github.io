@@ -9,6 +9,7 @@ The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_
 - **Public CMS Areas slice:** Areas title and intro now apply from `data/site-content.json`; location cards remain safely data-driven from vendor records.
 - **Public CMS Map slice:** Map title and intro now apply from `data/site-content.json`; interactive map behavior remains unchanged.
 - **Public CMS database-page slice:** Vendors, Weapons, Armour, Crafting, and Items titles/intros now apply from `data/site-content.json`; their specialist cards and data-driven content remain controlled by the existing dedicated datasets/editors.
+- **Public CMS section controls:** the Content Editor now supports section title/intro fields and the public adapter can apply them to targeted Vendor, Weapons, and Armour sections without replacing their interactive/data-driven bodies.
 
 ## Latest handover — 21 September 2026
 
