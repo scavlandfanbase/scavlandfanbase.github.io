@@ -2207,56 +2207,98 @@
       "name": "Ilya",
       "location": "Dazbog Hollow",
       "factionId": "mudlarks",
-      "inventoryDocumented": false,
+      "inventoryDocumented": true,
       "inventory": [
         {
           "itemId": "fresh-mushrooms",
           "name": "Fresh Mushrooms",
-          "rank": "",
-          "price": null,
-          "details": ""
+          "rank": "1",
+          "price": 3000,
+          "details": "Food",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "canteen",
           "name": "Canteen",
-          "rank": "",
-          "price": null,
-          "details": ""
+          "rank": "1",
+          "price": 480,
+          "details": "",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "chemical-residue",
           "name": "Chemical Residue",
-          "rank": "",
-          "price": null,
-          "details": ""
+          "rank": "1",
+          "price": 100,
+          "details": "A container of industrial waste from when Svarog Factories was still operational.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "metal-scrap",
           "name": "Metal Scrap",
-          "rank": "",
-          "price": null,
-          "details": ""
+          "rank": "1",
+          "price": 100,
+          "details": "Scraps of metal that can be recycled into something useful by able hands.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "fabric-scrap",
           "name": "Fabric Scrap",
-          "rank": "",
-          "price": null,
-          "details": ""
+          "rank": "1",
+          "price": 100,
+          "details": "An old scrap of low-quality fabric, useful for patching up clothes.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "plastic-scrap",
           "name": "Plastic Scrap",
-          "rank": "",
-          "price": null,
-          "details": ""
+          "rank": "1",
+          "price": 100,
+          "details": "A scrap of plastic that can maybe be recycled.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         },
         {
           "itemId": "rubber-scrap",
           "name": "Rubber Scrap",
-          "rank": "",
-          "price": null,
-          "details": ""
+          "rank": "1",
+          "price": 100,
+          "details": "A scrap of rubber which resisted the years. A very resilient material, and good for trading.",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
         }
       ],
       "source": {
