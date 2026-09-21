@@ -430,7 +430,18 @@
         "armour"
       ],
       "image": null,
-      "notes": null
+      "notes": "test",
+      "estimatedPrice": null,
+      "rank": null,
+      "maxStack": null,
+      "description": null,
+      "stackable": null,
+      "source": {
+        "file": null,
+        "status": null,
+        "note": null,
+        "lastVerified": null
+      }
     },
     {
       "id": "bahadir-918-long",
