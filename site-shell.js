@@ -27,7 +27,10 @@ function buildShell(){
     if(values.footerText){const footer=document.querySelector('footer');if(footer)footer.textContent=values.footerText}
     if(values.navLabels&&typeof values.navLabels==='object')nav.querySelectorAll('a').forEach(link=>{const label=values.navLabels[link.getAttribute('href')];if(label)link.textContent=label});
  };
- fetch('data/site-settings.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(settings=>{if(settings)applySettings(settings)}).catch(()=>{});
+   const previewKey='scavland-admin-preview';
+   const previewSettings=()=>{try{return new URLSearchParams(location.search).has('adminPreview')?JSON.parse(localStorage.getItem(previewKey)||'null'):null}catch{return null}};
+   fetch('data/site-settings.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(settings=>{if(settings){const override=previewSettings();if(override){settings={...settings,global:{...settings.global,...override}}}applySettings(settings)}}).catch(()=>{});
+   if(new URLSearchParams(location.search).has('adminPreview'))window.addEventListener('storage',e=>{if(e.key===previewKey)location.reload()});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',buildShell);else buildShell();
 })();
