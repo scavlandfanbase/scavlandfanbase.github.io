@@ -40,7 +40,11 @@
         }
       ]
     },
-    "roadmap.html": {"title":"SCAVLAND Roadmap","intro":"A look at the main improvements being made to the fan database.","sections":[]},
+    "roadmap.html": {"title":"SCAVLAND Roadmap","intro":"A look at the main improvements being made to the fan database.","sections":[
+      {"id":"in-progress","title":"In progress","cards":[{"id":"evidence","title":"More in-game evidence","description":"Adding verified screenshots to item, armour, weapon and recipe records."},{"id":"galleries","title":"Vendor shop galleries","description":"Organising shop screenshots so visitors can browse what each vendor screen looks like."},{"id":"cards","title":"Clearer database cards","description":"Linking trustworthy screenshots directly from cards where available."}]},
+      {"id":"coming-up","title":"Coming up","cards":[{"id":"layout","title":"Website layout","description":"Improving the way information is arranged so the database is easier to browse."},{"id":"corrections","title":"Corrections to data","description":"Reviewing reports and evidence to correct inaccurate or incomplete entries."},{"id":"mobile","title":"Ongoing mobile polish","description":"Keeping the database easy to use on phones as new content is added."}]},
+      {"id":"help","title":"How players can help","cards":[{"id":"tooltips","title":"Share clear tooltips","description":"Full screenshots with the exact name and visible stats are the most useful."},{"id":"durability","title":"Show 100% armour durability","description":"This is needed to verify normal armour resistance values."}]}
+    ]},
     "areas.html": {"title":"Areas","intro":"Known locations from the SCAVLAND database.","sections":[]},
     "factions.html": {"title":"Factions of Zalesye","intro":"Meet the groups that shape the wasteland.","sections":[]},
     "map.html": {"title":"SCAVLAND Map","intro":"Explore known locations and routes.","sections":[]},
