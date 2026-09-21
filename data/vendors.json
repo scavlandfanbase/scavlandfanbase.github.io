@@ -2036,7 +2036,7 @@
     {
       "id": "olga",
       "name": "Olga",
-      "location": null,
+      "location": "The Mire",
       "factionId": "rada",
       "inventoryDocumented": false,
       "inventory": [],
