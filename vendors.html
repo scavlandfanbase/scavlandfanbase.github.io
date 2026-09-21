@@ -338,9 +338,11 @@ async function loadVendorDirectory() {
   const list = document.getElementById('vendor-list');
   const count = document.querySelector('.vendor-count');
   try {
-    const response = await fetch('data/vendors.json', {cache: 'no-store'});
+    const [response, itemResponse] = await Promise.all([fetch('data/vendors.json', {cache: 'no-store'}), fetch('data/items.json', {cache: 'no-store'})]);
     if (!response.ok) throw new Error('Vendor data request failed: ' + response.status);
     const payload = await response.json();
+    const itemPayload = itemResponse.ok ? await itemResponse.json() : {data: []};
+    const itemsById = new Map((itemPayload.data || []).map(item => [item.id, item]));
     if (!Array.isArray(payload.data) || !payload.data.length) throw new Error('Invalid vendor data');
     document.querySelectorAll('.sell-card[data-vendor-id]').forEach(card => {
       const vendor = payload.data.find(v => v.id === card.dataset.vendorId);
@@ -360,8 +362,8 @@ async function loadVendorDirectory() {
       const content = shopGallery + (vendor.inventoryDocumented
         ? '<p class="placeholder-note">Unverified inventory</p>' +
           '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
-          vendor.inventory.map(item => '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(item.name) + '</a></td><td>' + escapeVendorText(item.rank) +
-            '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>').join('') + '</tbody></table>'
+          vendor.inventory.map(item => { const shared = itemsById.get(item.itemId); const displayName = shared?.name || item.name; return '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(displayName) + '</a></td><td>' + escapeVendorText(item.rank) +
+            '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details) + '</td></tr>'; }).join('') + '</tbody></table>'
         : '<div class="placeholder-note">' + (screenshots.length ? 'Item list awaiting confirmation. See the shop screenshots above.' : 'Inventory coming soon.') + '</div>');
       const portrait = vendor.portrait?.file || '';
       return '<div class="vendor-section' + (vendor.inventoryDocumented || screenshots.length ? '' : ' placeholder') + '"' + (portrait ? ' data-portrait="' + escapeVendorText(portrait) + '"' : '') + '>' +
