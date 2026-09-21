@@ -1903,7 +1903,7 @@ function renderAmmo() {
     ammoSections.innerHTML = "";
 
 
-    ammoCategories.forEach(
+    [...new Set(ammunition.map(item => item.category).filter(Boolean))].forEach(
         category => {
 
             const categoryAmmo =
@@ -2104,7 +2104,7 @@ async function loadWeaponMaster() {
             ammunition = ammunition.map(item => {
                 const source = currentAmmo.get(item.name.toLowerCase());
                 if (!source) return item;
-                return {...item, name: source.name, price: source.estimatedPrice == null ? item.price : source.estimatedPrice, description: source.description || item.description, damage: source.damage ?? item.damage, penetration: source.penetrationPercent == null ? item.penetration : source.penetrationPercent + '%', stacks: source.maxStack ?? item.stacks};
+                return {...item, name: source.name, category: source.category || item.category, price: source.estimatedPrice == null ? item.price : source.estimatedPrice, description: source.description || item.description, damage: source.damage ?? item.damage, penetration: source.penetrationPercent == null ? item.penetration : source.penetrationPercent + '%', stacks: source.maxStack ?? item.stacks};
             });
         }
         document.getElementById("ammoTotal").textContent = ammunition.length;
