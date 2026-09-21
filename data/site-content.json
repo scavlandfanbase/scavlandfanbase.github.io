@@ -39,6 +39,15 @@
           "source": "scavland-updates.json"
         }
       ]
-    }
+    },
+    "roadmap.html": {"title":"SCAVLAND Roadmap","intro":"A look at the main improvements being made to the fan database.","sections":[]},
+    "areas.html": {"title":"Areas","intro":"Known locations from the SCAVLAND database.","sections":[]},
+    "factions.html": {"title":"Factions of Zalesye","intro":"Meet the groups that shape the wasteland.","sections":[]},
+    "map.html": {"title":"SCAVLAND Map","intro":"Explore known locations and routes.","sections":[]},
+    "items.html": {"title":"Items Database","intro":"Search items, equipment, ammo and crafting resources.","sections":[]},
+    "vendors.html": {"title":"SCAVLAND Vendors","intro":"Browse vendors, stock, portraits, and shop evidence.","sections":[]},
+    "weapons.html": {"title":"SCAVLAND Weapons and Ammo Database","intro":"Browse weapons, stats, and ammunition.","sections":[]},
+    "armour.html": {"title":"SCAVLAND Armour Database","intro":"Compare protective gear and survival outfits.","sections":[]},
+    "crafting.html": {"title":"Crafting Database","intro":"Workbench recipes and required resources.","sections":[]}
   }
 }

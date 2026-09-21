@@ -9,7 +9,7 @@ const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
 const githubToken = Deno.env.get("GITHUB_TOKEN")!;
 const repository = "scavlandfanbase/scavlandfanbase.github.io";
 const contentPath = "data/site-content.json";
-const allowedPages = new Set(["index.html"]);
+const allowedPages = new Set(["index.html", "roadmap.html", "areas.html", "factions.html", "map.html", "items.html", "vendors.html", "weapons.html", "armour.html", "crafting.html"]);
 const imagePath = (value: unknown) => value === null || (typeof value === "string" && /^(images|evidence-inbox)\/(?:[A-Za-z0-9._ ()-]+\/)*[A-Za-z0-9._ ()-]+\.(png|jpe?g|webp)$/i.test(value) && !value.includes(".."));
 const text = (value: unknown, max: number) => value === null || typeof value === "string" && value.length <= max;
 const githubHeaders = () => ({ Accept: "application/vnd.github+json", Authorization: `Bearer ${githubToken}`, "X-GitHub-Api-Version": "2022-11-28" });
