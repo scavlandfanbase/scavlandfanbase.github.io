@@ -1,5 +1,11 @@
 # SCAVLAND Website — Next Jobs
 
+## Vendor editor loading repair — 21 September 2026
+
+- Restored missing JSON quotation marks around Vesna’s The Mire and Snezhana’s Microrayon locations, preserving the entered values.
+- Invalid JSON now produces an actionable file-specific loading error instead of `records.filter is not a function`.
+- Validated all data JSON files and browser-tested all 22 vendors loading, search, preview, and the malformed-file error using `scripts/test-vendor-editor-loading.cjs`.
+
 ## End-of-session handover — 21 September 2026
 
 - **Item stats:** `data/items.json` is the canonical shared item layer. Verified tooltip OCR populated missing prices, ranks, stack limits, and consumable effects where readable. Effects use `health`, `bleed`, `radiation`, `hunger`, and `thirst`; `maxStack` is the canonical stack field. The repeatable enrichment utility is `scripts/enrich-item-stats.cjs`; it is idempotent and must not be used to overwrite existing values.

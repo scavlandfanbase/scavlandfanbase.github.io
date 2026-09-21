@@ -2034,7 +2034,7 @@
     {
       "id": "vesna",
       "name": "Vesna",
-      "location": The Mire,
+      "location": "The Mire",
       "factionId": "rada",
       "inventoryDocumented": false,
       "inventory": [],
@@ -2400,7 +2400,7 @@
     {
       "id": "snezhana",
       "name": "Snezhana",
-      "location": Microrayon,
+      "location": "Microrayon",
       "factionId": "rada",
       "inventoryDocumented": false,
       "inventory": [],
