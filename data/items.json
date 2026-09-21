@@ -118,9 +118,10 @@
       "id": "2hmg-ergonomic-pistol-grip",
       "name": "2HMG Ergonomic Pistol Grip",
       "classification": [
+        "junk-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/wg-40__icon__2026-09-21.png",
       "notes": null,
       "estimatedPrice": 2500,
       "rank": 3,
@@ -3472,18 +3473,126 @@
       "id": "wg-40",
       "name": "WG-40",
       "classification": [
+        "junk-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/wg-40__icon__2026-09-21.png",
       "notes": null,
       "estimatedPrice": 250,
       "rank": 1,
       "description": "A lubricant bottle so old and busted I’d need lubricant to open it. Still valuable for the tinkerers in Zalesye.",
       "maxStack": 4,
       "source": {
-        "file": "evidence-inbox/items/wg-40__tooltip__2026-09-18_091658.png",
+        "file": "evidence-inbox/items/wg-40__tooltip__2026-09-21.png",
         "status": "screenshot-verified"
       }
+    },
+    {
+      "id": "big-filter",
+      "name": "Big Filter",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/big-filter__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 3000,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "A large filter for some sort of liquid; most likely an automobile part.",
+      "source": {"file": "evidence-inbox/items/big-filter__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "small-filter",
+      "name": "Small Filter",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/small-filter__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 500,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "A small filter, probably from an old machine or automobile.",
+      "source": {"file": "evidence-inbox/items/small-filter__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "electric-wires",
+      "name": "Electric Wires",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/electric-wires__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 500,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "A bundle of electric wires that should be reasonably valuable for a Mechanist.",
+      "source": {"file": "evidence-inbox/items/electric-wires__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "tactical-knife",
+      "name": "Tactical Knife",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/tactical-knife__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 10000,
+      "stackable": false,
+      "description": "A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back.",
+      "source": {"file": "evidence-inbox/items/tactical-knife__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "chemical-container",
+      "name": "Chemical Container",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/chemical-container__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 1000,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "A chemical container for hazardous materials. Must have seemed like a big deal before the Mist.",
+      "source": {"file": "evidence-inbox/items/chemical-container__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "metal-pipe",
+      "name": "Metal Pipe",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/metal-pipe__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 500,
+      "maxStack": 10,
+      "stackable": true,
+      "description": "A metal pipe left over from some sort of equipment or construction. Good for trading.",
+      "source": {"file": "evidence-inbox/items/metal-pipe__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "broken-mk-receiver",
+      "name": "Broken MK Receiver",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/broken-mk-receiver__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 500,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "The broken body of an MK series weapon. Should be salvageable.",
+      "source": {"file": "evidence-inbox/items/broken-mk-receiver__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "butcher-knife",
+      "name": "Butcher Knife",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/butcher-knife__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 1000,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "A common butcher's knife, reappropriated for field use out of desperation. The wooden handle is rotting off.",
+      "source": {"file": "evidence-inbox/items/butcher-knife__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
+    },
+    {
+      "id": "toilet-paper",
+      "name": "Toilet Paper",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/toilet-paper__icon__2026-09-21.png",
+      "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
+      "estimatedPrice": 500,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "If I could find one of these that didn't feel like a sand file, I'd be the richest man in Zalesye.",
+      "source": {"file": "evidence-inbox/items/toilet-paper__tooltip__2026-09-21.png", "status": "screenshot-verified", "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."}
     },
     {
       "id": "winter-pants",

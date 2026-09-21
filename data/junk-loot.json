@@ -1,70 +1,26 @@
 {
   "schemaVersion": 1,
-  "description": "Junk-loot records derived by elimination and current owner confirmation. Screenshot evidence verifies the item details; junk status records the current no-use assessment.",
+  "description": "Junk-loot records derived by elimination and current owner confirmation. Screenshot evidence verifies item details; junk status records the current no-use assessment.",
   "method": "Excluded crafting records and ingredients, weapons, armour, ammunition, weapon-mod naming patterns, blueprints, food, medical items, and other identifiable gameplay records. Current owner confirmation says these records have no use at present.",
   "data": [
-    {
-      "itemId": "rubber-scrap",
-      "name": "Rubber Scrap",
-      "sellPrice": 100,
-      "status": "junk-confirmed",
-      "note": "No current crafting, equipment, medical, food, ammunition, or other known use."
-    },
-    {
-      "itemId": "screws",
-      "name": "Screws",
-      "sellPrice": 100,
-      "status": "junk-confirmed",
-      "note": "No current crafting, equipment, medical, food, ammunition, or other known use."
-    },
-    {
-      "itemId": "pre-mist-gold-wristwatch",
-      "name": "Pre-Mist Gold Wristwatch",
-      "sellPrice": 10000,
-      "status": "junk-confirmed",
-      "note": "Direct tooltip and matching icon supplied; no current use reported."
-    },
-    {
-      "itemId": "cassette-tape",
-      "name": "Cassette Tape",
-      "sellPrice": 1500,
-      "status": "junk-confirmed",
-      "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
-    },
-    {
-      "itemId": "square-battery",
-      "name": "Square Battery",
-      "sellPrice": 1500,
-      "status": "junk-confirmed",
-      "note": "Direct tooltip and matching icon supplied; no current use reported."
-    },
-    {
-      "itemId": "floppy-disk",
-      "name": "Floppy Disk",
-      "sellPrice": 3000,
-      "status": "junk-confirmed",
-      "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
-    },
-    {
-      "itemId": "light-bulb",
-      "name": "Light Bulb",
-      "sellPrice": 750,
-      "status": "junk-confirmed",
-      "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
-    },
-    {
-      "itemId": "t-plug",
-      "name": "T Plug",
-      "sellPrice": 500,
-      "status": "junk-confirmed",
-      "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
-    },
-    {
-      "itemId": "camera",
-      "name": "Camera",
-      "sellPrice": 10000,
-      "status": "junk-confirmed",
-      "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
-    }
+    {"itemId":"rubber-scrap","name":"Rubber Scrap","sellPrice":100,"status":"junk-confirmed","note":"No current crafting, equipment, medical, food, ammunition, or other known use."},
+    {"itemId":"screws","name":"Screws","sellPrice":100,"status":"junk-confirmed","note":"No current crafting, equipment, medical, food, ammunition, or other known use."},
+    {"itemId":"pre-mist-gold-wristwatch","name":"Pre-Mist Gold Wristwatch","sellPrice":10000,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"cassette-tape","name":"Cassette Tape","sellPrice":1500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"square-battery","name":"Square Battery","sellPrice":1500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"floppy-disk","name":"Floppy Disk","sellPrice":3000,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"light-bulb","name":"Light Bulb","sellPrice":750,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"t-plug","name":"T Plug","sellPrice":500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"camera","name":"Camera","sellPrice":10000,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"big-filter","name":"Big Filter","sellPrice":3000,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"small-filter","name":"Small Filter","sellPrice":500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"wg-40","name":"WG-40","sellPrice":250,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"electric-wires","name":"Electric Wires","sellPrice":500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"tactical-knife","name":"Tactical Knife","sellPrice":10000,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"chemical-container","name":"Chemical Container","sellPrice":1000,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"metal-pipe","name":"Metal Pipe","sellPrice":500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"broken-mk-receiver","name":"Broken MK Receiver","sellPrice":500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"butcher-knife","name":"Butcher Knife","sellPrice":1000,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."},
+    {"itemId":"toilet-paper","name":"Toilet Paper","sellPrice":500,"status":"junk-confirmed","note":"Direct tooltip and matching icon supplied; no current use reported."}
   ]
 }

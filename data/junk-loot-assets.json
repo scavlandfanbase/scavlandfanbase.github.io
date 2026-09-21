@@ -1,48 +1,23 @@
 {
   "schemaVersion": 1,
-  "description": "Named asset manifest for supplied junk-loot icons. Add each supplied icon at the listed path, then set the matching data/items.json image field.",
+  "description": "Named asset manifest for supplied junk-loot icons.",
   "data": [
-    {
-      "itemId": "pre-mist-gold-wristwatch",
-      "name": "Pre-Mist Gold Wristwatch",
-      "expectedPath": "evidence-inbox/items/pre-mist-gold-wristwatch__icon__2026-09-21.png",
-      "status": "available-in-repository"
-    },
-    {
-      "itemId": "cassette-tape",
-      "name": "Cassette Tape",
-      "expectedPath": "evidence-inbox/items/cassette-tape__icon__2026-09-21.png",
-      "status": "available-in-repository"
-    },
-    {
-      "itemId": "square-battery",
-      "name": "Square Battery",
-      "expectedPath": "evidence-inbox/items/square-battery__icon__2026-09-21.png",
-      "status": "available-in-repository"
-    },
-    {
-      "itemId": "floppy-disk",
-      "name": "Floppy Disk",
-      "expectedPath": "evidence-inbox/items/floppy-disk__icon__2026-09-21.png",
-      "status": "available-in-repository"
-    },
-    {
-      "itemId": "light-bulb",
-      "name": "Light Bulb",
-      "expectedPath": "evidence-inbox/items/light-bulb__icon__2026-09-21.png",
-      "status": "available-in-repository"
-    },
-    {
-      "itemId": "t-plug",
-      "name": "T Plug",
-      "expectedPath": "evidence-inbox/items/t-plug__icon__2026-09-21.png",
-      "status": "available-in-repository"
-    },
-    {
-      "itemId": "camera",
-      "name": "Camera",
-      "expectedPath": "evidence-inbox/items/camera__icon__2026-09-21.png",
-      "status": "available-in-repository"
-    }
+    {"itemId":"pre-mist-gold-wristwatch","name":"Pre-Mist Gold Wristwatch","expectedPath":"evidence-inbox/items/pre-mist-gold-wristwatch__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"cassette-tape","name":"Cassette Tape","expectedPath":"evidence-inbox/items/cassette-tape__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"square-battery","name":"Square Battery","expectedPath":"evidence-inbox/items/square-battery__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"floppy-disk","name":"Floppy Disk","expectedPath":"evidence-inbox/items/floppy-disk__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"light-bulb","name":"Light Bulb","expectedPath":"evidence-inbox/items/light-bulb__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"t-plug","name":"T Plug","expectedPath":"evidence-inbox/items/t-plug__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"camera","name":"Camera","expectedPath":"evidence-inbox/items/camera__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"big-filter","name":"Big Filter","expectedPath":"evidence-inbox/items/big-filter__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"small-filter","name":"Small Filter","expectedPath":"evidence-inbox/items/small-filter__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"wg-40","name":"WG-40","expectedPath":"evidence-inbox/items/wg-40__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"electric-wires","name":"Electric Wires","expectedPath":"evidence-inbox/items/electric-wires__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"tactical-knife","name":"Tactical Knife","expectedPath":"evidence-inbox/items/tactical-knife__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"chemical-container","name":"Chemical Container","expectedPath":"evidence-inbox/items/chemical-container__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"metal-pipe","name":"Metal Pipe","expectedPath":"evidence-inbox/items/metal-pipe__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"broken-mk-receiver","name":"Broken MK Receiver","expectedPath":"evidence-inbox/items/broken-mk-receiver__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"butcher-knife","name":"Butcher Knife","expectedPath":"evidence-inbox/items/butcher-knife__icon__2026-09-21.png","status":"available-in-repository"},
+    {"itemId":"toilet-paper","name":"Toilet Paper","expectedPath":"evidence-inbox/items/toilet-paper__icon__2026-09-21.png","status":"available-in-repository"}
   ]
 }
