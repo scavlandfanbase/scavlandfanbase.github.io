@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 397,
+  "count": 399,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -3595,6 +3595,26 @@
       "height": 615,
       "phash": "cccc2670f8f83333",
       "ocr": "= & @ fi eae | — . ' , “.R AS # ST aS"
+    },
+    {
+      "file": "vendors/zhivan_character-tag_2026-09-21 145809.png",
+      "sha256": "9e002d24d07f68f5de9e93459182d31e3c7fd1c64341ad567fa928f13e14d64c",
+      "bytes": 3516,
+      "filename_timestamp": "2026-09-21T14:58:09",
+      "width": 256,
+      "height": 262,
+      "phash": "c70e3c879ef03ec0",
+      "ocr": ""
+    },
+    {
+      "file": "vendors/zhivan_shop-screen-part-1_2026-09-21 131439.png",
+      "sha256": "891013f71a394c9953e2e4aa510c30599a0afedaffd63593a04cbb8fee7af262",
+      "bytes": 47596,
+      "filename_timestamp": "2026-09-21T13:14:39",
+      "width": 1329,
+      "height": 736,
+      "phash": "ae87d52a08d927ad",
+      "ocr": "| : ; @ 0:53 ) i Zhivan Reputation 1202 Cs ¥ Rank K} Vultures ——— as bs\". G & = =, = a cA | he ats in # = &. : 2 i 1 -- i) en 1 = 1 # » | her | [ 1 1 1 1"
     },
     {
       "file": "weapons/2hmg-long__stats__2026-09-19_084756.png",
