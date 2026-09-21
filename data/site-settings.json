@@ -12,5 +12,9 @@
     "navColor": "#0c0e0d",
     "radius": "6px"
   },
-  "pages": {}
+  "pages": {
+    "index.html": {
+      "fontSize": "22px"
+    }
+  }
 }
