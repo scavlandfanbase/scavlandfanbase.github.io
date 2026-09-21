@@ -228,7 +228,9 @@
     "map.html": {
       "title": "SCAVLAND Map",
       "intro": "Explore known locations and routes.",
-      "sections": []
+      "sections": [
+        {"id":"map-image","target":"#mapImage","title":"SCAVLAND map of Zalesye","image":"images/scavlandmap_v5.png"}
+      ]
     },
     "items.html": {
       "title": "Items Database",

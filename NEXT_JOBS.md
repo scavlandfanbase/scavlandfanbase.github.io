@@ -10,6 +10,7 @@ The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_
 - **Public CMS Areas slice:** Areas title and intro now apply from `data/site-content.json`; location cards remain safely data-driven from vendor records.
 - **Public CMS Map slice:** Map title and intro now apply from `data/site-content.json`; interactive map behavior remains unchanged.
 - **Public CMS database-page slice:** Vendors, Weapons, Armour, Crafting, and Items titles/intros now apply from `data/site-content.json`; their specialist cards and data-driven content remain controlled by the existing dedicated datasets/editors.
+- **Public CMS Map asset:** the public Map image path is now modeled as an editable section asset, applied by `site-shell.js`, and validated by `publish-site-content`.
 - **Public CMS Vendor rates:** Vendor Selling Rates cards are now modeled with stable vendor IDs, editable through the Content Editor, escaped safely, and applied to the public Vendors page.
 - **Public CMS Items copy:** the junk-loot heading/explanation and collapsed item-browser label are now modeled as editable Items page sections.
 - **Public CMS section controls:** the Content Editor now supports section title/intro fields and the public adapter can apply them to targeted Vendor, Weapons, and Armour sections without replacing their interactive/data-driven bodies.
