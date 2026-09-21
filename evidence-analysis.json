@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 395,
+  "count": 396,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -25,6 +25,10 @@
     [
       "Screenshot 2026-09-20 211045.png",
       "armour/ashen-ushanka_2026-09-20 211045.png"
+    ],
+    [
+      "admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
+      "items/mutated-stick_tooltip_2026-09-21 132009.png"
     ],
     [
       "vendors/jasna__shop-screen-part-1__2026-09-20.png",
@@ -171,6 +175,15 @@
       "height": 913,
       "phash": "d0e12fb587689a96",
       "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
+    },
+    {
+      "file": "admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
+      "sha256": "d01a3305e505b5a9b31cd0da1bf47763b041c08f37079ca3a26abf8b25a175d6",
+      "bytes": 102290,
+      "width": 1023,
+      "height": 675,
+      "phash": "c0e13f694ed4921f",
+      "ocr": "tai | Mutated Stick ~50P A warped and splintered stick harvested from mutated vegetation. Too brittle for tools or weapons, but strange properties remain in its fibers. It twitches slightly when held — whatever grew this, it’s still half-alive. -"
     },
     {
       "file": "ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png",
