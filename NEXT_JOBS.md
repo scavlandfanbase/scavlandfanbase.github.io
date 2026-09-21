@@ -3,6 +3,7 @@
 The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_CMS_PLAN.md`. It is intentionally separate from the current editor handover because it requires staged page migrations and new content publishing infrastructure.
 
 - **Public CMS Stage 1 started:** added `data/site-content.json` as a no-output-change model of the current global navigation, footer, Home page hero, feature cards, and latest update section. Public rendering is not switched over yet.
+- **Public CMS Stage 2 started:** added `content-admin.html`, connected it to the Admin Hub, deployed `publish-site-content`, and wired Home page headings, intro, feature cards, and latest-update heading to `data/site-content.json` with legacy markup fallback.
 
 ## Latest handover — 21 September 2026
 

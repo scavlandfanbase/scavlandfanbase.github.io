@@ -18,7 +18,7 @@ Admin login
 
 ## Current State
 
-Stage 1 has started. `data/site-content.json` now captures the current global navigation, footer, Home page hero, feature cards, and latest-update section without changing public rendering yet.
+Stage 1 is complete and Stage 2 has started. `data/site-content.json` captures the current global navigation, footer, Home page hero, feature cards, and latest-update section. The first `content-admin.html` editor and `publish-site-content` function now exist, and the Home page consumes the model through `site-shell.js` while retaining its existing markup as fallback.
 
 Already working:
 
