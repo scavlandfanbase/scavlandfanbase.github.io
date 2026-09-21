@@ -2169,13 +2169,15 @@
     {
       "id": "zhivan",
       "name": "Zhivan",
-      "location": null,
+      "location": "Dazbog Hollow",
       "factionId": "vultures",
       "inventoryDocumented": false,
       "inventory": [],
       "source": {
-        "file": "vendors.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/vendors/zhivan_shop-screen-part-1_2026-09-21 131439.png",
+        "status": "screenshot-verified",
+        "note": "admin upload",
+        "lastVerified": "2026-09-21"
       },
       "portrait": {
         "file": "evidence-inbox/factions/zhivan-vultures__character-card__2026-09-13_212725.png",
@@ -2187,6 +2189,17 @@
           "size": 240
         },
         "sourceWidth": 675
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/zhivan_shop-screen-part-1_2026-09-21 131439.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     },
     {
