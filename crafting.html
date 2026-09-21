@@ -24,10 +24,10 @@ async function loadCrafting(){
     const payload=await res.json();
     const itemPayload=itemRes.ok?await itemRes.json():{data:[]};
     itemNames=new Map((itemPayload.data||[]).map(item=>[item.id,item]));
-    let previewRecord=null;if(new URLSearchParams(location.search).get('adminPreview')==='crafting'){try{const preview=JSON.parse(localStorage.getItem('scavland-specialist-preview')||'null');previewRecord=preview?.record||null}catch(err){console.warn('SCAVLAND crafting preview unavailable:',err)}}
+    let previewRecord=null,previewId=null;if(new URLSearchParams(location.search).get('adminPreview')==='crafting'){try{const preview=JSON.parse(localStorage.getItem('scavland-specialist-preview')||'null');previewId=preview?.id||null;previewRecord=preview?.record||null}catch(err){console.warn('SCAVLAND crafting preview unavailable:',err)}}
     data={medical:[],weapon:[],armour:[]};
     (payload.data||[]).forEach(r=>{
-      const recipe=previewRecord&&previewRecord.id===r.id?{...r,...previewRecord}:r;
+      const recipe=previewRecord&&previewId===r.id?{...r,...previewRecord}:r;
       if(!data[recipe.workbench])return;
       data[recipe.workbench].push([itemNames.get(recipe.id)?.name||recipe.name,(recipe.ingredients||[]).map(i=>[itemNames.get(i.itemId)?.name||i.name,i.quantity,i.itemId]),recipe.id]);
     });
