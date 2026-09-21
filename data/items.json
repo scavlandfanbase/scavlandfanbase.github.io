@@ -3609,6 +3609,86 @@
       }
     },
     {
+      "id": "pre-mist-gold-wristwatch",
+      "name": "Pre-Mist Gold Wristwatch",
+      "classification": ["junk-item", "vendor-item"],
+      "image": null,
+      "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
+      "estimatedPrice": 10000,
+      "stackable": false,
+      "description": "A glistening memento from the world before it ended. This country must've been full of rich folks."
+    },
+    {
+      "id": "cassette-tape",
+      "name": "Cassette Tape",
+      "classification": ["junk-item", "vendor-item"],
+      "image": null,
+      "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
+      "estimatedPrice": 1500,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "A tape used to store sounds and music. Been decades since I last heard one. Don't think I'll find a working device to play this on..."
+    },
+    {
+      "id": "square-battery",
+      "name": "Square Battery",
+      "classification": ["junk-item", "vendor-item"],
+      "image": "evidence-inbox/items/historical/square-battery__tooltip__2026-09-13_144010.png",
+      "notes": "Candidate junk item from supplied tooltip.",
+      "estimatedPrice": 1500,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "Dried-up batteries - often leaky, sometimes toxic. They come in a variety of formats, from Button Cells to big C-Types.",
+      "source": {
+        "file": "evidence-inbox/items/historical/square-battery__tooltip__2026-09-13_144010.png",
+        "status": "screenshot-verified",
+        "note": "Direct in-game tooltip supplied for item identity, description, and displayed value."
+      }
+    },
+    {
+      "id": "floppy-disk",
+      "name": "Floppy Disk",
+      "classification": ["junk-item", "vendor-item"],
+      "image": null,
+      "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
+      "estimatedPrice": 3000,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "Information of some sort used to be stored in these, but I don't know how.\n\nLots of things we used to know have been unlearned: what was the point?"
+    },
+    {
+      "id": "light-bulb",
+      "name": "Light Bulb",
+      "classification": ["junk-item", "vendor-item"],
+      "image": null,
+      "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
+      "estimatedPrice": 750,
+      "maxStack": 5,
+      "stackable": true,
+      "description": "A light bulb that seems to have stood the test of time.\n\nMight be worth offering to a Mechanist."
+    },
+    {
+      "id": "t-plug",
+      "name": "T Plug",
+      "classification": ["junk-item", "vendor-item"],
+      "image": null,
+      "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
+      "estimatedPrice": 500,
+      "maxStack": 10,
+      "stackable": true,
+      "description": "A small piece of plastic used to fit plugs into other plugs... Or something?\n\nLooks pretty worthless."
+    },
+    {
+      "id": "camera",
+      "name": "Camera",
+      "classification": ["junk-item", "vendor-item"],
+      "image": null,
+      "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
+      "estimatedPrice": 10000,
+      "stackable": false,
+      "description": "The world used to be so beautiful that it was worth recording and revisiting.\n\nThe thought lingers as I struggle to connect it with this broken camera husk."
+    },
+    {
       "id": "old-tactical-pants",
       "name": "Old Tactical Pants",
       "classification": [

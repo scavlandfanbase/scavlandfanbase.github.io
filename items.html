@@ -12,7 +12,7 @@
 <div class="category-overview" id="category-overview"></div><details class="junk-table"><summary>Candidate junk loot and sell prices</summary><p class="status">These are conservative, unverified candidates. Check in-game before treating them as safe to sell.</p><div id="junk-loot"></div></details><div class="item-tools"><input id="item-search" type="search" placeholder="Search the selected category..." autocomplete="off"></div>
 <details id="item-browser"><summary>Browse selected category</summary><div class="item-filters" id="item-filters"></div><div class="verify-tools"><button id="verified-only" class="verify-toggle" type="button" aria-pressed="false">Verified Only</button><button id="needs-review" class="verify-toggle review-toggle" type="button" aria-pressed="false">Needs Verification</button><div class="verify-legend"><span class="verify-badge verified">✓ Verified</span><span class="verify-badge review">Unverified</span></div></div><div class="item-count" id="item-count">Loading items…</div><section class="item-grid" id="item-grid"></section></details></main>
 <script>
-const labels={weapon:'Weapons',armour:'Armour',ammunition:'Ammo','crafted-item':'Crafted','crafting-resource':'Crafting','vendor-item':'Vendor Items'};
+const labels={weapon:'Weapons',armour:'Armour',ammunition:'Ammo','crafted-item':'Crafted','crafting-resource':'Crafting','vendor-item':'Vendor Items','junk-item':'Junk Loot'};
 let items=[],active='all',verifiedOnly=false,needsReview=false,weapons=[],armour=[],ammo=[],crafting=[],vendors=[],targetItemId=null;
 const norm=s=>clean(String(s||'')).toLowerCase();
 function sourceStatus(x){
@@ -36,7 +36,7 @@ function categoryCount(k){return k==='all'?items.length:items.filter(x=>(x.class
 function reviewCount(k){return items.filter(x=>(k==='all'||(x.classification||[]).includes(k))&&sourceStatus(x).cls==='review').length}
 function setCategory(k){active=k;renderFilters();document.getElementById('item-browser').open=true;render()}
 function renderFilters(){
- const order=['all','weapon','armour','ammunition','crafted-item','crafting-resource','vendor-item'];
+ const order=['all','weapon','armour','ammunition','crafted-item','crafting-resource','vendor-item','junk-item'];
  document.getElementById('category-overview').innerHTML=order.map(k=>'<button class="category-card '+(active===k?'active':'')+'" data-category="'+k+'"><strong>'+(k==='all'?'All Items':labels[k])+'</strong><span class="category-count">'+categoryCount(k)+'</span><span>'+reviewCount(k)+' unverified</span></button>').join('');
  document.querySelectorAll('.category-card').forEach(b=>b.onclick=()=>setCategory(b.dataset.category));
  document.getElementById('item-filters').innerHTML=order.map(k=>'<button class="item-filter '+(active===k?'active':'')+'" data-filter="'+k+'">'+(k==='all'?'All Items':labels[k])+'</button>').join('');

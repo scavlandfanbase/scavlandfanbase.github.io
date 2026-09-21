@@ -16,6 +16,55 @@
       "sellPrice": 100,
       "status": "candidate-unverified",
       "note": "Not found in current crafting recipes or specialist datasets; vendor evidence describes it as valuable for tinkerers. Confirm no hidden use before treating as junk."
+    },
+    {
+      "itemId": "pre-mist-gold-wristwatch",
+      "name": "Pre-Mist Gold Wristwatch",
+      "sellPrice": 10000,
+      "status": "candidate-unverified",
+      "note": "Supplied tooltip screenshot; icon asset still needs to be added to the repository."
+    },
+    {
+      "itemId": "cassette-tape",
+      "name": "Cassette Tape",
+      "sellPrice": 1500,
+      "status": "candidate-unverified",
+      "note": "Supplied tooltip screenshot; icon asset still needs to be added to the repository."
+    },
+    {
+      "itemId": "square-battery",
+      "name": "Square Battery",
+      "sellPrice": 1500,
+      "status": "candidate-unverified",
+      "note": "Tooltip evidence and repository image available."
+    },
+    {
+      "itemId": "floppy-disk",
+      "name": "Floppy Disk",
+      "sellPrice": 3000,
+      "status": "candidate-unverified",
+      "note": "Supplied tooltip screenshot; icon asset still needs to be added to the repository."
+    },
+    {
+      "itemId": "light-bulb",
+      "name": "Light Bulb",
+      "sellPrice": 750,
+      "status": "candidate-unverified",
+      "note": "Supplied tooltip screenshot; icon asset still needs to be added to the repository."
+    },
+    {
+      "itemId": "t-plug",
+      "name": "T Plug",
+      "sellPrice": 500,
+      "status": "candidate-unverified",
+      "note": "Supplied tooltip screenshot; icon asset still needs to be added to the repository."
+    },
+    {
+      "itemId": "camera",
+      "name": "Camera",
+      "sellPrice": 10000,
+      "status": "candidate-unverified",
+      "note": "Supplied tooltip screenshot; icon asset still needs to be added to the repository."
     }
   ]
 }

@@ -11,7 +11,7 @@ const REPO = "scavlandfanbase/scavlandfanbase.github.io";
 const BRANCH = "main";
 const DATA_PATH = "data/items.json";
 const allowedFields = new Set(["name", "classification", "image", "notes", "estimatedPrice", "rank", "maxStack", "description", "stackable", "source"]);
-const classifications = new Set(["weapon", "armour", "ammunition", "crafted-item", "crafting-resource", "vendor-item"]);
+const classifications = new Set(["weapon", "armour", "ammunition", "crafted-item", "crafting-resource", "vendor-item", "junk-item"]);
 const sourceStatuses = new Set(["screenshot-verified", "unverified", "user-provided", "pending-review", "not-verified"]);
 const imagePattern = /^(images|evidence-inbox)\/(?:[A-Za-z0-9._ ()-]+\/)*[A-Za-z0-9._ ()-]+\.(png|jpe?g|webp)$/i;
 
