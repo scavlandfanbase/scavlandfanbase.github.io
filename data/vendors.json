@@ -1008,9 +1008,9 @@
         "status": "screenshot-verified",
         "evidence": "character-card",
         "crop": {
-          "x": 17,
+          "x": 28,
           "y": 19,
-          "size": 240
+          "size": 550
         },
         "sourceWidth": 618
       },
