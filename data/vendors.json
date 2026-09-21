@@ -2402,22 +2402,101 @@
       "name": "Snezhana",
       "location": "Microrayon",
       "factionId": "rada",
-      "inventoryDocumented": false,
-      "inventory": [],
+      "inventoryDocumented": true,
+      "inventory": [
+        {
+          "itemId": "bandage",
+          "name": "Bandage",
+          "rank": "1",
+          "price": 250,
+          "details": "Health: +5 Bleed: -15",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "ai-2-medkit",
+          "name": "AI-2 Medkit",
+          "rank": "1",
+          "price": 3200,
+          "details": "Health: +30 Radiation: -15 Hunger: +3 Thirst: +3",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "cigarettes",
+          "name": "Cigarettes",
+          "rank": "1",
+          "price": 750,
+          "details": "Consumable",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "canteen",
+          "name": "Canteen",
+          "rank": "1",
+          "price": 480,
+          "details": "Radiation: -5 Thirst: -33",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        },
+        {
+          "itemId": "bread",
+          "name": "Bread",
+          "rank": "",
+          "price": 480,
+          "details": "Hunger: -12 Thirst: +1 Max Stacks: 5",
+          "source": {
+            "file": null,
+            "status": "pending-review",
+            "note": "Suggested values from Items, existing vendor listings. Confirm this vendor’s price and unlock rank. Missing or conflicting values are left blank.",
+            "lastVerified": null
+          }
+        }
+      ],
       "source": {
-        "file": "vendors.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/vendors/snezhana__shop-rank-1__2026-09-21_230113.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-09-21"
       },
       "portrait": {
-        "file": "evidence-inbox/factions/snezhana-rada__character-card__2026-09-18_211839.png",
+        "file": "evidence-inbox/vendors/snezhana__portrait__2026-09-21_230105.png",
         "status": "screenshot-verified",
         "evidence": "character-card",
         "crop": {
-          "x": 20,
-          "y": 21,
-          "size": 55
+          "x": 0,
+          "y": 0,
+          "size": 242
         },
-        "sourceWidth": 199
+        "sourceWidth": 253
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/snezhana__shop-rank-1__2026-09-21_230113.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     },
     {
