@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 430,
+  "count": 431,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -3657,6 +3657,16 @@
       "height": 1369,
       "phash": "d5d526ec27936834",
       "ocr": "ae 2HMG (Long) ~100000P A heavy machine gun, unreliable but intimidating. Can mow down enemies with ease — and attract a whole lot more. Damage ATT] 33 Handling ATT 20 +14 Fire Rate (RPM) —_||||||| 700 Ergonomics | 5+2 Range LUULIL 18 Reload Speed TTT 10- 0.1 Accuracy LUMI 40 Durability LUNATUUTI 4] Recoil WMI 27- 14 Repair Class: Expert = | Caliber: High Caliber Rifle Ammo ao - “i ——, Nes © =. Small Military it ; i Box % _if 4 loant All 0 | 100"
+    },
+    {
+      "file": "vendors/Alexei_character-card_2026-09-21 185026.png",
+      "sha256": "016529696ab7d2ae180f72dbf8b2a181741cd8a28191f1ef1ad3d8769c21bcf0",
+      "bytes": 3532,
+      "filename_timestamp": "2026-09-21T18:50:26",
+      "width": 246,
+      "height": 253,
+      "phash": "c38f6e0ff0379380",
+      "ocr": "i. Ve: ae ™,"
     },
     {
       "file": "vendors/Gavron_character-tag_2026-09-21 154120.png",
