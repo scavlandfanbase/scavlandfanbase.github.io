@@ -1,3 +1,4 @@
+import '../../../vendor-stock.js';
 // All database editors publish one Git commit, including images and linked records.
 export const paths = {items:'data/items.json',weapons:'data/weapons.json',armour:'data/armour.json',ammunition:'data/ammo.json',crafting:'data/crafting.json',vendors:'data/vendors.json'};
 const sharedFields = ['name','image','description','estimatedPrice','maxStack','stackable','notes'];
@@ -85,6 +86,11 @@ export function prepare(body, docs) {
   if (kind==='vendors') {
     if (!rows(docs['data/factions.json']).some(x=>x.id===record.factionId)) fail('Choose a faction.');
     if(typeof record.inventoryDocumented!=='boolean'||!Array.isArray(record.inventory)) fail('Vendor stock is invalid.');
+    if ('inventory' in changes || create) {
+      const catalog={armour:rows(docs[paths.armour]),ammo:rows(docs[paths.ammunition]),weapons:rows(docs[paths.weapons])};
+      record.inventory=record.inventory.map(row=>globalThis.ScavVendorStock.fillMissing(row,items.find(item=>item.id===row.itemId),catalog,rows(docs[paths.vendors])));
+      if(record.inventory.length && !('inventoryDocumented' in changes))record.inventoryDocumented=true;
+    }
     for (const row of record.inventory) {
       const item=items.find(x=>x.id===row.itemId);
       if(!item||typeof row.rank!=='string'||(row.price!==null&&(!Number.isInteger(row.price)||row.price<0))||typeof row.details!=='string') fail('Choose an item and valid rank, price and details for each stock row.');

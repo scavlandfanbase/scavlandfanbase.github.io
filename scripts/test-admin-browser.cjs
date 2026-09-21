@@ -38,6 +38,14 @@ const fs=require('fs'),path=require('path'),http=require('http'),assert=require(
   await f.locator('#f-location').fill('The Mire');await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).create,false);
   await f.locator('#search').fill('Grigory');await f.locator('.choice').click();await f.locator('#f-location').fill('Test location');await f.locator('#save').click();await savedMessage(f);assert.deepEqual(Object.keys(saved.at(-1).changes),['location']);
   console.log('PASS vendors: optional portrait, numeric prices, second save, provenance retained');
+  const ilya=docs['data/vendors.json'].data.find(row=>row.id==='ilya');
+  ilya.inventory=['fresh-mushrooms','canteen','chemical-residue','metal-scrap','fabric-scrap','plastic-scrap','rubber-scrap'].map(itemId=>({itemId,name:docs['data/items.json'].data.find(item=>item.id===itemId).name,price:null,rank:'',details:''}));ilya.inventoryDocumented=false;
+  f=await editor('vendors-admin.html?embed=1');await f.locator('#search').fill('Ilya');await f.locator('.choice').click();await f.locator('#preview').click();
+  assert.deepEqual(await f.locator('#stock .price').evaluateAll(inputs=>inputs.map(input=>input.value)),['3000','480','100','100','100','100','100']);
+  assert.equal(await f.locator('#f-inventoryDocumented').inputValue(),'true');assert.ok(!(await f.locator('#preview-panel').innerText()).includes('Unknown price'));
+  await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).changes.inventory[1].price,480);
+  console.log('PASS exact Ilya screenshot: opening, previewing and saving seven previously blank prices');
+
   f=await editor('items-admin.html?embed=1');await f.locator('#new-record').click();await f.locator('#f-name').fill('Picture item');await f.locator('[value="junk-item"]').check();
   await f.locator('#main-picture input[type=file]').setInputFiles({name:'test.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jOQAAAABJRU5ErkJggg==','base64')});
   await f.locator('#main-picture img').waitFor({state:'visible'});await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).uploads.length,1);await f.locator('#f-notes').fill('Still editable');await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).uploads.length,0);

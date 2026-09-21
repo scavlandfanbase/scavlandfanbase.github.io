@@ -64,7 +64,7 @@
     picture('main-picture',kind==='vendors'?selected.portrait?.file:selected.image,'Choose picture',kind==='vendors');picture('evidence-picture',selected.source?.file,'Supporting screenshot');
     if(kind==='crafting'){renderIngredients();$('add-ingredient').onclick=()=>{readIngredients();ingredients.push({itemId:'',name:'',quantity:1});renderIngredients();changed();};}
     if(kind==='vendors'){renderStock();renderShots();$('add-stock').onclick=()=>{readStock();stock.push({itemId:'',name:'',rank:'',price:null,details:''});renderStock();changed();};$('add-shot').onclick=()=>{readShots();shots.push({file:null,association:'pending-review'});renderShots();changed();};}
-    baseline=collect();renderList();cropPreview();
+    baseline=collect();renderList();cropPreview();if(kind==='vendors')fillMissingStock();
   }
   function picture(id,value,label,portrait=false){
     const holder=$(id),state={value:value||null};pictureControls.set(id,state);
@@ -96,6 +96,11 @@
   function readIngredients(){if(!$('ingredients'))return;ingredients=[...$('ingredients').children].map((el,i)=>({...ingredients[i],itemId:el.querySelector('select').value,name:items.find(x=>x.id===el.querySelector('select').value)?.name||'',quantity:Number(el.querySelector('input').value)}));}
   function renderIngredients(){$('ingredients').innerHTML=ingredients.map(row=>'<div class="row">'+itemSelect(row.itemId)+'<label>Quantity<input type="number" min="1" step="1" required value="'+esc(row.quantity)+'"></label><button type="button">Remove</button></div>').join('');$('ingredients').querySelectorAll('button').forEach((b,i)=>b.onclick=()=>{readIngredients();ingredients.splice(i,1);renderIngredients();changed();});}
   function readStock(){if(!$('stock'))return;stock=[...$('stock').children].map((el,i)=>({...stock[i],itemId:el.querySelector('select').value,name:items.find(x=>x.id===el.querySelector('select').value)?.name||'',rank:el.querySelector('.rank').value.trim(),price:el.querySelector('.price').value===''?null:Number(el.querySelector('.price').value),details:el.querySelector('.details').value.trim()}));}
+  function fillMissingStock(){
+    readStock();const before=clone(stock);
+    stock=stock.map(row=>ScavVendorStock.fillMissing(row,items.find(item=>item.id===row.itemId),stockCatalog,records));
+    if(!equal(before,stock)){if(stock.some(row=>row.itemId))$('f-inventoryDocumented').value='true';renderStock();changed();$('message').textContent='Missing stock values filled from the database. Review them, then save.';}
+  }
   function renderStock(){
     $('stock').innerHTML=stock.map(row=>'<div class="row stock-row"><div class="record-field"><label>Find an item<input type="search" class="stock-search" placeholder="Search any item, weapon, attachment or armour"></label>'+itemSelect(row.itemId)+'</div><label>Unlock rank<input class="rank" value="'+esc(row.rank)+'"></label><label>Price<input type="number" min="0" step="1" class="price" value="'+esc(row.price)+'"></label><label class="record-wide">Details<input class="details" value="'+esc(row.details)+'"></label><span class="help record-wide">'+esc(row.source?.status==='screenshot-verified'?'Existing screenshot evidence retained':row.source?.note||'Needs verification')+'</span><button type="button">Remove</button></div>').join('');
     [...$('stock').children].forEach((el,i)=>{
@@ -139,7 +144,7 @@
       const endpoint=kind==='items'?'publish-item':kind==='vendors'?'publish-vendor':'publish-specialist';
       const response=await json(SB+'/functions/v1/'+endpoint,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body)});
       if(!response.record)throw new Error('The publishing service needs updating. Keep this form open and contact the site maintainer.');
-      selected=clone(response.record);original=clone(response.record);$('evidence-status').value=selected.source?.status||'pending-review';baseline=collect();dirty=false;
+      selected=clone(response.record);original=clone(response.record);if(kind==='vendors'){stock=clone(selected.inventory||[]);renderStock();$('f-inventoryDocumented').value=String(selected.inventoryDocumented);}if(!$('preview-panel').hidden)preview();$('evidence-status').value=selected.source?.status||'pending-review';baseline=collect();dirty=false;
       const index=records.findIndex(r=>r.id===selected.id);if(index<0)records.push(clone(selected));else records[index]=clone(selected);
       for(const attachment of attachments){committedUploads.add(attachment.path);if(!pictures.includes(attachment.path))pictures.push(attachment.path);}
       if(kind==='items'){const i=items.findIndex(r=>r.id===selected.id);if(i<0)items.push(clone(selected));else items[i]=clone(selected);}

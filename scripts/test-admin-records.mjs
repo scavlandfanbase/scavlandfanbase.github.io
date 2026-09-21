@@ -92,3 +92,16 @@ test('picture, library and data enter the same commit',async()=>{
   const response=await handler(new Request(req.url,{method:'POST',headers:req.headers,body:JSON.stringify(body)}));assert.equal(response.status,200);
   const tree=calls.find(c=>c.url.endsWith('/git/trees')).body.tree;assert.ok(tree.some(x=>x.path===body.changes.image));assert.ok(tree.some(x=>x.path==='data/admin-images.json'));
 });
+
+test('older Ilya form saves fill all seven screenshot prices and enable stock',()=>{
+  const docs=fixture();
+  const ids=['fresh-mushrooms','canteen','chemical-residue','metal-scrap','fabric-scrap','plastic-scrap','rubber-scrap'];
+  const inventory=ids.map(itemId=>({itemId,name:'Old form name',price:null,rank:'',details:''}));
+  const result=prepare({kind:'vendors',id:'ilya',changes:{inventory}},docs).record;
+  assert.deepEqual(result.inventory.map(row=>row.price),[3000,480,100,100,100,100,100]);
+  assert.ok(result.inventory.every(row=>row.rank==='1'&&row.source.status==='pending-review'));
+  assert.equal(result.inventoryDocumented,true);
+  result.inventory[0].price=123;
+  const second=prepare({kind:'vendors',id:'ilya',changes:{inventory:structuredClone(result.inventory)}},docs).record;
+  assert.equal(second.inventory[0].price,123);
+});

@@ -17,3 +17,7 @@ for(const id of ['pm-nikolay','mk-triangle-stock','armoured-rags','mutated-stick
   row=suggest(items.find(item=>item.id===id),catalog,vendors);assert.equal(row.itemId,id);assert.notEqual(row.price,null);assert.notEqual(row.rank,'');assert.equal(row.source.status,'pending-review');
 }
 console.log('PASS stock defaults: full registry examples, price/rank precedence, zero values, unknown/conflicting data, conservative provenance.');
+
+row=suggest({id:'canteen',name:'Canteen'},{},[{inventory:[{itemId:'canteen',price:480,rank:'1'},{itemId:'canteen',price:'480₽',rank:'1'}]}]);assert.equal(row.price,480);
+const retained=context.ScavVendorStock.fillMissing({itemId:'item',price:25,rank:'4',details:'Custom'},item,{},[]);assert.equal(retained.price,25);assert.equal(retained.rank,'4');assert.equal(retained.details,'Custom');
+console.log('PASS formatted currency and existing vendor overrides.');

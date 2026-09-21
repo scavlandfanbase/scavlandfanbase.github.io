@@ -2,6 +2,8 @@
 
 ## Admin record entry — 21 September 2026
 
+- Ilya stock-price fix: fill missing values both when opening a vendor and in the publishing service (including submissions from already-open older editors). Normalize currency-formatted legacy prices such as `480₽`; retain typed vendor overrides. The exact seven screenshot rows are covered by browser and service tests: Fresh Mushrooms 3000, Canteen 480, five materials 100 each, all rank 1 suggestions. No production stock was invented or inserted; prices apply when the owner saves their rows. The publisher now also packages root `vendor-stock.js` as a shared dependency. Vendor editor scripts carry a cache version.
+
 - Vendor stock picker searches the full Items registry (all weapons, attachments, armour, ammo and other items). Selection fills name, estimated price, rank and details from Items, with specialist data and consistent existing vendor listings as fallbacks. Existing custom rows are untouched until a different item is selected; all suggestions remain editable and pending review. Conflicting/missing values stay blank. Selecting stock also enables its public stock list. Tests: `node scripts/test-vendor-stock.cjs` and the extended admin browser checks.
 
 - All New item tags now control public destinations. Shared `item-catalog.js` joins tagged Items with known specialist records: weapon → Weapons, armour → Armour, ammunition → Ammo, crafted-item → Crafting. Missing stats/recipes appear as details pending without fabricated or verified data. Untagging hides the public specialist entry while preserving its stored details.
@@ -14,7 +16,7 @@
 
 Implementation commit: `20ddd8e` (branch `improve-admin-entry`).
 
-**Deployment approved and saving services deployed:** owner approved on 21 September 2026. Active versions after tag routing: publish-item v5, publish-specialist v7, publish-vendor v6. All three live endpoints return HTTP 403 to unauthenticated save requests. Frontend release is tracked in PR #17.
+**Deployment approved and saving services deployed:** owner approved on 21 September 2026. Active versions after missing-price fix: publish-item v6, publish-specialist v8, publish-vendor v7. All three live endpoints return HTTP 403 to unauthenticated save requests. Frontend release is tracked in PR #17.
 
 - Items, Weapons, Armour, Ammunition, Crafting and Vendors now share a form-based editor: Add new, Preview, Save and publish. No IDs, JSON or repository paths are required.
 - Picture library and PNG/JPG/WebP uploads (5 MB each, 12 MB per save); evidence notes/status/date are normal fields. Recipes and vendor inventories use item pickers and numeric inputs. Portraits are optional.
