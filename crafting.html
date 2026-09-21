@@ -27,7 +27,8 @@ async function loadCrafting(){
     data={medical:[],weapon:[],armour:[]};
     (payload.data||[]).forEach(r=>{
       if(!data[r.workbench])return;
-      data[r.workbench].push([r.name,(r.ingredients||[]).map(i=>[i.name,i.quantity,i.itemId])]);
+      const outputName=itemNames.get(r.id)?.name||r.name;
+      data[r.workbench].push([outputName,(r.ingredients||[]).map(i=>[itemNames.get(i.itemId)?.name||i.name,i.quantity,i.itemId]),r.id]);
     });
     selected=data.medical[0]||null;
     document.querySelector(".database-count strong").textContent=(payload.data||[]).length;
