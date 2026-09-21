@@ -1,69 +1,69 @@
 {
   "schemaVersion": 1,
-  "description": "Conservative junk-loot candidates derived by elimination. These records are not confirmed junk until direct gameplay evidence confirms they have no crafting, equipment, medical, food, ammunition, or other use.",
-  "method": "Excluded crafting records and ingredients, weapons, armour, ammunition, weapon-mod naming patterns, blueprints, food, medical items, and other identifiable gameplay records. Remaining candidates are flagged for review.",
+  "description": "Junk-loot records derived by elimination and current owner confirmation. Screenshot evidence verifies the item details; junk status records the current no-use assessment.",
+  "method": "Excluded crafting records and ingredients, weapons, armour, ammunition, weapon-mod naming patterns, blueprints, food, medical items, and other identifiable gameplay records. Current owner confirmation says these records have no use at present.",
   "data": [
     {
       "itemId": "rubber-scrap",
       "name": "Rubber Scrap",
       "sellPrice": 100,
-      "status": "candidate-unverified",
-      "note": "Not found in current crafting recipes or specialist datasets; vendor evidence describes it as good for trading. Confirm no hidden use before treating as junk."
+      "status": "junk-confirmed",
+      "note": "No current crafting, equipment, medical, food, ammunition, or other known use."
     },
     {
       "itemId": "screws",
       "name": "Screws",
       "sellPrice": 100,
-      "status": "candidate-unverified",
-      "note": "Not found in current crafting recipes or specialist datasets; vendor evidence describes it as valuable for tinkerers. Confirm no hidden use before treating as junk."
+      "status": "junk-confirmed",
+      "note": "No current crafting, equipment, medical, food, ammunition, or other known use."
     },
     {
       "itemId": "pre-mist-gold-wristwatch",
       "name": "Pre-Mist Gold Wristwatch",
       "sellPrice": 10000,
-      "status": "screenshot-verified-candidate",
-      "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
+      "status": "junk-confirmed",
+      "note": "Direct tooltip and matching icon supplied; no current use reported."
     },
     {
       "itemId": "cassette-tape",
       "name": "Cassette Tape",
       "sellPrice": 1500,
-      "status": "screenshot-verified-candidate",
+      "status": "junk-confirmed",
       "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
     },
     {
       "itemId": "square-battery",
       "name": "Square Battery",
       "sellPrice": 1500,
-      "status": "screenshot-verified-candidate",
-      "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
+      "status": "junk-confirmed",
+      "note": "Direct tooltip and matching icon supplied; no current use reported."
     },
     {
       "itemId": "floppy-disk",
       "name": "Floppy Disk",
       "sellPrice": 3000,
-      "status": "screenshot-verified-candidate",
+      "status": "junk-confirmed",
       "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
     },
     {
       "itemId": "light-bulb",
       "name": "Light Bulb",
       "sellPrice": 750,
-      "status": "screenshot-verified-candidate",
+      "status": "junk-confirmed",
       "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
     },
     {
       "itemId": "t-plug",
       "name": "T Plug",
       "sellPrice": 500,
-      "status": "screenshot-verified-candidate",
+      "status": "junk-confirmed",
       "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
     },
     {
       "itemId": "camera",
       "name": "Camera",
       "sellPrice": 10000,
-      "status": "screenshot-verified-candidate",
+      "status": "junk-confirmed",
       "note": "Direct tooltip and matching icon supplied; no known use found in current data. Confirm sell-only status in gameplay."
     }
   ]
