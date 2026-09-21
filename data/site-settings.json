@@ -3,9 +3,13 @@
   "global": {
     "backgroundImage": "images/backgrounds/campfire_upscayl_4x_ultramix-balanced-4x.png",
     "headerImage": "images/scavland-banner.jpg.png",
-    "subtitle": "Wasteland Survival Database.",
+    "subtitle": "Wasteland Survival Database",
     "fontFamily": "Arial, Helvetica, sans-serif",
-    "fontSize": "20px"
+    "fontSize": "20px",
+    "accentColor": "#000000",
+    "textColor": "#000000",
+    "panelColor": "#000000",
+    "navColor": "#000000"
   },
   "pages": {}
 }
