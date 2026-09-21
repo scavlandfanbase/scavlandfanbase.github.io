@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 392,
+  "count": 393,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -21,6 +21,10 @@
     [
       "Screenshot 2026-09-20 204544.png",
       "armour/stronghold-vest__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "Screenshot 2026-09-20 211045.png",
+      "armour/ashen-ushanka_2026-09-20 211045.png"
     ],
     [
       "vendors/jasna__shop-screen-part-1__2026-09-20.png",
@@ -327,6 +331,16 @@
       "height": 837,
       "phash": "a89d1d989ab4a6e9",
       "ocr": "fc : f : — a ai (eS) i er , ES tt &, LU i F 4 + Special FMJ Ammo ~1000P \" i= BE Special ammunition that can fit into different types of weapons. 7 4q Damage: 75 Penetration: 100% “J z"
+    },
+    {
+      "file": "armour/ashen-ushanka_2026-09-20 211045.png",
+      "sha256": "750eb56ced1abc498d7a90d772b93a210252fc188ccfa2c45ba0776a4e13d270",
+      "bytes": 145813,
+      "filename_timestamp": "2026-09-20T21:10:45",
+      "width": 1011,
+      "height": 1158,
+      "phash": "c085277c1b676d5a",
+      "ocr": "- Ashen Ushanka ~18000P A very common piece of headwear throughout Zalesye, and one of the first trades people make when they come into some money. Its comfy shape and texture are great against the cold, but don't offer much protection. Durability PUNTAAUATUUUNINITIIT 100 Ballistic Res I| 8 Slash Res I| 10 Rad Res I 8 Repair Class: Tattered al"
     },
     {
       "file": "armour/balistic-kask__stats-100-durability__2026-09-20.png",
