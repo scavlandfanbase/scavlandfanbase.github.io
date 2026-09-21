@@ -1281,8 +1281,21 @@
       "classification": [
         "vendor-item"
       ],
-      "image": null,
-      "notes": null
+      "image": "evidence-inbox/items/fresh-mushrooms__tooltip__2026-09-20.png",
+      "notes": null,
+      "estimatedPrice": 3000,
+      "maxStack": 5,
+      "stackable": true,
+      "effects": {
+        "health": 10,
+        "hunger": -5
+      },
+      "source": {
+        "file": "evidence-inbox/items/fresh-mushrooms__tooltip__2026-09-20.png",
+        "status": "screenshot-verified",
+        "note": "admin",
+        "lastVerified": "2026-09-21"
+      }
     },
     {
       "id": "glue",
