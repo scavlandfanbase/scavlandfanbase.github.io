@@ -3934,17 +3934,17 @@
       "classification": [
         "junk-item"
       ],
-      "image": "evidence-inbox/admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
+      "image": "evidence-inbox/admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
       "notes": null,
       "source": {
-        "file": null,
-        "status": "pending-review",
+        "file": "evidence-inbox/admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
+        "status": "screenshot-verified",
         "note": null,
         "lastVerified": null
       },
       "name": "Mutated Stick",
       "estimatedPrice": 50,
-      "rank": null,
+      "rank": 0,
       "maxStack": 10,
       "stackable": true,
       "description": null
