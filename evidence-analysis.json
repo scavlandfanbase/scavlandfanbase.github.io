@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 401,
+  "count": 403,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -33,6 +33,10 @@
     [
       "admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
       "items/mutated-stick_tooltip_2026-09-21 132009.png"
+    ],
+    [
+      "vendors/Screenshot 2026-09-20 213218.png",
+      "vendors/gavron__shop-screen__2026-09-20.png"
     ],
     [
       "vendors/jasna__shop-screen-part-1__2026-09-20.png",
@@ -3470,6 +3474,16 @@
       "ocr": "ae 2HMG (Long) ~100000P A heavy machine gun, unreliable but intimidating. Can mow down enemies with ease — and attract a whole lot more. Damage ATT] 33 Handling ATT 20 +14 Fire Rate (RPM) —_||||||| 700 Ergonomics | 5+2 Range LUULIL 18 Reload Speed TTT 10- 0.1 Accuracy LUMI 40 Durability LUNATUUTI 4] Recoil WMI 27- 14 Repair Class: Expert = | Caliber: High Caliber Rifle Ammo ao - “i ——, Nes © =. Small Military it ; i Box % _if 4 loant All 0 | 100"
     },
     {
+      "file": "vendors/Gavron_character-tag_2026-09-21 154120.png",
+      "sha256": "2656fb240350f5a989c8a915d9aa5c8dad2e30f69250915976ea4d1892e277de",
+      "bytes": 57272,
+      "filename_timestamp": "2026-09-21T15:41:20",
+      "width": 304,
+      "height": 301,
+      "phash": "c79e2c38313c7999",
+      "ocr": ""
+    },
+    {
       "file": "vendors/IIya_character-shop_part-1_2026-09-21 131338.png",
       "sha256": "8f8aabd5c7e37786c20a76a65038b7e5b3098e25f3c6a8a77cd1af310eb8e775",
       "bytes": 38208,
@@ -3488,6 +3502,16 @@
       "height": 336,
       "phash": "f5414ac01e1a1ffe",
       "ocr": "pda"
+    },
+    {
+      "file": "vendors/Screenshot 2026-09-20 213218.png",
+      "sha256": "431b1bcc8e2968cbdecb4481e4ea64a708cfbeb6c98b4b2f3dfda71ac10177ab",
+      "bytes": 41394,
+      "filename_timestamp": "2026-09-20T21:32:18",
+      "width": 1317,
+      "height": 1003,
+      "phash": "ee8695d52a3b5903",
+      "ocr": "| @ ile). Gavron rm Reputation 0 &. Rank 1 =a’ Mudlark i | a at us ze °F &, %, = = q F == Nc 2 ‘ aT o TH 10"
     },
     {
       "file": "vendors/anatoly__shop-screen-part-1__2026-09-20.png",
