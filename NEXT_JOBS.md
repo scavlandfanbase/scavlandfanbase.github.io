@@ -7,7 +7,7 @@
 - **Evidence contributor documentation:** `EVIDENCE_GUIDE.md` is the public guide for adding evidence to the repository. It covers the correct evidence folder, descriptive filenames, JSON image/source fields, and the different display rules for Items, Armour, Weapons, Crafting and Vendors.
 - **Future private editor handover:** `ADMIN_HUB_BUILD_GUIDE.md` is the build brief for another AI/developer. It scopes the first version to a private Items editor, preserves the existing JSON structure/evidence rules, requires a secure server-side GitHub publishing bridge, and lists the required tests. If another AI completes this, review its branch/PR and test it before publishing.
 - **Advanced Gun Repair Kit image lesson:** on an Items record, use the exact repository-relative image path in `image`, for example `evidence-inbox/items/filename.png`. `source.file` should also be the exact direct evidence path. Do not append a new path to an existing path; invalid/missing preview images are intentionally hidden by `image-viewer.js`.
-- **Validation:** `node scripts/validate-evidence.cjs` passes: 22 vendors, 231 inventory links, 319 evidence paths, unique IDs, armour links and page JavaScript. Current strict counts: **Armour 10/31 verified; Items 180/256 verified**.
+- **Validation:** `node scripts/validate-evidence.cjs` passes: 22 vendors, 231 inventory links, 357 evidence paths, unique IDs, armour links and page JavaScript. Current strict counts: **Armour 10/31 verified; Items 180/256 verified**.
 
 ## Armour evidence batch — 20 September 2026
 
@@ -213,9 +213,9 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 
 ## Current confirmed baseline
 
-- 255 indexed item identities
+- 256 indexed item identities
 - 39 canonical weapon records currently in `data/weapons.json` (38 screenshot-verified; base 2HMG unverified)
-- 30 armour/gear records
+- 31 armour/gear records
 - 13 ammo records
 - 22 vendors
 - 9 factions
