@@ -35,8 +35,13 @@ const fs=require('fs'),path=require('path'),http=require('http'),assert=require(
   await f.locator('#search').fill('Grigory');await f.locator('.choice').click();await f.locator('#f-location').fill('Test location');await f.locator('#save').click();await savedMessage(f);assert.deepEqual(Object.keys(saved.at(-1).changes),['location']);
   console.log('PASS vendors: optional portrait, numeric prices, second save, provenance retained');
   f=await editor('items-admin.html?embed=1');await f.locator('#new-record').click();await f.locator('#f-name').fill('Picture item');await f.locator('[value="junk-item"]').check();
-  await f.locator('#main-picture input').setInputFiles({name:'test.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jOQAAAABJRU5ErkJggg==','base64')});
+  await f.locator('#main-picture input[type=file]').setInputFiles({name:'test.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jOQAAAABJRU5ErkJggg==','base64')});
   await f.locator('#main-picture img').waitFor({state:'visible'});await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).uploads.length,1);await f.locator('#f-notes').fill('Still editable');await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).uploads.length,0);
+  await f.locator('#main-picture .picture-path').fill('https://github.com/scavlandfanbase/scavlandfanbase.github.io/blob/main/evidence-inbox/items/mutated-stick_icon_2026-09-21%20132014.png');
+  await f.locator('#save').click();await savedMessage(f);assert.equal(saved.at(-1).changes.image,'evidence-inbox/items/mutated-stick_icon_2026-09-21 132014.png');
+  await f.locator('#main-picture .picture-path').fill('https://example.com/untrusted.png');assert.equal(await f.locator('#main-picture .picture-path').evaluate(e=>e.checkValidity()),false);
+  await f.locator('#main-picture select').selectOption('');assert.equal(await f.locator('#main-picture .picture-path').inputValue(),'');
+  console.log('PASS picture paths: GitHub link normalization, invalid link rejection, dropdown synchronization');
   await page.setViewportSize({width:390,height:844});await f.locator('#preview').click();assert.equal(await f.locator('body').evaluate(el=>el.scrollWidth<=el.clientWidth+1),true);await page.screenshot({path:path.join(root,'../admin-mobile-check.png'),fullPage:true});
   console.log('PASS pictures: upload then edit; mobile has no horizontal overflow');
   // The live ammunition page must render an added record, not just the old hard-coded list.

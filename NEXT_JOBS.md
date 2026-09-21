@@ -2,6 +2,8 @@
 
 ## Admin record entry — 21 September 2026
 
+- Picture picker follow-up: every picture field now accepts a repository path or a GitHub/raw file link from this repository on main. It previews the selection and rejects unsupported paths/foreign links before saving. Existing dropdown and upload options remain available; browser checks cover link normalization and switching back to the dropdown.
+
 Implementation commit: `20ddd8e` (branch `improve-admin-entry`).
 
 **Deployment approved and saving services deployed:** owner approved on 21 September 2026. Active versions: publish-item v4, publish-specialist v6, publish-vendor v5. All three live endpoints return HTTP 403 to unauthenticated save requests. Frontend release is tracked in PR #17.
