@@ -2333,11 +2333,31 @@
       "name": "Gavron",
       "location": null,
       "factionId": "mudlarks",
-      "inventoryDocumented": false,
+      "inventoryDocumented": true,
       "inventory": [],
       "source": {
         "file": "vendors.html",
         "status": "existing-site-data"
+      },
+      "portrait": {
+        "file": "evidence-inbox/vendors/Gavron_character-tag_2026-09-21 154120.png",
+        "sourceWidth": 304,
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "size": 301
+        }
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/gavron__shop-screen__2026-09-20.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     }
   ]
