@@ -4399,6 +4399,30 @@
       "maxStack": null,
       "stackable": false,
       "description": null
+    },
+    {
+      "id": "bean-soup",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/beans-soup__icon__2026-09-21_225235.png",
+      "notes": null,
+      "effects": {
+        "hunger": -70,
+        "thirst": -10
+      },
+      "source": {
+        "file": "evidence-inbox/items/beans-soup__tooltip__2026-09-21_225231.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-09-21"
+      },
+      "name": "Bean Soup",
+      "estimatedPrice": 10000,
+      "rank": null,
+      "maxStack": null,
+      "stackable": null,
+      "description": null
     }
   ]
 }
