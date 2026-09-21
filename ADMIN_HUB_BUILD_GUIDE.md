@@ -173,6 +173,20 @@ supabase functions deploy publish-item --no-verify-jwt
 
 Use a fine-grained GitHub token restricted to this repository with Contents: Read and write only. `SUPABASE_URL` and `SUPABASE_ANON_KEY` are provided by the Supabase function environment; do not add them or `GITHUB_TOKEN` to the repository. The function itself verifies the bearer token and calls `is_scavland_admin`, so `--no-verify-jwt` is used only because the function performs the authorization check and returns the appropriate CORS response. Review the function URL and browser origin before publishing the page.
 
+## Completed 21 September 2026
+
+- Added `items-admin.html` with Supabase sign-in, `is_scavland_admin` authorization, item search, shared-field editing, image preview, path validation, before/after summary, and publish confirmation.
+- Added `supabase/functions/publish-item/index.ts`. It accepts only one item ID and the allowed shared fields, revalidates the request server-side, fetches the current GitHub file, updates exactly one record, and returns the commit URL/SHA after GitHub confirms the commit.
+- Notes remain admin-only. They can be stored in `data/items.json`, but the public `items.html` renderer does not display them.
+- Linked the local repository to Supabase project `demtoqsafufzmnhvaykj`, configured the GitHub write secret, and deployed the `publish-item` Edge Function successfully.
+- Published commits to `main`: `c9a1132` (`Add private items admin hub`) and `9fe24b7` (`Ignore Supabase local metadata`). Supabase CLI-generated `.temp` files were removed from the repository and added to `.gitignore`.
+- Confirmed an authorized admin can edit a test item and see the change committed in `data/items.json`.
+- Passed `node scripts/validate-evidence.cjs`, JSON parsing, page JavaScript syntax checks, invalid image-path checks, and public Items-page/image smoke checks.
+- Tested the admin page locally at desktop (1440px) and mobile (390px) widths. The login gate showed correctly and the editor stayed hidden before authorization.
+- No GitHub token, private key, password, or service-role credential was committed to the repository.
+
+Still recommended before treating this as fully verified: test a signed-in non-admin account, test one approved production edit through the live Pages URL, confirm the resulting public deployment, and record the final commit link. Do not leave temporary test data in the public database.
+
 1. Run the repository's `validate-evidence.cjs` validation if applicable and ensure JSON remains valid.
 2. Confirm the public Items page still loads and searches correctly.
 3. Confirm an existing item image still previews correctly.
