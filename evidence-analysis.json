@@ -1,31 +1,7 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 403,
+  "count": 429,
   "exact_duplicate_groups": [
-    [
-      "armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
-      "armour/old-tactical-vest__stats-100-durability__2026-09-20.png"
-    ],
-    [
-      "armour/skull-mask__stats-100-durability__2026-09-20.png",
-      "armour/skull-mask__stats-100-durability__2026-09-20.png"
-    ],
-    [
-      "armour/panskiy-kask__stats-100-durability__2026-09-20.png",
-      "armour/panskiy-kask__stats-100-durability__2026-09-20.png"
-    ],
-    [
-      "armour/balistic-kask__stats-100-durability__2026-09-20.png",
-      "armour/balistic-kask__stats-100-durability__2026-09-20.png"
-    ],
-    [
-      "armour/stronghold-vest__stats-100-durability__2026-09-20.png",
-      "armour/stronghold-vest__stats-100-durability__2026-09-20.png"
-    ],
-    [
-      "armour/ashen-ushanka__stats-100-durability__2026-09-20.png",
-      "armour/ashen-ushanka_2026-09-20 211045.png"
-    ],
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
       "items/mutated-stick_icon_2026-09-21 132014.png"
@@ -33,6 +9,10 @@
     [
       "admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
       "items/mutated-stick_tooltip_2026-09-21 132009.png"
+    ],
+    [
+      "armour/ashen-ushanka_2026-09-20 211045.png",
+      "armour/ashen-ushanka__stats-100-durability__2026-09-20.png"
     ],
     [
       "vendors/gavron__shop-screen-part-2__2026-09-20.png",
@@ -44,136 +24,6 @@
     ]
   ],
   "files": [
-    {
-      "file": "armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
-      "sha256": "523312a02188ce05731a049c309c17f504d46259259d0cef5219735e79ae680e",
-      "bytes": 276833,
-      "filename_timestamp": "2026-09-20T20:20:03",
-      "width": 534,
-      "height": 609,
-      "phash": "c487273c1b676cd8",
-      "ocr": "i es ee Old Tactical Vest ~75000P A beat-up tactical vest worn by police forces of pre-Mist times. It offers great mobility and decent protection against weaker types of weapon fire. This vest is usually a reward for those with basic training and experience in the field. Durability TITTAUIANITANIIIHY 100 Ballistic Res HUTT 35 Slash Res I 25 Rad Res Ill 15 Repair Class: Medium as"
-    },
-    {
-      "file": "armour/skull-mask__stats-100-durability__2026-09-20.png",
-      "sha256": "853c733e1e57a7563a73564eacc52c800d8855e168a4ca753fec623bdf100588",
-      "bytes": 305974,
-      "filename_timestamp": "2026-09-20T20:45:19",
-      "width": 1015,
-      "height": 1003,
-      "phash": "d091276d399bcec2",
-      "ocr": "ro rs a, » Skull Mask ~5000P A menacing mask in the shape of a skull, worn by different folks for different reasons: some in respect and awe of the dead, others in order to intimidate and scare. Durability Te Ballistic Res | 3 Slash Res I| 10 Rad Res 0 Repair Class: Tattered 1}"
-    },
-    {
-      "file": "armour/panskiy-kask__stats-100-durability__2026-09-20.png",
-      "sha256": "9df42abd095a9ce5865206f321acc9df7b211169048951e3a2edb9367580cf59",
-      "bytes": 325632,
-      "filename_timestamp": "2026-09-20T20:45:27",
-      "width": 1015,
-      "height": 1098,
-      "phash": "c085273c99df6e62",
-      "ocr": "fal oe i i Panskiy Kask ~15000P | An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field. Durability PUAULNVANUNINIMIIINY § 100 Ballistic Res {| 8 Slash Res III 13 Rad Res ll 10 Repair Class: Scavenger a"
-    },
-    {
-      "file": "armour/balistic-kask__stats-100-durability__2026-09-20.png",
-      "sha256": "aa8b4da084ecdaf9a2bc873ca3a56f985304a9930bc6b8d15c1db46d09165193",
-      "bytes": 331923,
-      "filename_timestamp": "2026-09-20T20:45:34",
-      "width": 1018,
-      "height": 994,
-      "phash": "d095276c395b4ec6",
-      "ocr": "all | Ballistic Kask ~40000P One of the most common pieces of Pre-War soldier equipment, this cheaply mass-produced helmet is sturdy enough against bludgeon attacks, but will not stop a bullet. Durability LT Ballistic Res VIII 7} Slash Res WT 25 Rad Res | 5 | Repair Class: Medium -,"
-    },
-    {
-      "file": "armour/stronghold-vest__stats-100-durability__2026-09-20.png",
-      "sha256": "292dc28faffade8ad0e931e2ca68093611db775f538a005153a4d895f7444231",
-      "bytes": 387559,
-      "filename_timestamp": "2026-09-20T20:45:44",
-      "width": 991,
-      "height": 1131,
-      "phash": "d083272c3b636cdb",
-      "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
-    },
-    {
-      "file": "items/advanced-bandage__tooltip__2026-09-20.png",
-      "sha256": "5d7cf1c5b1f663cb86d27c61b1242c24566e3e1d458c79c02e8b00873cb7af8d",
-      "bytes": 63071,
-      "filename_timestamp": "2026-09-20T20:59:54",
-      "width": 1017,
-      "height": 654,
-      "phash": "e0852f691adada1b",
-      "ocr": "Advanced Bandage ~4000P High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 wl"
-    },
-    {
-      "file": "factions/mother-mora__character-card__2026-09-20.png",
-      "sha256": "26ead173453070f38b8bd1e2ba6f85c4893f82ae550001dc439eb4f973539229",
-      "bytes": 44850,
-      "filename_timestamp": "2026-09-20T21:00:06",
-      "width": 331,
-      "height": 367,
-      "phash": "84991a4f34746db7",
-      "ocr": "a a - i a Mother Mora"
-    },
-    {
-      "file": "armour/ashen-ushanka__stats-100-durability__2026-09-20.png",
-      "sha256": "750eb56ced1abc498d7a90d772b93a210252fc188ccfa2c45ba0776a4e13d270",
-      "bytes": 145813,
-      "filename_timestamp": "2026-09-20T21:10:45",
-      "width": 1011,
-      "height": 1158,
-      "phash": "c085277c1b676d5a",
-      "ocr": "- Ashen Ushanka ~18000P A very common piece of headwear throughout Zalesye, and one of the first trades people make when they come into some money. Its comfy shape and texture are great against the cold, but don't offer much protection. Durability PUNTAAUATUUUNINITIIT 100 Ballistic Res I| 8 Slash Res I| 10 Rad Res I 8 Repair Class: Tattered al"
-    },
-    {
-      "file": "weapons/bortovka-tinker__stats__2026-09-20.png",
-      "sha256": "daf2af92843768d5c7427bff697ac4fbadceaec5754787107266a27fa8208a6a",
-      "bytes": 314594,
-      "filename_timestamp": "2026-09-20T21:16:14",
-      "width": 2103,
-      "height": 1179,
-      "phash": "f0c82e32b37c27f0",
-      "ocr": "r Bortovka Tinker ~]000P This freakish gun is a home-brew combination of parts from different guns that were lost to history. Terrible accuracy, powerful shots, and noise that will be heard across the wastes. Damage WUUAUII 30 Handling III 4+8 Fire Rate (RPM) | 100 Ergonomics Ill 12+7 Range WT 18 Reload Speed §=—[IIIIIIII 1.0 Accuracy TTT 50 Durability UUNNUUAUUII 94 Recoil UINANAUTI 50- 13 Repair Class: Scrap Caliber: High Caliber Rifle Ammo _."
-    },
-    {
-      "file": "items/russet-potato__tooltip__2026-09-20.png",
-      "sha256": "558aa9cc7f0e664d4beddce8b90fccb3f5ce5a331b4ad2b5fd7ed6d996ed3588",
-      "bytes": 97634,
-      "filename_timestamp": "2026-09-20T21:16:37",
-      "width": 1012,
-      "height": 808,
-      "phash": "c0812f69877c7ad6",
-      "ocr": "a Russet Potato ~800P A common food throughout the Continent. Bland, but nutritious. Hard to eat uncooked. Better off trading these, or having someone prepare them. Hunger: -12 Thirst: -1 yl"
-    },
-    {
-      "file": "items/chemical-container__tooltip__2026-09-20.png",
-      "sha256": "a40726495e174479c78d05e660ca9246c3601c768139422fa0876aed4ed629de",
-      "bytes": 73223,
-      "filename_timestamp": "2026-09-20T21:18:19",
-      "width": 1017,
-      "height": 466,
-      "phash": "c5a52fc8da1a7ac8",
-      "ocr": "oil 7 Chemical Container ~1000P A chemical container for hazardous materials. Must have seemed like a big deal before the Mist. a"
-    },
-    {
-      "file": "unresolved/unknown__screen__2026-09-20_213057.png",
-      "sha256": "cebbd4b57caa143dc8aa7074d2e1a838f097b8fca2c6636a50fa5ce6c48c6585",
-      "bytes": 71860,
-      "filename_timestamp": "2026-09-20T21:30:57",
-      "width": 1377,
-      "height": 1873,
-      "phash": "ae85869597b8956a",
-      "ocr": "| ; 4 Mila Reputation 192 | | f Rank 1 | | Rada — | il | # Oh, hi there. Didn't notice you. = = ee | | 1. Talk | 2. Ask for Jobs |: _ 3. Bye t ! | = _——_ oe br"
-    },
-    {
-      "file": "items/rubber-scrap__tooltip__2026-09-20.png",
-      "sha256": "0b65043173be83b8a3a6be8f5d0b744163317965e45d0bbe77dea57e152794df",
-      "bytes": 53157,
-      "filename_timestamp": "2026-09-20T21:32:43",
-      "width": 1005,
-      "height": 576,
-      "phash": "e0e12fc4983ace97",
-      "ocr": "r ee i — Rubber Scrap ~100P Dank. Rank: 1 A scrap of rubber which resisted the years. A very resilient material, and good for trading. Fa a"
-    },
     {
       "file": "Spoiled-Radish 2026-09-20 213237.png",
       "sha256": "18c0c76c68585408a841c2e6612371f5e8b927d712b47da072f8daf50a58a6c7",
@@ -367,6 +217,15 @@
       "sha256": "750eb56ced1abc498d7a90d772b93a210252fc188ccfa2c45ba0776a4e13d270",
       "bytes": 145813,
       "filename_timestamp": "2026-09-20T21:10:45",
+      "width": 1011,
+      "height": 1158,
+      "phash": "c085277c1b676d5a",
+      "ocr": "- Ashen Ushanka ~18000P A very common piece of headwear throughout Zalesye, and one of the first trades people make when they come into some money. Its comfy shape and texture are great against the cold, but don't offer much protection. Durability PUNTAAUATUUUNINITIIT 100 Ballistic Res I| 8 Slash Res I| 10 Rad Res I 8 Repair Class: Tattered al"
+    },
+    {
+      "file": "armour/ashen-ushanka__stats-100-durability__2026-09-20.png",
+      "sha256": "750eb56ced1abc498d7a90d772b93a210252fc188ccfa2c45ba0776a4e13d270",
+      "bytes": 145813,
       "width": 1011,
       "height": 1158,
       "phash": "c085277c1b676d5a",
@@ -1962,6 +1821,15 @@
       "ocr": "F - 7 - - [ e Mechanicte f | ~ \\ - | if ' Wk aa a te . Ke S)) | a Saul | | a % . {4 as =| , | = —— fess IN 4 Nae) A) = — ath a “ee ONS} ix N\\ | A etn Pi Petes. - OGSay Cearned folk who work machines, filters, tools and all. Keep things moving for every other group, try to research radiation and Mist in the meantime. Most live around Sontce Station, but sometimes they travel around to do work. Rade, untrustworthy — prices high, explanations vague — but we all need the clean water from their filters, the cuctom toolc, the gadgets. Feel like theyre just hogging all that co we dont work it out ourselves... But other than them, who elce got time to study in thi hellbole?"
     },
     {
+      "file": "factions/mother-mora__character-card__2026-09-20.png",
+      "sha256": "26ead173453070f38b8bd1e2ba6f85c4893f82ae550001dc439eb4f973539229",
+      "bytes": 44850,
+      "width": 331,
+      "height": 367,
+      "phash": "84991a4f34746db7",
+      "ocr": "a a - i a Mother Mora"
+    },
+    {
       "file": "factions/mudlarks__page__2026-09-18_160428.png",
       "sha256": "9212b8fb50891d892cc035681fe207e883f223af1a880fc5bda749d7d5ec4195",
       "bytes": 496453,
@@ -1990,6 +1858,42 @@
       "height": 1405,
       "phash": "ae6e9591896b2666",
       "ocr": "Rada i, | = } ali oe a (a Bi tk Hf 2 ¥ ’ }- “io << . a i ai F fl Po J A an | 1 i ; / il i == jo - fa ‘(bre ee 5 Romie en A cooperative of farmers and traders trying to spread their ways. Say if we distribute work evenly we guarantee comfort for everyone. They own come farms, pay Palatines for protection. Largest settlement ic Dubravka Camp; drawing in a lot of Commonfolk with their promises. They try to gain control of bunkers and food storages while talking about the greater good. Many of uc dont trust this, and there's rumors of them hiring folk like myself to get rid of competition — like Acolytes or rich landowners. Guess power and influence dont come without dirty tricks."
+    },
+    {
+      "file": "factions/rosa__character-card__2026-09-21.png",
+      "sha256": "34a68f1e1bbfa2d3b201e8d94d0630754007113f1fc7326ddf98ebea8bc29e44",
+      "bytes": 15406,
+      "width": 649,
+      "height": 280,
+      "phash": "b0081fbc4b9794fc",
+      "ocr": "= Rosa a — 3] Acolytes"
+    },
+    {
+      "file": "factions/rosa__shop-screen__2026-09-21.png",
+      "sha256": "396dbf8c862d28a12b793aa0e2598ee674877bd8cf0b8cd5f4becefafc01ab21",
+      "bytes": 34990,
+      "width": 1266,
+      "height": 630,
+      "phash": "c69f3901631e8e73",
+      "ocr": "| — R ; @ 07:16 a, osa Reputation f Ae r Rank = 3] Acolytes _ Fa et My, = 5 ] , -, iil ait es) i) Le) a a a a"
+    },
+    {
+      "file": "factions/sasha__character-card__2026-09-21.png",
+      "sha256": "1a7dbb17548685a0b2b0071c1c1a02b3d4d76cb55514d522801dca17648d664c",
+      "bytes": 16783,
+      "width": 781,
+      "height": 277,
+      "phash": "98613f1c6c9bc3d2",
+      "ocr": "j 2. Sasha | Lk i A i Palatine"
+    },
+    {
+      "file": "factions/sasha__shop-screen__2026-09-21.png",
+      "sha256": "af1e6b90b793b2c057ec98d54de6aa5dc99e8122adaeff604980cb4701e0791a",
+      "bytes": 40152,
+      "width": 1300,
+      "height": 724,
+      "phash": "a685d56a194bcf07",
+      "ocr": "| fe O74) Sasha : Reputation 1454 1 Rank 3 A Palatine ee} 515 515 717 i = #is,, me me a] © 4 4 yy a"
     },
     {
       "file": "factions/snezhana-rada__character-card__2026-09-18_211839.png",
@@ -2072,6 +1976,24 @@
       "ocr": "@e pig"
     },
     {
+      "file": "items/acid-gland__icon__2026-09-21.png",
+      "sha256": "15de3c0b1eed571498548f29d33a5b23fdfb2465248a38dfaca4c52b05fb5699",
+      "bytes": 1004,
+      "width": 102,
+      "height": 201,
+      "phash": "9e5163c68e793986",
+      "ocr": ""
+    },
+    {
+      "file": "items/acid-gland__tooltip__2026-09-21.png",
+      "sha256": "d3cda1e1838005993aa6c93772383d0c8214abb50b5aa5cb730e6f75cfca3233",
+      "bytes": 53559,
+      "width": 1014,
+      "height": 526,
+      "phash": "c0a52fcad2165eda",
+      "ocr": "= “ Acid Gland ~150P A fluid-filled sac that bursts on impact, spilling a burning slime used by Woundworts to dissolve aggressors. Handle with care — or don't handle at all. a"
+    },
+    {
       "file": "items/advanced-bandage__tooltip__2026-09-18_085054.png",
       "sha256": "db97224576ce8511d5f30b0464e23496237960e2bd7fd59cc21f30b865d4f9b6",
       "bytes": 88838,
@@ -2080,6 +2002,15 @@
       "height": 754,
       "phash": "e0e52f6387d07a1a",
       "ocr": "o — a a Advanced Bandage ~4000P Rank Rank: 2. High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 a"
+    },
+    {
+      "file": "items/advanced-bandage__tooltip__2026-09-20.png",
+      "sha256": "5d7cf1c5b1f663cb86d27c61b1242c24566e3e1d458c79c02e8b00873cb7af8d",
+      "bytes": 63071,
+      "width": 1017,
+      "height": 654,
+      "phash": "e0852f691adada1b",
+      "ocr": "Advanced Bandage ~4000P High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 wl"
     },
     {
       "file": "items/advanced-gun-repair-kit_tooltip_2026-09-20 235934.png",
@@ -2152,6 +2083,24 @@
       "ocr": "r Bandage ~250P Dank. Rank: 1 These tattered bandages look like they'll infect my wounds rather than protect them. Still, it’s better than nothing — and I've used worse. Health: +5 Bleed: -15 -"
     },
     {
+      "file": "items/berry-puree__icon__2026-09-21.png",
+      "sha256": "1da4d7cf4f5832abf8c6fec21dfd4b14a02a42e96f66fcb8856f6df2f8149f21",
+      "bytes": 1542,
+      "width": 199,
+      "height": 192,
+      "phash": "8b553877c3d51839",
+      "ocr": "aie"
+    },
+    {
+      "file": "items/berry-puree__tooltip__2026-09-21.png",
+      "sha256": "fec73e530d0d9706a819dff095511bd4b3f9b648775fd2a96505a2072e2261c7",
+      "bytes": 108213,
+      "width": 996,
+      "height": 768,
+      "phash": "f0a52da187f4d25a",
+      "ocr": "Berry Puree ~5000P Dank. Rank: 1 Mudlarks created this dish that only a few merchants dared taste. They believe it enhances one’s awareness of the Mist... Hunger: -25 ga"
+    },
+    {
       "file": "items/big-filter__icon__2026-09-21.png",
       "sha256": "adb4233ed38df9abccbae33c4a697ac8bdde82b8315ea2d22379e89c31280cc9",
       "bytes": 870,
@@ -2206,6 +2155,24 @@
       "ocr": "i Butcher Knife ~1000P A common butcher's knife, reappropriated for field use out of desperation. The wooden handle is rotting off. a"
     },
     {
+      "file": "items/butter__icon__2026-09-21.png",
+      "sha256": "41826c0fee0ae506a5497a04addb02754f424ec7ca42e29aa94e66b5bcd4d5eb",
+      "bytes": 792,
+      "width": 96,
+      "height": 97,
+      "phash": "8e557a876138c58f",
+      "ocr": "&,"
+    },
+    {
+      "file": "items/butter__tooltip__2026-09-21.png",
+      "sha256": "82f2c25e85048ac3e2c3b4a17cae904fd4d5a88daf4dfb4d669eccf694376824",
+      "bytes": 89750,
+      "width": 1017,
+      "height": 672,
+      "phash": "f0a52f8987707aca",
+      "ocr": "ail Butter ~2100P Rank. Rank: 1 A great condiment which goes with any meal. Hard to make, rare to come by, and it goes bad pretty fast. Hunger: -15"
+    },
+    {
       "file": "items/camera__icon__2026-09-21.png",
       "sha256": "ef0c54f4c5d1e5ba2ddb88ffe51ad7b7ec82de9d280bfbd60a49452f190b848e",
       "bytes": 902,
@@ -2232,6 +2199,15 @@
       "height": 844,
       "phash": "e0a52fe18f3cd05a",
       "ocr": ". re Se Canned Beans ~2100P Dank. Rank: 1 These canned beans are the slop that’s kept me alive all these years. Can't even smell or taste them anymore, but they get me through the day. Hunger: -27 a"
+    },
+    {
+      "file": "items/canned-beans__tooltip__2026-09-21.png",
+      "sha256": "8c8ab5144b2694cc1a8ae6a6c2c5a4183ce5b9d9751b96cb6c7ed07d3c0e9ad5",
+      "bytes": 139431,
+      "width": 1014,
+      "height": 835,
+      "phash": "f0a52fe1873dc05a",
+      "ocr": ". Canned Beans ~2100P Rank. Rank: 1 These canned beans are the slop that’s kept me alive all these years. Can't even smell or taste them anymore, but they get me through the day. Hunger: -27 a"
     },
     {
       "file": "items/canteen__tooltip__2026-09-18_085107.png",
@@ -2271,6 +2247,15 @@
       "ocr": "B"
     },
     {
+      "file": "items/chemical-container__tooltip__2026-09-20.png",
+      "sha256": "a40726495e174479c78d05e660ca9246c3601c768139422fa0876aed4ed629de",
+      "bytes": 73223,
+      "width": 1017,
+      "height": 466,
+      "phash": "c5a52fc8da1a7ac8",
+      "ocr": "oil 7 Chemical Container ~1000P A chemical container for hazardous materials. Must have seemed like a big deal before the Mist. a"
+    },
+    {
       "file": "items/chemical-container__tooltip__2026-09-21.png",
       "sha256": "9899749aaaa9e7f072e50c97634a9d5d19f975b378629bec56cdf49fe4b64fd9",
       "bytes": 55568,
@@ -2290,6 +2275,24 @@
       "ocr": "- Chemical Residue ~100P Rank. Rank: 1 A container of industrial waste from when Svarog Factories was still operational. a"
     },
     {
+      "file": "items/cigarettes__icon__2026-09-21.png",
+      "sha256": "0878fb98513e0025d44e76b3d482e5210dac2f4858072f7d08320f079443fe98",
+      "bytes": 832,
+      "width": 97,
+      "height": 105,
+      "phash": "98de266169b173a6",
+      "ocr": "F"
+    },
+    {
+      "file": "items/cigarettes__tooltip__2026-09-21.png",
+      "sha256": "33350bbac9ae1589d4588fbb5d290cca44ee5dac486a32235ca075179b907e6e",
+      "bytes": 254629,
+      "width": 1017,
+      "height": 931,
+      "phash": "f0a52d7987911f46",
+      "ocr": "al Cigarettes ~750P Dank. Rank: 1 A time-tested drug which at once relaxes and keeps us alert. Not even the Mist can prevent a Vulture from taking these out in the middle of a scavenge. Health: -1 Thirst: +3 Radiation: -15 a,"
+    },
+    {
       "file": "items/current-berries__tooltip__2026-09-20.png",
       "sha256": "d1080f086d343fceb3719f7270a28af98dc03ca3160b77a1787937b921a437aa",
       "bytes": 218400,
@@ -2297,6 +2300,42 @@
       "height": 1083,
       "phash": "e0a13f622799875e",
       "ocr": "r Currant Berries ~50P Rank. Rank: 1 These berries are a common find in every region I’ve traveled. They grow even in areas full of Mist, but how this affects the fruit, | don’t know. Jobs ¢ Supply Run (Olga) 3/9 ¢ Supply Run (Olga) 0/12 Thirst: -2 Hunger: -2 -"
+    },
+    {
+      "file": "items/dried-mushrooms__icon__2026-09-21.png",
+      "sha256": "49daa8828a8272267894273d619a4d04f4147c73cdc5e4351859138efcb3fff2",
+      "bytes": 678,
+      "width": 93,
+      "height": 100,
+      "phash": "8e542945cfbcdaa1",
+      "ocr": "ae"
+    },
+    {
+      "file": "items/dried-mushrooms__tooltip__2026-09-21.png",
+      "sha256": "e762d9036a07c85e2018d2e81bbea5025ee7b4c85215293356e4d583220aded1",
+      "bytes": 136058,
+      "width": 1009,
+      "height": 838,
+      "phash": "e0e52fad87521e1c",
+      "ocr": "a Dried Mushrooms ~1000P Rank. Rank: 1 These dried mushrooms are specially prepared to give psychoactive effects. They've been dulled by age, but | should still be careful when | eat this. Hunger: -13 _"
+    },
+    {
+      "file": "items/echelon-killer-apple__icon__2026-09-21.png",
+      "sha256": "b5a58cdff0e7132223c6f85bb59fccf36b89b7fadd49f03f4e992cb4f1876e43",
+      "bytes": 803,
+      "width": 96,
+      "height": 102,
+      "phash": "87563c694b8dd634",
+      "ocr": "e,"
+    },
+    {
+      "file": "items/echelon-killer-apple__tooltip__2026-09-21.png",
+      "sha256": "d476c1267a9acacbd966b8b4b3434cb5cffb566fe4f3aaa24c7417e021156483",
+      "bytes": 204010,
+      "width": 1015,
+      "height": 810,
+      "phash": "c0a52fcd87f03a5a",
+      "ocr": "al _ — ne en Echelon - Killer Apple ~3000P Rank. Rank: 1 A drink so tasty it makes you forget about the surrounding hellscape! Well... That didn't last long. Time for some more. Hunger: -10 Thirst: -40 r."
     },
     {
       "file": "items/electric-wires__icon__2026-09-21.png",
@@ -2335,6 +2374,24 @@
       "height": 802,
       "phash": "e0a527693fc2587a",
       "ocr": "a Field Repair Kit ~5000P 4499P Rank. Rank: 1 A spool of threads used to stich together broken armor bits and fabric. Repair: 15% Not usable below item condition: 70% Repair Class: Global"
+    },
+    {
+      "file": "items/fish-soup__icon__2026-09-21.png",
+      "sha256": "9411f18c39aaf20610df88dfa5b6190d15dc8a67ed8d48ca3991e005a08aaccf",
+      "bytes": 902,
+      "width": 109,
+      "height": 108,
+      "phash": "9fda213564e6c689",
+      "ocr": "%."
+    },
+    {
+      "file": "items/fish-soup__tooltip__2026-09-21.png",
+      "sha256": "235205a670a26d89af72afb85d368cb0f9750832a69d3e4cc8350bb5636fda42",
+      "bytes": 62937,
+      "width": 1005,
+      "height": 850,
+      "phash": "f0a52d61879e2e5a",
+      "ocr": "_ Fish Soup ~7500P Rank Rank: 1 An eccentric fish soup that’s definitely an acquired taste. The secret is to cook it for so long that it’s almost not radioactive at all. Hunger: -30 Thirst: -15 a"
     },
     {
       "file": "items/floppy-disk__icon__2026-09-21.png",
@@ -2960,6 +3017,24 @@
       "ocr": "a Mechanical Components ~10000P PRank- Rank: 1 Small gears, levers and bits of machinery. Not too big or high- quality, but still probably worth something. a"
     },
     {
+      "file": "items/medical-herb__icon__2026-09-21.png",
+      "sha256": "b98165882862b9f52c6b02971531680f4b7b3a7681ee0e3378570151824375c7",
+      "bytes": 1159,
+      "width": 102,
+      "height": 207,
+      "phash": "9652654e895bb3b4",
+      "ocr": "y"
+    },
+    {
+      "file": "items/medical-herb__tooltip__2026-09-21.png",
+      "sha256": "1e681a196499d6cc86673cf7793b801d0d5a51a88b3d47e2b02082194d6cfcf3",
+      "bytes": 147171,
+      "width": 1009,
+      "height": 847,
+      "phash": "e0e13f2f87585a46",
+      "ocr": "a Medicinal Herb ~50P Dank. Rank: 1 A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss ‘em in the pot anyway. Health: +5 Thirst: +3 a"
+    },
+    {
       "file": "items/medicinal-herb__tooltip__2026-09-20_083129.png",
       "sha256": "e1483ff63e4129d634a5594290f6ad9811bd12000b3cf8da68b497e78d0b89ad",
       "bytes": 107036,
@@ -3075,6 +3150,24 @@
       "ocr": "Pre-Mist Gold Wristwatch ~10000P | A glistening memento from the world before it ended. This country must've been full of rich folks. wl"
     },
     {
+      "file": "items/radish__icon__2026-09-21.png",
+      "sha256": "84b098a8294d22a36b18887833836b3fe78862ec93435ea273768bb6c3aa8cfc",
+      "bytes": 813,
+      "width": 94,
+      "height": 93,
+      "phash": "8dc42e3f7aa57029",
+      "ocr": "& “Yy"
+    },
+    {
+      "file": "items/radish__tooltip__2026-09-21.png",
+      "sha256": "b92ee3862fd879b6c8d7ccad79efda499f3da26d1afc49986202a6bb9e4bc19e",
+      "bytes": 166767,
+      "width": 1015,
+      "height": 904,
+      "phash": "f0e12f2d87c24ad6",
+      "ocr": "_ Radish ~150P \"Dank: Rank: 1 A spicy and crispy vegetable which survives the Mist reasonably well. It’s very hard to find produce in Zalesye, but when | do, it’s usually this. Hunger: -8 Thirst: -1 al"
+    },
+    {
       "file": "items/rat-meat__image__2026-09-20.png",
       "sha256": "b91460bcda426a79b3eb3f44f700cb9f37e30d6e86327db78053c1a761982741",
       "bytes": 1526,
@@ -3119,6 +3212,60 @@
       "height": 574,
       "phash": "e0e12fc5983a4e97",
       "ocr": "- Rubber Scrap ~100P Dank. Rank: 1 A scrap of rubber which resisted the years. A very resilient material, and good for trading."
+    },
+    {
+      "file": "items/rubber-scrap__tooltip__2026-09-20.png",
+      "sha256": "0b65043173be83b8a3a6be8f5d0b744163317965e45d0bbe77dea57e152794df",
+      "bytes": 53157,
+      "width": 1005,
+      "height": 576,
+      "phash": "e0e12fc4983ace97",
+      "ocr": "r ee i — Rubber Scrap ~100P Dank. Rank: 1 A scrap of rubber which resisted the years. A very resilient material, and good for trading. Fa a"
+    },
+    {
+      "file": "items/russet-potato__icon__2026-09-21.png",
+      "sha256": "71d999bf36786097d641c39c6fbdbb014ad741d47a4423a566648f2c8a7f4844",
+      "bytes": 756,
+      "width": 94,
+      "height": 96,
+      "phash": "8e7238cd652cd6a3",
+      "ocr": "+."
+    },
+    {
+      "file": "items/russet-potato__tooltip__2026-09-20.png",
+      "sha256": "558aa9cc7f0e664d4beddce8b90fccb3f5ce5a331b4ad2b5fd7ed6d996ed3588",
+      "bytes": 97634,
+      "width": 1012,
+      "height": 808,
+      "phash": "c0812f69877c7ad6",
+      "ocr": "a Russet Potato ~800P A common food throughout the Continent. Bland, but nutritious. Hard to eat uncooked. Better off trading these, or having someone prepare them. Hunger: -12 Thirst: -1 yl"
+    },
+    {
+      "file": "items/russet-potato__tooltip__2026-09-21.png",
+      "sha256": "cddc7c4cd95bb1116e747c20f409f876641e4149c7b6ffa3ca7a12f52392f73c",
+      "bytes": 149030,
+      "width": 1011,
+      "height": 910,
+      "phash": "e0e12de587784ad6",
+      "ocr": "a 7 Russet Potato ~800P FPank: Rank: 1 A common food throughout the Continent. Bland, but nutritious. Hard to eat uncooked. Better off trading these, or having someone prepare them. Hunger: -12 Thirst: -1 -"
+    },
+    {
+      "file": "items/sardines__icon__2026-09-21.png",
+      "sha256": "cc6a5958b29829b92bcb5338ee2173783a910882a66aebd0f947d5d1c3ec0f4e",
+      "bytes": 1549,
+      "width": 202,
+      "height": 189,
+      "phash": "99d564769acc9992",
+      "ocr": "® q"
+    },
+    {
+      "file": "items/sardines__tooltip__2026-09-21.png",
+      "sha256": "568a574b0c1d27ff75e1a44d2f13713731ecf4c5b59f305b2f696ba06d3b974a",
+      "bytes": 153301,
+      "width": 1012,
+      "height": 850,
+      "phash": "e0a13d2d87f2d24e",
+      "ocr": "a Sardines ~2400P FPank: Rank: 1 The best military ration there is — even if it’s a bit too fermented. The salty taste makes me thirsty. Hunger: -20 Thirst: +2 os"
     },
     {
       "file": "items/scrap-gun-repair-kit__tooltip-alt__2026-09-18_085008.png",
@@ -3280,6 +3427,24 @@
       "ocr": "f Toilet Paper ~500P If | could find one of these that didn't feel like a sand file, I'd be the richest man in Zalesye. yl"
     },
     {
+      "file": "items/undead-arm__icon__2026-09-21.png",
+      "sha256": "df6be85608f065dd8082638b4575d6bfb7c1cad64a0012b0a881002eb16726f0",
+      "bytes": 2386,
+      "width": 306,
+      "height": 201,
+      "phash": "97956a63a69c9859",
+      "ocr": "am"
+    },
+    {
+      "file": "items/undead-arm__tooltip__2026-09-21.png",
+      "sha256": "4e27050855c320e8625e6a94c4de445ef799403e95d6c92729f8e4856e3d2f5e",
+      "bytes": 50537,
+      "width": 1017,
+      "height": 465,
+      "phash": "c1e12fd4d61e1e94",
+      "ocr": "- Undead Arm ~300P A human arm, still twitching from whatever monstrous properties the Mist has given to its unlucky previous owner. a"
+    },
+    {
       "file": "items/wg-40__icon__2026-09-21.png",
       "sha256": "321091dd010f4f8b0f4add7820a9e30e738ddcae926805ebc797e430a6cd6f53",
       "bytes": 1286,
@@ -3306,6 +3471,24 @@
       "height": 571,
       "phash": "c1b52d4b3e96c21e",
       "ocr": "al WG-40 ~250P A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. al"
+    },
+    {
+      "file": "items/whole-roasted-fish__icon__2026-09-21.png",
+      "sha256": "47dd33670b4d1306904ec7a37668bdc19c703053901bc7e9cc4be1c33a88e51e",
+      "bytes": 1761,
+      "width": 198,
+      "height": 202,
+      "phash": "8ac72c588276cfcb",
+      "ocr": "@"
+    },
+    {
+      "file": "items/whole-roasted-fish__tooltip__2026-09-21.png",
+      "sha256": "80a258865ee250056955efdf73000d3f7e02b12c0733386760714a879d800fb4",
+      "bytes": 99043,
+      "width": 1008,
+      "height": 901,
+      "phash": "e0a52f6187cc1fb2",
+      "ocr": "Whole Roasted Fish ~4000P \"Rank Rank: 1 The sharp crackle of fish bones against my teeth keeps me on edge, but does nothing for nutrition. This thing came from the dirty waters of Lake Pavlie. | should eat these sparingly. Hunger: -30 Radiation: +5 -"
     },
     {
       "file": "map/full-map__context__2026-09-18_211740.png",
@@ -3454,6 +3637,16 @@
       "ocr": "Fil"
     },
     {
+      "file": "unresolved/unknown__screen__2026-09-20_213057.png",
+      "sha256": "cebbd4b57caa143dc8aa7074d2e1a838f097b8fca2c6636a50fa5ce6c48c6585",
+      "bytes": 71860,
+      "filename_timestamp": "2026-09-20T21:30:57",
+      "width": 1377,
+      "height": 1873,
+      "phash": "ae85869597b8956a",
+      "ocr": "| ; 4 Mila Reputation 192 | | f Rank 1 | | Rada — | il | # Oh, hi there. Didn't notice you. = = ee | | 1. Talk | 2. Ask for Jobs |: _ 3. Bye t ! | = _——_ oe br"
+    },
+    {
       "file": "unresolved/unresolved__2026-09-17_171835.png",
       "sha256": "216e230f50b0dfd75d9b8c7fa9bc607729e5628f515a2ec79c0f415b96f1d93a",
       "bytes": 1261882,
@@ -3504,16 +3697,6 @@
       "ocr": "pda"
     },
     {
-      "file": "vendors/gavron__shop-screen-part-2__2026-09-20.png",
-      "sha256": "431b1bcc8e2968cbdecb4481e4ea64a708cfbeb6c98b4b2f3dfda71ac10177ab",
-      "bytes": 41394,
-      "filename_timestamp": "2026-09-20T21:32:18",
-      "width": 1317,
-      "height": 1003,
-      "phash": "ee8695d52a3b5903",
-      "ocr": "| @ ile). Gavron rm Reputation 0 &. Rank 1 =a’ Mudlark i | a at us ze °F &, %, = = q F == Nc 2 ‘ aT o TH 10"
-    },
-    {
       "file": "vendors/anatoly__shop-screen-part-1__2026-09-20.png",
       "sha256": "aa600342abd285c202e94749833d83468bfcee6d8e065d5052bfa31c3939aebd",
       "bytes": 55754,
@@ -3530,6 +3713,15 @@
       "height": 412,
       "phash": "e8393fc0703f8ac9",
       "ocr": "1 sf : = < od b Ss ‘Say ©, Oa, @ be, a @ “y Sly"
+    },
+    {
+      "file": "vendors/gavron__shop-screen-part-2__2026-09-20.png",
+      "sha256": "431b1bcc8e2968cbdecb4481e4ea64a708cfbeb6c98b4b2f3dfda71ac10177ab",
+      "bytes": 41394,
+      "width": 1317,
+      "height": 1003,
+      "phash": "ee8695d52a3b5903",
+      "ocr": "| @ ile). Gavron rm Reputation 0 &. Rank 1 =a’ Mudlark i | a at us ze °F &, %, = = q F == Nc 2 ‘ aT o TH 10"
     },
     {
       "file": "vendors/gavron__shop-screen__2026-09-20.png",
@@ -3729,6 +3921,15 @@
       "height": 1287,
       "phash": "f0ca2eb7b96885d0",
       "ocr": "r—--:—‘SFC~™*™~™~™~™ ees ne nn Bortovka Tinker ~13250P Fl Rank: 1 This freakish gun is a home-brew combination of parts from different guns that were lost to history. Terrible accuracy, powerful shots, and noise that will be heard across the wastes. Damage WUUAII 30 Handling lI 4+6 Fire Rate (RPM) — | 100 Ergonomics HMI 8+8 Range WT 20 Reload Speed §=——[ [III] 1.0 Accuracy LUNMUTNTIL 52 Durability LNTUTNTNINITIININT © 100 Recoil TTT 41-11 Repair Class: Scrap Caliber: High Caliber Rifle Ammo a"
+    },
+    {
+      "file": "weapons/bortovka-tinker__stats__2026-09-20.png",
+      "sha256": "daf2af92843768d5c7427bff697ac4fbadceaec5754787107266a27fa8208a6a",
+      "bytes": 314594,
+      "width": 2103,
+      "height": 1179,
+      "phash": "f0c82e32b37c27f0",
+      "ocr": "r Bortovka Tinker ~]000P This freakish gun is a home-brew combination of parts from different guns that were lost to history. Terrible accuracy, powerful shots, and noise that will be heard across the wastes. Damage WUUAUII 30 Handling III 4+8 Fire Rate (RPM) | 100 Ergonomics Ill 12+7 Range WT 18 Reload Speed §=—[IIIIIIII 1.0 Accuracy TTT 50 Durability UUNNUUAUUII 94 Recoil UINANAUTI 50- 13 Repair Class: Scrap Caliber: High Caliber Rifle Ammo _."
     },
     {
       "file": "weapons/leon-1895-long__stats__2026-09-13_142127.png",
