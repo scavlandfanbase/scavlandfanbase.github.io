@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 396,
+  "count": 397,
   "exact_duplicate_groups": [
     [
       "Screenshot 2026-09-20 202003.png",
@@ -25,6 +25,10 @@
     [
       "Screenshot 2026-09-20 211045.png",
       "armour/ashen-ushanka_2026-09-20 211045.png"
+    ],
+    [
+      "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
+      "items/mutated-stick_icon_2026-09-21 132014.png"
     ],
     [
       "admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
@@ -175,6 +179,15 @@
       "height": 913,
       "phash": "d0e12fb587689a96",
       "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
+    },
+    {
+      "file": "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
+      "sha256": "a3a0aa376edeb9c19bb5384568f24425744d25519c8fefb8dbaa615ac9552f26",
+      "bytes": 950,
+      "width": 204,
+      "height": 100,
+      "phash": "a9552a549db365ca",
+      "ocr": "one Sg"
     },
     {
       "file": "admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png",
