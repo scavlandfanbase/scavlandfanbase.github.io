@@ -1887,15 +1887,6 @@
       "ocr": "j 2. Sasha | Lk i A i Palatine"
     },
     {
-      "file": "vendors/sasha__shop-screen-part-1__2026-09-21.png",
-      "sha256": "af1e6b90b793b2c057ec98d54de6aa5dc99e8122adaeff604980cb4701e0791a",
-      "bytes": 40152,
-      "width": 1300,
-      "height": 724,
-      "phash": "a685d56a194bcf07",
-      "ocr": "| fe O74) Sasha : Reputation 1454 1 Rank 3 A Palatine ee} 515 515 717 i = #is,, me me a] © 4 4 yy a"
-    },
-    {
       "file": "factions/snezhana-rada__character-card__2026-09-18_211839.png",
       "sha256": "a4e641368e0d435b549a85bec51eabfcd5b4c808c36e89bad352b5b9b0f4f987",
       "bytes": 21976,
@@ -3814,6 +3805,15 @@
       "height": 1017,
       "phash": "ea8e97f1606819cb",
       "ocr": "Raisa ke 13:3) ‘=a Reputation 0 =! Rank 1 - Vultures | i i eS a alg ele. . . . . . Z i oa al ial $260 a & a ( dle 41 | i | | | | | | | . . zo . . . . . . Z Z i"
+    },
+    {
+      "file": "vendors/sasha__shop-screen-part-1__2026-09-21.png",
+      "sha256": "af1e6b90b793b2c057ec98d54de6aa5dc99e8122adaeff604980cb4701e0791a",
+      "bytes": 40152,
+      "width": 1300,
+      "height": 724,
+      "phash": "a685d56a194bcf07",
+      "ocr": "| fe O74) Sasha : Reputation 1454 1 Rank 3 A Palatine ee} 515 515 717 i = #is,, me me a] © 4 4 yy a"
     },
     {
       "file": "vendors/vesna__shop-screen-part-1__2026-09-20.png",
