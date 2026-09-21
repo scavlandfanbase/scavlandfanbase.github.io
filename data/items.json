@@ -4056,6 +4056,26 @@
       "maxStack": 10,
       "stackable": true,
       "description": null
+    },
+    {
+      "id": "salt",
+      "classification": [
+        "vendor-item"
+      ],
+      "image": "evidence-inbox/items/salt-icon__2026-09-21_155515.png",
+      "notes": null,
+      "source": {
+        "file": "evidence-inbox/items/historical/salt__tooltip__2026-09-13_144113.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-09-21"
+      },
+      "name": "Salt",
+      "estimatedPrice": 3000,
+      "rank": null,
+      "maxStack": 5,
+      "stackable": true,
+      "description": null
     }
   ]
 }
