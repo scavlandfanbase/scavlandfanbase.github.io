@@ -18,7 +18,7 @@ Admin login
 
 ## Current State
 
-Stage 1 is complete and Stage 2 has started. `data/site-content.json` captures the current global navigation, footer, Home page hero, feature cards, latest-update section, and baseline title/intro values for the other public pages. The first `content-admin.html` editor and `publish-site-content` function now exist, and the public shell consumes the model through `site-shell.js` while retaining existing markup as fallback.
+Stage 1 is complete and Stage 2 has started. `data/site-content.json` captures the current global navigation, footer, Home page hero, feature cards, latest-update section, Roadmap sections, and Factions descriptions, plus baseline title/intro values for the other public pages. The first `content-admin.html` editor and `publish-site-content` function now exist, and the public shell consumes the model through `site-shell.js` while retaining existing markup as fallback.
 
 Already working:
 

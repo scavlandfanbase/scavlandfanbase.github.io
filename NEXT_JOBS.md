@@ -5,6 +5,7 @@ The complete public-content CMS migration plan is documented in `PUBLIC_CONTENT_
 - **Public CMS Stage 1 started:** added `data/site-content.json` as a no-output-change model of the current global navigation, footer, Home page hero, feature cards, and latest update section. Public rendering is not switched over yet.
 - **Public CMS Stage 2 started:** added `content-admin.html`, connected it to the Admin Hub, deployed `publish-site-content`, and wired Home page headings, intro, feature cards, and latest-update heading to `data/site-content.json` with legacy markup fallback.
 - **Public CMS page coverage:** the Content Editor now lists Home, Roadmap, Areas, Factions, Map, Items, Vendors, Weapons, Armour, and Crafting. Their current title/intro baselines are modeled and publishable through the fixed-target content function; existing page bodies remain fallback until each page receives section-level migration.
+- **Public CMS Factions slice:** faction description cards are now modeled with stable IDs, editable through the Content Editor, and applied to the public Factions page with existing markup fallback.
 
 ## Latest handover — 21 September 2026
 
