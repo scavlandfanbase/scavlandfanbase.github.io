@@ -2118,9 +2118,9 @@
         "evidence": "direct-shop-screen",
         "note": "Vendor name and faction visible; inventory facts have separate provenance.",
         "crop": {
-          "x": 18,
-          "y": 31,
-          "size": 240
+          "x": 0,
+          "y": 0,
+          "size": 634
         },
         "sourceWidth": 1311
       },
