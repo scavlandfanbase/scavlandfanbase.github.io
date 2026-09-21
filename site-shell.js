@@ -16,6 +16,11 @@ function buildShell(){
   if(values.headerImage)root.setProperty('--site-header-image',`url('${values.headerImage.replace(/'/g,"%27")}')`);
   if(values.fontFamily)root.setProperty('--site-font-family',values.fontFamily);
   if(values.fontSize)root.setProperty('--site-font-size',values.fontSize);
+    if(values.accentColor)root.setProperty('--site-accent-color',values.accentColor);
+    if(values.textColor)root.setProperty('--site-text-color',values.textColor);
+    if(values.panelColor)root.setProperty('--site-panel-color',values.panelColor);
+    if(values.navColor)root.setProperty('--site-nav-color',values.navColor);
+    if(values.radius)root.setProperty('--site-radius',values.radius);
   if(values.subtitle)header.querySelector('.scav-site-subtitle').textContent=values.subtitle;
  };
  fetch('data/site-settings.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(settings=>{if(settings)applySettings(settings)}).catch(()=>{});

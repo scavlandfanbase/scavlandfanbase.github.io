@@ -2,19 +2,19 @@
 :root{--scav-bg:#0b0d0d;--scav-panel:rgba(20,22,21,.94);--scav-panel-2:rgba(28,30,28,.96);--scav-line:#3a3d37;--scav-gold:#d7b56d;--scav-gold-bright:#ffcc66;--scav-text:#e8e5dc;--scav-muted:#aaa79e;--scav-shadow:rgba(0,0,0,.55)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--scav-bg)}
-body{margin:0!important;padding:0!important;background:linear-gradient(rgba(7,9,9,.84),rgba(7,9,9,.9)),var(--site-background-image,url('images/backgrounds/campfire_upscayl_4x_ultramix-balanced-4x.png')) center/cover fixed no-repeat!important;color:var(--scav-text)!important;font-family:var(--site-font-family,Arial,Helvetica,sans-serif)!important;font-size:var(--site-font-size,16px)!important;line-height:1.5}
+body{margin:0!important;padding:0!important;background:linear-gradient(rgba(7,9,9,.84),rgba(7,9,9,.9)),var(--site-background-image,url('images/backgrounds/campfire_upscayl_4x_ultramix-balanced-4x.png')) center/cover fixed no-repeat!important;color:var(--site-text-color,var(--scav-text))!important;font-family:var(--site-font-family,Arial,Helvetica,sans-serif)!important;font-size:var(--site-font-size,16px)!important;line-height:1.5}
 .scav-site-header{background:linear-gradient(to bottom,rgba(8,9,9,.55),rgba(10,12,11,.92)),var(--site-header-image,url('images/scavland-banner.jpg.png')) center/cover no-repeat!important;min-height:180px;padding:42px 20px 34px!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-bottom:3px solid var(--scav-gold)!important;box-shadow:0 8px 28px var(--scav-shadow)}
 .scav-site-title{margin:0;color:var(--scav-gold-bright);font-size:clamp(2.6rem,7vw,4.7rem);font-weight:800;letter-spacing:.12em;line-height:1;text-shadow:0 3px 16px #000,0 0 20px rgba(215,181,109,.25)}
 .scav-site-subtitle{margin-top:12px;color:#d2cec3;font-size:clamp(.85rem,2vw,1.1rem);font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-shadow:0 2px 8px #000}
-.scav-site-nav{position:sticky;top:0;z-index:900;background:rgba(12,14,13,.97)!important;border-bottom:1px solid #4b493f!important;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.scav-site-nav{position:sticky;top:0;z-index:900;background:var(--site-nav-color,rgba(12,14,13,.97))!important;border-bottom:1px solid #4b493f!important;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .scav-site-nav-inner{max-width:1200px;margin:auto;padding:10px 14px;display:flex;justify-content:center;gap:5px;flex-wrap:wrap}
 .scav-site-nav a{color:#d9d6cd!important;text-decoration:none!important;font-size:14px!important;font-weight:700!important;letter-spacing:.04em;padding:8px 11px;border:1px solid transparent;border-radius:4px;transition:.16s ease}
-.scav-site-nav a:hover,.scav-site-nav a.active{color:#171713!important;background:var(--scav-gold-bright)!important;border-color:var(--scav-gold-bright)!important}
+.scav-site-nav a:hover,.scav-site-nav a.active{color:#171713!important;background:var(--site-accent-color,var(--scav-gold-bright))!important;border-color:var(--site-accent-color,var(--scav-gold-bright))!important}
 .hero{background:linear-gradient(90deg,rgba(17,19,18,.96),rgba(28,29,25,.93),rgba(17,19,18,.96))!important;border-bottom:1px solid var(--scav-line)!important;text-align:center!important;padding:42px 20px 34px!important}
 .hero h1,body>h1,main h1{color:var(--scav-gold-bright)!important;letter-spacing:.03em}
 .hero p{color:#c8c5bc!important}
 main,.container{max-width:1200px}
-.card,.panel,.controls,.construction-box,.vendor-section,.sell-guide,.update-box{background:var(--scav-panel)!important;border-color:var(--scav-line)!important;box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.card,.panel,.controls,.construction-box,.vendor-section,.sell-guide,.update-box{background:var(--site-panel-color,var(--scav-panel))!important;border-color:var(--scav-line)!important;box-shadow:0 8px 22px rgba(0,0,0,.18);border-radius:var(--site-radius,6px)!important}
 .card h3,.panel-heading,.vendor-header,.sell-guide h2,.updates h2,.update-box h3{color:var(--scav-gold-bright)!important}
 input,select,button{font-family:inherit}
 input,select{background:#111412!important;color:var(--scav-text)!important;border-color:#484b45!important}
