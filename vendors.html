@@ -343,10 +343,6 @@ async function loadVendorDirectory() {
     const payload = await response.json();
     const itemPayload = itemResponse.ok ? await itemResponse.json() : {data: []};
     const itemsById = new Map((itemPayload.data || []).map(item => [item.id, item]));
-    const stockedIds = new Set((payload.data || []).flatMap(vendor => (vendor.inventory || []).map(row => row.itemId)));
-    const unassigned = (itemPayload.data || []).filter(item => item.classification?.includes('vendor-item') && !stockedIds.has(item.id));
-    document.getElementById('unassigned-vendor-items').hidden = !unassigned.length;
-    document.getElementById('unassigned-vendor-item-list').innerHTML = unassigned.map(item => '<div class="sell-card"><a class="data-link" href="items.html?id='+encodeURIComponent(item.id)+'">'+escapeVendorText(item.name)+'</a></div>').join('');
     if (new URLSearchParams(location.search).get('adminPreview') === 'vendor') {
       try { const preview = JSON.parse(localStorage.getItem('scavland-vendor-preview') || 'null'); const index = (payload.data || []).findIndex(vendor => vendor.id === preview?.id); if (index >= 0) payload.data[index] = {...payload.data[index], ...preview.record}; } catch (err) { console.warn('SCAVLAND vendor preview unavailable:', err); }
     }
@@ -438,7 +434,6 @@ document.addEventListener('DOMContentLoaded', loadVendorDirectory);
   </div>
 </section>
 
-<section class="sell-guide" id="unassigned-vendor-items" hidden><h2>Vendor items — seller not recorded</h2><p class="placeholder-note">These items are tagged as vendor stock. Their sellers have not been recorded yet.</p><div class="sell-grid" id="unassigned-vendor-item-list"></div></section>
 <div id="vendor-list" aria-live="polite"><p class="placeholder-note">Loading vendors…</p></div>
 <noscript><p>Enable JavaScript to browse the vendor directory.</p></noscript>
 <script src="site-shell.js"></script>
