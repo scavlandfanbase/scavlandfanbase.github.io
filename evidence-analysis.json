@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 450,
+  "count": 452,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -13,6 +13,14 @@
     [
       "armour/ashen-ushanka_2026-09-20 211045.png",
       "armour/ashen-ushanka__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "vendors/Screenshot 2026-09-21 230105.png",
+      "vendors/snezhana__portrait__2026-09-21_230105.png"
+    ],
+    [
+      "vendors/Screenshot 2026-09-21 230113.png",
+      "vendors/snezhana__shop-rank-1__2026-09-21_230113.png"
     ],
     [
       "vendors/gavron__shop-screen-part-2__2026-09-20.png",
@@ -4024,6 +4032,26 @@
       "height": 724,
       "phash": "a685d56a194bcf07",
       "ocr": "| fe O74) Sasha : Reputation 1454 1 Rank 3 A Palatine ee} 515 515 717 i = #is,, me me a] © 4 4 yy a"
+    },
+    {
+      "file": "vendors/snezhana__portrait__2026-09-21_230105.png",
+      "sha256": "12fb24272f95d58eac3c047e25e1ed8aebf304b9f666458861ae335966aefc90",
+      "bytes": 3660,
+      "filename_timestamp": "2026-09-21T23:01:05",
+      "width": 253,
+      "height": 249,
+      "phash": "c2873f9c38783867",
+      "ocr": ""
+    },
+    {
+      "file": "vendors/snezhana__shop-rank-1__2026-09-21_230113.png",
+      "sha256": "38ec54d96848473eacf3e1ee13f11a0116767720dbbf329ab688b39a510cb992",
+      "bytes": 33024,
+      "filename_timestamp": "2026-09-21T23:01:13",
+      "width": 1324,
+      "height": 526,
+      "phash": "ae973a604f5f7030",
+      "ocr": "& 00:10 & Snezhana Reputation 0 = ' Rank 1 Pal Rada iad 2, %, a a “y . y"
     },
     {
       "file": "vendors/vesna__shop-screen-part-1__2026-09-20.png",
