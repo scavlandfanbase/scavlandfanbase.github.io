@@ -490,7 +490,9 @@
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
-      }
+      },
+      "durability": 100,
+      "image": "evidence-inbox/armour/Vozhd Beret.png"
     },
     {
       "id": "winter-pants",
