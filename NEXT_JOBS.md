@@ -1,3 +1,12 @@
+## Invitation repair — 22 September 2026
+
+- Live `manage-admin-users` v2 preserves Owner accounts and reuses existing invitations without duplicate emails. Source is now stored in the repository.
+- Restored missing service-role SELECT/INSERT/UPDATE grants on admin_users; browser roles still have no direct writes and RLS remains enabled. SQL recorded in supabase/admin-access-repair.sql.
+- Added admin-password.html/js for invitation and recovery links; invitation tokens are verified, removed from the address bar, and kept only in memory. Password matching and backend password-policy errors are handled.
+- Home and Admin pages forward old invitation/recovery links to password setup. New invitation and reset links request that destination directly.
+- Existing invitations whose role save failed must be retried from the Owner account with the intended role. No new email is sent for an existing account. Users with consumed/expired links can use Reset password.
+- Local mocked tests: scripts/test-admin-invites.cjs and scripts/test-admin-password.cjs. No emails or real password changes were used for tests. Live DB privilege checks passed. Full recipient email-to-login test still requires the user.
+
 # SCAVLAND Website — Next Jobs
 
 ## Repository housekeeping — 22 September 2026
