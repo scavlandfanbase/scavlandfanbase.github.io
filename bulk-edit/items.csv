@@ -1,0 +1,282 @@
+id,name,classification,estimatedPrice,rank,maxStack,stackable,effects_health,effects_bleed,effects_radiation,effects_hunger,effects_thirst,notes,image,source_status,source_file,source_note
+special-ammo-special-fmj-ammo,Special FMJ Ammo,ammunition,1000,,,,,,,,,,evidence-inbox/items/pre-mist-gold-wristwatch__icon__2026-09-21.png,screenshot-verified,evidence-inbox/ammo/special-fmj-ammo__stats__2026-09-16_115812.png,Verification synchronized from canonical database record
+high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo,High Caliber Rifle HP Ammo,ammunition;vendor-item,350,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/high-caliber-rifle-hp__stats__2026-09-13_141544.png,Verification synchronized from canonical database record
+pistol-ammo-pistol-hp-ammo,Pistol HP Ammo,ammunition;vendor-item,60,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/pistol-hp__stats__2026-09-13_141651.png,Verification synchronized from canonical database record
+rifle-ammo-rifle-hp-ammo,Rifle HP Ammo,ammunition;vendor-item,280,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/rifle-hp__stats__2026-09-13_141753.png,Verification synchronized from canonical database record
+shotgun-ammo-shotgun-hp-ammo,Shotgun HP Ammo,ammunition;vendor-item,180,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/shotgun-hp__stats__2026-09-13_141501.png,Verification synchronized from canonical database record
+2hmg,2HMG,weapon,,,,,,,,,,,,,,
+2hmg-long,2HMG (Long),weapon,100000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/2hmg-long__stats__2026-09-19_084756.png,Verification synchronized from canonical High Caliber Rifles record
+2hmg-short,2HMG (Short),weapon,100000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/2hmg-short__stats__2026-09-19_084341.png,Verification synchronized from canonical High Caliber Rifles record
+2hmg-ergonomic-pistol-grip,2HMG Ergonomic Pistol Grip,vendor-item,2500,3,,FALSE,,,,,,,evidence-inbox/attachments/2hmg-ergonomic-pistol-grip__tooltip__2026-09-17_201901.png,screenshot-verified,evidence-inbox/attachments/2hmg-ergonomic-pistol-grip__tooltip__2026-09-17_201901.png,
+2hmg-modern-polymer-stock-module,2HMG Modern Polymer Stock Module,vendor-item,2500,3,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/2hmg-modern-polymer-stock-module__tooltip__2026-09-17_201233.png,
+2hmg-railed-handguard,2HMG Railed Handguard,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/2hmg-railed-handguard__tooltip__2026-09-17_201240.png,Direct in-game attachment tooltip screenshot.
+3-line-nagant-full-stock,3-Line Nagant (Full Stock),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/3-Line Nagant (Full Stock).png,Verification synchronized from canonical High Caliber Rifles record
+3-line-nagant-infantry,3-Line Nagant (Infantry),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/3-Line Nagant (Infantry).png,Verification synchronized from canonical High Caliber Rifles record
+3-line-nagant-obrez,3-Line Nagant (Obrez),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/3-Line Nagant (Obrez).png,Verification synchronized from canonical High Caliber Rifles record
+3-line-nagant-stockless,3-Line Nagant (Stockless),weapon,,,,,,,,,,,,screenshot-verified,user-provided screenshot (2026-09-19),Verification synchronized from canonical High Caliber Rifles record
+63-dragoon,63 Dragoon,weapon,,,,,,,,,,,,screenshot-verified,images/weapons/63 Dragoon.png,Verification synchronized from canonical High Caliber Rifles record
+advanced-bandage,Advanced Bandage,crafting-resource;crafted-item;vendor-item,4000,2,,,10,-33,,,,,,screenshot-verified,evidence-inbox/items/advanced-bandage__tooltip__2026-09-18_085054.png,Verification synchronized from canonical database record
+advanced-bandage-blueprint,Advanced Bandage Blueprint,vendor-item,,,,,,,,,,,,,,
+advanced-gun-repair-kit,Advanced Gun Repair Kit,crafting-resource;crafted-item;vendor-item,60000,,,,,,,,,,,screenshot-verified,evidence-inbox/items/advanced-gun-repair-kit_tooltip_2026-09-20 235934.png,Verification synchronized from canonical database record
+advanced-gun-repair-kit-blueprint,Advanced Gun Repair Kit Blueprint,vendor-item,40000,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/blueprints/advanced-gun-repair-kit-blueprint__tooltip__2026-09-17_202103.png,
+advanced-mechanical-components,Advanced Mechanical Components,crafting-resource;vendor-item,25000,3,5,,,,,,,,,screenshot-verified,evidence-inbox/items/advanced-mechanical-components__tooltip__2026-09-18_091907.png,
+ai-2-army-medkit,AI-2 Army Medkit,crafting-resource;crafted-item;vendor-item,6200,2,,,40,-20,-10,3,3,,,screenshot-verified,evidence-inbox/items/ai-2-army-medkit__tooltip__2026-09-18_085021.png,Verification synchronized from canonical database record
+ai-2-army-medkit-blueprint,AI-2 Army Medkit Blueprint,vendor-item,,,,,,,,,,,,,,
+ai-2-mechanist-medkit,AI-2 Mechanist Medkit,vendor-item,9200,3,,,50,-30,-50,3,3,,,screenshot-verified,evidence-inbox/items/ai-2-mechanist-medkit__tooltip__2026-09-18_085027.png,
+ai-2-medkit,AI-2 Medkit,crafting-resource;crafted-item;vendor-item,3200,1,,,30,,-15,3,3,,,screenshot-verified,evidence-inbox/items/ai-2-medkit__tooltip__2026-09-18_085015.png,Verification synchronized from canonical database record
+angled-foregrip,Angled Foregrip,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/angled-foregrip__tooltip__2026-09-17_201949.png,
+armor-plate,Armor Plate,crafting-resource;vendor-item,25000,3,5,,,,,,,,,screenshot-verified,evidence-inbox/items/armor-plate__tooltip__2026-09-18_091919.png,
+armoured-rags,Armoured Rags,armour;vendor-item,,,,,,,,,,,,,,
+ashen-ushanka,Ashen Ushanka,armour,,,,,,,,,,test,,,,
+bahadir-918-long,Bahadir 918 (Long),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Bahadir 918 (Long).png,Verification synchronized from canonical Pistols record
+bahadir-918-short,Bahadir 918 (Short),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Bahadir 918 (Short).png,Verification synchronized from canonical Pistols record
+bahadir-920,Bahadir 920,weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Bahadir 920.png,Verification synchronized from canonical Pistols record
+bahadir-extended-handguard,Bahadir Extended Handguard,vendor-item,2500,3,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/bahadir-extended-handguard__tooltip__2026-09-17_201300.png,Direct in-game attachment tooltip screenshot.
+bahadir-railed-handguard,Bahadir Railed Handguard,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/bahadir-railed-handguard__tooltip__2026-09-17_201305.png,Direct in-game attachment tooltip screenshot.
+bahadir-ribbed-cylinder-mag,Bahadir Ribbed Cylinder Mag,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/bahadir-ribbed-cylinder-mag__tooltip__2026-09-17_200643.png,Direct in-game attachment tooltip screenshot.
+bakelite-pistol-grip-module,Bakelite Pistol Grip Module,vendor-item,,,,,,,,,,,,,,
+balistic-kask,Balistic Kask,armour,40000,,,,,,,,,,evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png,Verification synchronized from canonical Armour record
+bandage,Bandage,crafting-resource;crafted-item;vendor-item,250,1,,,5,-15,,,,,,screenshot-verified,evidence-inbox/items/bandage__tooltip__2026-09-18_085034.png,Verification synchronized from canonical database record
+basic-gun-repair-kit,Basic Gun Repair Kit,crafting-resource;crafted-item,,,,,,,,,,,,screenshot-verified,,Verification synchronized from canonical database record
+basic-gun-repair-kit-blueprint,Basic Gun Repair Kit Blueprint,vendor-item,30000,1,,,,,,,,,,screenshot-verified,evidence-inbox/blueprints/basic-gun-repair-kit-blueprint__tooltip__2026-09-13_141943.png,Direct in-game blueprint tooltip screenshot.
+borealis-12,Borealis 12,weapon,75000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/borealis-12__stats__2026-09-19_141353.png,Verification synchronized from canonical Shotguns record
+borealis-12-tak,Borealis 12-TAK,weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Borealis 12-TAK.png,Verification synchronized from canonical Shotguns record
+borealis-adaptable-folding-stock,Borealis Adaptable Folding Stock,vendor-item,4000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/borealis-adaptable-folding-stock__tooltip__2026-09-17_201102.png,Direct in-game attachment tooltip screenshot.
+borealis-adaptable-railed-handguard,Borealis Adaptable Railed Handguard,vendor-item,4000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/borealis-adaptable-railed-handguard__tooltip__2026-09-17_201334.png,Direct in-game attachment tooltip screenshot.
+borealis-aluminum-mag,Borealis Aluminum Mag,vendor-item,1500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/borealis-aluminum-mag__tooltip__2026-09-17_200439.png,Direct in-game attachment tooltip screenshot.
+borealis-curved-mag,Borealis Curved Mag,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/borealis-curved-mag__tooltip__2026-09-17_200446.png,Direct in-game attachment tooltip screenshot.
+borealis-drum-mag,Borealis Drum Mag,vendor-item,8000,3,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/borealis-drum-mag__tooltip__2026-09-17_200340.png,Direct in-game attachment tooltip screenshot.
+borealis-lock-mount-handguard,Borealis Lock Mount Handguard,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/borealis-lock-mount-handguard__tooltip__2026-09-17_201342.png,Direct in-game attachment tooltip screenshot.
+borealis-long-curved-mag,Borealis Long Curved Mag,vendor-item,4000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/borealis-long-curved-mag__tooltip__2026-09-17_200618.png,Direct in-game attachment tooltip screenshot.
+borealis-polymer-short-handguard,Borealis Polymer Short Handguard,vendor-item,1250,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/borealis-polymer-short-handguard__tooltip__2026-09-17_201328.png,Direct in-game attachment tooltip screenshot.
+borealis-railed-dust-cover,Borealis Railed Dust Cover,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/dust-covers/borealis-railed-dust-cover__tooltip__2026-09-17_202047.png,Direct in-game attachment tooltip screenshot.
+borealis-skeleton-stock,Borealis Skeleton Stock,vendor-item,1250,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/borealis-skeleton-stock__tooltip__2026-09-17_201109.png,Direct in-game attachment tooltip screenshot.
+bortovka-tinker,Bortovka Tinker,weapon;vendor-item,,,,,,,,,,,,screenshot-verified,user-provided screenshot (2026-09-19),Verification synchronized from canonical High Caliber Rifles record
+bortovka-tinker-mag,Bortovka Tinker (+Mag),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Bortovka Tinker (+Mag).png,Verification synchronized from canonical High Caliber Rifles record
+bortovka-tinker-long-mag,Bortovka Tinker (Long / +Mag),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Bortovka Tinker (Long - +Mag).png,Verification synchronized from canonical High Caliber Rifles record
+canned-beans,Canned Beans,vendor-item,2100,1,,,,,,-27,,,,screenshot-verified,evidence-inbox/items/canned-beans__tooltip__2026-09-18_085113.png,
+canteen,Canteen,crafting-resource;vendor-item,480,1,,,,,-5,,-33,,,screenshot-verified,evidence-inbox/items/canteen__tooltip__2026-09-18_085107.png,
+chemical-residue,Chemical Residue,crafting-resource;vendor-item,100,1,40,,,,,,,,,screenshot-verified,evidence-inbox/items/chemical-residue__tooltip__2026-09-18_091704.png,
+cigarettes,Cigarettes,vendor-item,,,,,-1,,-15,,3,,,screenshot-verified,evidence-inbox/items/historical/cigarettes__tooltip__2026-09-13_144346.png,"Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+classic-scope,Classic Scope,vendor-item,,,,,,,,,,,,,,
+dragoon-2-slot-compensator,Dragoon 2-Slot Compensator,vendor-item,,,,,,,,,,,,,,
+dragoon-folding-stock,Dragoon Folding Stock,vendor-item,4000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/dragoon-folding-stock__tooltip__2026-09-17_201225.png,Direct in-game attachment tooltip screenshot.
+dragoon-large-steel-mag,Dragoon Large Steel Mag,vendor-item,4000,3,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/dragoon-large-steel-mag__tooltip__2026-09-17_200638.png,Direct in-game attachment tooltip screenshot.
+dragoon-polymer-handguard,Dragoon Polymer Handguard,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/dragoon-polymer-handguard__tooltip__2026-09-17_201248.png,Direct in-game attachment tooltip screenshot.
+dragoon-polymer-stock,Dragoon Polymer Stock,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/dragoon-polymer-stock__tooltip__2026-09-17_201121.png,Direct in-game attachment tooltip screenshot.
+dragoon-railed-dust-cover,Dragoon Railed Dust Cover,vendor-item,2500,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/dust-covers/dragoon-railed-dust-cover__tooltip__2026-09-17_202057.png,Direct in-game attachment tooltip screenshot.
+dragoon-railed-handguard,Dragoon Railed Handguard,vendor-item,4000,3,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/dragoon-railed-handguard__tooltip__2026-09-17_201255.png,Direct in-game attachment tooltip screenshot.
+dragoon-steel-mag,Dragoon Steel Mag,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/dragoon-steel-mag__tooltip__2026-09-17_200631.png,Direct in-game attachment tooltip screenshot.
+dried-mushrooms,Dried Mushrooms,vendor-item,,,,,,,,,,,,,,
+dried-steak,Dried Steak,vendor-item,,,,,,,,,,,,,,
+dusty-overcoat,Dusty Overcoat,armour,,,,,,,,,,,,,,
+echelon-killer-apple,Echelon - Killer Apple,vendor-item,,,,,,,,,,,,,,
+ekzoskelet-armor,Ekzoskelet Armor,armour,,,,,,,,,,,,,,
+ekzoskelet-legs,Ekzoskelet Legs,armour,100000,,,,,,,,,,,screenshot-verified,evidence-inbox/armour/ekzoskelet-legs__stats-100-durability__2026-09-20_084304.png,Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json.
+elevated-red-dot-sight,Elevated Red Dot Sight,vendor-item,,,,,,,,,,,,,,
+expert-gun-repair-kit,Expert Gun Repair Kit,crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/weapon/expert-gun-repair-kit__recipe__2026-09-18_205358.png,Verification synchronized from canonical database record
+expert-gun-repair-kit-blueprint,Expert Gun Repair Kit Blueprint,vendor-item,60000,3,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/blueprints/expert-gun-repair-kit-blueprint__tooltip__2026-09-17_202109.png,
+fabric-scrap,Fabric Scrap,crafting-resource;vendor-item,100,1,40,,,,,,,,,screenshot-verified,evidence-inbox/items/fabric-scrap__tooltip__2026-09-18_091726.png,
+field-repair-kit,Field Repair Kit,crafting-resource;crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/field-repair-kit__recipe__2026-09-18_205425.png,Verification synchronized from canonical database record
+forward-angled-foregrip,Forward Angled Foregrip,vendor-item,4000,3,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/forward-angled-foregrip__tooltip__2026-09-17_201954.png,
+fresh-mushrooms,Fresh Mushrooms,vendor-item,3000,,5,TRUE,10,,,-5,,,evidence-inbox/items/fresh-mushrooms__tooltip__2026-09-20.png,screenshot-verified,evidence-inbox/items/fresh-mushrooms__tooltip__2026-09-20.png,admin
+glue,Glue,crafting-resource;crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/glue__recipe__2026-09-18_205415.png,Verification synchronized from canonical database record
+gp-4-gas-mask,GP-4 Gas Mask,armour;vendor-item,25000,,,,,,,,,,,screenshot-verified,evidence-inbox/armour/gp-4-gas-mask__stats-100-durability__2026-09-20_084320.png,Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json.
+green-rags,Green Rags,armour,,,,,,,,,,,,,,
+gun-cleaning-rod,Gun Cleaning Rod,crafting-resource;crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/weapon/gun-cleaning-rod__recipe__2026-09-18_205326.png,Verification synchronized from canonical database record
+gun-field-tools,Gun Field Tools,crafting-resource;crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/weapon/gun-field-tools__recipe__2026-09-18_205332.png,Verification synchronized from canonical database record
+gun-lube,Gun Lube,crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/weapon/gun-lube__recipe__2026-09-18_205320.png,Verification synchronized from canonical database record
+hammer,Hammer,crafting-resource;vendor-item,2000,1,,,,,,,,,,screenshot-verified,evidence-inbox/items/hammer__tooltip__2026-09-18_091636.png,
+handstop,Handstop,vendor-item,2500,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/handstop__tooltip__2026-09-17_201943.png,
+headache-pills,Headache Pills,crafting-resource;vendor-item,1500,,,,15,,,,3,,,screenshot-verified,evidence-inbox/items/historical/headache-pills__tooltip__2026-09-13_141136.png,"Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+heavy-armor-repair-kit,Heavy Armor Repair Kit,crafted-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/heavy-armor-repair-kit__recipe__2026-09-18_205453.png,Verification synchronized from canonical database record
+high-caliber-rifle-ap-ammo,High Caliber Rifle AP Ammo,ammunition;vendor-item,500,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/high-caliber-rifle-ap__stats__2026-09-13_141718.png,Verification synchronized from canonical database record
+high-caliber-rifle-fmj-ammo,High Caliber Rifle FMJ Ammo,ammunition;vendor-item,150,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/high-caliber-rifle-fmj-ammo__stats__2026-09-19_221757.png,Verification synchronized from canonical database record
+holographic-sight,Holographic Sight,vendor-item,60000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/sights/holographic-sight__tooltip__2026-09-17_195031.png,Direct in-game attachment tooltip screenshot.
+ifak-medkit,IFAK Medkit,crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/medical/ifak-medkit__recipe__2026-09-18_205130.png,Verification synchronized from canonical database record
+ifak-medkit-blueprint,IFAK Medkit Blueprint,vendor-item,,,,,,,,,,,,,,
+kevlar-weave,Kevlar Weave,crafting-resource;vendor-item,10000,2,5,,,,,,,,,screenshot-verified,evidence-inbox/items/kevlar-weave__tooltip__2026-09-18_091913.png,
+large-pumpkin,Large Pumpkin,vendor-item,,,,,,,,,,,,,,
+leon-1895,Leon 1895,weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Leon 1895.png,Verification synchronized from canonical Pistols record
+leon-1895-long,Leon 1895 (Long),weapon;vendor-item,,,,,,,,,,,,screenshot-verified,images/weapons/Leon 1895 (Long).png,Verification synchronized from canonical Pistols record
+leon-1895-short,Leon 1895 (Short),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Leon 1895 (Short).png,Verification synchronized from canonical Pistols record
+lightweight-2x-scope,Lightweight 2x Scope,vendor-item,,,,,,,,,,,,,,
+lightweight-4x-scope,Lightweight 4x Scope,vendor-item,,,,,,,,,,,,,,
+m4-adaptable-extended-handguard,M4 Adaptable Extended Handguard,vendor-item,8000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/m4-adaptable-extended-handguard__tooltip__2026-09-17_201420.png,Direct in-game attachment tooltip screenshot.
+m4-ergonomic-pistol-grip-module,M4 Ergonomic Pistol Grip Module,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/m4-ergonomic-pistol-grip-module__tooltip__2026-09-17_201739.png,
+m4-gen2-drum-mag,M4 Gen2 Drum Mag,vendor-item,8000,3,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/m4-gen2-drum-mag__tooltip__2026-09-17_200147.png,Direct in-game attachment tooltip screenshot.
+m4-large-aluminum-mag,M4 Large Aluminum Mag,vendor-item,,,,,,,,,,,,,,
+m4-large-aluminum-mag-tan,M4 Large Aluminum Mag (Tan),vendor-item,,,,,,,,,,,,,,
+m4-pistol-grip-module,M4 Pistol Grip Module,vendor-item,1250,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/m4-pistol-grip-module__tooltip__2026-09-17_201745.png,
+m4-railed-handguard,M4 Railed Handguard,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/m4-railed-handguard__tooltip__2026-09-17_201522.png,
+m4-ribbed-handguard,M4 Ribbed Handguard,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/m4-ribbed-handguard__tooltip__2026-09-17_201510.png,
+m4-slotted-mount-handguard,M4 Slotted Mount Handguard,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/handguards/m4-slotted-mount-handguard__tooltip__2026-09-17_201428.png,Direct in-game attachment tooltip screenshot.
+m4-svodbonik,Svobodnik M4,weapon,80000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/svobodnik-m4__stats__2026-09-19_144346.png,Verification synchronized from canonical weapon record
+m4-target-pistol-grip-module,M4 Target Pistol Grip Module,vendor-item,4000,3,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/m4-target-pistol-grip-module__tooltip__2026-09-17_201733.png,
+makeshift-collapsible-stock-module,Makeshift Collapsible Stock Module,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/makeshift-collapsible-stock-module__tooltip__2026-09-17_201056.png,Direct in-game attachment tooltip screenshot.
+makeshift-double-stacked-steel-stick-mag,Makeshift Double Stacked Steel Stick Mag,vendor-item,2500,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/makeshift-double-stacked-steel-stick-mag__tooltip__2026-09-17_200413.png,Direct in-game attachment tooltip screenshot.
+makeshift-grated-stock,Makeshift Grated Stock,vendor-item,2500,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/makeshift-grated-stock__tooltip__2026-09-17_200722.png,Direct in-game attachment tooltip screenshot.
+makeshift-large-steel-stick-mag,Makeshift Large Steel Stick Mag,vendor-item,,,,,,,,,,,,,,
+makeshift-prosthetic-stock,Makeshift Prosthetic Stock,vendor-item,2500,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/makeshift-prosthetic-stock__tooltip__2026-09-17_200716.png,Direct in-game attachment tooltip screenshot.
+meat-drumstick,Meat Drumstick,vendor-item,,,,,,,,,,,,,,
+meat-skewer,Meat Skewer,vendor-item,,,,,,,,,,,,,,
+mechanical-components,Mechanical Components,crafting-resource;vendor-item,10000,1,5,,,,,,,,,screenshot-verified,evidence-inbox/items/mechanical-components__tooltip__2026-09-18_091859.png,
+medium-armor-repair-kit,Medium Armor Repair Kit,crafting-resource;crafted-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/medium-armor-repair-kit__recipe__2026-09-18_205448.png,Verification synchronized from canonical database record
+medium-armor-repair-kit-blueprint,Medium Armor Repair Kit Blueprint,vendor-item,,,,,,,,,,,,,,
+medved-drum-mag,Medved Drum Mag,vendor-item,4000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/medved-drum-mag__tooltip__2026-09-17_200347.png,Direct in-game attachment tooltip screenshot.
+medved-monster,Medved Monster,weapon;vendor-item,,,,,,,,,,,,screenshot-verified,images/weapons/Medved Monster.png,Verification synchronized from canonical Pistols record
+medved-monster-silenced,Medved Monster (Silenced),weapon,15000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/medved-monster-silenced__stats__2026-09-19_144317.png,Verification synchronized from canonical Pistols record
+metal-breastplate,Metal Breastplate,armour,,,,,,,,,,,,,,
+metal-scrap,Metal Scrap,crafting-resource;vendor-item,100,1,40,,,,,,,,,screenshot-verified,evidence-inbox/items/metal-scrap__tooltip__2026-09-18_091713.png,
+mikhail-47,Mikhail 47,weapon;vendor-item,,,,,,,,,,,,screenshot-verified,images/weapons/Mikhail 47.png,Verification synchronized from canonical Rifles record
+mikhail-50,Mikhail 50,weapon,100000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/mikhail-50__stats__2026-09-19_084710.png,Verification synchronized from canonical Special Weapons record
+mikhail-50-pristine,Mikhail 50 (Pristine),weapon,100000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/mikhail-50-pristine__stats__2026-09-19_084409.png,Verification synchronized from canonical Special Weapons record
+mikhail-50-prototype,Mikhail 50 (Prototype),weapon,80000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/mikhail-50-prototype__stats__2026-09-19_084730.png,Verification synchronized from canonical Special Weapons record
+mikhail-74-u,Mikhail 74 U,weapon;vendor-item,,,,,,,,,,,,screenshot-verified,images/weapons/Mikhail 74 U.png,Verification synchronized from canonical Rifles record
+mk-combination-handguard,MK Combination Handguard,vendor-item,2500,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/mk-combination-handguard__tooltip__2026-09-17_201529.png,
+mk-compensator,MK Compensator,vendor-item,,,,,,,,,,,,,,
+mk-drum-mag,MK Drum Mag,vendor-item,8000,3,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/mk-drum-mag__tooltip__2026-09-17_200139.png,Direct in-game attachment tooltip screenshot.
+mk-dust-cover,MK Dust Cover,vendor-item,,,,,,,,,,,,,,
+mk-extended-railed-handguard,MK Extended Railed Handguard,vendor-item,4000,3,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/mk-extended-railed-handguard__tooltip__2026-09-17_201543.png,
+mk-extended-slotted-handguard,MK Extended Slotted Handguard,vendor-item,,,,,,,,,,,,,,
+mk-fixed-carbine-stock,MK Fixed Carbine Stock,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/mk-fixed-carbine-stock__tooltip__2026-09-17_201029.png,Direct in-game attachment tooltip screenshot.
+mk-metal-stock,MK Metal Stock,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/mk-metal-stock__tooltip__2026-09-17_201115.png,
+mk-polymer-stock,MK Polymer Stock,vendor-item,2500,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/mk-polymer-stock__tooltip__2026-09-17_201019.png,
+mk-railed-combination-handguard,MK Railed Combination Handguard,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/mk-railed-combination-handguard__tooltip__2026-09-17_201549.png,
+mk-railed-dust-cover,MK Railed Dust Cover,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/mk-railed-dust-cover__tooltip__2026-09-17_202040.png,
+mk-railed-polymer-handguard,MK Railed Polymer Handguard,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/mk-railed-polymer-handguard__tooltip__2026-09-17_201555.png,
+mk-silencer,MK Silencer,vendor-item,,,,,,,,,,,,,,
+mk-slant-muzzle-brake,MK Slant Muzzle Brake,vendor-item,,,,,,,,,,,,,,
+mk-slotted-mount-handguard,MK Slotted Mount Handguard,vendor-item,,,,,,,,,,,,,,
+mk-slotted-mount-handguard-ext,MK Slotted Mount Handguard (Ext.),vendor-item,,,,,,,,,,,,,,
+mk-stamped-steel-mag,MK Stamped Steel Mag,vendor-item,1250,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/mk-stamped-steel-mag__tooltip__2026-09-17_200406.png,Direct in-game attachment tooltip screenshot.
+mk-steel-polymer-mag-brown,MK Steel-Polymer Mag (Brown),vendor-item,,,,,,,,,,,,,,
+mk-triangle-stock,MK Triangle Stock,vendor-item,,,,,,,,,,,,,,
+mk-underfolding-stock,MK Underfolding Stock,vendor-item,,,,,,,,,,,,,,
+mk-upgraded-muzzle-brake,MK Upgraded Muzzle Brake,vendor-item,,,,,,,,,,,,,,
+mk-vert-grip-handguard,MK Vert Grip Handguard,vendor-item,,,,,,,,,,,,,,
+mk-wood-handguard,MK Wood Handguard,vendor-item,,,,,,,,,,,,,,
+moonshine,Moonshine,crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/medical/moonshine__recipe__2026-09-18_205043.png,Verification synchronized from canonical database record
+morphine,Morphine,crafting-resource;crafted-item;vendor-item,,,,,12,,,3,3,,evidence-inbox/items/historical/morphine__tooltip__2026-09-13_142950.png,pending-review,evidence-inbox/crafting/medical/morphine__recipe__2026-09-18_205050.png,Verification synchronized from canonical database record
+mutant-steak,Mutant Steak,vendor-item,,,,,,,,,,,,,,
+mystery-pills,Mystery Pills,vendor-item,6000,,5,,15,,-30,,5,,,screenshot-verified,evidence-inbox/items/mystery-pills__tooltip__2026-09-20_083137.png,Direct in-game tooltip screenshot; newest verified evidence supersedes the preserved 13 September screenshot.
+old-blue-trousers,Old Blue Trousers,armour,,,,,,,,,,,,,,
+old-gp-4-gas-mask,Old GP-4 Gas Mask,armour,,,,,,,,,,,evidence-inbox/armour/old-gp-4-gas-mask__stats__2026-09-13_230420.png,user-provided,evidence-inbox/armour/old-gp-4-gas-mask__stats__2026-09-13_230420.png,
+old-kepka,Old Kepka,armour,,,,,,,,,,,,,,
+old-tactical-vest,Old Tactical Vest,armour,75000,,,,,,,,,,evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown.
+overripe-potato,Overripe Potato,vendor-item,,,,,,,,,,,,,,
+panskiy-kask,Panskiy Kask,armour,15000,,,,,,,,,,evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png,Verification synchronized from canonical Armour record
+parade-helmet,Parade Helmet,armour,,,,,,,,,,,,,,
+patched-armored-blouse,Patched Armored Blouse,armour,,,,,,,,,,,,,,
+pills,Pills,vendor-item,2500,,,,,,-25,,5,,,screenshot-verified,evidence-inbox/items/historical/pills__tooltip__2026-09-13_141150.png,"Direct in-game tooltip screenshot; older preserved evidence, no newer conflicting screenshot currently archived."
+pistol-ap-ammo,Pistol AP Ammo,ammunition;vendor-item,100,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/pistol-ap__stats__2026-09-13_141636.png,Verification synchronized from canonical database record
+pistol-fmj-ammo,Pistol FMJ Ammo,ammunition;vendor-item,30,1,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/pistol-fmj-ammo__stats__2026-09-18_084728.png,Verification synchronized from canonical database record
+plastic-scrap,Plastic Scrap,crafting-resource;vendor-item,100,1,40,,,,,,,,,screenshot-verified,evidence-inbox/items/plastic-scrap__tooltip__2026-09-18_091720.png,
+plated-overcoat,Plated Overcoat,armour;vendor-item,,,,,,,,,,,,,,
+plated-ragged-pants,Plated Ragged Pants,armour;vendor-item,,,,,,,,,,,,,,
+plier,Plier,vendor-item,2000,1,5,,,,,,,,,screenshot-verified,evidence-inbox/items/plier__tooltip__2026-09-18_091651.png,
+pm-12-70-long-extended,PM 12-70 (Long | Extended),weapon,,,,,,,,,,,,,,
+pm-12-70-long,PM 12-70 (Long),weapon,,,,,,,,,,,,,,
+pm-12-70-short-extended,PM 12-70 (Short | Extended),weapon,,,,,,,,,,,,,,
+pm-12-70-short,PM 12-70 (Short),weapon;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/pm-12-70-short__stats__2026-09-19_090151.png,Verification synchronized from canonical Shotguns record
+pm-flashlight-forestock,PM Flashlight Forestock,vendor-item,2500,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/pm-flashlight-forestock__tooltip__2026-09-17_201656.png,
+pm-full-polymer-stock,PM Full Polymer Stock,vendor-item,1250,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/pm-full-polymer-stock__tooltip__2026-09-17_200954.png,Direct in-game attachment tooltip screenshot.
+pm-muzzle-brake,PM Muzzle Brake,vendor-item,120,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/muzzle/pm-muzzle-brake__tooltip__2026-09-17_195324.png,Direct in-game attachment tooltip screenshot.
+pm-nikolay,PM Nikolay,weapon;vendor-item,,,,,,,,,,,,screenshot-verified,images/weapons/PM Nikolay.png,Verification synchronized from canonical Pistols record
+pm-nikolay-pb,PM Nikolay PB,weapon,,,,,,,,,,,,screenshot-verified,images/weapons/PM Nikolay PB.png,Verification synchronized from canonical Pistols record
+pm-polymer-beavertail-grip,PM Polymer Beavertail Grip,vendor-item,1250,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/pm-polymer-beavertail-grip__tooltip__2026-09-17_201959.png,
+pm-polymer-stock,PM Polymer Stock,vendor-item,150,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/pm-polymer-stock__tooltip__2026-09-17_201004.png,Direct in-game attachment tooltip screenshot.
+pm-railed-forestock,PM Railed Forestock,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/pm-railed-forestock__tooltip__2026-09-17_201702.png,
+pm-silencer,PM Silencer,vendor-item,,,,,,,,,,,,,,
+pm-small-compensator,PM Small Compensator,vendor-item,,,,,,,,,,,,,,
+polymer-pistol-grip-module,Polymer Pistol Grip Module,vendor-item,2500,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/polymer-pistol-grip-module__tooltip__2026-09-17_201853.png,
+pp-pristine-mag,PP Pristine Mag,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/pp-pristine-mag__tooltip__2026-09-17_200626.png,Direct in-game attachment tooltip screenshot.
+rabbit-meat,Rabbit Meat,vendor-item,,,,,,,,,,,,,,
+radish,Radish,vendor-item,,,,,,,,,,,,,,
+rat-meat,Rat Meat,vendor-item,,,,,,,,,,,,,,
+red-dot-sight,Red Dot Sight,vendor-item,,,,,,,,,,,,,,
+refurbished-kask,Refurbished Kask,armour,,,,,,,,,,,,,,
+reinforced-leather-pants,Reinforced Leather Pants,armour,,,,,,,,,,,,,,
+revolutionary-kepka,Revolutionary Kepka,armour,,,,,,,,,,,,,,
+rifle-ap-ammo,Rifle AP Ammo,ammunition;vendor-item,400,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/rifle-ap__stats__2026-09-13_141731.png,Verification synchronized from canonical database record
+rifle-collapsible-stock-module,Rifle Collapsible Stock Module,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/rifle-collapsible-stock-module__tooltip__2026-09-17_201043.png,Direct in-game attachment tooltip screenshot.
+rifle-fmj-ammo,Rifle FMJ Ammo,ammunition;vendor-item,120,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/rifle-fmj-ammo__stats__2026-09-19_221953.png,Verification synchronized from canonical database record
+roit-vest,Riot Vest,armour,86000,,,,,,,,,,,screenshot-verified,evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-20_084312.png,Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json.
+rubber-scrap,Rubber Scrap,vendor-item;junk-item,100,1,40,,,,,,,,,screenshot-verified,evidence-inbox/items/rubber-scrap__tooltip__2026-09-18_091732.png,
+ruined-beret,Ruined Beret,armour,,,,,,,,,,,,,,
+russet-potato,Russet Potato,vendor-item,,,,,,,,,,,,,,
+scavenger-armor-repair-kit,Scavenger Armor Repair Kit,crafting-resource;crafted-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/scavenger-armor-repair-kit__recipe__2026-09-18_205442.png,Verification synchronized from canonical database record
+scrap-gun-repair-kit,Scrap Gun Repair Kit,crafting-resource;crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/weapon/scrap-gun-repair-kit__recipe__2026-09-18_205338.png,Verification synchronized from canonical database record
+scrapyard-armor,Scrapyard Armor,armour,,,,,,,,,,,,,,
+scrapyard-pants,Scrapyard Pants,armour;vendor-item,,,,,,,,,,,,,,
+screwdriver,Screwdriver,crafting-resource;vendor-item,2000,1,4,,,,,,,,,screenshot-verified,evidence-inbox/items/screwdriver__tooltip__2026-09-18_091645.png,
+screws,Screws,vendor-item;junk-item,100,1,10,,,,,,,,,screenshot-verified,evidence-inbox/items/screws__tooltip__2026-09-18_091739.png,
+security-helmet,Security Helmet,armour,89000,,,,,,,,,,,screenshot-verified,evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png,Verification synchronized from canonical Helmets record
+sewing-kit,Sewing Kit,crafting-resource;crafted-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/sewing-kit__recipe__2026-09-18_205431.png,Verification synchronized from canonical database record
+short-tapered-vertical-foregrip,Short Tapered Vertical Foregrip,vendor-item,1250,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/short-tapered-vertical-foregrip__tooltip__2026-09-17_201915.png,
+short-vertical-foregrip,Short Vertical Foregrip,vendor-item,1250,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/short-vertical-foregrip__tooltip__2026-09-17_201936.png,
+shotgun-ap-ammo,Shotgun AP Ammo,ammunition;vendor-item,400,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/shotgun-ap__stats__2026-09-13_141705.png,Verification synchronized from canonical database record
+shotgun-buckshot-ammo,Shotgun Buckshot Ammo,ammunition;vendor-item,60,1,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/shotgun-buckshot-ammo__stats__2026-09-18_084734.png,Verification synchronized from canonical database record
+sidemounted-4x-scope,Sidemounted 4x Scope,vendor-item,,,,,,,,,,,,,,
+skull-mask,Skull Mask,armour,5000,,,,,,,,,,evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png,Verification synchronized from canonical Armour record
+smg-railed-dust-cover,SMG Railed Dust Cover,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/dust-covers/smg-railed-dust-cover__tooltip__2026-09-17_202052.png,Direct in-game attachment tooltip screenshot.
+sniper-4x-scope,Sniper 4x Scope,vendor-item,,,,,,,,,,,,,,
+splint,Splint,vendor-item,,,,,,,,,,,,,,
+stimpack,Stimpack,crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/medical/stimpack__recipe__2026-09-18_205108.png,Verification synchronized from canonical database record
+stimpack-blueprint,Stimpack Blueprint,vendor-item,,,,,,,,,,,,,,
+stronghold-vest,Stronghold Vest,armour,65000,,,,,,,,,,evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png,Verification synchronized from canonical Armour record
+svarsh-drum-mag,Svarsh Drum Mag,vendor-item,4000,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/svarsh-drum-mag__tooltip__2026-09-17_200131.png,Direct in-game attachment tooltip screenshot.
+svarsh-miracle-long,Svarsh Miracle (Long),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Svarsh Miracle (Long).png,Verification synchronized from canonical Shotguns record
+svarsh-miracle-short,Svarsh Miracle (Short),weapon;vendor-item,,,,,,,,,,,,screenshot-verified,images/weapons/Svarsh Miracle (Short).png,Verification synchronized from canonical Shotguns record
+svobodnik-m4-long,Svobodnik M4 (Long),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Svobodnik M4 (Long).png,Verification synchronized from canonical Rifles record
+tapered-vertical-foregrip,Tapered Vertical Foregrip,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/tapered-vertical-foregrip__tooltip__2026-09-17_201907.png,
+tattered-armor-repair-kit,Tattered Armor Repair Kit,crafting-resource;crafted-item;vendor-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/tattered-armor-repair-kit__recipe__2026-09-18_205436.png,Verification synchronized from canonical database record
+tc-handguard,TC Handguard,vendor-item,750,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/tc-handguard__tooltip__2026-09-17_201715.png,
+tc-polymer-large-mag-black,TC Polymer Large Mag (Black),vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/tc-polymer-large-mag-black__tooltip__2026-09-17_200354.png,Direct in-game attachment tooltip screenshot.
+tc-polymer-mag-black,TC Polymer Mag (Black),vendor-item,1250,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/magazines/tc-polymer-mag-black__tooltip__2026-09-17_200400.png,Direct in-game attachment tooltip screenshot.
+tc-railed-dust-cover,TC Railed Dust Cover,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/tc-railed-dust-cover__tooltip__2026-09-17_202033.png,
+tc-railed-handguard,TC Railed Handguard,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/tc-railed-handguard__tooltip__2026-09-17_201708.png,
+tc-skeleton-stock,TC Skeleton Stock,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/tc-skeleton-stock__tooltip__2026-09-17_200659.png,Direct in-game attachment tooltip screenshot.
+tc-wood-stock,TC Wood Stock,vendor-item,,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/tc-wood-stock__tooltip__2026-09-17_200706.png,Direct in-game attachment tooltip screenshot.
+thread-cutter,Thread Cutter,weapon,80000,,,,,,,,,,,screenshot-verified,evidence-inbox/weapons/thread-cutter__stats__2026-09-19_084742.png,Verification synchronized from canonical Rifles record
+thread-cutter-short,Thread Cutter (Short),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Thread Cutter (Short).png,Verification synchronized from canonical Rifles record
+vegetable-soup,Vegetable Soup,vendor-item,,,,,,,,,,,,,,
+vertical-foregrip,Vertical Foregrip,vendor-item,2500,2,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/vertical-foregrip__tooltip__2026-09-17_201923.png,
+vintage-red-dot-sight,Vintage Red Dot Sight,vendor-item,,,,,,,,,,,,,,
+vozhd-beret,Vozhd Beret,armour,,,,,,,,,,,,,,
+wg-40,WG-40,junk-item;vendor-item,250,1,4,,,,,,,,evidence-inbox/items/wg-40__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/wg-40__tooltip__2026-09-21.png,
+big-filter,Big Filter,junk-item;vendor-item,3000,,5,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/big-filter__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/big-filter__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+small-filter,Small Filter,junk-item;vendor-item,500,,5,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/small-filter__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/small-filter__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+electric-wires,Electric Wires,junk-item;vendor-item,500,,5,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/electric-wires__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/electric-wires__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+tactical-knife,Tactical Knife,junk-item;vendor-item,10000,,,FALSE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/tactical-knife__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/tactical-knife__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+chemical-container,Chemical Container,junk-item;vendor-item,1000,,5,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/chemical-container__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/chemical-container__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+metal-pipe,Metal Pipe,junk-item;vendor-item,500,,10,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/metal-pipe__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/metal-pipe__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+broken-mk-receiver,Broken MK Receiver,junk-item;vendor-item,500,,5,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/broken-mk-receiver__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/broken-mk-receiver__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+butcher-knife,Butcher Knife,junk-item;vendor-item,1000,,5,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/butcher-knife__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/butcher-knife__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+toilet-paper,Toilet Paper,junk-item;vendor-item,500,,5,TRUE,,,,,,Direct tooltip and matching icon supplied; current no-use junk classification.,evidence-inbox/items/toilet-paper__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/toilet-paper__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+winter-pants,Winter Pants,armour,,,,,,,,,,,,,,
+wooden-pistol-grip-module,Wooden Pistol Grip Module,vendor-item,,,,,,,,,,,,,,
+worm-meat,Worm Meat,vendor-item,,,,,,,,,,,,,,
+zavod-24-short,Zavod 24 (Short),vendor-item,,,,,,,,,,,,,,
+zavod-34,Zavod 34,weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Zavod 34.png,Verification synchronized from canonical Shotguns record
+zavod-34-short,Zavod 34 (Short),weapon,,,,,,,,,,,,screenshot-verified,images/weapons/Zavod 34 (Short) - durability 23.png,Verification synchronized from canonical Shotguns record
+zavod-polymer-full-stock,Zavod Polymer Full Stock,vendor-item,1250,1,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/zavod-polymer-full-stock__tooltip__2026-09-17_200652.png,Direct in-game attachment tooltip screenshot.
+zavod-polymer-handguard,Zavod Polymer Handguard,vendor-item,750,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/zavod-polymer-handguard__tooltip__2026-09-17_201721.png,
+medicinal-herb,Medicinal Herb,crafting-resource,50,1,10,,5,,,,3,,evidence-inbox/items/medicinal-herb__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/medicinal-herb__tooltip__2026-09-21.png,Direct in-game tooltip screenshot.
+acid-gland,Acid Gland,vendor-item,150,,10,,,,,,,,evidence-inbox/items/acid-gland__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/acid-gland__tooltip__2026-09-21.png,Direct in-game tooltip and icon screenshot.
+berry-puree,Berry Puree,vendor-item,5000,1,5,,,,,-25,,,evidence-inbox/items/berry-puree__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/berry-puree__tooltip__2026-09-21.png,Direct in-game tooltip and icon screenshot.
+butter,Butter,vendor-item,2100,1,5,,,,,-15,,,evidence-inbox/items/butter__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/butter__tooltip__2026-09-21.png,Direct in-game tooltip and icon screenshot.
+fish-soup,Fish Soup,vendor-item,7500,1,5,,,,,-30,-15,,evidence-inbox/items/fish-soup__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/fish-soup__tooltip__2026-09-21.png,Direct in-game tooltip and icon screenshot.
+undead-arm,Undead Arm,vendor-item,300,,10,,,,,,,,evidence-inbox/items/undead-arm__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/undead-arm__tooltip__2026-09-21.png,Direct in-game tooltip and icon screenshot.
+whole-roasted-fish,Whole Roasted Fish,vendor-item,4000,1,4,,,,5,-30,,,evidence-inbox/items/whole-roasted-fish__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/whole-roasted-fish__tooltip__2026-09-21.png,Direct in-game tooltip and icon screenshot.
+pre-mist-gold-wristwatch,Pre-Mist Gold Wristwatch,junk-item;vendor-item,10000,,,FALSE,,,,,,Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.,evidence-inbox/items/pre-mist-gold-wristwatch__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/pre-mist-gold-wristwatch__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+cassette-tape,Cassette Tape,junk-item;vendor-item,1500,,5,TRUE,,,,,,Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.,evidence-inbox/items/cassette-tape__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/cassette-tape__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+square-battery,Square Battery,junk-item;vendor-item,1500,,5,TRUE,,,,,,Candidate junk item from supplied tooltip.,evidence-inbox/items/square-battery__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/square-battery__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+floppy-disk,Floppy Disk,junk-item;vendor-item,3000,,5,TRUE,,,,,,Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.,evidence-inbox/items/floppy-disk__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/floppy-disk__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+light-bulb,Light Bulb,junk-item;vendor-item,750,,5,TRUE,,,,,,Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.,evidence-inbox/items/light-bulb__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/light-bulb__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+t-plug,T Plug,junk-item;vendor-item,500,,10,TRUE,,,,,,Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.,evidence-inbox/items/t-plug__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/t-plug__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+camera,Camera,junk-item;vendor-item,10000,,,FALSE,,,,,,Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.,evidence-inbox/items/camera__icon__2026-09-21.png,screenshot-verified,evidence-inbox/items/camera__tooltip__2026-09-21.png,"Direct in-game tooltip supplied for item identity, description, and displayed value."
+old-tactical-pants,Old Tactical Pants,armour,35000,,,,,,,,,,,screenshot-verified,evidence-inbox/armour/old-tactical-pants__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown.
+mutated-stick,Mutated Stick,junk-item,50,0,10,TRUE,,,,,,,evidence-inbox/admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png,screenshot-verified,evidence-inbox/admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png,
+salt,Salt,vendor-item,3000,,5,TRUE,,,,-2,20,,evidence-inbox/items/salt-icon__2026-09-21_155515.png,screenshot-verified,evidence-inbox/items/historical/salt__tooltip__2026-09-13_144113.png,
+bread,Bread,vendor-item,480,,5,TRUE,,,,-12,1,,evidence-inbox/items/historical/bread__tooltip__2026-09-13_141058.png,pending-review,,

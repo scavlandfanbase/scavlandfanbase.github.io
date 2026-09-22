@@ -1,0 +1,36 @@
+id,name,category,vendorRank,price,ballistic,slash,radiation,durability,repairClass,stackable,description,image,source_status,source_file,source_note
+armoured-rags,Armoured Rags,Body Armour,2,35000,15,23,13,,Scavenger,,,,existing-site-data,armour.html,
+ashen-ushanka,Ashen Ushanka,Helmets,2,18000,8,10,8,,Tattered,,,,existing-site-data,armour.html,
+balistic-kask,Balistic Kask,Helmets,-,40000,23,25,5,100,Medium,FALSE,"One of the most common pieces of Pre-War soldier equipment, this cheaply mass-produced helmet is sturdy enough against bludgeon attacks, but will not stop a bullet.",evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/balistic-kask__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability.
+dusty-overcoat,Dusty Overcoat,Body Armour,-,,,,,,Tattered,,,,existing-site-data,armour.html,
+ekzoskelet-armor,Ekzoskelet Armor,Body Armour,-,100000,50,50,30,,Heavy,,,,existing-site-data,armour.html,
+ekzoskelet-legs,Ekzoskelet Legs,Pants,-,100000,30,35,20,100,Heavy,,"A Mechanist's bizarre invention, the Ekzoskelet Legs are a heavy-duty lining of metal parts woven together with regular trousers. They're designed to offer great resistance and to actually improve the wearer's stamina, but they're still very clumsy to use.",,screenshot-verified,evidence-inbox/armour/ekzoskelet-legs__stats-100-durability__2026-09-20_084304.png,Direct in-game screenshot at 100% durability.
+gp-4-gas-mask,GP-4 Gas Mask,Gas Masks,-,25000,5,8,30,100,Scavenger,,"This widespread Gas Mask was issued to Civil Defense and civilians alike, during the times of War. Vultures and Bandits often wear these for days at a time, and the mask’s straps dig themselves painfully into the back of their heads.",,screenshot-verified,evidence-inbox/armour/gp-4-gas-mask__stats-100-durability__2026-09-20_084320.png,Direct in-game screenshot at 100% durability.
+green-rags,Green Rags,Body Armour,1,5000,3,5,5,,Tattered,,,,existing-site-data,armour.html,
+metal-breastplate,Metal Breastplate,Body Armour,-,40000,25,30,10,,Medium,,,,existing-site-data,armour.html,
+old-blue-trousers,Old Blue Trousers,Pants,1,8500,5,8,5,,Tattered,,,,existing-site-data,armour.html,
+old-gp-4-gas-mask,Old GP-4 Gas Mask,Gas Masks,1,15000,0,5,1,,Tattered,,,evidence-inbox/armour/old-gp-4-gas-mask__stats__2026-09-13_230420.png,existing-site-data,armour.html,
+old-kepka,Old Kepka,Helmets,1,5000,5,5,5,,Tattered,,,,existing-site-data,armour.html,
+old-tactical-vest,Old Tactical Vest,Body Armour,,75000,35,25,15,100,Medium,FALSE,"A beat-up tactical vest worn by police forces of pre-Mist times. It offers great mobility and decent protection against weaker types of weapon fire.
+
+This vest is usually a reward for those with basic training and experience in the field.",evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/old-tactical-vest__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown.
+panskiy-kask,Panskiy Kask,Helmets,-,15000,8,13,10,100,Scavenger,FALSE,"An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field.",evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/panskiy-kask__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability.
+parade-helmet,Parade Helmet,Helmets,-,29000,15,15,5,,Medium,,,,existing-site-data,armour.html,
+patched-armored-blouse,Patched Armored Blouse,Body Armour,2,19000,10,15,10,,Tattered,,,,existing-site-data,armour.html,
+plated-overcoat,Plated Overcoat,Body Armour,-,45000,25,18,15,,Scavenger,,,,existing-site-data,armour.html,
+plated-ragged-pants,Plated Ragged Pants,Pants,3,45000,13,15,10,,Scavenger,,,,existing-site-data,armour.html,
+refurbished-kask,Refurbished Kask,Helmets,-,27500,15,15,5,,Medium,,,,existing-site-data,armour.html,
+reinforced-leather-pants,Reinforced Leather Pants,Pants,-,33000,18,18,10,,Medium,,,,existing-site-data,armour.html,
+revolutionary-kepka,Revolutionary Kepka,Helmets,-,5000,10,8,8,,Scavenger,,,,existing-site-data,armour.html,
+roit-vest,Riot Vest,Body Armour,-,86000,40,50,20,100,Heavy,,,,screenshot-verified,evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-20_084312.png,Direct in-game screenshot at 100% durability.
+ruined-beret,Ruined Beret,Helmets,1,8500,5,8,5,,Tattered,,,,existing-site-data,armour.html,
+scrapyard-armor,Scrapyard Armor,Body Armour,-,32000,15,15,8,,Scavenger,,,,existing-site-data,armour.html,
+scrapyard-pants,Scrapyard Pants,Pants,2,22000,10,13,10,,Scavenger,,,,existing-site-data,armour.html,
+security-helmet,Security Helmet,Helmets,-,89000,35,35,20,,Heavy,,,,screenshot-verified,evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png,100% durability screenshot evidence
+skull-mask,Skull Mask,Gas Masks,-,5000,3,10,5,100,Tattered,FALSE,"A menacing mask in the shape of a skull, worn by different folks for different reasons: some in respect and awe of the dead, others in order to intimidate and scare.",evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/skull-mask__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability.
+stronghold-vest,Stronghold Vest,Body Armour,-,65000,38,35,15,100,Medium,FALSE,"A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility.
+
+This combat-oriented vest is usually worn by those have proven themselves capable.",evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png,screenshot-verified,evidence-inbox/armour/stronghold-vest__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability.
+vozhd-beret,Vozhd Beret,Helmets,-,6000,5,10,5,,Scavenger,,,,existing-site-data,armour.html,
+winter-pants,Winter Pants,Pants,2,12500,10,10,8,,Tattered,,,,existing-site-data,armour.html,
+old-tactical-pants,Old Tactical Pants,Pants,,35000,20,23,15,100,Medium,FALSE,"A pair of beat-up tactical pants worn by the armed men of pre-War times. Offers great mobility and is pretty comfortable, but doesn't protect against the rocky terrain of the wastes.",,screenshot-verified,evidence-inbox/armour/old-tactical-pants__stats-100-durability__2026-09-20.png,Direct in-game tooltip at 100% durability. Displayed approximate value recorded as price; vendor sale price and unlock rank are not shown.
