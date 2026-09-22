@@ -202,7 +202,7 @@ rifle-ap-ammo,Rifle AP Ammo,ammunition;vendor-item,400,,,,,,,,,,,screenshot-veri
 rifle-collapsible-stock-module,Rifle Collapsible Stock Module,vendor-item,2500,2,,,,,,,,,,screenshot-verified,evidence-inbox/attachments/stocks/rifle-collapsible-stock-module__tooltip__2026-09-17_201043.png,Direct in-game attachment tooltip screenshot.
 rifle-fmj-ammo,Rifle FMJ Ammo,ammunition;vendor-item,120,,,,,,,,,,,screenshot-verified,evidence-inbox/ammo/rifle-fmj-ammo__stats__2026-09-19_221953.png,Verification synchronized from canonical database record
 roit-vest,Riot Vest,armour,86000,,,,,,,,,,,screenshot-verified,evidence-inbox/armour/riot-vest__stats-100-durability__2026-09-20_084312.png,Identity and armour record supported by direct in-game screenshot at 100% durability; detailed resistance stats are canonical in data/armour.json.
-rubber-scrap,Rubber Scrap,vendor-item;junk-item,100,1,40,,,,,,,,,screenshot-verified,evidence-inbox/items/rubber-scrap__tooltip__2026-09-18_091732.png,
+rubber-scrap,Rubber Scrap,vendor-item;junk-item,100,1,40,,,,,,,,evidence-inbox/items/rubber-scrap__tooltip__2026-09-20.png,screenshot-verified,evidence-inbox/items/rubber-scrap__tooltip__2026-09-18_091732.png,
 ruined-beret,Ruined Beret,armour,,,,,,,,,,,,,,
 russet-potato,Russet Potato,vendor-item,,,,,,,,,,,,,,
 scavenger-armor-repair-kit,Scavenger Armor Repair Kit,crafting-resource;crafted-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/scavenger-armor-repair-kit__recipe__2026-09-18_205442.png,Verification synchronized from canonical database record
@@ -210,7 +210,7 @@ scrap-gun-repair-kit,Scrap Gun Repair Kit,crafting-resource;crafted-item;vendor-
 scrapyard-armor,Scrapyard Armor,armour,,,,,,,,,,,,,,
 scrapyard-pants,Scrapyard Pants,armour;vendor-item,,,,,,,,,,,,,,
 screwdriver,Screwdriver,crafting-resource;vendor-item,2000,1,4,,,,,,,,,screenshot-verified,evidence-inbox/items/screwdriver__tooltip__2026-09-18_091645.png,
-screws,Screws,vendor-item;junk-item,100,1,10,,,,,,,,,screenshot-verified,evidence-inbox/items/screws__tooltip__2026-09-18_091739.png,
+screws,Screws,vendor-item;junk-item,100,1,10,,,,,,,,evidence-inbox/items/screws__icon__2026-09-21_224451.png,screenshot-verified,evidence-inbox/items/screws__tooltip__2026-09-18_091739.png,
 security-helmet,Security Helmet,armour,89000,,,,,,,,,,,screenshot-verified,evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png,Verification synchronized from canonical Helmets record
 sewing-kit,Sewing Kit,crafting-resource;crafted-item,,,,,,,,,,,,screenshot-verified,evidence-inbox/crafting/armour/sewing-kit__recipe__2026-09-18_205431.png,Verification synchronized from canonical database record
 short-tapered-vertical-foregrip,Short Tapered Vertical Foregrip,vendor-item,1250,1,,FALSE,,,,,,,,screenshot-verified,evidence-inbox/attachments/short-tapered-vertical-foregrip__tooltip__2026-09-17_201915.png,
@@ -280,3 +280,7 @@ old-tactical-pants,Old Tactical Pants,armour,35000,,,,,,,,,,,screenshot-verified
 mutated-stick,Mutated Stick,junk-item,50,0,10,TRUE,,,,,,,evidence-inbox/admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png,screenshot-verified,evidence-inbox/admin/mutated-stick-f4029b94-4b36-456c-8f23-2fe714b6433d.png,
 salt,Salt,vendor-item,3000,,5,TRUE,,,,-2,20,,evidence-inbox/items/salt-icon__2026-09-21_155515.png,screenshot-verified,evidence-inbox/items/historical/salt__tooltip__2026-09-13_144113.png,
 bread,Bread,vendor-item,480,,5,TRUE,,,,-12,1,,evidence-inbox/items/historical/bread__tooltip__2026-09-13_141058.png,pending-review,,
+pre-mist-money-stack,Pre-Mist Money Stack,junk-item,20000,,,FALSE,,,,,,,evidence-inbox/items/pre-mist-money-stack__icon__2026-09-21_224548.png,screenshot-verified,evidence-inbox/items/pre-mist-money-stack__tooltip__2026-09-21_224542.png,
+diamond-ring,Diamond Ring,vendor-item;junk-item,10000,,,FALSE,,,,,,,evidence-inbox/items/diamond-ring__icon__2026-09-21_225245.png,screenshot-verified,evidence-inbox/items/diamond-ring__tooltip__2026-09-21_225251.png,
+gold-chain,Gold Chain,vendor-item;junk-item,10000,,,FALSE,,,,,,,evidence-inbox/items/gold-chain__icon__2026-09-21_224536.png,screenshot-verified,evidence-inbox/items/gold-chain__tooltip__2026-09-21_224530.png,
+bean-soup,Bean Soup,vendor-item,10000,,,,,,,-70,-10,,evidence-inbox/items/beans-soup__icon__2026-09-21_225235.png,screenshot-verified,evidence-inbox/items/beans-soup__tooltip__2026-09-21_225231.png,
