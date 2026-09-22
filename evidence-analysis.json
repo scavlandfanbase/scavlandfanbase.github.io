@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 463,
+  "count": 465,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -212,6 +212,15 @@
       "ocr": ""
     },
     {
+      "file": "armour/Armored_Rags-removebg-preview.png",
+      "sha256": "5a0ab1c85b74ab874102925dabea085d851f96f507bb7dc371d8e2fbc3400e55",
+      "bytes": 23715,
+      "width": 142,
+      "height": 132,
+      "phash": "87933e5e3838392d",
+      "ocr": "rT"
+    },
+    {
       "file": "armour/GP-4 Gas Mask.png",
       "sha256": "aad108d64a378087bd14f3b9078fd3ff0e79bf913bd51ea52dea2f25a813a1c5",
       "bytes": 1180,
@@ -236,6 +245,15 @@
       "width": 101,
       "height": 132,
       "phash": "c69f3961683c1d6c",
+      "ocr": "fi"
+    },
+    {
+      "file": "armour/Old_Blue_Trousers-removebg-preview.png",
+      "sha256": "3448576512c5b95f8d231d6d88fbfd6b91888c5a57aac261517f73de68258ba8",
+      "bytes": 21817,
+      "width": 101,
+      "height": 132,
+      "phash": "c69f39e078381f4c",
       "ocr": "fi"
     },
     {
