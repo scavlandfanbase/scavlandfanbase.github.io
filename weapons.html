@@ -405,6 +405,8 @@ body {
     margin: 0;
 }
 
+.weapon-verification{margin:0 0 12px}.verify-badge{display:inline-block;font-size:11px;padding:4px 7px;border-radius:3px;border:1px solid #55574f}.verify-badge.verified{color:#bde8bd;border-color:#4f7d4f;background:#142014}.verify-badge.review{color:#e5c98c;border-color:#76633d;background:#211c12}
+
 .tier-badge {
     background: var(--tier-color);
 
@@ -1444,6 +1446,7 @@ function escapeHTML(value) {
 function createWeaponCard(weapon) {
 
     const screenshotHTML = ScavImages.preview(weapon);
+    const verified = weapon.source?.status === 'screenshot-verified';
 
     const card =
         document.createElement("article");
@@ -1468,6 +1471,8 @@ function createWeaponCard(weapon) {
             </span>
 
         </div>
+
+        <div class="weapon-verification"><span class="verify-badge ${verified ? 'verified' : 'review'}">${verified ? '✓ Verified' : 'Unverified'}</span></div>
 
         ${screenshotHTML}
 

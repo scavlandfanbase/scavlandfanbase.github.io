@@ -1,3 +1,8 @@
+## Weapon verification badges — 22 September 2026
+
+- Weapons cards now show the same green Verified / amber Unverified labels as Items, based strictly on the weapon record's source.status. No evidence status or stats were changed.
+- Browser checked all 40 cards, base 2HMG unverified, Long verified, search and full-stats expansion. Badges fit mobile cards; a separate page-width check found horizontal overflow (478px at 390px viewport), which needs a later layout review.
+
 ## Reset-email limit — 22 September 2026
 
 - User-authorized single retry confirmed HTTP 429 / over_email_send_rate_limit. No reset email was sent. This is an email-service limit, not an admin-role failure.
