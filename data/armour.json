@@ -292,8 +292,10 @@
       "radiation": 15,
       "repairClass": "Scavenger",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/armour/Plated Overcoat.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": null
       },
       "durability": 100,
       "stackable": false,
