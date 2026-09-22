@@ -3684,7 +3684,8 @@
         "armour"
       ],
       "image": "evidence-inbox/armour/Vozhd Beret.png",
-      "notes": null
+      "notes": null,
+      "stackable": false
     },
     {
       "id": "wg-40",

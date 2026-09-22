@@ -497,7 +497,8 @@
         "status": "existing-site-data"
       },
       "durability": 100,
-      "image": "evidence-inbox/armour/Vozhd Beret.png"
+      "image": "evidence-inbox/armour/Vozhd Beret.png",
+      "stackable": false
     },
     {
       "id": "winter-pants",
