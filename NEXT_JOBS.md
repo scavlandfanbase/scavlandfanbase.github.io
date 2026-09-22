@@ -1,3 +1,9 @@
+## Reset-email limit — 22 September 2026
+
+- User-authorized single retry confirmed HTTP 429 / over_email_send_rate_limit. No reset email was sent. This is an email-service limit, not an admin-role failure.
+- Reset button now explains rate limiting, displays other service errors, catches network failures, and prevents duplicate clicks during a request.
+- Verified rate-limit, service-error and success cases with scripts/test-reset-email.cjs. Future higher-volume email needs a configured mail provider; no billing or mail-provider configuration was changed.
+
 ## Invitation repair — 22 September 2026
 
 - Live `manage-admin-users` v2 preserves Owner accounts and reuses existing invitations without duplicate emails. Source is now stored in the repository.
