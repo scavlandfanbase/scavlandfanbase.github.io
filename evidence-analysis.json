@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 450,
+  "count": 452,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -286,6 +286,24 @@
       "height": 1098,
       "phash": "c085273c99df6e62",
       "ocr": "fal oe i i Panskiy Kask ~15000P | An old aviator's helmet, with stellar wind protection and decent resistance against impact. However, it's a bit uncomfortable to wear all day long, and it dulls the senses a bit - not ideal for the field. Durability PUAULNVANUNINIMIIINY § 100 Ballistic Res {| 8 Slash Res III 13 Rad Res ll 10 Repair Class: Scavenger a"
+    },
+    {
+      "file": "armour/parade-helmet_Stats-100%dura_22092026.png",
+      "sha256": "cc133c46c3c6beb75a2b4c837d40b5dc4c819ce0289e54eb0efb5cde688bb1c8",
+      "bytes": 209270,
+      "width": 507,
+      "height": 497,
+      "phash": "d085276c3d5b2cc7",
+      "ocr": "gt Parade Helmet ~29000P A high-quality steel helmet, a during the War. A red star was painted on it at some point; anyone who would've known what it means is long gone. Durability THNTTANITITAANHTIIN 100 Ballistic Res Ill 18 Slash Res Il 15 Rad Res | 5 Repair Class: Medium"
+    },
+    {
+      "file": "armour/parade-helmet_icon_22092026.png",
+      "sha256": "0655a816514b486c34ff5d2888b3dce101cae00870538a37f3ab52a32fa6a714",
+      "bytes": 13759,
+      "width": 102,
+      "height": 110,
+      "phash": "cece3d39b0300dc7",
+      "ocr": "& |"
     },
     {
       "file": "armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
