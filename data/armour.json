@@ -126,7 +126,8 @@
         "note": "Direct in-game screenshot at 100% durability."
       },
       "durability": 100,
-      "description": "This widespread Gas Mask was issued to Civil Defense and civilians alike, during the times of War. Vultures and Bandits often wear these for days at a time, and the mask’s straps dig themselves painfully into the back of their heads."
+      "description": "This widespread Gas Mask was issued to Civil Defense and civilians alike, during the times of War. Vultures and Bandits often wear these for days at a time, and the mask’s straps dig themselves painfully into the back of their heads.",
+      "image": "evidence-inbox/armour/GP-4_Gas_Mask-removebg-preview.png"
     },
     {
       "id": "green-rags",
