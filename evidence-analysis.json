@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 452,
+  "count": 462,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -203,6 +203,87 @@
       "ocr": "fc : f : — a ai (eS) i er , ES tt &, LU i F 4 + Special FMJ Ammo ~1000P \" i= BE Special ammunition that can fit into different types of weapons. 7 4q Damage: 75 Penetration: 100% “J z"
     },
     {
+      "file": "armour/Armored Rags.png",
+      "sha256": "04d78d27d053ce38b7d29ca6e85d23143b7be79d030c6c00e5c1f52caeb86f11",
+      "bytes": 1922,
+      "width": 142,
+      "height": 132,
+      "phash": "8793361e3939392d",
+      "ocr": ""
+    },
+    {
+      "file": "armour/GP-4 Gas Mask.png",
+      "sha256": "aad108d64a378087bd14f3b9078fd3ff0e79bf913bd51ea52dea2f25a813a1c5",
+      "bytes": 1180,
+      "width": 112,
+      "height": 94,
+      "phash": "cccc735974713139",
+      "ocr": "3"
+    },
+    {
+      "file": "armour/Old Blue Trousers.png",
+      "sha256": "665c82e22184dd579b17a11ed9418ae78c66cc66a0bdff1a5de0e1f1c746d4d4",
+      "bytes": 1579,
+      "width": 101,
+      "height": 132,
+      "phash": "c69f3961683c1d6c",
+      "ocr": "fi"
+    },
+    {
+      "file": "armour/Plated Overcoat.png",
+      "sha256": "25f5d8013bd55795266cbe762e96c09f3421127df45cb1263e8ffd9735f6357d",
+      "bytes": 2056,
+      "width": 159,
+      "height": 134,
+      "phash": "9bc36e3839a562c9",
+      "ocr": "oa"
+    },
+    {
+      "file": "armour/Refurbished Kask.png",
+      "sha256": "396f311a337bcf300cc28371dd86dabaf3e9ff6bd1dc962398e6bb205fafebe1",
+      "bytes": 1046,
+      "width": 93,
+      "height": 91,
+      "phash": "ca9b1919993179cd",
+      "ocr": "2)"
+    },
+    {
+      "file": "armour/Reinforced Leather Pants.png",
+      "sha256": "73aad87825e4a135176012cf4ed28177584468195abc29fcfe52673ec82b4a99",
+      "bytes": 1707,
+      "width": 150,
+      "height": 130,
+      "phash": "cfcc39733631318c",
+      "ocr": "a"
+    },
+    {
+      "file": "armour/Riot Vest.png",
+      "sha256": "3593d8908ebfdc211a838febbcb2b911e7d799a1f22dffa6bfa07b5ec889d227",
+      "bytes": 1873,
+      "width": 152,
+      "height": 135,
+      "phash": "87863a7e69796431",
+      "ocr": ""
+    },
+    {
+      "file": "armour/Scrapyard Armor.png",
+      "sha256": "6567e011b5b800374c57a62f9f834d004f7a4b63e89ffec9a429f1bea1abb6c4",
+      "bytes": 1909,
+      "width": 156,
+      "height": 136,
+      "phash": "9f96626865919769",
+      "ocr": "1S wig!"
+    },
+    {
+      "file": "armour/Vozhd Beret.png",
+      "sha256": "54aea040850491746d08e71d781d4454f2fc9df25a24abdd1b1196489e5910bb",
+      "bytes": 971,
+      "width": 106,
+      "height": 93,
+      "phash": "cdc3363c383ac6c3",
+      "ocr": "_ Ra od"
+    },
+    {
       "file": "armour/ashen-ushanka_2026-09-20 211045.png",
       "sha256": "750eb56ced1abc498d7a90d772b93a210252fc188ccfa2c45ba0776a4e13d270",
       "bytes": 145813,
@@ -268,6 +349,15 @@
       "height": 550,
       "phash": "d497272c39336cc3",
       "ocr": "a a ———— en a Old Tactical Pants ~35000P A pair of beat-up tactical pants worn by the armed men of pre-War times. Offers great mobility and is pretty comfortable, but doesn't protect against the rocky terrain of the wastes. Durability TIUATIANATIANIIINT 100 Ballistic Res Hl 20 Slash Res I 23 Rad Res Ill 15 Repair Class: Medium ul"
+    },
+    {
+      "file": "armour/old-tactical-vest-icon.webp",
+      "sha256": "c85698afedcd7d444f84258b2010803c98259e29e1cb75247da7a1a3e858fefe",
+      "bytes": 2710,
+      "width": 155,
+      "height": 156,
+      "phash": "96867839a596da66",
+      "ocr": "aa"
     },
     {
       "file": "armour/old-tactical-vest__stats-100-durability__2026-09-20.png",
