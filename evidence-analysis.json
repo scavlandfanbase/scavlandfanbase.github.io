@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 452,
+  "count": 450,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -15,14 +15,6 @@
       "armour/ashen-ushanka__stats-100-durability__2026-09-20.png"
     ],
     [
-      "vendors/Screenshot 2026-09-21 230105.png",
-      "vendors/snezhana__portrait__2026-09-21_230105.png"
-    ],
-    [
-      "vendors/Screenshot 2026-09-21 230113.png",
-      "vendors/snezhana__shop-rank-1__2026-09-21_230113.png"
-    ],
-    [
       "vendors/gavron__shop-screen-part-2__2026-09-20.png",
       "vendors/gavron__shop-screen__2026-09-20.png"
     ],
@@ -32,16 +24,6 @@
     ]
   ],
   "files": [
-    {
-      "file": "Spoiled-Radish 2026-09-20 213237.png",
-      "sha256": "18c0c76c68585408a841c2e6612371f5e8b927d712b47da072f8daf50a58a6c7",
-      "bytes": 149583,
-      "filename_timestamp": "2026-09-20T21:32:37",
-      "width": 1017,
-      "height": 913,
-      "phash": "d0e12fb587689a96",
-      "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
-    },
     {
       "file": "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
       "sha256": "a3a0aa376edeb9c19bb5384568f24425744d25519c8fefb8dbaa615ac9552f26",
@@ -1965,16 +1947,6 @@
       "ocr": "Zhivan | * ae Vultures : J"
     },
     {
-      "file": "gunner-enemy_face-image_2026-09-20 205301.png",
-      "sha256": "504b73d6fa171f33f66d42bb5d5077e9d06a49ea40808383a2a6382ad7cc18d6",
-      "bytes": 18478,
-      "filename_timestamp": "2026-09-20T20:53:01",
-      "width": 325,
-      "height": 370,
-      "phash": "c79f1ce4341b6193",
-      "ocr": "@e pig"
-    },
-    {
       "file": "items/acid-gland__icon__2026-09-21.png",
       "sha256": "15de3c0b1eed571498548f29d33a5b23fdfb2465248a38dfaca4c52b05fb5699",
       "bytes": 1004,
@@ -3496,6 +3468,16 @@
       "ocr": "a"
     },
     {
+      "file": "items/spoiled-radish__tooltip__2026-09-20_213237.png",
+      "sha256": "18c0c76c68585408a841c2e6612371f5e8b927d712b47da072f8daf50a58a6c7",
+      "bytes": 149583,
+      "filename_timestamp": "2026-09-20T21:32:37",
+      "width": 1017,
+      "height": 913,
+      "phash": "d0e12fb587689a96",
+      "ocr": "al — — a Spoiled Radish ~150P Dank. Rank: 1 A slightly nutritious piece of spoiled produce. Makes me sick; should eat in desperate situations only. Radish survives so well in the Mist that folks who don’t know how to grow them still try it. The result is a bunch of waste. Hunger: -3 Health: -1 a"
+    },
+    {
       "file": "items/square-battery__icon__2026-09-21.png",
       "sha256": "5249fee61634b43b93cc4b9306566b349c35b54d04340a58b52fb89b119a2734",
       "bytes": 847,
@@ -3679,6 +3661,16 @@
       "height": 307,
       "phash": "f935b640c2d7592c",
       "ocr": "HLAZ909. Fol, “dig 5 “35 se & fed aaa"
+    },
+    {
+      "file": "unresolved/gunner-enemy__face-image__2026-09-20_205301.png",
+      "sha256": "504b73d6fa171f33f66d42bb5d5077e9d06a49ea40808383a2a6382ad7cc18d6",
+      "bytes": 18478,
+      "filename_timestamp": "2026-09-20T20:53:01",
+      "width": 325,
+      "height": 370,
+      "phash": "c79f1ce4341b6193",
+      "ocr": "@e pig"
     },
     {
       "file": "unresolved/high-caliber-rifle-ap-ammo__unresolved__2026-09-20.png",
@@ -3885,26 +3877,6 @@
       "height": 250,
       "phash": "c03070c797e39f9c",
       "ocr": "nT é (eer = i"
-    },
-    {
-      "file": "vendors/Screenshot 2026-09-21 230105.png",
-      "sha256": "12fb24272f95d58eac3c047e25e1ed8aebf304b9f666458861ae335966aefc90",
-      "bytes": 3660,
-      "filename_timestamp": "2026-09-21T23:01:05",
-      "width": 253,
-      "height": 249,
-      "phash": "c2873f9c38783867",
-      "ocr": ""
-    },
-    {
-      "file": "vendors/Screenshot 2026-09-21 230113.png",
-      "sha256": "38ec54d96848473eacf3e1ee13f11a0116767720dbbf329ab688b39a510cb992",
-      "bytes": 33024,
-      "filename_timestamp": "2026-09-21T23:01:13",
-      "width": 1324,
-      "height": 526,
-      "phash": "ae973a604f5f7030",
-      "ocr": "& 00:10 & Snezhana Reputation 0 = ' Rank 1 Pal Rada iad 2, %, a a “y . y"
     },
     {
       "file": "vendors/anatoly__shop-screen-part-1__2026-09-20.png",
