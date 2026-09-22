@@ -256,9 +256,13 @@
       "radiation": 5,
       "repairClass": "Medium",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/parade-helmet_icon_22092026.png",
+        "status": "screenshot-verified",
+        "note": "error with the actual stat pic, will fix later",
+        "lastVerified": "2026-09-22"
+      },
+      "durability": 100,
+      "image": "evidence-inbox/armour/parade-helmet_icon_22092026.png"
     },
     {
       "id": "patched-armored-blouse",
