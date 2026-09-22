@@ -16,7 +16,9 @@
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
-      }
+      },
+      "durability": 100,
+      "image": "evidence-inbox/armour/Armored Rags.png"
     },
     {
       "id": "ashen-ushanka",
