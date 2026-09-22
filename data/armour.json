@@ -170,9 +170,13 @@
       "radiation": 5,
       "repairClass": "Tattered",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
-      }
+        "file": "evidence-inbox/armour/Old Blue Trousers.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": "2026-09-22"
+      },
+      "durability": 100,
+      "image": "evidence-inbox/armour/Old_Blue_Trousers-removebg-preview.png"
     },
     {
       "id": "old-gp-4-gas-mask",
