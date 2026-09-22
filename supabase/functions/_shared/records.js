@@ -151,12 +151,12 @@ export function createHandler(endpoint, env, fetcher=fetch) {
       const headers={apikey:key,Authorization:auth,'Content-Type':'application/json'};
       const user=await fetcher(sb+'/auth/v1/user',{headers});
       if(!user.ok)fail('Your session expired. Sign in again; your changes have not been saved.',403);
-      const permission={items:'items_edit',vendors:'vendors_edit',weapons:'weapons_edit',armour:'armour_edit',ammunition:'ammunition_edit',crafting:'crafting_edit'}[endpoint] || null;
-      const admin=await fetcher(sb+'/rest/v1/rpc/has_scavland_permission',{method:'POST',headers,body:JSON.stringify({required_permission:permission || 'items_edit'})});
-      if(!admin.ok||await admin.json()!==true)fail('You do not have permission to publish from this editor.',403);
       let body;try{body=await request.json();}catch{fail('Invalid save request.');}
       if(endpoint==='items'||endpoint==='vendors')body.kind=endpoint;
       else if(!Object.hasOwn(classifications,body.kind))fail('Unknown editor.');
+      const permission={items:'items_edit',vendors:'vendors_edit',weapons:'weapons_edit',armour:'armour_edit',ammunition:'ammunition_edit',crafting:'crafting_edit'}[body.kind];
+      const admin=await fetcher(sb+'/rest/v1/rpc/has_scavland_permission',{method:'POST',headers,body:JSON.stringify({required_permission:permission})});
+      if(!permission||!admin.ok||await admin.json()!==true)fail('You do not have permission to publish from this editor.',403);
       const ghHeaders={Accept:'application/vnd.github+json',Authorization:'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'};
       async function gh(path,method='GET',data) {
         const r=await fetcher(root+path,{method,headers:ghHeaders,...(data?{body:JSON.stringify(data)}:{})});
