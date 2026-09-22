@@ -2656,8 +2656,9 @@
         "armour",
         "vendor-item"
       ],
-      "image": null,
-      "notes": null
+      "image": "evidence-inbox/armour/Plated Overcoat.png",
+      "notes": null,
+      "stackable": false
     },
     {
       "id": "plated-ragged-pants",

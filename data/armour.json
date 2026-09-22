@@ -294,7 +294,10 @@
       "source": {
         "file": "armour.html",
         "status": "existing-site-data"
-      }
+      },
+      "durability": 100,
+      "stackable": false,
+      "image": "evidence-inbox/armour/Plated Overcoat.png"
     },
     {
       "id": "plated-ragged-pants",
