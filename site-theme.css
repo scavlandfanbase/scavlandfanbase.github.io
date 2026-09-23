@@ -281,7 +281,7 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
 .scav-site-header,
 .scav-site-header:has(.scav-site-logo){
   width:100%!important;
-  height:clamp(220px,18vw,300px)!important;
+  height:clamp(150px,11vw,210px)!important;
   aspect-ratio:auto!important;
   min-height:0!important;
   max-height:none!important;
@@ -300,7 +300,7 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
 
 /* 23 Sept 2026 — reserve exactly the same shell space before JS builds the header */
 body:not(:has(> .scav-site-header))::before{
-  content:"";display:block;width:100%;height:clamp(220px,18vw,300px);
+  content:"";display:block;width:100%;height:clamp(150px,11vw,210px);
   background:#0b0c0c;border-bottom:3px solid var(--scav-gold);
 }
 @media(max-width:700px){body:not(:has(> .scav-site-header))::before{height:clamp(130px,34vw,180px)}}
