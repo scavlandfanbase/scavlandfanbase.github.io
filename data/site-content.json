@@ -90,17 +90,17 @@
               "image": null
             },
             {
-              "id": "areas-card",
-              "title": "Areas",
-              "description": "Explore every zone, region, and dangerous territory.",
-              "href": "areas.html",
-              "image": null
-            },
-            {
               "id": "custom-1790194173114",
               "title": "Test Box",
               "description": "Temporary Box",
               "href": "#",
+              "image": null
+            },
+            {
+              "id": "areas-card",
+              "title": "Areas",
+              "description": "Explore every zone, region, and dangerous territory.",
+              "href": "areas.html",
               "image": null
             },
             {
