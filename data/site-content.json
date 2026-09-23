@@ -108,7 +108,8 @@
         {
           "id": "content-1790196225849",
           "title": "TEST SECTION edited",
-          "intro": "edited section text"
+          "intro": "edited section text",
+          "hidden": true
         },
         {
           "id": "latest-update",
