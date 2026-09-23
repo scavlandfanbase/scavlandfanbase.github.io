@@ -114,18 +114,20 @@
    else beginGesture();
  }
  viewport.addEventListener('pointerup',stopPointer);viewport.addEventListener('pointercancel',stopPointer);
- // Recalculate after the shared header is inserted and whenever its size changes.
+ // Keep the map viewer sized to the device viewport. The shared 21:9 header
+ // sits above the map and must not be subtracted from the viewer's height.
  function sizeViewer(){
-   const top=viewport.getBoundingClientRect().top+window.scrollY;
-   viewport.style.setProperty('--map-height',Math.max(280,window.innerHeight-top-12)+'px');
+   const vh=window.visualViewport?.height||window.innerHeight;
+   const mobile=window.matchMedia('(max-width:700px)').matches;
+   const height=Math.max(360,Math.min(vh*(mobile?.68:.72),900));
+   viewport.style.setProperty('--map-height',height+'px');
  }
  function observeLayout(){
-   const layoutObserver=new ResizeObserver(sizeViewer);
-   document.querySelectorAll('.scav-site-header,.scav-site-nav,.map-intro,.map-toolbar').forEach(el=>layoutObserver.observe(el));
-   new ResizeObserver(fit).observe(viewport);
+   new ResizeObserver(()=>{sizeViewer();fit()}).observe(viewport);
    sizeViewer();fit();
  }
  window.addEventListener('resize',sizeViewer);
+ if(window.visualViewport)window.visualViewport.addEventListener('resize',sizeViewer);
  window.addEventListener('load',observeLayout);
 })();
 </script>
