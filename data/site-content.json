@@ -83,17 +83,17 @@
               "image": null
             },
             {
-              "id": "custom-1790194173114",
-              "title": "Test Box",
-              "description": "Temporary Box",
-              "href": "#",
-              "image": null
-            },
-            {
               "id": "map-card",
               "title": "Map",
               "description": "Find hidden shelters, loot spots, and underground safe havens.",
               "href": "map.html",
+              "image": null
+            },
+            {
+              "id": "custom-1790194173114",
+              "title": "Test Box",
+              "description": "Temporary Box",
+              "href": "#",
               "image": null
             },
             {
