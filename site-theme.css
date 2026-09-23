@@ -271,3 +271,7 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
 .scav-image-full img { display:block; max-width:100%; max-height:calc(100vh - 120px); max-height:calc(100dvh - 120px); width:auto; height:auto; object-fit:contain; margin:auto; }
 .scav-image-caption { flex-shrink:0; margin:0; font-size:13px; color:#bbb; text-align:center; }
 @media (max-width:650px) { .scav-image-preview img { height:auto; max-height:280px; } .scav-image-viewer { padding-left:8px; padding-right:8px; } }
+
+/* Optional CMS card artwork */
+.scav-card-image{display:block;width:100%;height:160px;object-fit:cover;border-radius:calc(var(--site-radius,6px) - 1px);margin:0 0 14px}
+@media(max-width:640px){.scav-card-image{height:140px}}
