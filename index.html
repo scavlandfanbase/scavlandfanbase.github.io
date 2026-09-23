@@ -284,9 +284,15 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
   const canonicalInternalPages=['index.html','vendors.html','weapons.html','armour.html','crafting.html','map.html','items.html','factions.html','areas.html','roadmap.html'];
   const normaliseBoxHref=value=>{const href=(value||'').trim();if(!href||href==='#'||/^https:\/\//i.test(href))return href;const m=href.match(/^([^?#]+\.html)([?#].*)?$/i);if(!m)return null;const page=canonicalInternalPages.find(p=>p.toLowerCase()===m[1].toLowerCase());return page?page+(m[2]||''):null};
   let contentSaveQueue=Promise.resolve(),queuedContentSaves=0;
+  async function sendHomeContent(page){
+    const pr=await fetch(SB+'/functions/v1/publish-site-content',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({page:'index.html',content:page})});
+    const data=await pr.json().catch(()=>({}));
+    if(!pr.ok)throw new Error(data.error||'Publish failed');
+    return data;
+  }
   function publishHomeContent(page){
     queuedContentSaves++;
-    const run=async()=>{status.textContent=queuedContentSaves>1?'Saving queued changes...':'Saving...';try{await publishHomeContent(page);return data}finally{queuedContentSaves--}};
+    const run=async()=>{status.textContent=queuedContentSaves>1?'Saving queued changes...':'Saving...';try{return await sendHomeContent(page)}finally{queuedContentSaves--}};
     const job=contentSaveQueue.then(run,run);contentSaveQueue=job.catch(()=>{});return job;
   }
   function wireEditable(el,meta){editables.push(el);fields.set(el,meta);originals.set(el,el.textContent.trim());el.title='Tap to edit';el.style.cssText+=';outline:1px dashed rgba(255,204,102,.75);outline-offset:6px;cursor:text';el.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();begin(el)});el.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();save.click()}if(e.key==='Escape'){e.preventDefault();cancel.click()}})}
