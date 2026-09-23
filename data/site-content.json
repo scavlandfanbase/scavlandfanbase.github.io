@@ -74,7 +74,7 @@
               "description": "Temporary Box",
               "href": "#",
               "image": null,
-              "hidden": true
+              "hidden": false
             },
             {
               "id": "armour-card",
