@@ -318,9 +318,14 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
    chooseGitHub.onclick=async()=>{
     status.textContent='Loading SCAVLAND images...';chooseGitHub.disabled=true;
     try{
-     const sources=['images','images/backgrounds'],files=[];
-     for(const folder of sources){const rr=await fetch('https://api.github.com/repos/scavlandfanbase/scavlandfanbase.github.io/contents/'+folder+'?ref=main',{headers:{Accept:'application/vnd.github+json'}});if(!rr.ok)throw new Error('Could not load '+folder);const list=await rr.json();list.filter(x=>x.type==='file'&&/\\.(png|jpe?g|webp)$/i.test(x.name)).forEach(x=>files.push(x))}
-     if(!files.length)throw new Error('No site images found');
+     const paths=[
+      'images/scavland-banner.jpg.png',
+      'images/backgrounds/campfire_upscayl_4x_ultramix-balanced-4x.png',
+      'images/backgrounds/loading_background.webp',
+      'images/backgrounds/scavland_capsule_main.png',
+      'images/backgrounds/tactical-grid.png'
+     ];
+     const files=paths.map(path=>({path,download_url:path}));
      const overlay=document.createElement('div');overlay.style.cssText='position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);padding:18px;overflow:auto;color:#eee';
      overlay.innerHTML='<div style="max-width:1000px;margin:auto"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px"><strong style="font-size:20px;color:#ffcc66">Choose SCAVLAND image</strong><button type="button" id="close-github-picker" style="padding:9px 13px">Close</button></div><div id="github-image-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px"></div></div>';
      document.body.append(overlay);overlay.querySelector('#close-github-picker').onclick=()=>overlay.remove();
