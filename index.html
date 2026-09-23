@@ -329,10 +329,12 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
    if(value.length>200){status.textContent='Keep this text under 200 characters.';return}
    setButtons(false);status.textContent='Saving...';
    try{
-    let url=SB+'/functions/v1/publish-site-settings',body={scope:'index.html',settings:{[meta.key]:value}};
-    if(meta.type==='card'||meta.type==='section'){const page=await loadHome();if(meta.type==='card'){const card=page.sections?.flatMap(s=>s.cards||[]).find(x=>x.id===meta.id);if(!card)throw new Error('Card content not found');card[meta.key]=value}else{const section=page.sections?.find(s=>s.id===meta.id);if(!section)throw new Error('Section content not found');section[meta.key]=value}url=SB+'/functions/v1/publish-site-content';body={page:'index.html',content:page}}
-    const pr=await fetch(url,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body)});
-    const data=await pr.json().catch(()=>({}));if(!pr.ok)throw new Error(data.error||'Publish failed');
+    if(meta.type==='card'||meta.type==='section'){
+     await queueHomeMutation(page=>{if(meta.type==='card'){const card=page.sections?.flatMap(s=>s.cards||[]).find(x=>x.id===meta.id);if(!card)throw new Error('Card content not found');card[meta.key]=value}else{const section=page.sections?.find(s=>s.id===meta.id);if(!section)throw new Error('Section content not found');section[meta.key]=value}});
+    }else{
+     const pr=await fetch(SB+'/functions/v1/publish-site-settings',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({scope:'index.html',settings:{[meta.key]:value}})});
+     const data=await pr.json().catch(()=>({}));if(!pr.ok)throw new Error(data.error||'Publish failed');
+    }
     originals.set(el,value);finish('Saved. The public site will update shortly.');
    }catch(error){active=el;el.contentEditable='true';status.textContent='Could not save: '+error.message;setButtons(true)}
   };
