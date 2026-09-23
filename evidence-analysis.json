@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 469,
+  "count": 480,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -1607,6 +1607,15 @@
       "ocr": "al Advanced Gun Repair Kit ~40000P Blueprint FRank Rank: 24 This lets me learn to set up a high-quality kit for maintaining and repairing weapons very reliably. a"
     },
     {
+      "file": "blueprints/basic-gun-repair-kit-Blueprint_bg-icon.png",
+      "sha256": "d6b81c84b76adc1db596d9758f6f85e7ff0d49bb513cdeddcc8629e97e80dbda",
+      "bytes": 2210,
+      "width": 204,
+      "height": 210,
+      "phash": "e869871c963ccab6",
+      "ocr": ""
+    },
+    {
       "file": "blueprints/basic-gun-repair-kit-blueprint__tooltip__2026-09-13_141943.png",
       "sha256": "f2c4f3ff19a0585f97266803c9a57798300df616a0e0740c9a3cf9dbcefa4d10",
       "bytes": 92316,
@@ -2117,6 +2126,96 @@
       "height": 282,
       "phash": "b0681f4969964fb6",
       "ocr": "Zhivan | * ae Vultures : J"
+    },
+    {
+      "file": "items/Acid-Gland_bg-icon.png",
+      "sha256": "5456f4b96ef4b68c298a83edd74ef4fe6d9500f2a70378ce4020079742dce15d",
+      "bytes": 2107,
+      "width": 102,
+      "height": 201,
+      "phash": "e885973a78a5654e",
+      "ocr": ""
+    },
+    {
+      "file": "items/Berry-Puree_bg-icon.png",
+      "sha256": "9be962d3d01e5931adae3f1fe615e4c0a2d869b8cc80df641bf7b7c308b4d5d8",
+      "bytes": 3914,
+      "width": 202,
+      "height": 189,
+      "phash": "e93896e719986539",
+      "ocr": ""
+    },
+    {
+      "file": "items/Butter_bg-icon.png",
+      "sha256": "a787cd9057be3ee5d02d2528bdcee973593119fc44cafd934b1bf738329e37b4",
+      "bytes": 1546,
+      "width": 96,
+      "height": 97,
+      "phash": "fa61a187a538959e",
+      "ocr": "a"
+    },
+    {
+      "file": "items/Cigarettes_bg-icon.png",
+      "sha256": "1ac2e7ca4959be49817818cc605dbf8b17b3dac39594696f2880fef09a7b55cb",
+      "bytes": 771,
+      "width": 109,
+      "height": 108,
+      "phash": "fadaa130a5e6868d",
+      "ocr": "EB"
+    },
+    {
+      "file": "items/Currant-Berries_bg-icon.png",
+      "sha256": "bdf2724836b913b6366d642f71c99a35a97dfd555a8dab192a12248a0dca95ac",
+      "bytes": 660,
+      "width": 97,
+      "height": 103,
+      "phash": "facd95b287693848",
+      "ocr": ""
+    },
+    {
+      "file": "items/Potato_bg-icon.png",
+      "sha256": "72ccf817d3c637e7592f26d41e9371d6f12a72ad03208d059137a1032fa00606",
+      "bytes": 657,
+      "width": 93,
+      "height": 100,
+      "phash": "eac3953d9a306963",
+      "ocr": ""
+    },
+    {
+      "file": "items/Rat-Tail_bg-icon.png",
+      "sha256": "06b4e7b1bb07cdf5cd858939163acf868750d72a6c57757e6b6b59e3419d10da",
+      "bytes": 2620,
+      "width": 93,
+      "height": 205,
+      "phash": "ee1391cc3db5624a",
+      "ocr": "é"
+    },
+    {
+      "file": "items/Rotten-Plum_bg_icon.png",
+      "sha256": "ddb19f32a222bf7530a31c9f7edf77b9075d382d35120a8d455f39842b154524",
+      "bytes": 748,
+      "width": 94,
+      "height": 109,
+      "phash": "f06587968f4b8566",
+      "ocr": ""
+    },
+    {
+      "file": "items/Salt_bg-icon.png",
+      "sha256": "2c64887aa3a7d1b65b18a2300c0af882d843c6b0f97f6190c99e3d9217a2b7c8",
+      "bytes": 1859,
+      "width": 94,
+      "height": 96,
+      "phash": "eeb0b0cec23c8b71",
+      "ocr": "o>"
+    },
+    {
+      "file": "items/Undead-Arm_bg_icon.png",
+      "sha256": "c2da94fac4f2c04fdf8295dd56b1bae93c6e1bdaf3c9c7e0c79c527077347af5",
+      "bytes": 4312,
+      "width": 306,
+      "height": 201,
+      "phash": "ee61859c7872836b",
+      "ocr": "’ ne"
     },
     {
       "file": "items/acid-gland__icon__2026-09-21.png",
