@@ -188,7 +188,7 @@ footer {
 </section>
 
 <!-- FEATURE GRID -->
-<section class="grid">
+<section class="grid" data-section-id="feature-grid">
     <div class="card" onclick="location.href='vendors.html'">
         <h3>Vendors</h3>
         <p>Discover traders, their stock, and where to find them.</p>
@@ -226,7 +226,7 @@ footer {
 </section>
 
 <!-- UPDATE FEED -->
-<section class="updates">
+<section class="updates" data-section-id="latest-update">
     <h2>Latest Update</h2>
     <div class="update-box" id="updateBox">
         <h3>Loading latest update...</h3>
@@ -322,7 +322,14 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
    grid.append(add);
    add.onclick=()=>{if(newCardDraft||active){status.textContent='Save or cancel the current edit first.';return}const draft=document.createElement('div');draft.className='card';draft.style.cssText='border:2px dashed #ffcc66;padding:14px';draft.innerHTML='<label style="display:block;margin-bottom:8px">Title<input data-new-title maxlength="100" placeholder="New box title" style="display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font-size:16px"></label><label style="display:block;margin-bottom:8px">Description<textarea data-new-description maxlength="200" placeholder="What should this box say?" style="display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font-size:16px"></textarea></label><label style="display:block">Link (optional)<input data-new-href maxlength="300" placeholder="vendors.html" style="display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font-size:16px"></label>';grid.insertBefore(draft,add);newCardDraft=draft;setButtons(true);status.textContent='Fill in the new box, then press Save or Cancel.';draft.querySelector('input').focus()}
   }
-  status.textContent='Tap highlighted homepage text to edit it, or add a new box.';
+  const sectionBar=document.createElement('div');sectionBar.style.cssText='max-width:1100px;margin:10px auto;padding:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:1px dashed rgba(255,204,102,.6)';sectionBar.innerHTML='<strong style="color:#ffcc66">Arrange sections:</strong><select id="section-order-select" style="min-height:44px;padding:8px;font-size:16px"><option value="feature-grid">Homepage boxes</option><option value="latest-update">Latest Update</option></select><button type="button" id="section-up" style="min-height:44px;padding:8px 12px">↑ Move</button><button type="button" id="section-down" style="min-height:44px;padding:8px 12px">Move ↓</button>';const firstSection=document.querySelector('[data-section-id]');firstSection?.before(sectionBar);
+  const sectionSelect=sectionBar.querySelector('#section-order-select'),sectionUp=sectionBar.querySelector('#section-up'),sectionDown=sectionBar.querySelector('#section-down');
+  async function refreshSectionOrder(){try{const page=await loadHome(),ids=(page.sections||[]).map(s=>s.id).filter(id=>id==='feature-grid'||id==='latest-update');[...sectionSelect.options].forEach(o=>o.remove());ids.forEach(id=>{const o=document.createElement('option');o.value=id;o.textContent=id==='feature-grid'?'Homepage boxes':'Latest Update';sectionSelect.append(o)});updateSectionButtons();ids.forEach(id=>{const el=document.querySelector('[data-section-id="'+id+'"]'),footer=document.querySelector('footer');if(el&&footer)footer.before(el)})}catch(error){status.textContent='Could not load section order: '+error.message}}
+  function updateSectionButtons(){const i=sectionSelect.selectedIndex,n=sectionSelect.options.length;sectionUp.disabled=i<=0;sectionDown.disabled=i<0||i>=n-1}
+  sectionSelect.onchange=updateSectionButtons;
+  async function moveSection(delta){if(active||newCardDraft){status.textContent='Save or cancel the current edit first.';return}const id=sectionSelect.value;if(!id)return;sectionUp.disabled=sectionDown.disabled=true;status.textContent='Saving section order...';try{const page=await loadHome(),from=page.sections.findIndex(s=>s.id===id),to=from+delta;if(from<0||to<0||to>=page.sections.length){updateSectionButtons();return}const [item]=page.sections.splice(from,1);page.sections.splice(to,0,item);const pr=await fetch(SB+'/functions/v1/publish-site-content',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({page:'index.html',content:page})});const data=await pr.json().catch(()=>({}));if(!pr.ok)throw new Error(data.error||'Publish failed');await refreshSectionOrder();sectionSelect.value=id;updateSectionButtons();status.textContent='Section order saved.'}catch(error){status.textContent='Could not move section: '+error.message;updateSectionButtons()}}
+  sectionUp.onclick=()=>moveSection(-1);sectionDown.onclick=()=>moveSection(1);refreshSectionOrder();
+  status.textContent='Tap highlighted homepage text to edit it, add a box, or arrange sections.';
   const siteHeader=document.querySelector('.scav-site-header');
   if(siteHeader){
    siteHeader.style.position='relative';
