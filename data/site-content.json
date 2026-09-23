@@ -97,17 +97,17 @@
               "image": null
             },
             {
-              "id": "factions-card",
-              "title": "Factions",
-              "description": "Meet the groups that rule the wasteland.",
-              "href": "factions.html",
-              "image": null
-            },
-            {
               "id": "custom-1790194173114",
               "title": "Test Box",
               "description": "Temporary Box",
               "href": "#",
+              "image": null
+            },
+            {
+              "id": "factions-card",
+              "title": "Factions",
+              "description": "Meet the groups that rule the wasteland.",
+              "href": "factions.html",
               "image": null
             }
           ]
