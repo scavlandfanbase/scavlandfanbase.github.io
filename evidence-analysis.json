@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 468,
+  "count": 469,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -265,6 +265,15 @@
       "height": 132,
       "phash": "c69f3961683c1d6c",
       "ocr": "fi"
+    },
+    {
+      "file": "armour/Old-Kepka_bg-icon_23092026.png",
+      "sha256": "59bc328a26c1e0f945dbd325a74587e9f6e572d40d9f64d251a872443c462703",
+      "bytes": 2858,
+      "width": 168,
+      "height": 162,
+      "phash": "e532d3cb9c9c6138",
+      "ocr": ""
     },
     {
       "file": "armour/Old_Blue_Trousers-removebg-preview.png",
