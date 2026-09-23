@@ -316,3 +316,8 @@ html.scav-shell-loading [data-section-id="latest-update"]{
 }
 html.scav-shell-loading [data-section-id="feature-grid"]{min-height:260px}
 html.scav-shell-loading [data-section-id="latest-update"]{min-height:150px}
+
+/* 23 Sept 2026 — reserve hero geometry while published text hydrates */
+html.scav-shell-loading .hero{min-height:104px}
+html.scav-shell-loading .hero h1,html.scav-shell-loading .hero p{visibility:hidden}
+@media(max-width:700px){html.scav-shell-loading .hero{min-height:78px}}
