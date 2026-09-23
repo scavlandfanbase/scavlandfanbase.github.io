@@ -14,7 +14,8 @@
   },
   "pages": {
     "index.html": {
-      "fontSize": "22px"
+      "fontSize": "22px",
+      "pageIntro": "Weapons, armour, vendors, crafting, items and more"
     }
   }
 }
