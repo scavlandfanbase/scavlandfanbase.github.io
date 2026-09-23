@@ -111,6 +111,11 @@
           "summary": "The SCAVLAND fan database is now linked to this live update feed.",
           "url": "https://store.steampowered.com/news/app/3373500",
           "source": "scavland-updates.json"
+        },
+        {
+          "id": "content-1790196225849",
+          "title": "TEST SECTION",
+          "intro": "Temporary section for editor testing."
         }
       ]
     },
