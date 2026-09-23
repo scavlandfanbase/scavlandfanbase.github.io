@@ -15,7 +15,8 @@
   "pages": {
     "index.html": {
       "fontSize": "22px",
-      "pageIntro": "Weapons, armour, vendors, crafting, items and more"
+      "pageIntro": "Weapons, armour, vendors, crafting, items and more",
+      "pageTitle": "Welcome to SCAVLAND."
     }
   }
 }
