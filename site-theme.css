@@ -298,3 +298,13 @@ body>.construction-box{margin:18px auto 48px!important;padding:20px!important}
   }
   .scav-site-logo{max-height:min(82px,30vw)!important}
 }
+
+/* 23 Sept 2026 — reserve shell space before JS builds header/navigation */
+body:not(:has(> .scav-site-header))::before{
+  content:"";display:block;width:100%;aspect-ratio:21 / 9;max-height:min(42.857vw,720px);
+  background:#0b0c0c;border-bottom:3px solid var(--scav-gold);
+}
+body:not(:has(> .scav-site-nav))::after{
+  content:"";display:block;height:45px;background:var(--site-nav-color,rgba(12,14,13,.97));border-bottom:1px solid #4b493f;
+}
+@media(max-width:700px){body:not(:has(> .scav-site-nav))::after{height:43px}}
