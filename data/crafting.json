@@ -489,7 +489,8 @@
       "source": {
         "file": "evidence-inbox/crafting/armour/scavenger-armor-repair-kit__recipe__2026-09-18_205442.png",
         "status": "screenshot-verified"
-      }
+      },
+      "image": "evidence-inbox/blueprints/scavenger-armor-repair-kit-Blueprint_bg-icon.png"
     },
     {
       "id": "tattered-armor-repair-kit",

@@ -3101,7 +3101,7 @@
         "crafting-resource",
         "crafted-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/blueprints/scavenger-armor-repair-kit-Blueprint_bg-icon.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/armour/scavenger-armor-repair-kit__recipe__2026-09-18_205442.png",
