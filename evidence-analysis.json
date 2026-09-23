@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 465,
+  "count": 468,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -219,6 +219,25 @@
       "height": 132,
       "phash": "87933e5e3838392d",
       "ocr": "rT"
+    },
+    {
+      "file": "armour/Ashen-Ushanka_bg-icon.png",
+      "sha256": "7d6d3c9a7294a471c252c60b86d5cc453df60aeb220754988c8374b69d3fe525",
+      "bytes": 6429,
+      "width": 160,
+      "height": 163,
+      "phash": "e8a79761865aa798",
+      "ocr": ""
+    },
+    {
+      "file": "armour/Ekzoskelet-Armor_bg_icon_2026-09-23 001043.png",
+      "sha256": "155ac4f342a37edf5b64bded551124781058352e02399bfafcfbf64cfe2cb7b8",
+      "bytes": 9746,
+      "filename_timestamp": "2026-09-23T00:10:43",
+      "width": 87,
+      "height": 97,
+      "phash": "fe85809781d999ce",
+      "ocr": ""
     },
     {
       "file": "armour/GP-4 Gas Mask.png",
@@ -469,6 +488,15 @@
       "height": 1131,
       "phash": "d083272c3b636cdb",
       "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
+    },
+    {
+      "file": "armour/vozhd-beret_bg-icon.png",
+      "sha256": "813cc5d56cc020881e511efb47cc7955d9319dae3bc5f6350d83e4834bac34d9",
+      "bytes": 4851,
+      "width": 160,
+      "height": 163,
+      "phash": "e84e97a19a566978",
+      "ocr": ""
     },
     {
       "file": "attachments/2hmg-ergonomic-pistol-grip__tooltip__2026-09-17_201901.png",
