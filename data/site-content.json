@@ -56,7 +56,7 @@
           "cards": [
             {
               "id": "vendors-card",
-              "title": "Vendors Test",
+              "title": "Vendors",
               "description": "Discover traders, their stock, and where to find them.",
               "href": "vendors.html",
               "image": null
