@@ -63,7 +63,7 @@
             },
             {
               "id": "vendors-card",
-              "title": "Vendors.",
+              "title": "Vendors",
               "description": "Discover traders, their stock, and where to find them.",
               "href": "vendors.html",
               "image": null
