@@ -55,17 +55,17 @@
           "title": null,
           "cards": [
             {
-              "id": "vendors-card",
-              "title": "Vendors",
-              "description": "Discover traders, their stock, and where to find them.",
-              "href": "vendors.html",
-              "image": null
-            },
-            {
               "id": "weapons-card",
               "title": "Weapons",
               "description": "Browse the full arsenal of firearms and melee weapons.",
               "href": "weapons.html",
+              "image": null
+            },
+            {
+              "id": "vendors-card",
+              "title": "Vendors",
+              "description": "Discover traders, their stock, and where to find them.",
+              "href": "vendors.html",
               "image": null
             },
             {
@@ -101,6 +101,13 @@
               "title": "Factions",
               "description": "Meet the groups that rule the wasteland.",
               "href": "factions.html",
+              "image": null
+            },
+            {
+              "id": "custom-1790177121506",
+              "title": "Test",
+              "description": "Testing",
+              "href": "vendors.html",
               "image": null
             }
           ]
