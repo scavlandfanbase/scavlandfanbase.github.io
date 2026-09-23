@@ -2,16 +2,46 @@
   "schemaVersion": 1,
   "global": {
     "navigation": [
-      { "page": "index.html", "label": "Home" },
-      { "page": "vendors.html", "label": "Vendors" },
-      { "page": "weapons.html", "label": "Weapons" },
-      { "page": "armour.html", "label": "Armour" },
-      { "page": "crafting.html", "label": "Crafting" },
-      { "page": "map.html", "label": "Map" },
-      { "page": "items.html", "label": "Items" },
-      { "page": "factions.html", "label": "Factions" },
-      { "page": "areas.html", "label": "Areas" },
-      { "page": "roadmap.html", "label": "Roadmap" }
+      {
+        "page": "index.html",
+        "label": "Home"
+      },
+      {
+        "page": "vendors.html",
+        "label": "Vendors"
+      },
+      {
+        "page": "weapons.html",
+        "label": "Weapons"
+      },
+      {
+        "page": "armour.html",
+        "label": "Armour"
+      },
+      {
+        "page": "crafting.html",
+        "label": "Crafting"
+      },
+      {
+        "page": "map.html",
+        "label": "Map"
+      },
+      {
+        "page": "items.html",
+        "label": "Items"
+      },
+      {
+        "page": "factions.html",
+        "label": "Factions"
+      },
+      {
+        "page": "areas.html",
+        "label": "Areas"
+      },
+      {
+        "page": "roadmap.html",
+        "label": "Roadmap"
+      }
     ],
     "footerText": "SCAVLAND Fan Database © 2026"
   },
@@ -26,7 +56,7 @@
           "cards": [
             {
               "id": "vendors-card",
-              "title": "Vendors",
+              "title": "Vendors Test",
               "description": "Discover traders, their stock, and where to find them.",
               "href": "vendors.html",
               "image": null
@@ -161,15 +191,60 @@
           "id": "faction-tiles",
           "title": "Faction tiles",
           "cards": [
-            { "id": "bandits", "title": "Bandits", "description": "", "image": "images/factions/bandits.png" },
-            { "id": "mudlarks", "title": "Mudlarks", "description": "", "image": "images/factions/mudlarks.png" },
-            { "id": "mechanists", "title": "Mechanists", "description": "", "image": "images/factions/mechanist.png" },
-            { "id": "rada", "title": "Rada", "description": "", "image": "images/factions/rada.png" },
-            { "id": "gunners", "title": "Gunners", "description": "", "image": "images/factions/gunners.png" },
-            { "id": "commonfolk", "title": "Commonfolk", "description": "", "image": "images/factions/commonfolk.png" },
-            { "id": "acolytes", "title": "Acolytes", "description": "", "image": "images/factions/acolytes.png" },
-            { "id": "palatines", "title": "Palatines", "description": "", "image": "images/factions/palatines.png" },
-            { "id": "vultures", "title": "Vultures", "description": "", "image": "images/factions/vultures.png" }
+            {
+              "id": "bandits",
+              "title": "Bandits",
+              "description": "",
+              "image": "images/factions/bandits.png"
+            },
+            {
+              "id": "mudlarks",
+              "title": "Mudlarks",
+              "description": "",
+              "image": "images/factions/mudlarks.png"
+            },
+            {
+              "id": "mechanists",
+              "title": "Mechanists",
+              "description": "",
+              "image": "images/factions/mechanist.png"
+            },
+            {
+              "id": "rada",
+              "title": "Rada",
+              "description": "",
+              "image": "images/factions/rada.png"
+            },
+            {
+              "id": "gunners",
+              "title": "Gunners",
+              "description": "",
+              "image": "images/factions/gunners.png"
+            },
+            {
+              "id": "commonfolk",
+              "title": "Commonfolk",
+              "description": "",
+              "image": "images/factions/commonfolk.png"
+            },
+            {
+              "id": "acolytes",
+              "title": "Acolytes",
+              "description": "",
+              "image": "images/factions/acolytes.png"
+            },
+            {
+              "id": "palatines",
+              "title": "Palatines",
+              "description": "",
+              "image": "images/factions/palatines.png"
+            },
+            {
+              "id": "vultures",
+              "title": "Vultures",
+              "description": "",
+              "image": "images/factions/vultures.png"
+            }
           ]
         },
         {
@@ -229,15 +304,29 @@
       "title": "SCAVLAND Map",
       "intro": "Explore known locations and routes.",
       "sections": [
-        {"id":"map-image","target":"#mapImage","title":"SCAVLAND map of Zalesye","image":"images/scavlandmap_v5.png"}
+        {
+          "id": "map-image",
+          "target": "#mapImage",
+          "title": "SCAVLAND map of Zalesye",
+          "image": "images/scavlandmap_v5.png"
+        }
       ]
     },
     "items.html": {
       "title": "Items Database",
       "intro": "Search items, equipment, ammo and crafting resources.",
       "sections": [
-        {"id":"junk-table","target":".junk-table summary","title":"Junk loot: current items with no known use","intro":"These items are currently marked as having no known use. Sell only when you are comfortable with that risk; future game updates may add uses."},
-        {"id":"item-browser","target":"#item-browser summary","title":"Browse selected category"}
+        {
+          "id": "junk-table",
+          "target": ".junk-table summary",
+          "title": "Junk loot: current items with no known use",
+          "intro": "These items are currently marked as having no known use. Sell only when you are comfortable with that risk; future game updates may add uses."
+        },
+        {
+          "id": "item-browser",
+          "target": "#item-browser summary",
+          "title": "Browse selected category"
+        }
       ]
     },
     "vendors.html": {
@@ -250,11 +339,36 @@
           "title": "Vendor Selling Rates",
           "intro": "Vendor buy rates.",
           "cards": [
-            {"id":"vesna-rates","vendorId":"vesna","title":"Vesna","description":"Common items — 30%\nClothing — 60%"},
-            {"id":"grigory-rates","vendorId":"grigory","title":"Grigory","description":"Common items — 50%"},
-            {"id":"zhivan-rates","vendorId":"zhivan","title":"Zhivan","description":"Common items — 140% value"},
-            {"id":"nadja-rates","vendorId":"nadja","title":"Nadja","description":"Common items — 90%\nCrafting items — 80%"},
-            {"id":"bogdan-rates","vendorId":"bogdan","title":"Bogdan","description":"Pays 40% more for Mutant Parts"}
+            {
+              "id": "vesna-rates",
+              "vendorId": "vesna",
+              "title": "Vesna",
+              "description": "Common items — 30%\nClothing — 60%"
+            },
+            {
+              "id": "grigory-rates",
+              "vendorId": "grigory",
+              "title": "Grigory",
+              "description": "Common items — 50%"
+            },
+            {
+              "id": "zhivan-rates",
+              "vendorId": "zhivan",
+              "title": "Zhivan",
+              "description": "Common items — 140% value"
+            },
+            {
+              "id": "nadja-rates",
+              "vendorId": "nadja",
+              "title": "Nadja",
+              "description": "Common items — 90%\nCrafting items — 80%"
+            },
+            {
+              "id": "bogdan-rates",
+              "vendorId": "bogdan",
+              "title": "Bogdan",
+              "description": "Pays 40% more for Mutant Parts"
+            }
           ]
         }
       ]
@@ -275,7 +389,11 @@
       "title": "SCAVLAND Armour Database",
       "intro": "Compare protective gear and survival outfits.",
       "sections": [
-        { "id": "backpacks", "target": "#backpacks h2", "title": "Backpacks" },
+        {
+          "id": "backpacks",
+          "target": "#backpacks h2",
+          "title": "Backpacks"
+        },
         {
           "id": "backpacks-coming",
           "target": "#backpacks h3",
