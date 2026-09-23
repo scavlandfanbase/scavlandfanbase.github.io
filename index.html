@@ -275,36 +275,45 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
   bar.innerHTML='<span>✎ Edit Mode — Homepage</span><span id="edit-status" style="font-weight:400;color:#ccc">Tap the homepage title to edit it.</span><button type="button" id="save-title" disabled style="padding:8px 12px;border:1px solid #ffcc66;border-radius:4px;background:#171713;color:#ffcc66;font-weight:700;cursor:pointer;opacity:.45">Save</button><button type="button" id="cancel-title" disabled style="padding:8px 12px;border:1px solid #777;border-radius:4px;background:#171713;color:#ddd;font-weight:700;cursor:pointer;opacity:.45">Cancel</button><button type="button" id="leave-edit" style="padding:8px 12px;border:1px solid #ffcc66;border-radius:4px;background:#171713;color:#ffcc66;font-weight:700;cursor:pointer">Exit Edit Mode</button>';
   document.body.prepend(bar);
   const title=document.querySelector('.hero h1'),intro=document.querySelector('.hero p'),save=document.getElementById('save-title'),cancel=document.getElementById('cancel-title'),status=document.getElementById('edit-status');
-  const cardIds=['vendors-card','weapons-card','armour-card','crafting-card','map-card','areas-card','factions-card'],cards=[...document.querySelectorAll('.grid .card')];
+  const grid=document.querySelector('.grid'),cards=[...document.querySelectorAll('.grid .card')];
   const editables=[title,intro],originals=new Map(),fields=new Map([[title,{type:'page',key:'pageTitle'}],[intro,{type:'page',key:'pageIntro'}]]);
-  cards.forEach((card,i)=>{const id=cardIds[i];if(!id)return;const h=card.querySelector('h3'),p=card.querySelector('p');if(h){editables.push(h);fields.set(h,{type:'card',id,key:'title'})}if(p){editables.push(p);fields.set(p,{type:'card',id,key:'description'})}card.addEventListener('click',e=>{if(params.get('edit')==='1'){e.preventDefault();e.stopPropagation()}})});
-  editables.forEach(el=>originals.set(el,el.textContent.trim()));
-  let active=null;
-  editables.forEach(el=>{el.title='Tap to edit';el.style.cssText+=';outline:1px dashed rgba(255,204,102,.75);outline-offset:6px;cursor:text';el.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();begin(el)});el.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();save.click()}if(e.key==='Escape'){e.preventDefault();cancel.click()}})});
+  let active=null,newCardDraft=null;
+  async function loadHome(){const doc=await fetch('data/site-content.json?edit='+Date.now(),{cache:'no-store'}).then(x=>{if(!x.ok)throw new Error('Could not load site content');return x.json()});const page=structuredClone(doc.pages?.['index.html']);if(!page)throw new Error('Homepage content not found');return page}
+  function wireEditable(el,meta){editables.push(el);fields.set(el,meta);originals.set(el,el.textContent.trim());el.title='Tap to edit';el.style.cssText+=';outline:1px dashed rgba(255,204,102,.75);outline-offset:6px;cursor:text';el.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();begin(el)});el.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();save.click()}if(e.key==='Escape'){e.preventDefault();cancel.click()}})}
+  wireEditable(title,{type:'page',key:'pageTitle'});wireEditable(intro,{type:'page',key:'pageIntro'});
+  loadHome().then(page=>{const source=page.sections?.find(s=>s.id==='feature-grid')?.cards||[];cards.forEach((card,i)=>{const record=source[i];if(!record)return;card.dataset.contentId=record.id;const h=card.querySelector('h3'),p=card.querySelector('p');if(h)wireEditable(h,{type:'card',id:record.id,key:'title'});if(p)wireEditable(p,{type:'card',id:record.id,key:'description'});card.addEventListener('click',e=>{e.preventDefault();e.stopPropagation()})})}).catch(error=>status.textContent='Could not prepare card editor: '+error.message);
   function setButtons(on){save.disabled=cancel.disabled=!on;save.style.opacity=cancel.style.opacity=on?'1':'.45'}
-  function begin(el){if(active===el&&el.contentEditable==='true')return;if(active&&active!==el)active.textContent=originals.get(active);editables.forEach(x=>x.contentEditable='false');active=el;el.contentEditable='true';setButtons(true);const meta=fields.get(el);status.textContent=meta?.type==='card'?'Edit this card text, then Save or Cancel.':el===title?'Edit the title, then Save or Cancel.':'Edit the description, then Save or Cancel.';el.focus();const range=document.createRange();range.selectNodeContents(el);range.collapse(false);const sel=getSelection();sel.removeAllRanges();sel.addRange(range)}
+  function begin(el){if(newCardDraft)return;if(active===el&&el.contentEditable==='true')return;if(active&&active!==el)active.textContent=originals.get(active);editables.forEach(x=>x.contentEditable='false');active=el;el.contentEditable='true';setButtons(true);const meta=fields.get(el);status.textContent=meta?.type==='card'?'Edit this card text, then Save or Cancel.':el===title?'Edit the title, then Save or Cancel.':'Edit the description, then Save or Cancel.';el.focus();const range=document.createRange();range.selectNodeContents(el);range.collapse(false);const sel=getSelection();sel.removeAllRanges();sel.addRange(range)}
   function finish(message){if(active)active.contentEditable='false';active=null;setButtons(false);status.textContent=message||'Tap highlighted homepage text to edit it.'}
-  cancel.onclick=()=>{if(active)active.textContent=originals.get(active);finish()};
+  cancel.onclick=()=>{if(newCardDraft){newCardDraft.remove();newCardDraft=null;finish('New box cancelled. Nothing was published.');return}if(active)active.textContent=originals.get(active);finish()};
   save.onclick=async()=>{
+   if(newCardDraft){
+    const t=newCardDraft.querySelector('[data-new-title]').value.trim(),d=newCardDraft.querySelector('[data-new-description]').value.trim(),h=newCardDraft.querySelector('[data-new-href]').value.trim();
+    if(!t||!d){status.textContent='New boxes need a title and description.';setButtons(true);return}
+    if(t.length>100||d.length>200||h.length>300){status.textContent='New box text or link is too long.';setButtons(true);return}
+    if(h&&!/^(?:[a-z0-9_-]+\.html(?:[#?][^\s]*)?|https:\/\/[^\s]+)$/i.test(h)){status.textContent='Use a SCAVLAND .html page or an https:// link.';setButtons(true);return}
+    setButtons(false);status.textContent='Saving new box...';
+    try{const page=await loadHome(),section=page.sections?.find(s=>s.id==='feature-grid');if(!section||!Array.isArray(section.cards))throw new Error('Homepage card section not found');const existing=new Set(section.cards.map(x=>x.id));let id='custom-'+Date.now();while(existing.has(id))id+='-1';section.cards.push({id,title:t,description:d,href:h||'#',image:null});const pr=await fetch(SB+'/functions/v1/publish-site-content',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({page:'index.html',content:page})});const data=await pr.json().catch(()=>({}));if(!pr.ok)throw new Error(data.error||'Publish failed');newCardDraft.remove();newCardDraft=null;finish('New box saved. Refresh shortly to see the published card.')}catch(error){status.textContent='Could not save new box: '+error.message;setButtons(true)}return
+   }
    if(!active)return;
-   const el=active,value=el.textContent.trim().replace(/\\s+/g,' '),meta=fields.get(el);
+   const el=active,value=el.textContent.trim().replace(/\s+/g,' '),meta=fields.get(el);
    if(!value){status.textContent='This text cannot be empty.';return}
    if(value.length>200){status.textContent='Keep this text under 200 characters.';return}
    setButtons(false);status.textContent='Saving...';
    try{
     let url=SB+'/functions/v1/publish-site-settings',body={scope:'index.html',settings:{[meta.key]:value}};
-    if(meta.type==='card'){
-     const doc=await fetch('data/site-content.json?edit='+Date.now(),{cache:'no-store'}).then(x=>{if(!x.ok)throw new Error('Could not load site content');return x.json()});
-     const page=structuredClone(doc.pages?.['index.html']);if(!page)throw new Error('Homepage content not found');
-     const card=page.sections?.flatMap(s=>s.cards||[]).find(x=>x.id===meta.id);if(!card)throw new Error('Card content not found');
-     card[meta.key]=value;url=SB+'/functions/v1/publish-site-content';body={page:'index.html',content:page};
-    }
+    if(meta.type==='card'){const page=await loadHome();const card=page.sections?.flatMap(s=>s.cards||[]).find(x=>x.id===meta.id);if(!card)throw new Error('Card content not found');card[meta.key]=value;url=SB+'/functions/v1/publish-site-content';body={page:'index.html',content:page}}
     const pr=await fetch(url,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body)});
     const data=await pr.json().catch(()=>({}));if(!pr.ok)throw new Error(data.error||'Publish failed');
     originals.set(el,value);finish('Saved. The public site will update shortly.');
    }catch(error){active=el;el.contentEditable='true';status.textContent='Could not save: '+error.message;setButtons(true)}
   };
-  status.textContent='Tap highlighted homepage text to edit it.';
+  if(grid){
+   const add=document.createElement('button');add.type='button';add.textContent='+ Add Box';add.style.cssText='min-height:90px;border:2px dashed #ffcc66;border-radius:6px;background:#111;color:#ffcc66;font-size:18px;font-weight:700;cursor:pointer;padding:18px';
+   grid.append(add);
+   add.onclick=()=>{if(newCardDraft||active){status.textContent='Save or cancel the current edit first.';return}const draft=document.createElement('div');draft.className='card';draft.style.cssText='border:2px dashed #ffcc66;padding:14px';draft.innerHTML='<label style="display:block;margin-bottom:8px">Title<input data-new-title maxlength="100" placeholder="New box title" style="display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font-size:16px"></label><label style="display:block;margin-bottom:8px">Description<textarea data-new-description maxlength="200" placeholder="What should this box say?" style="display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font-size:16px"></textarea></label><label style="display:block">Link (optional)<input data-new-href maxlength="300" placeholder="vendors.html" style="display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font-size:16px"></label>';grid.insertBefore(draft,add);newCardDraft=draft;setButtons(true);status.textContent='Fill in the new box, then press Save or Cancel.';draft.querySelector('input').focus()}
+  }
+  status.textContent='Tap highlighted homepage text to edit it, or add a new box.';
   const siteHeader=document.querySelector('.scav-site-header');
   if(siteHeader){
    siteHeader.style.position='relative';
