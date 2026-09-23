@@ -69,17 +69,17 @@
               "image": null
             },
             {
-              "id": "armour-card",
-              "title": "Armour",
-              "description": "Compare protective gear and survival outfits.",
-              "href": "armour.html",
-              "image": null
-            },
-            {
               "id": "custom-1790194173114",
               "title": "Test Box",
               "description": "Temporary Box",
               "href": "#",
+              "image": null
+            },
+            {
+              "id": "armour-card",
+              "title": "Armour",
+              "description": "Compare protective gear and survival outfits.",
+              "href": "armour.html",
               "image": null
             },
             {
