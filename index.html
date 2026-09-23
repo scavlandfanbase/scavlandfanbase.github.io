@@ -272,8 +272,28 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
   bar.setAttribute('role','toolbar');
   bar.setAttribute('aria-label','Website edit mode');
   bar.style.cssText='position:sticky;top:0;z-index:9999;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;background:#111;border-bottom:2px solid #ffcc66;color:#eee;font:700 14px Arial,sans-serif';
-  bar.innerHTML='<span>✎ Edit Mode — Homepage</span><button type="button" id="leave-edit" style="padding:8px 12px;border:1px solid #ffcc66;border-radius:4px;background:#171713;color:#ffcc66;font-weight:700;cursor:pointer">Exit Edit Mode</button>';
+  bar.innerHTML='<span>✎ Edit Mode — Homepage</span><span id="edit-status" style="font-weight:400;color:#ccc">Tap the homepage title to edit it.</span><button type="button" id="save-title" disabled style="padding:8px 12px;border:1px solid #ffcc66;border-radius:4px;background:#171713;color:#ffcc66;font-weight:700;cursor:pointer;opacity:.45">Save</button><button type="button" id="cancel-title" disabled style="padding:8px 12px;border:1px solid #777;border-radius:4px;background:#171713;color:#ddd;font-weight:700;cursor:pointer;opacity:.45">Cancel</button><button type="button" id="leave-edit" style="padding:8px 12px;border:1px solid #ffcc66;border-radius:4px;background:#171713;color:#ffcc66;font-weight:700;cursor:pointer">Exit Edit Mode</button>';
   document.body.prepend(bar);
+  const title=document.querySelector('.hero h1'),originalTitle=title.textContent.trim(),save=document.getElementById('save-title'),cancel=document.getElementById('cancel-title'),status=document.getElementById('edit-status');
+  title.title='Tap to edit';
+  title.style.cssText+=';outline:1px dashed rgba(255,204,102,.75);outline-offset:8px;cursor:text';
+  function editing(on){title.contentEditable=on?'true':'false';save.disabled=cancel.disabled=!on;save.style.opacity=cancel.style.opacity=on?'1':'.45';status.textContent=on?'Edit the title, then Save or Cancel.':'Tap the homepage title to edit it.';if(on){title.focus();const range=document.createRange();range.selectNodeContents(title);range.collapse(false);const sel=getSelection();sel.removeAllRanges();sel.addRange(range)}}
+  title.addEventListener('click',()=>{if(title.contentEditable!=='true')editing(true)});
+  cancel.onclick=()=>{title.textContent=originalTitle;editing(false)};
+  save.onclick=async()=>{
+   const value=title.textContent.trim().replace(/\\s+/g,' ');
+   if(!value){status.textContent='The title cannot be empty.';return}
+   if(value.length>200){status.textContent='Keep the title under 200 characters.';return}
+   save.disabled=cancel.disabled=true;status.textContent='Saving...';
+   try{
+    const pr=await fetch(SB+'/functions/v1/publish-site-settings',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({scope:'index.html',settings:{pageTitle:value}})});
+    const data=await pr.json().catch(()=>({}));
+    if(!pr.ok)throw new Error(data.error||'Publish failed');
+    status.textContent='Saved. The public site will update shortly.';
+    title.contentEditable='false';save.style.opacity=cancel.style.opacity='.45';
+   }catch(error){status.textContent='Could not save: '+error.message;save.disabled=cancel.disabled=false;save.style.opacity=cancel.style.opacity='1'}
+  };
+  title.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();save.click()}if(e.key==='Escape'){e.preventDefault();cancel.click()}});
   document.getElementById('leave-edit').onclick=()=>{sessionStorage.removeItem('scavland-edit-token');location.href='index.html'};
  }catch{
   sessionStorage.removeItem('scavland-edit-token');
