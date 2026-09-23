@@ -258,6 +258,30 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
     });
 </script>
 
+<script>
+(async()=>{
+ const params=new URLSearchParams(location.search);
+ if(params.get('edit')!=='1')return;
+ const token=sessionStorage.getItem('scavland-edit-token');
+ if(!token){location.replace('admin.html');return}
+ const SB='https://demtoqsafufzmnhvaykj.supabase.co',KEY='sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH';
+ try{
+  const r=await fetch(SB+'/rest/v1/rpc/is_scavland_admin',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:'{}'});
+  if(!r.ok||await r.json()!==true)throw new Error('not authorized');
+  const bar=document.createElement('div');
+  bar.setAttribute('role','toolbar');
+  bar.setAttribute('aria-label','Website edit mode');
+  bar.style.cssText='position:sticky;top:0;z-index:9999;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;background:#111;border-bottom:2px solid #ffcc66;color:#eee;font:700 14px Arial,sans-serif';
+  bar.innerHTML='<span>✎ Edit Mode — Homepage</span><button type="button" id="leave-edit" style="padding:8px 12px;border:1px solid #ffcc66;border-radius:4px;background:#171713;color:#ffcc66;font-weight:700;cursor:pointer">Exit Edit Mode</button>';
+  document.body.prepend(bar);
+  document.getElementById('leave-edit').onclick=()=>{sessionStorage.removeItem('scavland-edit-token');location.href='index.html'};
+ }catch{
+  sessionStorage.removeItem('scavland-edit-token');
+  location.replace('admin.html');
+ }
+})();
+</script>
+
 <script src="site-shell.js"></script>
 </body>
 </html>
