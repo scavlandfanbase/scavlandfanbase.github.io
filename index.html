@@ -314,13 +314,24 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
    const picker=document.createElement('input');picker.type='file';picker.accept='image/png,image/jpeg,image/webp';picker.hidden=true;
    siteHeader.append(imageButton,picker);
    imageButton.onclick=()=>picker.click();
-   picker.onchange=()=>{
+   picker.onchange=async()=>{
     const file=picker.files?.[0];if(!file)return;
-    if(!file.type.startsWith('image/')){status.textContent='Choose a PNG, JPG or WebP image.';return}
+    if(!['image/png','image/jpeg','image/webp'].includes(file.type)){status.textContent='Choose a PNG, JPG or WebP image.';return}
+    if(file.size>6291456){status.textContent='Banner images must be 6 MB or smaller.';return}
     const preview=URL.createObjectURL(file);
     siteHeader.style.setProperty('--site-header-image',`url("${preview}")`);
     siteHeader.style.backgroundImage=`linear-gradient(to bottom,rgba(8,9,9,.55),rgba(10,12,11,.92)),url("${preview}")`;
-    status.textContent='Banner preview loaded. Upload/publish support is the next checkpoint; this has not changed the public site yet.';
+    status.textContent='Uploading banner...';imageButton.disabled=true;
+    try{
+     const ext=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg',path='banners/header-'+Date.now()+'.'+ext;
+     const upload=await fetch(SB+'/storage/v1/object/site-assets/'+path,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':file.type,'Cache-Control':'3600'},body:file});
+     const ud=await upload.json().catch(()=>({}));if(!upload.ok)throw new Error(ud.message||ud.error||'Image upload failed');
+     const publicUrl=SB+'/storage/v1/object/public/site-assets/'+path;
+     const saveAsset=await fetch(SB+'/rest/v1/site_visual_assets?on_conflict=asset_key',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({asset_key:'header-banner',public_url:publicUrl,updated_at:new Date().toISOString()})});
+     if(!saveAsset.ok){const sd=await saveAsset.json().catch(()=>({}));throw new Error(sd.message||'Could not publish banner')}
+     status.textContent='Banner saved. It is now the shared SCAVLAND header image.';
+    }catch(error){status.textContent='Could not save banner: '+error.message}
+    finally{imageButton.disabled=false}
    };
   }
   document.getElementById('leave-edit').onclick=()=>{sessionStorage.removeItem('scavland-edit-token');location.href='index.html'};
