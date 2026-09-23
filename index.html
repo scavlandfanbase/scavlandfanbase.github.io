@@ -314,6 +314,23 @@ fetch("https://raw.githubusercontent.com/andrewrobb247/scavland-feed/main/scavla
    const picker=document.createElement('input');picker.type='file';picker.accept='image/png,image/jpeg,image/webp';picker.hidden=true;
    siteHeader.append(imageButton,picker);
    imageButton.onclick=()=>picker.click();
+   const chooseGitHub=document.createElement('button');chooseGitHub.type='button';chooseGitHub.textContent='Choose GitHub image';chooseGitHub.style.cssText=imageButton.style.cssText+';right:150px';siteHeader.append(chooseGitHub);
+   chooseGitHub.onclick=async()=>{
+    status.textContent='Loading SCAVLAND images...';chooseGitHub.disabled=true;
+    try{
+     const sources=['images','images/backgrounds'],files=[];
+     for(const folder of sources){const rr=await fetch('https://api.github.com/repos/scavlandfanbase/scavlandfanbase.github.io/contents/'+folder+'?ref=main',{headers:{Accept:'application/vnd.github+json'}});if(!rr.ok)throw new Error('Could not load '+folder);const list=await rr.json();list.filter(x=>x.type==='file'&&/\\.(png|jpe?g|webp)$/i.test(x.name)).forEach(x=>files.push(x))}
+     if(!files.length)throw new Error('No site images found');
+     const overlay=document.createElement('div');overlay.style.cssText='position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);padding:18px;overflow:auto;color:#eee';
+     overlay.innerHTML='<div style="max-width:1000px;margin:auto"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px"><strong style="font-size:20px;color:#ffcc66">Choose SCAVLAND image</strong><button type="button" id="close-github-picker" style="padding:9px 13px">Close</button></div><div id="github-image-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px"></div></div>';
+     document.body.append(overlay);overlay.querySelector('#close-github-picker').onclick=()=>overlay.remove();
+     const grid=overlay.querySelector('#github-image-grid');
+     files.forEach(file=>{const b=document.createElement('button');b.type='button';b.style.cssText='background:#141615;border:1px solid #555;border-radius:6px;padding:8px;color:#eee;text-align:left';b.innerHTML='<img src="'+file.download_url+'" alt="" style="width:100%;height:110px;object-fit:cover;border-radius:4px;display:block;margin-bottom:7px"><span style="font-size:12px;word-break:break-word">'+file.path+'</span>';b.onclick=async()=>{siteHeader.style.setProperty('--site-header-image',`url("${file.path}")`);siteHeader.style.backgroundImage=`linear-gradient(to bottom,rgba(8,9,9,.55),rgba(10,12,11,.92)),url("${file.path}")`;overlay.remove();status.textContent='Saving GitHub banner...';const pr=await fetch(SB+'/functions/v1/publish-site-settings',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({scope:'global',settings:{headerImage:file.path}})});const data=await pr.json().catch(()=>({}));status.textContent=pr.ok?'GitHub banner saved. The public site will update shortly.':'Could not save banner: '+(data.error||'Publish failed')};grid.append(b)});
+     status.textContent='Choose an existing SCAVLAND image.';
+    }catch(error){status.textContent='Could not load GitHub images: '+error.message}
+    finally{chooseGitHub.disabled=false}
+   };
+
    picker.onchange=async()=>{
     const file=picker.files?.[0];if(!file)return;
     if(!['image/png','image/jpeg','image/webp'].includes(file.type)){status.textContent='Choose a PNG, JPG or WebP image.';return}
