@@ -15,7 +15,7 @@
 .map-toolbar button:hover{background:var(--scav-gold-bright);color:#111;border-color:var(--scav-gold-bright)}
 #zoomLabel{min-width:64px;text-align:center;color:var(--scav-gold-bright);font-weight:700}
 .map-help{color:#999;font-size:13px;margin-left:8px}
-.map-viewport{position:relative;width:calc(100% - 24px);height:var(--map-height,65vh);margin:8px 12px 0;overflow:hidden;background:#090a09;border:1px solid var(--scav-line);box-shadow:0 12px 35px rgba(0,0,0,.45);cursor:grab;touch-action:none}
+.map-viewport{position:relative;width:calc(100% - 24px);height:var(--map-height,65vh);margin:8px 12px 0;overflow:hidden;background:#090a09;border:1px solid var(--scav-line);box-shadow:0 12px 35px rgba(0,0,0,.45);cursor:grab;touch-action:pan-y}
 .map-viewport.dragging{cursor:grabbing;user-select:none}
 .map-stage{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
 .map-img{display:block;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;border:0!important;box-shadow:none!important;user-select:none;-webkit-user-drag:none}
@@ -92,13 +92,15 @@
    }
  }
  viewport.addEventListener('pointerdown',e=>{
-   pointers.set(e.pointerId,localPoint(e));viewport.setPointerCapture(e.pointerId);viewport.classList.add('dragging');beginGesture();
+   pointers.set(e.pointerId,localPoint(e));
+   if(e.pointerType==='touch'&&pointers.size<2){gesture=null;return}
+   viewport.setPointerCapture(e.pointerId);viewport.classList.add('dragging');beginGesture();
  });
  viewport.addEventListener('pointermove',e=>{
    if(!pointers.has(e.pointerId))return;
    pointers.set(e.pointerId,localPoint(e));
    const pts=[...pointers.values()];
-   if(pts.length===1&&gesture?.type==='pan'){
+   if(pts.length===1&&gesture?.type==='pan'&&e.pointerType!=='touch'){
      x=gesture.x+(pts[0].x-gesture.start.x);y=gesture.y+(pts[0].y-gesture.start.y);clampPan();apply();
    }else if(pts.length>=2){
      const a=pts[0],b=pts[1],cx=(a.x+b.x)/2,cy=(a.y+b.y)/2;
