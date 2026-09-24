@@ -443,9 +443,12 @@
       "repairClass": "Heavy",
       "source": {
         "file": "evidence-inbox/armour/security-helmet__stats-100-durability__2026-09-18_131628.png",
-        "status": "screenshot-verified",
-        "note": "100% durability screenshot evidence"
-      }
+        "status": "pending-review",
+        "note": "100% durability screenshot evidence",
+        "lastVerified": null
+      },
+      "durability": 98,
+      "image": "evidence-inbox/armour/security-helmet_bg-ico_24092026.png"
     },
     {
       "id": "skull-mask",
