@@ -86,10 +86,12 @@
       "radiation": 30,
       "repairClass": "Heavy",
       "source": {
-        "file": "armour.html",
-        "status": "existing-site-data"
+        "file": "evidence-inbox/armour/Ekzoskelet-armor_bg-icon_24092026.png",
+        "status": "screenshot-verified",
+        "note": null,
+        "lastVerified": null
       },
-      "durability": 99,
+      "durability": 100,
       "image": "evidence-inbox/armour/Ekzoskelet-armor_bg-icon_24092026.png"
     },
     {
