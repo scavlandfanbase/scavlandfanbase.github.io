@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 484,
+  "count": 486,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -406,6 +406,15 @@
       "ocr": "cl —————E Old GP-4 Gas Mask ~15000P ra Rank: 1 This widespread Gas Mask was issued to Civil Defense and civilians alike, during the times of War. Vultures and Bandits often wear these for days at a time, and the mask’s straps dig themselves painfully into the back of their heads. This one is on the brink of shattering completely, rendering it mostly ineffective. Durability DUUANUUUNUITNIMIIT 100 Ballistic Res 0 Slash Res | 5 Rad Res ill 18 Repair Class: Tattered -"
     },
     {
+      "file": "armour/old-gp4-gas-mask_bg-icon_24092026.png",
+      "sha256": "d45f4dc2b5c55f619878b022257d27d1dd0968ac28351fa6f0ed2c82f8814756",
+      "bytes": 754,
+      "width": 17,
+      "height": 30,
+      "phash": "c4e46e4e623e3b83",
+      "ocr": "3"
+    },
+    {
       "file": "armour/old-tactical-pants__stats-100-durability__2026-09-20.png",
       "sha256": "6468d95ae3779e07e627c6c0b3c149e79491b64fe7d777ca32edd336bafddaad",
       "bytes": 237954,
@@ -458,6 +467,15 @@
       "height": 497,
       "phash": "d085276c3d5b2cc7",
       "ocr": "gt Parade Helmet ~29000P A high-quality steel helmet, a during the War. A red star was painted on it at some point; anyone who would've known what it means is long gone. Durability THNTTANITITAANHTIIN 100 Ballistic Res Ill 18 Slash Res Il 15 Rad Res | 5 Repair Class: Medium"
+    },
+    {
+      "file": "armour/parade-helmet_bg-icon_24092026.png",
+      "sha256": "f978c7241642e426ac2fc275b3af59340ecba2226f3d185a26c4b297196bd63f",
+      "bytes": 774,
+      "width": 25,
+      "height": 30,
+      "phash": "c7c43e4b383ec961",
+      "ocr": "&"
     },
     {
       "file": "armour/parade-helmet_icon_22092026.png",
