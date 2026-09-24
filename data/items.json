@@ -1305,7 +1305,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/Glue_bg-icon__24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/armour/glue__recipe__2026-09-18_205415.png",
