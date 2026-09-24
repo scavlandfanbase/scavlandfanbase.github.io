@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 510,
+  "count": 511,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -4597,6 +4597,16 @@
       "height": 262,
       "phash": "c70e3c879ef03ec0",
       "ocr": ""
+    },
+    {
+      "file": "vendors/zhivan_character_bg-icon_2026-09-21 145809.png",
+      "sha256": "78187cb15420b023031d2918f146c8419dcf9e9781cfb8b74703f83aa58ef3fa",
+      "bytes": 7992,
+      "filename_timestamp": "2026-09-21T14:58:09",
+      "width": 256,
+      "height": 262,
+      "phash": "c54e3ca51ee03ef0",
+      "ocr": "&."
     },
     {
       "file": "vendors/zhivan_shop-screen-part-1_2026-09-21 131439.png",
