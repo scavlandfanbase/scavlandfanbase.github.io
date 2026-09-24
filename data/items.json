@@ -1378,7 +1378,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/Gun-lube_bg-icon__24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/weapon/gun-lube__recipe__2026-09-18_205320.png",
