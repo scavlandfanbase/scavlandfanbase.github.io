@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 488,
+  "count": 510,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -13,6 +13,10 @@
     [
       "armour/ashen-ushanka_2026-09-20 211045.png",
       "armour/ashen-ushanka__stats-100-durability__2026-09-20.png"
+    ],
+    [
+      "blueprints/basic-gun-repair-kit-Blueprint_bg-icon.png",
+      "items/scavenger-armor-repair-kit-Blueprint_bg-icon.png"
     ],
     [
       "vendors/gavron__shop-screen-part-2__2026-09-20.png",
@@ -2209,6 +2213,24 @@
       "ocr": ""
     },
     {
+      "file": "items/Adv-Mechanical-Parts__24092026.png",
+      "sha256": "a09b63d3d1f1ec62096c9640ab6d5e30e501b3785da19f21d6c73ee98e198516",
+      "bytes": 2049,
+      "width": 187,
+      "height": 180,
+      "phash": "94ce2a666ed8391b",
+      "ocr": "“ts"
+    },
+    {
+      "file": "items/Battery_bg-icon__24092026.png",
+      "sha256": "15666196a3d6a30297bc8981150a1df72744a60777b25a8eae842985efe90049",
+      "bytes": 759,
+      "width": 90,
+      "height": 90,
+      "phash": "82952a5a722f6dad",
+      "ocr": "oa"
+    },
+    {
       "file": "items/Berry-Puree_bg-icon.png",
       "sha256": "9be962d3d01e5931adae3f1fe615e4c0a2d869b8cc80df641bf7b7c308b4d5d8",
       "bytes": 3914,
@@ -2216,6 +2238,15 @@
       "height": 189,
       "phash": "e93896e719986539",
       "ocr": ""
+    },
+    {
+      "file": "items/Body-Armor-Plate_bg_icon_24092026.png",
+      "sha256": "85a998aeb66fb97e0db7f787f2893052b681eb21527f2914432e2d9f42a83c59",
+      "bytes": 616,
+      "width": 90,
+      "height": 102,
+      "phash": "c0c30f273f3c1e3c",
+      "ocr": "a"
     },
     {
       "file": "items/Butter_bg-icon.png",
@@ -2227,6 +2258,24 @@
       "ocr": "a"
     },
     {
+      "file": "items/Canteen_bg-icon__24092026.png",
+      "sha256": "58691fec4d3efe06f4833b0802b83f4d52f0bd38e8ab27f3739455c72b7bb655",
+      "bytes": 1024,
+      "width": 101,
+      "height": 99,
+      "phash": "edcad08981af8b3c",
+      "ocr": "a"
+    },
+    {
+      "file": "items/Chemical_residue_bg-icon__24092026.png",
+      "sha256": "3de19bb3570c0766b7f4eecfa2f9a935b59195376e34f3ae75746f45a5b1364e",
+      "bytes": 739,
+      "width": 54,
+      "height": 132,
+      "phash": "c13e3e6d6bc13291",
+      "ocr": "F"
+    },
+    {
       "file": "items/Cigarettes_bg-icon.png",
       "sha256": "1ac2e7ca4959be49817818cc605dbf8b17b3dac39594696f2880fef09a7b55cb",
       "bytes": 771,
@@ -2236,6 +2285,15 @@
       "ocr": "EB"
     },
     {
+      "file": "items/Cloth_bg-icon__24092026.png",
+      "sha256": "170896de9a107d992344d6945c2c7b527ab83856a692871af4d120004bcc3cd5",
+      "bytes": 803,
+      "width": 144,
+      "height": 84,
+      "phash": "858f7a7087e0336e",
+      "ocr": "pe"
+    },
+    {
       "file": "items/Currant-Berries_bg-icon.png",
       "sha256": "bdf2724836b913b6366d642f71c99a35a97dfd555a8dab192a12248a0dca95ac",
       "bytes": 660,
@@ -2243,6 +2301,105 @@
       "height": 103,
       "phash": "facd95b287693848",
       "ocr": ""
+    },
+    {
+      "file": "items/Echelon-Killer-Applebg-icon_24092026.png",
+      "sha256": "20b62df8693e1b5214789802f3c3fa91a545ccc1a13f83665b33393373bdc619",
+      "bytes": 690,
+      "width": 97,
+      "height": 105,
+      "phash": "edce933186309b93",
+      "ocr": ""
+    },
+    {
+      "file": "items/Fish-Soupbg-icon_24092026.png",
+      "sha256": "385b07083112cf219619a289759e8392b34fbf3b88d4a26fd86672bab63abc39",
+      "bytes": 3325,
+      "width": 198,
+      "height": 202,
+      "phash": "e592c6699a6d31a6",
+      "ocr": "@"
+    },
+    {
+      "file": "items/Glue_bg-icon__24092026.png",
+      "sha256": "9b5d27f42cbd76b3c24cb211936f93ee813d856f7150d3b9e3a42cf7d6f9e91e",
+      "bytes": 670,
+      "width": 132,
+      "height": 66,
+      "phash": "91826f6b70b4d687",
+      "ocr": "= 1_|"
+    },
+    {
+      "file": "items/Gold-Chain_bg-icon_24092026.png",
+      "sha256": "4467c0b021ec517554e4908d3fd2db6e0070eca193409d3542ae891d18ee8411",
+      "bytes": 2613,
+      "width": 202,
+      "height": 102,
+      "phash": "f8679584ce999368",
+      "ocr": "="
+    },
+    {
+      "file": "items/Gun-lube_bg-icon__24092026.png",
+      "sha256": "92dc0334aea75091635318054934fa48c11cd5a3aa797b80dc0c6928983e7e51",
+      "bytes": 625,
+      "width": 54,
+      "height": 102,
+      "phash": "c11e3cb173c79c70",
+      "ocr": "fs"
+    },
+    {
+      "file": "items/Hammerbg-icon_24092026.png",
+      "sha256": "9fcaff3893ba2c7c6adc0139f863f27599d4a84a73003fda65f08112ce04da17",
+      "bytes": 909,
+      "width": 93,
+      "height": 183,
+      "phash": "e55a9aa591311b4f",
+      "ocr": "T"
+    },
+    {
+      "file": "items/Herb_bg-icon_24092026.png",
+      "sha256": "6673c4be25c87a538bdb6cffa3de317cd0a0f425758ab64e48e76498aa7b53ab",
+      "bytes": 1656,
+      "width": 102,
+      "height": 207,
+      "phash": "f84e95b064b1a766",
+      "ocr": "¥"
+    },
+    {
+      "file": "items/Kevlar_bg-icon_24092026.png",
+      "sha256": "71bd7b36dea5c0ea23e7cd798505add3f5e5a0a02d683f95fb07f291e15b6e3b",
+      "bytes": 1271,
+      "width": 120,
+      "height": 150,
+      "phash": "c3c73e3c6c3b38c0",
+      "ocr": ""
+    },
+    {
+      "file": "items/Mechanical-Parts_bg-icon__24092026.png",
+      "sha256": "124fd765a98c8d606637b61ddde3d12690eb49ec09a72fec611f9748b60dfaf9",
+      "bytes": 1501,
+      "width": 174,
+      "height": 150,
+      "phash": "d996194c73f13127",
+      "ocr": "at oy"
+    },
+    {
+      "file": "items/Moonshine_bg-icon__24092026.png",
+      "sha256": "4c50717e7e9c4af13e7aaded05b1ddd9d01d62f17d552e4810cfdba91b35a954",
+      "bytes": 836,
+      "width": 83,
+      "height": 168,
+      "phash": "efb090839b4fc638",
+      "ocr": ""
+    },
+    {
+      "file": "items/Morphine_bg-icon_24092026.png",
+      "sha256": "953592b10254424de8e2823790941567cdd40e3cedebb860e98991eab94a67f1",
+      "bytes": 1093,
+      "width": 109,
+      "height": 207,
+      "phash": "be3fd1c060341b4f",
+      "ocr": "Re"
     },
     {
       "file": "items/Potato_bg-icon.png",
@@ -2272,6 +2429,15 @@
       "ocr": ""
     },
     {
+      "file": "items/Rubber_bg-icon__24092026.png",
+      "sha256": "0c85f138d8f93cc3f1cddad364848bf4e5c0dd44af6331108588c33fc527b917",
+      "bytes": 819,
+      "width": 162,
+      "height": 78,
+      "phash": "a0d52f587a8ec32b",
+      "ocr": "eae"
+    },
+    {
       "file": "items/Salt_bg-icon.png",
       "sha256": "2c64887aa3a7d1b65b18a2300c0af882d843c6b0f97f6190c99e3d9217a2b7c8",
       "bytes": 1859,
@@ -2281,6 +2447,24 @@
       "ocr": "o>"
     },
     {
+      "file": "items/Scrap-Metal-Parts_bg-icon__24092026.png",
+      "sha256": "0e727db21dae3a66a4eee3e79c9591d5ffe714673ceade27c40761475cd9a839",
+      "bytes": 794,
+      "width": 174,
+      "height": 84,
+      "phash": "d2492e967af8c139",
+      "ocr": "i"
+    },
+    {
+      "file": "items/Screwdriver_bg-icon__24092026.png",
+      "sha256": "3b473b9e40aecb4307296b3510b19cc86dd23d43f6e50987c42d84cada8ad857",
+      "bytes": 573,
+      "width": 84,
+      "height": 84,
+      "phash": "b46ae59249a5532f",
+      "ocr": "oN"
+    },
+    {
       "file": "items/Undead-Arm_bg_icon.png",
       "sha256": "c2da94fac4f2c04fdf8295dd56b1bae93c6e1bdaf3c9c7e0c79c527077347af5",
       "bytes": 4312,
@@ -2288,6 +2472,15 @@
       "height": 201,
       "phash": "ee61859c7872836b",
       "ocr": "’ ne"
+    },
+    {
+      "file": "items/Whole-Roasted-Fish_bg-icon__24092026.png",
+      "sha256": "fd9b41782ba60ab844d6c9f75b8ea7332d6571c4f2b56e3ec066dadf6f171fd2",
+      "bytes": 2545,
+      "width": 199,
+      "height": 192,
+      "phash": "e859973759ca2439",
+      "ocr": ""
     },
     {
       "file": "items/acid-gland__icon__2026-09-21.png",
@@ -3731,6 +3924,15 @@
       "height": 850,
       "phash": "e0a13d2d87f2d24e",
       "ocr": "a Sardines ~2400P FPank: Rank: 1 The best military ration there is — even if it’s a bit too fermented. The salty taste makes me thirsty. Hunger: -20 Thirst: +2 os"
+    },
+    {
+      "file": "items/scavenger-armor-repair-kit-Blueprint_bg-icon.png",
+      "sha256": "d6b81c84b76adc1db596d9758f6f85e7ff0d49bb513cdeddcc8629e97e80dbda",
+      "bytes": 2210,
+      "width": 204,
+      "height": 210,
+      "phash": "e869871c963ccab6",
+      "ocr": ""
     },
     {
       "file": "items/scrap-gun-repair-kit__tooltip-alt__2026-09-18_085008.png",
