@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 482,
+  "count": 484,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -249,15 +249,6 @@
       "ocr": ""
     },
     {
-      "file": "armour/Ekzoskelet-armor_bg-icon_24092026.png",
-      "sha256": "3e2160221f022e453db6133dd2303fe9e99429fb679dfe2f69b2f6a47904d8f2",
-      "bytes": 1364,
-      "width": 36,
-      "height": 39,
-      "phash": "85b4673d2d4b5a62",
-      "ocr": ""
-    },
-    {
       "file": "armour/GP-4 Gas Mask.png",
       "sha256": "aad108d64a378087bd14f3b9078fd3ff0e79bf913bd51ea52dea2f25a813a1c5",
       "bytes": 1180,
@@ -442,6 +433,15 @@
       "ocr": "i es ee Old Tactical Vest ~75000P A beat-up tactical vest worn by police forces of pre-Mist times. It offers great mobility and decent protection against weaker types of weapon fire. This vest is usually a reward for those with basic training and experience in the field. Durability TITTAUIANITANIIIHY 100 Ballistic Res HUTT 35 Slash Res I 25 Rad Res Ill 15 Repair Class: Medium as"
     },
     {
+      "file": "armour/old-tactical-vest_bg-icon_24092026.png",
+      "sha256": "f04e190f74c9bb304d9581e8353bf3defc9532b843c2da63b1464e95fabc3a54",
+      "bytes": 962,
+      "width": 34,
+      "height": 33,
+      "phash": "84e4161e3a8f71f9",
+      "ocr": "ae"
+    },
+    {
       "file": "armour/panskiy-kask__stats-100-durability__2026-09-20.png",
       "sha256": "9df42abd095a9ce5865206f321acc9df7b211169048951e3a2edb9367580cf59",
       "bytes": 325632,
@@ -487,6 +487,15 @@
       "height": 1059,
       "phash": "d0b7272c39726cc3",
       "ocr": "Riot Vest ~86000P This extra-sturdy, plated armor seems good enough to hold hack a crowd of people, and even withstand some fire. It is heavy and difficult to wear, but survival is worth a little struggle. Durability PUNTUAUNTUUUNINIIIIT 100 Ballistic Res Ud 40 Slash Res NTT 50 Rad Res ill 20 Repair Class: Heavy wl"
+    },
+    {
+      "file": "armour/scrap-armor_bg-icon_24092026.png",
+      "sha256": "e52fc4d7c52b91e3ed171a405646b3e15f0289ec62d29c00e843b4df4a463db6",
+      "bytes": 1158,
+      "width": 34,
+      "height": 36,
+      "phash": "c19416663fb7348d",
+      "ocr": "1S"
     },
     {
       "file": "armour/security-helmet__stats-100-durability__2026-09-18_131628.png",
