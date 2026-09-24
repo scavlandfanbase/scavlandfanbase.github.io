@@ -928,7 +928,7 @@
         "crafting-resource",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/Canteen_bg-icon__24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/items/canteen__tooltip__2026-09-18_085107.png",
