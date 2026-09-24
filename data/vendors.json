@@ -2675,15 +2675,15 @@
         "lastVerified": "2026-09-21"
       },
       "portrait": {
-        "file": "evidence-inbox/factions/zhivan-vultures__character-card__2026-09-13_212725.png",
+        "file": "evidence-inbox/vendors/zhivan_character_bg-icon_2026-09-21 145809.png",
         "status": "screenshot-verified",
         "evidence": "character-card",
         "crop": {
-          "x": 20,
-          "y": 26,
-          "size": 240
+          "x": 0,
+          "y": 0,
+          "size": 256
         },
-        "sourceWidth": 675
+        "sourceWidth": 256
       },
       "shopEvidence": {
         "status": "pending-review",
