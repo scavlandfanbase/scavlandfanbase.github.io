@@ -4165,7 +4165,7 @@
         "junk-item",
         "vendor-item"
       ],
-      "image": "evidence-inbox/items/square-battery__icon__2026-09-21.png",
+      "image": "evidence-inbox/items/Battery_bg-icon__24092026.png",
       "notes": "Candidate junk item from supplied tooltip.",
       "estimatedPrice": 1500,
       "maxStack": 5,
