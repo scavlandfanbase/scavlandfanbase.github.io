@@ -1393,7 +1393,7 @@
         "crafting-resource",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/Hammerbg-icon_24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/items/hammer__tooltip__2026-09-18_091636.png",
