@@ -388,7 +388,8 @@
         "lastVerified": "2026-09-20",
         "note": "Direct in-game screenshot at 100% durability."
       },
-      "durability": 100
+      "durability": 100,
+      "image": "evidence-inbox/armour/riot-vest_bg-icon_24092026.png"
     },
     {
       "id": "ruined-beret",
