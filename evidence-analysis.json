@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 480,
+  "count": 482,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -237,6 +237,15 @@
       "width": 87,
       "height": 97,
       "phash": "fe85809781d999ce",
+      "ocr": ""
+    },
+    {
+      "file": "armour/Ekzoskelet-armor_bg-icon_24092026.png",
+      "sha256": "3e2160221f022e453db6133dd2303fe9e99429fb679dfe2f69b2f6a47904d8f2",
+      "bytes": 1364,
+      "width": 36,
+      "height": 39,
+      "phash": "85b4673d2d4b5a62",
       "ocr": ""
     },
     {
@@ -479,6 +488,15 @@
       "height": 987,
       "phash": "c087276d39736cc3",
       "ocr": "al Security Helmet ~89000P A reinforced metal helmet with an armored visor, designed for heavy-duty security work. Offers great protection, but is exhaustive to wear for long periods. Durability DUUULUUATUITNIMIINT° 100 Ballistic Res UAT 35 Slash Res UAT 35 Rad Res ill 20 Repair Class: Heavy"
+    },
+    {
+      "file": "armour/security-helmet_bg-ico_24092026.png",
+      "sha256": "0cde7bf567cb6a1a24c80bc6af1516a99132c84824ab3f7d06189fe9c4451de7",
+      "bytes": 729,
+      "width": 25,
+      "height": 29,
+      "phash": "c4270fde39303e71",
+      "ocr": "J"
     },
     {
       "file": "armour/skull-mask__stats-100-durability__2026-09-20.png",
