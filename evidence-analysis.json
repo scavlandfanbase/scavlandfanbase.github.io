@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 486,
+  "count": 488,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -487,6 +487,15 @@
       "ocr": "& |"
     },
     {
+      "file": "armour/plated-overcoat_bg-icon_24092026.png",
+      "sha256": "f3aa6023bb84b93b6c0814390653f5e0b28096d8539cb724e364f2d867ebb827",
+      "bytes": 1219,
+      "width": 34,
+      "height": 41,
+      "phash": "d2f0020f2d3d7dd8",
+      "ocr": "on Pe"
+    },
+    {
       "file": "armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
       "sha256": "cbb73e8101db23ba162505a4ad0ad6040dd34b7f503a07d3aff3435ec004b2d1",
       "bytes": 637984,
@@ -505,6 +514,15 @@
       "height": 1059,
       "phash": "d0b7272c39726cc3",
       "ocr": "Riot Vest ~86000P This extra-sturdy, plated armor seems good enough to hold hack a crowd of people, and even withstand some fire. It is heavy and difficult to wear, but survival is worth a little struggle. Durability PUNTUAUNTUUUNINIIIIT 100 Ballistic Res Ud 40 Slash Res NTT 50 Rad Res ill 20 Repair Class: Heavy wl"
+    },
+    {
+      "file": "armour/riot-vest_bg-icon_24092026.png",
+      "sha256": "d9e978e9295477d152e4e112def8828513cd3255ed3bde497a983698d9c9aac0",
+      "bytes": 1188,
+      "width": 33,
+      "height": 38,
+      "phash": "d1e41346794e391f",
+      "ocr": ""
     },
     {
       "file": "armour/scrap-armor_bg-icon_24092026.png",
