@@ -3202,7 +3202,7 @@
         "crafting-resource",
         "crafted-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/sewing-kit_bg-icon_24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/armour/sewing-kit__recipe__2026-09-18_205431.png",

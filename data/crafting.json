@@ -550,7 +550,8 @@
       "source": {
         "file": "evidence-inbox/crafting/armour/sewing-kit__recipe__2026-09-18_205431.png",
         "status": "screenshot-verified"
-      }
+      },
+      "image": "evidence-inbox/items/sewing-kit_bg-icon_24092026.png"
     },
     {
       "id": "field-repair-kit",
