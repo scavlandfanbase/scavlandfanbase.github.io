@@ -3712,7 +3712,7 @@
         "junk-item",
         "vendor-item"
       ],
-      "image": "evidence-inbox/items/big-filter__icon__2026-09-21.png",
+      "image": "evidence-inbox/items/big-filter_bg-icon_25092026.png",
       "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
       "estimatedPrice": 3000,
       "maxStack": 5,
