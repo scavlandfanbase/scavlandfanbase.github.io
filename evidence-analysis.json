@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 570,
+  "count": 571,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -564,6 +564,15 @@
       "height": 1003,
       "phash": "d091276d399bcec2",
       "ocr": "ro rs a, » Skull Mask ~5000P A menacing mask in the shape of a skull, worn by different folks for different reasons: some in respect and awe of the dead, others in order to intimidate and scare. Durability Te Ballistic Res | 3 Slash Res I| 10 Rad Res 0 Repair Class: Tattered 1}"
+    },
+    {
+      "file": "armour/skull-mask_bg-icon_25092026.png",
+      "sha256": "a267f074df0714514b89c307749516afb65f4a1e9a0b3572ec34c962eb9d4c3e",
+      "bytes": 4531,
+      "width": 306,
+      "height": 174,
+      "phash": "cccc3339333389e6",
+      "ocr": "¢"
     },
     {
       "file": "armour/stronghold-vest__stats-100-durability__2026-09-20.png",
