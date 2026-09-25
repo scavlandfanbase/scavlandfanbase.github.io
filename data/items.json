@@ -3787,7 +3787,7 @@
         "junk-item",
         "vendor-item"
       ],
-      "image": "evidence-inbox/items/chemical-container__icon__2026-09-21.png",
+      "image": "evidence-inbox/items/chemical-container_bg-icon_25092026.png",
       "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
       "estimatedPrice": 1000,
       "maxStack": 5,
