@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 540,
+  "count": 568,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -2204,6 +2204,33 @@
       "ocr": "Zhivan | * ae Vultures : J"
     },
     {
+      "file": "items/AI-2-army-medkit_bg-icon_24092026.png",
+      "sha256": "a877fc1fb7017439243a05385ef9c195aaaf2ba44b8e54d71b5c713b05113ef8",
+      "bytes": 261,
+      "width": 16,
+      "height": 16,
+      "phash": "cc992f49f0ad2372",
+      "ocr": "@"
+    },
+    {
+      "file": "items/AI-2-mechanist-medkit_bg-icon_24092026.png",
+      "sha256": "f08e859576ef667e09a7744b8861f89d39a07aa534adbb9bfdf50a7aa75cba7d",
+      "bytes": 322,
+      "width": 16,
+      "height": 16,
+      "phash": "94c94b363bc07ef0",
+      "ocr": ""
+    },
+    {
+      "file": "items/AI-2-medkit_bc-icon_25092026.png",
+      "sha256": "230f17ddd105a28b8cd0319c45d5125ff3b990771330ec35354c94cbb1afad64",
+      "bytes": 738,
+      "width": 96,
+      "height": 96,
+      "phash": "855a2d4af0b553b5",
+      "ocr": "a uy"
+    },
+    {
       "file": "items/Acid-Gland_bg-icon.png",
       "sha256": "5456f4b96ef4b68c298a83edd74ef4fe6d9500f2a70378ce4020079742dce15d",
       "bytes": 2107,
@@ -2402,6 +2429,15 @@
       "ocr": "Re"
     },
     {
+      "file": "items/Pliers_bg-icon__24092026.png",
+      "sha256": "ab529b61ff2a5aba26d3a137a807a8274299871e686775f4f938a6b64115a456",
+      "bytes": 632,
+      "width": 108,
+      "height": 72,
+      "phash": "c0e0733d2e965a1f",
+      "ocr": "a"
+    },
+    {
       "file": "items/Potato_bg-icon.png",
       "sha256": "72ccf817d3c637e7592f26d41e9371d6f12a72ad03208d059137a1032fa00606",
       "bytes": 657,
@@ -2492,6 +2528,15 @@
       "ocr": "’ ne"
     },
     {
+      "file": "items/Wg-40_bg-icon__24092026.png",
+      "sha256": "a48ed3dc3e05282cc18faa54517fff9b72e5fd10882721a582057c4b207cf20f",
+      "bytes": 736,
+      "width": 54,
+      "height": 132,
+      "phash": "c13a3f6f1fc130d0",
+      "ocr": "Pe 1 J"
+    },
+    {
       "file": "items/Whole-Roasted-Fish_bg-icon__24092026.png",
       "sha256": "fd9b41782ba60ab844d6c9f75b8ea7332d6571c4f2b56e3ec066dadf6f171fd2",
       "bytes": 2545,
@@ -2558,6 +2603,15 @@
       "ocr": "Advanced Bandage ~4000P High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 wl"
     },
     {
+      "file": "items/advanced-gun-repair-kit_bg-icon_24092026.png",
+      "sha256": "87d39d2dedd92758fb52c3c5c0ca76c5eb03a2a58b7caa2c25c21a16de5c8828",
+      "bytes": 536,
+      "width": 34,
+      "height": 21,
+      "phash": "d0fc3f909f3f0181",
+      "ocr": "—|"
+    },
+    {
       "file": "items/advanced-gun-repair-kit_tooltip_2026-09-20 235934.png",
       "sha256": "28d2d9df1732757df73c4e32d31860a4f68f1fd83b783fc94e6204b94e43b196",
       "bytes": 133677,
@@ -2608,6 +2662,15 @@
       "ocr": "Yr Al-2 Medkit ~3200P FPank: Rank: 1 This war-proven medkit has outlived both its owner and their country. Can't shake the feeling that | shouldn't use it lightly. Health: +30 Radiation: -15 Hunger: «3 Thirst: +3 -."
     },
     {
+      "file": "items/antique-pocket-compass_bg-icon_24092026.png",
+      "sha256": "7a0ab4276330b318a76e1044abbb1f69252c0522eea119c9bb92023ef19f8db0",
+      "bytes": 604,
+      "width": 16,
+      "height": 23,
+      "phash": "c125d2d03bca6bcb",
+      "ocr": "BQ @"
+    },
+    {
       "file": "items/armor-plate__tooltip__2026-09-18_091919.png",
       "sha256": "1ceb2cc417b23c250c032f83303994f0d00e0eacd14a7ef438465373de0fe7bd",
       "bytes": 66553,
@@ -2626,6 +2689,15 @@
       "height": 856,
       "phash": "f0a53d3887e49e1a",
       "ocr": "r Bandage ~250P Dank. Rank: 1 These tattered bandages look like they'll infect my wounds rather than protect them. Still, it’s better than nothing — and I've used worse. Health: +5 Bleed: -15 -"
+    },
+    {
+      "file": "items/basic-gun-repair-kit_bg-icon_24092026.png",
+      "sha256": "feedb3496be91c14916294e3d432c1575be84cb9bff76396825e85fde42fb01c",
+      "bytes": 557,
+      "width": 34,
+      "height": 19,
+      "phash": "f0ec4fc24a4f6ab0",
+      "ocr": "ea"
     },
     {
       "file": "items/beans-soup__icon__2026-09-21_225235.png",
@@ -2756,6 +2828,15 @@
       "ocr": "i Butcher Knife ~1000P A common butcher's knife, reappropriated for field use out of desperation. The wooden handle is rotting off. a"
     },
     {
+      "file": "items/butcher-knife_bg-icon_25092026.png",
+      "sha256": "dec6563f10791d39d5c6d77a80b1382a46540672d661a0bc4dd9c7e4afb56134",
+      "bytes": 1944,
+      "width": 171,
+      "height": 57,
+      "phash": "946b6b94a56b1a65",
+      "ocr": "= oe"
+    },
+    {
       "file": "items/butter__icon__2026-09-21.png",
       "sha256": "41826c0fee0ae506a5497a04addb02754f424ec7ca42e29aa94e66b5bcd4d5eb",
       "bytes": 792,
@@ -2855,6 +2936,15 @@
       "height": 517,
       "phash": "e5a12b78949e7a1a",
       "ocr": "r . Cassette Tape ~1500P A tape used to store sounds and music. Been decades since last | heard one. Don't think I'll find a working device to play this on... a"
+    },
+    {
+      "file": "items/cassette-tape_bg-icon_24092026.png",
+      "sha256": "9a3497c6419526fcbfc8ff7e02e9238e15aff07c64f8a972ee68e44a2e87f955",
+      "bytes": 375,
+      "width": 16,
+      "height": 15,
+      "phash": "87923862676dcd99",
+      "ocr": "oe"
     },
     {
       "file": "items/chemical-container__icon__2026-09-21.png",
@@ -2970,6 +3060,15 @@
       "ocr": "yi : Diamond Ring ~10000P A diamond ring which probably symbolized some sort of love or marriage. Priceless before the War; could someone in Zalesye still be interested? -"
     },
     {
+      "file": "items/diamond-ring_bg-icon_25092026.png",
+      "sha256": "69fcececc1bac8d25c0dbbded73673c3ab031190a37f73ebddedc34972a37f88",
+      "bytes": 2503,
+      "width": 81,
+      "height": 87,
+      "phash": "c7c17835271e9c99",
+      "ocr": "0"
+    },
+    {
       "file": "items/dried-mushrooms__icon__2026-09-21.png",
       "sha256": "84b098a8294d22a36b18887833836b3fe78862ec93435ea273768bb6c3aa8cfc",
       "bytes": 813,
@@ -2986,6 +3085,24 @@
       "height": 838,
       "phash": "e0e52fad87521e1c",
       "ocr": "a Dried Mushrooms ~1000P Rank. Rank: 1 These dried mushrooms are specially prepared to give psychoactive effects. They've been dulled by age, but | should still be careful when | eat this. Hunger: -13 _"
+    },
+    {
+      "file": "items/dried-steak_bg-icon_25092026.png",
+      "sha256": "59bbf7116349841b669f963cd2282d039991498bb2fe55141535d068bd90f211",
+      "bytes": 2077,
+      "width": 99,
+      "height": 99,
+      "phash": "85853f3e7a62c2c3",
+      "ocr": "="
+    },
+    {
+      "file": "items/dusty-overcoat_bg-icon_25092026.png",
+      "sha256": "ee9f179b84ab1754158d0076caaf14a8345607a1a4c56e82c945bc9c52902e5b",
+      "bytes": 7747,
+      "width": 291,
+      "height": 285,
+      "phash": "cb93394c34f4334d",
+      "ocr": "“ip"
     },
     {
       "file": "items/echelon-killer-apple__icon__2026-09-21.png",
@@ -3031,6 +3148,24 @@
       "height": 100,
       "phash": "85947a6b8ec2e335",
       "ocr": "="
+    },
+    {
+      "file": "items/electrical-components_bg-icon_24092026.png",
+      "sha256": "208109c1768519828c73d3876c78fa76bcbbdffdf7627cc3ba32224c629aeaf1",
+      "bytes": 628,
+      "width": 29,
+      "height": 21,
+      "phash": "94b14ede91dc6362",
+      "ocr": "(="
+    },
+    {
+      "file": "items/expert-gun-repair-kit_bg-icon_25092026.png",
+      "sha256": "efcebd53caf13a6c14c946d03461fa9185c7fd5d0799c21692dba4a4edafc2a8",
+      "bytes": 748,
+      "width": 38,
+      "height": 27,
+      "phash": "d1fb7e9563403612",
+      "ocr": ""
     },
     {
       "file": "items/fabric-scrap__tooltip__2026-09-18_091726.png",
@@ -3117,6 +3252,15 @@
       "ocr": "a a _— | | Glue ~3000P 2699P \"Rank. Rank: 1 A small tub of glue used to quickly patch holes in clothing. Useful to have while out in the field. Repair: 5% Not usable below item condition: 80% Repair Class: Global af"
     },
     {
+      "file": "items/glue_bg-icon_24092026.png",
+      "sha256": "5f90998ab2577378fa8b953896cd835201f538320daaa7f8ce87a8ebaad63948",
+      "bytes": 366,
+      "width": 22,
+      "height": 11,
+      "phash": "81c26f6b70b4c697",
+      "ocr": "7!"
+    },
+    {
       "file": "items/gold-chain__icon__2026-09-21_224536.png",
       "sha256": "39f2b66c37a01da1191c60fb2b47d08b39146f29427341f54f510105c2ca5258",
       "bytes": 982,
@@ -3147,6 +3291,24 @@
       "ocr": "all | Gun Cleaning Rod ~5000P 4499P Rank Rank: 1 A ramrod used to clean firearms. Good for scavengers who do long stretches of field work. Repair: 15% Not usable below item condition: 70% Repair Class: Global rs"
     },
     {
+      "file": "items/gun-cleaning-rod_bg-icon_24092026.png",
+      "sha256": "126fb5e7950e37935530abe53ac4a4068a24049d0ef82f5e5d7ae4371ab2ee27",
+      "bytes": 662,
+      "width": 28,
+      "height": 29,
+      "phash": "92ccf8b8ac96d2a9",
+      "ocr": "YS"
+    },
+    {
+      "file": "items/gun-field-tools_bg-icon_24092026.png",
+      "sha256": "d12f2c4abb90d9acae2f3fc16635c7c5ca1b187a5e72c23ed4f0688edcdd2c0b",
+      "bytes": 816,
+      "width": 31,
+      "height": 22,
+      "phash": "c0c063613fba3b3e",
+      "ocr": "Fa"
+    },
+    {
       "file": "items/gun-lube__tooltip__2026-09-18_084839.png",
       "sha256": "9697a137f47bca7b8e2f5d4b1bf75ed8a2b10daf44c0cf13aec54b13ab21ea5f",
       "bytes": 109825,
@@ -3155,6 +3317,15 @@
       "height": 817,
       "phash": "c0b52d6997c25a7a",
       "ocr": "al Gun Lube ~3000P 2699P Dank. Rank: 1 A lube used to polish weapons and remove any grime or carbon. Grigory even keeps a personal bottle at his bedside. Repair: 5% Not usable below item condition: 80% Repair Class: Global -"
+    },
+    {
+      "file": "items/gun-lube_bg-icon_25092026.png",
+      "sha256": "0b0ca524081c4b59afeb561048fdcf85fd9d541f369df8f7242bc3cbf2a33bb7",
+      "bytes": 348,
+      "width": 9,
+      "height": 17,
+      "phash": "c11e3cf173c71c70",
+      "ocr": "fy"
     },
     {
       "file": "items/hammer__image__2026-09-20.png",
@@ -3193,6 +3364,15 @@
       "height": 1029,
       "phash": "eac545eb8ac706a6",
       "ocr": "1 5 4 fl (oo a a. . 3 _ oe 2 = i 2 4 4 ery a fy i) s i fa ic UE CE | E Heavy Armor Repair Kit ~120000P ® High-grade tools for fixing up heavy armor that's seen a lot of | _ action. Maybe just carrying this around attracts good armor Lu loot? * 5 Repair: 25% at ©, Usable in any item condition. Repair Class: Heavy mi ra"
+    },
+    {
+      "file": "items/heavy-armour-repair-kit_bg-icon_24092026.png",
+      "sha256": "5d19be06e7a498ae8bc25595c6e02195c0a8d8e3dd80aec10329dbde43a06788",
+      "bytes": 795,
+      "width": 34,
+      "height": 23,
+      "phash": "81802d577d915f3e",
+      "ocr": ""
     },
     {
       "file": "items/historical/advanced-bandage__tooltip__2026-09-13_141207.png",
@@ -3685,6 +3865,15 @@
       "ocr": "Fer WG-40 ~250P A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. r."
     },
     {
+      "file": "items/industrial-capacitor_bg-icon_24092026.png",
+      "sha256": "f8923e9132e170ea05f97c681648c691fd1158537b1f0554818016540a42aa81",
+      "bytes": 593,
+      "width": 26,
+      "height": 26,
+      "phash": "d0e8329d4fa30f1e",
+      "ocr": "ty."
+    },
+    {
       "file": "items/jerry-can_bg-icon_25092026.png",
       "sha256": "da516d1abe9db1bbe990f07773965304b54be739593c80be3833d8a30cd3fc30",
       "bytes": 4019,
@@ -3787,6 +3976,24 @@
       "ocr": "a Medicinal Herb ~50P Dank. Rank: 1 A medicinal herb commonly used in Zalesye. Some of its supposed uses are sketchy, but tradition makes us toss ‘em in the pot anyway. Health: +5 Thirst: +3 a"
     },
     {
+      "file": "items/medicinal-herb_bg-icon_24092026.png",
+      "sha256": "112a804139293fe10538c4d8122ed606d50f1828db9b69a78a90b91601ad30df",
+      "bytes": 387,
+      "width": 13,
+      "height": 23,
+      "phash": "d29e32276d69199c",
+      "ocr": "»"
+    },
+    {
+      "file": "items/medium-armor-repair-kit_bg-icon_24092026.png",
+      "sha256": "dc4bbcc9d41e5cc4de01e7e06a6e2cf8f1fe0b281e784cec24068d3be0d6fad3",
+      "bytes": 893,
+      "width": 28,
+      "height": 27,
+      "phash": "c0261ffb2ad12ed8",
+      "ocr": ""
+    },
+    {
       "file": "items/metal-pipe__icon__2026-09-21.png",
       "sha256": "1253de7801151f2ca181dbe4eabaf414b9d15db4caa7dfcb91b4c09090d0c66c",
       "bytes": 1398,
@@ -3855,6 +4062,15 @@
       "ocr": "- Mystery Pills ~6000P A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away. Health: +15 Radiation: -30 Thirst: +5 al"
     },
     {
+      "file": "items/mystery-pills_bg-icon_25092026.png",
+      "sha256": "3f60ff1d5dcd1dedc67542ef448a2c8978783f2edabf7922f14dbcc0b31e5018",
+      "bytes": 695,
+      "width": 84,
+      "height": 78,
+      "phash": "c0186e8d3d73f44d",
+      "ocr": "a a"
+    },
+    {
       "file": "items/old-canteen__icon__2026-09-21_224832.png",
       "sha256": "3d477294953219bd63df3b7aa1ceed352ff943bbd2cc14d0c03379b2fc7cb213",
       "bytes": 997,
@@ -3892,6 +4108,15 @@
       "height": 514,
       "phash": "c0e125c37a3eda17",
       "ocr": "r Plastic Scrap ~100P PRank- Rank: 1 A scrap of plastic that can maybe be recycled. al"
+    },
+    {
+      "file": "items/plastic-scrap_bg-icon_24092026.png",
+      "sha256": "78d4fe4ea01bf856f3a924cde5a74a6b7372415aae3bc80cad43b653d9a296ba",
+      "bytes": 353,
+      "width": 18,
+      "height": 13,
+      "phash": "94b73f5e6a23604a",
+      "ocr": "ae"
     },
     {
       "file": "items/plier__tooltip__2026-09-18_091651.png",
@@ -4157,6 +4382,15 @@
       "ocr": "a Screws ~100P PRank Rank: 1 A bunch of metal screws, hard to find and pick up but valuable for the tinkering types. -"
     },
     {
+      "file": "items/sewing-kit_bg-icon_24092026.png",
+      "sha256": "1006f145f66fe494331eae13a9d8c78214090aaa2585ada0f3b08c9c5330a4aa",
+      "bytes": 473,
+      "width": 18,
+      "height": 19,
+      "phash": "c4c14b872f3e347c",
+      "ocr": "=)"
+    },
+    {
       "file": "items/small-filter__icon__2026-09-21.png",
       "sha256": "fc0349e26185391ec5ff787c2899b436b8889df3c8e2218c1ba6e27b2a7f85d9",
       "bytes": 784,
@@ -4232,6 +4466,15 @@
       "ocr": "aa 5 Stimpack ~6000P Dank. Rank: 2. A complex mixture of drugs which can be quickly injected and discarded to numb pain, increase adrenaline and get me out of desperate situations. Health: +35 Hunger: «5 Thirst: «5 J"
     },
     {
+      "file": "items/stimpackv_bg-icon_24092026.png",
+      "sha256": "718ea74267c6afe023ef07c943a76fbf2b9ca4d750e0f3964791a1d42c15a4de",
+      "bytes": 442,
+      "width": 30,
+      "height": 14,
+      "phash": "c6c3233180fc7c7e",
+      "ocr": "pt=--"
+    },
+    {
       "file": "items/t-plug__icon__2026-09-21.png",
       "sha256": "83cf3ce744649658a3560b062cd595d5c49d0d16218b625cfee411be60b4b580",
       "bytes": 841,
@@ -4303,6 +4546,15 @@
       "height": 825,
       "phash": "c08d2f6295c67a7a",
       "ocr": "al Tattered Armor Repair Kit ~12000P 10799P Dank. Rank: 1 A repair kit for clothes that have seen better days. Used to fix up scrap armor by some of the poorest scavengers in Rhos. Repair: 25% Usable in any item condition. Repair Class: Tattered | a"
+    },
+    {
+      "file": "items/tattered-armor-repair-kit_bg-icon_24092026.png",
+      "sha256": "74796be8d8936bd6543d33cf9b0aadb9ccec67ae8479f830b1d3c5030dc87492",
+      "bytes": 544,
+      "width": 18,
+      "height": 20,
+      "phash": "c01f69cb763c3c83",
+      "ocr": ""
     },
     {
       "file": "items/thermometer_bg-icon_25092026.png",
