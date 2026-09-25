@@ -439,7 +439,8 @@
       "source": {
         "file": "evidence-inbox/crafting/armour/heavy-armor-repair-kit__recipe__2026-09-18_205453.png",
         "status": "screenshot-verified"
-      }
+      },
+      "image": "evidence-inbox/items/heavy-armour-repair-kit_bg-icon_24092026.png"
     },
     {
       "id": "medium-armor-repair-kit",
