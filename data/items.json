@@ -4203,7 +4203,7 @@
         "junk-item",
         "vendor-item"
       ],
-      "image": "evidence-inbox/items/light-bulb__icon__2026-09-21.png",
+      "image": "evidence-inbox/items/light-bulb_bg-icon_25092026.png",
       "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
       "estimatedPrice": 750,
       "maxStack": 5,
