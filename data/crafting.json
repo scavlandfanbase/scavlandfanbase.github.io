@@ -524,7 +524,8 @@
       "source": {
         "file": "evidence-inbox/crafting/armour/tattered-armor-repair-kit__recipe__2026-09-18_205436.png",
         "status": "screenshot-verified"
-      }
+      },
+      "image": "evidence-inbox/items/tattered-armor-repair-kit_bg-icon_24092026.png"
     },
     {
       "id": "sewing-kit",
