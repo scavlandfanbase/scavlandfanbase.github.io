@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 568,
+  "count": 569,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -5151,6 +5151,15 @@
       "height": 1068,
       "phash": "f08e2e2e31782ff0",
       "ocr": "a 2HMG (Short) ~100000P A heavy machine gun, unreliable but intimidating. Can mow down enemies with ease — and attract a whole lot more. Damage WAIT 30 Handling WUULIINI 20 +16 Fire Rate (RPM) —_|||||]] 700 Ergonomics lI 8 Range HTT 16 Reload Speed TTT 10-01 Accuracy ATT 35 Durability TTT 40 Recoil AUTH 21- 12 Repair Class: Expert Caliber: High Caliber Rifle Ammo"
+    },
+    {
+      "file": "weapons/2hmg_bg-icon_25092026.png",
+      "sha256": "faf0e146c6ad32040d4e6a70f10efcd8cfb8401cac0c351a20cff326b087f2d8",
+      "bytes": 380,
+      "width": 42,
+      "height": 11,
+      "phash": "e6ec2846efb910c6",
+      "ocr": "Fh ere"
     },
     {
       "file": "weapons/63-dragoon__stats__2026-09-13_141243.png",
