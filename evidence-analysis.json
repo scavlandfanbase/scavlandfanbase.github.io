@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 513,
+  "count": 540,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -2411,6 +2411,15 @@
       "ocr": ""
     },
     {
+      "file": "items/Pre-Mist-Money-Stack_bg-icon_24092026.png",
+      "sha256": "01229ca8f080b69559290aee27ea009ad987ca268b33667978feb348475aee90",
+      "bytes": 907,
+      "width": 103,
+      "height": 111,
+      "phash": "eac4b52f81341ef2",
+      "ocr": "aF"
+    },
+    {
       "file": "items/Rat-Tail_bg-icon.png",
       "sha256": "06b4e7b1bb07cdf5cd858939163acf868750d72a6c57757e6b6b59e3419d10da",
       "bytes": 2620,
@@ -2463,6 +2472,15 @@
       "height": 84,
       "phash": "b46ae59249a5532f",
       "ocr": "oN"
+    },
+    {
+      "file": "items/Screws_bg-icon_25092026.png",
+      "sha256": "5045757c7fd4ba674bf13cac2257f41d6cd0f01b4a3ec096e4a325e3ad766d10",
+      "bytes": 1970,
+      "width": 103,
+      "height": 105,
+      "phash": "e83793c99e4aa5c4",
+      "ocr": "at"
     },
     {
       "file": "items/Undead-Arm_bg_icon.png",
@@ -2666,6 +2684,33 @@
       "ocr": "a an Big Filter ~3000P A large filter for some sort of liquid; most likely an automobile part. wl"
     },
     {
+      "file": "items/big-filter_bg-icon_25092026.png",
+      "sha256": "f0bb59e61a719bde267766a5767570c9766395200d52972f8fc613c8031040e2",
+      "bytes": 2457,
+      "width": 100,
+      "height": 103,
+      "phash": "83c37c3c383267c7",
+      "ocr": "cad"
+    },
+    {
+      "file": "items/brass-shell-casing_bg-icon_25092026.png",
+      "sha256": "dce2894b0c7720015dbbe1c9ab7a686a743af71f116e9048756281b18f9117cd",
+      "bytes": 4787,
+      "width": 106,
+      "height": 207,
+      "phash": "95e14a172fcb706c",
+      "ocr": "é"
+    },
+    {
+      "file": "items/bread_bg-icon_25092026.png",
+      "sha256": "534f4599c8b76bb8dafdb877ddb4da455af6b40f8c6907a977908f1597aa653b",
+      "bytes": 2894,
+      "width": 102,
+      "height": 103,
+      "phash": "85943e63c1676ec9",
+      "ocr": "ll"
+    },
+    {
       "file": "items/broken-mk-receiver__icon__2026-09-21.png",
       "sha256": "730240b3ed3463ad7d5c66114f8bbd0c770a4cbb5e151990b1bb3740e1c3dd93",
       "bytes": 879,
@@ -2682,6 +2727,15 @@
       "height": 468,
       "phash": "e0c52f70da1e3a78",
       "ocr": "al Broken MK Receiver ~500P The broken body of an MK series weapon. Should be salvageable. a,"
+    },
+    {
+      "file": "items/broken-mk-receiver_bg-icon_25092026.png",
+      "sha256": "17d2f592b63f0949e5fe93c8d51add0d7eb82667f632f56a277245f5f297a144",
+      "bytes": 2480,
+      "width": 174,
+      "height": 88,
+      "phash": "94953f2a4acacbc3",
+      "ocr": ""
     },
     {
       "file": "items/butcher-knife__icon__2026-09-21.png",
@@ -2738,6 +2792,15 @@
       "ocr": "a Camera ~10000P The world used to be so-beautiful that it was worth recording and revisiting. The thought lingers as | struggle to connect it with this broken camera husk. r"
     },
     {
+      "file": "items/camera_bg-icon_25092026.png",
+      "sha256": "02491cf3c09dcb132e397706801a4120e5bf9bab3963a04dbd7f49c5307bcb52",
+      "bytes": 4599,
+      "width": 123,
+      "height": 132,
+      "phash": "959e6833cbc93436",
+      "ocr": "*"
+    },
+    {
       "file": "items/canned-beans__tooltip__2026-09-18_085113.png",
       "sha256": "810c5704e47134e83ba9d1e3b6b3a58ed897a048b81487f80e9cfdf01992bf36",
       "bytes": 162768,
@@ -2765,6 +2828,15 @@
       "height": 862,
       "phash": "e0b13de987911eca",
       "ocr": "¥ a 7 Canteen ~480P \"Rank. Rank: 1 The water around here has a taste. The implication isn’t good. | should drink this in small swigs throughout the day — lessen the risk of radiation poisoning. Thirst: -33 Radiation: -5 a"
+    },
+    {
+      "file": "items/car-battery_bg-icon_25092026.png",
+      "sha256": "768157493541243699ae53ad0d44fee616e082fc42ed0f5c1dbb4411dcfa5178",
+      "bytes": 4257,
+      "width": 237,
+      "height": 165,
+      "phash": "9787685a68655a3e",
+      "ocr": ""
     },
     {
       "file": "items/cassette-tape__icon__2026-09-21.png",
@@ -2810,6 +2882,15 @@
       "height": 466,
       "phash": "c5a52fcada1a5ac8",
       "ocr": "- Chemical Container ~1000P A chemical container for hazardous materials. Must have seemed like a big deal before the Mist. _."
+    },
+    {
+      "file": "items/chemical-container_bg-icon_25092026.png",
+      "sha256": "3fe19b2a8042a244f512669cb82f107ffa7dc9cf9a8dd609b71bfb4f9377deee",
+      "bytes": 3470,
+      "width": 211,
+      "height": 202,
+      "phash": "9e9b61656594929b",
+      "ocr": ""
     },
     {
       "file": "items/chemical-residue__tooltip__2026-09-18_091704.png",
@@ -2943,6 +3024,15 @@
       "ocr": "- _ — —_ Electric Wires ~500P A bundle of electric wires that should be reasonably valuable for a Mechanist. ail"
     },
     {
+      "file": "items/electric-wires_bg-icon_25092026.png",
+      "sha256": "734e0f59597bdbdeb76fe548b7553271307551a841341bc630c7e7d574289985",
+      "bytes": 3571,
+      "width": 198,
+      "height": 100,
+      "phash": "85947a6b8ec2e335",
+      "ocr": "="
+    },
+    {
       "file": "items/fabric-scrap__tooltip__2026-09-18_091726.png",
       "sha256": "cffae637610d0855b28c856001634a68b29aec98de6b852d7c8289d6a96a9ea5",
       "bytes": 44482,
@@ -2951,6 +3041,15 @@
       "height": 573,
       "phash": "e0e12fd49a3a5a96",
       "ocr": "ee —— a a Fabric Scrap ~100P Dank. Rank: 1 An old scrap of low-quality fabric, useful for patching up clothes. ,"
+    },
+    {
+      "file": "items/fang-of-a-veles_bg-icon_25092026.png",
+      "sha256": "0166df5da966a8b1a196a08def3155e450c0ac44c5dd2a2691ad070a686980cf",
+      "bytes": 2933,
+      "width": 204,
+      "height": 202,
+      "phash": "8e993366cc9993b2",
+      "ocr": "¢"
     },
     {
       "file": "items/field-repair-kit__tooltip__2026-09-18_084748.png",
@@ -3586,6 +3685,15 @@
       "ocr": "Fer WG-40 ~250P A lubricant bottle so old and busted I'd need lubricant to open it. Still valuable for the tinkerers in Zalesye. r."
     },
     {
+      "file": "items/jerry-can_bg-icon_25092026.png",
+      "sha256": "da516d1abe9db1bbe990f07773965304b54be739593c80be3833d8a30cd3fc30",
+      "bytes": 4019,
+      "width": 153,
+      "height": 211,
+      "phash": "851a7a2d6fe171c4",
+      "ocr": "iz"
+    },
+    {
       "file": "items/kevlar-weave__tooltip__2026-09-18_091913.png",
       "sha256": "0293ecc64b372223577a73204d00c4448d1b7f6d49999a4e1e99aabb033f860f",
       "bytes": 54350,
@@ -3594,6 +3702,15 @@
       "height": 574,
       "phash": "e0b52fc49a7a4a96",
       "ocr": "al Kevlar Weave ~10000P FRank. Rank: 2, A fabric designed for high impact resistance, usually sewn onto armor to make it bulletproof. a r."
+    },
+    {
+      "file": "items/large-pumpkin_bg-icon_25092026.png",
+      "sha256": "3d003057d657133686d6ef0f05b5dc67673d17b98547fb8f56d7aa35932f63cb",
+      "bytes": 2657,
+      "width": 201,
+      "height": 106,
+      "phash": "9a336165a6e68e99",
+      "ocr": ""
     },
     {
       "file": "items/light-bulb__icon__2026-09-21.png",
@@ -3612,6 +3729,24 @@
       "height": 517,
       "phash": "c0b12d4dde964a1f",
       "ocr": "ro . Light Bulb ~750P A light bulb that seems to have stood the test of time: Might be worth offering to a Mechanist. a."
+    },
+    {
+      "file": "items/light-bulb_bg-icon_25092026.png",
+      "sha256": "e3434c50eb016aa2b73a7af3e2387b9c0895e13e3f600d044c71dcc3f2c04062",
+      "bytes": 2361,
+      "width": 93,
+      "height": 99,
+      "phash": "989f73473e684a58",
+      "ocr": ","
+    },
+    {
+      "file": "items/lipstick_bg-icon_25092026.png",
+      "sha256": "1d609892cb76152b983d90da473c7e430028902cb26a809b336e1265e83c5d76",
+      "bytes": 2220,
+      "width": 96,
+      "height": 100,
+      "phash": "96b4654bd992b6a4",
+      "ocr": "a"
     },
     {
       "file": "items/mechanical-components__tooltip__2026-09-18_091859.png",
@@ -3769,6 +3904,15 @@
       "ocr": "- Plier ~2000P \"Rank Rank: 1 I’m not the type to pull someone’s teeth out. But what else is this thing for? a"
     },
     {
+      "file": "items/power-relay_bg-icon_25092026.png",
+      "sha256": "e41026e6ff44a39364605c1a27bec7dc0da090efbd3957477e550bd3ead9fe56",
+      "bytes": 3677,
+      "width": 156,
+      "height": 192,
+      "phash": "97a66c5971c28795",
+      "ocr": "Ef"
+    },
+    {
       "file": "items/pre-mist-gold-wristwatch__icon__2026-09-21.png",
       "sha256": "0cef5c24260ccefa98ce097dc64144e53496576313863a129b694ab43dac8e85",
       "bytes": 975,
@@ -3785,6 +3929,25 @@
       "height": 472,
       "phash": "c5e53fcad2326ac0",
       "ocr": "Pre-Mist Gold Wristwatch ~10000P | A glistening memento from the world before it ended. This country must've been full of rich folks. wl"
+    },
+    {
+      "file": "items/pre-mist-gold-wristwatch_bg-icon_25092026.png",
+      "sha256": "09f1b9b3122be6bcb089d59eb487cab416a1fe92e5eda79894740ed3be2fd8d4",
+      "bytes": 3154,
+      "width": 100,
+      "height": 103,
+      "phash": "c19f3e702ce93037",
+      "ocr": "= ie"
+    },
+    {
+      "file": "items/pre-mist-money-stack__bg-icon__2026-09-21_224548.png",
+      "sha256": "83cfe2602a0710ecf9b7ba2d749d95ccdf741fdeda9cbcdb39f90714e75a3008",
+      "bytes": 2600,
+      "filename_timestamp": "2026-09-21T22:45:48",
+      "width": 103,
+      "height": 111,
+      "phash": "94937e6ac2c96d2c",
+      "ocr": "a"
     },
     {
       "file": "items/pre-mist-money-stack__icon__2026-09-21_224548.png",
@@ -3823,6 +3986,15 @@
       "height": 904,
       "phash": "f0e12f2d87c24ad6",
       "ocr": "_ Radish ~150P \"Dank: Rank: 1 A spicy and crispy vegetable which survives the Mist reasonably well. It’s very hard to find produce in Zalesye, but when | do, it’s usually this. Hunger: -8 Thirst: -1 al"
+    },
+    {
+      "file": "items/rain-coat_bg-icon_25092026.png",
+      "sha256": "2dc6624343826d6795dcb6bfa392ab0b20de53ed9342fbe1d201903ffc79a497",
+      "bytes": 7505,
+      "width": 307,
+      "height": 282,
+      "phash": "9e966e7861613173",
+      "ocr": "MW"
     },
     {
       "file": "items/rat-meat__image__2026-09-20.png",
@@ -4003,6 +4175,15 @@
       "ocr": "2 i a a ee ee — Small Filter ~500P A small filter, probably from an old machine or automobile. wl"
     },
     {
+      "file": "items/small-filter_bg-icon_25092026.png",
+      "sha256": "6e9f2dcbeaeb5d4fa8c55496b9364a1ed2941fb8af3da20097cd1ba6f0aff598",
+      "bytes": 2119,
+      "width": 87,
+      "height": 88,
+      "phash": "c7c76c1d393224cd",
+      "ocr": "©,"
+    },
+    {
       "file": "items/spoiled-radish__icon__2026-09-21_224508.png",
       "sha256": "f8f372b31e6f36b7b6f3ed234a9959b06b39d97a66ee8d5f7a86ae1e0b0221e8",
       "bytes": 804,
@@ -4069,6 +4250,15 @@
       "ocr": "a T Plug ~500P A small piece of plastic used-to fit plugs into other plugs... Or something? Looks pretty worthless. al"
     },
     {
+      "file": "items/t-plug_bg-icon_25092026.png",
+      "sha256": "afd97eb151f2968bb35f85a90478e5b2f05638aee08cca1c862013cd6c6143bf",
+      "bytes": 2272,
+      "width": 102,
+      "height": 106,
+      "phash": "9687697839616765",
+      "ocr": ""
+    },
+    {
       "file": "items/tactical-knife__icon__2026-09-21.png",
       "sha256": "49b7b2a0bc92e1effa848c173558154498ed0d2ce079fcf14e1c232f930a45dc",
       "bytes": 830,
@@ -4096,6 +4286,15 @@
       "ocr": "i — — — —_ Tactical Knife ~10000P A small and convenient weapon for last-resort situations. Desperate Scavengers use them to fend off incoming threats for as long as they can, typically while trying to fall back. wl"
     },
     {
+      "file": "items/tacticall-knife_bg-icon_25092026.png",
+      "sha256": "0d6b56b1ec3c3354e331eb93297a989a3a6abb0d68127d20db8b4689ef148765",
+      "bytes": 2079,
+      "width": 181,
+      "height": 81,
+      "phash": "942d6bd2912d6ed2",
+      "ocr": "=a"
+    },
+    {
       "file": "items/tattered-armor-repair-kit__tooltip__2026-09-18_084830.png",
       "sha256": "4f886883e4871aee45292518c1ad927ab37f56f01990d167f2fb3316157ad92c",
       "bytes": 131408,
@@ -4104,6 +4303,15 @@
       "height": 825,
       "phash": "c08d2f6295c67a7a",
       "ocr": "al Tattered Armor Repair Kit ~12000P 10799P Dank. Rank: 1 A repair kit for clothes that have seen better days. Used to fix up scrap armor by some of the poorest scavengers in Rhos. Repair: 25% Usable in any item condition. Repair Class: Tattered | a"
+    },
+    {
+      "file": "items/thermometer_bg-icon_25092026.png",
+      "sha256": "8e8baa5f23dfb355adf19c251b91eb5cb945ae1fae8c9cc1b329c27c20f1bc27",
+      "bytes": 2980,
+      "width": 99,
+      "height": 190,
+      "phash": "ccc1336e6f4f3130",
+      "ocr": "°"
     },
     {
       "file": "items/toilet-paper__icon__2026-09-21.png",
@@ -4124,6 +4332,24 @@
       "ocr": "f Toilet Paper ~500P If | could find one of these that didn't feel like a sand file, I'd be the richest man in Zalesye. yl"
     },
     {
+      "file": "items/toilet-paper_bg-icon_25092026.png",
+      "sha256": "cddefa302a99f4dcf1c4ddb89b1751723856eb3876c549eb2e262f0ce5d8c7a7",
+      "bytes": 3056,
+      "width": 205,
+      "height": 103,
+      "phash": "c7663c93329c4c79",
+      "ocr": "Cn"
+    },
+    {
+      "file": "items/trophy_bg-icon_25092026.png",
+      "sha256": "230fe2b1d01d5ab3b2a1cad36e9f2e6771492c01f8a880e7eca701151d090a43",
+      "bytes": 3529,
+      "width": 81,
+      "height": 184,
+      "phash": "c7cf38c03f0ef032",
+      "ocr": "LA t"
+    },
+    {
       "file": "items/undead-arm__icon__2026-09-21.png",
       "sha256": "df6be85608f065dd8082638b4575d6bfb7c1cad64a0012b0a881002eb16726f0",
       "bytes": 2386,
@@ -4140,6 +4366,24 @@
       "height": 465,
       "phash": "c1e12fd4d61e1e94",
       "ocr": "- Undead Arm ~300P A human arm, still twitching from whatever monstrous properties the Mist has given to its unlucky previous owner. a"
+    },
+    {
+      "file": "items/veles-hide_bg-icon_25092026.png",
+      "sha256": "3d539fa6b4d600c338bc5d55a8d15f326381a9c4d8c9cd32df64c992d0cbd1eb",
+      "bytes": 6396,
+      "width": 310,
+      "height": 196,
+      "phash": "cecc3835e1639b1c",
+      "ocr": ""
+    },
+    {
+      "file": "items/water-filter_bg-icon_25092026.png",
+      "sha256": "a7073b9836e744bb6ac12054205f9c7081592164c3ae9ad34b8d541433e07af9",
+      "bytes": 2715,
+      "width": 100,
+      "height": 195,
+      "phash": "9cc3631c7c3c6563",
+      "ocr": "a) |"
     },
     {
       "file": "items/wg-40__icon__2026-09-21.png",
