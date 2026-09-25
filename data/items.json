@@ -4128,7 +4128,7 @@
         "junk-item",
         "vendor-item"
       ],
-      "image": "evidence-inbox/items/pre-mist-gold-wristwatch__icon__2026-09-21.png",
+      "image": "evidence-inbox/items/pre-mist-gold-wristwatch_bg-icon_25092026.png",
       "notes": "Candidate junk item from supplied tooltip. Icon asset is not yet present in the repository.",
       "estimatedPrice": 10000,
       "stackable": false,
