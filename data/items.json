@@ -346,7 +346,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/AI-2-army-medkit_bg-icon_24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/items/ai-2-army-medkit__tooltip__2026-09-18_085021.png",
