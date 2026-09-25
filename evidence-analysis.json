@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 569,
+  "count": 570,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -573,6 +573,15 @@
       "height": 1131,
       "phash": "d083272c3b636cdb",
       "ocr": "r ' Stronghold Vest ~65000P A souped-up tactical vest, with shoulder guards and bits of metal woven in throughout the fabric. Offers good protection from weaker weapons, at the cost of mobility. This combat-oriented vest is usually worn by those have proven ' themselves capable. Durability UUUULNTANININTMNINTT © 100 Ballistic Res UA AIII 38 Slash Res UT 35 Rad Res HH 15 Repair Class: Medium | ‘ + ,"
+    },
+    {
+      "file": "armour/stronghold-vest_bg-icon_25092026.png",
+      "sha256": "7771cdb6ca62211f8b43303a801ce160d927bc13a80e844f9d0b197a336e02cc",
+      "bytes": 8347,
+      "width": 307,
+      "height": 316,
+      "phash": "97c678386dc1c687",
+      "ocr": "ve"
     },
     {
       "file": "armour/vozhd-beret_bg-icon.png",
