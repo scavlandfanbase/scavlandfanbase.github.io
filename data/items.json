@@ -3844,7 +3844,7 @@
         "junk-item",
         "vendor-item"
       ],
-      "image": "evidence-inbox/items/butcher-knife__icon__2026-09-21.png",
+      "image": "evidence-inbox/items/butcher-knife_bg-icon_25092026.png",
       "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
       "estimatedPrice": 1000,
       "maxStack": 5,
