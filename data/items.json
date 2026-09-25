@@ -293,7 +293,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/advanced-gun-repair-kit_bg-icon_24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/items/advanced-gun-repair-kit_tooltip_2026-09-20 235934.png",

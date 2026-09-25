@@ -273,7 +273,8 @@
       "source": {
         "file": "evidence-inbox/crafting/weapon/advanced-gun-repair-kit__recipe__2026-09-18_205350.png",
         "status": "screenshot-verified"
-      }
+      },
+      "image": "evidence-inbox/items/advanced-gun-repair-kit_bg-icon_24092026.png"
     },
     {
       "id": "basic-gun-repair-kit",
