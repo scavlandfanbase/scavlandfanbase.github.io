@@ -2534,6 +2534,21 @@
           "size": 54
         },
         "sourceWidth": 226
+      },
+      "shopEvidence": {
+        "status": "pending-review",
+        "screenshots": [
+          {
+            "file": "evidence-inbox/vendors/yelena_shop-part1_25092026.png",
+            "association": "pending-review"
+          },
+          {
+            "file": "evidence-inbox/vendors/yelena_shop-part-2_25092026.png",
+            "association": "pending-review"
+          }
+        ],
+        "pricesVerified": false,
+        "unlockRanksVerified": false
       }
     },
     {
