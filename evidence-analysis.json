@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 511,
+  "count": 513,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -4587,6 +4587,24 @@
       "height": 615,
       "phash": "cccc2670f8f83333",
       "ocr": "= & @ fi eae | — . ' , “.R AS # ST aS"
+    },
+    {
+      "file": "vendors/yelena_shop-part-2_25092026.png",
+      "sha256": "5b92f825422e8f9a828afde3996d328a83139c7257337cbd83e7b4955fa6eb38",
+      "bytes": 24405,
+      "width": 1252,
+      "height": 625,
+      "phash": "f28ee0ec9e9b4164",
+      "ocr": "e, vi Fh, |= -,.! =F) ° Ig al a Tele teeta 2 [Aa | et : ii, “= 6 aN i HH j \" < ie ©, = ¢ es ee Ce el"
+    },
+    {
+      "file": "vendors/yelena_shop-part1_25092026.png",
+      "sha256": "ac4dbcae464d4d932b65f9b330cc9e1509f0ade73b9a72193dda7a9ac7208417",
+      "bytes": 11042,
+      "width": 1258,
+      "height": 327,
+      "phash": "f1c69be2d9b88984",
+      "ocr": "= ae ar ae 717 15.115 G15 | t= et a — arr a | aa ‘ ! FT, | 30130"
     },
     {
       "file": "vendors/zhivan_character-tag_2026-09-21 145809.png",
