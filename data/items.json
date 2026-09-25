@@ -403,7 +403,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/AI-2-medkit_bc-icon_25092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/items/ai-2-medkit__tooltip__2026-09-18_085015.png",
