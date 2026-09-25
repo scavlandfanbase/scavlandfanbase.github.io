@@ -3750,7 +3750,7 @@
         "junk-item",
         "vendor-item"
       ],
-      "image": "evidence-inbox/items/electric-wires__icon__2026-09-21.png",
+      "image": "evidence-inbox/items/electric-wires_bg-icon_25092026.png",
       "notes": "Direct tooltip and matching icon supplied; current no-use junk classification.",
       "estimatedPrice": 500,
       "maxStack": 5,
