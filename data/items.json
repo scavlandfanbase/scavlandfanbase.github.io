@@ -3351,7 +3351,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/stimpackv_bg-icon_24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/medical/stimpack__recipe__2026-09-18_205108.png",

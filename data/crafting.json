@@ -104,7 +104,8 @@
       "source": {
         "file": "evidence-inbox/crafting/medical/stimpack__recipe__2026-09-18_205108.png",
         "status": "screenshot-verified"
-      }
+      },
+      "image": "evidence-inbox/items/stimpackv_bg-icon_24092026.png"
     },
     {
       "id": "ai-2-medkit",
