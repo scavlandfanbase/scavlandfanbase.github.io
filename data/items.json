@@ -1931,7 +1931,7 @@
         "crafting-resource",
         "crafted-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/medium-armor-repair-kit_bg-icon_24092026.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/armour/medium-armor-repair-kit__recipe__2026-09-18_205448.png",

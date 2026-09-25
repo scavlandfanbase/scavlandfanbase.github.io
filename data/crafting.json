@@ -470,7 +470,8 @@
       "source": {
         "file": "evidence-inbox/crafting/armour/medium-armor-repair-kit__recipe__2026-09-18_205448.png",
         "status": "screenshot-verified"
-      }
+      },
+      "image": "evidence-inbox/items/medium-armor-repair-kit_bg-icon_24092026.png"
     },
     {
       "id": "scavenger-armor-repair-kit",
