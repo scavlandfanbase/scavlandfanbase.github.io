@@ -1,0 +1,24 @@
+.dashboard,.dashboard *{box-sizing:border-box;min-width:0}
+.dashboard{margin-top:20px;overflow-wrap:anywhere}
+.dashboard h2{color:var(--scav-gold-bright);font-size:21px}
+.dashboard>section{margin-bottom:28px}
+#hub,.dashboard-review{scroll-margin-top:100px}
+.dashboard-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dashboard .btn,.dashboard select,.dashboard input{min-height:44px;max-width:100%;font:inherit}
+.dashboard .btn:disabled{opacity:.5;cursor:default}
+.dashboard [hidden]{display:none!important}
+.dashboard-overview{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}
+.dashboard-overview h2{margin:4px 0}.dashboard-eyebrow{color:var(--scav-gold-bright);font-size:12px;letter-spacing:2px;margin:0}
+.dashboard-actions,.dashboard-counts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+#dashboard-status,#dashboard-metrics{grid-column:1/-1}
+.dashboard-patch{display:flex;align-items:center;gap:12px;margin-bottom:20px;color:var(--scav-muted)}
+.dashboard-patch strong{color:var(--scav-gold-bright);font-size:28px}
+.dashboard progress{display:block;width:100%;height:20px;accent-color:#ffcc66;margin:12px 0}
+.dashboard-counts span{border:1px solid var(--scav-line);border-radius:4px;padding:8px}
+.dashboard-filters{display:grid;grid-template-columns:1fr 1fr 2fr;gap:12px}
+.dashboard-filters label{display:grid;gap:6px}.dashboard-filters select,.dashboard-filters input{width:100%;padding:10px;background:#111412;color:#eee;border:1px solid #64685c;border-radius:4px}
+.dashboard-review-row{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--scav-line);padding:14px 0}
+.dashboard-review-row p{margin:6px 0;font-size:14px}.dashboard-review-row .btn{flex-shrink:0}
+.dashboard :focus-visible{outline:2px solid #ffcc66;outline-offset:3px}
+@media(max-width:850px){.dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-filters{grid-template-columns:1fr 1fr}.dashboard-filters label:last-child{grid-column:1/-1}}
+@media(max-width:520px){.dashboard-grid,.dashboard-overview,.dashboard-filters{grid-template-columns:minmax(0,1fr)}.dashboard-review-row{align-items:stretch;flex-direction:column}.dashboard-actions .btn{flex:1}.dashboard .hub-card{min-height:0}}

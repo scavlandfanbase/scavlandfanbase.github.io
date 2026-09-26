@@ -222,6 +222,8 @@ body {
 @media(max-width:650px){.vendor-header .vendor-face{width:70px;height:70px}}
 </style>
 
+<script src="vendor-canonical.js"></script>
+<script src="verification.js"></script>
 <script>
 function toggleVendor(id) {
   openVendor(id);
@@ -360,7 +362,7 @@ async function loadVendorDirectory() {
       const vendor = payload.data.find(v => v.id === card.dataset.vendorId);
       if (vendor) card.querySelector('strong').innerHTML = renderVendorPortrait(vendor) + '<span>' + escapeVendorText(vendor.name) + '</span>';
     });
-    let vendors = payload.data;
+    let vendors = payload.data.filter(vendor=>!vendor.hidden&&!vendor.archived);
     const factionParam = new URLSearchParams(location.search).get('faction');
     if (factionParam) vendors = vendors.filter(vendor => vendor.factionId === factionParam);
     list.innerHTML = vendors.map(vendor => {
@@ -371,7 +373,9 @@ async function loadVendorDirectory() {
         screenshots.map((shot, i) => '<figure>' + ScavImages.preview({name:vendor.name + ' shop, part ' + (i + 1),image:shot.file}) +
           '<figcaption>Part ' + (i + 1) + ' of ' + screenshots.length + '</figcaption></figure>').join('') +
         '</div><p class="placeholder-note">Item names, prices and unlock ranks still need confirmation.</p>' : '';
-      const content = shopGallery + (vendor.inventoryDocumented
+      const canonicalRows=ScavVendorCanonical.rows(vendor.id,payload.vendorListings,itemPayload.data||[]);
+      const canonicalContent=canonicalRows.length?'<h3>Item listings</h3><table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Quantity</th></tr></thead><tbody>'+canonicalRows.map(({listing,item})=>'<tr><td><a class="data-link" href="items.html?id='+encodeURIComponent(item.id)+'">'+escapeVendorText(item.name)+'</a></td><td>'+escapeVendorText(listing.rank??'?')+'</td><td>'+escapeVendorText(listing.price??'?')+'</td><td>'+escapeVendorText(listing.quantity??'?')+'</td></tr>').join('')+'</tbody></table>':'';
+      const content = canonicalContent + shopGallery + (vendor.inventoryDocumented
         ? '<p class="placeholder-note">Unverified inventory</p>' +
           '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
           vendor.inventory.map(item => { const shared = itemsById.get(item.itemId); const displayName = shared?.name || item.name; return '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(displayName) + '</a></td><td>' + escapeVendorText(item.rank) +

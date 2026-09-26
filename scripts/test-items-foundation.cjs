@@ -1,0 +1,18 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const Items=require('../item-model.cjs'),V=require('../verification.js');
+const root=path.resolve(__dirname,'..'),source=JSON.parse(fs.readFileSync(path.join(root,'data/items.json'))),before=structuredClone(source);
+const result=Items.foundation(source);
+assert.equal(result.data.length,source.data.length);
+for(const [i,record] of source.data.entries())for(const key of Object.keys(record))assert.deepEqual(result.data[i][key],record[key]);
+assert.deepEqual(source,before);assert(result.data.every(r=>r.category===null&&r.createdAt===null));
+const seed={schemaVersion:1,description:'keep',data:[{id:'immutable-1',name:'Same',category:'Legacy category',properties:{unknown:null,zero:0},hidden:true,archived:true,source:{status:'screenshot-verified',file:'evidence.png'},extra:{retain:true}},{id:'immutable-2',name:'Same'}]};
+const projected=Items.foundation(seed);assert.equal(projected.data[0].category,'Legacy category');assert.equal(projected.data[0].properties.zero,0);assert.equal(projected.data[0].archived,true);
+projected.data[0].name='Renamed';assert.equal(projected.data[0].id,'immutable-1');projected.data[0].extra.retain=false;assert.equal(seed.data[0].extra.retain,true);
+assert.equal(V.inspect(projected.data[0],{schemaVersion:1,current_patch_id:'patch'}).status,'patch-check-needed');
+projected.data[0]=V.decide(projected.data[0],'verified',{schemaVersion:1,current_patch_id:'patch'},'test-actor');Items.validate(projected);
+assert.equal(Items.foundation(projected).data[0].verification.history.length,1);
+assert.throws(()=>Items.foundation({...seed,data:[seed.data[0],seed.data[0]]}),/identity/);
+for(const bad of [{id:''},{name:null},{hidden:'false'},{properties:5},{verification:{}},{createdAt:'not a date'}])assert.throws(()=>Items.foundation({...seed,data:[{...seed.data[0],...bad}]}));
+assert.deepEqual(Items.foundation({schemaVersion:1,data:[]}).data,[]);
+assert.equal(Items.categories.length,6);
+console.log('PASS Items foundation: all existing fields/records preserved, independent clones, stable identities, legacy categories, unknowns/zero, state, timestamp validation and existing verification hooks.');

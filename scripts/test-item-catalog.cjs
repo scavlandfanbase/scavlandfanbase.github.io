@@ -9,6 +9,9 @@ for(const [kind,tag] of Object.entries({weapons:'weapon',armour:'armour',ammunit
   const known={id:'new-item',name:'Old name',damage:42,source:{status:'screenshot-verified'}};
   const complete=project(kind,shared,[known]);assert.equal(complete.length,1);assert.equal(complete[0].damage,42);assert.equal(complete[0].name,'New item');
   assert.equal(project(kind,shared,[known],{editor:true})[0],known,'editor original must match the stored record for conflict checks');
+  shared[0].name='Canonical rename';assert.equal(project(kind,shared,[known])[0].name,'Canonical rename');assert.equal(project(kind,shared,[known])[0].damage,42);
+  shared[0].hidden=true;assert.equal(project(kind,shared,[known]).length,0);delete shared[0].hidden;
+  shared[0].archived=true;assert.equal(project(kind,shared,[known]).length,0);delete shared[0].archived;shared[0].name='New item';
   assert.equal(JSON.stringify(shared),before);
   shared[0].classification=[];
   assert.equal(project(kind,shared,[known]).length,0,'removed tag hides the public entry');

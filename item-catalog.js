@@ -4,12 +4,13 @@
   function records(kind,items,specialists,{editor=false}={}) {
     const tag=tags[kind];if(!tag)return specialists;
     const registry=new Map(items.map(item=>[item.id,item]));
-    const result=specialists.filter(row=>editor||!registry.has(row.id)||registry.get(row.id).classification?.includes(tag)).map(row=>{
+    const result=specialists.filter(row=>editor||!registry.has(row.id)||!registry.get(row.id).hidden&&!registry.get(row.id).archived&&registry.get(row.id).classification?.includes(tag)).map(row=>{
       const shared=registry.get(row.id);
       return editor||!shared?row:{...row,name:shared.name,image:shared.image||row.image};
     });
     const ids=new Set(specialists.map(row=>row.id));
     for(const item of items) {
+      if(!editor&&(item.hidden||item.archived))continue;
       if(!item.classification?.includes(tag)||ids.has(item.id))continue;
       const row={id:item.id,name:item.name,image:item.image||null,description:item.description||null,
         source:{file:null,status:'pending-review',note:'Specialist details have not been recorded.'},_catalogOnly:true};
