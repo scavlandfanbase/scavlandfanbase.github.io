@@ -61,7 +61,7 @@
  E.button('vendor-up','↑',()=>change('move',{direction:-1}).catch(()=>{}),$('selection'),'Move vendor up');
  E.button('vendor-down','↓',()=>change('move',{direction:1}).catch(()=>{}),$('selection'),'Move vendor down');
  E.button('vendor-edit','Edit',()=>details(),$('actions'));
- E.button('vendor-image','Image',()=>E.imagePicker({inventory,current:selected().portrait?.file||null,title:'Vendor image',onSubmit:image=>change('image',{image})}),$('actions'));
+ E.button('vendor-image','Image',()=>E.imagePicker({inventory,current:selected().portrait?.file||null,title:'Vendor image',recordName:selected().name,onSubmit:image=>change('image',{image})}),$('actions'));
  E.button('vendor-inventory','Inventory',()=>listings.open(),$('actions'));
  E.button('vendor-more','•••',more,$('actions'),'More vendor actions');
  E.button('vendor-add','+ Add Vendor',()=>details(true),$('add-actions'));

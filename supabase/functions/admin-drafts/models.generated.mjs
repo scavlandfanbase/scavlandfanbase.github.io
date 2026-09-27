@@ -93,9 +93,10 @@ const factories={
 // Explicit private classification only. Evidence paths are a review aid, never membership.
 (function(root){
  const types=Object.freeze(['Sight','Scope','Muzzle','Suppressor','Magazine','Stock','Handguard','Foregrip','Pistol Grip','Dust Cover','Mount','Rail','Laser','Flashlight','Other','Unknown']);
+ const contentTypes=Object.freeze(['Item','Weapon','Armour','Ammo','Attachment','Blueprint']);
  const contentType=r=>r.contentType??'Item';
  function validate(r){
-  if(!['Item','Attachment'].includes(contentType(r)))throw new Error('Choose Item or Attachment.');
+  if(!contentTypes.includes(contentType(r)))throw new Error('Choose a recognised Content Type.');
   if(r.attachmentType!==undefined&&!types.includes(r.attachmentType))throw new Error('Choose a supported Attachment Type.');
   if(contentType(r)==='Attachment'&&!types.includes(r.attachmentType))throw new Error('Choose an Attachment Type, including Unknown.');
  }
@@ -104,7 +105,16 @@ const factories={
   return evidence(r.source)||evidence(r.evidence)||evidence(r.image)||evidence(r.file);
  }
  function catalogue(state){state.data.forEach(validate);return {...structuredClone(state),data:structuredClone(state.data.filter(r=>contentType(r)==='Attachment'))};}
- const api=Object.freeze({types,contentType,validate,candidate,catalogue});
+ // Read only: explicit source classifications are displayed, never written back.
+ const sourceTypes=Object.freeze({item:'Item',weapon:'Weapon',armour:'Armour',ammunition:'Ammo',ammo:'Ammo',attachment:'Attachment',blueprint:'Blueprint'});
+ function describe(record,namespace='item'){
+  const recorded=contentType(record),source=[...new Set((Array.isArray(record.classification)?record.classification:[]).map(v=>sourceTypes[v]).filter(Boolean))];
+  const dedicated=sourceTypes[namespace];
+  const type=namespace!=='item'&&dedicated?dedicated:source.length===1?source[0]:recorded;
+  const conflict=source.length>1||source.some(v=>v!==recorded);
+  return {type,recorded,source,conflict,message:conflict?'Stored Content Type: '+recorded+'; existing classification: '+source.join(', ')+'. Review before reclassifying. No information has been moved.':''};
+ }
+ const api=Object.freeze({types,contentTypes,contentType,describe,validate,candidate,catalogue});
  if(typeof module==='object'&&module.exports)module.exports=api;else root.ScavAttachments=api;
 })(globalThis);
 
@@ -161,7 +171,7 @@ const factories={
 // Private Items foundation. The existing registry remains the sole seed source.
 // Never derive identity/category/facts from names or merge specialist/vendor records.
 const Verification=require('./verification.js'),Attachments=require('./attachment-model.js');
-const categories=Object.freeze(['Food & Drink','Medical','Repair & Maintenance','Crafting Materials','Tools','Other']);
+const categories=Object.freeze(['Food & Drink','Medical','Repair & Maintenance','Crafting Materials','Tools','Junk','Other']);
 const factFields=Object.freeze(['notes','rank','estimatedPrice','maxStack','stackable','effects']);
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
 function validate(state){
@@ -210,7 +220,8 @@ function mutate(input,body,{images=[],settings,actorId='local-operator'}={}){
  }
  switch(body.action){
   case 'classify':{
-   if(!['Item','Attachment'].includes(body.contentType))fail('Choose Item or Attachment.');
+   if(!Attachments.contentTypes.includes(body.contentType))fail('Choose a recognised Content Type.');
+   if(!['Item','Attachment'].includes(body.contentType)||!['Item','Attachment'].includes(Attachments.contentType(r)))fail('This content belongs in its dedicated catalogue. Moving it requires an explicit reviewed migration; no record has been moved or copied.');
    if(body.contentType==='Attachment'&&!Attachments.types.includes(body.attachmentType))fail('Choose an Attachment Type, including Unknown.');
    // Always confirm reversal, including unknown future relationships. Never delete source fields.
    if(Attachments.contentType(r)==='Attachment'&&body.contentType==='Item'&&body.confirmId!==r.id)fail('Confirm changing this Attachment back to Item. All recorded information will be retained.');
@@ -223,6 +234,7 @@ function mutate(input,body,{images=[],settings,actorId='local-operator'}={}){
    state.data.push(record);selectedId=record.id;break;
   }
   case 'edit':{
+   if(!['Item','Attachment'].includes(Attachments.contentType(r)))fail('Edit this content in its dedicated catalogue; its existing information has been retained.');
    const next=details(body.details);
    if(body.details.facts!==undefined){
     if(!object(body.details.facts)||Object.keys(body.details.facts).some(key=>!factFields.includes(key)||!Object.hasOwn(r,key)))fail('Choose an existing recorded fact.');
@@ -232,6 +244,7 @@ function mutate(input,body,{images=[],settings,actorId='local-operator'}={}){
    if(JSON.stringify(next)!==JSON.stringify(Object.fromEntries(Object.keys(next).map(k=>[k,r[k]])))){Object.assign(r,next);resetVerification(r);}break;
   }
   case 'duplicate':{
+   if(!['Item','Attachment'].includes(Attachments.contentType(r)))fail('Duplicate this content only in its dedicated catalogue.');
    const verification={schemaVersion:1,decision:'unverified',verified_patch_id:null,last_verified_at:null,last_verified_by:null,history:[]};
    const copy={...structuredClone(r),id:crypto.randomUUID(),name:r.name.slice(0,295)+' Copy',hidden:true,archived:false,verification,createdAt:now,updatedAt:now};
    // Provenance remains a reference, never a copied attestation/history for the new identity.

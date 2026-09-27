@@ -14,5 +14,5 @@ assert.equal(Items.foundation(projected).data[0].verification.history.length,1);
 assert.throws(()=>Items.foundation({...seed,data:[seed.data[0],seed.data[0]]}),/identity/);
 for(const bad of [{id:''},{name:null},{hidden:'false'},{properties:5},{verification:{}},{createdAt:'not a date'}])assert.throws(()=>Items.foundation({...seed,data:[{...seed.data[0],...bad}]}));
 assert.deepEqual(Items.foundation({schemaVersion:1,data:[]}).data,[]);
-assert.equal(Items.categories.length,6);
+assert.deepEqual(Items.categories,['Food & Drink','Medical','Repair & Maintenance','Crafting Materials','Tools','Junk','Other']);
 console.log('PASS Items foundation: all existing fields/records preserved, independent clones, stable identities, legacy categories, unknowns/zero, state, timestamp validation and existing verification hooks.');

@@ -26,3 +26,13 @@
  .scav-editor-dialog { margin:auto 0 0; width:100%; max-width:100%; max-height:92dvh; padding:20px 16px max(20px,env(safe-area-inset-bottom)); border-radius:14px 14px 0 0; }
  .scav-dialog-actions > button { flex:1; }
 }
+
+/* Inline disclosure keeps help readable in narrow dialogs without clipping. */
+.scav-field{display:grid;gap:6px;min-width:0}.scav-field-heading{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.scav-field-heading>label{flex:1;min-width:0}.scav-field input,.scav-field select,.scav-field textarea{width:100%;box-sizing:border-box;min-height:44px;max-width:100%}
+.scav-help-slot{display:inline-block;max-width:100%;vertical-align:middle}.scav-help{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px;max-width:100%;font:14px/1.5 Arial,sans-serif;vertical-align:middle;overflow-wrap:anywhere}
+button.scav-help-trigger{box-sizing:border-box;flex:0 0 44px;width:44px!important;min-width:44px!important;min-height:44px;height:44px;padding:6px!important;margin:0!important;border:1px solid #746444;border-radius:50%;background:#20231e;color:#ffcc66;cursor:pointer;font-size:20px}.scav-help-trigger:focus-visible{outline:2px solid #ffcc66;outline-offset:2px}
+.scav-help-text{display:block;flex:1 1 220px;max-width:100%;box-sizing:border-box;padding:10px;background:#29291f;border:1px solid #89713f;border-radius:6px;color:#eee;white-space:normal}.scav-help-text[hidden]{display:none!important}
+.scav-field-heading .scav-help:has(.scav-help-text:not([hidden])){flex-basis:100%}.scav-dialog-actions>.scav-help-slot{flex:0 1 auto}
+.item-advanced{border:1px solid #514b3a;padding:10px;min-width:0}.item-advanced>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:#ffcc66}.item-advanced>div{display:grid;gap:12px}.item-type-boundary{padding:12px;border-left:3px solid #ffcc66;color:#ddd}.item-type-boundary[hidden]{display:none}
+
+.scav-help-text{position:fixed;z-index:10000;width:min(340px,calc(100vw - 24px));max-height:50dvh;overflow:auto;box-shadow:0 6px 24px #0009}.scav-field-heading .scav-help:has(.scav-help-text:not([hidden])){flex-basis:auto}

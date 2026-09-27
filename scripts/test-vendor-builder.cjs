@@ -7,7 +7,7 @@ const {createServer}=require('./page-builder-server.cjs');
   const base='http://127.0.0.1:'+server.address().port;await context.route('**/*',r=>r.request().url().startsWith(base)?r.continue():r.abort());page.on('pageerror',e=>errors.push(e.message));
   const dialog=()=>page.locator('dialog').last(),submit=async()=>{await dialog().locator('button[type=submit]').click();await page.locator('dialog').waitFor({state:'hidden'});};
   const more=async(name)=>{await page.locator('#vendor-more').click();await dialog().getByRole('button',{name,exact:true}).click();await submit();};
-  await page.goto(base);await page.locator('#workspace').waitFor();assert((await page.locator('header .notice').innerText()).includes('Private vendor drafts'));assert.equal(await page.locator('select option').count(),22);assert(await page.locator('#vendor-up').isDisabled());
+  await page.goto(base);await page.locator('#workspace').waitFor();assert((await page.locator('header .notice').innerText()).includes('Edit Vendors in a private draft'));assert.equal(await page.locator('select option').count(),22);assert(await page.locator('#vendor-up').isDisabled());
   const id=await page.locator('select').inputValue();
   await page.locator('#vendor-edit').click();await dialog().locator('[name=name]').fill('Private Grigory');await submit();assert.equal(await page.locator('#vendor-name').innerText(),'Private Grigory');
   await page.locator('#vendor-down').click();await page.locator('#status').filter({hasText:'Saved'}).waitFor();assert.equal(await page.locator('select option').nth(1).getAttribute('value'),id);

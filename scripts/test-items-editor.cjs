@@ -10,16 +10,16 @@ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'scav-items-editor-')),root
   page.on('dialog',d=>d.accept());page.setDefaultTimeout(10000);
   const dialog=()=>page.getByRole('dialog');
   async function save(){await dialog().getByRole('button',{name:'Save private draft',exact:true}).click();await dialog().waitFor({state:'detached'});assert.match(await page.locator('#status').innerText(),/Saved/);}
-  async function action(id){await page.locator('#'+id).click();await save();}
+  async function action(id){if(['item-duplicate','item-visibility','item-archive'].includes(id)&&!await page.locator('#item-more').evaluate(n=>n.open))await page.locator('#item-more>summary').click();await page.locator('#'+id).click();await save();}
   async function cancel(){await page.keyboard.press('Escape');if(await dialog().count())await page.keyboard.press('Escape');}
   await page.goto(base);await page.locator('#workspace').waitFor();
   if(process.env.SCAVLAND_TEST_OUTPUT){fs.mkdirSync(process.env.SCAVLAND_TEST_OUTPUT,{recursive:true});for(const width of [320,1280]){await page.setViewportSize({width,height:900});await page.screenshot({path:path.join(process.env.SCAVLAND_TEST_OUTPUT,'9b-catalogue-'+width+'.png'),fullPage:true});}}
-  await page.locator('#item-edit').click();await dialog().locator('fieldset').filter({has:page.getByText('Estimated Price',{exact:true})}).getByLabel('Value',{exact:true}).fill('0');await save();assert.equal(store.read().data[0].estimatedPrice,0);
+  await page.locator('#item-edit').click();await dialog().getByLabel('Estimated Price',{exact:true}).fill('0');await save();assert.equal(store.read().data[0].estimatedPrice,0);
   // Keyboard opening, unsaved discard, and focus return.
   await page.locator('#item-add').focus();await page.keyboard.press('Enter');await dialog().waitFor();await dialog().getByLabel('Item name',{exact:true}).fill('Discard me');await page.keyboard.press('Escape');assert.match(await dialog().innerText(),/Discard unsaved/);await page.keyboard.press('Escape');assert.equal(await page.evaluate(()=>document.activeElement.id),'item-add');assert.equal(store.read().data.length,285);
   await page.locator('#item-add').click();await dialog().getByLabel('Item name',{exact:true}).fill('Private test item');
   await dialog().getByLabel('Item category',{exact:true}).selectOption('custom');await dialog().getByLabel('New category name',{exact:true}).fill('Legacy / custom');
-  await dialog().getByLabel('Description',{exact:true}).fill('Only documented facts.');
+  await dialog().getByLabel('Description state',{exact:true}).selectOption('text');await dialog().getByLabel('Description',{exact:true}).fill('Only documented facts.');await dialog().getByText('Advanced / Technical details',{exact:true}).click();
   await dialog().getByLabel('Value type',{exact:true}).selectOption('group');await dialog().getByRole('button',{name:'Add property',exact:true}).click();
   await dialog().getByLabel('Property name',{exact:true}).fill('Amount');await dialog().getByLabel('Value type',{exact:true}).nth(1).selectOption('number');await dialog().getByLabel('Value',{exact:true}).fill('0');
   for(const width of [280,320,390,768,1280]){
@@ -33,12 +33,12 @@ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'scav-items-editor-')),root
   const complex={zero:0,no:false,unknown:null,nested:[{text:'<safe text>',empty:''},null]},saved=store.read(),record=saved.data.at(-1);
   store.mutate({action:'edit',id:added.id,revision:saved.revision,requestId:crypto.randomUUID(),details:{name:record.name,category:record.category,description:record.description,properties:complex}});
   await page.reload();await page.locator('#workspace').waitFor();await page.getByLabel('Search items',{exact:true}).fill(added.id);await page.locator('#item-edit').click();
-  await dialog().getByRole('button',{name:'Remove property',exact:true}).first().click();await dialog().getByRole('button',{name:'Undo removal',exact:true}).click();await save();assert.deepEqual(store.read().data.at(-1).properties,complex);
+  await dialog().getByText('Advanced / Technical details',{exact:true}).click();await dialog().getByRole('button',{name:'Remove property',exact:true}).first().click();await dialog().getByRole('button',{name:'Undo removal',exact:true}).click();await save();assert.deepEqual(store.read().data.at(-1).properties,complex);
   // Set, replace, remove through the shared library picker.
   const inventory=JSON.parse(fs.readFileSync(path.join(root,'data/site-images.json'))),paths=Object.values(inventory.categories).flatMap(c=>c.images||[]);
   for(const image of [paths[0],paths[1],null]){
    await page.locator('#item-image-action').click();
-   if(image){await dialog().getByLabel('Search images',{exact:true}).fill(image);await dialog().getByRole('button',{name:image,exact:true}).click();}else await dialog().getByRole('button',{name:'Remove Image',exact:true}).click();
+   if(image){await dialog().getByLabel('Search images',{exact:true}).fill(image);await dialog().locator('button[data-image-path]').filter({has:page.locator('img[src='+JSON.stringify(image)+']')}).click();}else await dialog().getByRole('button',{name:'Remove Image',exact:true}).click();
    await dialog().getByRole('button',{name:'Use Image',exact:true}).click();await dialog().waitFor({state:'detached'});assert.equal(store.read().data.at(-1).image,image);
   }
   await page.locator('#item-review').click();await dialog().getByLabel('Review decision',{exact:true}).selectOption('verified');await dialog().getByRole('button',{name:'Record review',exact:true}).click();await dialog().waitFor({state:'detached'});assert.equal(store.read().data.at(-1).verification.decision,'verified');
@@ -56,7 +56,7 @@ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'scav-items-editor-')),root
   // Commit reached disk but response was lost: duplicate retry must not duplicate twice.
   const count=store.read().data.length;let lost=true;
   await page.route('**/api/items',async r=>{if(r.request().method()==='POST'&&lost){lost=false;await r.fetch();return r.abort();}return r.continue();});
-  await page.locator('#item-duplicate').click();await dialog().getByRole('button',{name:'Save private draft',exact:true}).click();await dialog().getByRole('button',{name:'Retry',exact:true}).waitFor();assert.equal(store.read().data.length,count+1);
+  if(!await page.locator('#item-more').evaluate(n=>n.open))await page.locator('#item-more>summary').click();await page.locator('#item-duplicate').click();await dialog().getByRole('button',{name:'Save private draft',exact:true}).click();await dialog().getByRole('button',{name:'Retry',exact:true}).waitFor();assert.equal(store.read().data.length,count+1);
   await dialog().getByRole('button',{name:'Retry',exact:true}).click();await dialog().waitFor({state:'detached'});assert.equal(store.read().data.length,count+1);await page.unroute('**/api/items');
   // Concurrent editor changes reject stale revision; local dialog values survive.
   await page.locator('#item-edit').click();await dialog().getByLabel('Item name',{exact:true}).fill('Unsaved conflict text');

@@ -16,14 +16,14 @@ window.createScavDashboard = function ({ hub, read, navigate, allowedViews=null 
     <div id="dashboard-metrics" hidden><div class="dashboard-patch">CURRENT PATCH <strong id="dashboard-patch"></strong></div>
     <label for="dashboard-progress">Verification <strong id="dashboard-summary"></strong></label><progress id="dashboard-progress" max="100" value="0"></progress>
     <div class="dashboard-counts"><span id="dashboard-current"></span><span id="dashboard-stale"></span><span id="dashboard-unverified"></span></div>
-    <p class="status">Includes separate checks for vendor stock. Previous screenshot evidence is retained; it does not establish verification for this patch.</p>
+    <p class="status" data-help="Vendor Listings">Vendor stock has separate reviews.</p>
     <button class="btn" id="dashboard-review">Review entries needing attention</button></div>
   </section>
   <section class="dashboard-review panel" id="dashboard-review-panel" hidden aria-labelledby="dashboard-review-title">
     <h2 id="dashboard-review-title" tabindex="-1">Review verification</h2>
-    <p class="status">Review the entries below and open their existing editor when needed. Use Items to record a review without requiring evidence, then Preview and Publish the saved draft.</p>
+    <p class="status" data-help="Needs attention">Open an editor to review an entry. Evidence is optional.</p>
     <div class="dashboard-filters"><label>Category<select id="dashboard-category" aria-label="Review category"><option value="all">All categories</option></select></label>
-    <label>Status<select id="dashboard-filter" aria-label="Review status"><option value="attention">Needs attention</option><option value="unverified">Unverified</option><option value="patch-check-needed">Patch check needed</option><option value="verified">Verified</option><option value="all">All statuses</option></select></label>
+    <label>Status<select id="dashboard-filter" aria-label="Review status"><option value="attention">Needs attention</option><option value="unverified">Unverified</option><option value="patch-check-needed">Patch check needed</option><option value="verified">Verified</option><option value="image">Missing Image</option><option value="missing">Missing Information</option><option value="conflict">Classification Conflict</option><option value="all">All statuses</option></select></label>
     <label>Search<input id="dashboard-search" type="search" placeholder="Name or vendor"></label></div>
     <p id="dashboard-results" role="status"></p><div id="dashboard-review-list"></div><button class="btn" id="dashboard-more">Show more</button>
   </section>
@@ -76,13 +76,13 @@ window.createScavDashboard = function ({ hub, read, navigate, allowedViews=null 
   }
   function renderReview() {
     const category = $('dashboard-category').value, status = $('dashboard-filter').value, search = $('dashboard-search').value.trim().toLowerCase();
-    const filtered = rows.filter(row => (category === 'all' || row.category === category) && (status === 'all' || status === 'attention' && row.status !== 'verified' || row.status === status) && ScavEditor.matches(row.name,search));
+    const filtered = rows.filter(row => (category === 'all' || row.category === category) && (status === 'all' || status === 'attention' && (row.status !== 'verified'||row.missingImage||row.missing||row.conflict) || status==='image'&&row.missingImage || status==='missing'&&row.missing || status==='conflict'&&row.conflict || row.status === status) && ScavEditor.matches(row.name,search));
     const list = $('dashboard-review-list'); list.replaceChildren();
-    $('dashboard-results').textContent = filtered.length ? `${filtered.length} entries · showing ${Math.min(limit,filtered.length)}` : 'No entries match these filters.';
+    $('dashboard-results').textContent = filtered.length ? `${rows.length} total · ${filtered.length} match current filters · showing ${Math.min(limit,filtered.length)}` : 'No entries match these filters.';
     for (const row of filtered.slice(0,limit)) {
       const item = document.createElement('article'); item.className = 'dashboard-review-row';
       const info = document.createElement('div'), title = document.createElement('strong'), text = document.createElement('p');
-      title.textContent = row.name; text.textContent = names[row.category] ; info.append(title,text); ScavEditor.verificationInfo(info,row.inspection);
+      title.textContent = row.name; text.textContent = row.type+(row.conflict?' · Classification Conflict':'') ; info.append(title,text); ScavEditor.verificationInfo(info,row.inspection);
       if (row.legacy) { const note = document.createElement('p'); note.className = 'status'; note.textContent = 'Previously screenshot-verified; patch and verifier unknown.'; info.append(note); }
       item.append(info); action(item,'Open '+names[row.category]+' editor',()=>navigate(views[row.category])); list.append(item);
     }
@@ -105,7 +105,8 @@ window.createScavDashboard = function ({ hub, read, navigate, allowedViews=null 
     const counts = Object.fromEntries(Object.entries(groups).map(([key,records])=>[key,ScavVerification.progress(records,data.settings)]));
     const entries = Object.entries(groups).flatMap(([category,records])=>records.map(record=> {
       const check = ScavVerification.inspect(record,data.settings), name = record.name || record.itemName || record.item_name || record.title || 'Unnamed entry';
-      return {category,name:record.dashboardVendorName ? record.dashboardVendorName+' — '+name : name,status:check.status,legacy:check.legacy,inspection:check};
+      const classification=['items','weapons','armour','ammo'].includes(category)?window.ScavAttachments?.describe(record,category==='items'?'item':category.replace(/s$/,'')):null;
+      return {category,type:category==='listings'?'Vendor stock':classification?.type||names[category],conflict:classification?.conflict||false,missingImage:category!=='listings'&&!record.image&&!record.portrait?.file,missing:category==='items'&&(record.category==null||record.description==null),name:record.dashboardVendorName ? record.dashboardVendorName+' — '+name : name,status:check.status,legacy:check.legacy,inspection:check};
     }));
     return {totals,counts,entries};
   }

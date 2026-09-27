@@ -9,7 +9,7 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
  const entity=row=>catalog?.entities[row.entity.type]?.find(e=>e.id===row.entity.id);
  const text=(parent,tag,value)=>{const el=document.createElement(tag);el.textContent=value;parent.append(el);return el;};
  const name=row=>entity(row)?.name||row.entity.id;
- const unknown=value=>value===null?'?':String(value);
+ const unknown=value=>value===null?'Not recorded':String(value);
  function focusRow(id,action){
   setTimeout(()=>{const row=[...list.children].find(el=>el.dataset.listingId===id);(row?.querySelector('[data-action="'+action+'"]:not(:disabled)')||row?.querySelector('button')||$('inventory-heading')).focus();},0);
  }
@@ -23,15 +23,17 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
  }
  function edit(row){
   scavEditorDialog({title:'Edit '+name(row)+' · '+labels[row.entity.type],submit:'Save private listing',build:({body})=>{
-   text(body,'p','Vendor-specific values. Leave blank for unknown; 0 is a known zero.');
+   E.help(body,'Vendor Listings');
    for(const [key,label] of [['rank','Rank'],['price','Price (₽)'],['quantity','Stock / quantity']]){
     const input=E.field(body,label,key,row[key],30);input.type='number';input.min='0';input.max=String(Number.MAX_SAFE_INTEGER);input.step=key==='price'?'any':'1';
    }
-   E.field(body,'Vendor notes','notes',row.notes,4000,false,true);
+   const noteState=E.selectField(body,'Note state','noteState',[['unknown','Not recorded'],['text','Written notes']],row.notes===null?'unknown':'text');
+   const notes=E.field(body,'Vendor notes','notes',row.notes,4000,false,true);
+   noteState.onchange=()=>{notes.disabled=noteState.value==='unknown';};noteState.onchange();
   },onSubmit:({form})=>{
    const values=Object.fromEntries(new FormData(form)),fields={};
    for(const key of ['rank','price','quantity'])fields[key]=values[key].trim()===''?null:Number(values[key]);
-   fields.notes=values.notes===''?null:values.notes;
+   fields.notes=values.noteState==='unknown'?null:values.notes;
    return save('edit',{listingId:row.id,fields});
   }});
  }
@@ -50,10 +52,10 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
  }
  function add(){
   let selected=null,limit=40;
-  scavEditorDialog({title:'Add existing canonical record',submit:'Add private listing',build:({body,save:submit,setDirty})=>{
-   text(body,'p','Choose the exact type and ID. Some source lists contain overlapping records; select the correct record manually. New listing values start unknown.');
+  scavEditorDialog({title:'Add existing stock',submit:'Add private listing',build:({body,save:submit,setDirty})=>{
+   E.help(body,'Vendor Listings');
    const query=E.field(body,'Search existing records','search','',200);query.dataset.editorTransient='true';
-   const type=E.selectField(body,'Entity type','entityType',[['all','All types'],...L.types.map(t=>[t,labels[t]])],'all');type.dataset.editorTransient='true';
+   const type=E.selectField(body,'Content Type','entityType',[['all','All types'],...L.types.map(t=>[t,labels[t]])],'all');type.dataset.editorTransient='true';
    const selection=text(body,'p','No record selected.'),count=text(body,'p','');count.setAttribute('role','status');
    const results=document.createElement('div');results.className='inventory-results';body.append(results);
    const more=E.button('','Show more records',()=>{limit+=40;show();},body);
@@ -63,7 +65,7 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
     results.replaceChildren();
     for(const {type:t,record} of entries.slice(0,limit)){
      const existing=collection().listings.find(r=>r.vendorId===vendor().id&&r.entity.type===t&&r.entity.id===record.id);
-     const label=(record.name||record.id)+' · '+labels[t]+' · ID: '+record.id;
+     const label=(record.name||'Unnamed entry')+' · '+ScavAttachments.describe(record,t).type;
      const button=E.button('',label+(existing?(existing.archived?' · Already archived — restore below':' · Already listed'):''),()=>{selected={type:t,id:record.id};selection.textContent='Selected: '+label;setDirty();show();[...results.children].find(b=>b.dataset.key===JSON.stringify(selected))?.focus();},results);
      button.disabled=!!existing;button.dataset.key=JSON.stringify({type:t,id:record.id});button.setAttribute('aria-pressed',String(selected?.type===t&&selected.id===record.id));
     }
@@ -85,10 +87,10 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
   addButton.disabled=!catalog;retry.disabled=loading;retry.hidden=!!catalog;
   list.replaceChildren();if(!catalog)return;
   const entries=rows(),active=L.forVendor(collection(),vendor().id);
-  if(!entries.length)text(list,'p','No canonical listings in this view. Add an existing record to start; legacy inventory is unchanged.');
+  if(!entries.length)text(list,'p','No new stock listings yet. Existing stock is retained below.');
   for(const row of entries){
-   const article=document.createElement('article');article.className='inventory-card';article.dataset.listingId=row.id;
-   text(article,'h3',name(row));text(article,'p',labels[row.entity.type]+' · '+row.entity.id+(row.archived?' · Archived':''));
+   const article=document.createElement('article');article.className='inventory-card';article.dataset.listingId=row.id;article.dataset.entityType=row.entity.type;
+   text(article,'h3',name(row));text(article,'p',ScavAttachments.describe(entity(row)||{},row.entity.type).type+(row.archived?' · Archived':''));
    text(article,'p','Rank '+unknown(row.rank)+' · '+unknown(row.price)+'₽ · Stock '+unknown(row.quantity));
    if(row.notes!==null)text(article,'p',row.notes).className='inventory-notes';
    const unavailable=!entity(row)||entity(row).archived;
@@ -105,6 +107,19 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
     button('archive','Archive',()=>confirm('archive',row));
    }
    button('verification','Verification',()=>verification(row));button('remove','Remove',()=>confirm('remove',row));list.append(article);
+  }
+  legacy();
+ }
+ function legacy(){
+  let old=section.querySelector('#legacy-stock');if(old)old.remove();
+  const panel=document.createElement('section');panel.id='legacy-stock';text(panel,'h3','Existing stock — migration review');section.append(panel);
+  const rows=ScavLegacyReview.review(vendor(),catalog.entities.item||[],collection().listings);
+  text(panel,'p',rows.length+' existing stock entries retained. Proposals do not save or publish changes.');
+  for(const row of rows){const card=document.createElement('details');const summary=document.createElement('summary');summary.textContent=(row.entry.name||'Unnamed stock')+' · '+({'exact-proposal':'Exact match proposed',review:'Needs human review',unmatched:'No match','already-linked':'Already linked'}[row.status]);card.append(summary);
+   text(card,'p',row.reason);text(card,'p','Rank '+unknown(row.entry.rank??null)+' · Price '+unknown(row.entry.price??null)+' · Stock '+unknown(row.entry.quantity??null));
+   if(row.entry.details)text(card,'p',row.entry.details);
+   for(const candidate of row.candidates)text(card,'p','Candidate: '+candidate.name);
+   const tech=document.createElement('details');text(tech,'summary','Technical source and proposed references');text(tech,'pre',JSON.stringify({source:row.entry,candidates:row.candidates},null,2));card.append(tech);panel.append(card);
   }
  }
  async function load(){

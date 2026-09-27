@@ -2,3 +2,5 @@
 
 .archive-filter{display:flex;align-items:center;gap:10px;margin:20px 0}.archive-filter input{width:24px;min-height:44px}#vendor-portrait{width:180px;height:180px;object-fit:contain;margin:0 0 16px}#vendor-state{color:#c6ad73}#add-actions{display:flex;flex-wrap:wrap;gap:8px}
 #inventory-workspace{margin-top:28px;border-top:1px solid #887443;padding-top:16px}.inventory-card{padding:16px;margin:14px 0;background:#1a1e18;border:1px solid #514b3a;border-radius:6px;min-width:0}.inventory-card h3{margin:0;overflow-wrap:anywhere}.inventory-notes{white-space:pre-wrap}.inventory-results{display:grid;gap:10px}.inventory-results button{text-align:left;width:100%;min-width:0;white-space:normal}.inventory-results [aria-pressed=true]{outline:2px solid #ffcc66}#inventory-status[data-state=error]{color:#ffb7b7}@media(min-width:850px){#inventory-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.inventory-card{margin:0 0 14px}}
+
+#legacy-stock details{border:1px solid #565142;padding:10px;margin:10px 0;overflow-wrap:anywhere}#legacy-stock summary{min-height:44px;cursor:pointer}#legacy-stock pre{white-space:pre-wrap;overflow-wrap:anywhere}

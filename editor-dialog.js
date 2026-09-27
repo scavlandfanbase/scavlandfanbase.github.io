@@ -56,5 +56,6 @@ window.scavEditorDialog = function ({ title, submit = 'Save changes', build, onS
     finally { busy = false; body.inert = false; form.removeAttribute('aria-busy'); save.disabled = cancel.disabled = false; }
   };
   document.body.append(dialog); dialog.showModal();
+  (form.querySelector('[autofocus]')||[...form.querySelectorAll('input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')].find(el=>el.getClientRects().length)||cancel).focus();
   return api;
 };

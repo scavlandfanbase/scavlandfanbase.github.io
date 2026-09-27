@@ -2,7 +2,7 @@
 (function(root){
  const enabled=parent!==window||!['localhost','127.0.0.1'].includes(location.hostname);
  function create(domain){
-  let token='',pending=null,busy=false,previewVersion=null,onSaved=()=>{};
+  let token='',pending=null,busy=false,previewVersion=null,onSaved=()=>{},canPublish=false;
   const endpoint='https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts',apiKey='sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH';
   const section=document.createElement('section');section.className='production-actions';section.setAttribute('aria-label','Private draft and publication');
   const status=document.createElement('p');status.setAttribute('role','status');status.setAttribute('aria-live','polite');section.append(status);
@@ -11,7 +11,7 @@
   function paint(){
    retry.hidden=!pending;recover.hidden=!pending;
    for(const button of toolbar.querySelectorAll('button'))button.disabled=busy;
-   preview.disabled=busy||!!pending;publish.disabled=busy||!!pending||previewVersion!==client.getVersion();
+   preview.disabled=busy||!!pending;publish.disabled=!canPublish||busy||!!pending||previewVersion!==client.getVersion();publish.textContent=canPublish?'Publish':'Publishing disabled';
   }
   const client=ScavDraftPersistence.create({endpoint,apiKey,getToken:()=>token,domain,entityId:'catalogue',onState:({state,detail})=>{
    const labels={saving:'Saving…',saved:'Saved · private draft',conflict:'Conflict — newer version exists',error:'Couldn’t save — Retry',publishing:'Publishing…',published:'Published',previewing:'Preparing preview…'};
@@ -88,6 +88,7 @@
    }catch(error){status.textContent=error.message;}finally{busy=false;paint();}
   },toolbar);
   const publish=E.button('production-publish','Publish',()=>{
+   if(!canPublish)return;
    E.confirm({title:'Publish '+domain+'?',message:'Update the public '+domain+' catalogue with the saved draft you previewed? This is separate from Save Draft.',submit:'Publish',onConfirm:async()=>{
     busy=true;paint();try{await client.publish({confirm:true});previewVersion=null;status.textContent='Published. Your private draft and review history are retained.';}
     catch(error){status.textContent=error.message;throw error;}finally{busy=false;paint();}
@@ -96,7 +97,7 @@
   paint();status.textContent='Sign in through the Admin Hub to load private drafts.';
   window.addEventListener('beforeunload',e=>{if(pending||busy){e.preventDefault();e.returnValue='';}});
   return {change,retry:retryPending,hasPending:()=>!!pending,set onSaved(callback){onSaved=callback;},
-   async load(){await authenticate();await client.load({discardPending:true});pending=null;previewVersion=null;paint();const result=await request({action:'source'});status.textContent='Private draft · changes save after each action · Preview before Publish';return result;},
+   async load(){await authenticate();await client.load({discardPending:true});pending=null;previewVersion=null;paint();const result=await request({action:'source'});canPublish=result.capabilities?.publish===true;paint();status.textContent=canPublish?'Private draft · Preview before Publish':'Private draft · Publishing disabled · Your saves do not change the website';return result;},
    async source(){await authenticate();return request({action:'source'});}};
  }
  root.ScavProductionEditor={enabled,create};

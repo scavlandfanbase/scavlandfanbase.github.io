@@ -43,12 +43,12 @@ const fixture={settings,datasets:{items:[verified,{name:'Unverified item'},{name
   assert.equal(await page.locator('#dashboard-content [data-view="items"]').count(),1);
   assert.equal(await page.locator('#dashboard-website #edit-site').count(),1);
   await page.locator('[data-review-category="items"]').click();
-  assert.equal(await page.locator('#dashboard-category').inputValue(),'items');assert.match(await page.locator('#dashboard-results').textContent(),/^2 entries/);
+  assert.equal(await page.locator('#dashboard-category').inputValue(),'items');assert.match(await page.locator('#dashboard-results').textContent(),/3 match current filters/);
   assert.equal(await page.locator('#dashboard-review-list img').count(),0,'Untrusted names must be text');
-  await page.locator('#dashboard-filter').selectOption('verified');assert.match(await page.locator('#dashboard-results').textContent(),/^1 entries/);
+  await page.locator('#dashboard-filter').selectOption('verified');assert.match(await page.locator('#dashboard-results').textContent(),/1 match current filters/);
   await page.locator('#dashboard-search').fill('not found');assert.match(await page.locator('#dashboard-results').textContent(),/^No entries/);
   await page.locator('[data-review-category="listings"]').click();assert.match(await page.locator('#dashboard-review-list').textContent(),/The Doctor — Bandage/);
-  await page.locator('#dashboard-review-list button').click();assert.equal(await page.locator('#vendors').isVisible(),true);
+  await page.locator('#dashboard-review-list').getByRole('button',{name:'Open Vendor listings editor',exact:true}).click();assert.equal(await page.locator('#vendors').isVisible(),true);
   await page.frameLocator('#vendors-frame').locator('body[data-token="test-only"]').waitFor();
   await page.locator('#vendors .hub-button').click();await loaded();
   for(const view of ['weapons','armour','crafting','ammunition','settings','content'])assert(await page.locator('#hub [data-view="'+view+'"]').isDisabled());
