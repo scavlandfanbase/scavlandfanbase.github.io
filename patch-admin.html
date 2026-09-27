@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Patch Management | SCAVLAND</title><link rel="stylesheet" href="site-theme.css"><link rel="stylesheet" href="patch-admin.css"></head>
+<body><main>
+<h1>Patch Management</h1><p id="status" role="status" aria-live="polite">Open Patch Management from the Admin Hub.</p><button id="retry-load" type="button" hidden>Retry loading</button>
+<section id="workspace" hidden>
+<section class="panel"><h2>Current patch <span id="current"></span></h2><p id="started"></p><p id="summary"></p><progress id="progress" max="100" value="0" aria-label="Current patch verification progress"></progress><p>Counts show records verified for this patch. Previous evidence and verification history are preserved.</p><div class="actions"><button id="refresh" type="button">Refresh</button><button id="new-patch" type="button" disabled>New Patch — Require Re-verification</button></div><p id="permission"></p></section>
+<section class="panel"><h2>Verification progress</h2><div id="categories"></div><p>Attachments, Blueprints and compatibility counts will appear when their canonical datasets are introduced. Vendor listings are counted separately from vendor profiles.</p></section>
+<section class="panel"><h2>Patch history</h2><ul id="history"></ul></section>
+</section>
+<dialog id="confirm-dialog" aria-labelledby="dialog-title"><form id="patch-form"><h2 id="dialog-title">Start a new patch</h2><label for="patch-id">Patch or build identifier</label><input id="patch-id" name="patch" maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9._\-]{0,63}" required autocomplete="off"><p><strong>Scope: Everything</strong></p><p>Previously verified records will need checking against this new patch. Existing game information, evidence and verification history will be kept. This does not verify any records.</p><label class="check"><input id="confirm-all" type="checkbox" required> I want all categories to require verification for this patch.</label><p id="save-error" role="alert"></p><div class="actions"><button id="cancel" type="button">Cancel</button><button id="start" type="submit">Start patch</button></div></form></dialog>
+</main><script src="verification.js"></script><script src="patch-admin.js"></script></body></html>

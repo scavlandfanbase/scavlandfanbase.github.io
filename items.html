@@ -10,18 +10,18 @@
 <main class="items-main"><section class="items-head"><h1>Items Database</h1><p>Search items, equipment, ammo and crafting resources.</p>
 <div class="evidence-box"><h2>Submit Evidence</h2><form class="evidence-form" id="evidence-form"><select id="evidence-type" aria-label="Submission type"><option value="">Type (optional)</option><option value="missing-item">Missing item</option><option value="correction">Incorrect stats or information</option><option value="clearer-evidence">New or clearer screenshot</option></select><select id="evidence-category" aria-label="Category"><option value="">Category (optional)</option><option>Item</option><option>Weapon</option><option>Armour / gear</option><option>Ammo</option><option>Crafting</option><option>Vendor</option><option>Faction</option><option>Area / map</option><option>Other</option></select><input id="evidence-name" maxlength="160" placeholder="Item / weapon / armour name (optional)"><textarea id="evidence-notes" maxlength="2000" placeholder="Notes (optional)"></textarea><input id="evidence-screenshot" type="file" accept="image/png,image/jpeg,image/webp" required><div class="evidence-help">Only the screenshot is required · PNG, JPG or WebP · maximum 10 MB.<span class="armour-warning"><svg class="armour-shield" viewBox="0 0 24 28" aria-hidden="true"><path d="M12 1.5 21 5v7.2c0 6.2-3.8 11.1-9 14.3-5.2-3.2-9-8.1-9-14.3V5l9-3.5Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 5.2v16.7" fill="none" stroke="currentColor" stroke-width="2"/></svg><span><strong>ARMOUR / GEAR:</strong> Screenshots used to verify resistance stats must show the item at <strong>100% DURABILITY</strong>.</span></span></div><div class="evidence-actions"><button class="submit-evidence" id="evidence-submit" type="submit">Submit Evidence</button><span class="evidence-help" id="evidence-status">Evidence submitted for review.</span></div></form></div></section>
 <div class="category-overview" id="category-overview"></div><details class="junk-table" open><summary>Junk loot: current items with no known use</summary><p class="status">These items are currently marked as having no known use. Sell only when you are comfortable with that risk; future game updates may add uses.</p><div id="junk-loot"></div></details><div class="item-tools"><input id="item-search" type="search" placeholder="Search the selected category..." autocomplete="off"></div>
-<details id="item-browser"><summary>Browse selected category</summary><div class="item-filters" id="item-filters"></div><div class="verify-tools"><button id="verified-only" class="verify-toggle" type="button" aria-pressed="false">Verified Only</button><button id="needs-review" class="verify-toggle review-toggle" type="button" aria-pressed="false">Needs Verification</button><div class="verify-legend"><span class="verify-badge verified">✓ Verified</span><span class="verify-badge review">Unverified</span></div></div><div class="item-count" id="item-count">Loading items…</div><section class="item-grid" id="item-grid"></section></details></main>
+<details id="item-browser"><summary>Browse selected category</summary><div class="item-filters" id="item-filters"></div><div class="verify-tools"><button id="verified-only" class="verify-toggle" type="button" aria-pressed="false">Verified Only</button><button id="needs-review" class="verify-toggle review-toggle" type="button" aria-pressed="false">Needs Verification</button><div class="verify-legend"><span class="verify-badge verified">✓ VERIFIED</span><span class="verify-badge review">⚠ UNVERIFIED</span><span class="verify-badge review">⚠ PATCH CHECK NEEDED</span></div></div><div class="item-count" id="item-count">Loading items…</div><section class="item-grid" id="item-grid"></section></details></main>
+<script src="verification.js"></script>
 <script>
 const labels={weapon:'Weapons',armour:'Armour',ammunition:'Ammo','crafted-item':'Crafted','crafting-resource':'Crafting','vendor-item':'Vendor Items','junk-item':'Junk Loot'};
 let items=[],active='all',verifiedOnly=false,needsReview=false,weapons=[],armour=[],ammo=[],crafting=[],vendors=[],targetItemId=null;
 const norm=s=>clean(String(s||'')).toLowerCase();
-function sourceStatus(x){
- return x.source?.status==='screenshot-verified'
-  ?{label:'✓ Verified',cls:'verified'}
-  :{label:'Unverified',cls:'review'};
-}
+let verificationSettings={schemaVersion:1,current_patch_id:null};
+function sourceStatus(x){const status=ScavVerification.inspect(x,verificationSettings);return {label:(status.status==='verified'?'✓ ':'⚠ ')+status.label,cls:status.status==='verified'?'verified':'review'};}
 function itemStats(x){
  const n=norm(x.name), bits=[];
+ if(x.description)bits.push(['Description',x.description]);if(x.category)bits.push(['Category',x.category]);
+ if(x.properties)for(const [key,value] of Object.entries(x.properties))if(value!==null&&value!==undefined)bits.push([key,typeof value==='object'?JSON.stringify(value):value]);
  if(x.source?.status==='screenshot-verified'){bits.push(['Item Rank',x.rank],['Est. Price',x.estimatedPrice],['Max Stack',x.maxStack]);}
  const w=weapons.find(v=>v.id===x.id)||weapons.find(v=>norm(v.name)===n); if(w){bits.push(['Tier',w.tier],['Damage',w.damage],['RPM',w.rpm],['Range',w.range],['Accuracy',w.accuracy],['Recoil',w.recoil],['Handling',w.handling],['Ergonomics',w.ergonomics],['Reload',w.reload],['Ammo',w.ammo]);}
  const a=armour.find(v=>v.id===x.id)||armour.find(v=>norm(v.name)===n); if(a){bits.push(['Category',a.category],['Rank',a.vendorRank],['Price',a.price],['Ballistic',a.ballistic],['Slash',a.slash],['Radiation',a.radiation],['Repair',a.repairClass]);}
@@ -67,7 +67,8 @@ function applyUrlState(){const params=new URLSearchParams(location.search);const
 async function loadItems(){
  try{
   const i=await loadJson('items',true);
-  items=i.data||[];
+  items=(i.data||[]).filter(item=>!item.hidden&&!item.archived);
+  verificationSettings=await loadJson('verification-settings',true);ScavVerification.patchId(verificationSettings);
   if(new URLSearchParams(location.search).has('adminPreview')){try{const preview=JSON.parse(localStorage.getItem('scavland-item-preview')||'null');if(preview?.item&&preview.id){const index=items.findIndex(item=>item.id===preview.id);if(index>=0)items[index]={...items[index],...preview.item}}}catch(err){console.warn('SCAVLAND item preview unavailable:',err)}}
   const [w,a,m,c,v]=await Promise.all(['weapons','armour','ammo','crafting','vendors'].map(n=>loadJson(n)));
   weapons=w.data||[];armour=a.data||[];ammo=m.data||[];crafting=c.data||[];vendors=v.data||[];

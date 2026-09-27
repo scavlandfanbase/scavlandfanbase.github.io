@@ -143,6 +143,9 @@ export function createHandler(endpoint, env, fetcher=fetch) {
   return async request => {
     if(request.method==='OPTIONS')return new Response('ok',{headers:cors});
     if(request.method!=='POST')return reply({error:'POST is required.'},405);
+    // Release gate: specialist/legacy writes can also mutate canonical Items.
+    // Retire these paths together before enabling the trusted core publisher.
+    if(env('ADMIN_CORE_ENABLED')==='true')return reply({error:'This legacy editor is unavailable. Use Items or Vendors in the Admin Hub.'},503);
     try {
       const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY'),token=env('GITHUB_TOKEN');
       if(!sb||!key||!token)fail('Publish service is not configured.',503);
