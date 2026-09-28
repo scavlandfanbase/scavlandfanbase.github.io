@@ -50,7 +50,7 @@
  function confirm(action,title,message,extra={}){E.confirm({title,message,submit:'Save private draft',onConfirm:()=>change(action,extra)});}
  function more(){
   const v=selected();
-  scavEditorDialog({title:'More vendor actions',submit:'Close',build:api=>{
+  scavEditorDialog({title:'More vendor actions',submit:'Close',readOnly:true,build:api=>{
    function option(label,action){E.button('',label,()=>{api.close();action();},api.body);}
    if(v.archived){option('Restore',()=>confirm('restore','Restore '+v.name,'Return this vendor to the active draft list.'));return;}
    option('Duplicate',()=>confirm('duplicate','Duplicate '+v.name,'Copy details and portrait to a new hidden vendor. Inventory will be empty and verification will start as pending review.'));
@@ -62,7 +62,8 @@
  E.button('vendor-down','↓',()=>change('move',{direction:1}).catch(()=>{}),$('selection'),'Move vendor down');
  E.button('vendor-edit','Edit',()=>details(),$('actions'));
  E.button('vendor-image','Image',()=>E.imagePicker({inventory,current:selected().portrait?.file||null,title:'Vendor image',recordName:selected().name,onSubmit:image=>change('image',{image})}),$('actions'));
- E.button('vendor-inventory','Inventory',()=>listings.open(),$('actions'));
+ E.button('vendor-inventory','Inventory',()=>listings.open(),$('actions')).dataset.helpAdded='true';
+ E.help(document.querySelector('header .notice'),'Save private draft');
  E.button('vendor-more','•••',more,$('actions'),'More vendor actions');
  E.button('vendor-add','+ Add Vendor',()=>details(true),$('add-actions'));
  picker.onchange=()=>paint();$('show-archived').onchange=()=>paint();

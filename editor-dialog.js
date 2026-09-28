@@ -1,6 +1,6 @@
 // Shared accessible editor dialog. Native dialog supplies focus containment/inertness.
 let scavDialogSequence = 0;
-window.scavEditorDialog = function ({ title, submit = 'Save changes', build, onSubmit, changedOnly = false }) {
+window.scavEditorDialog = function ({ title, submit = 'Save changes', build, onSubmit, changedOnly = false, readOnly = false }) {
   const opener = document.activeElement;
   const dialog = document.createElement('dialog');
   dialog.className = 'scav-editor-dialog';
@@ -20,7 +20,7 @@ window.scavEditorDialog = function ({ title, submit = 'Save changes', build, onS
   cancel.type = 'button'; cancel.textContent = 'Cancel';
   const save = document.createElement('button');
   save.type = 'submit'; save.textContent = submit;
-  actions.append(cancel, save); form.append(heading, body, error, actions); dialog.append(form);
+  if(!readOnly)actions.append(cancel); actions.append(save); form.append(heading, body, error, actions); dialog.append(form);
   let dirty = false, busy = false, discarding = false;
   const close = () => { dialog.close(); dialog.remove(); if (opener?.isConnected) opener.focus(); };
   const requestClose = () => {
@@ -56,6 +56,6 @@ window.scavEditorDialog = function ({ title, submit = 'Save changes', build, onS
     finally { busy = false; body.inert = false; form.removeAttribute('aria-busy'); save.disabled = cancel.disabled = false; }
   };
   document.body.append(dialog); dialog.showModal();
-  (form.querySelector('[autofocus]')||[...form.querySelectorAll('input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')].find(el=>el.getClientRects().length)||cancel).focus();
+  (form.querySelector('[autofocus]')||[...form.querySelectorAll('input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')].find(el=>el.getClientRects().length)||(readOnly?save:cancel)).focus();
   return api;
 };

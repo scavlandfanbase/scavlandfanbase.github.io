@@ -1,0 +1,3 @@
+.admin-main:has(#vendors:not(.hidden)){width:min(1800px,90%)}
+#vendors-frame{display:block;min-height:0;height:900px}
+@media(max-width:760px){.admin-main:has(#vendors:not(.hidden)){width:calc(100% - 20px)}}
