@@ -262,7 +262,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/advanced-bandage_bg-icon.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/items/advanced-bandage__tooltip__2026-09-18_085054.png",
@@ -327,7 +327,7 @@
         "crafting-resource",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/advanced-mechanical-components_bg-icon.png",
       "notes": null,
       "estimatedPrice": 25000,
       "rank": 3,
@@ -378,7 +378,7 @@
       "classification": [
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/ai-2-mechanist-medkit_bg-icon.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/items/ai-2-mechanist-medkit__tooltip__2026-09-18_085027.png",
@@ -1123,7 +1123,7 @@
       "classification": [
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/dried-mushrooms_bg-icon.png",
       "notes": null
     },
     {
@@ -1132,7 +1132,7 @@
       "classification": [
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/dried-steak_bg-icon.png",
       "notes": null
     },
     {
@@ -1194,7 +1194,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/expert-gun-repair-kit_bg-icon.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/weapon/expert-gun-repair-kit__recipe__2026-09-18_205358.png",
@@ -1347,7 +1347,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/gun-cleaning-rod_bg-icon.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/weapon/gun-cleaning-rod__recipe__2026-09-18_205326.png",
@@ -1363,7 +1363,7 @@
         "crafted-item",
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/gun-field-tools_bg-icon.png",
       "notes": null,
       "source": {
         "file": "evidence-inbox/crafting/weapon/gun-field-tools__recipe__2026-09-18_205332.png",
@@ -2469,7 +2469,7 @@
       "classification": [
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/mystery-pills_bg-icon.png",
       "notes": null,
       "source": {
         "status": "screenshot-verified",
@@ -2945,7 +2945,7 @@
       "classification": [
         "vendor-item"
       ],
-      "image": null,
+      "image": "evidence-inbox/items/radish_bg-icon.png",
       "notes": null
     },
     {
