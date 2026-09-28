@@ -316,7 +316,17 @@ function escapeVendorText(value) {
 // without importing item-tooltip verification or maintaining a second stat database.
 function renderVendorDetails(details, item, catalog = {}) {
   const parts = [String(details ?? '').trim()];
-  const add = (label, value) => { if (value !== null && value !== undefined && value !== '' && !parts.join(' ').toLowerCase().includes(label.toLowerCase() + ':')) parts.push(label + ': ' + value); };
+  const add = (label, value) => {
+    if (value === null || value === undefined || value === '') return;
+    const existing = parts.join(' ').toLowerCase();
+    const aliases = {
+      'damage': ['damage:', 'dmg:'],
+      'penetration': ['penetration:', 'pen:'],
+      'max stacks': ['max stacks:', 'max:']
+    };
+    const labels = aliases[label.toLowerCase()] || [label.toLowerCase() + ':'];
+    if (!labels.some(existingLabel => existing.includes(existingLabel))) parts.push(label + ': ' + value);
+  };
   for (const [key, label] of [['health','Health'],['bleed','Bleed'],['radiation','Radiation'],['hunger','Hunger'],['thirst','Thirst']]) add(label, item?.effects?.[key]);
   add('Max Stacks', item?.maxStack);
   const weapon = catalog.weapons?.get(item?.id), armour = catalog.armour?.get(item?.id), ammo = catalog.ammo?.get(item?.id);
@@ -324,8 +334,8 @@ function renderVendorDetails(details, item, catalog = {}) {
   if (armour) for (const [key, label] of [['durability','Durability'],['ballistic','Ballistic'],['slash','Slash'],['radiation','Radiation'],['repairClass','Repair Class']]) add(label, armour[key]);
   if (ammo) for (const [key, label] of [['damage','Damage'],['penetrationPercent','Penetration'],['maxStack','Max Stacks']]) add(label, ammo[key] == null ? null : key === 'penetrationPercent' ? ammo[key] + '%' : ammo[key]);
   const text = parts.filter(Boolean).join(' ');
-  const labels = /(?:Description|Max Stacks|Min Cond|Not usable below|Repair Class|Dmg|Damage|Pen|Penetration|Repair|Ergo|Recoil|Handling|Hand|Range|Acc|Health|Bleed|Rad|Radiation|Hunger|Thirst|Max):/g;
-  const matches = [...text.matchAll(labels)];
+const labels = /(?:Description|Max Stacks|Min Cond|Not usable below|Repair Class|Dmg|Damage|RPM|Pen|Penetration|Repair|Ergo|Reload|Recoil|Handling|Hand|Range|Acc|Health|Bleed|Rad|Radiation|Hunger|Thirst|Max):/g;  
+const matches = [...text.matchAll(labels)];
   if (!matches.length) return '<span class="type-label">' + escapeVendorText(text) + '</span>';
   const type = text.slice(0, matches[0].index).trim();
   return '<div class="badge-group"><span class="type-label">' + escapeVendorText(type) + '</span>' +
