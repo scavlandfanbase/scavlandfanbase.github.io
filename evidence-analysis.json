@@ -1,6 +1,6 @@
 {
   "generated_from": "evidence-inbox",
-  "count": 571,
+  "count": 587,
   "exact_duplicate_groups": [
     [
       "admin/mutated-stick-374a7376-19b1-4721-a191-60ec3581e3e6.png",
@@ -17,6 +17,42 @@
     [
       "blueprints/basic-gun-repair-kit-Blueprint_bg-icon.png",
       "items/scavenger-armor-repair-kit-Blueprint_bg-icon.png"
+    ],
+    [
+      "items/AI-2-mechanist-medkit_bg-icon_24092026.png",
+      "items/ai-2-mechanist-medkit_bg-icon.png"
+    ],
+    [
+      "items/Adv-Mechanical-Parts_bg-icon__24092026.png",
+      "items/advanced-mechanical-components_bg-icon.png"
+    ],
+    [
+      "items/dried-mushrooms__icon__2026-09-21.png",
+      "items/dried-mushrooms_bg-icon.png"
+    ],
+    [
+      "items/dried-steak_bg-icon.png",
+      "items/dried-steak_bg-icon_25092026.png"
+    ],
+    [
+      "items/expert-gun-repair-kit_bg-icon.png",
+      "items/expert-gun-repair-kit_bg-icon_25092026.png"
+    ],
+    [
+      "items/gun-cleaning-rod_bg-icon.png",
+      "items/gun-cleaning-rod_bg-icon_24092026.png"
+    ],
+    [
+      "items/gun-field-tools_bg-icon.png",
+      "items/gun-field-tools_bg-icon_24092026.png"
+    ],
+    [
+      "items/mystery-pills_bg-icon.png",
+      "items/mystery-pills_bg-icon_25092026.png"
+    ],
+    [
+      "items/radish__icon__2026-09-21.png",
+      "items/radish_bg-icon.png"
     ],
     [
       "vendors/gavron__shop-screen-part-2__2026-09-20.png",
@@ -400,6 +436,15 @@
       "ocr": "- GP-4 Gas Mask ~25000P This widespread Gas Mask was issued to Civil Defense and civilians alike, during the times of War. Vultures and Bandits often wear these for days at a time, and the mask’s straps dig themselves painfully into the back of their heads. Durability PUNTUNVNTUUUNTHITIIT 100 Ballistic Res | 5 Slash Res I 8 Rad Res LUMI 30 Repair Class: Scavenger r."
     },
     {
+      "file": "armour/green-rags_bg-icon_24092026.png",
+      "sha256": "f24f8782537f79b5d5616059492f98ae181cf40ed0bc8221d24a3e45fc1d3ba8",
+      "bytes": 917,
+      "width": 34,
+      "height": 34,
+      "phash": "c496464f39991d79",
+      "ocr": "Mm"
+    },
+    {
       "file": "armour/old-gp-4-gas-mask__stats__2026-09-13_230420.png",
       "sha256": "4c32d724260de2d2adaeed1529e49b29cc78efc5fc48336e2f3e04b4934f1a1c",
       "bytes": 337278,
@@ -491,6 +536,15 @@
       "ocr": "& |"
     },
     {
+      "file": "armour/patched-armored-blouse_bg-icon_24092026.png",
+      "sha256": "de0a40bdd0a322132eac86afdbd35cb9740017d2a64c0b28113a3b3c5cda30e8",
+      "bytes": 1269,
+      "width": 34,
+      "height": 35,
+      "phash": "85a5263e7e5a5869",
+      "ocr": "My"
+    },
+    {
       "file": "armour/plated-overcoat_bg-icon_24092026.png",
       "sha256": "f3aa6023bb84b93b6c0814390653f5e0b28096d8539cb724e364f2d867ebb827",
       "bytes": 1219,
@@ -498,6 +552,15 @@
       "height": 41,
       "phash": "d2f0020f2d3d7dd8",
       "ocr": "on Pe"
+    },
+    {
+      "file": "armour/plated-ragged-pants_bg-icon_24092026.png",
+      "sha256": "1619ea2ec52b940ae97a485c465fdd94f4ec2833aa92865bbe346a4fc13223f2",
+      "bytes": 1235,
+      "width": 29,
+      "height": 39,
+      "phash": "c4d848262bbc1fcf",
+      "ocr": "ve"
     },
     {
       "file": "armour/riot-vest__stats-100-durability__2026-09-16_091911.png",
@@ -529,6 +592,15 @@
       "ocr": ""
     },
     {
+      "file": "armour/ruined-beret_bg-icon_24092026.png",
+      "sha256": "152ec29bc7a8ba9a74052870768cad83f3d2df78acb45c5889bc0641939ea6d5",
+      "bytes": 529,
+      "width": 22,
+      "height": 20,
+      "phash": "c0f02f3b0f43f29c",
+      "ocr": ""
+    },
+    {
       "file": "armour/scrap-armor_bg-icon_24092026.png",
       "sha256": "e52fc4d7c52b91e3ed171a405646b3e15f0289ec62d29c00e843b4df4a463db6",
       "bytes": 1158,
@@ -536,6 +608,15 @@
       "height": 36,
       "phash": "c19416663fb7348d",
       "ocr": "1S"
+    },
+    {
+      "file": "armour/scrapyard-pants_bg-icon_20092026.png",
+      "sha256": "0f54c29902fd350c03356826f7849f2a61e87dafdbb553c265b726a9444a5347",
+      "bytes": 1088,
+      "width": 28,
+      "height": 38,
+      "phash": "c01f3f244bbf1ce0",
+      "ocr": "A Pe Fa"
     },
     {
       "file": "armour/security-helmet__stats-100-durability__2026-09-18_131628.png",
@@ -599,6 +680,15 @@
       "width": 160,
       "height": 163,
       "phash": "e84e97a19a566978",
+      "ocr": ""
+    },
+    {
+      "file": "armour/winter-pants_bg-icon_24092026.png",
+      "sha256": "06861c4cc4c9bb72b1d901d16aebc36fafe313ea9d9b1a2f70da1158bcd98bf5",
+      "bytes": 1268,
+      "width": 29,
+      "height": 39,
+      "phash": "d08d3f672c384bca",
       "ocr": ""
     },
     {
@@ -2621,6 +2711,15 @@
       "ocr": "Advanced Bandage ~4000P High-quality Esmarch bandages from a well-maintained, pre- War kit. Health: +10 Bleed: -33 wl"
     },
     {
+      "file": "items/advanced-bandage_bg-icon.png",
+      "sha256": "e447d754e0ae70eb0b1e70592a6f55dd645c5e2841d3f40933d68efa83745c05",
+      "bytes": 717,
+      "width": 102,
+      "height": 96,
+      "phash": "d01e3bf07107646f",
+      "ocr": "&"
+    },
+    {
       "file": "items/advanced-gun-repair-kit_bg-icon_24092026.png",
       "sha256": "87d39d2dedd92758fb52c3c5c0ca76c5eb03a2a58b7caa2c25c21a16de5c8828",
       "bytes": 536,
@@ -2650,6 +2749,15 @@
       "ocr": "‘ai Advanced Mechanical ~25000P Components FRank Rank: 3, A set of gears, levers and other high-grade machine parts. Possibly good for reuse instead of recycling. r."
     },
     {
+      "file": "items/advanced-mechanical-components_bg-icon.png",
+      "sha256": "a09b63d3d1f1ec62096c9640ab6d5e30e501b3785da19f21d6c73ee98e198516",
+      "bytes": 2049,
+      "width": 187,
+      "height": 180,
+      "phash": "94ce2a666ed8391b",
+      "ocr": "“ts"
+    },
+    {
       "file": "items/ai-2-army-medkit__tooltip__2026-09-18_085021.png",
       "sha256": "2bc198d6d56c707077fe081387f111a76faeb9bb9582d237cd88abfa9c0deda8",
       "bytes": 157652,
@@ -2668,6 +2776,15 @@
       "height": 963,
       "phash": "e0852f680f97937a",
       "ocr": "a Al-2 Mechanist Medkit ~9200P Dank. Rank: 3, A very high-grade medkit adapted by Mechanists to reflect all of their unique knowledge. Especially regarding sedatives. Health: +50 Bleed: -30 Radiation: -50 Hunger: «3 Thirst: +3 os"
+    },
+    {
+      "file": "items/ai-2-mechanist-medkit_bg-icon.png",
+      "sha256": "f08e859576ef667e09a7744b8861f89d39a07aa534adbb9bfdf50a7aa75cba7d",
+      "bytes": 322,
+      "width": 16,
+      "height": 16,
+      "phash": "94c94b363bc07ef0",
+      "ocr": ""
     },
     {
       "file": "items/ai-2-medkit__tooltip__2026-09-18_085015.png",
@@ -3105,6 +3222,24 @@
       "ocr": "a Dried Mushrooms ~1000P Rank. Rank: 1 These dried mushrooms are specially prepared to give psychoactive effects. They've been dulled by age, but | should still be careful when | eat this. Hunger: -13 _"
     },
     {
+      "file": "items/dried-mushrooms_bg-icon.png",
+      "sha256": "84b098a8294d22a36b18887833836b3fe78862ec93435ea273768bb6c3aa8cfc",
+      "bytes": 813,
+      "width": 94,
+      "height": 93,
+      "phash": "8dc42e3f7aa57029",
+      "ocr": "& “Yy"
+    },
+    {
+      "file": "items/dried-steak_bg-icon.png",
+      "sha256": "59bbf7116349841b669f963cd2282d039991498bb2fe55141535d068bd90f211",
+      "bytes": 2077,
+      "width": 99,
+      "height": 99,
+      "phash": "85853f3e7a62c2c3",
+      "ocr": "="
+    },
+    {
       "file": "items/dried-steak_bg-icon_25092026.png",
       "sha256": "59bbf7116349841b669f963cd2282d039991498bb2fe55141535d068bd90f211",
       "bytes": 2077,
@@ -3175,6 +3310,15 @@
       "height": 21,
       "phash": "94b14ede91dc6362",
       "ocr": "(="
+    },
+    {
+      "file": "items/expert-gun-repair-kit_bg-icon.png",
+      "sha256": "efcebd53caf13a6c14c946d03461fa9185c7fd5d0799c21692dba4a4edafc2a8",
+      "bytes": 748,
+      "width": 38,
+      "height": 27,
+      "phash": "d1fb7e9563403612",
+      "ocr": ""
     },
     {
       "file": "items/expert-gun-repair-kit_bg-icon_25092026.png",
@@ -3309,6 +3453,15 @@
       "ocr": "all | Gun Cleaning Rod ~5000P 4499P Rank Rank: 1 A ramrod used to clean firearms. Good for scavengers who do long stretches of field work. Repair: 15% Not usable below item condition: 70% Repair Class: Global rs"
     },
     {
+      "file": "items/gun-cleaning-rod_bg-icon.png",
+      "sha256": "126fb5e7950e37935530abe53ac4a4068a24049d0ef82f5e5d7ae4371ab2ee27",
+      "bytes": 662,
+      "width": 28,
+      "height": 29,
+      "phash": "92ccf8b8ac96d2a9",
+      "ocr": "YS"
+    },
+    {
       "file": "items/gun-cleaning-rod_bg-icon_24092026.png",
       "sha256": "126fb5e7950e37935530abe53ac4a4068a24049d0ef82f5e5d7ae4371ab2ee27",
       "bytes": 662,
@@ -3316,6 +3469,15 @@
       "height": 29,
       "phash": "92ccf8b8ac96d2a9",
       "ocr": "YS"
+    },
+    {
+      "file": "items/gun-field-tools_bg-icon.png",
+      "sha256": "d12f2c4abb90d9acae2f3fc16635c7c5ca1b187a5e72c23ed4f0688edcdd2c0b",
+      "bytes": 816,
+      "width": 31,
+      "height": 22,
+      "phash": "c0c063613fba3b3e",
+      "ocr": "Fa"
     },
     {
       "file": "items/gun-field-tools_bg-icon_24092026.png",
@@ -4080,6 +4242,15 @@
       "ocr": "- Mystery Pills ~6000P A prewar drug with half of a complicated name written in the back. Whatever it is makes the pain go away. Health: +15 Radiation: -30 Thirst: +5 al"
     },
     {
+      "file": "items/mystery-pills_bg-icon.png",
+      "sha256": "3f60ff1d5dcd1dedc67542ef448a2c8978783f2edabf7922f14dbcc0b31e5018",
+      "bytes": 695,
+      "width": 84,
+      "height": 78,
+      "phash": "c0186e8d3d73f44d",
+      "ocr": "a a"
+    },
+    {
       "file": "items/mystery-pills_bg-icon_25092026.png",
       "sha256": "3f60ff1d5dcd1dedc67542ef448a2c8978783f2edabf7922f14dbcc0b31e5018",
       "bytes": 695,
@@ -4229,6 +4400,15 @@
       "height": 904,
       "phash": "f0e12f2d87c24ad6",
       "ocr": "_ Radish ~150P \"Dank: Rank: 1 A spicy and crispy vegetable which survives the Mist reasonably well. It’s very hard to find produce in Zalesye, but when | do, it’s usually this. Hunger: -8 Thirst: -1 al"
+    },
+    {
+      "file": "items/radish_bg-icon.png",
+      "sha256": "b5a58cdff0e7132223c6f85bb59fccf36b89b7fadd49f03f4e992cb4f1876e43",
+      "bytes": 803,
+      "width": 96,
+      "height": 102,
+      "phash": "87563c694b8dd634",
+      "ocr": "e,"
     },
     {
       "file": "items/rain-coat_bg-icon_25092026.png",
