@@ -321,3 +321,18 @@ html.scav-shell-loading [data-section-id="latest-update"]{min-height:150px}
 html.scav-shell-loading .hero{min-height:104px}
 html.scav-shell-loading .hero h1,html.scav-shell-loading .hero p{visibility:hidden}
 @media(max-width:700px){html.scav-shell-loading .hero{min-height:78px}}
+
+/* Public Vendor canonical item icons */
+.vendor-item-identity{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.vendor-item-icon{
+  width:44px;
+  height:44px;
+  object-fit:contain;
+  flex:0 0 44px;
+}
