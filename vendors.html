@@ -374,11 +374,12 @@ async function loadVendorDirectory() {
           '<figcaption>Part ' + (i + 1) + ' of ' + screenshots.length + '</figcaption></figure>').join('') +
         '</div><p class="placeholder-note">Item names, prices and unlock ranks still need confirmation.</p>' : '';
       const canonicalRows=ScavVendorCanonical.rows(vendor.id,payload.vendorListings,itemPayload.data||[]);
+      const canonicalItemIds=new Set(canonicalRows.map(({listing})=>listing.entity?.id).filter(Boolean));
       const canonicalContent=canonicalRows.length?'<h3>Item listings</h3><table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Quantity</th></tr></thead><tbody>'+canonicalRows.map(({listing,item})=>'<tr><td><a class="data-link" href="items.html?id='+encodeURIComponent(item.id)+'">'+escapeVendorText(item.name)+'</a></td><td>'+escapeVendorText(listing.rank??'?')+'</td><td>'+escapeVendorText(listing.price??'?')+'</td><td>'+escapeVendorText(listing.quantity??'?')+'</td></tr>').join('')+'</tbody></table>':'';
       const content = canonicalContent + shopGallery + (vendor.inventoryDocumented
         ? '<p class="placeholder-note">Unverified inventory</p>' +
           '<table class="vendor-table"><thead><tr><th>Item</th><th>Rank</th><th>Price</th><th>Details / Stats</th></tr></thead><tbody>' +
-          vendor.inventory.map(item => { const shared = itemsById.get(item.itemId); const displayName = shared?.name || item.name; return '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(displayName) + '</a></td><td>' + escapeVendorText(item.rank) +
+       vendor.inventory.filter(item => !canonicalItemIds.has(item.itemId)).map(item => {const shared = itemsById.get(item.itemId); const displayName = shared?.name || item.name; return '<tr><td><a class="data-link" href="items.html?id=' + encodeURIComponent(item.itemId) + '">' + escapeVendorText(displayName) + '</a></td><td>' + escapeVendorText(item.rank) +
             '</td><td>' + escapeVendorText(item.price) + '</td><td>' + renderVendorDetails(item.details, shared, catalog) + '</td></tr>'; }).join('') + '</tbody></table>'
         : '<div class="placeholder-note">' + (screenshots.length ? 'Item list awaiting confirmation. See the shop screenshots above.' : 'Inventory coming soon.') + '</div>');
       const portrait = vendor.portrait?.file || '';
