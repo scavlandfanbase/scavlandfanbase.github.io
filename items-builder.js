@@ -143,7 +143,11 @@
  }
  function confirm(action,title,message,extra={}){E.confirm({title,message,submit:'Save private draft',onConfirm:()=>change(action,extra)});}
  function review(){
-  if(cloud){const r=chosen();return E.confirm({title:'Verify '+r.name+'?',message:'Verify this Item against the current game patch. The server records your identity and the time. Evidence is optional.',submit:'Verify',onConfirm:()=>change('verify',{decision:'verified',confirmId:r.id})});}
+  if(cloud){const r=chosen();let decision;return scavEditorDialog({title:'Review '+r.name+' verification',submit:'Record review',build:({body})=>{
+   E.verificationInfo(body,ScavVerification.inspect(r,state.settings));
+   paragraph(body,'Choose Verified after checking this Item, or Unverified when it needs another review. Previous verification history is retained. The server records your identity, time and current patch. This saves privately and does not publish.');
+   decision=E.selectField(body,'Review decision','decision',[['unverified','Unverified'],...(state.settings.current_patch_id?[['verified','Verified for current patch']]:[])],'unverified');
+  },onSubmit:()=>change('verify',{decision:decision.value,confirmId:r.id})});}
   const r=chosen();let decision;
   scavEditorDialog({title:'Review Item verification',submit:'Record review',build:({body})=>{
    E.verificationInfo(body,ScavVerification.inspect(r,state.settings));
