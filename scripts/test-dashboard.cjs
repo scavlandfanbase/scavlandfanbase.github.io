@@ -17,7 +17,7 @@ const fixture={settings,datasets:{items:[verified,{name:'Unverified item'},{name
     requests.push({path:url.pathname,body:req.postDataJSON?.()});
     if(url.pathname.endsWith('/token'))return route.fulfill({json:{access_token:'test-only'}});
     if(url.pathname.endsWith('/is_scavland_admin'))return route.fulfill({json:allow});
-    if(url.pathname.endsWith('/get_scavland_admin_profile'))return route.fulfill({json:[{role}]});
+    if(url.pathname.endsWith('/get_scavland_admin_profile'))return route.fulfill({json:[{role,is_active:true,display_name:'Fixture',permissions:role==='owner'?['items_edit','vendors_edit','weapons_edit','armour_edit','crafting_edit','ammunition_edit','settings_edit','content_edit','evidence_review']:['evidence_review','vendors_edit']}]});
     if(url.pathname.endsWith('/get-site-analytics'))return route.fulfill({json:{activeNow:0,last24Hours:0,totalSessions:0}});
     if(url.pathname.endsWith('/manage-patches')){
      assert.deepEqual(req.postDataJSON(),{action:'read'});assert.equal(req.headers().authorization,'Bearer test-only');
@@ -27,7 +27,7 @@ const fixture={settings,datasets:{items:[verified,{name:'Unverified item'},{name
     return route.fulfill({json:[]});
    }
    // Stub editor frames while exercising the real hub navigation/session handshake.
-   if(url.searchParams.has('embed'))return route.fulfill({contentType:'text/html',body:'<p>Editor test fixture</p><script>parent.postMessage({type:"scavland-admin-ready"},location.origin);addEventListener("message",e=>document.body.dataset.token=e.data.token)</script>'});
+   if(url.searchParams.has('embed'))return route.fulfill({contentType:'text/html',body:'<!doctype html><html><body><p>Editor test fixture</p><script>addEventListener("message",e=>{if(e.data.type==="scavland-admin-token")document.body.dataset.token=e.data.token});parent.postMessage({type:"scavland-admin-ready"},location.origin)</script></body></html>'});
    const file=path.join(root,url.pathname);return fs.existsSync(file)?route.fulfill({path:file}):route.fulfill({status:404,body:''});
   });
   async function login(){await page.goto('http://local.test/admin.html');await page.locator('#email').fill('test@example.invalid');await page.locator('#password').fill('fixture');await page.locator('#signin').click();}
@@ -35,8 +35,8 @@ const fixture={settings,datasets:{items:[verified,{name:'Unverified item'},{name
   await page.goto('http://local.test/admin.html');assert.equal(requests.some(r=>r.path.endsWith('manage-patches')),false);assert.equal(await page.locator('#hub').isVisible(),false);
   await login();await loaded();
   assert.equal(await page.locator('#dashboard-patch').textContent(),'0.7.2');
-  assert.equal(await page.locator('#dashboard-summary').textContent(),'1 / 5 (20%)');
-  assert.equal(await page.locator('#dashboard-stale').textContent(),'1 patch checks');
+  assert.equal(await page.locator('#dashboard-summary').textContent(),'1 / 6 (17%)');
+  assert.equal(await page.locator('#dashboard-stale').textContent(),'2 patch checks');
   assert.equal(await page.locator('#dashboard-unverified').textContent(),'3 unverified');
   assert.equal(await page.locator('#dashboard-new-patch').isDisabled(),true);
   assert.equal(await page.locator('#dashboard-admin [data-view="admin-users"]').count(),1);
@@ -51,7 +51,7 @@ const fixture={settings,datasets:{items:[verified,{name:'Unverified item'},{name
   await page.locator('#dashboard-review-list').getByRole('button',{name:'Open Vendor listings editor',exact:true}).click();assert.equal(await page.locator('#vendors').isVisible(),true);
   await page.frameLocator('#vendors-frame').locator('body[data-token="test-only"]').waitFor();
   await page.locator('#vendors .hub-button').click();await loaded();
-  for(const view of ['weapons','armour','crafting','ammunition','settings','content'])assert(await page.locator('#hub [data-view="'+view+'"]').isDisabled());
+  for(const view of ['weapons','armour','crafting','ammunition','settings','content','evidence'])assert(await page.locator('#hub [data-view="'+view+'"]').isEnabled());
   for(const view of ['items','patches']){
    await page.locator('#hub [data-view="'+view+'"]').click();assert.equal(await page.locator('#'+view).isVisible(),true);
    await page.locator('#'+view+' .hub-button').click();await loaded();
