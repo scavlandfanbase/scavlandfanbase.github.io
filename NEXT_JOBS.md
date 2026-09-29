@@ -1,3 +1,35 @@
+# CURRENT STATE ? 29 SEPTEMBER 2026
+
+## DONE
+
+- Admin email privacy and Owner-only Admin Users management hardened and regression-tested.
+- Granular publish permissions enforced for Public Content and Page Settings.
+- Evidence Review production RLS requires `evidence_review`.
+- Admin Hub navigation now follows the authenticated granular permission profile.
+- Owner, restricted-Admin and unauthorized browser access paths are covered by regression tests.
+- Password invitation/recovery flow remains passing.
+- Existing public site/data and canonical evidence workflows remain preserved.
+
+## CURRENT
+
+- Finish this Admin permission checkpoint by committing and pushing the tested dashboard/test/documentation changes.
+- Perform the remaining authenticated Owner acceptance check for the Public Content CMS if still required by its release notes.
+
+## NEXT
+
+- Return to the Vendor visual-editor work after Admin security/access is closed.
+- Continue Checkpoint 7A/7B using the existing reusable editor foundation and preserve the public Vendor page/data.
+- Do not begin the Checkpoint 8 canonical vendor-inventory migration until the Vendor editor checkpoint calls for it.
+
+## DEFERRED / EVIDENCE
+
+- Remaining evidence gaps and unresolved evidence conflicts.
+- Armour evidence must use 100% durability screenshots.
+- Broader image/evidence library cleanup and canonical organisation.
+- Later vendor canonical-inventory migration and advanced page-builder/theme work.
+
+---
+
 ## Weapon verification badges — 22 September 2026
 
 - Weapons cards now show the same green Verified / amber Unverified labels as Items, based strictly on the weapon record's source.status. No evidence status or stats were changed.

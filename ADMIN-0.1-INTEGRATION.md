@@ -152,3 +152,41 @@ Verified production state:
 - Repository commit: `ffe3eeb` (`Enforce granular Evidence Review permissions`).
 
 This closes the Evidence RLS permission audit. Dashboard visibility/navigation still needs to be aligned with the granular Admin permission profile.
+
+### Permission-aware Admin Hub ? 29 September 2026
+
+The Admin Hub navigation is now aligned with the live granular Admin permission profile.
+
+Implemented behaviour:
+
+- Evidence Review requires `evidence_review`.
+- Items requires `items_edit`.
+- Weapons requires `weapons_edit`.
+- Armour requires `armour_edit`.
+- Crafting requires `crafting_edit`.
+- Ammunition requires `ammunition_edit`.
+- Vendors requires `vendors_edit`.
+- Page Settings requires `settings_edit`.
+- Public Content requires `content_edit`.
+- Admin Users remains Owner-only.
+- Patch Management remains available under its existing authorization model; starting a new patch remains Owner-gated.
+- The previous hard-coded Admin 0.1 UI allowlist was removed.
+- Navigation itself checks the resolved permission set, rather than relying only on disabled buttons.
+
+Regression coverage was updated to use the verified production Admin profile contract: `role`, `display_name`, `is_active` and `permissions`.
+
+Browser coverage now includes:
+
+- Owner with the full permission set: permitted editor controls are enabled.
+- Restricted authenticated Admin with only `evidence_review` and `vendors_edit`: Evidence and Vendors are enabled while Items, Weapons, Ammunition, Settings and Public Content are denied; Admin Users is absent.
+- Unauthorized account: Admin Hub access remains rejected.
+
+Verification:
+
+- `npm test` ? PASS.
+- Admin 0.1 core/browser integration ? PASS.
+- Admin invite/privacy regression ? PASS.
+- `node scripts/test-admin-password.cjs` ? PASS.
+- `git diff --check` ? PASS apart from expected Windows LF/CRLF conversion warnings.
+
+This closes the dashboard visibility/navigation follow-up recorded under the Granular Evidence Review checkpoint.

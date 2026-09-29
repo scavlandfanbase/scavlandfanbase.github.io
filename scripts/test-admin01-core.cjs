@@ -184,7 +184,12 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
       const allowed=[alice,bob].includes(actor);
       if(url.pathname==='/auth/v1/token')return route.fulfill({headers:cors,json:{access_token:actor}});
       if(url.pathname.endsWith('/is_scavland_admin'))return route.fulfill({headers:cors,json:allowed});
-      if(url.pathname.endsWith('/get_scavland_admin_profile'))return route.fulfill({headers:cors,json:allowed?[{role:actor===alice?'owner':'admin'}]:[]});
+      if(url.pathname.endsWith('/get_scavland_admin_profile')){
+       const permissions=actor===alice
+        ? ['evidence_review','items_edit','weapons_edit','armour_edit','crafting_edit','ammunition_edit','vendors_edit','settings_edit','content_edit','manage_admins']
+        : ['evidence_review','vendors_edit'];
+       return route.fulfill({headers:cors,json:allowed?[{role:actor===alice?'owner':'admin',display_name:actor===alice?'Owner':'Admin',is_active:true,permissions}]:[]});
+      }
       if(url.pathname.endsWith('/manage-patches')){
        const response=await patchHandler(new Request(request.url(),{method:request.method(),headers:request.headers(),body:request.postData()}));
        return route.fulfill({status:response.status,headers:Object.fromEntries(response.headers),body:await response.text()});
@@ -238,7 +243,7 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
    // Real Admin Hub login and same-origin token handoff, with fixture Auth only.
    await page.goto('https://scavlandfanbase.github.io/admin.html');await page.locator('#email').fill('owner@example.invalid');await page.locator('#password').fill('fixture-only');await page.locator('#signin').click();await page.locator('#hub').waitFor();
    await page.locator('#dashboard-status').filter({hasText:'Updated'}).waitFor();
-   assert(await page.locator('[data-view="ammunition"]').isDisabled());assert(await page.locator('#edit-site').isDisabled());
+   assert(!(await page.locator('[data-view="ammunition"]').isDisabled()));assert(!(await page.locator('#edit-site').isDisabled()));
    await page.locator('[data-view="items"]').click();await page.frameLocator('#items-frame').locator('#workspace').waitFor();
    await page.locator('#items .hub-button').click();await page.locator('[data-view="patches"]').click();
    const patch=page.frameLocator('#patches-frame');await patch.locator('#status').filter({hasText:'Ready'}).waitFor();
@@ -253,7 +258,22 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
    await actualItems.locator('#production-preview').click();await actualItems.getByRole('dialog').getByRole('button',{name:'Close',exact:true}).click();await actualItems.getByRole('dialog').waitFor({state:'detached'});
    await actualItems.locator('#production-publish').click();await actualItems.getByRole('dialog').getByRole('button',{name:'Publish',exact:true}).click();await actualItems.getByRole('dialog').waitFor({state:'detached'});
    assert.equal(V.inspect(documents['data/items.json'].data.find(r=>r.id===browserItem.id),documents['data/verification-settings.json']).status,'verified');
-   const denied=await browserSession('33333333-3333-4333-8333-333333333333');await denied.page.goto('https://scavlandfanbase.github.io/admin.html');await denied.page.locator('#email').fill('denied@example.invalid');await denied.page.locator('#password').fill('fixture-only');await denied.page.locator('#signin').click();await denied.page.locator('#login-status').filter({hasText:'not authorized'}).waitFor();assert.equal(await denied.page.locator('#hub').isVisible(),false);assert.deepEqual(denied.errors,[]);
+   // Granular Admin Hub permissions: Bob may review Evidence and edit Vendors only.
+    await second.page.goto('https://scavlandfanbase.github.io/admin.html');
+    await second.page.locator('#email').fill('admin@example.invalid');
+    await second.page.locator('#password').fill('fixture-only');
+    await second.page.locator('#signin').click();
+    await second.page.locator('#hub').waitFor();
+    await second.page.locator('#dashboard-status').filter({hasText:'Updated'}).waitFor();
+    assert(!(await second.page.locator('[data-view="evidence"]').isDisabled()));
+    assert(!(await second.page.locator('[data-view="vendors"]').isDisabled()));
+    assert(await second.page.locator('[data-view="items"]').isDisabled());
+    assert(await second.page.locator('[data-view="weapons"]').isDisabled());
+    assert(await second.page.locator('[data-view="ammunition"]').isDisabled());
+    assert(await second.page.locator('[data-view="settings"]').isDisabled());
+    assert(await second.page.locator('#edit-site').isDisabled());
+    assert.equal(await second.page.locator('[data-view="admin-users"]').count(),0);
+    const denied=await browserSession('33333333-3333-4333-8333-333333333333');await denied.page.goto('https://scavlandfanbase.github.io/admin.html');await denied.page.locator('#email').fill('denied@example.invalid');await denied.page.locator('#password').fill('fixture-only');await denied.page.locator('#signin').click();await denied.page.locator('#login-status').filter({hasText:'not authorized'}).waitFor();assert.equal(await denied.page.locator('#hub').isVisible(),false);assert.deepEqual(denied.errors,[]);
    assert.deepEqual(first.errors,[]);assert.deepEqual(second.errors,[]);
    console.log('PASS production browser bridge: parent-origin authentication, durable Item add/reload/verify/preview/publish, second authenticated browser context, Vendor add/catalogue, 280â€“1280px layouts/44px controls, public Items/Vendors rendering and identity privacy.');
   }finally{await browser.close();}
