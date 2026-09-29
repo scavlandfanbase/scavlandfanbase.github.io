@@ -253,6 +253,10 @@ function mutate(input,body,{images=[],settings,actorId='local-operator'}={}){
   case 'image':
    if(body.image!==null&&body.image!==r.image&&(!Pages.image(body.image)||!images.includes(body.image)))fail('Choose an image from the existing library.');
    if(body.image!==r.image){r.image=body.image;resetVerification(r);}break;
+   case 'evidence':
+   if(body.evidence!==null&&body.evidence!==r.evidence&&(!Pages.image(body.evidence)||!images.includes(body.evidence)))fail('Choose evidence from the existing image library.');
+   if(body.evidence!==r.evidence)r.evidence=body.evidence;
+   break;
   case 'visibility':r.hidden=!r.hidden;break;
   case 'archive':if(body.confirmId!==r.id)fail('Confirm the item to archive.');r.archived=true;break;
   case 'restore':r.archived=false;break;

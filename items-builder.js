@@ -175,11 +175,17 @@
  E.button('item-add','+ Add Item',()=>edit(true),$('add-actions'));
  E.button('item-edit','Edit',()=>edit(),$('item-actions'));
  E.button('item-image-action','Image',()=>E.imagePicker({inventory,current:safeImage(chosen().image)?chosen().image:null,title:'Item image',recordName:chosen().name,onSubmit:image=>change('image',{image})}),$('item-actions'));
+ E.button('item-evidence-action','Evidence',()=>E.imagePicker({
+ inventory,
+ current:safeImage(chosen().evidence)?chosen().evidence:null,
+ title:'Item evidence',
+ recordName:chosen().name,
+ onSubmit:evidence=>change('evidence',{evidence})
+}),$('item-actions'));
  E.button('item-duplicate','Duplicate',()=>confirm('duplicate','Duplicate '+chosen().name,'Create a hidden copy with a fresh item reference. Evidence remains provenance only; verification history starts empty.'),$('item-actions'));
  E.button('item-visibility','Hide',()=>confirm('visibility',(chosen().hidden?'Show ':'Hide ')+chosen().name,'Change visibility in this private draft only. The item is retained.'),$('item-actions'));
  E.button('item-archive','Archive',()=>{const r=chosen();confirm(r.archived?'restore':'archive',(r.archived?'Restore ':'Archive ')+r.name,r.archived?'Return this item to the active draft list.':'Archive this item in the private draft? All its information is retained and you can restore it.',{confirmId:r.id});},$('item-actions'));
  E.button('item-review',cloud?'Verify':'Record verification',review,$('item-actions'));
- E.button('item-still-correct','Still correct',()=>{const r=chosen();E.confirm({title:'Still correct for this patch?',message:'Confirm you checked '+r.name+' for patch '+(state.settings.current_patch_id||'not configured')+'. Evidence is optional. This saves a private review; it does not publish.',submit:'Verify',onConfirm:()=>change('verify',{decision:'verified',confirmId:r.id,patchId:state.settings.current_patch_id})});},$('item-actions'));
  E.button('item-next','Skip / Next',()=>nextAction()(),$('item-actions'));
  const moreActions=document.createElement('details');moreActions.id='item-more';moreActions.className='item-advanced';const moreTitle=document.createElement('summary');moreTitle.textContent='••• More actions';moreActions.append(moreTitle);$('item-actions').after(moreActions);for(const id of ['item-duplicate','item-visibility','item-archive'])moreActions.append($(id));
  E.button('retry-save','Retry pending save',()=>change(null,{},true).catch(()=>{}),$('add-actions')).hidden=true;

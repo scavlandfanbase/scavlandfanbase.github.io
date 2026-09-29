@@ -13,6 +13,9 @@ assert.throws(()=>run('verify',{decision:'verified',confirmId:'stable',patchId:'
 const sourceBeforeDuplicate=structuredClone(state.data[0]);
 const dup=run('duplicate').selectedId,copy=state.data.find(r=>r.id===dup);assert.notEqual(dup,'stable');assert.equal(copy.hidden,true);assert.equal(copy.verification.history.length,0);assert.equal(V.inspect(copy,settings).status,'unverified');assert.deepEqual(copy.properties,details.properties);assert.deepEqual(copy.source,state.data[0].source);assert.deepEqual(state.data[0],sourceBeforeDuplicate);
 run('image',{image:images[0]});assert.equal(state.data[0].image,images[0]);assert.equal(V.inspect(state.data[0],settings).status,'unverified');assert.equal(state.data[0].verification.history.filter(e=>e.decision==='verified').length,1);
+run('evidence',{evidence:images[0]});assert.equal(state.data[0].evidence,images[0]);
+assert.throws(()=>run('evidence',{evidence:'https://bad.test/evidence.png'}),/library/);
+run('evidence',{evidence:null});assert.equal(state.data[0].evidence,null);
 run('verify',{decision:'unverified',confirmId:'stable',patchId:'test-patch'});assert.equal(state.data[0].verification.decision,'unverified');assert.equal(state.data[0].verification.history.filter(e=>e.decision==='verified').length,1);
 assert.throws(()=>run('image',{image:'https://bad.test/x.png'}),/library/);run('image',{image:null});assert.equal(state.data[0].image,null);
 run('visibility');assert.equal(state.data[0].hidden,true);run('visibility');assert.equal(state.data[0].hidden,false);
