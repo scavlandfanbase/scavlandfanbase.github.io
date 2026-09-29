@@ -223,8 +223,8 @@
   $('review-attachments').textContent='Review potential Attachments ('+state.catalogue.data.filter(ScavAttachments.candidate).length+')';
   $('more').hidden=records.length<=limit;details();
   $('workspace').querySelectorAll('button,input,select').forEach(el=>el.disabled=busy||!!pending);
-  const r=chosen();for(const id of ['item-classify','item-edit','item-image-action','item-duplicate','item-visibility','item-review'])$(id).disabled=busy||!!pending||!r||r.archived||(specialist(r)&&['item-edit','item-duplicate'].includes(id));
-  $('item-still-correct').disabled=busy||!!pending||!r||r.archived; $('item-next').disabled=busy||!!pending||!r;
+  const r=chosen();for(const id of ['item-classify','item-edit','item-image-action','item-evidence-action','item-duplicate','item-visibility','item-review'])$(id).disabled=busy||!!pending||!r||r.archived||(specialist(r)&&['item-edit','item-duplicate'].includes(id));
+$('item-next').disabled=busy||!!pending||!r;
   $('item-archive').disabled=busy||!!pending||!r;$('retry').disabled=busy;
   $('retry-save').hidden=!pending;$('retry-save').disabled=busy;
  }
