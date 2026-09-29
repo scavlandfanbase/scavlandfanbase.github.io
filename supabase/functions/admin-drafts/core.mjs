@@ -86,8 +86,8 @@ export function createCore({env,fetcher=fetch}){
     if(command.operation==='add'&&command.entity?.type!=='item')fail('Admin 0.1 listings reference canonical Items.');
     record=Inventory.mutate(catalogue,command,latest.entities,latest.settings,actor);
    }else record=Vendors.mutate(structuredClone(catalogue),command,{images,factions:latest.factions.map(f=>f.id)});
+   validate(domain,record.state);
   }catch(e){if(!e.status)e.status=400;throw e;}
-  validate(domain,record.state);
   return {payload:{catalogue:record.state,source:ctx.payload.source,selectedId:record.selectedId,settings:latest.settings},base:ctx.base};
  }
  function view(domain,saved,latest){
