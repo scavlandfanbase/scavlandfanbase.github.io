@@ -1,0 +1,26 @@
+{
+  "name": "scavlandfanbase.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "admin-dashboard.js",
+  "scripts": {
+    "test": "npm run test:admin && npm run test:invites",
+    "test:admin": "node scripts/test-admin01-core.cjs",
+    "test:invites": "node scripts/test-admin-invites.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scavlandfanbase/scavlandfanbase.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scavlandfanbase/scavlandfanbase.github.io/issues"
+  },
+  "homepage": "https://github.com/scavlandfanbase/scavlandfanbase.github.io#readme",
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "playwright": "^1.63.0"
+  }
+}
