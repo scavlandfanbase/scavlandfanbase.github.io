@@ -103,3 +103,34 @@ Relevant commits in this hardening sequence include:
 - 5986547 — Harden Admin draft validation error handling
 
 This checkpoint does not supersede the production release gates recorded above. It records subsequent Admin security, privacy, data-validation and test-hardening work only.
+
+### Granular publish permissions — 29 September 2026
+
+Additional authorization review found two legacy publishing endpoints still using the broad `is_scavland_admin()` check:
+
+- `publish-site-content`
+- `publish-site-settings`
+
+These were hardened to use the existing granular permission model:
+
+- `publish-site-content` requires `content_edit`
+- `publish-site-settings` requires `settings_edit`
+
+This aligns them with the existing Admin editor/draft publishing system, which already uses `has_scavland_permission(...)`.
+
+The change prevents an authenticated Reviewer with only `evidence_review` from using these publishing endpoints while preserving Owner access through the existing Owner permission override.
+
+Verification after the change:
+
+- `npm test` — PASS
+- Admin 0.1 core/browser integration — PASS
+- Admin invite/privacy regression — PASS
+- `scripts/test-admin-password.cjs` — PASS
+- `git diff --check` — PASS
+- Working tree clean after commit/push
+
+Commit:
+
+- `17c3c24 Enforce granular Admin publish permissions`
+
+The Node `MODULE_TYPELESS_PACKAGE_JSON` message remains a non-fatal development warning. No `"type": "module"` change was made because the repository uses mixed module formats.
