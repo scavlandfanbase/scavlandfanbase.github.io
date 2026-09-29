@@ -1,5 +1,7 @@
 # Admin 0.1 current-main integration and production status
 
+**Reading order:** the 29 September reconciliation addendum at the end supersedes earlier snapshot claims about unpublished main/configuration, release blockers, function versions and pending dashboard work. Earlier sections remain historical acceptance evidence, not current production certification.
+
 26 September 2026. Integration branch: release/admin-0.1-integration. Based directly on fetched main 0889115efa84b8bbc6d8b5bec8b520b72e114eb2. The reviewed core source was release/admin-0.1-core at 38bcfdff5813556738a9403c778ca980d1677b8c. This report supersedes the deployment-status statements in the historical ADMIN-0.1-DEPLOYMENT.md handoff.
 
 ## Integration and authoritative patch
@@ -190,3 +192,31 @@ Verification:
 - `git diff --check` ? PASS apart from expected Windows LF/CRLF conversion warnings.
 
 This closes the dashboard visibility/navigation follow-up recorded under the Granular Evidence Review checkpoint.
+
+## 29 September 2026 — Verified main and production reconciliation
+
+Read-only reconfirmation baseline: main `9c0d3815fb686c93b151515f0c609f7dc7f9d6bb`. No code, canonical data, production flags, policies or functions were changed by reconfirmation.
+
+### Completed and present
+
+- `1d042c9` published the authoritative `data/verification-settings.json`; main and the public site now serve patch `0.7.2`. The historical missing-configuration blocker above is resolved.
+- `167328e` published the Admin 0.1 frontend; `a610005` added Admin 0.2 usability/classification review; `2a71990` added the Vendor workspace/layout checkpoint. These are present on main despite their original review notes describing an unpublished local checkpoint.
+- Canonical Vendor inventory is already implemented. `0a33c79` published Vendor catalogue draft v6. Current repository data has 22 Vendors, 285 Items, 224 canonical listings and 255 retained legacy stock rows. Running the existing `vendor-legacy-review.js` helper against current data yields 224 already-linked and 31 classification-review rows. This does not approve the remaining rows or verify their facts.
+- `c851108` completed permission-aware Admin navigation; merge `9c0d381` is on main. GitHub Pages run [36636496385](https://github.com/scavlandfanbase/scavlandfanbase.github.io/actions/runs/36636496385) succeeded for that merge. The live Admin page returned HTTP 200, contains `allowedAdminViews()` and no longer contains the old "Not available in Admin 0.1" text.
+- Downloaded deployed source confirms `publish-site-content` requires `content_edit` and `publish-site-settings` requires `settings_edit`. Production Evidence Review SELECT/UPDATE/DELETE policies require `evidence_review`, including UPDATE WITH CHECK; public INSERT remains unchanged.
+- Observed ACTIVE production versions: admin-drafts 8, manage-patches 4, publish-item 15, publish-vendor 15, publish-specialist 16, publish-site-content 16, publish-site-settings 10 and manage-admin-users 8. Version listing alone is not a claim that every deployed file matches main.
+
+### Fresh validation and limits
+
+- Locked npm dependencies installed successfully in a temporary checkout; package.json and package-lock.json are already tracked. No new npm setup is needed in the repository.
+- `SCAVLAND_BROWSER=1 npm test` passed: Admin core SQL/persistence, hosted browser bridge, Owner/restricted-Admin/unauthorized access coverage and invite/privacy regression. `node scripts/test-admin-password.cjs` and `git diff --check` also passed. The mixed-module Node warning remains non-fatal.
+- Browser acceptance uses fixture authentication and intercepted backend/GitHub operations. It does not establish a real Owner content-publishing acceptance result or current production flag values.
+- The available "Core Char Meaning" chat slice confirms the earlier missing npm dependencies discussion; subsequent commits resolve that setup. The chat reader provided no cursor for older history, so this check does not claim to have reviewed the full conversation.
+
+### Exact outstanding work
+
+1. Complete the real authenticated Owner Public Content CMS acceptance described in NEXT_JOBS.md, using a controlled intended edit and verifying its commit/deployed output. No fabricated production record is needed.
+2. Reconfirm production publishing/patch flags before any flag-dependent workflow. Do not infer current values from the historical false flags above or from a prior publication commit.
+3. Continue the existing Vendor editor checkpoint with the 31 unresolved legacy classification-review rows preserved. Do not restart 7A/7B or repeat the inventory foundation. Genuine listing verification is a separate backend decision because the existing inventory operations do not implement it.
+
+The resolved configuration/frontend blockers do not automatically certify all previously outstanding real-session draft, verification and patch acceptance. Keep those distinctions explicit. Broader editor features, classification moves, themes and evidence cleanup remain deferred; use small controlled tasks with documentation and individual checkpoint commits.

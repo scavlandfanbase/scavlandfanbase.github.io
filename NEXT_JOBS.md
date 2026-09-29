@@ -1,4 +1,6 @@
-# CURRENT STATE ? 29 SEPTEMBER 2026
+# CURRENT STATE — 29 SEPTEMBER 2026
+
+Verified against main `9c0d3815fb686c93b151515f0c609f7dc7f9d6bb`, deployed Admin assets and read-only production checks. This queue supersedes the historical entries below; see the reconciliation addendum in ADMIN-0.1-INTEGRATION.md.
 
 ## DONE
 
@@ -9,24 +11,28 @@
 - Owner, restricted-Admin and unauthorized browser access paths are covered by regression tests.
 - Password invitation/recovery flow remains passing.
 - Existing public site/data and canonical evidence workflows remain preserved.
+- Admin permission checkpoint merged as `9c0d381`; its GitHub Pages deployment succeeded and the live Admin page serves permission-aware navigation.
+- Authoritative patch configuration `0.7.2` is published. Admin 0.1 frontend, Items/Vendor editor foundations, canonical Vendor inventory, Admin 0.2 usability and Vendor 0.2B layout are already on main.
+- Fresh focused checks passed: `SCAVLAND_BROWSER=1 npm test`, `node scripts/test-admin-password.cjs` and `git diff --check`. Browser Auth/GitHub publishing is mocked; these checks do not certify real Owner production publishing.
 
 ## CURRENT
 
-- Finish this Admin permission checkpoint by committing and pushing the tested dashboard/test/documentation changes.
-- Perform the remaining authenticated Owner acceptance check for the Public Content CMS if still required by its release notes.
+- Complete authenticated Owner acceptance for the Public Content CMS: load current content, preview a controlled intended edit, explicitly publish it, confirm the returned GitHub commit and deployed public result. No completion evidence was established during this reconfirmation.
+- Confirm current production publishing/patch flags before any flag-dependent acceptance or write. Earlier flag values and deployment versions below are historical, not a fresh live-state claim.
 
 ## NEXT
 
-- Return to the Vendor visual-editor work after Admin security/access is closed.
-- Continue Checkpoint 7A/7B using the existing reusable editor foundation and preserve the public Vendor page/data.
-- Do not begin the Checkpoint 8 canonical vendor-inventory migration until the Vendor editor checkpoint calls for it.
+- Continue from the existing Vendor editor after acceptance; do not restart Checkpoint 7A/7B or repeat the already-present inventory foundation.
+- Current public data: 22 Vendors, 285 Items, 224 canonical Vendor listings and 255 retained legacy stock rows. The existing review helper reports 224 already-linked rows and 31 classification-review rows. Keep legacy values/provenance and canonical references intact; review unresolved rows separately without inferring classifications or verification.
+- Genuine Vendor listing verification requires a separate backend task; current Status/History controls do not make verification decisions.
+- Keep each subsequent task small, update documentation after changes and make one small commit per checkpoint where appropriate.
 
 ## DEFERRED / EVIDENCE
 
 - Remaining evidence gaps and unresolved evidence conflicts.
 - Armour evidence must use 100% durability screenshots.
 - Broader image/evidence library cleanup and canonical organisation.
-- Later vendor canonical-inventory migration and advanced page-builder/theme work.
+- Unresolved legacy Vendor classification/migration decisions, genuine listing verification, and advanced page-builder/theme work.
 
 ---
 
