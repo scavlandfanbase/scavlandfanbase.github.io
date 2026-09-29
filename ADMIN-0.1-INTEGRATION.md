@@ -68,3 +68,38 @@ The code is integrated and locally tested; the approved backend is deployed with
 After the configuration dependency is available, use real authorized HTTP sessions for final draft/verify/patch-read acceptance, then seek final website publication approval. Keep write flags false until that release gate is satisfied. No additional feature development is required or started.
 
 Deferred: Ammo integration, Attachment 11B, Weapons/compatibility, Page Builder v2, advanced themes/styles and image-manager work. Evidence remains optional; identity is server-controlled; Item IDs remain canonical; vendor-specific values remain independent; Save Draft never publishes. No public content was rewritten, and no test data remains in production.
+
+## 29 September 2026 — Admin privacy and validation hardening checkpoint
+
+Branch: fix/admin-user-privacy.
+
+Post-integration Admin hardening completed and pushed. Existing public Items/Vendors behaviour and canonical relationships were retained.
+
+Completed work:
+
+- Vendor production data was brought into compliance with the existing numeric rank validator by converting 220 digit-only rank strings to numbers. No validator was weakened.
+- Admin core integration coverage was corrected to locate newly appended vendor listings by stable vendor/entity/listing identity rather than assuming the new listing occupied array index 0.
+- Reproducible local Admin test tooling was added through npm with PGlite and Playwright.
+- Admin Users privacy regression coverage was strengthened in commit 6d6d65d. A denied non-Owner request is verified to perform no Admin-user read, return 403, perform no writes, and expose neither Owner nor invited-user email addresses.
+- Owner-only Admin Users management remains enforced by the backend and frontend access controls.
+- Admin draft validation error handling was hardened in commit 5986547. Top-level post-mutation catalogue validation now executes inside the existing error-normalisation boundary so ordinary validation failures are classified as client validation errors rather than unclassified server failures.
+- Generated model inspection confirmed Items and Vendors validate mutation results internally. Vendor inventory/listing operations also validate their listing collection. The core change is therefore recorded as defensive boundary hardening rather than as a reproduced production 503 defect.
+- No `"type": "module"` package change was made merely to suppress Node's MODULE_TYPELESS_PACKAGE_JSON warning; the repository contains mixed module formats and the warning is non-fatal.
+
+Validation completed after the hardening:
+
+- `npm test` PASS.
+- Admin 0.1 core integration PASS.
+- Admin invite/privacy regression PASS: retry saves existing invite without email; Owner protected; non-Owner rejected.
+- Production browser bridge PASS, including parent-origin authentication, durable Item workflow, second authenticated browser context, Vendor catalogue workflow, responsive layouts, public Items/Vendors rendering and identity privacy.
+- `git diff --check` PASS.
+- Final working tree clean after push.
+
+Relevant commits in this hardening sequence include:
+
+- 75368b3 — Fix vendor listing data and Admin integration test
+- 348c7a5 — Add reproducible Admin test tooling
+- 6d6d65d — Strengthen Admin email privacy regression test
+- 5986547 — Harden Admin draft validation error handling
+
+This checkpoint does not supersede the production release gates recorded above. It records subsequent Admin security, privacy, data-validation and test-hardening work only.
