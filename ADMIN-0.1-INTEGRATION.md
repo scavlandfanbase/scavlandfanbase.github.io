@@ -134,3 +134,21 @@ Commit:
 - `17c3c24 Enforce granular Admin publish permissions`
 
 The Node `MODULE_TYPELESS_PACKAGE_JSON` message remains a non-fatal development warning. No `"type": "module"` change was made because the repository uses mixed module formats.
+
+### Granular Evidence Review permissions — 29 September 2026
+
+Production Evidence Review authorization was audited against the live Supabase RLS policies.
+
+Verified production state:
+- `evidence_submissions` has RLS policies for SELECT, UPDATE, DELETE and public INSERT.
+- The previous Admin moderation policies used the broad `is_scavland_admin()` check.
+- SELECT, UPDATE and DELETE now require `has_scavland_permission('evidence_review')`.
+- UPDATE applies the permission to both `USING` and `WITH CHECK`.
+- The existing public evidence-submission INSERT policy was left unchanged.
+- `has_scavland_permission(text)` was verified in production: the account must be active and either be the Owner or hold the requested permission.
+- Owner access is therefore preserved.
+- The deployed Evidence policy state is represented in `supabase/evidence-review-permissions.sql`.
+- Production policies were re-read after the change and confirmed correct.
+- Repository commit: `ffe3eeb` (`Enforce granular Evidence Review permissions`).
+
+This closes the Evidence RLS permission audit. Dashboard visibility/navigation still needs to be aligned with the granular Admin permission profile.
