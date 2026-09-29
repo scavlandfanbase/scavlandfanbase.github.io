@@ -2875,7 +2875,7 @@
     "listings": [
       {
         "id": "legacy-6179518c3a1cc7ec34a7c71024ba59bacbd10d562846a4b6",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 9500,
         "entity": {
@@ -2894,7 +2894,7 @@
       },
       {
         "id": "legacy-79fa2158f5a03ecc50c6e85e20af270b6fdd69f7757f01b5",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1500,
         "entity": {
@@ -2913,7 +2913,7 @@
       },
       {
         "id": "legacy-844f552bc28756be16dd952d92889c3681f4c79cff60c5d7",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3500,
         "entity": {
@@ -2932,7 +2932,7 @@
       },
       {
         "id": "legacy-2324dac33d8e0836da5871402e05ccbcf7eb74ec7a16395a",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 5000,
         "entity": {
@@ -2951,7 +2951,7 @@
       },
       {
         "id": "legacy-c6cff1994cb48b78a55edb56c3a1f1b81e559f841a8a5bc1",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 12000,
         "entity": {
@@ -2970,7 +2970,7 @@
       },
       {
         "id": "legacy-9f664a2954f67b6d729d3b99750d001aea8335c126fe0920",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -2989,7 +2989,7 @@
       },
       {
         "id": "legacy-54a54474a6efe624a1cd0d7b5e7a68490cf5085645278600",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -3008,7 +3008,7 @@
       },
       {
         "id": "legacy-e75f5b7941a668480275ac5dfc4ef80485d120c601dda8e3",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -3027,7 +3027,7 @@
       },
       {
         "id": "legacy-60041a8266e9ea2899f42a90ab8a9907c97e539c767884ab",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -3046,7 +3046,7 @@
       },
       {
         "id": "legacy-cc7e605f2c3bb4e78311082544c0b1dd4116d3008a971a80",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -3065,7 +3065,7 @@
       },
       {
         "id": "legacy-cbe2fea8b4314c71d8d0e52e42b51355c313b08cfa3c8708",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -3084,7 +3084,7 @@
       },
       {
         "id": "legacy-fc93bb4768ec277521c3a960954ee26ecb6bbf4ab4f71555",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -3103,7 +3103,7 @@
       },
       {
         "id": "legacy-690a9ea93e898de63701e5f043bd2700c44e3f20d875d750",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 750,
         "entity": {
@@ -3122,7 +3122,7 @@
       },
       {
         "id": "legacy-6a66aeef723c4a14ca02cb93e1349e5a18d50f12cbb03695",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -3141,7 +3141,7 @@
       },
       {
         "id": "legacy-4737d2313436b8eacef8a13af1ce38e9e905b67740f295cc",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -3160,7 +3160,7 @@
       },
       {
         "id": "legacy-64b80a7c8b380c44922cb4a4f972070d7d221a14a015f381",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2000,
         "entity": {
@@ -3179,7 +3179,7 @@
       },
       {
         "id": "legacy-15b8085e9778c8343b866337bd576fe390a8460d046607bd",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -3198,7 +3198,7 @@
       },
       {
         "id": "legacy-557db0ce80fcadfe6772ae20c98f1c3e49cc217b6b015892",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 750,
         "entity": {
@@ -3217,7 +3217,7 @@
       },
       {
         "id": "legacy-a0c312a06f5ff1c189ac72689431953cd9cac30f077137c0",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -3236,7 +3236,7 @@
       },
       {
         "id": "legacy-6ebe5d93cb4282f3c7ede69eb7530784268c37fbbf1d41f8",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -3255,7 +3255,7 @@
       },
       {
         "id": "legacy-0784fe557765254d8dbbf2e8d8e756b6d9ce46f5a62646cb",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -3274,7 +3274,7 @@
       },
       {
         "id": "legacy-8c2e3316b4fc46393912dfb31a4c31d779cf674d8b60ec02",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -3293,7 +3293,7 @@
       },
       {
         "id": "legacy-d7bfd00dfd764c7d21e9f6814c142f0622c8d8658af41358",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3200,
         "entity": {
@@ -3312,7 +3312,7 @@
       },
       {
         "id": "legacy-361a65d32fe5e2ff7a5152954dda0b2506110ab79e0e8955",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 30000,
         "entity": {
@@ -3331,7 +3331,7 @@
       },
       {
         "id": "legacy-c7da5dc1f824e2f9e1801873bd27c6a232c6793a33095194",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2400,
         "entity": {
@@ -3350,7 +3350,7 @@
       },
       {
         "id": "legacy-79a472a86cde5c4a782612897550b854067ee4a145068e74",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -3369,7 +3369,7 @@
       },
       {
         "id": "legacy-4fe0db4d8aae5d932e37e8f9420163fa8be24bb9a92f7ffe",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -3388,7 +3388,7 @@
       },
       {
         "id": "legacy-260672272a0f22b10ae90280dd892d872a53f6132beb3475",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 10000,
         "entity": {
@@ -3407,7 +3407,7 @@
       },
       {
         "id": "legacy-2a2c6012e10a5ee4eac41aa6ed0eddadf483669d478cbc37",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -3426,7 +3426,7 @@
       },
       {
         "id": "legacy-59ee9668a90106980b3c99dee995ba6518f6a8f56473aac0",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -3445,7 +3445,7 @@
       },
       {
         "id": "legacy-9b1d1b264ee85e13eb8ca7a1db37bef257206623873669c1",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -3464,7 +3464,7 @@
       },
       {
         "id": "legacy-3cae84a6820a6bc380ed2c71f5cb2f0ed8c3010bfdecf731",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -3483,7 +3483,7 @@
       },
       {
         "id": "legacy-7c00af72e081346f93beb291bff538ad704debf1c407cd96",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -3502,7 +3502,7 @@
       },
       {
         "id": "legacy-57fa11bda185806b75bee0ccdf06e01251a3e54e4146fee0",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2400,
         "entity": {
@@ -3521,7 +3521,7 @@
       },
       {
         "id": "legacy-3866224d15b0762666848194ab22b852c6dd2075189a3457",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1800,
         "entity": {
@@ -3540,7 +3540,7 @@
       },
       {
         "id": "legacy-55a160b2c1cc1eb3f5821fca2077b713cbcb3bb8db1dd964",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1450,
         "entity": {
@@ -3559,7 +3559,7 @@
       },
       {
         "id": "legacy-dc9f7e7aa167e8b1ace33afa83e12d41124170b86be2d2d5",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 50,
         "entity": {
@@ -3578,7 +3578,7 @@
       },
       {
         "id": "legacy-dd8d8bea39a89b1ff4e850ca7f36e2c71466f60ba3b55677",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 25,
         "entity": {
@@ -3597,7 +3597,7 @@
       },
       {
         "id": "legacy-d29363817892743cf5504f668f08a297c3290c1e7baf163f",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -3616,7 +3616,7 @@
       },
       {
         "id": "legacy-47d5ad368afd6c373431fa2bb60df2a1899935af9d8f67a3",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -3635,7 +3635,7 @@
       },
       {
         "id": "legacy-6f93767b05c4f93c52488bfd84f28d0a27b4ec49125a6b44",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 750,
         "entity": {
@@ -3654,7 +3654,7 @@
       },
       {
         "id": "legacy-2e83e03eb5d358b30708d86b9c2221ae5193cefd09e178b9",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 6000,
         "entity": {
@@ -3673,7 +3673,7 @@
       },
       {
         "id": "legacy-776e398eea55834e51467e7a31bd0b2fcd704f9c065d6a99",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2400,
         "entity": {
@@ -3692,7 +3692,7 @@
       },
       {
         "id": "legacy-b089d371be09fa5bf7bda62615518633a8a8eb07edf30fe1",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3000,
         "entity": {
@@ -3711,7 +3711,7 @@
       },
       {
         "id": "legacy-37f10596ad60326a0a99cf36dbe38293627882706cab08fc",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3000,
         "entity": {
@@ -3730,7 +3730,7 @@
       },
       {
         "id": "legacy-c59fc664cd099e26611d034282424ce1bc6b0b8ad8e44374",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -3749,7 +3749,7 @@
       },
       {
         "id": "legacy-3673fa829a369c658cb7e7d00411fb9c65ed9fe61b57cb2c",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 150,
         "entity": {
@@ -3768,7 +3768,7 @@
       },
       {
         "id": "legacy-68cf8f8b4b752a489cfdbbc971ed0deb352cb1d03d7021ab",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 800,
         "entity": {
@@ -3787,7 +3787,7 @@
       },
       {
         "id": "legacy-5e2f61de0b277331f8bb6f39293cd602512f65d59a2a5e46",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1000,
         "entity": {
@@ -3806,7 +3806,7 @@
       },
       {
         "id": "legacy-6bc42cae495b74d3515dad654a329d421fdde377e3622696",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 3000,
         "entity": {
@@ -3825,7 +3825,7 @@
       },
       {
         "id": "legacy-bc312802e7fe368a3bf1aa06dd36272932271a3e87da2d11",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 7500,
         "entity": {
@@ -3844,7 +3844,7 @@
       },
       {
         "id": "legacy-99ab905c02853610c146a7d90e968fa8a85d803432f9886c",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -3863,7 +3863,7 @@
       },
       {
         "id": "legacy-c4f6a500965ea1151b56b8a423800a95d8247182f24656ad",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3200,
         "entity": {
@@ -3882,7 +3882,7 @@
       },
       {
         "id": "legacy-7f9f9f3a975db9282759582be548cd85f717d71906099fb2",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -3901,7 +3901,7 @@
       },
       {
         "id": "legacy-c9710a7aafbc00ee8d854e9c79a9d783c53115e130a69faf",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2100,
         "entity": {
@@ -3920,7 +3920,7 @@
       },
       {
         "id": "legacy-3ca97ca43985537c0307b8c8ee9dda5faa0bc734581d091b",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 50000,
         "entity": {
@@ -3939,7 +3939,7 @@
       },
       {
         "id": "legacy-401006e6b984d72d13365b100c9a3f4477e3a0bb64e0c683",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -3958,7 +3958,7 @@
       },
       {
         "id": "legacy-cc9d6bb397f0e6fccbfc7c98e021ad3d5e01d16d332fe137",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -3977,7 +3977,7 @@
       },
       {
         "id": "legacy-5b11128b08edcd2dad21ec0933690422fb4292dd3f205682",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 12000,
         "entity": {
@@ -3996,7 +3996,7 @@
       },
       {
         "id": "legacy-4c9463d20f4d3510059e0d9b09d548c0d322292e3f2f9828",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -4015,7 +4015,7 @@
       },
       {
         "id": "legacy-a143b8ac432d172e0bd22a1c11bdd82241bacea5c88a7569",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 6000,
         "entity": {
@@ -4034,7 +4034,7 @@
       },
       {
         "id": "legacy-ba4ee1e353f4f9e398b16dd85bc03ce41811710aecd3d0e7",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1500,
         "entity": {
@@ -4053,7 +4053,7 @@
       },
       {
         "id": "legacy-8e34302faf9e3c529e42ca8579109ed4c2570e91fe5bb98f",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3200,
         "entity": {
@@ -4072,7 +4072,7 @@
       },
       {
         "id": "legacy-997add3c8d84979aaa4fc5a3cf3cab94dff00ffbf25342e4",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 6200,
         "entity": {
@@ -4091,7 +4091,7 @@
       },
       {
         "id": "legacy-ea66e25b147656ddaad9d35b06bf695b16e3ebc8245cd93e",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -4110,7 +4110,7 @@
       },
       {
         "id": "legacy-c6e74220fc692e5572e14b836e8102a05bb4cb6954864b99",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3000,
         "entity": {
@@ -4129,7 +4129,7 @@
       },
       {
         "id": "legacy-9a62f764be726768b9e4b20f82500556749b4d865753b94f",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -4148,7 +4148,7 @@
       },
       {
         "id": "legacy-f7537e1ce8d7bee222ec0d0fd81313a74bf45e13a5e8abb7",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 15000,
         "entity": {
@@ -4167,7 +4167,7 @@
       },
       {
         "id": "legacy-c6591d1d817819ca694503070ee20a2c8f52e4409067d86c",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 20000,
         "entity": {
@@ -4186,7 +4186,7 @@
       },
       {
         "id": "legacy-e9c63df8f6f53c67ff45cf0daab5f02ca5481cdb0a5556d8",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 30000,
         "entity": {
@@ -4205,7 +4205,7 @@
       },
       {
         "id": "legacy-92e3900748be6b6086a3f8fbca6deedce9a436c1b74dd81a",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 50000,
         "entity": {
@@ -4224,7 +4224,7 @@
       },
       {
         "id": "legacy-a43443a7ae434a40b5c3e6bf6a8c9d31866363e3a54a3570",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": null,
         "entity": {
@@ -4243,7 +4243,7 @@
       },
       {
         "id": "legacy-149511704aef2c341db648207f7ab7e35930293992a39001",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": null,
         "entity": {
@@ -4262,7 +4262,7 @@
       },
       {
         "id": "legacy-97f2595c1faebaec1757a029cd47b9f379b62fab94afa25c",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": null,
         "entity": {
@@ -4281,7 +4281,7 @@
       },
       {
         "id": "legacy-c8c7dec54c1bbcb8b16fdf2856f1fa2c7eed9137d9b97e24",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": null,
         "entity": {
@@ -4300,7 +4300,7 @@
       },
       {
         "id": "legacy-20b70077563f7c38290c8c321ed920301343e56db4606253",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": null,
         "entity": {
@@ -4319,7 +4319,7 @@
       },
       {
         "id": "legacy-894550b27e855b15c3134535831fb71e4faa4f1db3726f0e",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 12000,
         "entity": {
@@ -4338,7 +4338,7 @@
       },
       {
         "id": "legacy-9ed2af45ff7bdbe4a7399ed03902e5d155ace2f9e70a9153",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3200,
         "entity": {
@@ -4357,7 +4357,7 @@
       },
       {
         "id": "legacy-0d6cb2842bac10fd51b78b8dfef0093feba366a4f0cd3bf6",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 6200,
         "entity": {
@@ -4376,7 +4376,7 @@
       },
       {
         "id": "legacy-3cf580efdc4c201762e434dedc9d38a27b1c25aa14c6d057",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 9200,
         "entity": {
@@ -4395,7 +4395,7 @@
       },
       {
         "id": "legacy-31cdebcff39bb98999b601aa6f3adc60488292aad8b323e8",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -4414,7 +4414,7 @@
       },
       {
         "id": "legacy-c534e7d8f8a687bf8dfcf8a571b42436a4977b07f3fe7643",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -4433,7 +4433,7 @@
       },
       {
         "id": "legacy-0cd5c8f1cc69bae9627267f74f69ff489554abb55b1c304e",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 6000,
         "entity": {
@@ -4452,7 +4452,7 @@
       },
       {
         "id": "legacy-5eca20f057d501472bf494703752028c30e0d69f97b07d33",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -4471,7 +4471,7 @@
       },
       {
         "id": "legacy-203fbb5c15d512567e0ab30680d5831aa64ca060df90e7ef",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2100,
         "entity": {
@@ -4490,7 +4490,7 @@
       },
       {
         "id": "legacy-4f8277c8dba89bc7e7934c9fda7b266a89c5ef5e2e3d973b",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2000,
         "entity": {
@@ -4509,7 +4509,7 @@
       },
       {
         "id": "legacy-15fd7ae8f29decd177a5156f73e1d66f62cad0726c03a953",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2000,
         "entity": {
@@ -4528,7 +4528,7 @@
       },
       {
         "id": "legacy-6c0e022224a7f279fd34a92ff22babb95c7a80f9c0cf59cb",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2000,
         "entity": {
@@ -4547,7 +4547,7 @@
       },
       {
         "id": "legacy-8a75a11887ca122602d224e67606329a833bd1dc8267f58e",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -4566,7 +4566,7 @@
       },
       {
         "id": "legacy-4e87a6c187d72ef1e96264c9d7e52144bb251f583da9d1bd",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -4585,7 +4585,7 @@
       },
       {
         "id": "legacy-17596bbef6dceba57c800420a65ba06f7d33852fb04426fd",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -4604,7 +4604,7 @@
       },
       {
         "id": "legacy-d286d2cedbae8804fdef87875092992f792bea3284fd5648",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -4623,7 +4623,7 @@
       },
       {
         "id": "legacy-6c5444eadf23d767153415b6228820281a84e5b21c1737f2",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -4642,7 +4642,7 @@
       },
       {
         "id": "legacy-a53fae38b5916811e0f3b4bd742d43bf6c54e6db8f8dc22a",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -4661,7 +4661,7 @@
       },
       {
         "id": "legacy-58f576fabfaf216a621d2dfdf1143e33fbf7401e2c747352",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -4680,7 +4680,7 @@
       },
       {
         "id": "legacy-18a97cca241153f90675e77d33abadb0b8480ebe11bf6af8",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 10000,
         "entity": {
@@ -4699,7 +4699,7 @@
       },
       {
         "id": "legacy-af8cbccdc15f3e498f01e66720292ca137fa0eed6a880ec2",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 25000,
         "entity": {
@@ -4718,7 +4718,7 @@
       },
       {
         "id": "legacy-73fa3914db8634fd8e9d3671a470309bc229d87f3006c3bb",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 10000,
         "entity": {
@@ -4737,7 +4737,7 @@
       },
       {
         "id": "legacy-404c923aec43fa00170055d665a35b2e8f38e824b2fb7bb5",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 25000,
         "entity": {
@@ -4756,7 +4756,7 @@
       },
       {
         "id": "legacy-e3be73cfc678dfef3bfa158bbac7ce3ee0acc93332674634",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3000,
         "entity": {
@@ -4775,7 +4775,7 @@
       },
       {
         "id": "legacy-1d655260e128c867ca234c90dff2fb63a8f5f5069abe7975",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 5000,
         "entity": {
@@ -4794,7 +4794,7 @@
       },
       {
         "id": "legacy-41133a49fde6402782b567073ac4ee2aece931badf72c8da",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 7500,
         "entity": {
@@ -4813,7 +4813,7 @@
       },
       {
         "id": "legacy-4637bcb8a6280843daafbbe81dc129af3a71e153714fd59d",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 60000,
         "entity": {
@@ -4832,7 +4832,7 @@
       },
       {
         "id": "legacy-23b54a067526365e0bd96c993616d18588aa883eb08a013c",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 120000,
         "entity": {
@@ -4851,7 +4851,7 @@
       },
       {
         "id": "legacy-06954fb3b1efcf93b3d996c9fa68a7e153ad3474bdab24d8",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 40000,
         "entity": {
@@ -4870,7 +4870,7 @@
       },
       {
         "id": "legacy-cbea7b2c906fed936cfcfc41fefaf6767a0559b18fabacc8",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 60000,
         "entity": {
@@ -4889,7 +4889,7 @@
       },
       {
         "id": "legacy-69fc9945e2bf02f8b63cd92db3ccc45f47b88806029d54b3",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -4908,7 +4908,7 @@
       },
       {
         "id": "legacy-c4cb454e8c67a056594e99f40108a52b82cb55960e62b071",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -4927,7 +4927,7 @@
       },
       {
         "id": "legacy-4108020cddecbbe4cffaa47399d5623a28233e87338c467e",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -4946,7 +4946,7 @@
       },
       {
         "id": "legacy-a44598baf7fd4d2022479a18101e38375d12784659472ae0",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -4965,7 +4965,7 @@
       },
       {
         "id": "legacy-93e3ecc06179dfcdc534923cec6b60d88147963af7088292",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -4984,7 +4984,7 @@
       },
       {
         "id": "legacy-9512674421a4faef5ac0731ddf21c911c669b2f7832638b8",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5003,7 +5003,7 @@
       },
       {
         "id": "legacy-19aa08ce167ba8de2a01f67a8e2e771a6fdb622d31b940a6",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5022,7 +5022,7 @@
       },
       {
         "id": "legacy-a08cab7b90914d9e1f65f4c7879f21148624e391fa81e293",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5041,7 +5041,7 @@
       },
       {
         "id": "legacy-34bd2a45257a0b58c05bcd297da0dc84029716f9f90124f1",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5060,7 +5060,7 @@
       },
       {
         "id": "legacy-16db32dda52cb52e627968a2561365b80fa90057449dfc50",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5079,7 +5079,7 @@
       },
       {
         "id": "legacy-cc4526946bfecd2c31138a5b46d03e13497984c9b8008edc",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5098,7 +5098,7 @@
       },
       {
         "id": "legacy-57b96c03545b6512bf0ebabf5894512d10aa1bb2aae14911",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5117,7 +5117,7 @@
       },
       {
         "id": "legacy-56b5e5d941690a29334ce3d1cdcf3c4e867a5830450ab492",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2000,
         "entity": {
@@ -5136,7 +5136,7 @@
       },
       {
         "id": "legacy-36a466db463e64f6c93fcf9b28cc35325d3074c453a70808",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5155,7 +5155,7 @@
       },
       {
         "id": "legacy-8775057540739640c78e8ea4ca110ace1f2a720bcb174ed2",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 10000,
         "entity": {
@@ -5174,7 +5174,7 @@
       },
       {
         "id": "legacy-969e50a46daa92aafb1714452acc82130a19a7e95867db8d",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5193,7 +5193,7 @@
       },
       {
         "id": "legacy-521f6b995f8228e1cc1f792ab25ac8e3f432289f21c7e0ce",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5212,7 +5212,7 @@
       },
       {
         "id": "legacy-cde0a89cdb0746958a58b4e9ca2ca3b77ec0eed40bc21553",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5231,7 +5231,7 @@
       },
       {
         "id": "legacy-30e856e9acc93e4f962c49d1b1d2bc87f6407b83e1ad0716",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 8000,
         "entity": {
@@ -5250,7 +5250,7 @@
       },
       {
         "id": "legacy-91e6c00ce3eab65c5c012b79969567b67d9ab501b9432554",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 8000,
         "entity": {
@@ -5269,7 +5269,7 @@
       },
       {
         "id": "legacy-65b97545989253699b0234adc287395eefb6e5f25d54ec1e",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 8000,
         "entity": {
@@ -5288,7 +5288,7 @@
       },
       {
         "id": "legacy-db4152f7bb0fbf0bb53d68fa9d940e8549e5d6b82aefb4a5",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5307,7 +5307,7 @@
       },
       {
         "id": "legacy-4b671f92090c55138ae2acd86ed6448e860ff5b9a96b26d4",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5326,7 +5326,7 @@
       },
       {
         "id": "legacy-3cd7ff30204fd992b88171f91d44f90cf87df8267b4cacc4",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5345,7 +5345,7 @@
       },
       {
         "id": "legacy-cf06b60870f8f2a98367ec6447a8947b5b6fa4a3dc43c0b3",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5364,7 +5364,7 @@
       },
       {
         "id": "legacy-87fe4fa65193d759fdcafee1b8322bd4457310ccc283ec01",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5383,7 +5383,7 @@
       },
       {
         "id": "legacy-b9c8995c64ec890e7619a2545ae35ac7a8f8e0391c12574c",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5402,7 +5402,7 @@
       },
       {
         "id": "legacy-5560264172068937cdb29440cdb4f02687af1f02752a79e4",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5421,7 +5421,7 @@
       },
       {
         "id": "legacy-1987ba09bcd5feb6091413c0a1920b0bed037176325d1c61",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1500,
         "entity": {
@@ -5440,7 +5440,7 @@
       },
       {
         "id": "legacy-6b0c85735e868aff45f6b93d89fd379e203630cd0bd93646",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5459,7 +5459,7 @@
       },
       {
         "id": "legacy-a408c454fff89da2be4957e7650c1780afeed804cc4d010e",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5478,7 +5478,7 @@
       },
       {
         "id": "legacy-39f3a9be3c8ed513c6831759ef5b56d375279946c8259104",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5497,7 +5497,7 @@
       },
       {
         "id": "legacy-5df860f41230ace0e79b07c8bd688a6c4f7291bdeca3dc32",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5516,7 +5516,7 @@
       },
       {
         "id": "legacy-a0d217e2dff52b9a4442025da585919e22e31f48f08e7edd",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5535,7 +5535,7 @@
       },
       {
         "id": "legacy-b6447c36fed934a425a68c326008974c2af607c27f2ed402",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5554,7 +5554,7 @@
       },
       {
         "id": "legacy-4174e2f19dc85b0579ce29d3aee36d25b58c10abf11813f5",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5573,7 +5573,7 @@
       },
       {
         "id": "legacy-f409cae9fadf3694aa167c140afb16494ea97a8877f36294",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5592,7 +5592,7 @@
       },
       {
         "id": "legacy-9df797a2286c608440b5f6ccd4c8655821b71c3eab0b2750",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 750,
         "entity": {
@@ -5611,7 +5611,7 @@
       },
       {
         "id": "legacy-f86aa60f2d350b5b30292f05f5393bd2995b28af20235a8f",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5630,7 +5630,7 @@
       },
       {
         "id": "legacy-d64721a3b9dbd9bac8b0409505aff64c88e6d456af2cb685",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5649,7 +5649,7 @@
       },
       {
         "id": "legacy-0834e8c6346cfdaea1b3f907230bda4adc43203c113d2796",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5668,7 +5668,7 @@
       },
       {
         "id": "legacy-ee2ef91050d5ab576f6967544c38710996e4412f43fd5e3c",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 750,
         "entity": {
@@ -5687,7 +5687,7 @@
       },
       {
         "id": "legacy-2c8c97a378dedca743d7f0d1b87990def4679a37e14c7610",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5706,7 +5706,7 @@
       },
       {
         "id": "legacy-a98f9859ad11c6c879db1dfa4a58aa0c79e5cd0b14b881c0",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5725,7 +5725,7 @@
       },
       {
         "id": "legacy-e71b01eed758f5f55ba6d2515d01c9d321864f0ad04d55e5",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5744,7 +5744,7 @@
       },
       {
         "id": "legacy-5a8f52dab375348cd165d54cc39c2d452e0b7a343592c11c",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5763,7 +5763,7 @@
       },
       {
         "id": "legacy-ff7cb990f55a8e9bdb5573d5bba1e9b4a0368b959b28d760",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5782,7 +5782,7 @@
       },
       {
         "id": "legacy-5f9754fd4d9f39534cc9bf70d0998bd966f4722e6cf70b4d",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5801,7 +5801,7 @@
       },
       {
         "id": "legacy-3768e8aa09fab947844b6e509b2a9890b5b135ad865f2668",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5820,7 +5820,7 @@
       },
       {
         "id": "legacy-bfbf72e9d5c70670ed84c98c110d0b8596f5d06f224e837e",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5839,7 +5839,7 @@
       },
       {
         "id": "legacy-d7b22b21eb209e2d28e2689671f73dfb07e34948c9e01ff2",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5858,7 +5858,7 @@
       },
       {
         "id": "legacy-606604085ab96445f09b38812af6b557a66d399b5b5a090a",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5877,7 +5877,7 @@
       },
       {
         "id": "legacy-7204caae6fc67616ff368a5c223499c24474954b40fb455e",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5896,7 +5896,7 @@
       },
       {
         "id": "legacy-26a1328e49e86c11b848cb3b063978e83e68752aaa0d6469",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5915,7 +5915,7 @@
       },
       {
         "id": "legacy-85eea1877db667e85879fe30c8b0885b3433ff86c016da2d",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5934,7 +5934,7 @@
       },
       {
         "id": "legacy-34f275943ef76ca62a9b0a6f046da857dde052d6da552863",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -5953,7 +5953,7 @@
       },
       {
         "id": "legacy-13eb3da7a037eb25b1fa4214409182ba4410194845e63d19",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -5972,7 +5972,7 @@
       },
       {
         "id": "legacy-6b2dda3a1250d0ea42b1233e940ab95801f34625d333dc47",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -5991,7 +5991,7 @@
       },
       {
         "id": "legacy-af1106445bb9915882dade90c067e06c156a66dc86b275de",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -6010,7 +6010,7 @@
       },
       {
         "id": "legacy-a02d23fb2bb4162af8b611011ce2a1eed2fd9da8088d6f33",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6029,7 +6029,7 @@
       },
       {
         "id": "legacy-da4d6cf1467c6add8eccecbb7f28b4c8d9c7265447549fe4",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -6048,7 +6048,7 @@
       },
       {
         "id": "legacy-8f2a40d9c1d7c2959cfb121f6d35ee9274e90130f23303ce",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6067,7 +6067,7 @@
       },
       {
         "id": "legacy-054500422e394038a027a15409fb570091a600de0bc0a968",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -6086,7 +6086,7 @@
       },
       {
         "id": "legacy-4ec4c2d1e620ad3f7651f664a44188c02afbd7ccfce9afc3",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -6105,7 +6105,7 @@
       },
       {
         "id": "legacy-2f1e278531ed315857cbfaec747d5d3d242e5efd44222a5b",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6124,7 +6124,7 @@
       },
       {
         "id": "legacy-8f215591843397d0d800befb9910fe31f2ff83b1501d5ef1",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 8000,
         "entity": {
@@ -6143,7 +6143,7 @@
       },
       {
         "id": "legacy-f9a46317d206948b92755e8284f35f5536a397aa18eec4d5",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6162,7 +6162,7 @@
       },
       {
         "id": "legacy-3b05f4b1c5263e990563713f8bb7f8952467c4a65a7838e3",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -6181,7 +6181,7 @@
       },
       {
         "id": "legacy-a2ec60d27f70c75c731df6192b0d9c808d6d811d54c86df4",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6200,7 +6200,7 @@
       },
       {
         "id": "legacy-c80ee1cbad15d5709b37633c2d2969c474600d575eff123a",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6219,7 +6219,7 @@
       },
       {
         "id": "legacy-ff77a40a517225c68c20c08782af6d752002c3498317df48",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -6238,7 +6238,7 @@
       },
       {
         "id": "legacy-fc31b640bdcf19c8a5b47c776d679a312a6f4abacac7166d",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -6257,7 +6257,7 @@
       },
       {
         "id": "legacy-6b4d709843957dcdbea578e2cfe83523e8ff555fdfc49b82",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6276,7 +6276,7 @@
       },
       {
         "id": "legacy-54979637d5a91ff64b54b4a2800f8e7764fcd9d7cbf4eb46",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -6295,7 +6295,7 @@
       },
       {
         "id": "legacy-63998c414a14ac3c9205c79d6e4bcce21d3130f6844f9a41",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -6314,7 +6314,7 @@
       },
       {
         "id": "legacy-cd7b3a88d79f91870c6a0d921f1da19f8499d5e0e811c6dc",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6333,7 +6333,7 @@
       },
       {
         "id": "legacy-04f6f45383482b5969c16b40efa4343924df1a33114ef601",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6352,7 +6352,7 @@
       },
       {
         "id": "legacy-4f5ecd2d94dcd942d45e6ce757693820556204fe1fb78c13",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6371,7 +6371,7 @@
       },
       {
         "id": "legacy-a146bc06419d9a45e1bb464feb8e08ed8adc3662afc4c7d0",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6390,7 +6390,7 @@
       },
       {
         "id": "legacy-244ef30a43779c630c6afd7dc6c3825776573ddf48a2fdeb",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -6409,7 +6409,7 @@
       },
       {
         "id": "legacy-553ae80b85371fca744a3113818dd0b03db28842d4d576e5",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6428,7 +6428,7 @@
       },
       {
         "id": "legacy-760866d951201fb184763aff272d03f64f0808ff27358ba9",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -6447,7 +6447,7 @@
       },
       {
         "id": "legacy-725e8d8b7926066ad477de2d0b461ff5ee4acc9882334b5f",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6466,7 +6466,7 @@
       },
       {
         "id": "legacy-ccf2a12be22e80da631d5a0d8faf283ade8d8363718a2988",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6485,7 +6485,7 @@
       },
       {
         "id": "legacy-aa9478d93cd0306e33c95322f7be36649396e1e2c11c1a44",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -6504,7 +6504,7 @@
       },
       {
         "id": "legacy-01c7b2d84c6d1d00fc679a0a17875fc566a911d5c1771b7a",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 1250,
         "entity": {
@@ -6523,7 +6523,7 @@
       },
       {
         "id": "legacy-a99b9509871700048a9dc4be8f4050f5c993cdd9c542d227",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6542,7 +6542,7 @@
       },
       {
         "id": "legacy-ad67639e544b4a22ed829bfc4efd66e862a4ab5a50818649",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6561,7 +6561,7 @@
       },
       {
         "id": "legacy-e92518f5f4ba68e3634d990188c217a277a97c65766b4d88",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 750,
         "entity": {
@@ -6580,7 +6580,7 @@
       },
       {
         "id": "legacy-0d4abf6331b2751a671fdcae814e73b296615cdf8bfded88",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6599,7 +6599,7 @@
       },
       {
         "id": "legacy-e07e4903c2f0360e8b81bd3e235ec4b98bd7213f25d8faa3",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6618,7 +6618,7 @@
       },
       {
         "id": "legacy-d9833b6de1528204ac6ecb690263b39ef474b0fb7c754518",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6637,7 +6637,7 @@
       },
       {
         "id": "legacy-99f4f78d4bfab5421c1c56b84888a399f448ec60ff8dc818",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 750,
         "entity": {
@@ -6656,7 +6656,7 @@
       },
       {
         "id": "legacy-1bd12d2ac3b155a00e0a18e4dc78fbeaeb153408014648e4",
-        "rank": "3",
+        "rank": 3,
         "notes": null,
         "price": 2500,
         "entity": {
@@ -6675,7 +6675,7 @@
       },
       {
         "id": "legacy-fd47e00d602b8ce464b968659dd8b9da1e0a200842523fb1",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 50,
         "entity": {
@@ -6713,7 +6713,7 @@
       },
       {
         "id": "legacy-ab7f83c32b675fadfec6c4fcf6761b3b5f6c7afd2cd025b7",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -6751,7 +6751,7 @@
       },
       {
         "id": "legacy-a74ccb9bacf073e0d2e15701a5fb1588eb38ae56ab3aff86",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2100,
         "entity": {
@@ -6770,7 +6770,7 @@
       },
       {
         "id": "legacy-23a0950f571bb94406611ba12285f87443ab159fc4035261",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -6808,7 +6808,7 @@
       },
       {
         "id": "legacy-f6c9a41eeece8b504ada2391d9b6557c36ed934ac569b028",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 2100,
         "entity": {
@@ -6827,7 +6827,7 @@
       },
       {
         "id": "legacy-f7505d935e01e3d4a5f968d4f53a527b297f9b400e092553",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 5000,
         "entity": {
@@ -6846,7 +6846,7 @@
       },
       {
         "id": "legacy-a33c89aae56ff1c026414a2f1d9044e2d6fb4941993efef5",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 4000,
         "entity": {
@@ -6865,7 +6865,7 @@
       },
       {
         "id": "legacy-72b2727da653b428880347c8fd64cacf6f1accc55f4a8b20",
-        "rank": "2",
+        "rank": 2,
         "notes": null,
         "price": 7500,
         "entity": {
@@ -6884,7 +6884,7 @@
       },
       {
         "id": "legacy-13525a012cf3fb5e561495dedcb85a32572b1b6c8d3ca49f",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 7500,
         "entity": {
@@ -6903,7 +6903,7 @@
       },
       {
         "id": "legacy-dadd5b57cfeb9f8806cdfa5cfc792a58471eeb4f6e39777e",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 250,
         "entity": {
@@ -6922,7 +6922,7 @@
       },
       {
         "id": "legacy-d2cafcb0f9d3c5a24234a7c8a33924d2f0cb19acec363532",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3200,
         "entity": {
@@ -6941,7 +6941,7 @@
       },
       {
         "id": "legacy-9240ae6ee1749928c9af7c237b2c17908da47c654a175e2d",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 750,
         "entity": {
@@ -6960,7 +6960,7 @@
       },
       {
         "id": "legacy-bc186fd00041a8671a88f5a61860e4c90ce0cbbf8a9fdfea",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -6998,7 +6998,7 @@
       },
       {
         "id": "legacy-8c9229ba5a4137b59ed44f0e866a8b8f7968b453ef1e1d15",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 3000,
         "entity": {
@@ -7017,7 +7017,7 @@
       },
       {
         "id": "legacy-55f5ef516c5b1b9487ee2ed44fada62115a9028c89c25ff8",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 480,
         "entity": {
@@ -7036,7 +7036,7 @@
       },
       {
         "id": "legacy-716d6575715b6db3fd80cc7661064fd289e1f3482afdaf65",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -7055,7 +7055,7 @@
       },
       {
         "id": "legacy-fe481cf9369cd1c44fcbe1099747faac43d615fd7d8d7db4",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -7074,7 +7074,7 @@
       },
       {
         "id": "legacy-69577aa8efa5dea6aa1cac0880d56cac6ba90d69f89bc537",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -7093,7 +7093,7 @@
       },
       {
         "id": "legacy-d12f9d2d657e2e36f303006a1a04e96063f3b8c91be67870",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {
@@ -7112,7 +7112,7 @@
       },
       {
         "id": "legacy-10e0dca1b7eba90d0ef12a4b79a2d3f48556f9c3c629a989",
-        "rank": "1",
+        "rank": 1,
         "notes": null,
         "price": 100,
         "entity": {

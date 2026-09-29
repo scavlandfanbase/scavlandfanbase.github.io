@@ -19,3 +19,6 @@ supabase/.temp/
 
 # Local rollback archives; never publish these with GitHub Pages
 backups/
+
+# Local Node dependencies
+node_modules/

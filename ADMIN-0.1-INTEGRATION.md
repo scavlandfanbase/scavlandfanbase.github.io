@@ -68,3 +68,125 @@ The code is integrated and locally tested; the approved backend is deployed with
 After the configuration dependency is available, use real authorized HTTP sessions for final draft/verify/patch-read acceptance, then seek final website publication approval. Keep write flags false until that release gate is satisfied. No additional feature development is required or started.
 
 Deferred: Ammo integration, Attachment 11B, Weapons/compatibility, Page Builder v2, advanced themes/styles and image-manager work. Evidence remains optional; identity is server-controlled; Item IDs remain canonical; vendor-specific values remain independent; Save Draft never publishes. No public content was rewritten, and no test data remains in production.
+
+## 29 September 2026 — Admin privacy and validation hardening checkpoint
+
+Branch: fix/admin-user-privacy.
+
+Post-integration Admin hardening completed and pushed. Existing public Items/Vendors behaviour and canonical relationships were retained.
+
+Completed work:
+
+- Vendor production data was brought into compliance with the existing numeric rank validator by converting 220 digit-only rank strings to numbers. No validator was weakened.
+- Admin core integration coverage was corrected to locate newly appended vendor listings by stable vendor/entity/listing identity rather than assuming the new listing occupied array index 0.
+- Reproducible local Admin test tooling was added through npm with PGlite and Playwright.
+- Admin Users privacy regression coverage was strengthened in commit 6d6d65d. A denied non-Owner request is verified to perform no Admin-user read, return 403, perform no writes, and expose neither Owner nor invited-user email addresses.
+- Owner-only Admin Users management remains enforced by the backend and frontend access controls.
+- Admin draft validation error handling was hardened in commit 5986547. Top-level post-mutation catalogue validation now executes inside the existing error-normalisation boundary so ordinary validation failures are classified as client validation errors rather than unclassified server failures.
+- Generated model inspection confirmed Items and Vendors validate mutation results internally. Vendor inventory/listing operations also validate their listing collection. The core change is therefore recorded as defensive boundary hardening rather than as a reproduced production 503 defect.
+- No `"type": "module"` package change was made merely to suppress Node's MODULE_TYPELESS_PACKAGE_JSON warning; the repository contains mixed module formats and the warning is non-fatal.
+
+Validation completed after the hardening:
+
+- `npm test` PASS.
+- Admin 0.1 core integration PASS.
+- Admin invite/privacy regression PASS: retry saves existing invite without email; Owner protected; non-Owner rejected.
+- Production browser bridge PASS, including parent-origin authentication, durable Item workflow, second authenticated browser context, Vendor catalogue workflow, responsive layouts, public Items/Vendors rendering and identity privacy.
+- `git diff --check` PASS.
+- Final working tree clean after push.
+
+Relevant commits in this hardening sequence include:
+
+- 75368b3 — Fix vendor listing data and Admin integration test
+- 348c7a5 — Add reproducible Admin test tooling
+- 6d6d65d — Strengthen Admin email privacy regression test
+- 5986547 — Harden Admin draft validation error handling
+
+This checkpoint does not supersede the production release gates recorded above. It records subsequent Admin security, privacy, data-validation and test-hardening work only.
+
+### Granular publish permissions — 29 September 2026
+
+Additional authorization review found two legacy publishing endpoints still using the broad `is_scavland_admin()` check:
+
+- `publish-site-content`
+- `publish-site-settings`
+
+These were hardened to use the existing granular permission model:
+
+- `publish-site-content` requires `content_edit`
+- `publish-site-settings` requires `settings_edit`
+
+This aligns them with the existing Admin editor/draft publishing system, which already uses `has_scavland_permission(...)`.
+
+The change prevents an authenticated Reviewer with only `evidence_review` from using these publishing endpoints while preserving Owner access through the existing Owner permission override.
+
+Verification after the change:
+
+- `npm test` — PASS
+- Admin 0.1 core/browser integration — PASS
+- Admin invite/privacy regression — PASS
+- `scripts/test-admin-password.cjs` — PASS
+- `git diff --check` — PASS
+- Working tree clean after commit/push
+
+Commit:
+
+- `17c3c24 Enforce granular Admin publish permissions`
+
+The Node `MODULE_TYPELESS_PACKAGE_JSON` message remains a non-fatal development warning. No `"type": "module"` change was made because the repository uses mixed module formats.
+
+### Granular Evidence Review permissions — 29 September 2026
+
+Production Evidence Review authorization was audited against the live Supabase RLS policies.
+
+Verified production state:
+- `evidence_submissions` has RLS policies for SELECT, UPDATE, DELETE and public INSERT.
+- The previous Admin moderation policies used the broad `is_scavland_admin()` check.
+- SELECT, UPDATE and DELETE now require `has_scavland_permission('evidence_review')`.
+- UPDATE applies the permission to both `USING` and `WITH CHECK`.
+- The existing public evidence-submission INSERT policy was left unchanged.
+- `has_scavland_permission(text)` was verified in production: the account must be active and either be the Owner or hold the requested permission.
+- Owner access is therefore preserved.
+- The deployed Evidence policy state is represented in `supabase/evidence-review-permissions.sql`.
+- Production policies were re-read after the change and confirmed correct.
+- Repository commit: `ffe3eeb` (`Enforce granular Evidence Review permissions`).
+
+This closes the Evidence RLS permission audit. Dashboard visibility/navigation still needs to be aligned with the granular Admin permission profile.
+
+### Permission-aware Admin Hub ? 29 September 2026
+
+The Admin Hub navigation is now aligned with the live granular Admin permission profile.
+
+Implemented behaviour:
+
+- Evidence Review requires `evidence_review`.
+- Items requires `items_edit`.
+- Weapons requires `weapons_edit`.
+- Armour requires `armour_edit`.
+- Crafting requires `crafting_edit`.
+- Ammunition requires `ammunition_edit`.
+- Vendors requires `vendors_edit`.
+- Page Settings requires `settings_edit`.
+- Public Content requires `content_edit`.
+- Admin Users remains Owner-only.
+- Patch Management remains available under its existing authorization model; starting a new patch remains Owner-gated.
+- The previous hard-coded Admin 0.1 UI allowlist was removed.
+- Navigation itself checks the resolved permission set, rather than relying only on disabled buttons.
+
+Regression coverage was updated to use the verified production Admin profile contract: `role`, `display_name`, `is_active` and `permissions`.
+
+Browser coverage now includes:
+
+- Owner with the full permission set: permitted editor controls are enabled.
+- Restricted authenticated Admin with only `evidence_review` and `vendors_edit`: Evidence and Vendors are enabled while Items, Weapons, Ammunition, Settings and Public Content are denied; Admin Users is absent.
+- Unauthorized account: Admin Hub access remains rejected.
+
+Verification:
+
+- `npm test` ? PASS.
+- Admin 0.1 core/browser integration ? PASS.
+- Admin invite/privacy regression ? PASS.
+- `node scripts/test-admin-password.cjs` ? PASS.
+- `git diff --check` ? PASS apart from expected Windows LF/CRLF conversion warnings.
+
+This closes the dashboard visibility/navigation follow-up recorded under the Granular Evidence Review checkpoint.
