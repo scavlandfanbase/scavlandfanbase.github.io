@@ -1,4 +1,4 @@
-import {Items,Vendors,Listings,Inventory,Verification,Attachments} from './models.generated.mjs';
+import {Items,Vendors,Listings,Inventory,Verification,Attachments,Ammo} from './models.generated.mjs';
 import {githubPublisher} from './github-publisher.mjs';
 export const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});};
 export const same=(a,b)=>JSON.stringify(sort(a))===JSON.stringify(sort(b));
@@ -58,9 +58,9 @@ export function rebasePayload(domain,draft,latest){
  if(!data.some(r=>r.id===payload.selectedId))payload.selectedId=data.find(r=>!r.archived)?.id||null;
  return {payload,base:structuredClone(latest.base),conflicts};
 }
-export function seed(domain,source){return domain==='items'?{...Items.foundation(source),revision:0}:{version:1,revision:0,data:structuredClone(source.data),...(source.vendorListings?{vendorListings:structuredClone(source.vendorListings)}:{})};}
+export function seed(domain,source){return domain==='ammo'?{...Ammo.foundation(source),revision:0}:domain==='items'?{...Items.foundation(source),revision:0}:{version:1,revision:0,data:structuredClone(source.data),...(source.vendorListings?{vendorListings:structuredClone(source.vendorListings)}:{})};}
 export function validate(domain,catalogue){
- if(domain==='items')Items.validate(catalogue);else {Vendors.validate(catalogue);if(catalogue.vendorListings)Listings.validate(catalogue.vendorListings);}
+ if(domain==='ammo')Ammo.validate(catalogue);else if(domain==='items')Items.validate(catalogue);else {Vendors.validate(catalogue);if(catalogue.vendorListings)Listings.validate(catalogue.vendorListings);}
  if(!Number.isSafeInteger(catalogue.revision)||catalogue.revision<0)fail('Invalid catalogue revision.');
 }
 export function publicValue(value){
@@ -135,7 +135,8 @@ export function createCore({env,fetcher=fetch}){
   const images=[...new Set(Object.values(latest.images.categories||{}).flatMap(c=>c.images||[]))];
   let record;
   try{
-   if(domain==='items')record=Items.mutate(catalogue,{...command,...(command.action==='verify'?{patchId:latest.settings.current_patch_id}:{})},{images,settings:latest.settings,actorId:actor});
+   if(domain==='ammo')record=Ammo.mutate(catalogue,{...command,...(command.action==='verify'?{patchId:latest.settings.current_patch_id}:{})},{images,settings:latest.settings,actorId:actor});
+   else if(domain==='items')record=Items.mutate(catalogue,{...command,...(command.action==='verify'?{patchId:latest.settings.current_patch_id}:{})},{images,settings:latest.settings,actorId:actor});
    else if(command.action==='inventory'){
     if(command.operation==='add'&&command.entity?.type!=='item')fail('Admin 0.1 listings reference canonical Items.');
     record=Inventory.mutate(catalogue,command,latest.entities,latest.settings,actor);
@@ -147,10 +148,10 @@ export function createCore({env,fetcher=fetch}){
  function view(domain,saved,latest){
   const ctx=context(domain,saved,latest);
   return {catalogue:ctx.payload.catalogue,settings:latest.settings,images:latest.images,factions:latest.factions,
-   categories:domain==='items'?Items.categories:[],factFields:domain==='items'?Items.factFields:[],
+   categories:domain==='ammo'?Ammo.categories:domain==='items'?Items.categories:[],factFields:domain==='ammo'?Ammo.factFields:domain==='items'?Items.factFields:[],
    entities:latest.entities,sources:{item:'items',weapon:null,ammo:null,armour:null,attachment:null,blueprint:null}};
  }
- const publishers=Object.fromEntries(['items','vendors'].map(domain=>[domain,githubPublisher({repository,token:env('GITHUB_TOKEN'),paths:[fileFor(domain)],fetcher,
+ const publishers=Object.fromEntries(['items','vendors','ammo'].map(domain=>[domain,githubPublisher({repository,token:env('GITHUB_TOKEN'),paths:[fileFor(domain)],fetcher,
   validate:d=>{if(d.entity_id!=='catalogue')fail('Unknown editor draft.');validate(domain,d.payload.catalogue);},
   project:(draft,documents)=>{
    if(!same(draft.payload.source,documents[fileFor(domain)]))fail('Public source changed. Review before publishing.',409);

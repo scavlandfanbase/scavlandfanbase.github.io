@@ -17,6 +17,9 @@ Verified against main `9c0d3815fb686c93b151515f0c609f7dc7f9d6bb`, deployed Admin
 
 ## CURRENT
 
+- 29 September update: Items recovery is deployed through PRs #19–#21. Real Owner screenshots confirm saved refresh and retained edit in preview; genuine publication was not certified. This supersedes the historical recovery preparation/acceptance statements immediately below.
+- Ammo private editor integration is now prepared against main `98d121a`, adapting local 10B. The existing older Ammunition form was already present but used the retired legacy publisher. This checkpoint replaces its Hub route, adds trusted Ammo receipts, server verification identity/history, damage/penetration preview and separate Ammo-only publication. Local SQL/browser/permission tests pass; coordinated production release and real Owner acceptance remain pending. See `AMMO-INTEGRATION.md`.
+
 - Hosted Items now offers explicit Verified/Unverified review decisions. Use Unverified to retain history while a changed record awaits review; then Refresh from public can adopt uncontested public changes. Real Owner recovery remains to be confirmed. This frontend follow-up does not change the trusted backend or publish a private draft.
 - Active preparation checkpoint: Items stale-draft recovery, including trusted receipt-backed refresh, conflict protection and database/browser tests. Not deployed by this checkpoint. Follow ADMIN_WORK_PLAN.md for the recovered Admin roadmap; the separate CMS check below must not displace it.
 - Complete authenticated Owner acceptance for the Public Content CMS: load current content, preview a controlled intended edit, explicitly publish it, confirm the returned GitHub commit and deployed public result. No completion evidence was established during this reconfirmation.

@@ -10,7 +10,7 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
   try{
    const raw=await request.clone().text();if(new TextEncoder().encode(raw).length>1100000)fail('Draft is too large.',413);
    let body;try{body=JSON.parse(raw);}catch{fail('Invalid editor request.');}
-   if(!['items','vendors'].includes(body?.domain)||body.entityId!=='catalogue')fail('This editor is unavailable in Admin 0.1.',404);
+   if(!['items','vendors','ammo'].includes(body?.domain)||body.entityId!=='catalogue')fail('This editor is unavailable in Admin 0.1.',404);
    if(body.action==='publish'&&env('ADMIN_CORE_ENABLED')!=='true')fail('Publishing awaits activation of the trusted core and retirement of legacy editors.',503);
    if(!['source','prepare'].includes(body.action))return persistence(request);
    const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY'),auth=request.headers.get('Authorization')||'';
@@ -38,7 +38,7 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
    const latest=await core.read(body.domain),context=core.context(body.domain,saved.draft,latest);
    let prepared;
    if(body.command.action==='refresh-public'){
-    if(body.domain!=='items'||Object.keys(body.command).some(k=>k!=='action'))fail('Invalid refresh action.');
+    if(!['items','ammo'].includes(body.domain)||Object.keys(body.command).some(k=>k!=='action'))fail('Invalid refresh action.');
     prepared=rebasePayload(body.domain,saved.draft?{...saved.draft,payload:context.payload,base:context.base}:null,latest);
     if(prepared.conflicts.length)return reply({conflicts:prepared.conflicts,error:'Public changes conflict with your private draft. Nothing was saved.'},409);
    }else prepared=core.mutate(body.domain,context,body.command,latest,actor);
