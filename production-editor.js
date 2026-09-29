@@ -65,7 +65,7 @@
    const url=URL.createObjectURL(new Blob([JSON.stringify(pending||client.getPending(),null,2)],{type:'application/json'}));
    const link=document.createElement('a');link.href=url;link.download=domain+'-pending-private.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   },toolbar);
-  const refresh=domain==='items'&&E.button('production-refresh','Refresh from public',async()=>{
+  const refresh=['items','ammo'].includes(domain)&&E.button('production-refresh','Refresh from public',async()=>{
    if(busy||pending||client.getPending())return;busy=true;paint();previewVersion=null;
    try{const saved=await client.rebase();previewVersion=null;onSaved(record(saved));status.textContent='Saved · private draft refreshed from public data';}
    catch(error){const paths=Array.isArray(error.conflicts)&&error.conflicts.length?' Conflicting fields: '+error.conflicts.map(item=>item.path).join(', ')+'.':'';status.textContent=(error.status===409?'Refresh stopped — review conflicts. ':'Couldn’t refresh — ')+error.message+paths;}
@@ -85,7 +85,7 @@
       for(const record of document.data||[]){
        const details=window.document.createElement('details'),heading=window.document.createElement('summary'),facts=window.document.createElement('dl');
        heading.textContent=record.name+(record.archived?' · Archived':record.hidden?' · Hidden':'');details.append(heading,facts);
-       for(const key of ['category','description','properties','location','factionId','rank','estimatedPrice','maxStack'])if(Object.hasOwn(record,key)){
+       for(const key of ['category','description','properties','location','factionId','rank','estimatedPrice','maxStack',...(domain==='ammo'?['damage','penetrationPercent','notes']:[])])if(Object.hasOwn(record,key)){
         const title=window.document.createElement('dt'),value=window.document.createElement('dd');title.textContent=label(key);value.textContent=describe(record[key]);facts.append(title,value);
        }
        if(record.verification){const note=window.document.createElement('p');note.textContent=record.verification.decision==='verified'?'Verification recorded for patch '+record.verification.verified_patch_id:'Unverified';details.append(note);}
