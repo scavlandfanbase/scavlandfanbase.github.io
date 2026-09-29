@@ -1,5 +1,9 @@
 # CURRENT STATE — 29 SEPTEMBER 2026
 
+**30 September update:** proceed with connected category editors, not independent Items/Ammo copies. Draft PR #22 is on hold and must not be deployed. The first read-only shared-catalogue resolver checkpoint verifies all 13 Ammo, 31 Armour, 39 Weapon identities and canonical Vendor references. Shared-value conflicts are reported without changing data. Next is the trusted per-item draft/atomic publishing contract before replacing category editors. See `SHARED-CATALOGUE-PLAN.md`.
+
+Owner screenshots on 29 September confirmed Items refresh and preview recovery. This establishes that checkpoint, not real publication acceptance. Historical pending-recovery statements below are superseded.
+
 Verified against main `9c0d3815fb686c93b151515f0c609f7dc7f9d6bb`, deployed Admin assets and read-only production checks. This queue supersedes the historical entries below; see the reconciliation addendum in ADMIN-0.1-INTEGRATION.md.
 
 ## DONE

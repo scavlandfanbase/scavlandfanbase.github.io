@@ -1,5 +1,7 @@
 # Admin Hub working plan — 29 September 2026
 
+**30 September direction:** category editors with one shared item identity, linked specialist facts and vendor references supersede the independent Ammo rollout in draft PR #22. Hold that rollout. Read `SHARED-CATALOGUE-PLAN.md` for verified identity links, unresolved shared values and the per-item draft/publication design. The resolver foundation is prepared/tested; the unified write path and category UI are not live. Existing drafts must be preserved. The remaining dated roadmap below is historical context where it conflicts with this direction.
+
 Recovered from the saved 23 September SCAVLAND master plan (Core Char Meaning), local checkpoint branches and dated acceptance/publication reports. This is a roadmap reconciliation, not a claim that every planned tool is live.
 
 ## Intended system
