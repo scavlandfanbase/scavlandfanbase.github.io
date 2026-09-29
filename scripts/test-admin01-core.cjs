@@ -8,7 +8,7 @@ const alice='11111111-1111-4111-8111-111111111111',bob='22222222-2222-4222-8222-
 const documents=Object.fromEntries(['items','vendors','site-images','factions','verification-settings','weapons','armour','ammo','crafting'].map(n=>['data/'+n+'.json',JSON.parse(fs.readFileSync(path.join(root,'data',n+'.json')))]));
 documents['data/verification-settings.json']={schemaVersion:1,current_patch_id:'test-a'};
 const publicBefore=structuredClone(documents),sourceBytes=fs.readFileSync(path.join(root,'data/items.json'));
-let db,head='head-0',tree,commit,gitWrites=0,offline=false,lost=false,failPublish=false;
+let db,head='head-0',tree,commit,gitWrites=0,offline=false,lost=false,lostSave=false,failPublish=false;
 const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
 (async()=>{try{
  db=new PGlite(directory);
@@ -83,7 +83,7 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
   const client=Client.create({endpoint:'https://edge.invalid',apiKey:'fixture',getToken:()=>actor,domain,entityId:'catalogue',onState:s=>states.push(s.state),
    fetcher:async(url,opt)=>{
     if(offline){offline=false;throw Error('offline');}
-    const response=await handler(new Request(url,opt));if(lost){lost=false;throw Error('lost reply');}return response;
+    const response=await handler(new Request(url,opt));if(lost||lostSave&&JSON.parse(opt.body).action==='save'){lost=false;lostSave=false;throw Error('lost reply');}return response;
    }});
   return {client,states,source:()=>call(actor,{action:'source',domain,entityId:'catalogue'}),
    prepare:command=>call(actor,{action:'prepare',domain,entityId:'catalogue',expectedVersion:client.getVersion(),requestId:crypto.randomUUID(),command}),
@@ -169,6 +169,29 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
  const final=(await pc.client.load()).payload;
  assert.equal(final.catalogue.data.filter(require('../attachment-model.js').candidate).length,74);
  assert.equal(final.catalogue.data.filter(r=>Object.hasOwn(r,'attachmentModifiers')).length,29);
+ // Refresh must obtain the trusted SQL receipt before the normal durable save.
+ const refreshDevice=device();await refreshDevice.client.load();
+ const writesBeforeRefresh=gitWrites;
+ const beforeRefreshSource=structuredClone(documents['data/items.json']);
+ const publicTarget=documents['data/items.json'].data.find(r=>r.id!==id);
+ publicTarget.notes='External public-only note';
+ lost=true;await assert.rejects(refreshDevice.client.rebase(),/lost reply/);
+ const refreshRequest=refreshDevice.client.getPending().requestId;
+ const refreshed=await refreshDevice.client.retry();
+ assert.equal(refreshed.request_id,refreshRequest,'Lost preparation response retries the same receipt');
+ assert.equal(refreshed.payload.catalogue.data.find(r=>r.id===publicTarget.id).notes,'External public-only note');
+ assert.equal(refreshed.base['data/items.json'],sha(documents['data/items.json']));
+ assert.equal(gitWrites,writesBeforeRefresh,'Refresh never publishes');
+ lostSave=true;await assert.rejects(refreshDevice.client.rebase(),/lost reply/);
+ const retryPrepared=await refreshDevice.client.retry();
+ assert.equal(retryPrepared.version,refreshed.version+1);
+ const versionBeforeConflict=refreshDevice.client.getVersion();
+ await refreshDevice.change({action:'edit',id,revision:refreshed.payload.catalogue.revision,details:{name:'Private name',category:null,description:null,properties:{unknown:null,zero:0,no:false}}});
+ documents['data/items.json'].data.find(r=>r.id===id).name='External name';
+ await assert.rejects(refreshDevice.client.rebase(),e=>e.status===409&&e.conflicts.some(c=>c.path.endsWith('.name')));
+ assert.equal((await refreshDevice.client.load()).version,versionBeforeConflict+1,'Conflict adds no revision');
+ await assert.rejects(call('33333333-3333-4333-8333-333333333333',{action:'prepare',domain:'items',entityId:'catalogue',expectedVersion:0,requestId:crypto.randomUUID(),command:{action:'refresh-public'}}),e=>e.status===403);
+ documents['data/items.json']=beforeRefreshSource;
  assert.deepEqual(fs.readFileSync(path.join(root,'data/items.json')),sourceBytes);
  console.log('PASS Admin 0.1: trusted prepare + real R1 SQL; direct/approved-payload forgery denied; server actor/time/current patch; optional evidence; multi-actor history retained; restart/second-session; stale/retry/lost reply; explicit atomic mocked publish; private/public separation; canonical listing rename propagation without duplicates; independent vendor values; archive/remove retain Items; patch recheck/reverify; 74/29 source preservation.');
  if(process.env.SCAVLAND_BROWSER==='1'){
@@ -216,6 +239,14 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
    const dialog=frame.getByRole('dialog');await dialog.getByLabel('Item name',{exact:true}).fill('Browser durable Item');
    await dialog.getByRole('button',{name:'Save private draft',exact:true}).click();await dialog.waitFor({state:'detached'});
    assert.match(await frame.locator('#status').innerText(),/Saved/);await page.reload();await frame.locator('#workspace').waitFor();
+   const browserSaved=(await pc.client.load()).payload;
+   const browserDraftItem=browserSaved.catalogue.data.find(r=>r.name==='Browser durable Item');
+   const refreshNoteTarget=documents['data/items.json'].data.find(r=>r.id!==id);
+   refreshNoteTarget.notes='Browser external public-only note';
+   await frame.locator('#production-refresh').click();
+   await frame.getByText('Saved · private draft refreshed from public data',{exact:true}).waitFor();
+   assert.equal((await pc.client.load()).payload.catalogue.data.find(r=>r.id===browserDraftItem.id).name,'Browser durable Item');
+   assert.equal((await pc.client.load()).payload.catalogue.data.find(r=>r.id===refreshNoteTarget.id).notes,'Browser external public-only note');
    await frame.getByLabel('Search items',{exact:true}).fill('Browser durable Item');await frame.locator('#item-review').click();
    await dialog.getByRole('button',{name:'Verify',exact:true}).click();await dialog.waitFor({state:'detached'});
    const output=process.env.SCAVLAND_TEST_OUTPUT;

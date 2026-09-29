@@ -17,12 +17,13 @@ Verified against main `9c0d3815fb686c93b151515f0c609f7dc7f9d6bb`, deployed Admin
 
 ## CURRENT
 
+- Active preparation checkpoint: Items stale-draft recovery, including trusted receipt-backed refresh, conflict protection and database/browser tests. Not deployed by this checkpoint. Follow ADMIN_WORK_PLAN.md for the recovered Admin roadmap; the separate CMS check below must not displace it.
 - Complete authenticated Owner acceptance for the Public Content CMS: load current content, preview a controlled intended edit, explicitly publish it, confirm the returned GitHub commit and deployed public result. No completion evidence was established during this reconfirmation.
 - Confirm current production publishing/patch flags before any flag-dependent acceptance or write. Earlier flag values and deployment versions below are historical, not a fresh live-state claim.
 
 ## NEXT
 
-- Continue from the existing Vendor editor after acceptance; do not restart Checkpoint 7A/7B or repeat the already-present inventory foundation.
+- Verify the real signed-in Hub, then adapt the existing local Ammo 10B checkpoint and continue Attachments 11B. Do not restart Vendor 7A/7B or repeat the already-present inventory foundation.
 - Current public data: 22 Vendors, 285 Items, 224 canonical Vendor listings and 255 retained legacy stock rows. The existing review helper reports 224 already-linked rows and 31 classification-review rows. Keep legacy values/provenance and canonical references intact; review unresolved rows separately without inferring classifications or verification.
 - Genuine Vendor listing verification requires a separate backend task; current Status/History controls do not make verification decisions.
 - Keep each subsequent task small, update documentation after changes and make one small commit per checkpoint where appropriate.

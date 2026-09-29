@@ -1,5 +1,5 @@
 import {createHandler} from './handler.mjs';
-import {createCore,fail} from './core.mjs';
+import {createCore,fail,rebasePayload} from './core.mjs';
 const cors={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
 const reply=(value,status=200)=>Response.json(value,{status,headers:{...cors,'Cache-Control':'no-store'}});
 export function createProductionHandler({env,fetcher=fetch,core=createCore({env,fetcher})}){
@@ -36,7 +36,12 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
    if(receipt)return reply(receipt); // Original ID/time even after response loss.
    if(saved.currentVersion!==body.expectedVersion)fail('Conflict — newer version exists. Your entries are retained.',409);
    const latest=await core.read(body.domain),context=core.context(body.domain,saved.draft,latest);
-   const prepared=core.mutate(body.domain,context,body.command,latest,actor);
+   let prepared;
+   if(body.command.action==='refresh-public'){
+    if(body.domain!=='items'||Object.keys(body.command).some(k=>k!=='action'))fail('Invalid refresh action.');
+    prepared=rebasePayload(body.domain,saved.draft,latest);
+    if(prepared.conflicts.length)return reply({conflicts:prepared.conflicts,error:'Public changes conflict with your private draft. Nothing was saved.'},409);
+   }else prepared=core.mutate(body.domain,context,body.command,latest,actor);
    return reply(await rpc('scavland_prepare',{...args,p_payload:prepared.payload,p_base:prepared.base},true));
   }catch(e){return reply({error:e.status?e.message:'Could not complete this action. Keep your entries and retry.'},e.status||503);}
  };

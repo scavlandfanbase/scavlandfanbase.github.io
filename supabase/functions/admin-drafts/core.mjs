@@ -4,6 +4,60 @@ export const fail=(message,status=400)=>{throw Object.assign(Error(message),{sta
 export const same=(a,b)=>JSON.stringify(sort(a))===JSON.stringify(sort(b));
 function sort(v){return Array.isArray(v)?v.map(sort):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,sort(v[k])])):v;}
 const fileFor=domain=>'data/'+domain+'.json';
+const MISSING=Symbol('missing');
+const equal=(a,b)=>a===MISSING||b===MISSING?a===b:same(a,b);
+const copy=v=>v===MISSING?MISSING:structuredClone(v);
+function mergeValue(base,privateValue,publicValue,path,conflicts){
+ if(equal(publicValue,base))return copy(privateValue);
+ if(equal(privateValue,base))return copy(publicValue);
+ if(equal(privateValue,publicValue))return copy(privateValue);
+ if(privateValue!==MISSING&&publicValue!==MISSING&&base!==MISSING&&privateValue&&publicValue&&base&&
+    typeof privateValue==='object'&&typeof publicValue==='object'&&typeof base==='object'&&
+    !Array.isArray(privateValue)&&!Array.isArray(publicValue)&&!Array.isArray(base)){
+  const result={};
+  const keys=new Set([...Object.keys(base),...Object.keys(privateValue),...Object.keys(publicValue)]);
+  for(const key of keys){
+   const value=mergeValue(Object.hasOwn(base,key)?base[key]:MISSING,Object.hasOwn(privateValue,key)?privateValue[key]:MISSING,Object.hasOwn(publicValue,key)?publicValue[key]:MISSING,path+'.'+key,conflicts);
+   if(value!==MISSING)result[key]=value;
+  }
+  return result;
+ }
+ conflicts.push({path,base:base===MISSING?null:structuredClone(base),private:privateValue===MISSING?null:structuredClone(privateValue),public:publicValue===MISSING?null:structuredClone(publicValue)});
+ return copy(privateValue===MISSING?publicValue:privateValue);
+}
+// Three-way merge for a saved private catalogue. The old public source is the
+// merge base; same-field public/private edits are reported before any save.
+export function rebasePayload(domain,draft,latest){
+ if(!draft?.payload?.source)fail('This draft has no recorded public base. Reload it before continuing.',409);
+ validate(domain,draft.payload.catalogue);
+ const oldSource=draft.payload.source,newSource=latest.source;
+ if(!oldSource||!Array.isArray(oldSource.data)||!Array.isArray(newSource?.data))fail('The canonical public source is invalid.',502);
+ const oldCatalogue=seed(domain,oldSource),newCatalogue=seed(domain,newSource),privateCatalogue=draft.payload.catalogue;
+ const oldById=new Map(oldCatalogue.data.map(r=>[r.id,r])),privateById=new Map(privateCatalogue.data.map(r=>[r.id,r])),newById=new Map(newCatalogue.data.map(r=>[r.id,r]));
+ const ids=[...new Set([...oldById.keys(),...privateById.keys(),...newById.keys()])],conflicts=[],data=[];
+ for(const id of ids){
+  const base=oldById.get(id),privateValue=privateById.get(id),publicValue=newById.get(id),path='data['+JSON.stringify(id)+']';
+  if(base===undefined&&privateValue!==undefined){
+   if(publicValue===undefined)data.push(structuredClone(privateValue));
+   else data.push(mergeValue(MISSING,privateValue,publicValue,path,conflicts));
+  }else if(base===undefined&&publicValue!==undefined)data.push(structuredClone(publicValue));
+  else if(base!==undefined&&privateValue===undefined){
+   conflicts.push({path,base:structuredClone(base),private:null,public:publicValue===undefined?null:structuredClone(publicValue)});
+  }else{
+   const merged=mergeValue(base,privateValue===undefined?MISSING:privateValue,publicValue===undefined?MISSING:publicValue,path,conflicts);
+   if(merged!==MISSING){
+    if(privateValue?.verification?.decision==='verified'&&!same(publicValue,base)&&!same(merged,privateValue)){
+     conflicts.push({path:path+'.verification',base:null,private:null,public:null});
+    }
+    data.push(merged);
+   }
+  }
+ }
+ const payload={...structuredClone(draft.payload),catalogue:{...structuredClone(privateCatalogue),data},source:structuredClone(newSource),settings:structuredClone(latest.settings)};
+ validate(domain,payload.catalogue);
+ if(!data.some(r=>r.id===payload.selectedId))payload.selectedId=data.find(r=>!r.archived)?.id||null;
+ return {payload,base:structuredClone(latest.base),conflicts};
+}
 export function seed(domain,source){return domain==='items'?{...Items.foundation(source),revision:0}:{version:1,revision:0,data:structuredClone(source.data),...(source.vendorListings?{vendorListings:structuredClone(source.vendorListings)}:{})};}
 export function validate(domain,catalogue){
  if(domain==='items')Items.validate(catalogue);else {Vendors.validate(catalogue);if(catalogue.vendorListings)Listings.validate(catalogue.vendorListings);}

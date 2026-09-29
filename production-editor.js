@@ -9,12 +9,14 @@
   document.getElementById('workspace').before(section);
   const E=ScavEditor,toolbar=document.createElement('div');toolbar.className='toolbar';section.append(toolbar);
   function paint(){
-   retry.hidden=!pending;recover.hidden=!pending;
+   const waiting=pending||client.getPending();
+   retry.hidden=!waiting;recover.hidden=!waiting;
    for(const button of toolbar.querySelectorAll('button'))button.disabled=busy;
-   preview.disabled=busy||!!pending;publish.disabled=!canPublish||busy||!!pending||previewVersion!==client.getVersion();publish.textContent=canPublish?'Publish':'Publishing disabled';
+   if(refresh)refresh.disabled=busy||!!waiting;
+   preview.disabled=busy||!!waiting;publish.disabled=!canPublish||busy||!!waiting||previewVersion!==client.getVersion();publish.textContent=canPublish?'Publish':'Publishing disabled';
   }
   const client=ScavDraftPersistence.create({endpoint,apiKey,getToken:()=>token,domain,entityId:'catalogue',onState:({state,detail})=>{
-   const labels={saving:'Saving…',saved:'Saved · private draft',conflict:'Conflict — newer version exists',error:'Couldn’t save — Retry',publishing:'Publishing…',published:'Published',previewing:'Preparing preview…'};
+   const labels={saving:'Saving…',saved:'Saved · private draft',conflict:'Conflict — newer version exists',error:'Couldn’t save — Retry',rebasing:'Refreshing from public data…',publishing:'Publishing…',published:'Published',previewing:'Preparing preview…'};
    if(labels[state])status.textContent=labels[state]+(detail?' · '+detail:'');
   }});
   async function request(body){
@@ -35,7 +37,7 @@
   }
   function record(saved){return {record:{state:saved.payload.catalogue,selectedId:saved.payload.selectedId},settings:saved.payload.settings};}
   async function retryPending(){
-   if(busy||!pending)throw Error('No pending action is available.');busy=true;paint();status.textContent='Saving…';
+   if(busy||(!pending&&!client.getPending()))throw Error('No pending action is available.');busy=true;paint();status.textContent='Saving…';
    try{
     let saved;
     if(client.getPending())saved=await client.retry();
@@ -53,14 +55,21 @@
   }
   async function change(command){
    const clean=structuredClone(command);delete clean.requestId;
+   if(client.getPending()&&!pending)throw Error('Retry the pending refresh before editing.');
    if(pending&&JSON.stringify(pending.command)!==JSON.stringify(clean))throw Error('Retry or download the pending entries before reloading.');
    if(!pending)pending={command:clean,requestId:crypto.randomUUID(),version:client.getVersion()};
    return retryPending();
   }
   const retry=E.button('production-retry','Retry save',()=>retryPending().catch(()=>{}),toolbar);
   const recover=E.button('production-recover','Download pending entries',()=>{
-   const url=URL.createObjectURL(new Blob([JSON.stringify(pending,null,2)],{type:'application/json'}));
+   const url=URL.createObjectURL(new Blob([JSON.stringify(pending||client.getPending(),null,2)],{type:'application/json'}));
    const link=document.createElement('a');link.href=url;link.download=domain+'-pending-private.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  },toolbar);
+  const refresh=domain==='items'&&E.button('production-refresh','Refresh from public',async()=>{
+   if(busy||pending||client.getPending())return;busy=true;paint();previewVersion=null;
+   try{const saved=await client.rebase();previewVersion=null;onSaved(record(saved));status.textContent='Saved · private draft refreshed from public data';}
+   catch(error){const paths=Array.isArray(error.conflicts)&&error.conflicts.length?' Conflicting fields: '+error.conflicts.map(item=>item.path).join(', ')+'.':'';status.textContent=(error.status===409?'Refresh stopped — review conflicts. ':'Couldn’t refresh — ')+error.message+paths;}
+   finally{busy=false;paint();}
   },toolbar);
   const preview=E.button('production-preview','Preview',async()=>{
    if(busy||pending)return;busy=true;paint();
@@ -95,8 +104,8 @@
    }});
   },toolbar);
   paint();status.textContent='Sign in through the Admin Hub to load private drafts.';
-  window.addEventListener('beforeunload',e=>{if(pending||busy){e.preventDefault();e.returnValue='';}});
-  return {change,retry:retryPending,hasPending:()=>!!pending,set onSaved(callback){onSaved=callback;},
+  window.addEventListener('beforeunload',e=>{if(pending||client.getPending()||busy){e.preventDefault();e.returnValue='';}});
+  return {change,retry:retryPending,hasPending:()=>!!pending||!!client.getPending(),set onSaved(callback){onSaved=callback;},
    async load(){await authenticate();await client.load({discardPending:true});pending=null;previewVersion=null;paint();const result=await request({action:'source'});canPublish=result.capabilities?.publish===true;paint();status.textContent=canPublish?'Private draft · Preview before Publish':'Private draft · Publishing disabled · Your saves do not change the website';return result;},
    async source(){await authenticate();return request({action:'source'});}};
  }
