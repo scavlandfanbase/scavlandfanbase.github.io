@@ -17,6 +17,7 @@ Verified against main `9c0d3815fb686c93b151515f0c609f7dc7f9d6bb`, deployed Admin
 
 ## CURRENT
 
+- Hosted Items now offers explicit Verified/Unverified review decisions. Use Unverified to retain history while a changed record awaits review; then Refresh from public can adopt uncontested public changes. Real Owner recovery remains to be confirmed. This frontend follow-up does not change the trusted backend or publish a private draft.
 - Active preparation checkpoint: Items stale-draft recovery, including trusted receipt-backed refresh, conflict protection and database/browser tests. Not deployed by this checkpoint. Follow ADMIN_WORK_PLAN.md for the recovered Admin roadmap; the separate CMS check below must not displace it.
 - Complete authenticated Owner acceptance for the Public Content CMS: load current content, preview a controlled intended edit, explicitly publish it, confirm the returned GitHub commit and deployed public result. No completion evidence was established during this reconfirmation.
 - Confirm current production publishing/patch flags before any flag-dependent acceptance or write. Earlier flag values and deployment versions below are historical, not a fresh live-state claim.

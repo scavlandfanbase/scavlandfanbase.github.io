@@ -34,7 +34,7 @@ function record(id,name,extra={}){return {id,name,category:'Tools',description:'
 
  const {createProductionHandler}=await import('../supabase/functions/admin-drafts/production.mjs');
  const env=k=>({SUPABASE_URL:'https://supabase.test',SUPABASE_ANON_KEY:'public',SUPABASE_SERVICE_ROLE_KEY:'service'}[k]);
- const core={context:()=>({}),read:async()=>({source:latestSource,base:{'data/items.json':'new-sha'},settings:{schemaVersion:1,current_patch_id:'0.7.2'}}),publishers:{}};
+ const core={context:(_domain,saved)=>({payload:saved.payload,base:saved.base}),read:async()=>({source:latestSource,base:{'data/items.json':'new-sha'},settings:{schemaVersion:1,current_patch_id:'0.7.2'}}),publishers:{}};
  const fetcher=async(url,opt)=>{
   if(url.endsWith('/user'))return Response.json({id:'actor'});
   if(url.endsWith('/scavland_draft'))return Response.json({currentVersion:4,draft});

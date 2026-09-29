@@ -39,7 +39,7 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
    let prepared;
    if(body.command.action==='refresh-public'){
     if(body.domain!=='items'||Object.keys(body.command).some(k=>k!=='action'))fail('Invalid refresh action.');
-    prepared=rebasePayload(body.domain,saved.draft,latest);
+    prepared=rebasePayload(body.domain,saved.draft?{...saved.draft,payload:context.payload,base:context.base}:null,latest);
     if(prepared.conflicts.length)return reply({conflicts:prepared.conflicts,error:'Public changes conflict with your private draft. Nothing was saved.'},409);
    }else prepared=core.mutate(body.domain,context,body.command,latest,actor);
    return reply(await rpc('scavland_prepare',{...args,p_payload:prepared.payload,p_base:prepared.base},true));
