@@ -1,6 +1,6 @@
 // Server-configured publication adapter. No path/branch/URL comes from the browser.
 // Reuses existing SCAVLAND Git tree + commit + non-force ref update architecture.
-export function githubPublisher({repository,branch='main',token,paths,validate,project,fetcher=fetch}){
+export function githubPublisher({repository,branch='main',token,paths,validate,project,fetcher=fetch,allowUnrelatedChanges=false}){
  if(!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository)||!Array.isArray(paths)||!paths.length||new Set(paths).size!==paths.length||paths.some(p=>!/^data\/[a-z0-9/_-]+\.json$/.test(p)||p.includes('..'))||typeof validate!=='function'||typeof project!=='function')throw Error('Invalid publication adapter configuration.');
  const fail=(message,status=409)=>{throw Object.assign(Error(message),{status});};
  const root='https://api.github.com/repos/'+repository;
@@ -15,7 +15,9 @@ export function githubPublisher({repository,branch='main',token,paths,validate,p
   const head=await gh('/git/ref/heads/'+encodeURIComponent(branch)),commit=await gh('/git/commits/'+head.object.sha),documents={};
   for(const path of paths){
    const file=await gh('/contents/'+path+'?ref='+head.object.sha);
-   if(file.sha!==draft.base[path])fail('Public data changed since this draft was based on it. Reload and review before publishing.');
+   // Opt-in per-item projections must independently detect conflicts on every changed field.
+   // Existing whole-catalogue publishers retain strict complete-file base checks.
+   if(!allowUnrelatedChanges&&file.sha!==draft.base[path])fail('Public data changed since this draft was based on it. Reload and review before publishing.');
    if(file.encoding!=='base64'||typeof file.content!=='string')fail('Unsupported public file response.',502);
    documents[path]=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(file.content.replace(/\n/g,'')),c=>c.charCodeAt(0))));
   }

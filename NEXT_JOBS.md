@@ -1,5 +1,7 @@
 # CURRENT STATE — 29 SEPTEMBER 2026
 
+**30 September backend checkpoint:** per-item edit/publication model and separate trusted receipt-storage proposal are implemented and locally tested. No production changes. See `SHARED-ITEM-DRAFT-CHECKPOINT.md` for evidence and exact remaining API bridge, version/preview binding, legacy-draft migration and category UI work. This supersedes the earlier “next is the contract” wording below; do not deploy independent Ammo PR #22.
+
 **30 September update:** proceed with connected category editors, not independent Items/Ammo copies. Draft PR #22 is on hold and must not be deployed. The first read-only shared-catalogue resolver checkpoint verifies all 13 Ammo, 31 Armour, 39 Weapon identities and canonical Vendor references. Shared-value conflicts are reported without changing data. Next is the trusted per-item draft/atomic publishing contract before replacing category editors. See `SHARED-CATALOGUE-PLAN.md`.
 
 Owner screenshots on 29 September confirmed Items refresh and preview recovery. This establishes that checkpoint, not real publication acceptance. Historical pending-recovery statements below are superseded.
