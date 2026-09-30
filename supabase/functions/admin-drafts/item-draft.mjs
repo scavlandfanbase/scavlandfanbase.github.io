@@ -31,6 +31,20 @@ export function categoryView(input,category,{permissions:allowed}={}){
  validate(input);authorize(category,input.records.items,input.records[category],allowed);
  return {...structuredClone(input),category};
 }
+// Reconcile fields that are already exactly public. Keep full private review history.
+// A changed public value different from our desired value remains a conflict.
+export function reconcilePublishedItem(input,documents){
+ validate(input);const state=structuredClone(input);
+ for(const [kind,changes]of Object.entries(state.changes)){
+  const current=documents[paths[kind]]?.data.find(r=>r.id===state.itemId);if(!current)continue;
+  for(const key of Object.keys(changes))if(same(publicationValue(key,ownValue(current,key)),publicationValue(key,ownValue(state.records[kind],key)))){
+   if(Object.hasOwn(current,key))state.original[kind][key]=structuredClone(current[key]);else delete state.original[kind][key];
+   delete changes[key];
+  }
+  if(!Object.keys(changes).length)delete state.changes[kind];
+ }
+ return state;
+}
 function validate(state){
  keys(state,['schemaVersion','itemId','category','revision','original','records','changes']);
  if(state.schemaVersion!==1||typeof state.itemId!=='string'||!Object.hasOwn(tags,state.category)||!Number.isSafeInteger(state.revision)||state.revision<0)fail('Invalid per-item draft.');

@@ -1,5 +1,5 @@
 // Feature-gated authenticated per-item bridge. No browser authority over payloads/actors.
-import {snapshotItem,categoryView,editItem,planItem,createItemPublisher} from './item-draft.mjs';
+import {snapshotItem,categoryView,reconcilePublishedItem,editItem,planItem,createItemPublisher} from './item-draft.mjs';
 import {fail} from './core.mjs';
 const repository='scavlandfanbase/scavlandfanbase.github.io';
 const permission={ammo:'ammunition_edit',armour:'armour_edit',weapons:'weapons_edit'};
@@ -15,7 +15,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
  }
  const source=readSource||(async()=>{
   const head=(await github('/git/ref/heads/main')).object.sha;
-  const names=['items','ammo','armour','weapons','verification-settings','site-images'],documents={},base={};
+  const names=['items','ammo','armour','weapons','vendors','verification-settings','site-images'],documents={},base={};
   for(const name of names){const path='data/'+name+'.json',f=await github('/contents/'+path+'?ref='+encodeURIComponent(head));
    if(f.encoding!=='base64'||typeof f.content!=='string'||typeof f.sha!=='string')fail('Invalid canonical response.',502);
    documents[path]=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(f.content.replace(/\n/g,'')),c=>c.charCodeAt(0))));base[path]=f.sha;
@@ -31,7 +31,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const auth=request.headers.get('Authorization')||'';if(!auth.startsWith('Bearer '))fail('Sign in to continue.',401);
    const raw=await request.text();if(new TextEncoder().encode(raw).length>250000)fail('Item request is too large.',413);
    let body;try{body=JSON.parse(raw);}catch{fail('Invalid item request.');}
-   if(!body||Object.keys(body).some(k=>!['domain','action','itemId','category','expectedVersion','requestId','command','previewId','confirm'].includes(k))||body.domain!=='shared-item'||!Object.hasOwn(permission,body.category)||typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160||!['load','prepare','save','preview','publish'].includes(body.action))fail('Invalid item request.');
+   if(!body||Object.keys(body).some(k=>!['domain','action','itemId','category','expectedVersion','requestId','command','previewId','confirm'].includes(k))||body.domain!=='shared-item'||!Object.hasOwn(permission,body.category)||!['list','load','prepare','save','preview','publish'].includes(body.action)||(body.action!=='list'&&(typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)))fail('Invalid item request.');
    const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY');if(!sb||!key)fail('Private storage is unavailable.',503);
    async function rpc(name,args,trusted=false){
     const token=trusted?env('SUPABASE_SERVICE_ROLE_KEY'):key;if(!token)fail('Trusted storage is unavailable.',503);
@@ -43,14 +43,22 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const actor=(await userResponse.json()).id;if(typeof actor!=='string'||!actor)fail('Sign in again.',401);
    if(await rpc('has_scavland_permission',{required_permission:permission[body.category]})!==true)fail('Category editing permission is required.',403);
    const latest=await source();const context={actor,permissions:[permission[body.category]],settings:latest.settings,images:latest.images};
+   const tags={ammo:'ammunition',armour:'armour',weapons:'weapon'};
+   const vendorDocument=latest.documents['data/vendors.json']||{data:[]};
+   const usage=id=>(vendorDocument.vendorListings?.listings||[]).filter(r=>!r.archived&&r.entity?.type==='item'&&r.entity.id===id)
+    .map(r=>({vendorId:r.vendorId,name:vendorDocument.data.find(v=>v.id===r.vendorId)?.name||'Vendor',price:r.price,rank:r.rank,quantity:r.quantity}));
+   if(body.action==='list'){
+    const facets=new Set(latest.documents['data/'+body.category+'.json'].data.map(r=>r.id));
+    return reply({records:latest.documents['data/items.json'].data.filter(r=>!r.archived&&!r.hidden&&(facets.has(r.id)||r.classification?.includes(tags[body.category]))).map(r=>({id:r.id,name:r.name})),settings:latest.settings});
+   }
    const seed=snapshotItem(latest.documents,body.itemId,body.category,context); // Fresh canonical membership on every action.
    const args={p_item:body.itemId,p_category:body.category};
    const load=()=>rpc('scavland_item_draft',{p_action:'load',...args});
    const saved=await load();
-   const state=saved.draft?categoryView(saved.draft.payload,body.category,context):seed;
+   const state=saved.draft?reconcilePublishedItem(categoryView(saved.draft.payload,body.category,context),latest.documents):seed;
    const legacy=await rpc('scavland_item_legacy',{},true),legacyDrafts=legacy?[legacy]:[];
    planItem(state,latest.documents,{legacyDrafts}); // Also guards old draft overlap on load/save.
-   if(body.action==='load')return reply({currentVersion:saved.currentVersion,state,settings:latest.settings});
+   if(body.action==='load')return reply({currentVersion:saved.currentVersion,state,hasChanges:!!Object.keys(state.changes).length,settings:latest.settings,images:latest.documents['data/site-images.json'],usage:usage(body.itemId),canPublish:env('DRAFT_PUBLISH_ENABLED')==='true'&&env('ADMIN_CORE_ENABLED')==='true'});
    if(!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<0)fail('The saved item version is required.');
    const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
    if(body.action==='save'){

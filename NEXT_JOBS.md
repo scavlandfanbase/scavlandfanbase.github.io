@@ -1,5 +1,7 @@
 # CURRENT STATE — 29 SEPTEMBER 2026
 
+**30 September Ammo screen checkpoint:** selected-item shared Ammo editing is connected and browser-tested in preparation. Vendor usage, private save/reload, selected preview/publication and a second edit after publication pass with fixture services. No deployment. See `SHARED-AMMO-SCREEN-CHECKPOINT.md`. Next are required shared add/review/archive actions and an explicit old-draft preservation/import path before coordinated release; the general Items route stays available.
+
 **30 September API checkpoint:** signed-in per-item bridge and private preview intents are implemented and tested on top of the contract. Nothing deployed. See `SHARED-ITEM-API-CHECKPOINT.md`. Next: connect Ammo to shared item IDs, then complete required actions and existing-draft preservation before coordinated release. Independent Ammo PR #22 remains on hold.
 
 **30 September backend checkpoint:** per-item edit/publication model and separate trusted receipt-storage proposal are implemented and locally tested. No production changes. See `SHARED-ITEM-DRAFT-CHECKPOINT.md` for evidence and exact remaining API bridge, version/preview binding, legacy-draft migration and category UI work. This supersedes the earlier “next is the contract” wording below; do not deploy independent Ammo PR #22.

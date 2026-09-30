@@ -26,6 +26,8 @@ The production handler's existing paths pass their regressions. No browser/categ
 
 ## Next controlled task
 
+**Follow-up prepared:** `SHARED-AMMO-SCREEN-CHECKPOINT.md` records the connected existing-item Ammo screen and full fixture browser acceptance. The remaining action extensions and reviewed old-draft preservation path below still block a complete live replacement.
+
 Connect the recovered Ammo controls to `shared-item` requests, selecting canonical identities and showing shared details plus Ammo stats. Add/review/archive actions are still separate required extensions; this API presently supports editing existing items. Show usage preview using vendor references, preserve the general Items route until complete category coverage exists, and provide an explicit path to retain/import genuine overlapping old drafts.
 
 Before enabling live use, complete real frontend acceptance, review concurrency/recovery behaviour, coordinate rollout and validate an intended Owner edit on category and vendor pages. Independent Ammo PR #22 remains held.
