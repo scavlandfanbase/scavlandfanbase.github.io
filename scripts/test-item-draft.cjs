@@ -4,7 +4,7 @@ const documents=Object.fromEntries(['items','ammo','armour','weapons'].map(n=>['
 const originals=structuredClone(documents),settings={schemaVersion:1,current_patch_id:'fixture-patch'},actor='fixture-owner';
 const context={actor,permissions:['ammunition_edit'],settings,clock:()=>new Date('2026-09-30T10:00:00Z')};
 (async()=>{
- const {snapshotItem,categoryView,editItem,reviewItem,planItem,createItemPublisher,legacyItemBlockers}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
+ const {snapshotItem,categoryView,editItem,reviewItem,createAmmoItem,addAmmoFacet,reconcilePublishedItem,planItem,createItemPublisher,legacyItemBlockers}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
  const {seed}=await import('../supabase/functions/admin-drafts/core.mjs');
  const id=documents['data/ammo.json'].data[0].id;
  const state=snapshotItem(documents,id,'ammo',context);
@@ -109,5 +109,40 @@ const context={actor,permissions:['ammunition_edit'],settings,clock:()=>new Date
  const statsPreview=await statsPublisher.preview();assert.equal(statsPreview.files.length,2);
  await statsPublisher.publish();assert.equal(current['data/ammo.json'].data.find(r=>r.id===id).damage,0);
  assert.deepEqual(current['data/items.json'],originals['data/items.json']);assert.deepEqual(statsOnly.records.items,state.records.items);
+ // New identities publish the shared record and facet together, with unknowns retained.
+ const newId='item-11111111-1111-4111-8111-111111111111';
+ const create={action:'create',shared:{name:'Fixture new Ammo'},specialist:{damage:'8 x 12',penetrationPercent:-25}};
+ assert.throws(()=>createAmmoItem(documents,newId,{...create,id:'browser-id'},context),/Unsupported/);
+ assert.throws(()=>createAmmoItem(documents,'browser-name-slug',create,context),/server-assigned/);
+ assert.throws(()=>createAmmoItem(documents,newId,create,{...context,permissions:[]}),e=>e.status===403);
+ assert.throws(()=>createAmmoItem(documents,newId,{action:'create',shared:{}},context),/name/);
+ const added=createAmmoItem(documents,newId,create,context);
+ assert.equal(added.records.items.id,added.records.ammo.id);
+ assert.equal(added.records.ammo.category,null);assert.equal(added.records.items.estimatedPrice,null);
+ assert.equal(added.records.ammo.source.status,'pending-review');assert(!added.records.ammo.verification);
+ const orphan=structuredClone(documents);orphan['data/weapons.json'].data.push({id:newId,name:'Other category'});
+ assert.throws(()=>createAmmoItem(orphan,newId,create,context),e=>e.status===409);
+ assert.throws(()=>planItem(added,orphan),e=>e.status===409);
+ current=structuredClone(originals);head='create-head';failRef=true;
+ const addPublisher=createItemPublisher({state:added,base,repository:'fixture/repo',token:'fixture-only',fetcher:transport});
+ const addPreview=await addPublisher.preview();assert.equal(addPreview.files.length,2);assert.equal(current['data/items.json'].data.length,originals['data/items.json'].data.length);
+ await assert.rejects(addPublisher.publish(),e=>e.status===409);assert.deepEqual(current,originals);
+ failRef=false;await addPublisher.publish();await addPublisher.publish();
+ assert.equal(current['data/items.json'].data.filter(r=>r.id===newId).length,1);
+ assert.equal(current['data/ammo.json'].data.filter(r=>r.id===newId).length,1);
+ const afterAdd=reconcilePublishedItem(added,current);assert.deepEqual(afterAdd.creation,{});assert.deepEqual(afterAdd.changes,{});
+ const later=editItem(afterAdd,{action:'edit',expectedRevision:afterAdd.revision,shared:{name:'New Ammo updated'}},context);
+ assert.equal(planItem(later,current)['data/ammo.json'].data.find(r=>r.id===newId).name,'New Ammo updated');
+ const collision=structuredClone(originals);collision['data/items.json'].data.push({...added.records.items,name:'Concurrent different record'});
+ assert.throws(()=>planItem(added,collision),e=>e.status===409);
+ // Facet creation keeps an explicitly classified existing identity; no name matching.
+ const missing=structuredClone(originals);missing['data/ammo.json'].data=missing['data/ammo.json'].data.filter(r=>r.id!==id);
+ const missingState=snapshotItem(missing,id,'ammo',context),facetAdded=addAmmoFacet(missingState,{action:'add-facet',expectedRevision:0,confirmId:id,specialist:{damage:0}},context);
+ assert.deepEqual(facetAdded.records.items,missingState.records.items);
+ const facetPlan=planItem(facetAdded,missing);assert.equal(facetPlan['data/ammo.json'].data.find(r=>r.id===id).damage,0);
+ assert.deepEqual(facetPlan['data/items.json'],missing['data/items.json']);
+ assert.throws(()=>addAmmoFacet(state,{action:'add-facet',expectedRevision:0,confirmId:id},context),e=>e.status===409);
+ assert.deepEqual(documents,originals);
+ console.log('PASS Ammo creation: server identity, permissions, unknown facts, orphan/concurrent collisions, atomic paired add with failed-ref protection, duplicate-free retry, post-publication editing and explicit missing-facet creation.');
  console.log('PASS per-item contract: category permission/membership, protected fields, one-item edits, history/privacy, pending legacy-work blockers, unrelated concurrent changes, same-field conflicts, deliberate reconciliation and atomic linked Git publication with failed-ref preservation.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

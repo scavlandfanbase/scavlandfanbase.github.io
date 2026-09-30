@@ -1,5 +1,7 @@
 # CURRENT STATE — 29 SEPTEMBER 2026
 
+**30 September Ammo creation contract:** trusted one-ID shared record/facet creation and atomic insertion are prepared and tested, including private storage, duplicate-free retries and later editing. No Add UI/API activation or deployment yet. See `SHARED-AMMO-CREATION-CHECKPOINT.md`. Next: server identity assignment, creation receipts, unpublished-item listing and Add dialog; then archive/restore and old-draft preservation.
+
 **30 September Ammo review checkpoint:** explicit selected-category Verified/Unverified review is prepared, with trusted actor/patch checks, retained private history and verification summaries in preview. No deployment. See `SHARED-AMMO-REVIEW-CHECKPOINT.md`. Next: shared identity/facet creation, archive/restore, and old-draft preservation before coordinated rollout.
 
 **30 September Ammo screen checkpoint:** selected-item shared Ammo editing is connected and browser-tested in preparation. Vendor usage, private save/reload, selected preview/publication and a second edit after publication pass with fixture services. No deployment. See `SHARED-AMMO-SCREEN-CHECKPOINT.md`. Next are required shared add/review/archive actions and an explicit old-draft preservation/import path before coordinated release; the general Items route stays available.
