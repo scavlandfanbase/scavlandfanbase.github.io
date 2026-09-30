@@ -4,7 +4,7 @@ const documents=Object.fromEntries(['items','ammo','armour','weapons'].map(n=>['
 const originals=structuredClone(documents),settings={schemaVersion:1,current_patch_id:'fixture-patch'},actor='fixture-owner';
 const context={actor,permissions:['ammunition_edit'],settings,clock:()=>new Date('2026-09-30T10:00:00Z')};
 (async()=>{
- const {snapshotItem,categoryView,editItem,reviewItem,createAmmoItem,addAmmoFacet,reconcilePublishedItem,planItem,createItemPublisher,legacyItemBlockers}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
+ const {snapshotItem,categoryView,editItem,reviewItem,createAmmoItem,addAmmoFacet,lifecycleItem,reconcilePublishedItem,planItem,createItemPublisher,legacyItemBlockers}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
  const {seed}=await import('../supabase/functions/admin-drafts/core.mjs');
  const id=documents['data/ammo.json'].data[0].id;
  const state=snapshotItem(documents,id,'ammo',context);
@@ -143,6 +143,22 @@ const context={actor,permissions:['ammunition_edit'],settings,clock:()=>new Date
  assert.deepEqual(facetPlan['data/items.json'],missing['data/items.json']);
  assert.throws(()=>addAmmoFacet(state,{action:'add-facet',expectedRevision:0,confirmId:id},context),e=>e.status===409);
  assert.deepEqual(documents,originals);
+ const archived=lifecycleItem(state,{action:'archive',expectedRevision:0,confirmId:id},context);
+ assert.equal(archived.records.items.archived,true);assert.deepEqual(archived.records.ammo,state.records.ammo);
+ assert.throws(()=>editItem(archived,{action:'edit',expectedRevision:1,shared:{name:'No'}},context),/Restore/);
+ assert.throws(()=>reviewItem(archived,{action:'review',expectedRevision:1,confirmId:id,patchId:'fixture-patch',decision:'verified'},context),/Restore/);
+ const archivePlan=planItem(archived,documents);assert.equal(archivePlan['data/items.json'].data.find(r=>r.id===id).archived,true);assert(!archivePlan['data/ammo.json']);
+ const archivedPublic={...structuredClone(documents),...archivePlan},archiveReconciled=reconcilePublishedItem(archived,archivedPublic);
+ const restored=lifecycleItem(archiveReconciled,{action:'restore',expectedRevision:1,confirmId:id},context);
+ assert.equal(planItem(restored,archivedPublic)['data/items.json'].data.find(r=>r.id===id).archived,false);
+ assert.throws(()=>lifecycleItem(state,{action:'archive',expectedRevision:0,confirmId:'other'},context),/Confirm/);
+ assert.throws(()=>lifecycleItem(state,{action:'archive',expectedRevision:0,confirmId:id},{...context,permissions:[]}),e=>e.status===403);
+ const sandbox={};require('node:vm').runInNewContext(fs.readFileSync(path.join(root,'item-catalog.js'),'utf8'),sandbox);
+ assert.equal(sandbox.ScavCatalog.records('ammunition',archivePlan['data/items.json'].data,documents['data/ammo.json'].data).some(r=>r.id===id),false);
+ const stock={listings:[{id:'fixture-stock',vendorId:'fixture-vendor',entity:{type:'item',id},price:123,quantity:5,rank:3,archived:false}]},stockBefore=structuredClone(stock),vendorJoin=require('../vendor-canonical.js');
+ assert.equal(vendorJoin.rows('fixture-vendor',stock,archivePlan['data/items.json'].data).length,0);
+ const restorePlan=planItem(restored,archivedPublic);
+ assert.equal(vendorJoin.rows('fixture-vendor',stock,restorePlan['data/items.json'].data).length,1);assert.deepEqual(stock,stockBefore);
  console.log('PASS Ammo creation: server identity, permissions, unknown facts, orphan/concurrent collisions, atomic paired add with failed-ref protection, duplicate-free retry, post-publication editing and explicit missing-facet creation.');
  console.log('PASS per-item contract: category permission/membership, protected fields, one-item edits, history/privacy, pending legacy-work blockers, unrelated concurrent changes, same-field conflicts, deliberate reconciliation and atomic linked Git publication with failed-ref preservation.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

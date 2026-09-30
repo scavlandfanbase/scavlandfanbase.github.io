@@ -62,7 +62,7 @@ function validate(state){
  }
  for(const group of [state.original,state.records])for(const r of Object.values(group))if(r.id!==state.itemId)fail('A draft can contain only its own item.');
  for(const [kind,changes]of Object.entries(state.changes)){
-  keys(changes,[...sharedFields,...(facetFields[kind]||[]),'verification']);
+  keys(changes,[...sharedFields,...(facetFields[kind]||[]),'verification',...(kind==='items'?['archived']:[])]);
   for(const key of Object.keys(changes))if(!state.records[kind]||!Object.hasOwn(state.records[kind],key))fail('Invalid changed field.');
  }
  return state;
@@ -109,6 +109,7 @@ export function addAmmoFacet(input,command,context={}){
  return editItem(state,{action:'edit',expectedRevision:input.revision,specialist:command.specialist},context);
 }
 export function editItem(input,command,{actor,permissions:allowed,settings,images=[],clock=()=>new Date()}={}){
+ if(input.records?.items.archived)fail('Restore the item before editing.');
  validate(input);keys(command,['action','expectedRevision','shared','specialist']);
  if(command.action!=='edit'||command.expectedRevision!==input.revision)fail('The item draft changed. Reload and review.',409);
  if(typeof actor!=='string'||!actor.trim())fail('Authenticated identity is required.',401);
@@ -132,6 +133,7 @@ export function editItem(input,command,{actor,permissions:allowed,settings,image
 }
 // Review attests only to this category's saved facts, never unrelated facets.
 export function reviewItem(input,command,{actor,permissions:allowed,settings,clock=()=>new Date()}={}){
+ if(input.records?.items.archived)fail('Restore the item before reviewing.');
  validate(input);keys(command,['action','expectedRevision','confirmId','patchId','decision']);
  if(command.action!=='review'||command.expectedRevision!==input.revision)fail('The item draft changed. Reload and review.',409);
  authorize(input.category,input.records.items,input.records[input.category],allowed);
@@ -144,6 +146,16 @@ export function reviewItem(input,command,{actor,permissions:allowed,settings,clo
  const state=structuredClone(input);
  set(state,state.category,'verification',Verification.decide(state.records[state.category],command.decision,settings,actor,clock).verification);
  state.revision++;return validate(state);
+}
+export function lifecycleItem(input,command,{actor,permissions:allowed}={}){
+ validate(input);keys(command,['action','expectedRevision','confirmId']);
+ if(!['archive','restore'].includes(command.action)||command.expectedRevision!==input.revision)fail('The item draft changed. Reload and review.',409);
+ authorize(input.category,input.records.items,input.records[input.category],allowed);
+ if(typeof actor!=='string'||!actor.trim())fail('Authenticated identity is required.',401);
+ if(command.confirmId!==input.itemId)fail('Confirm the item identity.');
+ const archived=command.action==='archive';
+ if(!!input.records.items.archived===archived)fail(archived?'Item is already archived.':'Item is already active.');
+ const state=structuredClone(input);set(state,'items','archived',archived);state.revision++;return validate(state);
 }
 function sharedOutputField(kind,key,record){
  if(['name','image','description'].includes(key))return true;
@@ -166,7 +178,8 @@ export function planItem(input,documents,{legacyDrafts=[]}={}){
  if(input.creation?.items)for(const kind of ['armour','weapons'])if(documents[paths[kind]]&&rows(documents[paths[kind]]).some(r=>r.id===input.itemId))fail('This identity is already used in another category. Review before publishing.',409);
  if(!currentItem&&!input.creation?.items)fail('The item was removed from public data. Review before publishing.',409);
  if(legacyItemBlockers(input.itemId,currentItem,legacyDrafts).length)fail('This item has pending work in the existing Items draft. Review and preserve it before continuing.',409);
- if(currentItem&&(currentItem.archived||!same(ownValue(currentItem,'classification'),ownValue(input.original.items,'classification'))))fail('Item membership changed. Reload and review before publishing.',409);
+ if(currentItem&&(!same(ownValue(currentItem,'classification'),ownValue(input.original.items,'classification'))||
+  !input.changes.items?.archived&&!match(currentItem,'archived',ownValue(input.original.items,'archived'))))fail('Item membership or archive state changed. Reload and review before publishing.',409);
  const result={[paths.items]:structuredClone(documents[paths.items])},conflicts=[];
  for(const kind of Object.keys(input.creation||{})){
   const doc=structuredClone(documents[paths[kind]]),existing=rows(doc).find(r=>r.id===input.itemId),desired=publicValue(input.records[kind]);

@@ -1,5 +1,5 @@
 // Feature-gated authenticated per-item bridge. No browser authority over payloads/actors.
-import {snapshotItem,categoryView,reconcilePublishedItem,editItem,reviewItem,planItem,createItemPublisher} from './item-draft.mjs';
+import {snapshotItem,categoryView,reconcilePublishedItem,editItem,reviewItem,createAmmoItem,addAmmoFacet,lifecycleItem,planItem,createItemPublisher} from './item-draft.mjs';
 import {fail} from './core.mjs';
 const repository='scavlandfanbase/scavlandfanbase.github.io';
 const permission={ammo:'ammunition_edit',armour:'armour_edit',weapons:'weapons_edit'};
@@ -31,7 +31,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const auth=request.headers.get('Authorization')||'';if(!auth.startsWith('Bearer '))fail('Sign in to continue.',401);
    const raw=await request.text();if(new TextEncoder().encode(raw).length>250000)fail('Item request is too large.',413);
    let body;try{body=JSON.parse(raw);}catch{fail('Invalid item request.');}
-   if(!body||Object.keys(body).some(k=>!['domain','action','itemId','category','expectedVersion','requestId','command','previewId','confirm'].includes(k))||body.domain!=='shared-item'||!Object.hasOwn(permission,body.category)||!['list','load','prepare','save','preview','publish'].includes(body.action)||(body.action!=='list'&&(typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)))fail('Invalid item request.');
+   if(!body||Object.keys(body).some(k=>!['domain','action','itemId','category','expectedVersion','requestId','command','previewId','confirm'].includes(k))||body.domain!=='shared-item'||!Object.hasOwn(permission,body.category)||!['list','create','load','prepare','save','preview','publish'].includes(body.action)||(!['list','create'].includes(body.action)&&(typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)))fail('Invalid item request.');
    const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY');if(!sb||!key)fail('Private storage is unavailable.',503);
    async function rpc(name,args,trusted=false){
     const token=trusted?env('SUPABASE_SERVICE_ROLE_KEY'):key;if(!token)fail('Trusted storage is unavailable.',503);
@@ -43,24 +43,40 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const actor=(await userResponse.json()).id;if(typeof actor!=='string'||!actor)fail('Sign in again.',401);
    if(await rpc('has_scavland_permission',{required_permission:permission[body.category]})!==true)fail('Category editing permission is required.',403);
    const latest=await source();const context={actor,permissions:[permission[body.category]],settings:latest.settings,images:latest.images};
+   const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
+   if(body.action==='create'){
+    if(body.category!=='ammo'||body.itemId!==undefined||body.expectedVersion!==0||!uuid(body.requestId)||!body.command)fail('Invalid new Ammo request.');
+    const args={p_actor:actor,p_item:null,p_category:'ammo',p_version:0,p_request:body.requestId,p_command:body.command};
+    const receipt=await rpc('scavland_prepare_item',args,true);if(receipt)return reply(receipt);
+    const itemId='item-'+crypto.randomUUID(),state=createAmmoItem(latest.documents,itemId,body.command,context);
+    const legacy=await rpc('scavland_item_legacy',{},true);planItem(state,latest.documents,{legacyDrafts:legacy?[legacy]:[]});
+    return reply(await rpc('scavland_prepare_item',{...args,p_item:itemId,p_payload:state},true));
+   }
    const tags={ammo:'ammunition',armour:'armour',weapons:'weapon'};
    const vendorDocument=latest.documents['data/vendors.json']||{data:[]};
    const usage=id=>(vendorDocument.vendorListings?.listings||[]).filter(r=>!r.archived&&r.entity?.type==='item'&&r.entity.id===id)
     .map(r=>({vendorId:r.vendorId,name:vendorDocument.data.find(v=>v.id===r.vendorId)?.name||'Vendor',price:r.price,rank:r.rank,quantity:r.quantity}));
    if(body.action==='list'){
     const facets=new Set(latest.documents['data/'+body.category+'.json'].data.map(r=>r.id));
-    return reply({records:latest.documents['data/items.json'].data.filter(r=>!r.archived&&!r.hidden&&(facets.has(r.id)||r.classification?.includes(tags[body.category]))).map(r=>({id:r.id,name:r.name})),settings:latest.settings});
+    const entries=new Map(latest.documents['data/items.json'].data.filter(r=>facets.has(r.id)||r.classification?.includes(tags[body.category])).map(r=>[r.id,{id:r.id,name:r.name,archived:!!r.archived,hidden:!!r.hidden}]));
+    const privateEntries=await rpc('scavland_item_draft',{p_action:'list',p_item:null,p_category:body.category});
+    for(const d of privateEntries){const view=categoryView(d.payload,body.category,context),r=view.records.items;
+     if(entries.has(d.itemId))Object.assign(entries.get(d.itemId),{name:r.name,archived:!!r.archived});
+     else if(view.creation?.items)entries.set(d.itemId,{id:d.itemId,name:r.name,archived:!!r.archived,unpublished:true});
+    }
+    return reply({records:[...entries.values()],settings:latest.settings});
    }
-   const seed=snapshotItem(latest.documents,body.itemId,body.category,context); // Fresh canonical membership on every action.
    const args={p_item:body.itemId,p_category:body.category};
    const load=()=>rpc('scavland_item_draft',{p_action:'load',...args});
    const saved=await load();
+   const exists=latest.documents['data/items.json'].data.some(r=>r.id===body.itemId);
+   const seed=exists?snapshotItem(latest.documents,body.itemId,body.category,context):null; // Fresh membership when public.
+   if(!seed&&!saved.draft?.payload.creation?.items&&body.action!=='save')fail('Item not found.',404);
    const state=saved.draft?reconcilePublishedItem(categoryView(saved.draft.payload,body.category,context),latest.documents):seed;
    const legacy=await rpc('scavland_item_legacy',{},true),legacyDrafts=legacy?[legacy]:[];
-   planItem(state,latest.documents,{legacyDrafts}); // Also guards old draft overlap on load/save.
-   if(body.action==='load')return reply({currentVersion:saved.currentVersion,state,hasChanges:!!Object.keys(state.changes).length,settings:latest.settings,images:latest.documents['data/site-images.json'],usage:usage(body.itemId),canPublish:env('DRAFT_PUBLISH_ENABLED')==='true'&&env('ADMIN_CORE_ENABLED')==='true'});
+   if(state)planItem(state,latest.documents,{legacyDrafts}); // Also guards old draft overlap on load/save.
+   if(body.action==='load')return reply({currentVersion:saved.currentVersion,state,hasChanges:!!(Object.keys(state.changes).length||Object.keys(state.creation||{}).length),settings:latest.settings,images:latest.documents['data/site-images.json'],usage:usage(body.itemId),canPublish:env('DRAFT_PUBLISH_ENABLED')==='true'&&env('ADMIN_CORE_ENABLED')==='true'});
    if(!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<0)fail('The saved item version is required.');
-   const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
    if(body.action==='save'){
     if(!uuid(body.requestId))fail('A prepared receipt is required.');
     return reply(await rpc('scavland_item_draft',{p_action:'save',...args,p_expected_version:body.expectedVersion,p_request:body.requestId}));
@@ -70,7 +86,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
     const prepareArgs={p_actor:actor,...args,p_version:body.expectedVersion,p_request:body.requestId,p_command:body.command};
     const receipt=await rpc('scavland_prepare_item',prepareArgs,true);if(receipt)return reply(receipt);
     if(saved.currentVersion!==body.expectedVersion)fail('A newer item draft exists.',409);
-    const changed=(body.command.action==='review'?reviewItem:editItem)(state,body.command,context);planItem(changed,latest.documents,{legacyDrafts});
+    const changed=(body.command.action==='review'?reviewItem:body.command.action==='add-facet'?addAmmoFacet:['archive','restore'].includes(body.command.action)?lifecycleItem:editItem)(state,body.command,context);planItem(changed,latest.documents,{legacyDrafts});
     return reply(await rpc('scavland_prepare_item',{...prepareArgs,p_payload:changed},true));
    }
    if(!saved.draft)fail('Save this item draft first.',404);
@@ -89,7 +105,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
     if(await previewDigest(plan.tree)!==intent.digest)fail('Public content changed since preview. Review again.',409);
     if((await load()).currentVersion!==body.expectedVersion)fail('A newer item draft exists. Review again.',409);
     const currentLegacy=await rpc('scavland_item_legacy',{},true);
-    const now=await source();snapshotItem(now.documents,body.itemId,body.category,context);
+    const now=await source();if(!state.creation?.items)snapshotItem(now.documents,body.itemId,body.category,context);
     planItem(state,now.documents,{legacyDrafts:currentLegacy?[currentLegacy]:[]});
    }).publish();
    return reply({publishedVersion:body.expectedVersion,publication});
