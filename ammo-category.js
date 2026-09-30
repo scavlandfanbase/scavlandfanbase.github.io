@@ -9,6 +9,7 @@
  function status(s){$('status').textContent=s;}
  function buttons(){
   $('save').disabled=busy||!!pending||!loaded;
+  $('review').disabled=busy||dirty||!!pending||!loaded?.state.records.ammo;
   $('preview').disabled=busy||dirty||!!pending||!loaded||loaded.currentVersion===0||!loaded.hasChanges;
   $('publish').disabled=busy||dirty||!!pending||!previewId||!loaded?.canPublish;
   $('retry').hidden=!pending;$('retry').disabled=busy;
@@ -69,17 +70,28 @@
    if(!pending.receipt)pending.receipt=await request({action:'prepare',expectedVersion:pending.version,requestId:pending.requestId,command:pending.command});
    await request({action:'save',expectedVersion:pending.version,requestId:pending.requestId});
    pending=null;loaded=await request({action:'load'});const record=records.find(r=>r.id===selected);if(record)record.name=loaded.state.records.items.name;
-   paint();status('Saved — private item draft. Nothing has been published.');
+   paint();status('Saved — private item draft. Nothing has been published.');return true;
   }catch(e){if((e.status===400||e.status===409)&&!pending?.receipt)pending=null;status(e.message+' Your form entries are retained. Retry or review the conflict.');}
   finally{busy=false;buttons();}
  }
  $('item-form').onsubmit=e=>{e.preventDefault();save();};$('item-form').oninput=()=>{dirty=true;previewId=null;buttons();};$('retry').onclick=save;$('search').oninput=list;
+ $('review').onclick=()=>{
+  let decision;
+  scavEditorDialog({title:'Review '+loaded.state.records.items.name+' verification',submit:'Record review',build:({body})=>{
+   const note=document.createElement('p');note.textContent='Review the saved Ammo details against patch '+(loaded.settings.current_patch_id||'not configured')+'. Choose Verified after checking them, or Unverified when they need another review. History is retained. This saves privately; it does not publish or verify other categories.';body.append(note);
+   decision=E.selectField(body,'Review decision','review-decision',[['unverified','Unverified'],['verified','Verified']],'unverified');
+  },onSubmit:async()=>{
+   if(busy||dirty||pending)throw Error('Save or reload the item before reviewing.');
+   pending={requestId:crypto.randomUUID(),version:loaded.currentVersion,command:{action:'review',expectedRevision:loaded.state.revision,confirmId:selected,patchId:loaded.settings.current_patch_id,decision:decision.value}};
+   if(!await save())throw Error('Review could not be saved. Close this dialog and review the status message; any prepared request is retained for Retry.');
+  }});
+ };
  $('preview').onclick=async()=>{
   busy=true;previewId=null;buttons();
   try{const result=await request({action:'preview',expectedVersion:loaded.currentVersion});
    scavEditorDialog({title:'Preview '+loaded.state.records.items.name,submit:'Close',readOnly:true,build:({body})=>{
     const note=document.createElement('p');note.textContent='This publishes only the selected item’s saved changes. Linked vendor prices and stock stay unchanged.';body.append(note);
-    for(const file of result.preview.files){const r=JSON.parse(file.content).data.find(r=>r.id===selected);const heading=document.createElement('h3');heading.textContent=file.path.endsWith('/items.json')?'Shared item details':'Ammo details';body.append(heading);const dl=document.createElement('dl');body.append(dl);for(const [key,title]of schema)if(Object.hasOwn(r,key)){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=title;dd.textContent=text(r[key]);dl.append(dt,dd);}}
+    for(const file of result.preview.files){const r=JSON.parse(file.content).data.find(r=>r.id===selected);const heading=document.createElement('h3');heading.textContent=file.path.endsWith('/items.json')?'Shared item details':'Ammo details';body.append(heading);const dl=document.createElement('dl');body.append(dl);for(const [key,title]of schema)if(Object.hasOwn(r,key)){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=title;dd.textContent=text(r[key]);dl.append(dt,dd);}E.verificationInfo(body,ScavVerification.inspect(r,loaded.settings));}
    },onSubmit:()=>{previewId=result.previewId;status('Preview reviewed. You can publish this saved item.');buttons();}});
   }catch(e){status(e.message);}finally{busy=false;buttons();}
  };

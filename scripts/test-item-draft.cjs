@@ -4,10 +4,27 @@ const documents=Object.fromEntries(['items','ammo','armour','weapons'].map(n=>['
 const originals=structuredClone(documents),settings={schemaVersion:1,current_patch_id:'fixture-patch'},actor='fixture-owner';
 const context={actor,permissions:['ammunition_edit'],settings,clock:()=>new Date('2026-09-30T10:00:00Z')};
 (async()=>{
- const {snapshotItem,categoryView,editItem,planItem,createItemPublisher,legacyItemBlockers}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
+ const {snapshotItem,categoryView,editItem,reviewItem,planItem,createItemPublisher,legacyItemBlockers}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
  const {seed}=await import('../supabase/functions/admin-drafts/core.mjs');
  const id=documents['data/ammo.json'].data[0].id;
  const state=snapshotItem(documents,id,'ammo',context);
+ const review={action:'review',expectedRevision:0,confirmId:id,patchId:'fixture-patch',decision:'verified'};
+ assert.throws(()=>reviewItem(state,{...review,patchId:'old-patch'},context),e=>e.status===409);
+ assert.throws(()=>reviewItem(state,{...review,confirmId:'another-item'},context),/Confirm/);
+ assert.throws(()=>reviewItem(state,{...review,actor:'forged'},context),/Unsupported/);
+ assert.throws(()=>reviewItem(state,review,{...context,permissions:[]}),e=>e.status===403);
+ const reviewed=reviewItem(state,review,context);
+ assert.deepEqual(reviewed.records.items,state.records.items,'category review must not attest unrelated shared/facet records');
+ assert.equal(reviewed.records.ammo.verification.history.at(-1).by,actor);
+ const unreviewed=reviewItem(reviewed,{...review,expectedRevision:1,decision:'unverified'},context);
+ assert.equal(unreviewed.records.ammo.verification.history.length,2);
+ assert.equal(unreviewed.records.ammo.verification.last_verified_by,actor);
+ const reviewPlan=planItem(reviewed,documents);
+ assert.equal(reviewPlan['data/ammo.json'].data.find(r=>r.id===id).verification.decision,'verified');
+ assert(!JSON.stringify(reviewPlan).includes(actor));
+ const reviewEdited=editItem(reviewed,{action:'edit',expectedRevision:1,specialist:{damage:'Changed after review'}},context);
+ assert.equal(reviewEdited.records.ammo.verification.decision,'unverified');
+ assert.equal(reviewEdited.records.ammo.verification.history.length,2);
  assert.throws(()=>snapshotItem(documents,id,'armour',context),e=>e.status===403);
  assert.throws(()=>snapshotItem(documents,id,'armour',{permissions:['armour_edit']}),e=>e.status===403);
  assert.throws(()=>editItem(state,{action:'edit',expectedRevision:1,shared:{name:'Wrong'}},context),e=>e.status===409);

@@ -14,6 +14,8 @@ Real local SQL plus mocked Auth/GitHub and headless Edge exercise the screen: si
 
 ## Remaining before release
 
+Follow-up: category verification review is now prepared separately; see `SHARED-AMMO-REVIEW-CHECKPOINT.md`. The original screen checkpoint below records what was missing when PR #26 was created.
+
 - This screen supports existing-item editing. Add/new facet, explicit verification review, archive/restore and other item actions still require shared-contract extensions. No old independent Ammo action is substituted to fake these capabilities.
 - Preserve/import overlapping genuine old Items drafts through a reviewed path; the current screen blocks them.
 - Complete preview usage/acceptance and category coverage before removing the general Items route.

@@ -1,5 +1,5 @@
 // Feature-gated authenticated per-item bridge. No browser authority over payloads/actors.
-import {snapshotItem,categoryView,reconcilePublishedItem,editItem,planItem,createItemPublisher} from './item-draft.mjs';
+import {snapshotItem,categoryView,reconcilePublishedItem,editItem,reviewItem,planItem,createItemPublisher} from './item-draft.mjs';
 import {fail} from './core.mjs';
 const repository='scavlandfanbase/scavlandfanbase.github.io';
 const permission={ammo:'ammunition_edit',armour:'armour_edit',weapons:'weapons_edit'};
@@ -70,7 +70,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
     const prepareArgs={p_actor:actor,...args,p_version:body.expectedVersion,p_request:body.requestId,p_command:body.command};
     const receipt=await rpc('scavland_prepare_item',prepareArgs,true);if(receipt)return reply(receipt);
     if(saved.currentVersion!==body.expectedVersion)fail('A newer item draft exists.',409);
-    const changed=editItem(state,body.command,context);planItem(changed,latest.documents,{legacyDrafts});
+    const changed=(body.command.action==='review'?reviewItem:editItem)(state,body.command,context);planItem(changed,latest.documents,{legacyDrafts});
     return reply(await rpc('scavland_prepare_item',{...prepareArgs,p_payload:changed},true));
    }
    if(!saved.draft)fail('Save this item draft first.',404);

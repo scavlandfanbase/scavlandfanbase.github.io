@@ -166,6 +166,33 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     // A second edit after publication must use its own confirmed public baseline.
     await page.reload();await frame.locator('#item-form').waitFor();await frame.getByLabel('Name',{exact:true}).fill('Second connected edit');
     await frame.getByRole('button',{name:'Save private draft',exact:true}).click();await frame.locator('#status').filter({hasText:'Saved — private item draft'}).waitFor();
+    const publicBeforeReview=structuredClone(docs);
+    await frame.getByRole('button',{name:'Review verification',exact:true}).click();
+    await dialog.getByLabel('Review decision',{exact:true}).selectOption('verified');
+    await dialog.getByRole('button',{name:'Record review',exact:true}).click();await dialog.waitFor({state:'detached'});
+    let reviewedState=(await call(alice,{action:'load'})).result;
+    assert.equal(reviewedState.state.records.ammo.verification.decision,'verified');
+    assert.equal(reviewedState.state.records.ammo.verification.history.at(-1).by,alice);
+    assert.deepEqual(docs,publicBeforeReview,'review stays private');
+    await page.reload();await frame.locator('#item-form').waitFor();assert.match(await frame.locator('#verification').innerText(),/Verified/);
+    await frame.getByRole('button',{name:'Preview this item',exact:true}).click();await dialog.waitFor();assert.match(await dialog.innerText(),/Verified/);assert(!(await dialog.innerText()).includes(alice));
+    await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'detached'});
+    await frame.getByRole('button',{name:'Review verification',exact:true}).click();
+    assert.equal(await dialog.getByLabel('Review decision',{exact:true}).inputValue(),'unverified');
+    await dialog.getByRole('button',{name:'Record review',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(await frame.locator('#publish').isDisabled(),true,'new review invalidates old preview');
+    reviewedState=(await call(alice,{action:'load'})).result;
+    assert.equal(reviewedState.state.records.ammo.verification.history.length,2);
+    assert.equal(reviewedState.state.records.ammo.verification.decision,'unverified');
+    assert.deepEqual(docs,publicBeforeReview);
+    await frame.getByRole('button',{name:'Preview this item',exact:true}).click();await dialog.waitFor();
+    await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'detached'});
+    await frame.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.deepEqual(docs['data/ammo.json'].data[0].verification,{schemaVersion:2,decision:'unverified',verified_patch_id:'fixture-patch'});
+    assert.deepEqual(docs['data/vendors.json'],vendorBefore);
+    assert(!(JSON.stringify(docs).includes(alice)));
+    const retained=(await call(alice,{action:'load'})).result.state.records.ammo.verification;
+    assert.equal(retained.history.length,2,'publication retains full private review history');
     for(const width of [320,1280]){await page.setViewportSize({width,height:900});assert(await frame.locator('body').evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
     if(process.env.SCAVLAND_SHOT)await page.screenshot({path:process.env.SCAVLAND_SHOT,fullPage:true});
     assert.deepEqual(errors,[]);
