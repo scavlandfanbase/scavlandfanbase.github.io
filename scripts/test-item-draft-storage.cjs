@@ -143,13 +143,14 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   if(process.env.SCAVLAND_BROWSER==='1'){
    const {chromium}=require('playwright'),browser=await chromium.launch({headless:true,channel:'msedge'});
    try{
-    const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+    const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];let loseCreationReply=false;page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
     await page.route('**/*',async route=>{
      const req=route.request(),u=new URL(req.url());
      if(u.origin==='https://demtoqsafufzmnhvaykj.supabase.co'){
       const headers={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
       if(req.method()==='OPTIONS')return route.fulfill({headers,body:'ok'});
       const response=await api(new Request('https://fixture-edge.invalid',{method:'POST',headers:{Authorization:req.headers().authorization},body:req.postData()}));
+      if(loseCreationReply&&JSON.parse(req.postData()).action==='create'){loseCreationReply=false;return route.abort();}
       return route.fulfill({status:response.status,headers,json:await response.json()});
      }
      assert.equal(u.origin,'https://scavlandfanbase.github.io');
@@ -211,9 +212,11 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     assert(!(JSON.stringify(docs).includes(alice)));
     const retained=(await call(alice,{action:'load'})).result.state.records.ammo.verification;
     assert.equal(retained.history.length,2,'publication retains full private review history');
-    await frame.getByRole('button',{name:'Add Ammo',exact:true}).click();await dialog.waitFor();
+    loseCreationReply=true;await frame.getByRole('button',{name:'Add Ammo',exact:true}).click();await dialog.waitFor();
     await dialog.getByLabel('Name',{exact:true}).fill('Browser new Ammo');
-    await dialog.getByRole('button',{name:'Create private item',exact:true}).click();await dialog.waitFor({state:'detached'});
+    await dialog.getByRole('button',{name:'Create private item',exact:true}).click();
+    await frame.locator('#status').filter({hasText:'Your form entries are retained'}).waitFor();await dialog.getByRole('button',{name:'Retry',exact:true}).click();await dialog.waitFor({state:'detached'});await frame.locator('#status').filter({hasText:'Saved — private item draft'}).waitFor();
+    assert.equal((await db.query("select count(*)::int as n from scavland_item_drafts.prepared where payload->'records'->'items'->>'name'='Browser new Ammo'")).rows[0].n,1,'lost creation reply recovers one server identity');
     assert.equal(await frame.getByLabel('Name',{exact:true}).inputValue(),'Browser new Ammo');
     assert(!docs['data/items.json'].data.some(r=>r.name==='Browser new Ammo'));
     await page.reload();await frame.getByRole('button',{name:'Browser new Ammo · Private new item',exact:true}).click();
@@ -225,6 +228,30 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     await frame.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.waitFor({state:'detached'});
     const browserAdded=docs['data/items.json'].data.find(r=>r.name==='Browser new Ammo');assert(browserAdded);
     assert.equal(docs['data/ammo.json'].data.find(r=>r.id===browserAdded.id).damage,'0');assert.deepEqual(docs['data/vendors.json'],vendorBefore);
+    await frame.getByRole('button',{name:'Archive item',exact:true}).click();await dialog.getByRole('button',{name:'Archive privately',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(browserAdded.archived,false,'archive is private until publication');
+    assert.equal(await frame.getByLabel('Name',{exact:true}).isDisabled(),true);
+    await frame.getByRole('button',{name:'Preview this item',exact:true}).click();await dialog.waitFor();assert.match(await dialog.innerText(),/Archived — omitted/);
+    await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'detached'});
+    await frame.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(docs['data/items.json'].data.find(r=>r.id===browserAdded.id).archived,true);assert.deepEqual(docs['data/vendors.json'],vendorBefore);
+    await page.reload();await frame.getByRole('button',{name:'Browser new Ammo · Archived',exact:true}).click();await frame.getByRole('button',{name:'Restore item',exact:true}).waitFor();
+    await frame.getByRole('button',{name:'Restore item',exact:true}).click();await dialog.getByRole('button',{name:'Restore privately',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(await frame.getByLabel('Name',{exact:true}).isEnabled(),true);
+    await frame.getByRole('button',{name:'Preview this item',exact:true}).click();await dialog.waitFor();await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'detached'});
+    await frame.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(docs['data/items.json'].data.find(r=>r.id===browserAdded.id).archived,false);
+    assert.deepEqual(docs['data/vendors.json'],vendorBefore);assert.equal(docs['data/ammo.json'].data.find(r=>r.id===browserAdded.id).damage,'0');
+    docs['data/ammo.json'].data=docs['data/ammo.json'].data.filter(r=>r.id!=='api-other');
+    const missingName=docs['data/items.json'].data.find(r=>r.id==='api-other').name;
+    await page.reload();await frame.getByRole('button',{name:missingName,exact:true}).click();await frame.locator('#selected-name').filter({hasText:missingName}).waitFor();
+    assert.equal(await frame.getByLabel('Damage',{exact:true}).isDisabled(),true);
+    await frame.getByRole('button',{name:'Add Ammo details',exact:true}).click();await dialog.getByRole('button',{name:'Add details privately',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(await frame.getByLabel('Damage',{exact:true}).isEnabled(),true);assert.equal(await frame.getByLabel('Damage',{exact:true}).inputValue(),'');
+    assert(!docs['data/ammo.json'].data.some(r=>r.id==='api-other'));
+    await frame.getByRole('button',{name:'Preview this item',exact:true}).click();await dialog.waitFor();await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'detached'});
+    await frame.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(docs['data/ammo.json'].data.find(r=>r.id==='api-other').damage,null);assert.equal(docs['data/items.json'].data.filter(r=>r.id==='api-other').length,1);
     for(const width of [320,1280]){await page.setViewportSize({width,height:900});assert(await frame.locator('body').evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
     if(process.env.SCAVLAND_SHOT)await page.screenshot({path:process.env.SCAVLAND_SHOT,fullPage:true});
     assert.deepEqual(errors,[]);
