@@ -14,6 +14,7 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   await db.exec('create table scavland_drafts.versions(domain text,entity_id text,version integer,payload jsonb);');
   await db.exec(fs.readFileSync(path.join(root,'supabase/proposals/shared-item-drafts.sql'),'utf8'));
   await db.exec(fs.readFileSync(path.join(root,'supabase/proposals/shared-item-api.sql'),'utf8'));
+  await db.exec(fs.readFileSync(path.join(root,'supabase/proposals/shared-item-legacy-preservation.sql'),'utf8'));
   const invoke=(actor,sql,args=[])=>db.transaction(async tx=>{
    await tx.exec('set local role '+(actor==='service'?'service_role':'authenticated'));
    await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[actor==='service'?'':actor]);
@@ -138,6 +139,19 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   const oldSource=structuredClone(docs['data/items.json']),oldCatalogue=seed('items',oldSource);oldCatalogue.data.find(r=>r.id==='api-item').name='Pending legacy change';
   await db.query('insert into scavland_drafts.versions values ($1,$2,$3,$4)',['items','catalogue',20,{source:oldSource,catalogue:oldCatalogue}]);
   const blocked=await call(alice,{action:'load'});assert.equal(blocked.status,409);assert(!JSON.stringify(blocked.result).includes('Pending legacy change'));
+  const legacyReview=await call(alice,{action:'legacy-review'});assert.equal(legacyReview.status,200);assert.equal(legacyReview.result.status,'ready-for-reviewed-import');
+  assert.equal(legacyReview.result.preserved.privateRecord.name,'Pending legacy change');assert(!JSON.stringify(legacyReview.result).includes('api-other'));
+  assert.equal((await call(armourUser,{action:'legacy-review'})).status,403);
+  const preserve=()=>invoke('service','select public.scavland_preserve_item_legacy($1) as v',[20]);
+  const snapshot=await preserve();assert.deepEqual((await preserve()).snapshot,snapshot.snapshot);
+  await db.query("update scavland_drafts.versions set payload=$1 where domain='items' and version=20",[{...snapshot.snapshot.payload,selectedId:'fixture-tamper'}]);
+  await assert.rejects(preserve(),e=>e.code==='PT409');
+  await db.query("update scavland_drafts.versions set payload=$1 where domain='items' and version=20",[snapshot.snapshot.payload]);
+  assert.equal(snapshot.snapshot.payload.catalogue.data.find(r=>r.id==='api-item').name,'Pending legacy change');
+  await assert.rejects(invoke(alice,'select public.scavland_preserve_item_legacy($1) as v',[20]),e=>e.code==='42501');
+  await assert.rejects(invoke('service','select snapshot as v from scavland_item_drafts.legacy_snapshots'),e=>e.code==='42501');
+  await assert.rejects(invoke('service','select public.scavland_preserve_item_legacy($1) as v',[19]),e=>e.code==='PT409');
+  assert.equal((await db.query('select count(*)::int as n from scavland_item_drafts.legacy_snapshots')).rows[0].n,1);
   assert.equal((await db.query("select payload->'catalogue'->'data'->0->>'name' as name from scavland_drafts.versions")).rows[0].name,'Pending legacy change');
   await assert.rejects(invoke(alice,'select public.scavland_item_legacy() as v'),e=>e.code==='42501');
   if(process.env.SCAVLAND_BROWSER==='1'){
@@ -161,6 +175,9 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     await page.goto('https://scavlandfanbase.github.io/test-ammo-host.html');const frame=page.frameLocator('iframe');
     await frame.locator('#blocked').filter({hasText:'pending work'}).waitFor();assert.equal(await frame.locator('#item-form').isVisible(),false);
     assert.equal(await frame.locator('#publish').isDisabled(),true);
+    await frame.getByRole('button',{name:'Review existing Items work',exact:true}).click();
+    const legacyDialog=frame.getByRole('dialog');await legacyDialog.waitFor();assert.match(await legacyDialog.innerText(),/Pending legacy change/);assert.match(await legacyDialog.innerText(),/nothing is imported or published/);
+    await legacyDialog.getByRole('button',{name:'Close',exact:true}).click();await legacyDialog.waitFor({state:'detached'});
     await db.exec('delete from scavland_drafts.versions'); // Local fixture only, never production.
     await page.reload();await frame.locator('#item-form').waitFor();
     assert.equal(await frame.getByLabel('Damage',{exact:true}).inputValue(),'6 x 5 = 30');

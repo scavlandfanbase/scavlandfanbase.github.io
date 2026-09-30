@@ -1,6 +1,7 @@
 // Feature-gated authenticated per-item bridge. No browser authority over payloads/actors.
 import {snapshotItem,categoryView,reconcilePublishedItem,editItem,reviewItem,createAmmoItem,addAmmoFacet,lifecycleItem,planItem,createItemPublisher} from './item-draft.mjs';
 import {fail} from './core.mjs';
+import {inspectLegacyItem} from './legacy-item-review.mjs';
 const repository='scavlandfanbase/scavlandfanbase.github.io';
 const permission={ammo:'ammunition_edit',armour:'armour_edit',weapons:'weapons_edit'};
 const cors={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
@@ -31,7 +32,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const auth=request.headers.get('Authorization')||'';if(!auth.startsWith('Bearer '))fail('Sign in to continue.',401);
    const raw=await request.text();if(new TextEncoder().encode(raw).length>250000)fail('Item request is too large.',413);
    let body;try{body=JSON.parse(raw);}catch{fail('Invalid item request.');}
-   if(!body||Object.keys(body).some(k=>!['domain','action','itemId','category','expectedVersion','requestId','command','previewId','confirm'].includes(k))||body.domain!=='shared-item'||!Object.hasOwn(permission,body.category)||!['list','create','load','prepare','save','preview','publish'].includes(body.action)||(!['list','create'].includes(body.action)&&(typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)))fail('Invalid item request.');
+   if(!body||Object.keys(body).some(k=>!['domain','action','itemId','category','expectedVersion','requestId','command','previewId','confirm'].includes(k))||body.domain!=='shared-item'||!Object.hasOwn(permission,body.category)||!['list','create','legacy-review','load','prepare','save','preview','publish'].includes(body.action)||(!['list','create'].includes(body.action)&&(typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)))fail('Invalid item request.');
    const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY');if(!sb||!key)fail('Private storage is unavailable.',503);
    async function rpc(name,args,trusted=false){
     const token=trusted?env('SUPABASE_SERVICE_ROLE_KEY'):key;if(!token)fail('Trusted storage is unavailable.',503);
@@ -43,6 +44,10 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const actor=(await userResponse.json()).id;if(typeof actor!=='string'||!actor)fail('Sign in again.',401);
    if(await rpc('has_scavland_permission',{required_permission:permission[body.category]})!==true)fail('Category editing permission is required.',403);
    const latest=await source();const context={actor,permissions:[permission[body.category]],settings:latest.settings,images:latest.images};
+   if(body.action==='legacy-review'){
+    const legacy=await rpc('scavland_item_legacy',{},true);
+    return reply(await inspectLegacyItem(latest.documents,legacy,body.itemId,body.category,context));
+   }
    const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
    if(body.action==='create'){
     if(body.category!=='ammo'||body.itemId!==undefined||body.expectedVersion!==0||!uuid(body.requestId)||!body.command)fail('Invalid new Ammo request.');

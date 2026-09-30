@@ -1,0 +1,25 @@
+const assert=require('node:assert/strict');
+(async()=>{
+ const {inspectLegacyItem,legacyDigest}=await import('../supabase/functions/admin-drafts/legacy-item-review.mjs');
+ const {seed}=await import('../supabase/functions/admin-drafts/core.mjs');
+ const docs={'data/items.json':{schemaVersion:1,data:[{id:'ammo-id',name:'Old name',classification:['ammunition'],notes:null},{id:'other',name:'Other',classification:['ammunition']}]},'data/ammo.json':{data:[{id:'ammo-id',name:'Old name',damage:12}]},'data/armour.json':{data:[]},'data/weapons.json':{data:[]}};
+ const source=structuredClone(docs['data/items.json']),catalogue=seed('items',source),context={permissions:['ammunition_edit']};
+ const record=catalogue.data.find(r=>r.id==='ammo-id');record.name='Saved rename';record.internalNotes='Private context to retain';
+ const legacy={domain:'items',entity_id:'catalogue',version:20,payload:{source,catalogue}},before=structuredClone(legacy);
+ let report=await inspectLegacyItem(docs,legacy,'ammo-id','ammo',context);
+ assert.equal(report.status,'ready-for-reviewed-import');assert.equal(report.preserved.privateRecord.internalNotes,'Private context to retain');
+ assert.equal(report.fields.find(f=>f.field==='name').private.value,'Saved rename');assert.equal(report.sourceDigest.length,64);
+ assert(!JSON.stringify(report).includes('"id":"other"'));assert.deepEqual(legacy,before);
+ const conflict=structuredClone(docs);conflict['data/items.json'].data[0].name='Concurrent rename';
+ assert.equal((await inspectLegacyItem(conflict,legacy,'ammo-id','ammo',context)).status,'conflict');
+ conflict['data/items.json'].data[0].name='Saved rename';assert.equal((await inspectLegacyItem(conflict,legacy,'ammo-id','ammo',context)).status,'no-pending-public-fields');
+ record.hidden=true;assert.equal((await inspectLegacyItem(docs,legacy,'ammo-id','ammo',context)).status,'manual-review');
+ record.verification={schemaVersion:1,decision:'unverified',verified_patch_id:'previous-patch',last_verified_at:'2026-09-29T10:00:00Z',last_verified_by:'historic-admin',history:[{decision:'verified',patch_id:'previous-patch',at:'2026-09-29T10:00:00Z',by:'historic-admin'},{decision:'unverified',patch_id:'current-patch',at:'2026-09-30T10:00:00Z',by:'reviewing-admin'}]};
+ const withHistory=await inspectLegacyItem(docs,legacy,'ammo-id','ammo',context);
+ assert.deepEqual(withHistory.preserved.privateRecord.verification,record.verification);
+ assert.equal(withHistory.fields.find(f=>f.field==='verification').status,'manual-review');
+ assert.notEqual(await legacyDigest(legacy),report.sourceDigest);assert.equal(await legacyDigest(legacy),await legacyDigest({...legacy,payload:{catalogue,source}}));
+ await assert.rejects(inspectLegacyItem(docs,legacy,'ammo-id','ammo',{permissions:[]}),e=>e.status===403);
+ assert.equal((await inspectLegacyItem(docs,null,'ammo-id','ammo',context)).status,'no-legacy-draft');
+ console.log('PASS legacy item review: exact selected identity, three-way conflicts, already-public changes, manual visibility review, retained private context, permission denial, stable version digest and no mutations.');
+})().catch(e=>{console.error(e);process.exitCode=1;});
