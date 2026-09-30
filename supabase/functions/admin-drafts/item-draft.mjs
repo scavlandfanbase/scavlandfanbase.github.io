@@ -95,6 +95,21 @@ export function editItem(input,command,{actor,permissions:allowed,settings,image
  }
  state.revision++;return validate(state);
 }
+// Review attests only to this category's saved facts, never unrelated facets.
+export function reviewItem(input,command,{actor,permissions:allowed,settings,clock=()=>new Date()}={}){
+ validate(input);keys(command,['action','expectedRevision','confirmId','patchId','decision']);
+ if(command.action!=='review'||command.expectedRevision!==input.revision)fail('The item draft changed. Reload and review.',409);
+ authorize(input.category,input.records.items,input.records[input.category],allowed);
+ if(typeof actor!=='string'||!actor.trim())fail('Authenticated identity is required.',401);
+ if(command.confirmId!==input.itemId)fail('Confirm the item you reviewed.');
+ if(command.patchId!==Verification.patchId(settings))fail('The current patch changed. Reload before reviewing.',409);
+ if(!['verified','unverified'].includes(command.decision))fail('Choose Verified or Unverified.');
+ if(command.decision==='verified'&&!Verification.patchId(settings))fail('Set the current patch before verifying.');
+ if(!input.records[input.category])fail('Add the category record before reviewing.');
+ const state=structuredClone(input);
+ set(state,state.category,'verification',Verification.decide(state.records[state.category],command.decision,settings,actor,clock).verification);
+ state.revision++;return validate(state);
+}
 function sharedOutputField(kind,key,record){
  if(['name','image','description'].includes(key))return true;
  // Existing compatibility fields stay linked; do not invent unsuitable specialist fields.
