@@ -18,6 +18,8 @@ Prepared on top of the shared-catalogue foundation in PR #23. No production migr
 
 ## Required next checkpoint before rollout
 
+**Follow-up prepared:** `SHARED-ITEM-API-CHECKPOINT.md` now records the feature-gated authenticated bridge, fresh source/membership/legacy checks and administrator/version/output-bound preview intents. Its SQL proposal is locally tested but not applied. The original implementation queue below remains the rationale; frontend category integration and reviewed old-draft import are still pending.
+
 1. Build the authenticated API bridge: fetch canonical files from one pinned Git commit; verify real caller Auth and category permission on every operation; use the trusted model to generate preparation receipts; read current legacy draft blockers through a service-only reviewed access path. Neither this module nor its SQL proposal is a standalone deployed endpoint.
 2. Check latest immutable item version again at preview/publication and bind the accepted preview to that version/intent. Re-read legacy blockers and membership at preparation/publication rather than relying on an earlier UI check. Reconcile exact own-publication responses and retain full private history.
 3. Preserve/import old Items drafts through an explicit reviewed process. This checkpoint blocks overlaps; it does not silently split or discard old drafts. Vendor drafts remain independent commercial drafts.
