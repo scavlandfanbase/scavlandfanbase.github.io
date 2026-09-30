@@ -117,12 +117,12 @@ export function planItem(input,documents,{legacyDrafts=[]}={}){
  if(conflicts.length)throw Object.assign(Error('Public changes conflict with this item draft. Nothing was published.'),{status:409,conflicts});
  return result;
 }
-export function createItemPublisher({state,base,repository,token,fetcher,legacyDrafts=[]}){
+export function createItemPublisher({state,base,repository,token,fetcher,legacyDrafts=[],beforePublish}){
  validate(state);
  const changed=Object.keys(state.changes);if(!changed.length)fail('There are no changed item fields to publish.');
  const touched=[...new Set([paths.items,...changed.map(k=>paths[k])])];
  const payload={domain:'shared-item',entity_id:state.itemId,version:state.revision,payload:structuredClone(state),base:Object.fromEntries(touched.map(p=>[p,base[p]]))};
- const adapter=githubPublisher({repository,token,fetcher,paths:touched,allowUnrelatedChanges:true,
+ const adapter=githubPublisher({repository,token,fetcher,paths:touched,allowUnrelatedChanges:true,beforePublish,
   validate:d=>{if(d.entity_id!==state.itemId)fail('Incorrect item identity.');validate(d.payload);},
   project:(d,documents)=>planItem(d.payload,documents,{legacyDrafts})});
  return {preview:()=>adapter.preview(payload),publish:()=>adapter.publish(payload)};
