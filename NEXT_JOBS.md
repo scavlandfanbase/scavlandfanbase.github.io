@@ -1,5 +1,9 @@
 # CURRENT STATE — 29 SEPTEMBER 2026
 
+**Stopped for the night — 30 September:** all prepared code is committed/pushed through draft PR #30. Resume from `RESUME-SHARED-ADMIN.md`. First task: explicit version-bound legacy import/acknowledgement, followed by coordinated rollout preparation. Nothing from the shared-editor stack is live yet; existing genuine drafts remain intact.
+
+**30 September preservation/preflight batch:** selected-item read-only legacy review, service-only immutable snapshot proposal and an exact local rollout manifest are prepared/tested. No genuine drafts changed or production deployment. See `SHARED-LEGACY-PRESERVATION-CHECKPOINT.md`. Explicit version-bound import/acknowledgement remains the next checkpoint; overlap protection stays enabled, followed by coordinated rollout and real Owner acceptance.
+
 **30 September Ammo actions batch:** Add, permission-filtered unpublished-item listing, explicit missing-facet creation and private archive/restore are now connected and fixture-tested. No production changes. See `SHARED-AMMO-ACTIONS-CHECKPOINT.md`. Next is reviewed preservation of overlapping old Items drafts and coordinated release preparation; extend other categories before removing general Items.
 
 **30 September Ammo creation contract:** trusted one-ID shared record/facet creation and atomic insertion are prepared and tested, including private storage, duplicate-free retries and later editing. No Add UI/API activation or deployment yet. See `SHARED-AMMO-CREATION-CHECKPOINT.md`. Next: server identity assignment, creation receipts, unpublished-item listing and Add dialog; then archive/restore and old-draft preservation.

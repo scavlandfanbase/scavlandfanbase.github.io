@@ -15,6 +15,7 @@
   $('facet-add').hidden=!!loaded?.state.records.ammo;
   $('facet-add').disabled=busy||dirty||!!pending||!loaded||archived;
   $('add').disabled=busy||dirty||!!pending||!token;
+  $('legacy-review').disabled=busy||dirty||!!pending||!selected;
   $('review').disabled=busy||dirty||!!pending||!loaded?.state.records.ammo||archived;
   $('preview').disabled=busy||dirty||!!pending||!loaded||loaded.currentVersion===0||!loaded.hasChanges;
   $('publish').disabled=busy||dirty||!!pending||!previewId||!loaded?.canPublish;
@@ -97,6 +98,18 @@
    pending??={creation:true,requestId:crypto.randomUUID(),version:0,command:{action:'create',shared:{name:name.value},specialist:{}}};
    if(!await save())throw Error('Creation could not finish. Close this dialog and use Retry if a request is pending.');
   }});
+ };
+ $('legacy-review').onclick=async()=>{
+  busy=true;buttons();
+  try{const report=await request({action:'legacy-review'});
+   scavEditorDialog({title:'Existing Items work — '+report.name,submit:'Close',readOnly:true,build:({body})=>{
+    const summary=document.createElement('p');summary.textContent='Read-only review: '+report.status+(report.sourceVersion?' · Items draft version '+report.sourceVersion:'')+'. Existing work stays saved; nothing is imported or published.';body.append(summary);
+    for(const field of report.fields){const heading=document.createElement('h3');heading.textContent=label(field.field)+' · '+field.status;body.append(heading);
+     for(const [key,title]of [['baseline','Original public value'],['private','Saved private value'],['public','Current public value']]){const line=document.createElement('p');line.textContent=title+': '+(field[key].present?JSON.stringify(field[key].value):'Not present');body.append(line);}
+    }
+    if(report.preserved){const note=document.createElement('p');note.textContent='The complete selected private record, including its notes and review history, remains preserved in the existing draft. An explicit version-bound import is still required.';body.append(note);}
+   },onSubmit:()=>{}});
+  }catch(e){status(e.message);}finally{busy=false;buttons();}
  };
  $('review').onclick=()=>{
   let decision;
