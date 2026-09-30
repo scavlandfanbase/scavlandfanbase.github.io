@@ -56,6 +56,7 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
    'data/items.json':{schemaVersion:1,data:[{id:'api-item',name:'API Ammo',classification:['ammunition'],category:null,description:null,image:null},{id:'api-other',name:'Other Ammo',classification:['ammunition'],category:null,description:null,image:null}]},
    'data/ammo.json':{schemaVersion:1,data:[{id:'api-item',name:'API Ammo',category:'Special',damage:'46',penetrationPercent:-25},{id:'api-other',name:'Other Ammo',category:'Special',damage:'1'}]},
    'data/armour.json':{schemaVersion:1,data:[]},'data/weapons.json':{schemaVersion:1,data:[]},
+   'data/vendors.json':{schemaVersion:1,data:[{id:'fixture-shop',name:'Fixture shop'}],vendorListings:{listings:[{id:'stock',vendorId:'fixture-shop',entity:{type:'item',id:'api-item'},price:123,rank:3,quantity:5,archived:false}]}},
    'data/verification-settings.json':{schemaVersion:1,current_patch_id:'fixture-patch'},'data/site-images.json':{categories:{}}
   },head='api-head',gitTree,gitCommit,gitWrites=0;
   const hash=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
@@ -98,6 +99,8 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   assert.equal((await call('bad-token',{action:'load'})).status,401);
   assert.equal((await call(alice,{action:'load',payload:{verification:'forged'}})).status,400);
   assert.equal((await call(alice,{action:'load'})).result.currentVersion,0);
+  assert.equal((await call(alice,{action:'list'})).result.records.length,2);
+  assert.equal((await call(alice,{action:'load'})).result.usage[0].price,123);
   const request=crypto.randomUUID(),edit={action:'edit',expectedRevision:0,shared:{name:'One connected edit'},specialist:{damage:'6 x 5 = 30'}};
   const prepared=await call(alice,{action:'prepare',expectedVersion:0,requestId:request,command:edit});assert.equal(prepared.status,200);
   assert.deepEqual((await call(alice,{action:'prepare',expectedVersion:0,requestId:request,command:edit})).result,prepared.result);
@@ -119,6 +122,56 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   const blocked=await call(alice,{action:'load'});assert.equal(blocked.status,409);assert(!JSON.stringify(blocked.result).includes('Pending legacy change'));
   assert.equal((await db.query("select payload->'catalogue'->'data'->0->>'name' as name from scavland_drafts.versions")).rows[0].name,'Pending legacy change');
   await assert.rejects(invoke(alice,'select public.scavland_item_legacy() as v'),e=>e.code==='42501');
+  if(process.env.SCAVLAND_BROWSER==='1'){
+   const {chromium}=require('playwright'),browser=await chromium.launch({headless:true,channel:'msedge'});
+   try{
+    const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.route('**/*',async route=>{
+     const req=route.request(),u=new URL(req.url());
+     if(u.origin==='https://demtoqsafufzmnhvaykj.supabase.co'){
+      const headers={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
+      if(req.method()==='OPTIONS')return route.fulfill({headers,body:'ok'});
+      const response=await api(new Request('https://fixture-edge.invalid',{method:'POST',headers:{Authorization:req.headers().authorization},body:req.postData()}));
+      return route.fulfill({status:response.status,headers,json:await response.json()});
+     }
+     assert.equal(u.origin,'https://scavlandfanbase.github.io');
+     if(u.pathname==='/test-ammo-host.html')return route.fulfill({contentType:'text/html',body:`<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}iframe{border:0;width:100%;height:100vh}</style><body><script>addEventListener('message',e=>{if(e.origin===location.origin&&e.source===document.querySelector('iframe')?.contentWindow&&e.data?.type==='scavland-admin-ready')e.source.postMessage({type:'scavland-admin-token',token:'${alice}'},location.origin)});</script><iframe src="ammo-category.html?embed=1"></iframe>`});
+     const file=path.resolve(root,'.'+u.pathname);if(!file.startsWith(root+path.sep)||!fs.existsSync(file))return route.fulfill({status:404,body:'missing'});
+     return route.fulfill({path:file,contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'application/json'});
+    });
+    await page.goto('https://scavlandfanbase.github.io/test-ammo-host.html');const frame=page.frameLocator('iframe');
+    await frame.locator('#blocked').filter({hasText:'pending work'}).waitFor();assert.equal(await frame.locator('#item-form').isVisible(),false);
+    assert.equal(await frame.locator('#publish').isDisabled(),true);
+    await db.exec('delete from scavland_drafts.versions'); // Local fixture only, never production.
+    await page.reload();await frame.locator('#item-form').waitFor();
+    assert.equal(await frame.getByLabel('Damage',{exact:true}).inputValue(),'6 x 5 = 30');
+    assert.equal(await frame.getByLabel('Penetration (%)',{exact:true}).inputValue(),'-25');
+    assert.match(await frame.locator('#usage').innerText(),/Fixture shop.*123.*3.*5/);
+    await frame.getByLabel('Name',{exact:true}).fill('Browser connected Ammo');
+    await frame.getByLabel('Damage',{exact:true}).fill('8 x 12');
+    assert.equal(await frame.locator('#publish').isDisabled(),true);
+    await frame.getByRole('button',{name:'Save private draft',exact:true}).click();
+    await frame.locator('#status').filter({hasText:'Saved — private item draft'}).waitFor();
+    assert.equal(docs['data/items.json'].data[0].name,'One connected edit','browser save remains private');
+    await page.reload();await frame.locator('#item-form').waitFor();assert.equal(await frame.getByLabel('Name',{exact:true}).inputValue(),'Browser connected Ammo');
+    await frame.getByRole('button',{name:'Preview this item',exact:true}).click();
+    const dialog=frame.getByRole('dialog');await dialog.waitFor();assert.match(await dialog.innerText(),/8 x 12/);assert(!(await dialog.innerText()).includes(alice));
+    await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(await frame.locator('#publish').isEnabled(),true);
+    const vendorBefore=structuredClone(docs['data/vendors.json']);
+    await frame.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.getByRole('button',{name:'Publish this item',exact:true}).click();await dialog.waitFor({state:'detached'});
+    assert.equal(docs['data/items.json'].data[0].name,'Browser connected Ammo');assert.equal(docs['data/ammo.json'].data[0].name,'Browser connected Ammo');
+    assert.equal(docs['data/ammo.json'].data[0].damage,'8 x 12');assert.deepEqual(docs['data/vendors.json'],vendorBefore);
+    assert.equal(await frame.locator('#preview').isDisabled(),true);
+    // A second edit after publication must use its own confirmed public baseline.
+    await page.reload();await frame.locator('#item-form').waitFor();await frame.getByLabel('Name',{exact:true}).fill('Second connected edit');
+    await frame.getByRole('button',{name:'Save private draft',exact:true}).click();await frame.locator('#status').filter({hasText:'Saved — private item draft'}).waitFor();
+    for(const width of [320,1280]){await page.setViewportSize({width,height:900});assert(await frame.locator('body').evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
+    if(process.env.SCAVLAND_SHOT)await page.screenshot({path:process.env.SCAVLAND_SHOT,fullPage:true});
+    assert.deepEqual(errors,[]);
+    console.log('PASS shared Ammo browser: protected legacy work, signed-in handoff, damage/penetration, vendor usage, private edit/reload, item preview/explicit connected publish, vendor-value preservation, second post-publication edit and 320–1280px layouts.');
+   }finally{await browser.close();}
+  }
   console.log('PASS authenticated item API: caller Auth, category permission, pinned sources, trusted receipt recovery, shared session drafts, actor/version/digest-bound preview, explicit atomic publish, changed-preview rejection, private old-draft blocker and no production calls.');
  }finally{await db.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

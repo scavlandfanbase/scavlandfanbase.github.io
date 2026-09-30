@@ -1,0 +1,98 @@
+// One selected identity, one private draft. No tokens/drafts in browser storage.
+(()=>{
+ const $=id=>document.getElementById(id),E=ScavEditor;
+ const endpoint='https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts',key='sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH';
+ let token='',records=[],selected=null,loaded=null,pending=null,busy=false,dirty=false,previewId=null,controls=[];
+ const schema=[['name','Name','text','shared'],['description','Description','textarea','shared'],['image','Image reference','image','shared'],['notes','Notes','textarea','shared'],['estimatedPrice','General estimated price','number','shared'],['maxStack','Maximum stack','number','shared'],['category','Ammo type','text','specialist'],['damage','Damage','text','specialist'],['penetrationPercent','Penetration (%)','number','specialist']];
+ const label=k=>schema.find(r=>r[0]===k)?.[1]||k;
+ const text=v=>v===null||v===undefined?'Not recorded':String(v);
+ function status(s){$('status').textContent=s;}
+ function buttons(){
+  $('save').disabled=busy||!!pending||!loaded;
+  $('preview').disabled=busy||dirty||!!pending||!loaded||loaded.currentVersion===0||!loaded.hasChanges;
+  $('publish').disabled=busy||dirty||!!pending||!previewId||!loaded?.canPublish;
+  $('retry').hidden=!pending;$('retry').disabled=busy;
+  $('search').disabled=busy||!!pending;
+  document.querySelectorAll('#ammo-list button,#fields input,#fields textarea,#fields button').forEach(b=>b.disabled=busy||!!pending);
+ }
+ async function request(extra){
+  const response=await fetch(endpoint,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({domain:'shared-item',category:'ammo',...(selected?{itemId:selected}:{}),...extra})});
+  const result=await response.json();if(!response.ok)throw Object.assign(Error(result.error||'Could not complete this item action.'),{status:response.status});return result;
+ }
+ function list(){
+  const q=$('search').value.toLowerCase(),matches=records.filter(r=>r.name.toLowerCase().includes(q));
+  $('count').textContent=matches.length+' Ammo';$('ammo-list').replaceChildren();
+  for(const r of matches){const b=E.button('',r.name,()=>select(r.id),$('ammo-list'));b.className='ammo-choice';b.setAttribute('aria-pressed',String(r.id===selected));}
+  buttons();
+ }
+ function paint(){
+  const state=loaded.state,item=state.records.items,facet=state.records.ammo||{};
+  const entry=records.find(r=>r.id===selected);if(entry)entry.name=item.name;
+  $('selected-name').textContent=item.name;controls=[];$('fields').replaceChildren();$('blocked').hidden=true;$('item-form').hidden=false;
+  const disagreements=[];
+  for(const [key,title,type,group]of schema){
+   const owner=group==='shared'?item:facet;
+   const value=Object.hasOwn(owner,key)?owner[key]:group==='shared'?facet[key]:undefined;
+   const field=E.field($('fields'),title,'field-'+key,value??'',key==='name'?300:10000,key==='name',type==='textarea');
+   if(type==='number'){field.type='number';field.step=key==='maxStack'?'1':'any';if(key!=='penetrationPercent')field.min='0';}
+   if(type==='textarea')field.parentElement.classList.add('wide');
+   if(type==='image'){
+    field.readOnly=true;E.button('image-picker','Choose image',()=>E.imagePicker({inventory:loaded.images,current:value??null,title:'Shared item image',onSubmit:image=>{field.value=image??'';dirty=true;previewId=null;buttons();}}),field.parentElement);
+   }
+   controls.push({key,type,group,field,before:field.value});
+   if(group==='shared'&&Object.hasOwn(item,key)&&Object.hasOwn(facet,key)&&JSON.stringify(item[key])!==JSON.stringify(facet[key]))disagreements.push(title+': shared '+text(item[key])+'; Ammo '+text(facet[key]));
+  }
+  $('conflicts').hidden=!disagreements.length;$('conflicts').textContent='Existing values need review. Only a field you deliberately change will be reconciled.\n'+disagreements.join('\n');
+  $('verification').replaceChildren();if(facet.id)E.verificationInfo($('verification'),ScavVerification.inspect(facet,loaded.settings));
+  $('usage').replaceChildren();
+  for(const u of loaded.usage||[]){const li=document.createElement('li');li.textContent=u.name+' · Price '+text(u.price)+' · Rank '+text(u.rank)+' · Quantity '+text(u.quantity);$('usage').append(li);}
+  if(!loaded.usage?.length){const li=document.createElement('li');li.textContent='No linked vendor stock.';$('usage').append(li);}
+  dirty=false;list();
+ }
+ async function select(id){
+  if(busy||pending)return;if(dirty&&!confirm('Discard the unsaved form changes?'))return;
+  busy=true;loaded=null;previewId=null;selected=id;dirty=false;$('item-form').hidden=true;$('blocked').hidden=true;$('conflicts').hidden=true;$('usage').replaceChildren();status('Loading selected Ammo…');buttons();
+  try{loaded=await request({action:'load'});paint();status(loaded.currentVersion?'Saved private item draft. Preview before publishing.':'Ready. Changes save privately.');}
+  catch(e){$('selected-name').textContent=records.find(r=>r.id===id)?.name||'Ammo';$('blocked').hidden=false;$('blocked').textContent=e.message;status('This item is read-only until the reported issue is resolved. Existing saved work is retained.');}
+  finally{busy=false;list();}
+ }
+ async function save(){
+  if(busy||!loaded)return;busy=true;previewId=null;buttons();
+  try{
+   if(!pending){
+    const shared={},specialist={};
+    for(const c of controls)if(c.field.value!==c.before){const v=c.field.value===''?null:c.type==='number'?Number(c.field.value):c.field.value;(c.group==='shared'?shared:specialist)[c.key]=v;}
+    if(!Object.keys(shared).length&&!Object.keys(specialist).length){dirty=false;status('No changes to save.');return;}
+    pending={requestId:crypto.randomUUID(),version:loaded.currentVersion,command:{action:'edit',expectedRevision:loaded.state.revision,shared,specialist}};
+   }
+   status('Saving private item draft…');
+   if(!pending.receipt)pending.receipt=await request({action:'prepare',expectedVersion:pending.version,requestId:pending.requestId,command:pending.command});
+   await request({action:'save',expectedVersion:pending.version,requestId:pending.requestId});
+   pending=null;loaded=await request({action:'load'});const record=records.find(r=>r.id===selected);if(record)record.name=loaded.state.records.items.name;
+   paint();status('Saved — private item draft. Nothing has been published.');
+  }catch(e){if((e.status===400||e.status===409)&&!pending?.receipt)pending=null;status(e.message+' Your form entries are retained. Retry or review the conflict.');}
+  finally{busy=false;buttons();}
+ }
+ $('item-form').onsubmit=e=>{e.preventDefault();save();};$('item-form').oninput=()=>{dirty=true;previewId=null;buttons();};$('retry').onclick=save;$('search').oninput=list;
+ $('preview').onclick=async()=>{
+  busy=true;previewId=null;buttons();
+  try{const result=await request({action:'preview',expectedVersion:loaded.currentVersion});
+   scavEditorDialog({title:'Preview '+loaded.state.records.items.name,submit:'Close',readOnly:true,build:({body})=>{
+    const note=document.createElement('p');note.textContent='This publishes only the selected item’s saved changes. Linked vendor prices and stock stay unchanged.';body.append(note);
+    for(const file of result.preview.files){const r=JSON.parse(file.content).data.find(r=>r.id===selected);const heading=document.createElement('h3');heading.textContent=file.path.endsWith('/items.json')?'Shared item details':'Ammo details';body.append(heading);const dl=document.createElement('dl');body.append(dl);for(const [key,title]of schema)if(Object.hasOwn(r,key)){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=title;dd.textContent=text(r[key]);dl.append(dt,dd);}}
+   },onSubmit:()=>{previewId=result.previewId;status('Preview reviewed. You can publish this saved item.');buttons();}});
+  }catch(e){status(e.message);}finally{busy=false;buttons();}
+ };
+ $('publish').onclick=()=>E.confirm({title:'Publish '+loaded.state.records.items.name+'?',message:'Publish this item’s reviewed shared details and Ammo stats? Its stocking vendors will use the updated item information. Their prices, ranks and quantities stay unchanged.',submit:'Publish this item',onConfirm:async()=>{
+  busy=true;buttons();try{const r=await request({action:'publish',expectedVersion:loaded.currentVersion,previewId,confirm:true});previewId=null;loaded.hasChanges=false;status('Published item version '+r.publishedVersion+'. The public pages may take a moment to update.');}
+  catch(e){previewId=null;status(e.message);throw e;}finally{busy=false;buttons();}
+ }});
+ let started=false;
+ window.addEventListener('message',async e=>{
+  if(parent===window||e.source!==parent||e.origin!==location.origin||e.data?.type!=='scavland-admin-token'||typeof e.data.token!=='string')return;
+  token=e.data.token;if(started)return;started=true;
+  try{const result=await request({action:'list'});records=result.records;$('workspace').hidden=false;list();if(records.length)await select(records[0].id);else status('No Ammo records.');}catch(error){started=false;status(error.message);}
+ });
+ if(parent!==window)parent.postMessage({type:'scavland-admin-ready'},location.origin);
+ window.addEventListener('beforeunload',e=>{if(dirty||pending||busy){e.preventDefault();e.returnValue='';}});
+})();
