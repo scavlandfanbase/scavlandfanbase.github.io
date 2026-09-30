@@ -28,22 +28,24 @@ create function scavland_item_drafts.prepare(p_actor uuid,p_item text,p_category
 returns jsonb language plpgsql security definer set search_path='' as $$
 declare receipt scavland_item_drafts.prepared; head integer;
 begin
- if p_actor is null or p_item is null or length(p_item) not between 1 and 160
+ if p_actor is null or (p_item is not null and length(p_item) not between 1 and 160)
  or p_category is null or p_category not in ('ammo','armour','weapons')
  or p_version is null or p_version<0 or p_request is null or p_command is null
  or jsonb_typeof(p_command)<>'object' or octet_length(p_command::text)>200000 then
   raise sqlstate '22023' using message='Invalid item preparation.';
  end if;
- perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('shared-item:'||p_item,0));
+ perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('item-request:'||p_request::text,0));
  select * into receipt from scavland_item_drafts.prepared where request_id=p_request;
  if found then
-  if receipt.actor<>p_actor or receipt.item_id<>p_item or receipt.category<>p_category
+  if receipt.actor<>p_actor or (p_item is not null and receipt.item_id<>p_item) or receipt.category<>p_category
   or receipt.expected_version<>p_version or receipt.command<>p_command then
    raise sqlstate 'PT409' using message='Request reused with different item entries.';
   end if;
   return to_jsonb(receipt);
  end if;
  if p_payload is null then return null;end if;
+ if p_item is null then raise sqlstate '22023' using message='Server identity required.';end if;
+ perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('shared-item:'||p_item,0));
  if jsonb_typeof(p_payload)<>'object' or octet_length(p_payload::text)>1048576
  or p_payload->>'itemId' is distinct from p_item or p_payload->>'category' is distinct from p_category then
   raise sqlstate '22023' using message='Invalid prepared item payload.';
@@ -77,6 +79,10 @@ begin
  if actor is null or permission is null or not coalesce(public.has_scavland_permission(permission),false) then
   raise sqlstate '42501' using message='Category permission is required.';
  end if;
+ if p_action='list' then return coalesce((select jsonb_agg(jsonb_build_object('itemId',v.item_id,'payload',v.payload)) from
+  (select distinct on (item_id) item_id,payload from scavland_item_drafts.versions order by item_id,version desc) v
+  where (v.payload->'original' ? p_category) or coalesce(v.payload->'original'->'items'->'classification' ?
+   (case p_category when 'ammo' then 'ammunition' when 'armour' then 'armour' when 'weapons' then 'weapon' end),false)), '[]'::jsonb);end if;
  if p_item is null or length(p_item) not between 1 and 160 or p_action is null or p_action not in ('load','save') then
   raise sqlstate '22023' using message='Invalid item draft request.';
  end if;

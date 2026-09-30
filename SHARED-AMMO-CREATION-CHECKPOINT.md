@@ -12,4 +12,6 @@ Contract/Git fixture tests cover permissions, protected fields, required name, s
 
 ## Next
 
+Batch follow-up: the creation API and Add dialog are now connected in preparation. The server generates the UUID and recovers it by actor-bound receipt after an uncertain response. Category lists include permitted unpublished identities. Browser fixtures verify Add, private save, reload, stats entry and paired publication without stocking vendors. The historical next steps below describe the original PR #28 checkpoint.
+
 Wire server UUID assignment and receipt recovery into an authenticated creation route; include unpublished new identities in the category list; connect the Add dialog and retry flow, then browser-test save/reload/preview/publication. Existing API still accepts existing public identities only. Its change detection and membership checks must explicitly handle creation intent before activation. Then add archive/restore and reviewed old-draft preservation before coordinated rollout. No general Items route removal or PR #22 rollout.

@@ -9,6 +9,7 @@
  function status(s){$('status').textContent=s;}
  function buttons(){
   $('save').disabled=busy||!!pending||!loaded;
+  $('add').disabled=busy||dirty||!!pending||!token;
   $('review').disabled=busy||dirty||!!pending||!loaded?.state.records.ammo;
   $('preview').disabled=busy||dirty||!!pending||!loaded||loaded.currentVersion===0||!loaded.hasChanges;
   $('publish').disabled=busy||dirty||!!pending||!previewId||!loaded?.canPublish;
@@ -23,7 +24,7 @@
  function list(){
   const q=$('search').value.toLowerCase(),matches=records.filter(r=>r.name.toLowerCase().includes(q));
   $('count').textContent=matches.length+' Ammo';$('ammo-list').replaceChildren();
-  for(const r of matches){const b=E.button('',r.name,()=>select(r.id),$('ammo-list'));b.className='ammo-choice';b.setAttribute('aria-pressed',String(r.id===selected));}
+  for(const r of matches){const b=E.button('',r.name+(r.unpublished?' · Private new item':''),()=>select(r.id),$('ammo-list'));b.className='ammo-choice';b.setAttribute('aria-pressed',String(r.id===selected));}
   buttons();
  }
  function paint(){
@@ -58,7 +59,7 @@
   finally{busy=false;list();}
  }
  async function save(){
-  if(busy||!loaded)return;busy=true;previewId=null;buttons();
+  if(busy||(!loaded&&!pending))return;busy=true;previewId=null;buttons();
   try{
    if(!pending){
     const shared={},specialist={};
@@ -67,14 +68,27 @@
     pending={requestId:crypto.randomUUID(),version:loaded.currentVersion,command:{action:'edit',expectedRevision:loaded.state.revision,shared,specialist}};
    }
    status('Saving private item draft…');
-   if(!pending.receipt)pending.receipt=await request({action:'prepare',expectedVersion:pending.version,requestId:pending.requestId,command:pending.command});
-   await request({action:'save',expectedVersion:pending.version,requestId:pending.requestId});
-   pending=null;loaded=await request({action:'load'});const record=records.find(r=>r.id===selected);if(record)record.name=loaded.state.records.items.name;
+   if(!pending.receipt)pending.receipt=await request({action:pending.creation?'create':'prepare',...(pending.creation?{itemId:undefined}:{}),expectedVersion:pending.version,requestId:pending.requestId,command:pending.command});
+   const target=pending.creation?pending.receipt.item_id:selected;
+   await request({action:'save',itemId:target,expectedVersion:pending.version,requestId:pending.requestId});
+   loaded=await request({action:'load',itemId:target});selected=target;pending=null;
+   let record=records.find(r=>r.id===selected);if(!record){record={id:selected,unpublished:true};records.push(record);}record.name=loaded.state.records.items.name;
    paint();status('Saved — private item draft. Nothing has been published.');return true;
   }catch(e){if((e.status===400||e.status===409)&&!pending?.receipt)pending=null;status(e.message+' Your form entries are retained. Retry or review the conflict.');}
   finally{busy=false;buttons();}
  }
  $('item-form').onsubmit=e=>{e.preventDefault();save();};$('item-form').oninput=()=>{dirty=true;previewId=null;buttons();};$('retry').onclick=save;$('search').oninput=list;
+ $('add').onclick=()=>{
+  let name;
+  scavEditorDialog({title:'Add Ammo',submit:'Create private item',build:({body})=>{
+   const note=document.createElement('p');note.textContent='Create one shared Ammo identity. You can enter its stats next. It starts unverified and is not published or added to vendor stock.';body.append(note);
+   name=E.field(body,'Name','new-ammo-name','',300,true);
+  },onSubmit:async()=>{
+   if(pending||busy||dirty)throw Error('Finish the current save before adding Ammo.');
+   pending={creation:true,requestId:crypto.randomUUID(),version:0,command:{action:'create',shared:{name:name.value},specialist:{}}};
+   if(!await save())throw Error('Creation could not finish. Close this dialog and use Retry if a request is pending.');
+  }});
+ };
  $('review').onclick=()=>{
   let decision;
   scavEditorDialog({title:'Review '+loaded.state.records.items.name+' verification',submit:'Record review',build:({body})=>{
