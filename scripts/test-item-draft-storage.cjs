@@ -48,6 +48,14 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   assert.equal((await access(bob,'load','other')).currentVersion,1);
   assert.equal((await db.query('select payload from scavland_drafts.fixture_saved')).rows[0].payload.name,'untouched existing work');
   assert.equal((await db.query('select count(*)::int as n from scavland_item_drafts.versions')).rows[0].n,3);
+  const {createAmmoItem}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
+  const creationId='item-44444444-4444-4444-8444-444444444444',creationRequest=crypto.randomUUID(),creationCommand={action:'create',shared:{name:'Private new Ammo'},specialist:{damage:0}};
+  const emptyDocuments=Object.fromEntries(['items','ammo','armour','weapons'].map(n=>['data/'+n+'.json',{data:[]}]));
+  const creation=createAmmoItem(emptyDocuments,creationId,creationCommand,{actor:alice,permissions:['ammunition_edit'],settings:{schemaVersion:1,current_patch_id:'fixture-patch'}});
+  await prepare(alice,creationId,0,creationRequest,creationCommand,creation);
+  await access(alice,'save',creationId,0,creationRequest);
+  assert.deepEqual((await access(bob,'load',creationId)).draft.payload,creation,'new identity and creation intent survive a second session');
+  assert.equal((await access(alice,'save',creationId,0,creationRequest)).draft.version,1,'new identity save retry stays one version');
   console.log('PASS per-item SQL storage: private tables, trusted-only preparation, caller permissions/category membership, actor/receipt binding, immutable item versions, idempotent retry, second-session reads, stale-save rejection and existing-draft preservation.');
   // Real SQL through the authenticated bridge, with only Auth/GitHub transports mocked.
   const {createItemApi}=await import('../supabase/functions/admin-drafts/item-api.mjs');

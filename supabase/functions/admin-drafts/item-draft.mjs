@@ -35,6 +35,12 @@ export function categoryView(input,category,{permissions:allowed}={}){
 // A changed public value different from our desired value remains a conflict.
 export function reconcilePublishedItem(input,documents){
  validate(input);const state=structuredClone(input);
+ for(const kind of Object.keys(state.creation||{})){
+  const current=documents[paths[kind]]?.data.find(r=>r.id===state.itemId);
+  if(current&&same(publicValue(current),publicValue(state.records[kind]))){
+   state.original[kind]=structuredClone(current);delete state.creation[kind];delete state.changes[kind];
+  }
+ }
  for(const [kind,changes]of Object.entries(state.changes)){
   const current=documents[paths[kind]]?.data.find(r=>r.id===state.itemId);if(!current)continue;
   for(const key of Object.keys(changes))if(same(publicationValue(key,ownValue(current,key)),publicationValue(key,ownValue(state.records[kind],key)))){
@@ -46,10 +52,14 @@ export function reconcilePublishedItem(input,documents){
  return state;
 }
 function validate(state){
- keys(state,['schemaVersion','itemId','category','revision','original','records','changes']);
+ keys(state,['schemaVersion','itemId','category','revision','original','records','changes','creation']);
  if(state.schemaVersion!==1||typeof state.itemId!=='string'||!Object.hasOwn(tags,state.category)||!Number.isSafeInteger(state.revision)||state.revision<0)fail('Invalid per-item draft.');
  keys(state.original,Object.keys(paths));keys(state.records,Object.keys(paths));keys(state.changes,Object.keys(paths));
  if(!state.original.items||!state.records.items)fail('Missing shared identity.');
+ if(state.creation!==undefined){
+  keys(state.creation,['items','ammo']);
+  for(const [kind,created]of Object.entries(state.creation))if(created!==true||state.category!=='ammo'||!state.records[kind])fail('Invalid new item draft.');
+ }
  for(const group of [state.original,state.records])for(const r of Object.values(group))if(r.id!==state.itemId)fail('A draft can contain only its own item.');
  for(const [kind,changes]of Object.entries(state.changes)){
   keys(changes,[...sharedFields,...(facetFields[kind]||[]),'verification']);
@@ -72,6 +82,31 @@ function set(state,kind,key,v){
  if(match(state.records[kind],key,{present:true,value:v}))return false;
  state.records[kind][key]=structuredClone(v);state.changes[kind]??={};
  state.changes[kind][key]=true;return true;
+}
+// Server supplies the permanent ID. Browser commands contain only recorded facts.
+export function createAmmoItem(documents,itemId,command,context={}){
+ keys(command,['action','shared','specialist']);
+ if(command.action!=='create'||typeof itemId!=='string'||!/^item-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(itemId))fail('A server-assigned item identity is required.');
+ for(const path of Object.values(paths))if(rows(documents[path]).some(r=>r.id===itemId))fail('This identity already exists. Reload its saved draft.',409);
+ keys(command.shared||{},sharedFields);keys(command.specialist||{},facetFields.ammo);
+ if(!command.shared?.name)fail('Enter an item name.');
+ value('name',command.shared?.name,{images:context.images||[]});
+ const item={id:itemId,name:command.shared.name,classification:['ammunition'],image:null,description:null,notes:null,estimatedPrice:null,maxStack:null,source:{status:'pending-review'},hidden:false,archived:false};
+ const facet={id:itemId,name:item.name,image:null,description:null,estimatedPrice:null,maxStack:null,category:null,damage:null,penetrationPercent:null,source:{status:'pending-review'}};
+ const state={schemaVersion:1,itemId,category:'ammo',revision:0,original:{items:structuredClone(item),ammo:structuredClone(facet)},records:{items:item,ammo:facet},changes:{},creation:{items:true,ammo:true}};
+ return editItem(state,{action:'edit',expectedRevision:0,shared:command.shared,specialist:command.specialist},context);
+}
+// Explicitly add a missing facet only to an already classified Ammo identity.
+export function addAmmoFacet(input,command,context={}){
+ validate(input);keys(command,['action','expectedRevision','confirmId','specialist']);
+ if(input.category!=='ammo'||command.action!=='add-facet'||command.expectedRevision!==input.revision)fail('Reload the Ammo item before adding its details.',409);
+ authorize('ammo',input.records.items,null,context.permissions);
+ if(command.confirmId!==input.itemId)fail('Confirm the existing item identity.');
+ if(input.records.ammo)fail('This item already has Ammo details.',409);
+ const state=structuredClone(input),item=state.records.items;
+ const facet={id:input.itemId,name:item.name,image:item.image??null,description:item.description??null,estimatedPrice:item.estimatedPrice??null,maxStack:item.maxStack??null,category:null,damage:null,penetrationPercent:null,source:{status:'pending-review'}};
+ state.original.ammo=structuredClone(facet);state.records.ammo=facet;state.creation={...(state.creation||{}),ammo:true};
+ return editItem(state,{action:'edit',expectedRevision:input.revision,specialist:command.specialist},context);
 }
 export function editItem(input,command,{actor,permissions:allowed,settings,images=[],clock=()=>new Date()}={}){
  validate(input);keys(command,['action','expectedRevision','shared','specialist']);
@@ -128,11 +163,19 @@ export function legacyItemBlockers(itemId,currentItem,legacyDrafts=[]){
 export function planItem(input,documents,{legacyDrafts=[]}={}){
  validate(input);
  const currentItem=rows(documents[paths.items]).find(r=>r.id===input.itemId);
- if(!currentItem)fail('The item was removed from public data. Review before publishing.',409);
+ if(input.creation?.items)for(const kind of ['armour','weapons'])if(documents[paths[kind]]&&rows(documents[paths[kind]]).some(r=>r.id===input.itemId))fail('This identity is already used in another category. Review before publishing.',409);
+ if(!currentItem&&!input.creation?.items)fail('The item was removed from public data. Review before publishing.',409);
  if(legacyItemBlockers(input.itemId,currentItem,legacyDrafts).length)fail('This item has pending work in the existing Items draft. Review and preserve it before continuing.',409);
- if(currentItem.archived||!same(ownValue(currentItem,'classification'),ownValue(input.original.items,'classification')))fail('Item membership changed. Reload and review before publishing.',409);
+ if(currentItem&&(currentItem.archived||!same(ownValue(currentItem,'classification'),ownValue(input.original.items,'classification'))))fail('Item membership changed. Reload and review before publishing.',409);
  const result={[paths.items]:structuredClone(documents[paths.items])},conflicts=[];
+ for(const kind of Object.keys(input.creation||{})){
+  const doc=structuredClone(documents[paths[kind]]),existing=rows(doc).find(r=>r.id===input.itemId),desired=publicValue(input.records[kind]);
+  if(existing&&!same(publicValue(existing),desired))fail('A record now exists for this identity. Review before publishing.',409);
+  if(!existing)doc.data.push(desired);
+  result[paths[kind]]=doc;
+ }
  for(const [kind,changes]of Object.entries(input.changes)){
+  if(input.creation?.[kind])continue;
   const doc=structuredClone(documents[paths[kind]]),r=rows(doc).find(r=>r.id===input.itemId);
   if(!r)fail('A linked record was removed. Review before publishing.',409);
   for(const key of Object.keys(changes)){
@@ -148,7 +191,7 @@ export function planItem(input,documents,{legacyDrafts=[]}={}){
 }
 export function createItemPublisher({state,base,repository,token,fetcher,legacyDrafts=[],beforePublish}){
  validate(state);
- const changed=Object.keys(state.changes);if(!changed.length)fail('There are no changed item fields to publish.');
+ const changed=[...new Set([...Object.keys(state.changes),...Object.keys(state.creation||{})])];if(!changed.length)fail('There are no changed item fields to publish.');
  const touched=[...new Set([paths.items,...changed.map(k=>paths[k])])];
  const payload={domain:'shared-item',entity_id:state.itemId,version:state.revision,payload:structuredClone(state),base:Object.fromEntries(touched.map(p=>[p,base[p]]))};
  const adapter=githubPublisher({repository,token,fetcher,paths:touched,allowUnrelatedChanges:true,beforePublish,
