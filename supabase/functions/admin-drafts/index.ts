@@ -1,3 +1,4 @@
 import { createProductionHandler } from './production.mjs';
-// Deploy only with BOTH approved SQL proposals. Publishing still requires its flag.
+// Coordinated shared release requires all three reviewed shared-item proposals.
+// Keep SHARED_ITEM_ENABLED false until legacy import/preservation acceptance.
 Deno.serve(createProductionHandler({env:(key:string)=>Deno.env.get(key)}));
