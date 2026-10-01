@@ -1,3 +1,5 @@
+**Attachment preview intents — 1 October:** private actor/version/output-bound expiring intents are proposed and local SQL-tested. Next: handler/Git publication connection and review UI. Nothing deployed.
+
 **Attachment publication planning — 1 October:** selected master-only output and conflict/privacy protections are implemented/tested. Vendor data remains independent. Next: version-bound preview intent/Git publication and authenticated review UI; no live route or deployment.
 
 **Attachment transport batch — 1 October:** proposed RPC wrappers and server Auth/permission/receipt transport pass combined real local SQL/API tests for classification and later edits. Activation defaults disabled; no production routing or deployment. Next: Attachment review UI and selected master-only preview/publication.

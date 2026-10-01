@@ -68,3 +68,9 @@ Next substantial checkpoint: authenticated Attachment review/editor UI, selected
 attachment-publication.mjs prepares exactly data/items.json for a saved Attachment decision. Checks Items permission, stable identity, patch/source baseline binding, legacy overlap and specialist links. Only approved changed fields can be applied. Three-way field comparison preserves disjoint concurrent public changes and refuses same-field conflicts. Visibility changes stop the plan. Public verification contains the existing reduced summary; actor/history remains private. Vendor JSON is not written. Identical already-public retries remain compatible.
 
 Tests pass for selected output, unchanged inputs/unrelated Items, omitted private actor/history, disjoint edits, already-public retries, permission denial, category conflicts, specialist links and protected effect changes. Combined Attachment SQL/transport tests still pass. This is a preview/publication planner only; Git publication, version-bound preview intent and UI remain pending. No live publication/deployment.
+
+## Saved-preview intent proposal
+
+attachment-preview.sql adds private service-only preview intents bound to actor, selected Item, saved Attachment version and 64-character output digest. Intents expire after 30 minutes; stale saved versions stop lookup and creation. Browser roles cannot call preparation or read the table. The trusted publish handler must reauthenticate, recheck permissions, regenerate the plan and compare its digest before publishing; this proposal alone does not authorize Git writes.
+
+Real local SQL tests pass valid lookup, wrong actor, stale version, malformed digest, browser denial and expired intent. Existing combined transport/storage and master-only publication-planner tests pass. No production migration or route activation. Next: connect these intents to preview/publish requests and trusted Git publication, then the category UI and coordinated release checks.
