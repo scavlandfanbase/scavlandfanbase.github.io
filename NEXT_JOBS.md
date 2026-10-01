@@ -1,3 +1,7 @@
+## Page Builder connected integration in progress — 1 October 2026
+
+Real private save/history, saved-revision review, Owner publishing and deployment checks are connected in the release worktree; live switches remain disabled and migrations are unapplied. GitHub Pages settings confirm main/root branch publishing. Nine isolated database race cases and the connected-browser fixture pass. Finish interrupted-dispatch recovery and release regressions before deployment/activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md for the current boundary.
+
 ## Pages deployment evidence prepared — 1 October 2026
 
 Read-only legacy build checking now requires the exact commit and matching public page bytes before success. Local tests and adjacent regression checks pass. Git write/recovery, build-mode confirmation and combined integration remain next; no live activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.

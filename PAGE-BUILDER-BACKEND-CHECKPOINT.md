@@ -1,6 +1,18 @@
 # Page Builder backend foundation — 1 October 2026
 
-Status: isolated preparation. No live route, database migration, deployment or Hub enablement. VS owns its local editor branch; this checkpoint does not modify those files.
+Status: connected integration preparation with live switches disabled. No Page Builder migration, deployment or Hub enablement. Reviewed VS editor files have been integrated into the Admin release worktree; the VS branch is preserved.
+
+## Connected release preparation — 1 October 2026
+
+The integration worktree now connects the reviewed Page Builder editor to authenticated private save, real retained revision reads, saved-revision preview, Owner publication reservation, single-dispatch Git publication and deployment reconciliation. Both the Hub and backend release switches remain false. All five database proposals remain unapplied. Earlier sections below describe historical checkpoints, not the current implemented boundary.
+
+GitHub repository Settings → Pages was read on 1 October: **Deploy from a branch**, **main**, **/ (root)**, default `https://scavlandfanbase.github.io/` and enforced HTTPS. This matches the prepared legacy-build adapter; no Pages settings were changed.
+
+Verified locally: connected browser fixture preserves unsaved entries while publishing the exact saved revision; adapter retries retain request IDs; caller/Owner transport checks; private storage/read permissions; and nine independent PostgreSQL race cases. The Admin npm suite passed with its existing non-fatal module-type warning. These are local/isolated results, not live production acceptance.
+
+Latest UI repair removes demonstration wording from real saved history, clears historical previews when switching drafts, and rejects stale asynchronous loads instead of replacing edits made while loading. Its connected-browser check and syntax check passed. Full Page Builder, Items and Vendor browser regressions are running after the shared local-server integration.
+
+Remaining before activation: prove recovery for a worker interrupted after acquiring its dispatch claim; complete connected reload/permission/error tests; finish full regression checks; commit/reconcile current main; then apply the reviewed private migrations and deploy the gated complete function bundle. Only after live permission/source acceptance should coordinated Hub/backend activation occur. No live release readiness is claimed yet.
 
 ## Verified repository boundary
 
