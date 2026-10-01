@@ -24,12 +24,14 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
    publication??={request_id:requestId,actor,state:'prepared',created_at:'2026-10-01T12:00:00.000Z',commit_sha:null};return Response.json(publication);
   }
   if(name==='scavland_prepare_page_git_candidate'){assert(trusted);candidate=args.p_candidate;return Response.json(candidate);}
+  if(name==='scavland_page_recovery'){assert(trusted);if(args.p_action==='claim')return Response.json({acquired:true});if(['confirm','cancel-unprepared'].includes(args.p_action))publication.state='refused';return Response.json(publication);}
   if(name==='scavland_page_dispatch'){assert(trusted);if(args.p_action==='claim'){const acquired=!claimed;claimed=true;return Response.json({acquired});}publication.state='refused';return Response.json(publication);}
   if(name==='scavland_page_publication_outcome'){assert(trusted);if(args.p_event.type==='commit'){publication.state='committed';publication.commit_sha=args.p_event.sha;}else if(args.p_event.status==='success')publication.state='live';else if(args.p_event.status==='failure')publication.state='build-failed';return Response.json(publication);}
   throw Error('unexpected RPC '+name);
  };
  const api=createPageControlApi({env:key=>config[key],fetcher,readSnapshot:async()=>snapshot,
   publisherFactory:options=>async()=>{candidate={requestId,commit:'c'.repeat(40),baseHead:snapshot.head,tree:'b'.repeat(40),digest:preview.digest,path:preview.path};await options.persistCandidate(candidate);if(await options.claimAttempt(candidate))dispatches++;return {...candidate,state:result,noWrite:result==='refused'};},
+  recoveryFactory:options=>async()=>{const fence={requestId,commit:'e'.repeat(40),baseHead:snapshot.head,candidateCommit:candidate.commit};await options.persistFence(fence);await options.claimFence(fence);return {...candidate,state:'fenced'};},
   observeGit:async value=>{observations++;return {...value,state:'committed'};},discoverBuild:async()=> '123',readBuild:async({commit,buildId})=>({type:'build',sha:commit,runId:buildId,status:build})});
  const call=body=>api(new Request('https://fixture',{method:'POST',headers:{Authorization:'Bearer caller'},body:JSON.stringify({domain:'page-builder',...body})}));
  assert.equal((await call({action:'source'})).status,200);
@@ -41,6 +43,8 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
  build='success';assert.equal((await (await call({action:'status',requestId})).json()).publication.state,'live');assert.equal(dispatches,1);
  publication.state='prepared';candidate=null;assert.equal((await (await call({action:'status',requestId})).json()).uncertain,true);assert.equal(observations,0);
  candidate={commit:'c'.repeat(40)};build='pending';assert.equal((await (await call({action:'status',requestId})).json()).publication.state,'committed');assert.equal(observations,1);assert.equal(dispatches,1);
+ publication.state='prepared';candidate=null;assert.equal((await (await call({action:'recover',requestId})).json()).publication.state,'refused');
+ publication.state='prepared';candidate={commit:'c'.repeat(40)};assert.equal((await (await call({action:'recover',requestId})).json()).publication.state,'refused');assert.equal(dispatches,1);
  allowed=false;const before=log.length;assert.equal((await call({action:'preview',pageId,version:1,requestId:previewId})).status,403);assert.equal(log.length,before+1);
  assert.equal((await call({action:'status',requestId,evidence:{status:'success'}})).status,400);
  console.log('PASS Page control API fixtures: gated strict actions, caller permission before service work, saved preview, Owner publishing, status-only reconciliation and matching build confirmation.');

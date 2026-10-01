@@ -21,6 +21,7 @@ export function validatePageRequest(input){
   case 'revision':keys(input,['domain','action','pageId','version']);identity(input.pageId);version(input.version);break;
   case 'preview':keys(input,['domain','action','pageId','version','requestId']);identity(input.pageId);version(input.version);identity(input.requestId);break;
   case 'publish':keys(input,['domain','action','previewId','requestId']);identity(input.previewId);identity(input.requestId);break;
+  case 'recover':
   case 'status':keys(input,['domain','action','requestId']);identity(input.requestId);break;
   case 'create':
    keys(input,['domain','action','requestId','page']);identity(input.requestId);

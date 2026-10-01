@@ -20,7 +20,7 @@ export function createPageApi({env,fetcher=fetch,readContext}){
    const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY');if(!sb||!key)fail(503);
    const raw=await request.text();if(new TextEncoder().encode(raw).length>1100000)fail(413);
    let command;try{command=validatePageRequest(JSON.parse(raw));}catch{fail(400);}
-   if(['source','history','revision','preview','publish','status','page-state'].includes(command.action))return controls(controlRequest);
+   if(['source','history','revision','preview','publish','status','recover','page-state'].includes(command.action))return controls(controlRequest);
    async function rpc(name,args,trusted=false){
     const credential=trusted?env('SUPABASE_SERVICE_ROLE_KEY'):key;if(!credential)fail(503);
     const response=await fetcher(sb+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:credential,

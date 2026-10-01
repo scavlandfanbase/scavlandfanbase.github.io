@@ -1,3 +1,4 @@
+import {createPageGitRecovery} from './page-git-recovery.mjs';
 import {validatePageRequest} from './page-request.mjs';
 import {createPageContextSource} from './page-source.mjs';
 import {createTrustedPagePreview} from './page-preview.mjs';
@@ -7,7 +8,7 @@ const headers={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io'
 const reply=(value,status=200)=>Response.json(value,{status,headers});
 function fail(status=503){const error=new Error();error.status=status;throw error;}
 // Gated production preparation. Browser supplies identities, never Git evidence.
-export function createPageControlApi({env,fetcher=fetch,readSnapshot,publisherFactory=createPageGitPublisher,observeGit,discoverBuild,readBuild}){
+export function createPageControlApi({env,fetcher=fetch,readSnapshot,publisherFactory=createPageGitPublisher,recoveryFactory=createPageGitRecovery,observeGit,discoverBuild,readBuild}){
  const source=readSnapshot??createPageContextSource({env,fetcher,withSnapshot:true});
  return async request=>{
   if(env('PAGE_BUILDER_ENABLED')!=='true')return reply({error:'Page Builder is not enabled.'},503);
@@ -39,7 +40,7 @@ export function createPageControlApi({env,fetcher=fetch,readSnapshot,publisherFa
     await rpc('scavland_prepare_page_preview',{p_actor:actor,p_request:command.requestId,p_page:command.pageId,p_version:command.version,p_preview:preview},true);
     return reply({previewId:command.requestId,preview,page:current.draft.payload});
    }
-   if(!['publish','status'].includes(command.action))fail(400);
+   if(!['publish','status','recover'].includes(command.action))fail(400);
    if(command.action==='publish')await rpc('scavland_reserve_page_publication',{p_request:command.requestId,p_preview:command.previewId});
    let work=await read({p_action:'publication',p_request:command.requestId});
    async function confirmBuild(){
@@ -53,6 +54,16 @@ export function createPageControlApi({env,fetcher=fetch,readSnapshot,publisherFa
     return reply({publication:work.publication});
    }
    if(work.publication.state!=='prepared')return await confirmBuild();
+   if(command.action==='recover'){
+    const recoveryAttempt=crypto.randomUUID();
+    const recovery=(action,fence)=>rpc('scavland_page_recovery',{p_request:command.requestId,p_attempt:recoveryAttempt,p_action:action,p_fence:fence},true);
+    if(!work.candidate){await recovery('cancel-unprepared',null);work=await read({p_action:'publication',p_request:command.requestId});return reply({publication:work.publication});}
+    let fence;
+    const result=await recoveryFactory({env,fetcher,persistFence:async value=>{fence=value;await recovery('prepare',value);},claimFence:async value=>(await recovery('claim',value)).acquired})({candidate:work.candidate,createdAt:new Date(work.publication.created_at).toISOString()});
+    if(result.state==='fenced')await recovery('confirm',fence);
+    else if(result.state==='committed')await rpc('scavland_page_publication_outcome',{p_request:command.requestId,p_event_id:crypto.randomUUID(),p_event:{type:'commit',sha:result.commit}},true);
+    work=await read({p_action:'publication',p_request:command.requestId});return await confirmBuild();
+   }
    const attempt=crypto.randomUUID();
    const publisher=publisherFactory({env,fetcher,persistCandidate:candidate=>rpc('scavland_prepare_page_git_candidate',{p_request:command.requestId,p_candidate:candidate},true),
     claimAttempt:async()=> (await rpc('scavland_page_dispatch',{p_request:command.requestId,p_attempt:attempt,p_action:'claim'},true)).acquired});

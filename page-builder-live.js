@@ -43,7 +43,7 @@
   },
   check:async requestId=>{if(lastRequest?.own===false){const result=await call({action:'page-state',pageId:lastPageId});const p=result.publication;if(!p)throw Error('Publication status unavailable.');lastRequest={requestId:p.requestId,revision:p.version,state:({prepared:'outcome-unknown',committed:'deployment-pending','build-failed':'deployment-failed',live:'published',refused:'refused'})[p.state],commitId:p.commit,confirmed:p.state==='live',own:p.own};return lastRequest;}
    const result=await call({action:'status',requestId});lastRequest=publication(result);return lastRequest;},
-  advance:async requestId=>publicationAdapter.check(requestId),retry:async requestId=>publicationAdapter.check(requestId)
+  advance:async requestId=>publicationAdapter.check(requestId),retry:async requestId=>{if(lastRequest?.state==='outcome-unknown'&&lastRequest.own!==false){const result=await call({action:'recover',requestId});lastRequest=publication(result);return lastRequest;}return publicationAdapter.check(requestId);}
  };
  window.ScavPageBackend={ready,api,call,record,publicationAdapter,get canPublish(){return canPublish;},
   load:async id=>{const result=await call({action:'load',pageId:id});if(!result.draft||result.draft.archived)throw Error('This page is archived or unavailable.');

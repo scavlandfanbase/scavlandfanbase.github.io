@@ -248,7 +248,8 @@
     publicationNextButton.hidden=!!live||!canAdvance;publicationNextButton.disabled=publicationInFlight;
     const canCheck=!!publicationRequest&&(['deployment-pending','deployment-failed','outcome-unknown'].includes(publicationRequest.state)||publicationRequest.state==='published'&&publicationRequest.confirmed!==true);
     publicationCheckButton.hidden=!canCheck;publicationCheckButton.disabled=publicationInFlight;
-    const canRetry=!!publicationRequest&&publicationRequest.state==='deployment-failed';
+    const canRetry=!!publicationRequest&&(publicationRequest.state==='deployment-failed'||live&&publicationRequest.state==='outcome-unknown'&&publicationRequest.own!==false);
+    if(live)publicationRetryButton.textContent=publicationRequest?.state==='outcome-unknown'?'Recover interrupted publication':'Check deployment recovery';
     publicationRetryButton.hidden=!canRetry;publicationRetryButton.disabled=publicationInFlight;
     publicationReviewed.hidden=!publicationReview;
     if(publicationReview)publicationReviewed.textContent=`Reviewed saved revision ${publicationReview.revision} of “${publicationReview.title}” · SHA-256 ${publicationReview.digest.slice(0,16)}…${dirty?' · current editor has unsaved changes and is not part of this review':''}`;

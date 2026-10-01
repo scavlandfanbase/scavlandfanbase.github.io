@@ -8,7 +8,7 @@ const {PGlite}=require('@electric-sql/pglite');
  create function public.has_scavland_permission(p text) returns boolean language sql stable security definer set search_path='' as $$select exists(select 1 from public.fixture_users where id=auth.uid()) and p='content_edit'$$;
  create function public.is_scavland_owner() returns boolean language sql stable security definer set search_path='' as $$select coalesce((select is_owner from public.fixture_users where id=auth.uid()),false)$$;
  grant usage on schema auth to authenticated;`);
- for(const file of ['page-builder-storage.sql','page-builder-publication.sql','page-builder-git-candidate.sql','page-builder-dispatch.sql','page-builder-read.sql'])await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals',file),'utf8'));
+ for(const file of ['page-builder-storage.sql','page-builder-publication.sql','page-builder-git-candidate.sql','page-builder-dispatch.sql','page-builder-read.sql','page-builder-recovery.sql'])await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals',file),'utf8'));
  const run=(role,who,name,args)=>db.transaction(async tx=>{await tx.exec('set local role '+role);await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[who??'']);return (await tx.query('select public.'+name+'('+args.map((_,i)=>'$'+(i+1)).join(',')+') as v',args)).rows[0].v;});
  const prepare=(r,a,id,v,command,payload=null)=>run('service_role',null,'scavland_prepare_page',[owner,r,a,id,v,command,payload]);
  const access=(action,id,r=null)=>run('authenticated',owner,'scavland_page',[action,id,r,null]);
@@ -77,9 +77,23 @@ const {PGlite}=require('@electric-sql/pglite');
  assert.equal((await readWork('publication',owner,null,request2)).publication.state,'refused');
  await assert.rejects(readWork('publication',editor,null,request2),error=>error.code==='42501');
  await assert.rejects(run('anon',null,'scavland_read_page_work',['history',page.id,null,null]),error=>error.code==='42501');
+ const request3=crypto.randomUUID(),preview3Id=crypto.randomUUID(),recoveryAttempt=crypto.randomUUID();
+ const saved3=(await access('load',page.id)).draft;
+ const preview3=await createTrustedPagePreview({saved:saved3,snapshot:{head:preview.baseHead,manifest:{schemaVersion:1,pages:[]},context:{approvedImages:[],existingPages:[{id:page.id,slug:page.slug}],currentPageId:page.id}}});
+ await run('service_role',null,'scavland_prepare_page_preview',[owner,preview3Id,page.id,3,preview3]);await reserve(owner,request3,preview3Id);
+ await run('service_role',null,'scavland_prepare_page_git_candidate',[request3,{...candidate,requestId:request3,digest:preview3.digest}]);
+ const fence={requestId:request3,commit:'e'.repeat(40),baseHead:candidate.baseHead,candidateCommit:candidate.commit};
+ const recovery=(action,worker=recoveryAttempt,value=fence)=>run('service_role',null,'scavland_page_recovery',[request3,worker,action,value]);
+ await assert.rejects(recovery('confirm'),error=>error.code==='PT409');
+ await recovery('prepare');await recovery('prepare');
+ await assert.rejects(recovery('prepare',recoveryAttempt,{...fence,commit:'f'.repeat(40)}),error=>error.code==='PT409');
+ await assert.rejects(recovery('confirm'),error=>error.code==='PT409');
+ assert.equal((await recovery('claim')).acquired,true);assert.equal((await recovery('claim',crypto.randomUUID())).acquired,false);
+ assert.equal((await recovery('confirm')).state,'refused');assert.equal((await recovery('confirm')).state,'refused');
+ await assert.rejects(run('authenticated',owner,'scavland_page_recovery',[request3,recoveryAttempt,'confirm',fence]),error=>error.code==='42501');
  await db.query('update public.fixture_users set is_owner=false where id=$1',[owner]);
  await assert.rejects(reserve(),error=>error.code==='42501','Owner revocation blocks reservation replay');
- for(const role of ['anon','authenticated','service_role'])for(const table of ['previews','publications','publication_events','git_candidates'])for(const privilege of ['SELECT','INSERT','UPDATE','DELETE']){
+ for(const role of ['anon','authenticated','service_role'])for(const table of ['previews','publications','publication_events','git_candidates','git_recovery'])for(const privilege of ['SELECT','INSERT','UPDATE','DELETE']){
   assert.equal((await db.query('select has_table_privilege($1,$2,$3) as allowed',[role,'scavland_pages.'+table,privilege])).rows[0].allowed,false);
  }
  for(const table of ['previews','publications','publication_events'])assert.equal((await db.query('select relrowsecurity from pg_class where oid=$1::regclass',['scavland_pages.'+table])).rows[0].relrowsecurity,true);
