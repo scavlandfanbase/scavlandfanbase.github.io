@@ -1,10 +1,34 @@
 // Trusted master-only classification preparation; not registered as a live API.
 import {Attachments,Verification} from './models.generated.mjs';
 import {fail} from './core.mjs';
+import {legacyDigest} from './legacy-item-review.mjs';
+import {legacyItemBlockers} from './item-draft.mjs';
 const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
 function authorize(context){
  if(typeof context.actor!=='string'||!context.actor.trim())fail('Authenticated identity is required.',401);
  if(!context.permissions?.includes('items_edit'))fail('Items editing permission is required.',403);
+}
+
+// Context is loaded by the trusted service, never supplied in a browser payload.
+// The eventual receipt store must recheck these bindings within its save transaction.
+export async function prepareAttachmentDecision(command,context={}){
+ authorize(context);
+ const allowed=['action','confirmId','attachmentType','confirmReclassification','expectedVersion','sourceDigest'];
+ if(!object(command)||Object.keys(command).some(key=>!allowed.includes(key)))fail('Unsupported Attachment preparation fields.');
+ if(!Number.isSafeInteger(context.version)||context.version<0||command.expectedVersion!==context.version)fail('The saved draft changed. Reload before classifying.',409);
+ const source=context.source;
+ if(!object(source)||command.confirmId!==source.id)fail('Confirm the current Item identity.');
+ if(context.savedDraft)fail('This item already has private shared work. Review it before classifying.',409);
+ if(!Array.isArray(context.legacyDrafts))fail('Load existing Items work before classifying.',503);
+ const blockers=legacyItemBlockers(source.id,source,context.legacyDrafts);
+ if(blockers.length)fail('This item has pending work in the existing Items draft. Preserve it before classifying.',409);
+ if(!object(context.settings))fail('Load the current patch before classifying.',503);
+ const sourceDigest=await legacyDigest({source,settings:context.settings});
+ if(command.sourceDigest!==sourceDigest)fail('Item facts or the patch changed. Reload before classifying.',409);
+ const {expectedVersion,sourceDigest:ignored,...decision}=command;
+ const prepared=prepareAttachmentClassification(source,decision,context);
+ return {...prepared,expectedVersion,sourceDigest,actor:context.actor,
+  legacyDigest:await legacyDigest(context.legacyDrafts),category:'attachments'};
 }
 export function prepareAttachmentClassification(record,command,context={}){
  authorize(context);

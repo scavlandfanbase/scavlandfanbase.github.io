@@ -18,3 +18,9 @@ attachment-draft.mjs now prepares a master-only classification decision using th
 This is a pure preparation contract, not durable saving, a hosted endpoint or permission rollout. No production changes. Next: bind this decision to source revision/digest, legacy-work protection and durable preparation/save receipts before exposing controls. Do not accept browser-supplied record/history as trusted input.
 
 Validation: test-attachment-draft, test-shared-attachment-review and test-item-draft pass; git diff --check passes. Fixture tests cover permission/identity refusal, explicit consent, unknown types, immutable provenance, category collision, malformed classification, Unverified attribution and repeated-decision history preservation.
+
+## Revision/source-bound preparation
+
+prepareAttachmentDecision accepts only the explicit decision plus expectedVersion and sourceDigest. Trusted context supplies source, saved version, patch, server actor and existing private/legacy work. Preparation refuses stale saved versions, changed public facts/patch, unavailable legacy inspection, overlapping Items changes and existing shared drafts. Returned preparation binds source and full inspected legacy digest. Browser-supplied record/actor/history is rejected.
+
+Tests passed: test-attachment-draft, test-legacy-item-review and diff whitespace check. This does not yet persist a receipt. The SQL store still accepts only Ammo/Armour/Weapons and requires a separately reviewed master-only payload/save contract. Saving must recheck these bindings transactionally; the production API must load authoritative context before preparation. No schema/backend/frontend deployment or genuine draft change.

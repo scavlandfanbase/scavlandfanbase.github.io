@@ -1,3 +1,5 @@
+**Attachment preparation binding — 1 October:** stale revision/source/patch and private legacy overlap checks now pass fixture tests. Durable master-only receipt storage remains next; current production shared storage supports three specialist categories only. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
+
 **Attachment follow-up — 1 October:** explicit master-only classification preparation is implemented/tested under existing items_edit permission. Durable receipt saving/API remains next; no live activation or real reclassification. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
 
 **1 October next checkpoint:** Special FMJ Ammo recovery confirmed saved privately with history retained and Ammo Unverified. Read-only Attachment review foundation is implemented/tested: zero explicit Attachments, 74 candidates, exact vendor IDs and preserved commercial values. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md. Next is the master-only trusted Attachment contract and permission/storage integration; no hosted Attachment editor or deployment yet. Page Builder work belongs to Copilot.
