@@ -185,3 +185,9 @@ Combined browser/transport/PGlite coverage verifies selecting a recorded Weapon,
 Prepared attachment-create.mjs without registering it in the API. Server context supplies an Attachment UUID identity, complete Items/Weapons/Armour/Ammo catalogues, saved shared IDs, legacy catalogue inspection, patch and actor. Explicit creation consent and a name are required. Reuses edit validation for typed fields, approved images and recorded compatibility; unspecified numbers/details remain null and effects are not invented. Always starts Unverified with trusted history. Source baseline is null and creation is marked explicitly for future projection.
 
 Focused tests pass for collisions, missing inspection, forged IDs/protected facts, compatibility, immutability and unknown defaults. Added this suite to the release runner. Request-bound allocation/retry, null-baseline storage/load/publication and Add UI acceptance remain required. No live new-record action or rollout.
+
+## Request-bound new identity storage — 1 October
+
+Prepared attachment-creation-allocation.sql: service-only allocation RPC stores generated UUID identity, actor and exact creation command; request lock makes retry return the original allocation. RLS/direct table revocations protect it. Reciprocal request binding refuses an allocated request in existing specialist preparation and requires matching actor/item/command, creation marker, null baseline and expected version 0 for Attachment preparation.
+
+Local PGlite tests pass for retained identity after lost-response retry, actor/command reuse refusal, invalid browser identity, browser/direct service table denial, valid bound receipt and immutable version-1 save/retry. Existing legacy revision guards remain effective. Allocation alone does not create a public or saved item. Proposal is unapplied. Next: API/transport allocation, private new-record loading/listing and null-baseline publication, then Add UI.
