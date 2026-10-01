@@ -1,3 +1,5 @@
+**Deployment update — 1 October:** admin-drafts v12 is active. PR #34 is ready for review but its frontend merge was rejected by automatic approval review pending explicit approval of the Armour/Weapons production rollout. Main/Pages remain cd460b2 (Ammo release). Items v20, Vendors v6 and zero shared versions are unchanged. No genuine game-data publication occurred.
+
 # Connected category release — 1 October 2026
 
 PR #33 merged as cd460b2 and GitHub Pages deployment succeeded. SHARED_ITEM_ENABLED=true was explicitly saved in the project dashboard; missing flags still default to disabled. Unsigned live shared requests now return 401, proving the activated route enforces sign-in. Existing publishing/patch flag digests match the explicit true value; no credentials were read or exported. Current Admin tab is signed out, so real Owner/Admin acceptance is pending.
