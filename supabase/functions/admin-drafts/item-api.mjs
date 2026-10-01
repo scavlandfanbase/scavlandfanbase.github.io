@@ -1,7 +1,7 @@
 // Feature-gated authenticated per-item bridge. No browser authority over payloads/actors.
 import {snapshotItem,categoryView,reconcilePublishedItem,editItem,reviewItem,createAmmoItem,addAmmoFacet,lifecycleItem,planItem,createItemPublisher} from './item-draft.mjs';
 import {fail} from './core.mjs';
-import {inspectLegacyItem} from './legacy-item-review.mjs';
+import {inspectLegacyItem,prepareLegacyImport,legacyDigest} from './legacy-item-review.mjs';
 const repository='scavlandfanbase/scavlandfanbase.github.io';
 const permission={ammo:'ammunition_edit',armour:'armour_edit',weapons:'weapons_edit'};
 const cors={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
@@ -46,7 +46,8 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const latest=await source();const context={actor,permissions:[permission[body.category]],settings:latest.settings,images:latest.images};
    if(body.action==='legacy-review'){
     const legacy=await rpc('scavland_item_legacy',{},true);
-    return reply(await inspectLegacyItem(latest.documents,legacy,body.itemId,body.category,context));
+    const saved=await rpc('scavland_item_draft',{p_action:'load',p_item:body.itemId,p_category:body.category});
+    return reply({...await inspectLegacyItem(latest.documents,legacy,body.itemId,body.category,context),currentVersion:saved.currentVersion,revision:saved.draft?.payload.revision||0});
    }
    const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
    if(body.action==='create'){
@@ -78,12 +79,22 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const seed=exists?snapshotItem(latest.documents,body.itemId,body.category,context):null; // Fresh membership when public.
    if(!seed&&!saved.draft?.payload.creation?.items&&body.action!=='save')fail('Item not found.',404);
    const state=saved.draft?reconcilePublishedItem(categoryView(saved.draft.payload,body.category,context),latest.documents):seed;
-   const legacy=await rpc('scavland_item_legacy',{},true),legacyDrafts=legacy?[legacy]:[];
-   if(state)planItem(state,latest.documents,{legacyDrafts}); // Also guards old draft overlap on load/save.
+   const legacy=await rpc('scavland_item_legacy',{},true);
+   const guardedLegacy=async(s,l)=>s?.legacyTransfer&&l?.version===s.legacyTransfer.sourceVersion&&await legacyDigest(l)===s.legacyTransfer.sourceDigest?[]:l?[l]:[];
+   const legacyDrafts=await guardedLegacy(state,legacy);
+   const importing=body.command?.action==='import-legacy'&&['prepare','save'].includes(body.action);
+   if(state&&!importing)planItem(state,latest.documents,{legacyDrafts});
    if(body.action==='load')return reply({currentVersion:saved.currentVersion,state,hasChanges:!!(Object.keys(state.changes).length||Object.keys(state.creation||{}).length),settings:latest.settings,images:latest.documents['data/site-images.json'],usage:usage(body.itemId),canPublish:env('DRAFT_PUBLISH_ENABLED')==='true'&&env('ADMIN_CORE_ENABLED')==='true'});
    if(!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<0)fail('The saved item version is required.');
    if(body.action==='save'){
     if(!uuid(body.requestId))fail('A prepared receipt is required.');
+    if(importing){
+     const receipt=await rpc('scavland_prepare_item',{p_actor:actor,...args,p_version:body.expectedVersion,p_request:body.requestId,p_command:body.command},true);
+     if(!receipt)fail('Prepare this import first.',409);
+     const report=await inspectLegacyItem(latest.documents,legacy,body.itemId,body.category,context);
+     if(report.publicDigest!==receipt.payload.legacyTransfer.publicDigest||report.sourceDigest!==receipt.payload.legacyTransfer.sourceDigest)fail('Import sources changed. Review again.',409);
+     planItem(receipt.payload,latest.documents,{legacyDrafts:await guardedLegacy(receipt.payload,legacy)});
+    }
     return reply(await rpc('scavland_item_draft',{p_action:'save',...args,p_expected_version:body.expectedVersion,p_request:body.requestId}));
    }
    if(body.action==='prepare'){
@@ -91,7 +102,9 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
     const prepareArgs={p_actor:actor,...args,p_version:body.expectedVersion,p_request:body.requestId,p_command:body.command};
     const receipt=await rpc('scavland_prepare_item',prepareArgs,true);if(receipt)return reply(receipt);
     if(saved.currentVersion!==body.expectedVersion)fail('A newer item draft exists.',409);
-    const changed=(body.command.action==='review'?reviewItem:body.command.action==='add-facet'?addAmmoFacet:['archive','restore'].includes(body.command.action)?lifecycleItem:editItem)(state,body.command,context);planItem(changed,latest.documents,{legacyDrafts});
+    const changed=importing?await prepareLegacyImport(latest.documents,legacy,state,body.command,context):(body.command.action==='review'?reviewItem:body.command.action==='add-facet'?addAmmoFacet:['archive','restore'].includes(body.command.action)?lifecycleItem:editItem)(state,body.command,context);
+    if(importing)await rpc('scavland_preserve_item_legacy',{p_version:legacy.version},true);
+    planItem(changed,latest.documents,{legacyDrafts:await guardedLegacy(changed,legacy)});
     return reply(await rpc('scavland_prepare_item',{...prepareArgs,p_payload:changed},true));
    }
    if(!saved.draft)fail('Save this item draft first.',404);
@@ -111,7 +124,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
     if((await load()).currentVersion!==body.expectedVersion)fail('A newer item draft exists. Review again.',409);
     const currentLegacy=await rpc('scavland_item_legacy',{},true);
     const now=await source();if(!state.creation?.items)snapshotItem(now.documents,body.itemId,body.category,context);
-    planItem(state,now.documents,{legacyDrafts:currentLegacy?[currentLegacy]:[]});
+    planItem(state,now.documents,{legacyDrafts:await guardedLegacy(state,currentLegacy)});
    }).publish();
    return reply({publishedVersion:body.expectedVersion,publication});
   }catch(e){return reply({error:e.status?e.message:'Could not complete this item action. Draft retained; inspect public state before retrying an uncertain publish.'},e.status||503);}

@@ -1,5 +1,7 @@
 # CURRENT STATE — 29 SEPTEMBER 2026
 
+**1 October import bridge:** explicit Import privately is connected to trusted snapshot/receipt saves and version/digest-bound saved acknowledgement, then ordinary preview/publication. SQL/API/browser fixtures pass; no genuine drafts imported or live changes. See `SHARED-LEGACY-IMPORT-SAVE-CHECKPOINT.md`. Next: full stack/migration review, refreshed production state and concrete coordinated rollout preparation; unresolved manual fields stay blocked.
+
 **1 October resume:** reviewed legacy import preparation now checks exact source/public digests and identity/revision, preserves disjoint pending work and historical private context, and rejects conflicts. See `SHARED-LEGACY-IMPORT-CHECKPOINT.md`. Next is authenticated receipt-backed import/save, durable acknowledgement and the explicit UI; overlap protection remains enabled. No live changes.
 
 **Stopped for the night — 30 September:** all prepared code is committed/pushed through draft PR #30. Resume from `RESUME-SHARED-ADMIN.md`. First task: explicit version-bound legacy import/acknowledgement, followed by coordinated rollout preparation. Nothing from the shared-editor stack is live yet; existing genuine drafts remain intact.
