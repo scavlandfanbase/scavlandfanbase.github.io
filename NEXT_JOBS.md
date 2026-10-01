@@ -1,4 +1,32 @@
+**1 October live foundation:** final three shared migrations applied; admin-drafts v11 deployed with shared editing still disabled. Existing drafts unchanged. See ADMIN-AVAILABILITY-RELEASE.md for exact evidence, remaining category work and pending explicit flag/frontend activation. This supersedes earlier no-production-change notes.
+
+**1 October release review:** combined local checks pass; production remains main 98d121a / admin-drafts v10, Items v20 and Vendors v6. Handoff, manifest and cache tags refreshed. See SHARED-ROLLOUT-CHECKPOINT.md for final migration order and pending genuine-draft/flag/Owner acceptance. No live changes.
+
 # CURRENT STATE — 29 SEPTEMBER 2026
+
+**1 October import bridge:** explicit Import privately is connected to trusted snapshot/receipt saves and version/digest-bound saved acknowledgement, then ordinary preview/publication. SQL/API/browser fixtures pass; no genuine drafts imported or live changes. See `SHARED-LEGACY-IMPORT-SAVE-CHECKPOINT.md`. Next: full stack/migration review, refreshed production state and concrete coordinated rollout preparation; unresolved manual fields stay blocked.
+
+**1 October resume:** reviewed legacy import preparation now checks exact source/public digests and identity/revision, preserves disjoint pending work and historical private context, and rejects conflicts. See `SHARED-LEGACY-IMPORT-CHECKPOINT.md`. Next is authenticated receipt-backed import/save, durable acknowledgement and the explicit UI; overlap protection remains enabled. No live changes.
+
+**Stopped for the night — 30 September:** all prepared code is committed/pushed through draft PR #30. Resume from `RESUME-SHARED-ADMIN.md`. First task: explicit version-bound legacy import/acknowledgement, followed by coordinated rollout preparation. Nothing from the shared-editor stack is live yet; existing genuine drafts remain intact.
+
+**30 September preservation/preflight batch:** selected-item read-only legacy review, service-only immutable snapshot proposal and an exact local rollout manifest are prepared/tested. No genuine drafts changed or production deployment. See `SHARED-LEGACY-PRESERVATION-CHECKPOINT.md`. Explicit version-bound import/acknowledgement remains the next checkpoint; overlap protection stays enabled, followed by coordinated rollout and real Owner acceptance.
+
+**30 September Ammo actions batch:** Add, permission-filtered unpublished-item listing, explicit missing-facet creation and private archive/restore are now connected and fixture-tested. No production changes. See `SHARED-AMMO-ACTIONS-CHECKPOINT.md`. Next is reviewed preservation of overlapping old Items drafts and coordinated release preparation; extend other categories before removing general Items.
+
+**30 September Ammo creation contract:** trusted one-ID shared record/facet creation and atomic insertion are prepared and tested, including private storage, duplicate-free retries and later editing. No Add UI/API activation or deployment yet. See `SHARED-AMMO-CREATION-CHECKPOINT.md`. Next: server identity assignment, creation receipts, unpublished-item listing and Add dialog; then archive/restore and old-draft preservation.
+
+**30 September Ammo review checkpoint:** explicit selected-category Verified/Unverified review is prepared, with trusted actor/patch checks, retained private history and verification summaries in preview. No deployment. See `SHARED-AMMO-REVIEW-CHECKPOINT.md`. Next: shared identity/facet creation, archive/restore, and old-draft preservation before coordinated rollout.
+
+**30 September Ammo screen checkpoint:** selected-item shared Ammo editing is connected and browser-tested in preparation. Vendor usage, private save/reload, selected preview/publication and a second edit after publication pass with fixture services. No deployment. See `SHARED-AMMO-SCREEN-CHECKPOINT.md`. Next are required shared add/review/archive actions and an explicit old-draft preservation/import path before coordinated release; the general Items route stays available.
+
+**30 September API checkpoint:** signed-in per-item bridge and private preview intents are implemented and tested on top of the contract. Nothing deployed. See `SHARED-ITEM-API-CHECKPOINT.md`. Next: connect Ammo to shared item IDs, then complete required actions and existing-draft preservation before coordinated release. Independent Ammo PR #22 remains on hold.
+
+**30 September backend checkpoint:** per-item edit/publication model and separate trusted receipt-storage proposal are implemented and locally tested. No production changes. See `SHARED-ITEM-DRAFT-CHECKPOINT.md` for evidence and exact remaining API bridge, version/preview binding, legacy-draft migration and category UI work. This supersedes the earlier “next is the contract” wording below; do not deploy independent Ammo PR #22.
+
+**30 September update:** proceed with connected category editors, not independent Items/Ammo copies. Draft PR #22 is on hold and must not be deployed. The first read-only shared-catalogue resolver checkpoint verifies all 13 Ammo, 31 Armour, 39 Weapon identities and canonical Vendor references. Shared-value conflicts are reported without changing data. Next is the trusted per-item draft/atomic publishing contract before replacing category editors. See `SHARED-CATALOGUE-PLAN.md`.
+
+Owner screenshots on 29 September confirmed Items refresh and preview recovery. This establishes that checkpoint, not real publication acceptance. Historical pending-recovery statements below are superseded.
 
 Verified against main `9c0d3815fb686c93b151515f0c609f7dc7f9d6bb`, deployed Admin assets and read-only production checks. This queue supersedes the historical entries below; see the reconciliation addendum in ADMIN-0.1-INTEGRATION.md.
 
@@ -387,5 +415,3 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
 
 - Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
-
-
