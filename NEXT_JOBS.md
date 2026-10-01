@@ -1,3 +1,7 @@
+## 2026-10-01 — Attachment concurrent-save review
+
+Reviewed supported RPC lock order and documented six independent-session acceptance scenarios in ATTACHMENT-CONCURRENCY-REVIEW.md. Revision checks occur after transaction locks; reciprocal guards serialize competing specialist/Attachment authority. Static review is complete, while actual simultaneous Postgres acceptance remains unexecuted: no local Postgres/Docker executable was available. The separate Git/database publication interval is explicitly retained as a release limitation. No live changes.
+
 ## 2026-10-01 — Repeatable Attachment database readiness
 
 Added read-only supabase/proposals/attachment-readiness.sql. It reports exact prerequisite identities, four expected private tables and their RLS/direct access, six RPC signatures and role execution rights, and four overlap/allocation triggers. It returns no private draft contents, account identities or secrets. Missing objects are reported safely; the inventory does not authorize activation.
