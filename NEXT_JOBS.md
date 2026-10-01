@@ -1,3 +1,7 @@
+## Page Builder publication contracts prepared — 1 October 2026
+
+Strict public identity metadata and private publication outcome transitions now have local tests. Trusted source accepts indexed page routes and rejects unknown/missing custom HTML. Commit, pending build, failed build and confirmed live output remain distinct. Next: trusted preview/rendered digest, durable publication intents and Git/Pages recovery adapter. No public data, migration, deployment or live Page Builder activation. Details: PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Page Builder authenticated adapter prepared — 1 October 2026
 
 Unused gated adapter now connects caller authorization, server identity allocation, reviewed page-model validation, prepared receipts and private SQL commit. Trusted context reads pinned repository image files and paginated private identities. Lost-response/stale/privacy/source tests pass locally. Public identity manifest, preview/publication recovery, combined routing/editor/history and live acceptance remain next. No live changes; see PAGE-BUILDER-BACKEND-CHECKPOINT.md.
