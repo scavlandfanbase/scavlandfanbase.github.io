@@ -159,3 +159,7 @@ The combined browser test passes. This interleaved two-page case does not establ
 ## Deployment manifest and asset cache checkpoint — 1 October
 
 Prepared ATTACHMENT-DEPLOYMENT-MANIFEST.md covering complete backend deployment, existing dependencies, migration order, protected permissions, flags, coordinated frontend activation and retained-data recovery. Corrected an asset cache gap: child CSS/model/script now share the frame version attachment-preparation-20261001-2. Hub and combined browser/SQL tests pass after this fix. No flags, migrations, live data or deployments changed. Fresh production state and remaining release acceptance are still required.
+
+## Read-only production preflight — 1 October
+
+Recorded live v13 deployment, absence of Attachment objects, existing RLS tables and aggregate retained draft baseline in ATTACHMENT-PRODUCTION-PREFLIGHT.md. Live permission SQL grants active Owners by role; corrected the prepared Hub rule accordingly and added Owner coverage. Release switch remains false. Hub browser tests pass. No production changes.

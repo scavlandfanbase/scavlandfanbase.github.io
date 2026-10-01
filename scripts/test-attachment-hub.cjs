@@ -12,6 +12,7 @@ function harness(enabled,permissions,authorized=true){
 for(const [enabled,permissions,expected] of [[false,['items_edit'],false],[true,['weapons_edit'],false],[true,['items_edit'],true],[true,[],false]]){
  const h=harness(enabled,permissions);assert.equal(vm.runInContext("allowedAdminViews().has('attachments')",h.context),expected);h.context.frame=h.frame;vm.runInContext('sendSession(frame)',h.context);assert.equal(h.messages.length,expected?1:0);if(expected)assert.equal(h.messages[0].origin,'https://fixture.test');
 }
+const owner=harness(true,[]);owner.context.adminProfile.role='owner';assert(vm.runInContext("allowedAdminViews().has('attachments')",owner.context));owner.context.frame=owner.frame;vm.runInContext('sendSession(frame)',owner.context);assert.equal(owner.messages.length,1);
 const h=harness(true,['items_edit'],false);h.context.frame=h.frame;vm.runInContext('sendSession(frame)',h.context);assert.equal(h.messages.length,0);
 assert.match(html,/const ATTACHMENT_RELEASE_ENABLED=false/);
 assert.match(html,/attachment-category\.html\?embed=1&amp;v=attachment-preparation-20261001-2/);

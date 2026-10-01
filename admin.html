@@ -41,7 +41,7 @@ function allowedAdminViews(){
     const view=permissionViews[permission];
     if(view)allowed.add(view);
   }
-  if(ATTACHMENT_RELEASE_ENABLED && adminProfile?.permissions?.includes('items_edit'))allowed.add('attachments');
+  if(ATTACHMENT_RELEASE_ENABLED && (adminProfile?.role==='owner'||adminProfile?.permissions?.includes('items_edit')))allowed.add('attachments');
   if(adminProfile?.role==='owner')allowed.add('admin-users');
   return allowed;
 }
