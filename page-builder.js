@@ -20,7 +20,58 @@
     }
     if(text)element.textContent=text;return element;
   };
-  const setStatus=(message,state='saved')=>{status.textContent=message;status.dataset.state=state;};
+  const setStatus=(message,state='saved')=>{status.textContent=message;status.dataset.state=state;status.setAttribute('aria-live',state==='error'?'assertive':'polite');};
+  function blockControl(block,field){
+    const section=active?.sections.find(entry=>entry.blocks.some(candidate=>candidate.id===block?.id));
+    return section&&block?sections.querySelector(`[data-section-card="${CSS.escape(section.id)}"] [data-block-id="${CSS.escape(block.id)}"][data-field="${field}"]`):null;
+  }
+  function invalidBlock(predicate){return active?.sections.flatMap(section=>section.blocks).find(predicate);}
+  function fieldForError(message){
+    if(/page title/i.test(message))return titleInput;
+    if(/page address|address/i.test(message))return slugInput;
+    if(/introduction/i.test(message))return introInput;
+    if(/section title/i.test(message)){
+      const section=active?.sections.find(entry=>typeof entry.title!=='string'||entry.title.length>160);
+      return section&&sections.querySelector(`[data-section-card="${CSS.escape(section.id)}"] [data-field="title"][data-section-id]`);
+    }
+    if(/block title/i.test(message)){
+      const block=invalidBlock(entry=>['heading','card','button'].includes(entry.type)&&(typeof entry.title!=='string'||!entry.title.trim()||entry.title.length>160));
+      return blockControl(block,'title');
+    }
+    if(/image description/i.test(message)){
+      const block=invalidBlock(entry=>['image','card'].includes(entry.type)&&(typeof entry.alt!=='string'||entry.alt.length>300||(entry.type==='image'&&!entry.alt.trim())));
+      return blockControl(block,'alt');
+    }
+    if(/approved image/i.test(message)){
+      const block=invalidBlock(entry=>entry.type==='image'&&(typeof entry.image!=='string'||!entry.image||!images.includes(entry.image))||entry.type==='card'&&entry.image!==undefined&&entry.image!==null&&(typeof entry.image!=='string'||!entry.image||!images.includes(entry.image)));
+      return blockControl(block,'image');
+    }
+    if(/https link|\blink\b/i.test(message)){
+      const block=invalidBlock(entry=>['card','button'].includes(entry.type)&&!window.ScavPageBuilderModel.safeLink(entry.href));
+      return blockControl(block,'href');
+    }
+    if(/\btext\b/i.test(message)){
+      const block=invalidBlock(entry=>['text','card'].includes(entry.type)&&(typeof entry.text!=='string'||entry.text.length>10000||(entry.type==='text'&&!entry.text.trim())));
+      return blockControl(block,'text');
+    }
+    if(/layout/i.test(message))return sections.querySelector('[data-field^="layout."]');
+    return null;
+  }
+  function reportError(error,{prefix='',suffix='',focusTarget=null}={}){
+    setStatus(`${prefix}${error.message}${suffix}`,'error');
+    const field=fieldForError(error.message)||focusTarget;if(!field)return;
+    field.setAttribute('aria-invalid','true');
+    const descriptions=(field.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean);
+    if(!descriptions.includes('status'))descriptions.push('status');
+    field.setAttribute('aria-describedby',descriptions.join(' '));
+    if(field.disabled)requestAnimationFrame(()=>field.focus());else field.focus();
+  }
+  function clearFieldError(field){
+    if(field.getAttribute('aria-invalid')!=='true')return;
+    field.removeAttribute('aria-invalid');
+    const descriptions=(field.getAttribute('aria-describedby')||'').split(/\s+/).filter(description=>description&&description!=='status');
+    if(descriptions.length)field.setAttribute('aria-describedby',descriptions.join(' '));else field.removeAttribute('aria-describedby');
+  }
   const slugify=value=>value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80).replace(/-+$/,'')||'new-page';
   const layoutDefault=()=>({columns:1,align:'start',spacing:'normal',background:'none',border:false});
   function isDirty(){return !snapshot||JSON.stringify(active)!==snapshot;}
@@ -133,6 +184,7 @@
   }
   function syncField(target){
     const {field,sectionId,blockId}=target.dataset;if(!field)return;
+    clearFieldError(target);
     if(field==='title'&&!sectionId&&!blockId){active.title=target.value;if(!slugEdited){active.slug=slugify(target.value);slugInput.value=active.slug;}}
     else if(field==='slug'){active.slug=target.value;slugEdited=true;}
     else if(field==='intro')active.intro=target.value;
@@ -161,7 +213,7 @@
     active.title=titleInput.value;active.slug=slugInput.value;active.intro=introInput.value;
     const duplicate=records.find(record=>record.draft.slug===active.slug&&record.draft.id!==active.id);
     if(duplicate){setStatus('A saved draft already uses this address. Choose another address.','error');slugInput.focus();return;}
-    let page;try{page=Builder.validate(active,{images,existingPages,currentPageId:existingPages.some(entry=>entry.id===active.id)?active.id:null});}catch(error){setStatus(error.message,'error');return;}
+    let page;try{page=Builder.validate(active,{images,existingPages,currentPageId:existingPages.some(entry=>entry.id===active.id)?active.id:null});}catch(error){reportError(error);return;}
     saving=true;saveButton.disabled=true;setStatus('Saving private draft...','saving');
     try{
       const body=revision?{action:'save',id:active.id,revision,page}:{action:'create',page};
@@ -170,7 +222,7 @@
       const existing=records.findIndex(entry=>entry.draft.id===active.id);if(existing<0)records.push(record);else records[existing]=record;
       existingPages=records.map(entry=>({id:entry.draft.id,slug:entry.draft.slug}));
       renderEditor();setStatus(`Saved locally at revision ${revision}. This draft is not published.`,'saved');
-    }catch(error){setStatus(`Save failed: ${error.message} Your edits are still on screen; the last saved draft was preserved.`,'error');}
+    }catch(error){reportError(error,{prefix:'Save failed: ',suffix:' Your edits are still on screen; the last saved draft was preserved.',focusTarget:saveButton});}
     finally{saving=false;saveButton.disabled=!active;}
   }
   async function deleteDraft(){
@@ -181,14 +233,14 @@
     if(!revision){active=null;dirty=false;snapshot=null;renderEditor();setStatus('Unsaved page discarded.','saved');$('#new-page').focus();return;}
     setStatus('Deleting local draft...','saving');
     try{await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id:deletingId,revision})});records=records.filter(record=>record.draft.id!==deletingId);existingPages=records.map(record=>({id:record.draft.id,slug:record.draft.slug}));active=null;revision=null;snapshot=null;dirty=false;renderEditor();setStatus('Saved draft deleted.','saved');(draftList.querySelector('button')||$('#new-page')).focus();}
-    catch(error){setStatus(`Delete failed: ${error.message} The saved draft remains available.`,'error');}
+    catch(error){reportError(error,{prefix:'Delete failed: ',suffix:' The saved draft remains available.',focusTarget:$('#delete-draft')});}
   }
   async function exportHtml(){
     if(!active)return;
     try{
       const page=Builder.document(active,{images,existingPages,currentPageId:existingPages.some(entry=>entry.id===active.id)?active.id:null,css:cssText}),blob=new Blob([page],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=node('a',{href:url,download:`${slugify(active.slug)}.html`});
       document.body.append(anchor);anchor.click();anchor.remove();URL.revokeObjectURL(url);setStatus('HTML downloaded locally. This did not publish or deploy a website.','saved');
-    }catch(error){setStatus(`Export failed: ${error.message} Your saved draft is unchanged.`,'error');}
+    }catch(error){reportError(error,{prefix:'Export failed: ',suffix:' Your saved draft is unchanged.',focusTarget:$('#export-html')});}
   }
   $('#page-form').addEventListener('input',event=>syncField(event.target));
   $('#page-form').addEventListener('change',event=>syncField(event.target));
