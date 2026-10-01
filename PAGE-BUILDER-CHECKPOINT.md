@@ -19,13 +19,13 @@ The proposed production-integration workflow, unresolved decisions and release g
 ## Files Changed
 
 - `page-builder.html` — standalone local editor shell and accessible labels/states.
-- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration; passes trusted image/address context to the model.
+- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration; validation errors are associated with and focus the repair field. Passes trusted image/address context to the model.
 - `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
 - `page-builder-model.js` — reusable metadata/content validator; independent of filesystem, authentication and publication.
 - `page-builder-contract.js` — escaped preview/export renderer using the reusable model.
-- `scripts/page-builder-server.cjs` — validates create/save through the reusable model using image choices resolved from the existing inventory/filesystem and page identities/addresses derived from private saved drafts. Request envelopes reject unknown/protected fields. Existing loopback, host/origin/session protections and private storage remain in place.
+- `scripts/page-builder-server.cjs` — validates create/save through the reusable model using image choices resolved from the existing inventory/filesystem and page identities/addresses derived from private saved drafts. Request envelopes reject unknown/protected fields. The loopback preview CSP now permits only the SHA-256 hash of the trusted stylesheet, so preview styles work without enabling `unsafe-inline`. Existing host/origin/session protections and private storage remain in place.
 - `items-builder.js` — Active items excludes hidden records; hidden records remain reachable through the explicit Hidden items and Include archived views. Public Items behavior is unchanged.
-- `scripts/test-page-builder.cjs` — fixture-only service and browser acceptance checks using temporary storage.
+- `scripts/test-page-builder.cjs` — fixture-only service/browser coverage using temporary storage, including keyboard actions, error-field focus/announcements, labels, contrast, narrow reflow, preview CSP/style application and recovery states.
 - `scripts/test-items-builder.cjs` — updated stale count/empty-state expectations and verifies hidden-item filter state, stable identity, collapsed technical reference, and visible evidence link.
 - `PAGE-BUILDER-CHECKPOINT.md` — this handoff.
 - `NEXT_JOBS.md` — brief checkpoint reference only.
@@ -60,7 +60,7 @@ The status area reports loading, unsaved, saving, saved and error states. In-app
 
 Passed:
 
-- `node scripts/test-page-builder.cjs` — create/save/reopen/edit; all block types; ordering, duplication, hiding and deletion; exact preservation of valid drafts and `Unknown` values; missing trusted context; unknown/protected fields; duplicate stable identities, page IDs and addresses; reserved addresses; null, empty, omitted, unapproved and traversal image cases; optional null/omitted card images; unsafe/malformed links; layout/type/content limits; malicious text escaping; empty pages, 10,000-character text and 200-block rendering; hidden-content omission; preview/export equality and safe hrefs; strict request authority fields; save failure, single-save retry and stale-revision recovery; invalid stored-image repair with preview/save/export refusal until corrected; unsaved-change warnings; focus after cancel/confirm, reorder and delete actions; keyboard activation and 320–1280px layouts.
+- `node scripts/test-page-builder.cjs` — existing model/service/editor safety suite plus keyboard activation of section/block actions; accessible names and labels; metadata Tab order and visible focus; field-associated/assertive validation; focus after save failure and canceled deletion; contrast including error state; empty page and maximum title; 640px reflow proxy plus 320–1280px layouts; trusted preview stylesheet/CSP; all prior image, hidden-content, export parity, stale-save and recovery cases.
 - `node scripts/test-items-builder.cjs` — PASS. Exact populated/zero count states, 40/80 pagination, search, hidden excluded from Active and available under Hidden, archived filtering, hidden status, stable ID through the list and collapsed technical details, evidence link, missing image, keyboard/dialog focus and public hidden-item filtering.
 - `node scripts/test-items-editor.cjs` — existing Items editor workflow and responsive checks.
 - `node scripts/test-vendor-builder.cjs` — existing Vendor editor workflow and responsive checks.
@@ -70,6 +70,8 @@ Passed:
 The fixture expected hidden item ID `two` in visible facts, but permanent references are intentionally inside a collapsed technical-details disclosure. The test now checks the stable list identity and opens that disclosure before checking the reference. Investigation also found and fixed a separate visibility-filter bug: Active items had included hidden records; hidden records now appear only under Hidden items, Include archived, or other explicitly matching filters. The public Items page already omitted hidden records and remains unchanged.
 
 The browser suite replaces `window.confirm` with a deterministic fixture to exercise accept/cancel paths; application focus restoration after those paths is asserted, but native browser-chrome dialog focus itself is not automated. The repository Admin test run emitted its existing non-fatal Node `MODULE_TYPELESS_PACKAGE_JSON` warning. No production browser/authentication or deployment checks were attempted.
+
+Manual local-browser spot checks: the accessibility tree exposes names for editor controls and section/block actions; keyboard-canceling the native Remove section confirmation leaves focus on the invoking button and retains the section. At a 640 CSS-pixel viewport, the editor and styled preview reflow without horizontal overflow; the preview computes the trusted Bahnschrift font and intended dark background without CSP violations. The 640px viewport is a 200%-zoom reflow proxy for a 1280px layout, not an actual browser zoom setting. No screen-reader, real assistive-technology, or complete manual WCAG conformance audit was performed.
 
 ## Limitations and Next Tasks
 
