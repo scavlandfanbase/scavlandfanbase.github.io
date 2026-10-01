@@ -22,7 +22,7 @@ Repeated post-publication reconciliation could replace retained private verifica
 ## Remaining release gates
 
 1. Hub route/session/permission fixtures pass with a versioned Attachment frame. Frontend ATTACHMENT_RELEASE_ENABLED remains false. Coordinate its reviewed enablement and asset cache versions with backend/migrations; signed-in production acceptance remains required.
-2. Extend combined acceptance beyond edit/reload to classification/publication and realistic multi-session races. The combined edit/reload check passes; this does not establish live Auth or concurrent production behavior.
+2. Combined browser/handler/local SQL classification, edit/reload and preview/publication checks pass. Two pages verify stale-preview refusal after a newer save, with no Git writes. Auth/Git remain simulated; genuinely simultaneous Postgres sessions and live Auth acceptance remain unverified.
 3. Review full dependency deployment manifest and migrations in order: attachment-classification-storage.sql, attachment-preview.sql. Neither is applied in production.
 4. Check current production schema/permissions/drafts and publication flags before deployment. Preserve genuine old/shared drafts.
 5. Explicit review of release scope: current screen edits existing identities; Add-new and recorded Weapon-ID compatibility are still absent. General Items access must remain.

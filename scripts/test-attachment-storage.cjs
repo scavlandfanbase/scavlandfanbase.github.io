@@ -52,10 +52,12 @@ const {PGlite}=require('@electric-sql/pglite');
  // Replace the deliberately malformed legacy SQL fixture with a real catalogue.
  await db.exec('delete from scavland_drafts.versions');
  const source={id:'api-item',name:'Existing',classification:['item']},settings={schemaVersion:1,current_patch_id:'fixture'};
- const latest={documents:{'data/items.json':{data:[source]}},settings,images:[],base:{'data/items.json':'fixture-blob'}};
+ const latest={documents:{'data/items.json':{data:[source,{id:'browser-candidate',name:'Browser candidate',classification:['item'],source:'evidence-inbox/attachments/fixture.png'}]}},settings,images:[],base:{'data/items.json':'fixture-blob'}};
  const rpcArguments={scavland_attachment_receipt:['p_actor','p_item','p_request','p_command'],scavland_prepare_attachment:['p_actor','p_item','p_request','p_command','p_payload','p_legacy'],scavland_attachment_draft:['p_action','p_item','p_request']};
+ const gitWrites=[];
  const fetcher=async(url,options)=>{
   if(url.startsWith('https://api.github.com/')){
+   if(options.method==='POST'||options.method==='PATCH'){gitWrites.push({url,body:JSON.parse(options.body)});return Response.json({sha:url.endsWith('/git/trees')?'published-tree':'published-commit'});}
    if(url.includes('/git/ref/heads/'))return Response.json({object:{sha:'fixture-head'}});
    if(url.includes('/git/commits/'))return Response.json({tree:{sha:'fixture-tree'}});
    if(url.includes('/contents/'))return Response.json({sha:'fixture-blob',encoding:'base64',content:Buffer.from(JSON.stringify(latest.documents['data/items.json'])).toString('base64')});
@@ -72,7 +74,7 @@ const {PGlite}=require('@electric-sql/pglite');
    return Response.json(result);
   }catch(error){return Response.json({code:error.code,message:error.message},{status:400});}
  };
- const env=name=>({SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service',SHARED_ATTACHMENT_ENABLED:'true'})[name];
+ const env=name=>({SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service',SHARED_ATTACHMENT_ENABLED:'true',ADMIN_CORE_ENABLED:'true',DRAFT_PUBLISH_ENABLED:'true',GITHUB_TOKEN:'fixture'})[name];
  const api=createAttachmentTransport({env,fetcher,readSource:async()=>latest});
  const call=body=>api(new Request('https://fixture/editor',{method:'POST',headers:{Authorization:'Bearer fixture-session'},body:JSON.stringify(body)}));
  const apiRequest=crypto.randomUUID(),apiCommand={action:'classify-attachment',confirmId:source.id,attachmentType:'Unknown',confirmReclassification:true,expectedVersion:0,sourceDigest:await legacyDigest({source,settings})};
@@ -122,6 +124,17 @@ const {PGlite}=require('@electric-sql/pglite');
    const actual=(await run(actor,'select public.scavland_attachment_draft($1,$2) as v',['load','api-item']));assert.equal(actual.draft.payload.record.name,'Browser durable Attachment');assert.equal(actual.currentVersion,3);
    const second=await open(),otherFrame=second.frameLocator('iframe');await otherFrame.getByRole('button',{name:'Browser durable Attachment',exact:true}).click();
    assert.equal(await otherFrame.locator('#item-name').inputValue(),'Browser durable Attachment');
+   page.on('dialog',d=>d.accept());second.on('dialog',d=>d.accept());
+   await frame.locator('#preview').click();await frame.locator('#preview-dialog[open]').waitFor();await frame.locator('#close-preview').click();
+   await otherFrame.locator('#item-name').fill('Concurrent saved Attachment');await otherFrame.locator('#save').click();await otherFrame.locator('#status').filter({hasText:'Saved privately'}).waitFor();
+   await frame.locator('#publish').click();await frame.locator('#status').filter({hasText:'saved version changed'}).waitFor();assert.equal(gitWrites.length,0,'stale preview cannot write Git');
+   await otherFrame.locator('#preview').click();await otherFrame.locator('#preview-dialog[open]').waitFor();await otherFrame.locator('#close-preview').click();await otherFrame.locator('#publish').click();await otherFrame.locator('#status').filter({hasText:'Published commit'}).waitFor();
+   assert.equal(gitWrites.length,3);assert.equal(gitWrites[0].body.tree.length,1);assert.equal(gitWrites[0].body.tree[0].path,'data/items.json');assert.equal(gitWrites[2].body.force,false);
+   const output=JSON.parse(gitWrites[0].body.tree[0].content);assert.equal(output.data[0].name,'Concurrent saved Attachment');assert.equal(output.data[0].contentType,'Attachment');assert(!JSON.stringify(output).includes(actor),'private actor omitted');assert.equal(source.name,'Existing','Git fixture does not mutate real or source data');
+   const third=await open();third.on('dialog',d=>d.accept());const candidateFrame=third.frameLocator('iframe');await candidateFrame.getByRole('button',{name:'Browser candidate · Candidate for review',exact:true}).click();await candidateFrame.locator('#type').selectOption('Scope');await candidateFrame.locator('#classify').click();await candidateFrame.locator('#status').filter({hasText:'Saved privately'}).waitFor();
+   const classified=await run(actor,'select public.scavland_attachment_draft($1,$2) as v',['load','browser-candidate']);assert.equal(classified.currentVersion,1);assert.equal(classified.draft.payload.record.contentType,'Attachment');assert.equal(classified.draft.payload.record.attachmentType,'Scope');assert.equal(latest.documents['data/items.json'].data[1].contentType,undefined);assert.equal(gitWrites.length,3,'classification saves privately');
+   console.log('PASS browser explicit classification through handler/SQL, stable identity and no publication.');
+   console.log('PASS combined browser/SQL publication: stale second-session preview refused without writes; fresh intent publishes only master data through non-force Git fixture.');
    console.log('PASS combined Attachment browser/transport/real SQL: durable private edit, authoritative version 3 and second page reload. Auth/Git remain fixtures.');
   }finally{await browser.close();}
  }

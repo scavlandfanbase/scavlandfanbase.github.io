@@ -149,3 +149,9 @@ Prepared the Attachment section, versioned frame, navigation/title and session a
 Unit checks and Edge fixtures pass: release off, enabled without Items permission, enabled with Items permission, token handoff and return to Hub. Admin/invite tests pass. No production enablement, SQL application, merge or deployment occurred.
 
 Fetched Copilot branch without switching checkout. Head 3ce5f1aa4b0bf3fd35ebbe69c55acd5b7320d586 is available. Inspected 38cf7c7 visibility fix: Active excludes both hidden and archived; other visibility routes remain. Full branch review and independent suite reproduction are pending.
+
+## Combined classification/publication acceptance — 1 October
+
+Extended the Edge/transport/PGlite harness: explicit Scope classification saves a stable candidate identity privately at version 1 without Git writes; saved edits reload in another page; a newer second-page save invalidates the first preview before any Git write. A fresh preview publishes exactly data/items.json through three simulated Git writes with force false and no private actor in output. Vendor files are untouched. Auth/Git remain fixtures.
+
+The combined browser test passes. This interleaved two-page case does not establish truly simultaneous database transactions or a cross-service atomic guarantee. No live data, deployments or feature flags changed.
