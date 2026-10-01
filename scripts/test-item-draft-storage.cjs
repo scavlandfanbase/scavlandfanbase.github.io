@@ -1,13 +1,13 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {PGlite}=require('@electric-sql/pglite');
-const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111111',bob='22222222-2222-4222-8222-222222222222',armourUser='33333333-3333-4333-8333-333333333333';
+const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111111',bob='22222222-2222-4222-8222-222222222222',armourUser='33333333-3333-4333-8333-333333333333',weaponUser='44444444-4444-4444-8444-444444444444';
 (async()=>{
  const db=new PGlite();
  try{
   await db.exec(`create role anon;create role authenticated;create role service_role;create schema auth;
    create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
    create function public.has_scavland_permission(p text) returns boolean language sql stable as $$select
-    (auth.uid() in ('${alice}'::uuid,'${bob}'::uuid) and p='ammunition_edit') or (auth.uid()='${armourUser}'::uuid and p='armour_edit')$$;
+    (auth.uid() in ('${alice}'::uuid,'${bob}'::uuid) and p='ammunition_edit') or (auth.uid()='${armourUser}'::uuid and p='armour_edit') or (auth.uid()='${weaponUser}'::uuid and p='weapons_edit')$$;
    grant usage on schema auth to authenticated;grant execute on function auth.uid() to authenticated;
    create schema scavland_drafts;create table scavland_drafts.fixture_saved(payload jsonb);
    insert into scavland_drafts.fixture_saved values ('{"name":"untouched existing work"}');`);
@@ -73,11 +73,11 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   const transport=async(url,opt={})=>{
    const u=new URL(url),b=opt.body&&JSON.parse(opt.body),token=opt.headers.Authorization.slice(7);
    if(u.origin==='https://fixture-sb.invalid'){
-    if(u.pathname==='/auth/v1/user')return [alice,bob,armourUser].includes(token)?Response.json({id:token}):Response.json({},{status:401});
+    if(u.pathname==='/auth/v1/user')return [alice,bob,armourUser,weaponUser].includes(token)?Response.json({id:token}):Response.json({},{status:401});
     const user=token==='fixture-service'?'service':token;
     try{
      let result;
-     if(u.pathname.endsWith('/has_scavland_permission')){assert.deepEqual(Object.keys(b),['required_permission']);result=(b.required_permission==='ammunition_edit'&&[alice,bob].includes(token))||(b.required_permission==='armour_edit'&&token===armourUser);}
+     if(u.pathname.endsWith('/has_scavland_permission')){assert.deepEqual(Object.keys(b),['required_permission']);result=(b.required_permission==='ammunition_edit'&&[alice,bob].includes(token))||(b.required_permission==='armour_edit'&&token===armourUser)||(b.required_permission==='weapons_edit'&&token===weaponUser);}
      else if(u.pathname.endsWith('/scavland_item_draft'))result=await access(user,b.p_action,b.p_item,b.p_expected_version??null,b.p_request??null,b.p_category);
      else if(u.pathname.endsWith('/scavland_prepare_item')){assert.equal(user,'service');result=await prepare(b.p_actor,b.p_item,b.p_version,b.p_request,b.p_command,b.p_payload??null,b.p_category);}
      else if(u.pathname.endsWith('/scavland_item_preview'))result=await invoke(user,'select public.scavland_item_preview($1,$2,$3,$4,$5,$6) as v',[b.p_actor,b.p_item,b.p_category,b.p_version,b.p_digest??null,b.p_id??null]);
@@ -112,6 +112,23 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   assert.equal((await call(alice,{action:'list'})).result.records.length,3);
   assert((await call(alice,{action:'list'})).result.records.some(r=>r.id===creationId&&r.unpublished));
   assert.equal((await call(armourUser,{action:'list',category:'armour'})).result.records.length,0);
+  const armourCommand={action:'create',shared:{name:'Fixture shared Armour'},specialist:{ballistic:0,slash:23,radiation:null,durability:100,repairClass:'Scavenger'}};
+  const armourRequest=crypto.randomUUID(),armourReceipt=await call(armourUser,{category:'armour',action:'create',itemId:undefined,expectedVersion:0,requestId:armourRequest,command:armourCommand});assert.equal(armourReceipt.status,200,JSON.stringify(armourReceipt.result));
+  const armourId=armourReceipt.result.item_id;
+  assert.equal((await call(alice,{category:'armour',action:'load',itemId:armourId})).status,403);
+  assert.equal((await call(armourUser,{category:'armour',action:'save',itemId:armourId,expectedVersion:0,requestId:armourRequest})).status,200);
+  const armourLoad=await call(armourUser,{category:'armour',action:'load',itemId:armourId});assert.equal(armourLoad.result.state.records.armour.ballistic,0);assert.equal(armourLoad.result.state.records.armour.radiation,null);
+  const armourPreview=await call(armourUser,{category:'armour',action:'preview',itemId:armourId,expectedVersion:1});assert.equal(armourPreview.status,200);
+  const untouchedAmmo=structuredClone(docs['data/ammo.json']),untouchedVendors=structuredClone(docs['data/vendors.json']);
+  assert.equal((await call(armourUser,{category:'armour',action:'publish',itemId:armourId,expectedVersion:1,previewId:armourPreview.result.previewId,confirm:true})).status,200);
+  assert.equal(docs['data/armour.json'].data.find(r=>r.id===armourId).durability,100);assert.deepEqual(docs['data/ammo.json'],untouchedAmmo);assert.deepEqual(docs['data/vendors.json'],untouchedVendors);gitWrites=0;
+  const weaponRequest=crypto.randomUUID(),weaponCommand={action:'create',shared:{name:'Fixture shared Weapon'},specialist:{damage:10,rpm:600,reload:0,ammo:'Recorded Ammo',tier:'Scrap'}};
+  const weaponReceipt=await call(weaponUser,{category:'weapons',action:'create',itemId:undefined,expectedVersion:0,requestId:weaponRequest,command:weaponCommand});assert.equal(weaponReceipt.status,200,JSON.stringify(weaponReceipt.result));const weaponId=weaponReceipt.result.item_id;
+  assert.equal((await call(armourUser,{category:'weapons',action:'load',itemId:weaponId})).status,403);
+  assert.equal((await call(weaponUser,{category:'weapons',action:'save',itemId:weaponId,expectedVersion:0,requestId:weaponRequest})).status,200);
+  const wp=await call(weaponUser,{category:'weapons',action:'preview',itemId:weaponId,expectedVersion:1});assert.equal(wp.status,200);
+  assert.equal((await call(weaponUser,{category:'weapons',action:'publish',itemId:weaponId,expectedVersion:1,previewId:wp.result.previewId,confirm:true})).status,200);
+  assert.equal(docs['data/weapons.json'].data.find(r=>r.id===weaponId).rpm,600);assert.deepEqual(docs['data/vendors.json'],untouchedVendors);gitWrites=0;
   const newRequest=crypto.randomUUID(),newCommand={action:'create',shared:{name:'API private new Ammo'},specialist:{damage:0}};
   const newReceipt=await call(alice,{action:'create',itemId:undefined,expectedVersion:0,requestId:newRequest,command:newCommand});assert.equal(newReceipt.status,200);
   assert.deepEqual((await call(alice,{action:'create',itemId:undefined,expectedVersion:0,requestId:newRequest,command:newCommand})).result,newReceipt.result);
@@ -186,6 +203,8 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
       return route.fulfill({status:response.status,headers,json:await response.json()});
      }
      assert.equal(u.origin,'https://scavlandfanbase.github.io');
+     if(u.pathname==='/test-armour-host.html')return route.fulfill({contentType:'text/html',body:`<!doctype html><script>addEventListener('message',e=>{if(e.origin===location.origin&&e.source===document.querySelector('iframe')?.contentWindow&&e.data?.type==='scavland-admin-ready')e.source.postMessage({type:'scavland-admin-token',token:'${armourUser}'},location.origin)});</script><iframe src="armour-category.html?embed=1"></iframe>`});
+     if(u.pathname==='/test-weapons-host.html')return route.fulfill({contentType:'text/html',body:`<!doctype html><script>addEventListener('message',e=>{if(e.origin===location.origin&&e.source===document.querySelector('iframe')?.contentWindow&&e.data?.type==='scavland-admin-ready')e.source.postMessage({type:'scavland-admin-token',token:'${weaponUser}'},location.origin)});</script><iframe src="weapons-category.html?embed=1"></iframe>`});
      if(u.pathname==='/test-ammo-host.html')return route.fulfill({contentType:'text/html',body:`<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}iframe{border:0;width:100%;height:100vh}</style><body><script>addEventListener('message',e=>{if(e.origin===location.origin&&e.source===document.querySelector('iframe')?.contentWindow&&e.data?.type==='scavland-admin-ready')e.source.postMessage({type:'scavland-admin-token',token:'${alice}'},location.origin)});</script><iframe src="ammo-category.html?embed=1"></iframe>`});
      const file=path.resolve(root,'.'+u.pathname);if(!file.startsWith(root+path.sep)||!fs.existsSync(file))return route.fulfill({status:404,body:'missing'});
      return route.fulfill({path:file,contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'application/json'});
@@ -292,6 +311,14 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     assert.equal(docs['data/ammo.json'].data.find(r=>r.id==='api-other').damage,null);assert.equal(docs['data/items.json'].data.filter(r=>r.id==='api-other').length,1);
     for(const width of [320,1280]){await page.setViewportSize({width,height:900});assert(await frame.locator('body').evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
     if(process.env.SCAVLAND_SHOT)await page.screenshot({path:process.env.SCAVLAND_SHOT,fullPage:true});
+    await page.goto('https://scavlandfanbase.github.io/test-armour-host.html');const armourFrame=page.frameLocator('iframe');
+    await armourFrame.getByLabel('Ballistic',{exact:true}).waitFor();assert.equal(await armourFrame.getByLabel('Ballistic',{exact:true}).inputValue(),'0');
+    assert.equal(await armourFrame.getByLabel('Repair class',{exact:true}).inputValue(),'Scavenger');assert.equal(await armourFrame.getByLabel('Name',{exact:true}).inputValue(),'Fixture shared Armour');
+    await armourFrame.getByLabel('Ballistic',{exact:true}).fill('17');await armourFrame.getByRole('button',{name:'Save private draft',exact:true}).click();await armourFrame.locator('#status').filter({hasText:'Saved —'}).waitFor();
+    await page.reload();await armourFrame.getByLabel('Ballistic',{exact:true}).waitFor();assert.equal(await armourFrame.getByLabel('Ballistic',{exact:true}).inputValue(),'17');
+    assert.equal(docs['data/armour.json'].data.find(r=>r.id===armourId).ballistic,0,'private save is not publication');
+    await page.goto('https://scavlandfanbase.github.io/test-weapons-host.html');const weaponFrame=page.frameLocator('iframe');await weaponFrame.getByLabel('Rate of fire (RPM)',{exact:true}).waitFor();assert.equal(await weaponFrame.getByLabel('Rate of fire (RPM)',{exact:true}).inputValue(),'600');
+    await weaponFrame.getByLabel('Damage',{exact:true}).fill('18');await weaponFrame.getByRole('button',{name:'Save private draft',exact:true}).click();await weaponFrame.locator('#status').filter({hasText:'Saved —'}).waitFor();await page.reload();await weaponFrame.getByLabel('Damage',{exact:true}).waitFor();assert.equal(await weaponFrame.getByLabel('Damage',{exact:true}).inputValue(),'18');assert.equal(docs['data/weapons.json'].data.find(r=>r.id===weaponId).damage,10);
     assert.deepEqual(errors,[]);
     console.log('PASS shared Ammo browser: protected legacy work, signed-in handoff, damage/penetration, vendor usage, private edit/reload, item preview/explicit connected publish, vendor-value preservation, second post-publication edit and 320–1280px layouts.');
    }finally{await browser.close();}

@@ -1,5 +1,5 @@
 // Feature-gated authenticated per-item bridge. No browser authority over payloads/actors.
-import {snapshotItem,categoryView,reconcilePublishedItem,editItem,reviewItem,createAmmoItem,addAmmoFacet,lifecycleItem,planItem,createItemPublisher} from './item-draft.mjs';
+import {snapshotItem,categoryView,reconcilePublishedItem,editItem,reviewItem,createCategoryItem,addCategoryFacet,lifecycleItem,planItem,createItemPublisher} from './item-draft.mjs';
 import {fail} from './core.mjs';
 import {inspectLegacyItem,prepareLegacyImport,legacyDigest} from './legacy-item-review.mjs';
 const repository='scavlandfanbase/scavlandfanbase.github.io';
@@ -51,10 +51,10 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    }
    const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
    if(body.action==='create'){
-    if(body.category!=='ammo'||body.itemId!==undefined||body.expectedVersion!==0||!uuid(body.requestId)||!body.command)fail('Invalid new Ammo request.');
-    const args={p_actor:actor,p_item:null,p_category:'ammo',p_version:0,p_request:body.requestId,p_command:body.command};
+    if(!['ammo','armour','weapons'].includes(body.category)||body.itemId!==undefined||body.expectedVersion!==0||!uuid(body.requestId)||!body.command)fail('Invalid new category request.');
+    const args={p_actor:actor,p_item:null,p_category:body.category,p_version:0,p_request:body.requestId,p_command:body.command};
     const receipt=await rpc('scavland_prepare_item',args,true);if(receipt)return reply(receipt);
-    const itemId='item-'+crypto.randomUUID(),state=createAmmoItem(latest.documents,itemId,body.command,context);
+    const itemId='item-'+crypto.randomUUID(),state=createCategoryItem(latest.documents,itemId,body.category,body.command,context);
     const legacy=await rpc('scavland_item_legacy',{},true);planItem(state,latest.documents,{legacyDrafts:legacy?[legacy]:[]});
     return reply(await rpc('scavland_prepare_item',{...args,p_item:itemId,p_payload:state},true));
    }
@@ -102,7 +102,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
     const prepareArgs={p_actor:actor,...args,p_version:body.expectedVersion,p_request:body.requestId,p_command:body.command};
     const receipt=await rpc('scavland_prepare_item',prepareArgs,true);if(receipt)return reply(receipt);
     if(saved.currentVersion!==body.expectedVersion)fail('A newer item draft exists.',409);
-    const changed=importing?await prepareLegacyImport(latest.documents,legacy,state,body.command,context):(body.command.action==='review'?reviewItem:body.command.action==='add-facet'?addAmmoFacet:['archive','restore'].includes(body.command.action)?lifecycleItem:editItem)(state,body.command,context);
+    const changed=importing?await prepareLegacyImport(latest.documents,legacy,state,body.command,context):(body.command.action==='review'?reviewItem:body.command.action==='add-facet'?addCategoryFacet:['archive','restore'].includes(body.command.action)?lifecycleItem:editItem)(state,body.command,context);
     if(importing)await rpc('scavland_preserve_item_legacy',{p_version:legacy.version},true);
     planItem(changed,latest.documents,{legacyDrafts:await guardedLegacy(changed,legacy)});
     return reply(await rpc('scavland_prepare_item',{...prepareArgs,p_payload:changed},true));
