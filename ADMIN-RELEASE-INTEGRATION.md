@@ -15,3 +15,7 @@ Remaining before activation: fresh deployed schema/grants/configuration/Storage 
 ## Fresh read-only preflight
 
 See ADMIN-LIVE-PREFLIGHT-20261001.md for verified main/v13 baseline, absent new objects, 26 retained Evidence submissions, private Storage and actual grants. Owner Evidence navigation now matches server authorization behind the disabled release switch. Targeted combined gates, Attachment browser Hub and Evidence SQL checks pass. Configuration values and genuine signed-in acceptance remain unverified; no live changes.
+
+## Final combined acceptance
+
+New npm run test:release consolidates both inventories and all feature/category/editor/Dashboard suites. Full run passed, including both independent PostgreSQL concurrency suites (18 scenarios) on this combined branch; databases cleaned up and server stopped. This supersedes the earlier note that concurrency had not been rerun here. ADMIN-PREPUBLICATION-REPORT.md now describes combined PR 39 scope and remaining coordinated live gates.

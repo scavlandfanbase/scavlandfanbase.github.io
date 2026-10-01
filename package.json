@@ -8,7 +8,8 @@
     "test:admin": "node scripts/test-admin01-core.cjs",
     "test:invites": "node scripts/test-admin-invites.cjs",
     "test:attachments": "node scripts/test-attachment-release.cjs",
-    "test:attachment-concurrency": "node scripts/test-attachment-concurrency.cjs"
+    "test:attachment-concurrency": "node scripts/test-attachment-concurrency.cjs",
+    "test:release": "node scripts/test-admin-release.cjs"
   },
   "repository": {
     "type": "git",

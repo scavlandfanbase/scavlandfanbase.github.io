@@ -1,53 +1,44 @@
-# Admin prepublication report — 1 October 2026
+# Admin prepublication report — combined candidate, 1 October 2026
 
-## Decision
+## Review decision
 
-The current Attachment release is prepared and locally verified for review. Nothing has been merged, deployed, enabled or published by this preparation batch. This is not a claim that every planned Admin Hub tool is finished. The release remains draft PR #37 on feature/shared-attachment-review; main was freshly checked at 6f5d9dcdb75785118ee3879e25cfab4ad1fe00c1.
+Combined Attachment and Evidence Review preparation is locally verified on feature/admin-release-integration, draft PR 39. Main remains 6f5d9dc; live admin-drafts remains ACTIVE v13. No live changes, main merge or activation were performed. Andrew requested a report before publication, so coordinated rollout remains a separate review decision. This release does not make every planned Hub tool available.
 
-Andrew requested autonomous preparation and a report before publication. That boundary is the reason the live database/backend/frontend steps below have not been performed. No further coding prompt is needed for ordinary preparation; publication approval is a separate decision.
+## Prepared scope
 
-## Ready in this release
+Attachments: gated Hub navigation, explicit classification, private Add/edit/images/Weapon compatibility, patch review, archive/restore, durable receipt/retry/reload, exact preview and selected master-record publication. Existing effects/modifiers are preserved; new modifier authoring is excluded. Canonical shared facts flow through existing references; Vendor price, stock and rank stay separate. No genuine game facts or data files changed.
 
-The Attachment category has prepared Hub navigation and permission checks, explicit candidate classification, private Add, approved-image controls, shared-detail edits, explicit Weapon compatibility, patch review, archive/restore, durable receipt-based saves, reload/retry recovery, preview and selected-item publication. IDs remain canonical. Unknown game facts stay Unknown; changes are not automatically marked Verified. Existing effects/modifiers are preserved; a new modifier-authoring system is not part of this release.
+Evidence Review: gated replacement screen, bounded queue pagination, retained source text/screenshots, private reviewer history with server identity/time, approve/reject/restore, exact retries, stale-review refusal and explicit recovery. No submission deletion, automatic item verification or content publishing. Owner Hub access now matches the server permission rule when enabled. Old direct moderation remains until the coordinated cutover; the proposal revokes its UPDATE/DELETE grants.
 
-Publication changes only the selected shared master record in data/items.json. Existing Vendor references consume canonical shared information while Vendor price, stock and rank remain separate. No game-data file is changed by the code release. Legacy Items work remains accessible and protected from competing saved authority; no genuine pending drafts are discarded.
+Includes reviewed standalone VS Items fixes: Active excludes hidden records, Hidden/Include archived retain access, and fixtures match current counts/technical details. Page Builder implementation remains on its separate VS branch; no production integration included.
 
-The release package now has a machine-readable dependency/hash inventory, checked cache versions, explicit migration order, read-only database readiness SQL, disabled activation defaults and non-destructive recovery instructions.
+## Final local acceptance
 
-## Verified evidence
+`npm run test:release` passed on the combined branch. It checks both dependency inventories, complete Attachment release/Admin browser/invitation suites, Evidence SQL/API/Hub/browser and actual browser-to-production-handler-to-SQL acceptance, shared catalogue/item contract/storage, legacy import/review recovery, Items shell/full editor, Vendor browser and Dashboard. Independent gate tests preserve feature permission separation. Existing non-fatal Node module-type warning persists.
 
-- Corrected a browser-test timing race: the lost-response test now waits for Retry to become enabled before recording the saved version. No application behaviour was changed for that fix.
-- Complete Attachment release runner: request/contract/publication/storage/Hub/browser suites and existing Admin/invite checks pass. It now validates the package inventory before running tests.
-- Independent PostgreSQL 17.11, READ COMMITTED: twelve real simultaneous-session cases pass with observed advisory-lock waits, conflict SQLSTATEs, exact-retry/rollback checks and final counts. Separate fixture database per run; fixture databases were dropped and the local server stopped. No production connection or Git write occurs in this suite.
-- Shared catalogue, item contract/storage/API, legacy import and recovery checks pass; shared identity and independent Vendor values remain covered.
-- Full Items editor, Vendor editor and Dashboard browser regression suites pass, including mobile/keyboard/retry checks. Existing non-fatal Node module-type warning remains.
-- Fresh Git references show no new main changes requiring reconciliation. Release diff contains no data/ changes. Machine-readable inventory resolves 41 local dependencies with SHA256 hashes.
-- Live read-only database inspection: all six prerequisites present; four Attachment tables, six RPCs and four guards absent. Existing seven private tables retain RLS; aggregate retained versions remain legacy 26/max 20 and shared 2/max 1. These totals are not verification counts.
-- Live admin-drafts remains ACTIVE v13 with hash fbca9bf558c5ab9a43145593d5035ae56975f1b0b93dc2c27274028ed63b1a4a. No Attachment migrations or deployment have occurred.
+Both independent PostgreSQL 17.11 / READ COMMITTED suites reran on this combined candidate: 12 Attachment and 6 Evidence scenarios passed with observed independent-session lock waits, conflicts, exact retries, rollback and consistent histories. Temporary databases were dropped and the server stopped. No production Auth/Storage/Git acceptance is implied; browser identity and publication remain fixtures.
 
-Auth/Git in local browser acceptance are fixtures. Real local Postgres concurrency does not certify production authentication, server configuration, or deployed SQL/server-version settings.
+Inventories resolve 42 Attachment and 34 Evidence dependencies and hash their content. Cache tags and disabled switches are checked; no data/ diff. Reports identify commit and dirty state. They do not inspect secrets or authorize activation.
 
-## What still waits for the coordinated release
+## Live read-only baseline
 
-1. Review exact clean candidate commit, scope and the remaining publication limitation below. Confirm server configuration presence/access without printing secret values; management tools used here do not expose their actual values.
-2. Approve the coordinated rollout. Apply the three reviewed Attachment SQL proposals in order and re-run the readiness inventory; preserve all old/shared drafts. Verify actual production server isolation and grants.
-3. Deploy the complete backend with Attachment editing disabled. Confirm existing shared editors remain usable and disabled Attachment requests refuse. This requires live changes and was deliberately not done before this report.
-4. Conduct real signed-in Owner and restricted-Admin acceptance, then coordinate backend enablement and frontend/cache release. Preview/save must remain private. Use only an explicitly intended real item for any publication check; never publish fixtures or verify invented game facts.
-5. Verify completed Pages deployment and fresh assets. If acceptance fails, disable the new route/flag and retain all private versions/receipts; do not drop/reset retained state.
+Fresh preflight confirms Attachment prerequisites present, new Attachment/Evidence objects absent, and Evidence RLS enabled. Retained submissions: 3 pending, 12 approved, 11 rejected. Screenshot bucket is private, PNG/JPEG/WebP, 10 MiB. Existing active-admin Storage policy and permission function were inspected; actual signed-in signing remains pending. Authenticated submission UPDATE currently exists; DELETE is already ungranted. No explicit column ACL or role-membership bypass was found. Details: ADMIN-LIVE-PREFLIGHT-20261001.md.
 
-Git and Postgres do not share an atomic transaction. A private save can occur after the publisher's final version check and before the Git ref update. Non-force Git updates protect competing public commits, not this interval. This limitation is disclosed for release review; the concurrency suite does not remove it.
+## Required coordinated rollout
 
-## Other Hub tools
+1. Review the exact candidate, scope and publication limitation. Verify required deployed configuration presence/access without exposing values.
+2. Deploy complete combined backend with both new features disabled; verify existing editors.
+3. Apply reviewed Attachment proposals in order: classification-storage, preview, creation-allocation. Stop and inspect partial installation before retrying.
+4. Coordinate Evidence replacement UI/backend and evidence-review-history.sql cutover; old moderation stops when direct grants are revoked. Preserve submissions, policies and history.
+5. Run both readiness inventories, compare grants/retained counts, approve specific flag/frontend activation and verify Pages completion/fresh assets.
+6. Perform genuine Owner/permitted/denied account acceptance, screenshot signing and draft/retry/conflict/recovery checks. Any genuine item publication needs a deliberately chosen real change; never publish fixtures or invent verification.
 
-| Area | State for this review |
-| --- | --- |
-| Existing Items, Vendors, Ammo, Armour, Weapons, patch/admin foundations | Already released foundations; relevant local regressions preserved. New live signed-in acceptance is not implied. |
-| Attachments | Current prepared release described above; disabled live. |
-| Page Builder | Independently reviewed local-only branch 3ce5f1a. Durable production storage/Auth, approval/publication/routes/recovery and Hub integration are still future work. Not merged into this release. |
-| Blueprint editor, Crafting expansion, Evidence Centre, Image Manager, Navigation and Weapon Builder | Broader roadmap work; this PR does not implement or enable these tools. |
+Recovery disables new actions while retaining all drafts/receipts/history; no state deletion, force push or casual restoration of unaudited grants.
 
-A release described as “every Hub tool available” would require those additional implementations and their acceptance. It must not be achieved by simply enabling placeholder buttons. ADMIN_WORK_PLAN.md remains the broader roadmap; current release gates are in ATTACHMENT-RELEASE-REVIEW.md and ATTACHMENT-DEPLOYMENT-MANIFEST.md.
+Git and PostgreSQL cannot share an atomic transaction. Attachment private work can change after the final version check and before the Git ref update; non-force Git protects competing public commits but not this interval. The tests do not remove that disclosed limitation. See ATTACHMENT-CONCURRENCY-REVIEW.md.
 
-## Saved artifacts
+## Remaining roadmap
 
-Repeatable scripts: scripts/test-attachment-concurrency.cjs, scripts/attachment-rollout-manifest.cjs and npm run test:attachments. SQL inventory: supabase/proposals/attachment-readiness.sql. Evidence/rollout instructions: ATTACHMENT-CONCURRENCY-REVIEW.md, ATTACHMENT-PRODUCTION-PREFLIGHT.md and ATTACHMENT-DEPLOYMENT-MANIFEST.md. NEXT_JOBS.md and RESUME-SHARED-ADMIN.md have current checkpoint entries above their historical records.
+Page Builder's reviewed production plan is on VS branch 028054d; accessibility work is ongoing separately. Production permissions/storage/approval/publisher remain unimplemented. Blueprint/Crafting expansion, Image Manager, Navigation, Weapon Builder and other broader Hub tools still need their own implementations and acceptance. Existing category/editor foundations are preserved by this release; new live acceptance is not implied.
+
+Current references: ADMIN-RELEASE-INTEGRATION.md, ADMIN-LIVE-PREFLIGHT-20261001.md, EVIDENCE-REVIEW-RELEASE.md, ATTACHMENT-DEPLOYMENT-MANIFEST.md and NEXT_JOBS.md. Repeatable full local check: npm run test:release; include real concurrency by supplying SCAVLAND_PSQL while the isolated loopback server runs.

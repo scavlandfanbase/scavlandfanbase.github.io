@@ -1,3 +1,7 @@
+## Final combined local acceptance passed
+
+Full npm run test:release passes, including all 18 independent PostgreSQL concurrency scenarios on the combined candidate. ADMIN-PREPUBLICATION-REPORT.md is the current review report for draft PR 39. Next: coordinated rollout review/configuration and genuine signed-in acceptance. No live deployment, main merge or activation performed.
+
 ## Current live preflight and Owner alignment
 
 Read-only live baseline verified: main 6f5d9dc, admin-drafts v13, new objects absent, Evidence counts 3 pending/12 approved/11 rejected and private screenshot bucket. Prepared Owner Evidence route aligned to server permission rule behind disabled gate. See ADMIN-LIVE-PREFLIGHT-20261001.md. Next: final coordinated release review and configuration/signed-in acceptance; no activation performed.
