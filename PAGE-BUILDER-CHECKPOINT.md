@@ -12,20 +12,22 @@ The repository already contained a local loopback draft service and a shared pag
 
 The local editor supports page title, introduction and safe address; saved-draft listing/open/edit; section add/rename/reorder/hide/remove; block add/edit/reorder/duplicate/hide/remove; and heading, plain text, image, card, divider and link-button blocks. Section settings are limited to 1–3 columns, start/center alignment, compact/normal/spacious spacing, none/surface/subtle backgrounds and an optional border. Desktop and mobile previews and downloaded HTML use the same validated renderer. Hidden sections and blocks remain in the saved draft and are omitted from the preview/export.
 
+A clearly labeled **Version history - demonstration** panel uses a separate fixture adapter over inert demonstration data in the editor HTML. It does not read/write the draft service, and these records are not genuine saved history. It shows revision, saved time, fixture editor name and state; valid entries render read-only through the existing model/renderer, while invalid unsafe-link or unapproved-image entries show repair-needed text without rendering. Opening history never changes the active editor draft.
+
 `Save Draft` only saves to the local draft service. The service has no publish action and serves no `/pages/<address>` output. `Export HTML` downloads a local file; it is not a deployment. No live Admin Hub Page Builder button, public navigation or existing page was changed.
 
 The proposed production-integration workflow, unresolved decisions and release gates are documented in [PAGE-BUILDER-PRODUCTION-PLAN.md](PAGE-BUILDER-PRODUCTION-PLAN.md). That document is a review plan only; none of its production work is implemented or enabled.
 
 ## Files Changed
 
-- `page-builder.html` — standalone local editor shell and accessible labels/states.
-- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration; duplicate-address and model errors are associated with and focus repair fields. Preview errors are associated without stealing typing focus, deduplicated while unchanged, and clear only editor-owned ARIA attributes on repair. Passes trusted image/address context to the model.
+- `page-builder.html` — standalone local editor shell, accessible labels/states and inert demonstration-history fixtures.
+- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh, focus restoration and the fixture-only history adapter. History does not touch draft state; invalid fixture pages are blocked by the shared model/renderer.
 - `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
 - `page-builder-model.js` — reusable metadata/content validator; independent of filesystem, authentication and publication.
 - `page-builder-contract.js` — escaped preview/export renderer using the reusable model.
 - `scripts/page-builder-server.cjs` — validates create/save through the reusable model using image choices resolved from the existing inventory/filesystem and page identities/addresses derived from private saved drafts. Request envelopes reject unknown/protected fields. The loopback preview CSP now permits only the SHA-256 hash of the trusted stylesheet, so preview styles work without enabling `unsafe-inline`. Existing host/origin/session protections and private storage remain in place.
 - `items-builder.js` — Active items excludes hidden records; hidden records remain reachable through the explicit Hidden items and Include archived views. Public Items behavior is unchanged.
-- `scripts/test-page-builder.cjs` — fixture-only service/browser coverage using temporary storage, including keyboard actions, duplicate-address and preview-error associations/correction, preservation of original descriptions, focus and announcement behavior, labels, contrast, narrow reflow, preview CSP/style application and recovery states.
+- `scripts/test-page-builder.cjs` — fixture-only service/browser coverage using temporary storage, including history loading/list/select/close, saved and archived previews, invalid-link/image repair blocking, empty/failure/retry states, active-draft/revision/preview preservation, keyboard/focus and long-title/editor-name narrow reflow.
 - `scripts/test-items-builder.cjs` — updated stale count/empty-state expectations and verifies hidden-item filter state, stable identity, collapsed technical reference, and visible evidence link.
 - `PAGE-BUILDER-CHECKPOINT.md` — this handoff.
 - `NEXT_JOBS.md` — brief checkpoint reference only.
@@ -60,7 +62,7 @@ The status area reports loading, unsaved, saving, saved and error states. In-app
 
 Passed:
 
-- `node scripts/test-page-builder.cjs` — existing model/service/editor safety suite plus keyboard activation of section/block actions; accessible names and labels; metadata Tab order and visible focus; duplicate-address association/correction; preview error association without focus theft or repeated unchanged announcements; preservation/removal of only editor-added `aria-describedby` references; Save/Export repair focus; focus after save failure and canceled deletion; contrast including error state; empty page and maximum title; 640px reflow proxy plus 320–1280px layouts; trusted preview stylesheet/CSP; all prior image, hidden-content, export parity, stale-save and recovery cases.
+- `node scripts/test-page-builder.cjs` — model/service/editor safety suite plus history fixture loading, saved/archived revision metadata and preview, invalid unsafe-link/unapproved-image render blocking, empty/failure/retry states, no draft-store writes, unsaved active-draft/revision/preview preservation, selected-history retention and close-focus restoration; long title/editor-name reflow at 320px. Also covers keyboard actions/labels, duplicate-address and preview-error associations/correction, no repeated unchanged preview announcements, preservation of pre-existing `aria-describedby`, Save/Export repair focus, contrast, 640px reflow proxy, preview CSP/style, image/hidden-content/export parity and recovery.
 - `node scripts/test-items-builder.cjs` — PASS. Exact populated/zero count states, 40/80 pagination, search, hidden excluded from Active and available under Hidden, archived filtering, hidden status, stable ID through the list and collapsed technical details, evidence link, missing image, keyboard/dialog focus and public hidden-item filtering.
 - `node scripts/test-items-editor.cjs` — existing Items editor workflow and responsive checks.
 - `node scripts/test-vendor-builder.cjs` — existing Vendor editor workflow and responsive checks.
@@ -76,6 +78,8 @@ Manual local-browser spot checks: the accessibility tree exposes names for edito
 ## Limitations and Next Tasks
 
 This is a single-operator local service, not an authenticated or durable production draft system. There is no image upload/manager, rich-text/HTML input, live public route, Admin Hub integration, approval workflow or publication action. Existing image paths in an export require the site root as described above.
+
+Version history is also fixture-only: there is no history API, durable revision store, authenticated editor identity, archived-record authority or restore action. Real version history must be designed with the main Admin backend as part of the private draft/revision/audit work; do not present these demonstration entries as real records.
 
 Exact next tasks before considering live integration:
 
