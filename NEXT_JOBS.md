@@ -1,3 +1,7 @@
+## Evidence release inventory prepared
+
+27-file dependency inventory and read-only SQL readiness query prepared and locally checked. See EVIDENCE-REVIEW-RELEASE.md. Next: combined browser/handler/SQL acceptance and explicit Attachment/Evidence release integration; production gates remain pending.
+
 ## 2026-10-01 — VS required-image fix verified
 
 Page Builder ec7bc4e independently passes its full acceptance suite. Required-image validation defect is resolved, optional card images preserved, and invalid saved drafts remain repairable. See VS-PAGE-BUILDER-MODEL-REVIEW.md. Builder remains local-only; production integration gates remain outstanding.

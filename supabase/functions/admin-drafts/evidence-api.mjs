@@ -1,4 +1,4 @@
-// Preparation adapter; not registered or deployed. All authority is enforced by caller-JWT SQL.
+// Preparation adapter; registered behind a disabled switch, not deployed. All authority is enforced by caller-JWT SQL.
 export function createEvidenceApi({env,fetcher=fetch}){
  const headers={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Cache-Control':'no-store'};
  const reply=(body,status=200)=>Response.json(body,{status,headers});

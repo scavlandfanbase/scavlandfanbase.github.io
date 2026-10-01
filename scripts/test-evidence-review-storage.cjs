@@ -9,6 +9,7 @@ const {PGlite}=require('@electric-sql/pglite');
  grant select,update,delete on public.evidence_submissions to authenticated;`);
  await db.query("insert into public.evidence_submissions(id,item_name,screenshot_path,notes) values($1,'Fixture','original.png','Original notes')",[submission]);
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/evidence-review-history.sql'),'utf8'));
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/evidence-review-readiness.sql'),'utf8'));
  const run=(who,sql,args=[])=>db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[who]);return (await tx.query(sql,args)).rows[0]?.v;});
  const request=crypto.randomUUID(),decide=(who=actor,r=request,v=0,status='pending',decision='approved',notes='Reviewed')=>run(who,'select public.scavland_review_evidence($1,$2,$3,$4,$5,$6) as v',[submission,r,v,status,decision,notes]);
  await assert.rejects(decide(other),e=>e.code==='42501');
