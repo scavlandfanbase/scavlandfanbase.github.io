@@ -56,9 +56,11 @@ window.createScavDashboard = function ({ hub, read, navigate, allowedViews=null 
     const count = document.createElement('p'); count.id = 'dashboard-count-'+key; count.textContent = 'Verification unavailable';
     const review = action(card,'Review '+name,()=>showReview(key)); review.dataset.reviewCategory = key; review.disabled = true; card.insertBefore(count,review);
   }
-  for (const name of ['Attachments','Blueprints']) {
+  for (const name of ['Blueprints']) {
     const card = document.createElement('article'); card.className = 'panel hub-card';
-    const h = document.createElement('h2'); h.textContent = name; const p = document.createElement('p'); p.textContent = 'Planned — separate editor and verification counts are not available yet.'; card.append(h,p); $('dashboard-content').append(card);
+    const h = document.createElement('h2'); h.textContent = name; const p = document.createElement('p'); p.textContent = name==='Attachments'?'Editor prepared for review — production release checks are still pending.':'Planned — separate editor and verification counts are not available yet.'; card.append(h,p);
+    if(name==='Attachments'){const pending=action(card,'Release pending',()=>{});pending.disabled=true;}
+    $('dashboard-content').append(card);
   }
   const images = document.createElement('article'); images.className = 'panel hub-card';
   images.innerHTML = '<h2>Images</h2><p>Use existing image controls in Site Settings. The dedicated Image Manager is planned.</p>';

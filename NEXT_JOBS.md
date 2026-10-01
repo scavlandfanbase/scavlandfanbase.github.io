@@ -1,3 +1,139 @@
+## Approved rollout in progress
+
+Andrew explicitly approved main merge, database/backend deployment and Attachment/Evidence enablement. Combined backend v14 deployed with both routes disabled; all three Attachment migrations applied and readiness grants/RLS/guards verified. Evidence cutover and enabled backend/frontend follow. Source-controlled release-config.mjs gates preserve explicit server false as emergency stop; credentials remain server-only. Genuine live acceptance and retained-count verification remain pending until completion.
+
+## Final combined local acceptance passed
+
+Full npm run test:release passes, including all 18 independent PostgreSQL concurrency scenarios on the combined candidate. ADMIN-PREPUBLICATION-REPORT.md is the current review report for draft PR 39. Next: coordinated rollout review/configuration and genuine signed-in acceptance. No live deployment, main merge or activation performed.
+
+## Current live preflight and Owner alignment
+
+Read-only live baseline verified: main 6f5d9dc, admin-drafts v13, new objects absent, Evidence counts 3 pending/12 approved/11 rejected and private screenshot bucket. Prepared Owner Evidence route aligned to server permission rule behind disabled gate. See ADMIN-LIVE-PREFLIGHT-20261001.md. Next: final coordinated release review and configuration/signed-in acceptance; no activation performed.
+
+## Current combined release candidate
+
+Attachment d78ca09 and Evidence ad0770c combined on feature/admin-release-integration. Both feature and existing-editor regression suites pass; independent gates stay off. Reviewed standalone VS Items visibility/fixture corrections included, Page Builder excluded. Read ADMIN-RELEASE-INTEGRATION.md for exact scope and outstanding production gates. No main merge or deployment.
+
+## 2026-10-01 — Consolidated prepublication package
+
+Machine-readable Attachment package verification now checks full backend imports/assets, matching cache versions, disabled frontend gate and no game-data diff. Full Attachment/Admin release suites, shared catalogue/item/SQL/import/recovery tests, Items/Vendor browser suites and Dashboard suite passed. Real PostgreSQL concurrency separately passed twelve scenarios. Current release scope remains Attachments plus existing-editor preservation; Page Builder production and other planned Hub tools are not made live by this release. Read ADMIN-PREPUBLICATION-REPORT.md for the consolidated scope, evidence and release dependencies.
+
+## 2026-10-01 — Real concurrent-session acceptance
+
+Completed twelve independently connected PostgreSQL 17.11/READ COMMITTED scenarios with observed advisory-lock blocking, stale/changed-request refusal, rollback, exact retry and final-count assertions. npm run test:attachment-concurrency is repeatable against an isolated loopback cluster. Fixture databases were dropped and portable server stopped; no production writes or system service. This supersedes the earlier unavailable-local-Postgres checkpoint. Live Auth/configuration and coordinated publication remain pending.
+
+## 2026-10-01 — Attachment concurrent-save review
+
+Reviewed supported RPC lock order and documented six independent-session acceptance scenarios in ATTACHMENT-CONCURRENCY-REVIEW.md. Revision checks occur after transaction locks; reciprocal guards serialize competing specialist/Attachment authority. Static review is complete, while actual simultaneous Postgres acceptance remains unexecuted: no local Postgres/Docker executable was available. The separate Git/database publication interval is explicitly retained as a release limitation. No live changes.
+
+## 2026-10-01 — Repeatable Attachment database readiness
+
+Added read-only supabase/proposals/attachment-readiness.sql. It reports exact prerequisite identities, four expected private tables and their RLS/direct access, six RPC signatures and role execution rights, and four overlap/allocation triggers. It returns no private draft contents, account identities or secrets. Missing objects are reported safely; the inventory does not authorize activation.
+
+Executed against production: all six prerequisites present; all four Attachment tables, six RPCs and four triggers absent. Existing seven private tables retain RLS. Aggregate versions remain legacy 26/max 20 and shared 2/max 1. admin-drafts remains ACTIVE v13 with the previously recorded hash. Configuration values, real concurrency and signed-in acceptance remain outstanding.
+
+Verified the same SQL against the local installed proposal fixture with the storage suite: table access restrictions, RLS, RPC role grants and trigger activation pass. The fixture mocks rather than installs scavland_item_legacy; the inventory correctly reports that missing dependency. No migrations, deployment, flags or game data changed.
+
+## 2026-10-01 — Attachment configuration refusal checkpoint
+
+The prepared Attachment transport now checks all required server settings and its canonical-source reader when enabled. Missing or blank configuration returns a generic 503 before any authentication, storage or Git request; disabled routing still makes no requests. Tests cover each missing setting, blank values, missing reader and the fully configured unsigned-in refusal. The complete Attachment release suite passed, including browser/storage checks and Admin checks (existing non-fatal Node module warning).
+
+This is preparation only: no SQL migration, deployment, live enablement or game-data publication occurred. The coordinated release gates in ATTACHMENT-RELEASE-REVIEW.md still apply.
+
+**Attachment release candidate review — 1 October:** PR #37 description now matches completed preparation. Fresh live function source confirms v13 has no Attachment route. Config values/concurrent-session acceptance and coordinated release approval remain unresolved; no deployment. See ATTACHMENT-RELEASE-REVIEW.md.
+
+**Attachment Add workflow — 1 October:** Add dialog now creates privately and retries the same request after lost replies. Combined browser/SQL checks pass for cancel/create/retry/reopen/preview/simulated publish/later edit; full release suite passes. All initial Attachment controls are prepared, but live configuration, concurrent-session review and release acceptance remain. No deployment.
+
+**New Attachment publication backend — 1 October:** creation-marked null-baseline drafts now preview/append only the shared master catalogue; exact public retry is idempotent and collisions/patch changes/protected facts stop publication. Combined handler/SQL preview intent/Git fixture checks and full release suites pass. Add form/browser creation acceptance remain; nothing deployed.
+
+**New Attachment handler/storage — 1 October:** authenticated create action now allocates, prepares and saves a private version; exact retry reuses identity/version and changed command is refused. New saved records load/list before public existence. Combined SQL/handler checks pass; new-record preview/publication and Add UI remain pending. No production changes.
+
+**New Attachment identity/storage checkpoint — 1 October:** unapplied allocation proposal generates and retains server UUIDs bound to actor/request/exact command. Local SQL verifies retry identity, wrong-actor/changed-command/direct-access refusal, receipt binding and version-1 creation save/retry. API/UI and new-record publication remain next; no live changes.
+
+**New Attachment creation contract — 1 October:** server-assigned UUID identity, collision inspection across canonical and saved private IDs, explicit facts, Unknown defaults and Unverified history pass focused tests. Contract is not exposed by the API/UI yet. Next: request-bound allocation/retries, private storage and new-record publication, then Add form/browser acceptance. No live changes.
+
+**Attachment compatibility selector — 1 October:** Unknown/recorded-list controls now use server-supplied active Weapon IDs. Combined browser/SQL checks verify save, second-page reload and selected-item publication output; hidden Weapons are excluded and unchanged historical references are retained. Full release suite passes. Add-new and live acceptance remain. No deployment.
+
+**Attachment compatibility contract — 1 October:** compatibleWeaponIds now validates explicit unique active Weapon references; null means Unknown and [] means an explicitly empty list. Trusted preparation and fresh publication checks reject invented/ambiguous/inactive references; full Attachment release suite passes. UI and combined storage acceptance remain next. No live changes.
+
+**Consolidated Attachment release checks — 1 October:** npm run test:attachments runs all eight Attachment suites plus Admin/invites with browser coverage enabled and stops on failure. Fixed an older browser-fixture save timing race by waiting for the actual save response. Full run passes. Existing-item scope remains; Add-new/Weapon-ID compatibility and live acceptance are separate outstanding work.
+
+**VS handoff independently verified — 1 October:** exact 3ce5f1a isolated source passes Page Builder, Items shell/full editor, Vendor and Admin/invite suites. Focused local service/render/filter review confirms reported scope. No merge/deployment; production builder gates remain. See VS-PAGE-BUILDER-REVIEW.md.
+
+**Attachment production preflight — 1 October:** live admin-drafts remains v13; no Attachment SQL/RPC installed. Existing private tables have RLS, retained aggregate drafts recorded. Corrected prepared Hub Owner access to match live server permission semantics; gate/browser tests pass. Secret/flag values and signed-in live acceptance remain unverified. See ATTACHMENT-PRODUCTION-PREFLIGHT.md. No rollout.
+
+**Attachment deployment preparation — 1 October:** release manifest now records full function/assets, SQL order, permissions, flags, activation and non-destructive recovery. Fixed child asset cache versions to match the frame (-2); Hub and combined browser/SQL suites pass. Fresh production inspection and release approval remain; nothing deployed. See ATTACHMENT-DEPLOYMENT-MANIFEST.md.
+
+**Attachment combined publication checks — 1 October:** browser classification now saves through the handler into local SQL. Two-page acceptance refuses an older preview after another page saves; fresh preview publication produces only data/items.json and a non-force Git update in the fixture. Auth/Git are simulated; no live publication. Deployment manifest, production checks and scope review remain.
+
+**Attachment Hub preparation — 1 October:** gated route, cache version, Items-permission access and session handoff now pass unit and Edge navigation fixtures. Frontend release switch remains false; backend remains separately gated. Copilot branch fetched at 3ce5f1a; the hidden-item fix was inspected, but full Page Builder review/test reproduction is still pending. No merge or deployment.
+
+**Combined Attachment acceptance — 1 October:** Edge edits now pass through the actual handler and local SQL proposal, save revision 3 and reload in a second browser page. Hub inspection confirms Attachments still has no allowed view/frame/session route and its card is disabled. Next: coordinated Hub route/cache preparation, broader combined acceptance and release scope review. Nothing deployed; Page Builder remains separate.
+**Attachment release review — 1 October:** found/fixed repeated-refresh private-history loss; regression and restricted-permission tests pass. Exact remaining gates are in ATTACHMENT-RELEASE-REVIEW.md. Hub navigation, combined acceptance and scope review remain before rollout.
+
+**Parallel handoff — 1 October:** Copilot reports Page Builder follow-up commits and a remaining hidden-item fixture failure; branch unavailable locally, so report remains unverified. Attachment Hub status says Release pending (disabled); Admin tests pass. No live activation.
+
+**Attachment controls — 1 October:** approved images, explicit current-patch review and archive/restore now prepared with contract/browser checks. No deployment. Remaining: Add-new/compatibility scope, Hub/cache integration and coordinated release review.
+
+**Attachment recovery tests — 1 October:** lost-response/permission-denial retries preserve entries and avoid duplicate versions; explicit Review saved state reload is added and browser-tested. No deployment. Remaining controls/Hub integration and release review continue next.
+
+**Attachment disabled routing — 1 October:** backend dispatch/pinned source reader now prepared; missing flag refuses without network. Focused routing/API/SQL tests and Admin npm tests pass. No deployment/activation. Copilot branch is absent locally, so its commits remain unreviewed here.
+
+**Attachment interface batch — 1 October:** isolated review/classify/edit/preview/publish screen and post-publication baseline recovery are prepared. Edge fixture and local SQL/API tests pass. Not live; production source/routing integration, release review and remaining controls are documented in SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
+
+**Attachment preview/publish transport — 1 October:** saved-version preview intents and explicitly confirmed, flag-gated publication now connect through the transport. Focused fixture/local SQL tests pass. No live activation; UI, routing and post-publication recovery still pending.
+
+**Attachment Git adapter — 1 October:** fixed-path non-force publication adapter now checks saved version/permission, public conflicts and exact stored preview output before writes. Fixture tests pass; transport/UI wiring and deployment remain pending.
+
+**Attachment preview intents — 1 October:** private actor/version/output-bound expiring intents are proposed and local SQL-tested. Next: handler/Git publication connection and review UI. Nothing deployed.
+
+**Attachment publication planning — 1 October:** selected master-only output and conflict/privacy protections are implemented/tested. Vendor data remains independent. Next: version-bound preview intent/Git publication and authenticated review UI; no live route or deployment.
+
+**Attachment transport batch — 1 October:** proposed RPC wrappers and server Auth/permission/receipt transport pass combined real local SQL/API tests for classification and later edits. Activation defaults disabled; no production routing or deployment. Next: Attachment review UI and selected master-only preview/publication.
+
+**Attachment batch — 1 October:** multiple immutable private revisions and the disabled request adapter are prepared/tested. SQL tests cover versions 1–3 and stale saves; adapter transport remains mocked. Next: real RPC transport/receipt lookup, combined tests and hosted UI. No deployment.
+
+**Attachment edit preparation — 1 October:** subsequent shared-field/type edits now have version/permission/value validation and preserve baseline/history. Tests pass. Next: extend SQL receipt/version storage beyond version 1, then authenticated API. No deployment.
+
+**Attachment reciprocal guard — 1 October:** storage proposal now blocks competing saved specialist/Attachment drafts in either insertion order using the shared item transaction lock. Local SQL tests pass; unapplied. Next: subsequent revisions and authenticated API integration.
+
+**Attachment private storage — 1 October:** first-classification receipt storage proposal now passes real local SQL save/reload/retry and conflict tests. Not deployed. Reciprocal specialist overlap checks, subsequent edits and API integration remain required. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
+
+**Attachment preparation binding — 1 October:** stale revision/source/patch and private legacy overlap checks now pass fixture tests. Durable master-only receipt storage remains next; current production shared storage supports three specialist categories only. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
+
+**Attachment follow-up — 1 October:** explicit master-only classification preparation is implemented/tested under existing items_edit permission. Durable receipt saving/API remains next; no live activation or real reclassification. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
+
+**1 October next checkpoint:** Special FMJ Ammo recovery confirmed saved privately with history retained and Ammo Unverified. Read-only Attachment review foundation is implemented/tested: zero explicit Attachments, 74 candidates, exact vendor IDs and preserved commercial values. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md. Next is the master-only trusted Attachment contract and permission/storage integration; no hosted Attachment editor or deployment yet. Page Builder work belongs to Copilot.
+
+**Verified live — 1 October 2026:** PR #36 merged at e4b243d2c8855ddbdb9aa1df777190f8ea60c56e. Pages run 36834183922 succeeded; live Admin and all three category pages return 200 with shared-category-20261001-3, and the live script contains the explicit historical-review decision. admin-drafts v13 is ACTIVE. Ammo, Armour and Weapons releases are live. This supersedes preparation/approval-pending entries below. No genuine item import or game-data publication was performed during deployment. Next: administrator reviews Special FMJ Ammo, chooses Keep history and mark Unverified, and uses Preserve history and import; then reviews the private result before any explicit publication.
+## VS Page Builder production plan reviewed
+
+028054d is verified documentation-only. Its plan is a suitable proposal; production contracts remain unresolved and no activation is approved. See VS-PAGE-BUILDER-MODEL-REVIEW.md. Continue Attachment/Evidence combined release integration while coordinating a concrete Page Builder backend contract.
+
+## Evidence combined acceptance passed
+
+Browser-to-production-handler-to-actual-SQL acceptance passes, including committed lost-response retry, genuine second-reviewer conflict, permission refusal and history/source preservation. Next: isolated Attachment/Evidence integration and combined regressions. Production activation remains pending.
+
+## Evidence release inventory prepared
+
+27-file dependency inventory and read-only SQL readiness query prepared and locally checked. See EVIDENCE-REVIEW-RELEASE.md. Next: combined browser/handler/SQL acceptance and explicit Attachment/Evidence release integration; production gates remain pending.
+
+## 2026-10-01 — VS required-image fix verified
+
+Page Builder ec7bc4e independently passes its full acceptance suite. Required-image validation defect is resolved, optional card images preserved, and invalid saved drafts remain repairable. See VS-PAGE-BUILDER-MODEL-REVIEW.md. Builder remains local-only; production integration gates remain outstanding.
+
+## 2026-10-01 — Evidence concurrency verified
+
+Six independent-session PostgreSQL scenarios pass: competing decisions/restores, exact retries, actor-bound receipts, rollback and consistent state/history. Adapter/SQL and API/Hub regressions also pass. Next: readiness inventory and combined acceptance, then coordinated release review. Activation switches remain disabled and SQL unapplied. See EVIDENCE-REVIEW-CHECKPOINT.md.
+
+## 2026-10-01 — VS model handoff independently reviewed
+
+Exact c5b19d1 independently passes reported Page Builder/Items/Vendor/Admin suites. Found/reproduced one null-required-image validation gap that renders a broken image at /. Focused VS follow-up requested; keep local-only branch separate. See VS-PAGE-BUILDER-MODEL-REVIEW.md. No merge or deployment.
+
+## 2026-10-01 — Evidence Review screen preparation
+
+Separate feature/evidence-review-backend worktree now has audited SQL, caller-JWT adapter, paginated queue and review screen with history/retry/stale recovery. Hub/backend are connected behind disabled switches; local Evidence and existing Admin tests pass. No live changes. EVIDENCE-REVIEW-CHECKPOINT.md records rollout dependencies. Attachment PR #37 and VS Page Builder remain separate; reconcile shared Hub/backend files during release integration.
+
 **1 October recovery fix:** explicit preservation of historical verification into private context with a new Unverified category review is prepared/tested. See LEGACY-REVIEW-RECOVERY.md. No genuine draft changed; deployment and administrator opt-in remain pending.
 
 **Deployment update — 1 October:** admin-drafts v12 is active. PR #34 is ready for review but its frontend merge was rejected by automatic approval review pending explicit approval of the Armour/Weapons production rollout. Main/Pages remain cd460b2 (Ammo release). Items v20, Vendors v6 and zero shared versions are unchanged. No genuine game-data publication occurred.
