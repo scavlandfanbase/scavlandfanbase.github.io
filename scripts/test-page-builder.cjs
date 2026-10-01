@@ -1,9 +1,10 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),{chromium}=require('playwright');
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),crypto=require('node:crypto'),{chromium}=require('playwright');
 const {createServer,createStore}=require('./page-builder-server.cjs'),Builder=require('../page-builder-contract.js'),Model=require('../page-builder-model.js');
+const root=path.resolve(__dirname,'..');
 
 const draft=(overrides={})=>({id:'fixture-page',title:'Fixture <script>alert(1)</script>',slug:'fixture-page',intro:'Local fixture only.',sections:[{id:'section-one',title:'Welcome',hidden:false,layout:{columns:2,align:'center',spacing:'normal',background:'surface',border:true},blocks:[{id:'heading-one',type:'heading',title:'Safe heading',hidden:false}]}],...overrides});
 const modelContext={approvedImages:[],existingPages:[],currentPageId:null};
-const luminance=hex=>{const values=hex.slice(1).match(/.{2}/g).map(value=>parseInt(value,16)/255).map(value=>value<=.04045?value/12.92:((value+.055)/1.055)**2.4);return .2126*values[0]+.7152*values[1]+.0722*values[2];};
+const luminance=color=>{const values=color.startsWith('#')?color.slice(1).match(/.{2}/g).map(value=>parseInt(value,16)/255):color.match(/[\d.]+/g).slice(0,3).map(value=>Number(value)/255);const linear=values.map(value=>value<=.04045?value/12.92:((value+.055)/1.055)**2.4);return .2126*linear[0]+.7152*linear[1]+.0722*linear[2];};
 const contrast=(first,second)=>{const [high,low]=[luminance(first),luminance(second)].sort((a,b)=>b-a);return (high+.05)/(low+.05);};
 async function main(){
   const unchanged=draft({title:'Unknown',intro:'Unknown',sections:[{id:'section-one',title:'Unknown',hidden:false,layout:{columns:2,align:'center',spacing:'normal',background:'surface',border:true},blocks:[{id:'block-unknown',type:'text',text:'Unknown',hidden:false}]}]});
@@ -45,7 +46,10 @@ async function main(){
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   try{
     const base=`http://127.0.0.1:${server.address().port}`;
-    assert.equal((await fetch(base+'/')).status,200);
+    const shellResponse=await fetch(base+'/');
+    assert.equal(shellResponse.status,200);
+    const csp=shellResponse.headers.get('content-security-policy'),styleHash=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'page-builder.css'),'utf8').replace(/\r\n/g,'\n')).digest('base64');
+    assert(csp.includes(`'sha256-${styleHash}'`));assert(!csp.includes('unsafe-inline'));
     assert.equal((await fetch(base+'/page-builder.js')).status,200);
     assert.equal((await fetch(base+'/data/site-images.json')).status,404);
     assert.equal((await fetch(base+'/api/pages')).status,403);
@@ -126,23 +130,42 @@ async function main(){
     assert.throws(()=>Model.validate(draft({sections:[{id:'many-section',title:'',hidden:false,layout:{},blocks:[...manyBlocks,{id:'block-over-limit',type:'divider',hidden:false}]}]}),modelContext),/200 blocks/);
     const browser=await chromium.launch({headless:true,channel:'msedge'});
     try{
-      const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+      const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[],cspErrors=[];
       page.on('pageerror',error=>errors.push(error.message));
+      page.on('console',message=>{if(message.type()==='error'&&/Content Security Policy/.test(message.text()))cspErrors.push(message.text());});
       await page.addInitScript(()=>{window.__confirmMessages=[];window.__nextConfirm=true;window.confirm=message=>{window.__confirmMessages.push(message);return window.__nextConfirm;};});
       const confirmAction=async(action,accept=true)=>{
         await page.evaluate(value=>{window.__nextConfirm=value;},accept);await action();
         const message=await page.evaluate(()=>window.__confirmMessages.pop()||'');assert(message,'Expected a confirmation prompt.');return message;
       };
       const focused=locator=>locator.evaluate(element=>element===document.activeElement);
+      const activate=async locator=>{await locator.focus();await page.keyboard.press('Enter');};
+      const toggleByKeyboard=async locator=>{await locator.focus();await page.keyboard.press('Space');};
       await page.goto(base);
       await page.getByRole('heading',{name:'Page Builder'}).waitFor();
       await page.getByText('No saved drafts yet. Create a page to begin.').waitFor();
+      assert.equal(await page.locator('main h1').count(),1);
+      assert.deepEqual(await page.locator('.page-builder button').evaluateAll(buttons=>buttons.filter(button=>!(button.getAttribute('aria-label')||button.innerText).trim()).map(button=>button.outerHTML)),[]);
+      assert.deepEqual(await page.locator('.pb-editor input,.pb-editor select,.pb-editor textarea').evaluateAll(fields=>fields.filter(field=>!field.labels.length&&!field.getAttribute('aria-label')).map(field=>field.outerHTML)),[]);
       assert.equal(await page.locator('#page-title').isDisabled(),true);
-      await page.getByRole('button',{name:'New page'}).click();
+      await activate(page.getByRole('button',{name:'New page'}));
       assert(await focused(page.getByLabel('Page title')));
       await page.keyboard.press('Tab');assert(await focused(page.getByLabel(/Safe address/)));
+      const focusRing=await page.getByLabel(/Safe address/).evaluate(field=>({style:getComputedStyle(field).outlineStyle,width:parseFloat(getComputedStyle(field).outlineWidth)}));
+      assert.notEqual(focusRing.style,'none');assert(focusRing.width>=2);
       await page.keyboard.press('Tab');assert(await focused(page.getByLabel('Introduction')));
+      await page.getByLabel('Page title').fill('');
+      await page.getByRole('button',{name:'Save Draft'}).click();
+      await page.locator('#status').getByText(/Page title is required/).waitFor();
+      assert(await focused(page.getByLabel('Page title')));
+      assert.equal(await page.getByLabel('Page title').getAttribute('aria-invalid'),'true');
+      assert((await page.getByLabel('Page title').getAttribute('aria-describedby')).split(/\s+/).includes('status'));
+      assert.equal(await page.locator('#status').getAttribute('aria-live'),'assertive');
       await page.getByLabel('Page title').fill('Browser fixture');
+      const longTitle='Very Long Title '.repeat(10);assert.equal(longTitle.length,160);
+      await page.getByLabel('Page title').fill(longTitle);assert.equal(await page.getByLabel('Page title').inputValue().then(value=>value.length),160);
+      await page.getByLabel('Page title').fill('Browser fixture');
+      assert.equal(await page.getByLabel('Page title').getAttribute('aria-invalid'),null);
       assert.equal(await page.locator('#page-slug').inputValue(),'browser-fixture');
       const abandonMessage=await confirmAction(()=>page.getByRole('button',{name:'New page'}).click(),false);
       assert.match(abandonMessage,/Discard your unsaved changes/);
@@ -151,16 +174,27 @@ async function main(){
       await page.getByLabel('Introduction').fill('<img src=x onerror=alert(1)>');
       const previewFrame=page.frameLocator('#preview-frame');
       await previewFrame.getByRole('heading',{name:'Browser fixture'}).waitFor();
+      assert.match(await previewFrame.locator('body').evaluate(body=>getComputedStyle(body).fontFamily),/Bahnschrift/);
+      assert.equal(await previewFrame.locator('body').evaluate(body=>getComputedStyle(body).backgroundColor),'rgb(17, 23, 19)');
+      assert.deepEqual(cspErrors,[]);
       assert.equal(await previewFrame.locator('.page-section').count(),0);
+      assert.equal(await page.locator('#section-list .pb-section-card').count(),0);
+      assert.equal(await page.locator('#sections-empty').isVisible(),true);
       const palette=await page.locator('.page-builder').evaluate(element=>{const style=getComputedStyle(element);return Object.fromEntries(['canvas','panel','text','muted','gold','teal'].map(key=>[key,style.getPropertyValue(`--pb-${key}`).trim()]));});
       assert(contrast(palette.text,palette.canvas)>=4.5);
       assert(contrast(palette.text,palette.panel)>=4.5);
       assert(contrast(palette.muted,palette.panel)>=4.5);
       assert(contrast(palette.gold,palette.panel)>=4.5);
       assert(contrast(palette.teal,palette.canvas)>=4.5);
-      await page.getByRole('button',{name:'Add section'}).click();
+      for(const selector of ['#status','.pb-button.pb-primary','.pb-button.pb-danger','.pb-view-toggle button[aria-pressed=true]']){
+        const colors=await page.locator(selector).first().evaluate(element=>{const style=getComputedStyle(element);return [style.color,style.backgroundColor];});
+        assert(contrast(colors[0],colors[1])>=4.5,`Insufficient contrast for ${selector}: ${colors.join(' on ')}`);
+      }
+      await activate(page.getByRole('button',{name:'Add section'}));
       let section=page.locator('.pb-section-card').nth(0);
       await section.getByLabel('Section title').fill('Feature area');
+      await activate(section.getByRole('button',{name:'Rename section 1'}));
+      assert(await focused(section.getByLabel('Section title')),'Rename did not focus the section-title input.');
       await section.getByLabel('Columns').selectOption('2');
       await section.getByLabel('Alignment').selectOption('center');
       await section.getByLabel('Spacing').selectOption('spacious');
@@ -169,13 +203,13 @@ async function main(){
       const addBlock=async type=>{
         const current=page.locator('.pb-section-card').nth(0);
         await current.locator('.pb-add-block select').selectOption(type);
-        await current.getByRole('button',{name:/Add selected block/}).click();
+        await activate(current.getByRole('button',{name:/Add selected block/}));
         return page.locator('.pb-section-card').nth(0);
       };
       const addBlockTo=async(type,index)=>{
         const current=page.locator('.pb-section-card').nth(index);
         await current.locator('.pb-add-block select').selectOption(type);
-        await current.getByRole('button',{name:/Add selected block/}).click();
+        await activate(current.getByRole('button',{name:/Add selected block/}));
         return page.locator('.pb-section-card').nth(index);
       };
       section=await addBlock('heading');
@@ -200,37 +234,50 @@ async function main(){
       const buttonRow=section.locator('.pb-block-row').nth(6);
       await buttonRow.getByLabel('Heading').fill('Open Items');
       await buttonRow.getByLabel('Link address').fill('javascript:alert(1)');
-      await page.getByRole('button',{name:'Save Draft'}).click();
+      await activate(page.getByRole('button',{name:'Save Draft'}));
       await page.locator('#status').getByText(/Use an HTTPS link/).waitFor();
+      assert(await focused(buttonRow.getByLabel('Link address')));
+      assert.equal(await buttonRow.getByLabel('Link address').getAttribute('aria-invalid'),'true');
+      assert((await buttonRow.getByLabel('Link address').getAttribute('aria-describedby')).split(/\s+/).includes('status'));
+      assert.equal(await page.locator('#status').getAttribute('aria-live'),'assertive');
+      const errorColors=await page.locator('#status').evaluate(element=>{const style=getComputedStyle(element);return [style.color,style.backgroundColor];});
+      assert(contrast(errorColors[0],errorColors[1])>=4.5);
       await buttonRow.getByLabel('Link address').fill('items.html');
+      assert.equal(await buttonRow.getByLabel('Link address').getAttribute('aria-invalid'),null);
+      assert.deepEqual(await page.locator('.pb-editor input,.pb-editor select,.pb-editor textarea').evaluateAll(fields=>fields.filter(field=>!field.labels.length&&!field.getAttribute('aria-label')).map(field=>field.outerHTML)),[]);
+      assert.deepEqual(await page.locator('.page-builder button').evaluateAll(buttons=>buttons.filter(button=>!(button.getAttribute('aria-label')||button.innerText).trim()).map(button=>button.outerHTML)),[]);
+      assert(await page.locator('.page-builder h1').count()===1);
+      assert(await page.locator('.page-builder h1,.page-builder h2,.page-builder h3,.page-builder h4,.page-builder h5,.page-builder h6').evaluateAll(headings=>{
+        const levels=headings.map(heading=>Number(heading.tagName.slice(1)));return levels.every((level,index)=>index===0||level<=levels[index-1]+1);
+      }),'Heading levels skip a structural level.');
       section=page.locator('.pb-section-card').nth(0);
-      await section.locator('.pb-block-row').nth(0).getByRole('button',{name:/Duplicate block/}).click();
+      await activate(section.locator('.pb-block-row').nth(0).getByRole('button',{name:/Duplicate block/}));
       assert.equal(await section.locator('.pb-block-row').count(),8);
       await page.waitForFunction(()=>document.activeElement===document.querySelector('.pb-section-card .pb-block-row:nth-child(2) input[data-field="title"]'));
       assert(await focused(section.locator('.pb-block-row').nth(1).getByLabel('Heading')),'Duplicated block did not receive focus.');
-      await section.locator('.pb-block-row').nth(0).getByRole('button',{name:/Move block 1 down/}).click();
+      await activate(section.locator('.pb-block-row').nth(0).getByRole('button',{name:/Move block 1 down/}));
       await page.waitForFunction(()=>document.activeElement===document.querySelector('.pb-section-card .pb-block-row:nth-child(2) input[data-field="title"]'));
       assert(await focused(page.locator('.pb-block-row').nth(1).getByLabel('Heading')),'Moved block did not retain focus.');
-      await page.locator('.pb-section-card').nth(0).locator('.pb-block-row').nth(0).getByRole('button',{name:/Move block 1 down/}).click();
-      await section.locator('.pb-block-row').nth(2).getByLabel('Hidden from export').check();
+      await activate(page.locator('.pb-section-card').nth(0).locator('.pb-block-row').nth(0).getByRole('button',{name:/Move block 1 down/}));
+      await toggleByKeyboard(section.locator('.pb-block-row').nth(2).getByLabel('Hidden from export'));
       const removeBlock=section.locator('.pb-block-row').nth(1).getByRole('button',{name:/Remove block/});
-      const cancelBlockMessage=await confirmAction(()=>removeBlock.click(),false);
+      const cancelBlockMessage=await confirmAction(()=>activate(removeBlock),false);
       assert.match(cancelBlockMessage,/Remove block/);assert(await focused(removeBlock),'Canceled block removal did not retain focus.');
-      const removeBlockMessage=await confirmAction(()=>removeBlock.click());
+      const removeBlockMessage=await confirmAction(()=>activate(removeBlock));
       assert.match(removeBlockMessage,/Remove block/);
       assert(await focused(page.locator('.pb-block-row').nth(1).locator('textarea')),'Focus did not move to the next block after removal.');
       section=page.locator('.pb-section-card').nth(0);assert.equal(await section.locator('.pb-block-row').count(),7);
-      await page.getByRole('button',{name:'Add section'}).click();
+      await activate(page.getByRole('button',{name:'Add section'}));
       let hiddenSection=page.locator('.pb-section-card').nth(1);
       await hiddenSection.getByLabel('Section title').fill('Hidden section fixture');
-      await hiddenSection.locator('.pb-section-fields').getByLabel('Hidden from export').check();
+      await toggleByKeyboard(hiddenSection.locator('.pb-section-fields').getByLabel('Hidden from export'));
       await addBlockTo('heading',1);
       hiddenSection=page.locator('.pb-section-card').nth(1);
       await hiddenSection.locator('.pb-block-row').nth(0).getByLabel('Heading').fill('Hidden section content');
-      await hiddenSection.getByRole('button',{name:'Move section 2 up'}).click();
-      await page.locator('.pb-section-card').nth(0).getByRole('button',{name:'Move section 1 down'}).click();
-      const addDisposable=page.getByRole('button',{name:'Add section'});await addDisposable.click();
-      const disposable=page.locator('.pb-section-card').nth(2),removeSectionMessage=await confirmAction(()=>disposable.getByRole('button',{name:/Remove section/}).click());
+      await activate(hiddenSection.getByRole('button',{name:'Move section 2 up'}));
+      await activate(page.locator('.pb-section-card').nth(0).getByRole('button',{name:'Move section 1 down'}));
+      const addDisposable=page.getByRole('button',{name:'Add section'});await activate(addDisposable);
+      const disposable=page.locator('.pb-section-card').nth(2),removeSectionMessage=await confirmAction(()=>activate(disposable.getByRole('button',{name:/Remove section/})));
       assert.match(removeSectionMessage,/Remove section/);
       assert(await focused(page.locator('.pb-section-card').nth(1).getByLabel('Section title')),'Focus did not move to a remaining section after removal.');
       assert.equal(await page.locator('.pb-section-card').count(),2);
@@ -246,7 +293,7 @@ async function main(){
       assert.equal(await frame.locator('script').count(),0);
       assert.equal(await frame.locator('img').getAttribute('alt'),'Approved fixture image');
       const initialSectionId=await page.locator('.pb-section-card').nth(0).getAttribute('data-section-card');
-      const exportEvent=page.waitForEvent('download');await page.getByRole('button',{name:'Export HTML'}).click();
+      const exportEvent=page.waitForEvent('download');await activate(page.getByRole('button',{name:'Export HTML'}));
       const download=await exportEvent,exportPath=await download.path(),exportedHtml=fs.readFileSync(exportPath,'utf8');
       assert.equal(download.suggestedFilename(),'browser-fixture.html');
       assert.equal(await page.locator('#preview-frame').evaluate(frameElement=>frameElement.srcdoc),exportedHtml);
@@ -269,6 +316,8 @@ async function main(){
       await page.route('**/api/pages',route=>route.request().method()==='POST'?route.fulfill({status:503,contentType:'application/json',body:'{"error":"fixture save failure"}'}):route.continue());
       await page.getByRole('button',{name:'Save Draft'}).click();
       await page.getByText(/Save failed: fixture save failure/).waitFor();
+      assert(await focused(page.getByRole('button',{name:'Save Draft'})),'Focus did not remain on Save Draft after failure.');
+      assert.equal(await page.locator('#status').getAttribute('aria-live'),'assertive');
       assert.equal(await page.getByLabel('Page title').inputValue(),'Retry fixture');
       const afterFailure=(await (await fetch(base+'/api/pages',{headers})).json()).pages[0];assert.equal(afterFailure.revision,1);assert.equal(afterFailure.draft.title,originalTitle);
       await page.unroute('**/api/pages');await page.getByRole('button',{name:'Save Draft'}).click();
@@ -278,11 +327,17 @@ async function main(){
       await page.reload();await page.getByRole('button',{name:/Retry fixture/}).waitFor();
       await page.getByRole('button',{name:/Retry fixture/}).click();
       assert.equal(await page.getByLabel('Page title').inputValue(),'Retry fixture');
-      for(const width of [320,390,768,1280]){
+      for(const width of [320,390,640,768,1280]){
         await page.setViewportSize({width,height:1000});
         assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Page Builder horizontal overflow at ${width}px`);
         for(const height of await page.locator('.page-builder button:visible,.page-builder input:not([type=checkbox]):visible,.page-builder select:visible,.page-builder textarea:visible,.page-builder .pb-toggle:visible').evaluateAll(elements=>elements.map(element=>element.getBoundingClientRect().height)))assert(height>=40,`Control shorter than 40px at ${width}px`);
       }
+      await page.setViewportSize({width:640,height:1000});
+      const maximumTitle='Long Page Title '.repeat(10);assert.equal(maximumTitle.length,160);
+      await page.getByLabel('Page title').fill(maximumTitle);
+      await frame.getByRole('heading',{name:maximumTitle}).waitFor();
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'A maximum-length page title caused overflow at the 640px reflow proxy.');
+      await page.getByLabel('Page title').fill('Retry fixture');
       await page.locator('#mobile-view').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#mobile-view').getAttribute('aria-pressed'),'true');
       await page.getByLabel('Introduction').fill('Unsaved local edit');
       const stale=structuredClone((await (await fetch(base+'/api/pages',{headers})).json()).pages[0]);stale.draft.intro='Another local operator saved this newer revision.';
@@ -297,7 +352,7 @@ async function main(){
       assert.equal(await page.getByLabel('Introduction').inputValue(),'Unsaved local edit');
       await confirmAction(()=>page.getByRole('button',{name:/Retry fixture/}).click());
       assert.equal(await page.getByLabel('Introduction').inputValue(),'Another local operator saved this newer revision.');
-      const deleteMessage=await confirmAction(()=>page.getByRole('button',{name:'Delete draft'}).click());
+      const deleteMessage=await confirmAction(()=>activate(page.getByRole('button',{name:'Delete draft'})));
       assert.match(deleteMessage,/Delete the saved draft/);
       await page.getByText('Saved draft deleted.').waitFor();
       assert(await focused(page.getByRole('button',{name:'New page'})),'Focus did not move after deleting the current draft.');
@@ -310,10 +365,17 @@ async function main(){
         await page.locator('#preview-error').getByText(/Choose an approved image from the image library/).waitFor();
         await page.getByRole('button',{name:'Save Draft'}).click();
         await page.locator('#status').getByText(/Choose an approved image from the image library/).waitFor();
+        const imageControl=page.locator('.pb-block-row').first().getByLabel('Approved image');
+        assert(await focused(imageControl),'Invalid-image repair did not focus its selector.');
+        assert.equal(await imageControl.getAttribute('aria-invalid'),'true');
+        assert((await imageControl.getAttribute('aria-describedby')).split(/\s+/).includes('status'));
+        assert.equal(await page.locator('#status').getAttribute('aria-live'),'assertive');
         const beforeRepair=(await (await fetch(base+'/api/pages',{headers})).json()).pages[0];assert.equal(beforeRepair.revision,4);assert.deepEqual(beforeRepair.draft,invalidStoredDraft);
         await page.getByRole('button',{name:'Export HTML'}).click();
         await page.locator('#status').getByText(/Export failed: Choose an approved image from the image library/).waitFor();
-        const imageControl=page.locator('.pb-block-row').first().getByLabel('Approved image');await imageControl.selectOption(approvedImage);
+        assert(await focused(imageControl),'Export validation did not focus the invalid-image selector.');
+        await imageControl.selectOption(approvedImage);
+        assert.equal(await imageControl.getAttribute('aria-invalid'),null);
         await page.getByRole('button',{name:'Save Draft'}).click();
         await page.getByText('Saved locally at revision 5. This draft is not published.').waitFor();
         const repaired=(await (await fetch(base+'/api/pages',{headers})).json()).pages[0];assert.equal(repaired.revision,5);assert.equal(repaired.draft.sections[0].blocks[0].image,approvedImage);
