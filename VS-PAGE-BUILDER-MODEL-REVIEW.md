@@ -21,3 +21,13 @@ Independently fetched and compared the exact checkpoint to ec7bc4e: only PAGE-BU
 Suitable as a planning foundation, not implementation or activation approval. Before delegating production implementation, align its proposed permission/storage/publication contracts with the existing Admin backend. Avoid treating a pending Pages build as an immediate successful publication; retain separate committed/build-confirmed outcomes and recovery. Do not imply Git and private database state can be updated atomically. Current Attachment publication race limitations must also be considered if a shared publisher is reused.
 
 Main workstream remains combined Attachment/Evidence release integration and regression checks. Page Builder live work waits for a concrete reviewed contract; VS should not choose production permissions, credentials or migrate local drafts independently.
+
+## Accessibility and local CSP review — 052d175
+
+Independently fetched origin/feature/page-builder-local-drafts at 052d1752268496031d090f93a6a70718b4f2083c and compared it with 028054d. Exactly four files changed: page-builder.js, scripts/page-builder-server.cjs, scripts/test-page-builder.cjs and PAGE-BUILDER-CHECKPOINT.md. No Admin Hub, Supabase, game data, Attachment or NEXT_JOBS changes.
+
+The full Page Builder suite passed independently in an isolated archive. Browser launch required the normal sandbox escalation; the rerun passed. Reviewed the trusted stylesheet hash: it is computed from server-owned page-builder.css with normalized newlines, enabled only in Page Builder mode, and does not allow unsafe-inline. Validation repair focus and failed-save recovery have regression coverage. Other suites in this handoff are VS-reported, not independently rerun for this isolated four-file change.
+
+Two remaining accessibility consistency cases should receive focused follow-up: the local duplicate-draft address branch focuses the address but bypasses aria-invalid/describedby setup; automatic preview validation uses its own preview-error path, so it does not establish the same repair-field association. Automatic preview updates should not steal focus while typing. These do not prevent local model validation or make live publication available. No screen-reader audit, actual browser zoom certification, merge, deployment or production activation is claimed.
+
+Next production work remains a reviewed contract for granular page permissions, private revision storage, approved assets and publication receipts. Do not enable the local filesystem service for live admins.
