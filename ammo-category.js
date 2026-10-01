@@ -103,16 +103,19 @@
  $('legacy-review').onclick=async()=>{
   busy=true;buttons();
   try{const report=await request({action:'legacy-review'});
-   const importable=['ready-for-reviewed-import','no-pending-public-fields'].includes(report.status)&&report.sourceVersion;
-   scavEditorDialog({title:'Existing Items work — '+report.name,submit:importable?'Import privately':'Close',readOnly:!importable,build:({body})=>{
+   const preserveReview=report.historyRecoverable;let historyChoice;
+   const importable=(['ready-for-reviewed-import','no-pending-public-fields'].includes(report.status)||preserveReview)&&report.sourceVersion;
+   scavEditorDialog({title:'Existing Items work — '+report.name,submit:importable?(preserveReview?'Preserve history and import':'Import privately'):'Close',readOnly:!importable,build:({body})=>{
     const summary=document.createElement('p');summary.textContent='Read-only review: '+report.status+(report.sourceVersion?' · Items draft version '+report.sourceVersion:'')+'. Existing work stays saved. Import privately saves supported work into this editor; publication requires a separate preview and Publish.';body.append(summary);
+    if(preserveReview){const note=document.createElement('p');note.textContent='Keep the old verification and its history in the private preserved record. Mark this category Unverified for a fresh review. This does not publish, erase history or declare it verified.';body.append(note);historyChoice=E.selectField(body,'Historical review decision','historical-review-decision',[['','Choose a decision'],['unverified','Keep history and mark Unverified']],'');}
     for(const field of report.fields){const heading=document.createElement('h3');heading.textContent=label(field.field)+' · '+field.status;body.append(heading);
      for(const [key,title]of [['baseline','Original public value'],['private','Saved private value'],['public','Current public value']]){const line=document.createElement('p');line.textContent=title+': '+(field[key].present?JSON.stringify(field[key].value):'Not present');body.append(line);}
     }
     if(report.preserved){const note=document.createElement('p');note.textContent='The complete selected private record, including its notes and review history, remains preserved in the existing draft. An explicit version-bound import is still required.';body.append(note);}
    },onSubmit:async()=>{
     if(!importable)return;
-    pending??={requestId:crypto.randomUUID(),version:report.currentVersion,command:{action:'import-legacy',expectedRevision:report.revision,confirmId:selected,sourceVersion:report.sourceVersion,sourceDigest:report.sourceDigest,publicDigest:report.publicDigest}};
+    if(preserveReview&&historyChoice.value!=='unverified')throw Error('Choose Keep history and mark Unverified before importing.');
+    pending??={requestId:crypto.randomUUID(),version:report.currentVersion,command:{action:'import-legacy',expectedRevision:report.revision,confirmId:selected,sourceVersion:report.sourceVersion,sourceDigest:report.sourceDigest,publicDigest:report.publicDigest,...(preserveReview?{preserveVerification:true}:{})}};
     if(!await save())throw Error('Import could not finish. Review the status message before retrying.');
    }});
   }catch(e){status(e.message);}finally{busy=false;buttons();}

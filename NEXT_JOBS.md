@@ -1,3 +1,5 @@
+**1 October recovery fix:** explicit preservation of historical verification into private context with a new Unverified category review is prepared/tested. See LEGACY-REVIEW-RECOVERY.md. No genuine draft changed; deployment and administrator opt-in remain pending.
+
 **Deployment update — 1 October:** admin-drafts v12 is active. PR #34 is ready for review but its frontend merge was rejected by automatic approval review pending explicit approval of the Armour/Weapons production rollout. Main/Pages remain cd460b2 (Ammo release). Items v20, Vendors v6 and zero shared versions are unchanged. No genuine game-data publication occurred.
 
 **1 October category release:** Ammo activated explicitly after PR #33; Armour/Weapons shared screen, creation and receipt integration now fixture-tested. See SHARED-CATEGORY-RELEASE.md. Current live Admin tab is signed out; genuine acceptance remains pending.
