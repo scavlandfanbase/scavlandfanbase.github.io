@@ -23,7 +23,7 @@ function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}=
   };
   const validatePage=(page,existingPages,currentPageId)=>{
     try{return PageBuilderModel.validate(page,{approvedImages:imageChoices(),existingPages,currentPageId});}
-    catch(reason){if(reason.message==='A page with this address already exists.')throw error(reason.message,409);throw reason;}
+    catch(reason){if(reason.message==='A page with this address already exists.'||reason.message==='A page with this identity already exists.')throw error(reason.message,409);throw reason;}
   };
   const Items=ammoMode?require('../ammo-model.cjs'):itemMode?require('../item-model.cjs'):null;
   const Vendors=vendorMode?require('../vendor-model.cjs'):null;

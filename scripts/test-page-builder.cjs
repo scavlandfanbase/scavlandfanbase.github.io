@@ -26,6 +26,7 @@ async function main(){
   assert.throws(()=>Model.validate({...unchanged,slug:'items'},modelContext),/address/i);
   const addressContext={...modelContext,existingPages:[{id:'saved-page',slug:'taken-address'}]};
   assert.throws(()=>Model.validate({...unchanged,slug:'taken-address'},addressContext),/address already exists/i);
+  assert.throws(()=>Model.validate({...unchanged,id:'saved-page',slug:'different-address'},addressContext),/identity already exists/i);
   const unchangedSaved={...unchanged,id:'saved-page',slug:'taken-address'};
   assert.deepEqual(Model.validate(unchangedSaved,{...addressContext,currentPageId:'saved-page'}),unchangedSaved);
   assert.throws(()=>Model.validate(unchangedSaved,{...addressContext,currentPageId:'forged-page'}),/current page identity/i);
@@ -69,6 +70,7 @@ async function main(){
     assert.equal(record.draft.sections[0].layout.columns,2);
     assert(!Object.hasOwn(record,'published'));
     assert.equal((await post({action:'create',page:draft({id:'other-page'})})).status,409);
+    assert.equal((await post({action:'create',page:draft({slug:'new-address'})})).status,409);
     assert.equal((await post({action:'create',page:draft({id:'reserved-page',slug:'items'})})).status,400);
     assert.equal((await post({action:'create',page:draft({id:'role-page',slug:'role-page'}),role:'admin'})).status,400);
     assert.equal((await post({action:'create',page:draft({id:'revision-page',slug:'revision-page'}),revision:8})).status,400);

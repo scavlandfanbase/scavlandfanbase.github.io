@@ -94,6 +94,8 @@
         }
       }
     }
+    const identityConflict=trusted.existingPages.find(entry=>entry.id===pageId&&entry.id!==context.currentPageId);
+    if(identityConflict)fail('A page with this identity already exists.');
     const conflict=trusted.existingPages.find(entry=>entry.slug===input.slug&&entry.id!==context.currentPageId);
     if(conflict)fail('A page with this address already exists.');
     return structuredClone(input);
