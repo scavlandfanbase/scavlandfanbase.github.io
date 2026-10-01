@@ -1,3 +1,7 @@
+## Wider desktop layout — 1 October 2026
+
+Shared public/Admin desktop widths and Page Builder workspace/output styles are verified locally. Release and existing Guides output refresh follow; see PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Guides genuinely published — 1 October 2026
 
 Owner saved/reviewed/published Guides revision 1 through the live Page Builder. Exact commit and public content confirmed live; Pages run 36923562601 succeeded. PR #44 archived-history release is included. Refreshed-session archived-history inspection also passed. Next: public navigation integration; restricted-account and real failed-build recovery remain unclaimed. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
@@ -617,3 +621,4 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
 
 - Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
+

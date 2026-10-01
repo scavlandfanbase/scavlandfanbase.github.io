@@ -336,3 +336,14 @@ html.scav-shell-loading .hero h1,html.scav-shell-loading .hero p{visibility:hidd
   object-fit:contain;
   flex:0 0 44px;
 }
+
+/* Wide desktop workspaces; keep dialog and reading controls at their own sizes. */
+@media(min-width:1100px){
+  body>main,.container,.grid,.items-main,.admin-main,.areas-main,.roadmap-main,.map-container,.faction-grid,
+  #vendor-list,.sell-guide,.vendor-tools,.vendor-count,body>.construction-box{
+    box-sizing:border-box;width:calc(100% - 32px)!important;max-width:none!important;
+    margin-left:auto!important;margin-right:auto!important;
+  }
+  .admin-main .item-frame{display:block;height:calc(100dvh - 260px);min-height:600px}
+  .faction-box{max-width:none!important}
+}

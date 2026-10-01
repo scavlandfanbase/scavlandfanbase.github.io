@@ -138,3 +138,9 @@
 @media(max-width:430px){.pb-history-header{align-items:start;flex-direction:column}.pb-history-detail iframe{height:460px}}
 @media(max-width:430px){.pb-publication-actions{align-items:stretch;flex-direction:column}.pb-publication-actions button{width:100%}}
 @media(prefers-reduced-motion:reduce){.page-builder *{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+@media(min-width:1100px){
+  .page-builder{padding-left:20px;padding-right:20px}
+  .pb-header,.pb-notice,.pb-status,.pb-layout{max-width:none}
+  .published-page .page-preview{width:100%;max-width:none}
+}
