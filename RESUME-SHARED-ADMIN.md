@@ -1,3 +1,5 @@
+**Attachment publication planning — 1 October:** selected master-only output and conflict/privacy protections are implemented/tested. Vendor data remains independent. Next: version-bound preview intent/Git publication and authenticated review UI; no live route or deployment.
+
 **Attachment transport batch — 1 October:** proposed RPC wrappers and server Auth/permission/receipt transport pass combined real local SQL/API tests for classification and later edits. Activation defaults disabled; no production routing or deployment. Next: Attachment review UI and selected master-only preview/publication.
 
 **Attachment batch — 1 October:** multiple immutable private revisions and the disabled request adapter are prepared/tested. SQL tests cover versions 1–3 and stale saves; adapter transport remains mocked. Next: real RPC transport/receipt lookup, combined tests and hosted UI. No deployment.

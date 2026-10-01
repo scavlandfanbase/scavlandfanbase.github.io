@@ -1,0 +1,24 @@
+const assert=require('node:assert/strict');
+(async()=>{
+ const {prepareAttachmentDecision}=await import('../supabase/functions/admin-drafts/attachment-draft.mjs');
+ const {planAttachmentPublication:plan}=await import('../supabase/functions/admin-drafts/attachment-publication.mjs');
+ const {legacyDigest}=await import('../supabase/functions/admin-drafts/legacy-item-review.mjs');
+ const source={id:'stable',name:'Known',classification:['item'],source:{file:'proof'},notes:null};
+ const settings={schemaVersion:1,current_patch_id:'fixture'},context={actor:'private-admin',permissions:['items_edit'],source,settings,version:0,legacyDrafts:[],clock:()=>new Date('2026-10-01T10:00:00Z')};
+ const saved=await prepareAttachmentDecision({action:'classify-attachment',confirmId:'stable',attachmentType:'Unknown',confirmReclassification:true,expectedVersion:0,sourceDigest:await legacyDigest({source,settings})},context);
+ const documents={'data/items.json':{schemaVersion:1,data:[source,{id:'other',name:'Untouched'}]},'data/vendors.json':{data:[],vendorListings:{listings:[{id:'stock',entity:{type:'item',id:'stable'},price:999,rank:3,quantity:2}]}}};
+ const before=JSON.stringify(documents),output=await plan(saved,documents,context);
+ assert.deepEqual(Object.keys(output),['data/items.json']);assert.equal(JSON.stringify(documents),before);
+ assert.equal(output['data/items.json'].data[0].contentType,'Attachment');
+ assert.deepEqual(output['data/items.json'].data[1],documents['data/items.json'].data[1]);
+ assert(!JSON.stringify(output).includes('private-admin'));assert(!JSON.stringify(output).includes('history'));
+ assert.deepEqual(await plan(saved,{...documents,...output},context),output,'already-public retry is compatible');
+ await assert.rejects(plan(saved,documents,{...context,permissions:[]}),e=>e.status===403);
+ const disjoint=structuredClone(documents);disjoint['data/items.json'].data[0].description='Other public edit';
+ assert.equal((await plan(saved,disjoint,context))['data/items.json'].data[0].description,'Other public edit');
+ const conflict=structuredClone(documents);conflict['data/items.json'].data[0].classification=['weapon'];
+ await assert.rejects(plan(saved,conflict,context),e=>e.status===409);
+ await assert.rejects(plan(saved,{...documents,'data/weapons.json':{data:[{id:'stable'}]}},context),e=>e.status===409);
+ await assert.rejects(plan({...saved,record:{...saved.record,effects:{invented:1}}},documents,context),/Protected/);
+ console.log('PASS Attachment preview planner: one master output, no vendor changes, private history omitted, disjoint edits/retries preserved and conflicts/protected facts refused.');
+})().catch(e=>{console.error(e);process.exitCode=1;});
