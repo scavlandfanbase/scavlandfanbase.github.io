@@ -4,7 +4,7 @@
 
 **Date:** 1 October 2026  
 **Branch:** `feature/page-builder-local-drafts`  
-**Commits:** `77713bb` (draft-service foundation), `1b1ed58` (visual editor and acceptance tests), `45f6426` (focus restoration), `2997a7f` (Items count-state assertions), `d1c1b4d` (keyboard-navigation checks), `38cf7c7` (hidden-item filter and fixture corrections), `d206ccb` (trusted validation model), `14ba115` (model trust-boundary tests), `ec714dd` (duplicate page identity protection), `c1d4afc` (required approved image blocks)
+**Recent fixture-only UI checkpoints:** `9197f83` (explicit demonstration-mode boundary), `df8484b` (publication status/recovery UI and browser tests)
 
 ## What Exists
 
@@ -14,20 +14,24 @@ The local editor supports page title, introduction and safe address; saved-draft
 
 A clearly labeled **Version history - demonstration** panel is an explicit opt-in demonstration mode and is closed during normal local use. It uses a separate fixture adapter over inert demonstration data in the editor HTML; it does not read/write the draft service, and these records never appear in the saved-draft sidebar or public output. Entries are not genuine saved history. It shows revision, saved time, fixture editor name and state; valid entries render read-only through the existing model/renderer, while invalid identity, protected address, unsafe-link or unapproved-image entries show repair-needed text without rendering. Historical IDs/slugs are not rewritten for validation: each demo revision is checked against a separate fixture-only trusted context, isolated from active draft addresses. Opening history never changes the active editor draft.
 
+A separate **Publication status - demonstration** disclosure is also closed during normal local use. Its embedded scenarios and in-memory adapter simulate ready for review, publishing, repository commit recorded, deployment pending, confirmed published, deployment failed and outcome unknown. A deliberately unconfirmed completion fixture remains unknown until a later status check explicitly confirms it. The panel does not call the draft service or any publication, repository, Git, Pages, authentication or permission API. The browser suite verifies the simulation produces no draft-service POST requests.
+
+Review uses the exact stored local draft revision, not the current editor object. The read-only preview and request summary show the saved revision and a SHA-256 digest of its revision/content. Unsaved editor changes are labeled separately and preserved. Editing, switching pages, saving a new revision or deleting the reviewed draft invalidates the review. The fixture request identity is stable across checks and failed-deployment retries; duplicate actions are blocked. Editing is temporarily disabled while the fixture request is processing or deployment is pending, then restored without replacing editor content. Failure and unknown messages disclose the recorded fixture commit and direct the operator to check status; “Published” is shown only when the fixture result explicitly confirms deployment. None of these states represents a real commit or deployment.
+
 `Save Draft` only saves to the local draft service. The service has no publish action and serves no `/pages/<address>` output. `Export HTML` downloads a local file; it is not a deployment. No live Admin Hub Page Builder button, public navigation or existing page was changed.
 
 The proposed production-integration workflow, unresolved decisions and release gates are documented in [PAGE-BUILDER-PRODUCTION-PLAN.md](PAGE-BUILDER-PRODUCTION-PLAN.md). That document is a review plan only; none of its production work is implemented or enabled.
 
 ## Files Changed
 
-- `page-builder.html` — standalone local editor shell, accessible labels/states and inert demonstration-history fixtures.
-- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh, focus restoration and the fixture-only history adapter. History preserves original revision identities, uses a separate trusted fixture context and never touches active draft state; invalid fixture pages are blocked by the shared model/renderer.
-- `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
+- `page-builder.html` — standalone local editor shell, accessible labels/states and inert demonstration-history/publication fixtures. Both demonstration panels are opt-in and closed by default.
+- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh, focus restoration, isolated history fixtures and the fixture-only publication/recovery adapter. Publication review binds to an exact saved revision/digest and never mutates the active draft or calls the local draft service.
+- `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`; publication metadata wraps at narrow widths. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
 - `page-builder-model.js` — reusable metadata/content validator; independent of filesystem, authentication and publication.
 - `page-builder-contract.js` — escaped preview/export renderer using the reusable model.
 - `scripts/page-builder-server.cjs` — validates create/save through the reusable model using image choices resolved from the existing inventory/filesystem and page identities/addresses derived from private saved drafts. Request envelopes reject unknown/protected fields. The loopback preview CSP now permits only the SHA-256 hash of the trusted stylesheet, so preview styles work without enabling `unsafe-inline`. Existing host/origin/session protections and private storage remain in place.
 - `items-builder.js` — Active items excludes hidden records; hidden records remain reachable through the explicit Hidden items and Include archived views. Public Items behavior is unchanged.
-- `scripts/test-page-builder.cjs` — fixture-only service/browser coverage using temporary storage, including history loading/list/select/close, saved and archived previews, malformed identity/protected-address checks without rewriting, valid historical addresses distinct from active drafts, invalid-link/image repair blocking, empty/failure/retry states, active-draft/revision/preview preservation, keyboard/focus and long-title/editor-name narrow reflow.
+- `scripts/test-page-builder.cjs` — fixture-only service/browser coverage using temporary storage, including isolated history plus publication success/failure/unknown/unconfirmed/check/retry transitions, confirmed-only Published text, same-ID retry, duplicate-action prevention, no draft-service writes during simulation, exact revision/digest preview, edit invalidation, unsaved-content preservation, pending locks, keyboard/focus, and 320px long-title/digest reflow.
 - `scripts/test-items-builder.cjs` — updated stale count/empty-state expectations and verifies hidden-item filter state, stable identity, collapsed technical reference, and visible evidence link.
 - `PAGE-BUILDER-CHECKPOINT.md` — this handoff.
 - `NEXT_JOBS.md` — brief checkpoint reference only.
@@ -63,6 +67,7 @@ The status area reports loading, unsaved, saving, saved and error states. In-app
 Passed:
 
 - `node scripts/test-page-builder.cjs` — model/service/editor safety suite plus history fixture loading, saved/archived revision metadata and preview, malformed historical identity/protected-address blocking without rewriting, valid fixture address distinct from active draft, invalid unsafe-link/unapproved-image render blocking, empty/failure/retry states, no draft-store writes, unsaved active-draft/revision/preview preservation, selected-history retention and close-focus restoration; long title/editor-name reflow at 320px. Also covers keyboard actions/labels, duplicate-address and preview-error associations/correction, no repeated unchanged preview announcements, preservation of pre-existing `aria-describedby`, Save/Export repair focus, contrast, 640px reflow proxy, preview CSP/style, image/hidden-content/export parity and recovery.
+- The Page Builder browser suite also covers all fixture publication states, unconfirmed completion remaining unknown until checked, unknown-outcome checks, failure-after-commit recovery, stable request identity on retry, blocking duplicate starts, no draft-service POST during the simulation, exact saved revision/digest display, review invalidation after editor changes, preservation of unsaved edits, editor locking during pending fixture work, status/focus semantics, and publication-panel reflow with a 160-character title at 320px.
 - `node scripts/test-items-builder.cjs` — PASS. Exact populated/zero count states, 40/80 pagination, search, hidden excluded from Active and available under Hidden, archived filtering, hidden status, stable ID through the list and collapsed technical details, evidence link, missing image, keyboard/dialog focus and public hidden-item filtering.
 - `node scripts/test-items-editor.cjs` — existing Items editor workflow and responsive checks.
 - `node scripts/test-vendor-builder.cjs` — existing Vendor editor workflow and responsive checks.
@@ -79,7 +84,7 @@ Manual local-browser spot checks: the accessibility tree exposes names for edito
 
 This is a single-operator local service, not an authenticated or durable production draft system. There is no image upload/manager, rich-text/HTML input, live public route, Admin Hub integration, approval workflow or publication action. Existing image paths in an export require the site root as described above.
 
-Version history is also fixture-only: there is no history API, durable revision store, authenticated editor identity, archived-record authority or restore action. Real version history must be designed with the main Admin backend as part of the private draft/revision/audit work; do not present these demonstration entries as real records.
+Version history and publication status/recovery are fixture-only. There is no history API, durable revision store, authenticated editor identity, archived-record authority, real publication status source, commit/deployment action, retry service or Git/Pages recovery. The UI is a contract-preparation demonstration, not a production integration. The main Codex workstream owns database storage, authentication, permissions and publication/Git/Pages recovery; do not implement or enable those pieces in this local UI branch or present fixture states as real records/outcomes.
 
 Exact next tasks before considering live integration:
 
