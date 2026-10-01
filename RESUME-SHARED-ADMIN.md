@@ -1,3 +1,5 @@
+**New Attachment creation contract — 1 October:** server-assigned UUID identity, collision inspection across canonical and saved private IDs, explicit facts, Unknown defaults and Unverified history pass focused tests. Contract is not exposed by the API/UI yet. Next: request-bound allocation/retries, private storage and new-record publication, then Add form/browser acceptance. No live changes.
+
 **Attachment compatibility selector — 1 October:** Unknown/recorded-list controls now use server-supplied active Weapon IDs. Combined browser/SQL checks verify save, second-page reload and selected-item publication output; hidden Weapons are excluded and unchanged historical references are retained. Full release suite passes. Add-new and live acceptance remain. No deployment.
 
 **Attachment compatibility contract — 1 October:** compatibleWeaponIds now validates explicit unique active Weapon references; null means Unknown and [] means an explicitly empty list. Trusted preparation and fresh publication checks reject invented/ambiguous/inactive references; full Attachment release suite passes. UI and combined storage acceptance remain next. No live changes.

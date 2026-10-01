@@ -179,3 +179,9 @@ Contract tests cover valid/unknown/empty, invented/duplicate/missing catalogue/a
 Added explicit Unknown/recorded-list mode and a labelled multi-select of server-supplied active unambiguous Weapon IDs. Historical unavailable IDs remain labelled in saved selections; unchanged compatibility is omitted from unrelated edit commands, preserving retained references. Changing compatibility is subject to the trusted contract.
 
 Combined browser/transport/PGlite coverage verifies selecting a recorded Weapon, hidden choices absent, durable save, second-page selection reload and exact reference in master-only simulated publication. Full release suite passes. Bumped frame and child cache versions together to attachment-preparation-20261001-3. No live activation. Add-new and signed-in production acceptance remain.
+
+## New-record creation contract — 1 October
+
+Prepared attachment-create.mjs without registering it in the API. Server context supplies an Attachment UUID identity, complete Items/Weapons/Armour/Ammo catalogues, saved shared IDs, legacy catalogue inspection, patch and actor. Explicit creation consent and a name are required. Reuses edit validation for typed fields, approved images and recorded compatibility; unspecified numbers/details remain null and effects are not invented. Always starts Unverified with trusted history. Source baseline is null and creation is marked explicitly for future projection.
+
+Focused tests pass for collisions, missing inspection, forged IDs/protected facts, compatibility, immutability and unknown defaults. Added this suite to the release runner. Request-bound allocation/retry, null-baseline storage/load/publication and Add UI acceptance remain required. No live new-record action or rollout.
