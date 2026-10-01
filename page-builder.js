@@ -52,7 +52,7 @@
     }
   }
   function renderBlock(section,block,index){
-    const row=node('div',{className:'pb-block-row'}),top=node('div',{className:'pb-block-top'}),actions=node('div',{className:'pb-block-actions'});
+    const row=node('div',{className:'pb-block-row',dataset:{blockId:block.id}}),top=node('div',{className:'pb-block-top'}),actions=node('div',{className:'pb-block-actions'});
     top.append(node('h4',{},`${blockTypes.find(([type])=>type===block.type)?.[1]||'Block'} ${index+1}`));
     actions.append(button('Move up','move-block-up',{label:`Move block ${index+1} up`,disabled:index===0}),button('Move down','move-block-down',{label:`Move block ${index+1} down`,disabled:index===section.blocks.length-1}),button('Duplicate','duplicate-block',{label:`Duplicate block ${index+1}`}),button('Remove','remove-block',{label:`Remove block ${index+1}`,className:'pb-danger'}));
     top.append(actions);row.append(top);
@@ -120,6 +120,17 @@
     renderEditor();setStatus(`Opened saved draft at revision ${revision}.`,'saved');titleInput.focus();
   }
   function move(list,index,delta){const next=index+delta;if(next<0||next>=list.length)return;[list[index],list[next]]=[list[next],list[index]];}
+  function restoreSectionFocus(sectionId){
+    const card=sectionId?sections.querySelector(`[data-section-card="${CSS.escape(sectionId)}"]`):null;
+    const target=card?.querySelector('.pb-section-fields input:not([type=checkbox]),.pb-section-fields select')||card?.querySelector('.pb-card-actions button:not(:disabled)')||$('#add-section');
+    requestAnimationFrame(()=>target.focus());
+  }
+  function restoreBlockFocus(sectionId,blockIndex){
+    const card=sectionId?sections.querySelector(`[data-section-card="${CSS.escape(sectionId)}"]`):null;
+    const row=blockIndex===null||blockIndex===undefined?null:card?.querySelectorAll('.pb-block-row')[blockIndex];
+    const target=row?.querySelector('.pb-block-fields input:not([type=checkbox]),.pb-block-fields textarea,.pb-block-fields select')||row?.querySelector('.pb-block-actions button:not(:disabled)')||card?.querySelector('.pb-add-block select')||$('#add-section');
+    requestAnimationFrame(()=>target.focus());
+  }
   function syncField(target){
     const {field,sectionId,blockId}=target.dataset;if(!field)return;
     if(field==='title'&&!sectionId&&!blockId){active.title=target.value;if(!slugEdited){active.slug=slugify(target.value);slugInput.value=active.slug;}}
@@ -166,9 +177,9 @@
     const deletingId=active.id;
     if(revision){if(!canLeave())return;if(!window.confirm(`Delete the saved draft "${active.title}"? This cannot be undone.`))return;}
     else if(!window.confirm('Discard this unsaved page?'))return;
-    if(!revision){active=null;dirty=false;snapshot=null;renderEditor();setStatus('Unsaved page discarded.','saved');return;}
+    if(!revision){active=null;dirty=false;snapshot=null;renderEditor();setStatus('Unsaved page discarded.','saved');$('#new-page').focus();return;}
     setStatus('Deleting local draft...','saving');
-    try{await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id:deletingId,revision})});records=records.filter(record=>record.draft.id!==deletingId);active=null;revision=null;snapshot=null;dirty=false;renderEditor();setStatus('Saved draft deleted.','saved');}
+    try{await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id:deletingId,revision})});records=records.filter(record=>record.draft.id!==deletingId);active=null;revision=null;snapshot=null;dirty=false;renderEditor();setStatus('Saved draft deleted.','saved');(draftList.querySelector('button')||$('#new-page')).focus();}
     catch(error){setStatus(`Delete failed: ${error.message} The saved draft remains available.`,'error');}
   }
   async function exportHtml(){
@@ -194,14 +205,22 @@
     const control=event.target.closest('[data-action]');if(!control||!active)return;
     const card=control.closest('[data-section-card]'),sectionId=card?.dataset.sectionCard,sectionIndex=active.sections.findIndex(section=>section.id===sectionId),section=active.sections[sectionIndex];
     const blockRow=control.closest('.pb-block-row'),blockIndex=blockRow?[...blockRow.parentElement.children].indexOf(blockRow):-1;
-    if(control.dataset.action.startsWith('move-section'))move(active.sections,sectionIndex,control.dataset.action==='move-section-up'?-1:1);
-    else if(control.dataset.action==='remove-section'){if(!window.confirm(`Remove section ${sectionIndex+1} and its blocks?`))return;active.sections.splice(sectionIndex,1);}
+    let focusSectionId=null,focusBlockIndex=null,focusSection=false,focusBlock=false;
+    if(control.dataset.action.startsWith('move-section')){move(active.sections,sectionIndex,control.dataset.action==='move-section-up'?-1:1);focusSectionId=sectionId;focusSection=true;}
+    else if(control.dataset.action==='remove-section'){
+      if(!window.confirm(`Remove section ${sectionIndex+1} and its blocks?`))return;
+      active.sections.splice(sectionIndex,1);focusSectionId=active.sections[sectionIndex]?.id||active.sections[sectionIndex-1]?.id||null;focusSection=true;
+    }
     else if(control.dataset.action==='focus-section-title'){card.querySelector('[data-field="title"][data-section-id]')?.focus();return;}
-    else if(control.dataset.action.startsWith('move-block'))move(section.blocks,blockIndex,control.dataset.action==='move-block-up'?-1:1);
-    else if(control.dataset.action==='duplicate-block'){const duplicate=structuredClone(section.blocks[blockIndex]);duplicate.id=uid();section.blocks.splice(blockIndex+1,0,duplicate);}
-    else if(control.dataset.action==='remove-block'){if(!window.confirm(`Remove block ${blockIndex+1}?`))return;section.blocks.splice(blockIndex,1);}
-    else if(control.dataset.action==='add-block'){const type=card.querySelector(`[data-add-type="${CSS.escape(sectionId)}"]`).value;section.blocks.push(emptyBlock(type));}
+    else if(control.dataset.action.startsWith('move-block')){const delta=control.dataset.action==='move-block-up'?-1:1;move(section.blocks,blockIndex,delta);focusBlockIndex=blockIndex+delta;focusBlock=true;}
+    else if(control.dataset.action==='duplicate-block'){const duplicate=structuredClone(section.blocks[blockIndex]);duplicate.id=uid();section.blocks.splice(blockIndex+1,0,duplicate);focusBlockIndex=blockIndex+1;focusBlock=true;}
+    else if(control.dataset.action==='remove-block'){
+      if(!window.confirm(`Remove block ${blockIndex+1}?`))return;
+      section.blocks.splice(blockIndex,1);focusBlockIndex=Math.min(blockIndex,section.blocks.length-1);focusBlock=true;
+    }
+    else if(control.dataset.action==='add-block'){const type=card.querySelector(`[data-add-type="${CSS.escape(sectionId)}"]`).value;focusBlockIndex=section.blocks.length;section.blocks.push(emptyBlock(type));focusBlock=true;}
     renderSections();updateDirty();updatePreview();
+    if(focusBlock)restoreBlockFocus(sectionId,focusBlockIndex);else if(focusSection)restoreSectionFocus(focusSectionId);
   });
   $('#desktop-view').addEventListener('click',()=>{preview.dataset.mode='desktop';$('#desktop-view').setAttribute('aria-pressed','true');$('#mobile-view').setAttribute('aria-pressed','false');});
   $('#mobile-view').addEventListener('click',()=>{preview.dataset.mode='mobile';$('#desktop-view').setAttribute('aria-pressed','false');$('#mobile-view').setAttribute('aria-pressed','true');});
