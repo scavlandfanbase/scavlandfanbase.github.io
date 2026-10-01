@@ -14,6 +14,8 @@ The local editor supports page title, introduction and safe address; saved-draft
 
 `Save Draft` only saves to the local draft service. The service has no publish action and serves no `/pages/<address>` output. `Export HTML` downloads a local file; it is not a deployment. No live Admin Hub Page Builder button, public navigation or existing page was changed.
 
+The proposed production-integration workflow, unresolved decisions and release gates are documented in [PAGE-BUILDER-PRODUCTION-PLAN.md](PAGE-BUILDER-PRODUCTION-PLAN.md). That document is a review plan only; none of its production work is implemented or enabled.
+
 ## Files Changed
 
 - `page-builder.html` — standalone local editor shell and accessible labels/states.
