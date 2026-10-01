@@ -222,7 +222,7 @@
     else{for(const [control,disabled]of publicationDisabled)control.disabled=disabled;publicationDisabled.clear();}
   }
   function publicationMessage(){
-    if(live){const request=publicationRequest;if(!request)return 'Review the saved revision before publishing. Publishing requires Owner permission.';return ({'outcome-unknown':'Publication outcome is not confirmed. Keep your entries and check status.','deployment-pending':'Repository commit recorded. Waiting for confirmed deployment.','deployment-failed':'Deployment failed. The repository commit is retained; check recovery status.','published':'Published: the exact commit and public page content are confirmed.','refused':'Publishing was refused before any branch update. Your draft remains saved.'})[request.state]||'Publication is processing.';}
+    if(live){const request=publicationRequest;if(!request)return 'Review the saved revision before publishing. Publishing requires Owner permission.';return ({'outcome-unknown':'Publication outcome is not confirmed. Keep your entries and check status.','deployment-pending':'Repository commit recorded. Waiting for confirmed deployment.','deployment-failed':'Deployment failed. The repository commit is retained; check recovery status.','published':'Published: the exact commit and public page content are confirmed.','refused':'Publication stopped. Your saved draft is available for another review.'})[request.state]||'Publication is processing.';}
     if(!publicationRequest){
       if(publicationSavedRecord())return publicationReviewInvalidated?'Editor changed since the prior review. Review the exact saved revision again; unsaved editor changes are not included.':'Ready for review. This is a saved local revision; the demonstration will not publish it.';
       return active?'Save this page locally before reviewing an exact saved revision.':'Select a saved local draft to review an exact revision.';
@@ -308,12 +308,12 @@
   }
   async function runPublicationAction(action){
     if(publicationInFlight||!publicationRequest)return;
-    if(action==='retry'&&publicationRequest.state!=='deployment-failed')return;
+    if(action==='retry'&&publicationRequest.state!=='deployment-failed'&&!(live&&publicationRequest.state==='outcome-unknown'&&publicationRequest.own!==false))return;
     const actionButton={advance:publicationNextButton,check:publicationCheckButton,retry:publicationRetryButton}[action];
     publicationError='';publicationErrorFocus=null;const requestId=publicationRequest.requestId;publicationInFlight=true;setPublicationLock(true);renderPublication();
     publicationStatus.textContent=live?'Checking confirmed publication status...':action==='check'?'Checking fixture status...':action==='retry'?'Retrying the fixture deployment with the same request ID...':'Advancing the fixture status...';publicationStatus.dataset.state='loading';
     try{updatePublicationRequest(await publicationAdapter[action](requestId),action);}
-    catch(error){setPublicationError(`Fixture ${action} failed: ${error.message}`,actionButton);}
+    catch(error){setPublicationError(`${live?"Publication":"Fixture"} ${action} failed: ${error.message}`,actionButton);}
     finally{publicationInFlight=false;setPublicationLock(publicationNeedsEditorLock());renderPublication();restorePublicationErrorFocus();}
   }
   function showPreviewError(error){
@@ -328,7 +328,7 @@
   function isDirty(){return !snapshot||JSON.stringify(active)!==snapshot;}
   function updateDirty(){
     dirty=isDirty();if(publicationReview&&JSON.stringify(active)!==publicationReview.editorFingerprint)invalidatePublicationReview();
-    setStatus(dirty?'Unsaved changes. Save Draft stores this page locally.':'Saved draft loaded.',dirty?'unsaved':'saved');renderPublication();
+    setStatus(dirty?(live?'Unsaved changes. Save Draft stores this page privately.':'Unsaved changes. Save Draft stores this page locally.'):'Saved draft loaded.',dirty?'unsaved':'saved');renderPublication();
   }
   function labelInput(parent,labelText,value,{type='text',maxLength,field,sectionId,blockId,wide=false,required=false,choices}={}){
     const label=node('label',wide?{className:'pb-wide'}:{});label.append(document.createTextNode(labelText));
@@ -429,8 +429,8 @@
     historyRequest++;historyLoading=false;historyLoaded=false;historyVersions=[];historySelection=null;if(live){historyPanel.hidden=true;historyToggle.setAttribute('aria-expanded','false');historyList.replaceChildren();historyDetail.hidden=true;historyFrame.srcdoc='';}
     invalidatePublicationReview();
     active=structuredClone(record.draft);revision=record.revision;snapshot=JSON.stringify(active);dirty=false;slugEdited=true;
-    if(live){publicationRequest=record.publication||null;setPublicationLock(publicationNeedsEditorLock());}
-    renderEditor();setStatus(`Opened saved draft at revision ${revision}.`,'saved');titleInput.focus();
+    if(live){setPublicationLock(false);publicationRequest=record.publication||null;}
+    renderEditor();if(live)setPublicationLock(publicationNeedsEditorLock());setStatus(`Opened saved draft at revision ${revision}.`,'saved');titleInput.focus();
   }
   function move(list,index,delta){const next=index+delta;if(next<0||next>=list.length)return;[list[index],list[next]]=[list[next],list[index]];}
   function restoreSectionFocus(sectionId){

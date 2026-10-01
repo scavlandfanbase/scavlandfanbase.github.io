@@ -1,3 +1,7 @@
+## Page Builder gated production setup — 1 October 2026
+
+Six private migrations and the complete gated admin-drafts version 16 bundle are deployed. Live Page Builder remains disabled; existing protected Attachment/Evidence routes retain anonymous denial. Combined local release and eleven PostgreSQL race checks pass; connected recovery/reload checks pass. Coordinate final activation and signed-in acceptance. The current details and deployment digest are in PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Page Builder connected integration in progress — 1 October 2026
 
 Real private save/history, saved-revision review, Owner publishing and deployment checks are connected in the release worktree; live switches remain disabled and migrations are unapplied. GitHub Pages settings confirm main/root branch publishing. Nine isolated database race cases and the connected-browser fixture pass. Finish interrupted-dispatch recovery and release regressions before deployment/activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md for the current boundary.

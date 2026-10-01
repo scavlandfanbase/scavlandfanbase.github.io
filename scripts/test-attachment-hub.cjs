@@ -4,7 +4,7 @@ const source=html.match(/const permissionViews=\{[\s\S]*?\n};/)[0];
 const allowed=html.match(/function allowedAdminViews\(\)\{[\s\S]*?\n}/)[0];
 const send=html.match(/function sendSession\(frame\)\{[^\n]+/)[0];
 function harness(enabled,permissions,authorized=true){
- const messages=[];const context={ATTACHMENT_RELEASE_ENABLED:enabled,EVIDENCE_REVIEW_RELEASE_ENABLED:false,adminProfile:{role:'admin',permissions},authorized,accessToken:'fixture-token',location:{origin:'https://fixture.test'},messages};vm.createContext(context);
+ const messages=[];const context={PAGE_BUILDER_RELEASE_ENABLED:false,ATTACHMENT_RELEASE_ENABLED:enabled,EVIDENCE_REVIEW_RELEASE_ENABLED:false,adminProfile:{role:'admin',permissions},authorized,accessToken:'fixture-token',location:{origin:'https://fixture.test'},messages};vm.createContext(context);
  vm.runInContext(source+'\n'+allowed+'\n'+send,context);
  const frame={id:'attachments-frame',contentWindow:{postMessage:(body,origin)=>messages.push({body,origin})}};
  return {context,messages,frame};

@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),http=require('node:http'),path=require('node:path'),crypto=require('node:crypto');
 const {chromium}=require('playwright');
 (async()=>{
- const root=path.resolve(__dirname,'..'),id=crypto.randomUUID();let state=null,version=1;
+ const root=path.resolve(__dirname,'..'),id=crypto.randomUUID();let state=null,version=1,recoveryFailures=1;
  let payload={id,title:'Live fixture',slug:'live-fixture',intro:'Saved intro',sections:[]};const actions=[];
  const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');if(url.pathname==='/host'){res.setHeader('Content-Type','text/html');res.end('<iframe id="builder" src="/page-builder.html?live=1" onload="this.contentWindow.postMessage({type:\'scavland-admin-token\',token:\'fixture-token\'},location.origin)"></iframe>');return;}
@@ -19,6 +19,7 @@ const {chromium}=require('playwright');
    else if(command.action==='save'){payload=command.page;version++;result={draft:{payload,version,archived:false}};}
    else if(command.action==='preview')result={previewId:command.requestId,page:payload,preview:{version,html:'<h1>Trusted saved preview</h1>',digest:'f'.repeat(64)}};
    else if(command.action==='publish'){state={request_id:command.requestId,state:'committed',commit_sha:'c'.repeat(40)};result={publication:state};}
+   else if(command.action==='recover'){if(recoveryFailures-- >0){await route.fulfill({status:503,headers:{'Access-Control-Allow-Origin':base,'Content-Type':'application/json'},body:JSON.stringify({error:'Recovery not confirmed.'})});return;}state.state='refused';result={publication:state};}
    else if(command.action==='status'){state.state='live';result={publication:state};}
    else if(command.action==='history')result={revisions:[{version,savedAt:'2026-10-01T12:00:00Z',archived:false}]};
    else if(command.action==='revision')result={draft:{payload,version,archived:false}};
@@ -52,6 +53,17 @@ const {chromium}=require('playwright');
   await frame.getByText('Opened saved draft at revision 2.').waitFor();
   assert.equal(await frame.getByLabel('Introduction').inputValue(),'Saved once');
   assert.equal(await frame.getByLabel('Introduction').isDisabled(),false);
+  state.state='prepared';await page.reload();
+  await frame.getByRole('button',{name:'Live fixture',exact:false}).first().click();
+  await frame.getByText('Opened saved draft at revision 2.').waitFor();
+  assert.equal(await frame.getByLabel('Introduction').isDisabled(),true,'reload retains unresolved protection');
+  await frame.getByRole('button',{name:'Publish and status',exact:true}).click();
+  await frame.getByRole('button',{name:'Recover interrupted publication'}).click();
+  await frame.getByText('Recovery not confirmed.',{exact:false}).waitFor();
+  assert.equal(await frame.getByLabel('Introduction').isDisabled(),true,'failed recovery never unlocks');
+  await frame.getByRole('button',{name:'Recover interrupted publication'}).click();
+  await frame.getByText(/Publication stopped/ ).waitFor();
+  assert.equal(await frame.getByLabel('Introduction').isDisabled(),false,'confirmed recovery unlocks');
   assert.deepEqual(errors,[]);console.log('PASS connected Page Builder browser fixture: private save, trusted saved preview, exact preview publication, pending lock, confirmed live release and preserved unsaved entries.');
  }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -52,7 +52,7 @@ async function seed(slug){
 (async()=>{let created=false;try{
  once('postgres','create database '+database);created=true;
  once(database,"create schema auth;create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;create function public.has_scavland_permission(p text) returns boolean language sql stable as $$select auth.uid()='"+actor+"'::uuid and p='content_edit'$$;create table public.fixture_owners(id uuid primary key,enabled boolean);insert into public.fixture_owners values('"+actor+"',true);create function public.is_scavland_owner() returns boolean language sql stable security definer set search_path='' as $$select coalesce((select enabled from public.fixture_owners where id=auth.uid()),false)$$;grant usage on schema auth to authenticated");
- for(const file of ['page-builder-storage.sql','page-builder-publication.sql','page-builder-git-candidate.sql','page-builder-dispatch.sql','page-builder-read.sql'])once(database,fs.readFileSync(path.join(__dirname,'../supabase/proposals',file),'utf8'));
+ for(const file of ['page-builder-storage.sql','page-builder-publication.sql','page-builder-git-candidate.sql','page-builder-dispatch.sql','page-builder-read.sql','page-builder-recovery.sql'])once(database,fs.readFileSync(path.join(__dirname,'../supabase/proposals',file),'utf8'));
  console.log('PostgreSQL '+once(database,'show server_version')+'; isolation '+once(database,'show transaction_isolation'));
  let page=await seed('reservation-first');
  await race('Publication reservation refuses a waiting save',reserve(crypto.randomUUID(),page.previewId),commit(page.id,page.saveRequest),{conflict:true});
@@ -94,6 +94,17 @@ async function seed(slug){
  page=await dispatchSeed('refusal-save-race');const attempt=crypto.randomUUID();once(database,service+';'+dispatch(page.request,attempt,'claim'));
  await race('Proven no-write refusal releases a waiting save',dispatch(page.request,attempt,'refuse-no-write'),commit(page.id,page.saveRequest),{roleA:service});
  assert.equal(once(database,'select count(*) from scavland_pages.versions where page_id='+quote(page.id)),'2');
- console.log('PASS nine independent publication/edit/dispatch concurrency scenarios. No production calls.');
+ const recovery=(r,a,action,f)=>'select public.scavland_page_recovery('+[r,a,action].map(quote).join(',')+','+quote(f)+')';
+ page=await dispatchSeed('recovery-save-race');
+ const recoveryAttempt=crypto.randomUUID(),fence={requestId:page.request,commit:'e'.repeat(40),baseHead:page.preview.baseHead,candidateCommit:'c'.repeat(40)};
+ once(database,service+';'+recovery(page.request,recoveryAttempt,'prepare',fence)+';'+recovery(page.request,recoveryAttempt,'claim',fence));
+ await race('Confirmed recovery fence releases waiting save',recovery(page.request,recoveryAttempt,'confirm',fence),commit(page.id,page.saveRequest),{roleA:service});
+ assert.equal(once(database,'select count(*) from scavland_pages.versions where page_id='+quote(page.id)),'2');
+ page=await dispatchSeed('recovery-original-race');
+ const attemptRecovery=crypto.randomUUID(),fence2={...fence,requestId:page.request};
+ once(database,service+';'+recovery(page.request,attemptRecovery,'prepare',fence2)+';'+recovery(page.request,attemptRecovery,'claim',fence2));
+ const outcome='select public.scavland_page_publication_outcome('+[page.request,crypto.randomUUID(),{type:'commit',sha:'c'.repeat(40)}].map(quote).join(',')+')';
+ await race('Terminal recovery refuses late original commit outcome',recovery(page.request,attemptRecovery,'confirm',fence2),outcome,{roleA:service,roleB:service,conflict:true});
+ console.log('PASS eleven independent publication/edit/dispatch/recovery concurrency scenarios. No production calls.');
  }finally{if(created)once('postgres','drop database '+database+' with (force)');}
 })().catch(e=>{console.error(e);process.exitCode=1;});
