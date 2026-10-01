@@ -1,3 +1,7 @@
+## 2026-10-01 — Real concurrent-session acceptance
+
+Completed twelve independently connected PostgreSQL 17.11/READ COMMITTED scenarios with observed advisory-lock blocking, stale/changed-request refusal, rollback, exact retry and final-count assertions. npm run test:attachment-concurrency is repeatable against an isolated loopback cluster. Fixture databases were dropped and portable server stopped; no production writes or system service. This supersedes the earlier unavailable-local-Postgres checkpoint. Live Auth/configuration and coordinated publication remain pending.
+
 ## 2026-10-01 — Attachment concurrent-save review
 
 Reviewed supported RPC lock order and documented six independent-session acceptance scenarios in ATTACHMENT-CONCURRENCY-REVIEW.md. Revision checks occur after transaction locks; reciprocal guards serialize competing specialist/Attachment authority. Static review is complete, while actual simultaneous Postgres acceptance remains unexecuted: no local Postgres/Docker executable was available. The separate Git/database publication interval is explicitly retained as a release limitation. No live changes.

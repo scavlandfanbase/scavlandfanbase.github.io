@@ -41,3 +41,7 @@ No deployment approval has been requested at this checkpoint: genuinely concurre
 ## Concurrent-save review checkpoint
 
 Supported-path lock review and the exact six independent-connection acceptance scenarios are recorded in ATTACHMENT-CONCURRENCY-REVIEW.md. Static review is complete; simultaneous transaction evidence is still required. The existing PGlite/two-page tests do not satisfy that gate.
+
+## Autonomous prepublication preparation — 1 October
+
+The isolated simultaneous-session gate now passes on PostgreSQL 17.11 at READ COMMITTED with twelve observed-lock scenarios. This supersedes earlier statements that only sequential PGlite/two-page evidence was available. Production Auth and deployed server configuration are still separate acceptance gates. See ATTACHMENT-CONCURRENCY-REVIEW.md for exact results and remaining Git/database race limitation.

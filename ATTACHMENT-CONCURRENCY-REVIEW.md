@@ -1,6 +1,6 @@
 # Attachment concurrent-save review — 1 October 2026
 
-Scope: static review of supported RPC paths and a concrete acceptance plan. No simultaneous Postgres test or live mutation was performed. Local PGlite and two-browser interleaving remain separate evidence.
+Scope: supported RPC lock review plus independently connected, isolated PostgreSQL acceptance. No live mutation was performed. Local PGlite and two-browser interleaving remain separate evidence.
 
 ## Lock review
 
@@ -34,6 +34,16 @@ Use bounded statement_timeout and lock_timeout, capture SQLSTATEs and lock obser
 
 GitHub and Postgres still have no shared atomic transaction. A database save can occur after the publisher's final private-version check but before Git ref update. Non-force Git updates protect competing public commits, not that private-state interval. SQL lock acceptance does not close this gap. Coordinated release must explicitly review this limit; do not hold a browser transaction open across a Git network call or claim exactly-once cross-service publication.
 
-## Current result
+## Earlier checkpoint (superseded by isolated acceptance below)
 
 Static supported-path review completed. No local psql, postgres or Docker executable was available through command discovery. Existing local suites cover stale interleaving and immutable retries, but the six independent-session scenarios remain unexecuted. No migrations, flags, deployment or real verification facts changed.
+
+## Completed isolated PostgreSQL acceptance
+
+Used portable PostgreSQL 17.11 from the official EDB binary distribution (https://www.enterprisedb.com/download-postgresql-binaries), downloaded outside the repository into ../postgres-test-runtime. Archive SHA256: 4b8db0930c38f6ef845db919551dedda3b6b845aeb0927b3d79a6e8e9e4537cf (locally computed, not independently signed). No system service was installed. The server listened only on 127.0.0.1:55437; its temporary fixture databases were dropped, absence checked, and server stopped after testing.
+
+scripts/test-attachment-concurrency.cjs creates a uniquely named disposable database, applies reviewed proposals, uses two persistent psql connections and a third observer to require an actual advisory-lock wait, and bounds statement/lock waits. Host is fixed to loopback; inherited PG service/options variables are removed. Auth identity/permissions are SQL fixtures, not live Supabase sessions. Git is not called. Fixture setup leaves role definitions only within the disposable local cluster.
+
+All twelve cases passed at READ COMMITTED: competing same-head saves (one success/one PT409), identical receipt retry, save rollback/retry, specialist-first and Attachment-first authority, legacy-first invalidation, Attachment-first then legacy ordering, allocation identity retry, changed allocation command, changed allocation actor, allocation rollback, and preview refusal after a newer committed save. Final counts/versions and same allocation/request identities are asserted. A current-version preview then succeeds. No timeout or deadlock was accepted as a pass.
+
+Repeat with SCAVLAND_PSQL pointing to psql and SCAVLAND_PG_TEST_PORT pointing to a disposable local cluster port, then npm run test:attachment-concurrency. The test requires local create-database/role privileges; never point it at an operational cluster. No PostgreSQL binaries or cluster data are committed. Production server version/isolation, live Auth/permissions and post-deployment signed-in acceptance still need confirmation. Cross-service publication limitations above remain.
