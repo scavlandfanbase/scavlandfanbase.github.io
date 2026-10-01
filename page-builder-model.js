@@ -87,11 +87,9 @@
           text(block.href,limits.link,'Link',true);
           if(!safeLink(block.href))fail('Use an HTTPS link, an existing page such as items.html, or /pages/your-page.');
         }
-        if(block.type==='image'||block.type==='card'){
-          if(block.type==='image'&&!own(block,'image'))fail('Choose an approved image from the image library.');
-          if(own(block,'image')&&block.image!==null&&!trusted.approvedImages.has(block.image))fail('Choose an approved image from the image library.');
-          if(block.type==='image'||block.type==='card')text(block.alt,limits.alt,'Image description',block.type==='image');
-        }
+        if(block.type==='image'&&(!own(block,'image')||typeof block.image!=='string'||!block.image||!trusted.approvedImages.has(block.image)))fail('Choose an approved image from the image library.');
+        if(block.type==='card'&&own(block,'image')&&block.image!==null&&(typeof block.image!=='string'||!block.image||!trusted.approvedImages.has(block.image)))fail('Choose an approved image from the image library.');
+        if(block.type==='image'||block.type==='card')text(block.alt,limits.alt,'Image description',block.type==='image');
       }
     }
     const identityConflict=trusted.existingPages.find(entry=>entry.id===pageId&&entry.id!==context.currentPageId);

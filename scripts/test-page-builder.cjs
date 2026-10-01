@@ -58,9 +58,23 @@ async function main(){
     assert(list.imageChoices.every(image=>!image.startsWith('evidence-inbox/')));
     const imageFixture=draft({sections:[{id:'section-image',title:'Media',hidden:false,layout:{columns:1},blocks:[{id:'block-image',type:'image',image:list.imageChoices[0],alt:'Approved image',hidden:false}]}]});
     const imageContext={approvedImages:list.imageChoices,existingPages:[],currentPageId:null};
+    const imageRenderContext={images:list.imageChoices,existingPages:[],currentPageId:null};
     assert.deepEqual(Model.validate(imageFixture,imageContext),imageFixture);
     assert.throws(()=>Model.validate(imageFixture,{...imageContext,approvedImages:[]}),/approved image/i);
     assert.throws(()=>Model.validate(imageFixture,{...imageContext,approvedImages:['images/../private.png']}),/trusted image context/i);
+    for(const image of [null,'','images/not-in-library.png',undefined]){
+      const block={id:'block-image',type:'image',alt:'Required image',hidden:false};if(image!==undefined)block.image=image;
+      const invalidImagePage=draft({sections:[{id:'section-image',title:'Media',hidden:false,layout:{},blocks:[block]}]});
+      assert.throws(()=>Model.validate(invalidImagePage,imageContext),/approved image/i);
+      assert.throws(()=>Builder.render(invalidImagePage,imageRenderContext),/approved image/i);
+      assert.throws(()=>Builder.document(invalidImagePage,{...imageRenderContext,css:''}),/approved image/i);
+    }
+    const optionalCard=draft({sections:[{id:'section-card',title:'Card',hidden:false,layout:{},blocks:[{id:'block-card',type:'card',title:'No image card',text:'Unknown',href:'items.html',image:null,alt:'Unknown',hidden:false}]}]});
+    assert.deepEqual(Model.validate(optionalCard,imageContext),optionalCard);
+    assert(!Builder.render(optionalCard,imageRenderContext).includes('<img'));
+    const omittedCard=draft({sections:[{id:'section-card',title:'Card',hidden:false,layout:{},blocks:[{id:'block-card',type:'card',title:'Omitted image card',text:'Unknown',href:'items.html',alt:'',hidden:false}]}]});
+    assert.deepEqual(Model.validate(omittedCard,imageContext),omittedCard);
+    assert(!Builder.render(omittedCard,imageRenderContext).includes('<img'));
     const post=body=>fetch(base+'/api/pages',{method:'POST',headers:{...headers,Origin:base,'Content-Type':'application/json'},body:JSON.stringify(body)});
     const created=await post({action:'create',page:draft()});
     assert.equal(created.status,200);
@@ -77,6 +91,12 @@ async function main(){
     assert.equal((await post({action:'create',page:draft({id:'time-page',slug:'time-page'}),updatedAt:'2000-01-01T00:00:00.000Z'})).status,400);
     assert.equal((await post({action:'create',page:{...draft({id:'review-page',slug:'review-page'}),reviewerId:'admin-1'}})).status,400);
     assert.equal((await post({action:'create',page:draft({id:'bad-image',slug:'bad-image',sections:[{id:'section-bad',title:'',hidden:false,layout:{},blocks:[{id:'image-bad',type:'image',image:'images/../private.png',alt:'bad',hidden:false}]}]})})).status,400);
+    const imageDraft=(id,image)=>{const block={id:'image-block',type:'image',alt:'Required image',hidden:false};if(image!==undefined)block.image=image;return draft({id,slug:id,sections:[{id:'image-section',title:'Media',hidden:false,layout:{},blocks:[block]}]});};
+    const invalidImages=[null,'','images/not-in-library.png',undefined];
+    for(const [index,image]of invalidImages.entries())assert.equal((await post({action:'create',page:imageDraft(`bad-image-create-${index}`,image)})).status,400);
+    for(const image of invalidImages)assert.equal((await post({action:'save',id:record.draft.id,revision:record.revision,page:imageDraft(record.draft.id,image)})).status,400);
+    const unchangedRecord=(await (await fetch(base+'/api/pages',{headers})).json()).pages.find(entry=>entry.draft.id===record.draft.id);
+    assert.equal(unchangedRecord.revision,record.revision);assert.deepEqual(unchangedRecord.draft,record.draft);
     assert.equal((await post({action:'publish',id:record.draft.id,revision:1})).status,400);
     assert.equal((await fetch(base+'/pages/fixture-page')).status,404);
     const existingPages=[{id:record.draft.id,slug:record.draft.slug}];
@@ -282,14 +302,22 @@ async function main(){
       await page.getByText('Saved draft deleted.').waitFor();
       assert(await focused(page.getByRole('button',{name:'New page'})),'Focus did not move after deleting the current draft.');
       assert.equal((await (await fetch(base+'/api/pages',{headers})).json()).pages.length,0);
-      const missing=draft({id:'missing-image-fixture',title:'Missing image fixture',slug:'missing-image-fixture',sections:[{id:'missing-section',title:'Media',hidden:false,layout:{},blocks:[{id:'missing-block',type:'image',image:'images/not-in-library.png',alt:'Replace me',hidden:false}]}]});
-      fs.writeFileSync(path.join(directory,'pages.json'),JSON.stringify({version:1,pages:[{draft:missing,revision:4,updatedAt:new Date().toISOString()}]}));
-      await page.reload();await page.getByRole('button',{name:/Missing image fixture/}).click();
-      await page.getByText(/Choose an approved image from the image library/).waitFor();
-      const missingImage=page.locator('.pb-block-row').first();await missingImage.getByLabel('Approved image').selectOption(approvedImage);
-      await page.getByRole('button',{name:'Save Draft'}).click();
-      await page.getByText('Saved locally at revision 5. This draft is not published.').waitFor();
-      assert.equal((await (await fetch(base+'/api/pages',{headers})).json()).pages[0].draft.sections[0].blocks[0].image,approvedImage);
+      const storedImageCases=[['null',null],['empty',''],['omitted',undefined],['unapproved','images/not-in-library.png']];
+      for(const [name,image]of storedImageCases){
+        const invalidStoredDraft=imageDraft(`stored-${name}-image`,image);invalidStoredDraft.title=`Stored ${name} image fixture`;
+        fs.writeFileSync(path.join(directory,'pages.json'),JSON.stringify({version:1,pages:[{draft:invalidStoredDraft,revision:4,updatedAt:new Date().toISOString()}]}));
+        await page.reload();await page.getByRole('button',{name:new RegExp(`Stored ${name} image fixture`)}).click();
+        await page.locator('#preview-error').getByText(/Choose an approved image from the image library/).waitFor();
+        await page.getByRole('button',{name:'Save Draft'}).click();
+        await page.locator('#status').getByText(/Choose an approved image from the image library/).waitFor();
+        const beforeRepair=(await (await fetch(base+'/api/pages',{headers})).json()).pages[0];assert.equal(beforeRepair.revision,4);assert.deepEqual(beforeRepair.draft,invalidStoredDraft);
+        await page.getByRole('button',{name:'Export HTML'}).click();
+        await page.locator('#status').getByText(/Export failed: Choose an approved image from the image library/).waitFor();
+        const imageControl=page.locator('.pb-block-row').first().getByLabel('Approved image');await imageControl.selectOption(approvedImage);
+        await page.getByRole('button',{name:'Save Draft'}).click();
+        await page.getByText('Saved locally at revision 5. This draft is not published.').waitFor();
+        const repaired=(await (await fetch(base+'/api/pages',{headers})).json()).pages[0];assert.equal(repaired.revision,5);assert.equal(repaired.draft.sections[0].blocks[0].image,approvedImage);
+      }
       assert.deepEqual(errors,[]);
       console.log('PASS Page Builder: create/save/reopen/edit, all block types, ordering/duplication/hiding/deletion, address/link/image/layout validation, safe preview/export parity, failed/stale saves, unsaved warnings, missing-image recovery, focus labels, and 320-1280px layouts.');
     }finally{await browser.close();}
