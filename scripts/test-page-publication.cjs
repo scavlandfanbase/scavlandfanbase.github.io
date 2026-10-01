@@ -1,0 +1,27 @@
+const assert=require('node:assert/strict'),crypto=require('node:crypto');
+(async()=>{
+ const {validatePageManifest:validate,updatePageManifest:update,recordPagePublication:record}=await import('../supabase/functions/admin-drafts/page-publication.mjs');
+ const page={id:crypto.randomUUID(),slug:'fixture-page',version:1,digest:'a'.repeat(64)},empty={schemaVersion:1,pages:[]};
+ const manifest=update(empty,page);assert.deepEqual(manifest.pages,[page]);assert.deepEqual(empty.pages,[]);assert.deepEqual(update(manifest,page),manifest);
+ for(const extra of ['actor','notes','token','draft'])assert.throws(()=>validate({...manifest,[extra]:'private'}));
+ assert.throws(()=>update(manifest,{...page,id:crypto.randomUUID()}),error=>error.status===409);
+ assert.throws(()=>update(manifest,{...page,slug:'renamed'}),error=>error.status===409);
+ assert.throws(()=>update(manifest,{...page,digest:'b'.repeat(64)}),error=>error.status===409);
+ assert.throws(()=>validate({schemaVersion:1,pages:[page,page]}));
+ assert.throws(()=>update(empty,{...page,slug:'admin'}));
+ assert.throws(()=>update(empty,{...page,slug:'../private'}));
+ assert.throws(()=>update(empty,{...page,actor:'private'}));
+ const revised=update(manifest,{...page,version:2,digest:'b'.repeat(64)});assert.equal(revised.pages[0].version,2);assert.throws(()=>update(revised,page),error=>error.status===409);
+ const prepared={requestId:crypto.randomUUID(),pageId:page.id,version:1,digest:page.digest,baseHead:'c'.repeat(40),state:'prepared',commit:null,buildRun:null};
+ const event={type:'commit',sha:'d'.repeat(40)},committed=record(prepared,event);assert.equal(committed.state,'committed');assert.equal(prepared.state,'prepared');assert.deepEqual(record(committed,event),committed);
+ assert.throws(()=>record(committed,{...event,sha:'e'.repeat(40)}),error=>error.status===409);
+ const build={type:'build',sha:event.sha,runId:'12345',status:'pending'};assert.deepEqual(record(committed,build),committed);
+ assert.throws(()=>record(prepared,{...build,status:'success'}),error=>error.status===409);
+ assert.throws(()=>record(committed,{...build,sha:'e'.repeat(40),status:'success'}),error=>error.status===409);
+ const failed=record(committed,{...build,status:'failure'});assert.equal(failed.state,'build-failed');assert.equal(failed.commit,event.sha);
+ const live=record(failed,{...build,runId:'12346',status:'success'});assert.equal(live.state,'live');assert.deepEqual(record(live,{...build,runId:'12346',status:'success'}),live);
+ assert.throws(()=>record(live,{...build,status:'failure'}),error=>error.status===409);
+ assert.throws(()=>record(live,{...build,runId:'12347',status:'success'}),error=>error.status===409);
+ assert.throws(()=>record({...prepared,state:'live'},event));
+ console.log('PASS page publication contracts: public metadata privacy/identity, collision/stale/rename refusal, exact commit retry, matching build confirmation and failed-build recovery. No publishing calls.');
+})().catch(error=>{console.error(error);process.exitCode=1;});

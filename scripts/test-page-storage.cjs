@@ -1,0 +1,67 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const {PGlite}=require('@electric-sql/pglite');
+(async()=>{const db=new PGlite(),actor=crypto.randomUUID(),other=crypto.randomUUID();try{
+ await db.exec(`create role anon;create role authenticated;create role service_role;create schema auth;
+ create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+ create table public.fixture_permissions(actor uuid primary key,allowed boolean);
+ insert into public.fixture_permissions values('${actor}',true),('${other}',true);
+ create function public.has_scavland_permission(p text) returns boolean language sql stable security definer set search_path='' as $$select coalesce((select allowed from public.fixture_permissions where actor=auth.uid()),false) and p='content_edit'$$;
+ grant usage on schema auth to authenticated;`);
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/page-builder-storage.sql'),'utf8'));
+ const run=(role,who,sql,args=[])=>db.transaction(async tx=>{await tx.exec('set local role '+role);await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[who||'']);return (await tx.query(sql,args)).rows[0]?.v;});
+ const prepare=(who,r,a,id,v,command,payload=null)=>run('service_role',null,'select public.scavland_prepare_page($1,$2,$3,$4,$5,$6,$7) as v',[who,r,a,id,v,command,payload]);
+ const access=(who,a,id=null,r=null,after=null)=>run('authenticated',who,'select public.scavland_page($1,$2,$3,$4) as v',[a,id,r,after]);
+ const command={title:'Unknown',slug:'fixture-page',sections:[]},r=crypto.randomUUID();
+ const allocated=await prepare(actor,r,'create',null,0,command);
+ assert.ok(allocated.page_id);assert.equal(allocated.payload,null);
+ assert.deepEqual(await prepare(actor,r,'create',null,0,command),allocated,'allocation survives response loss');
+ await assert.rejects(prepare(other,r,'create',null,0,command),e=>e.code==='PT409');
+ await assert.rejects(prepare(actor,r,'create',null,0,{...command,title:'Changed'}),e=>e.code==='PT409');
+ await assert.rejects(access(actor,'commit',allocated.page_id,r),e=>e.code==='42501');
+ const payload={id:allocated.page_id,...command};
+ await assert.rejects(prepare(actor,r,'create',null,0,command,{...payload,id:other}),e=>e.code==='22023');
+ await assert.rejects(prepare(actor,r,'create',null,0,command,{...payload,slug:123}),e=>e.code==='22023');
+ await assert.rejects(prepare(actor,crypto.randomUUID(),'save',allocated.page_id,2147483647,command,payload),e=>e.code==='22023');
+ const prepared=await prepare(actor,r,'create',null,0,command,payload);
+ assert.equal(prepared.page_id,allocated.page_id);assert.equal(prepared.payload.title,'Unknown');
+ await assert.rejects(prepare(actor,r,'create',null,0,command,{...payload,title:'Changed'}),e=>e.code==='PT409');
+ await assert.rejects(access(other,'commit',allocated.page_id,r),e=>e.code==='42501');
+ const first=await access(actor,'commit',allocated.page_id,r);
+ assert.equal(first.currentVersion,1);assert.equal(first.draft.saved_by,actor);assert.ok(first.draft.saved_at);assert.equal(first.draft.archived,false);
+ const replay=await access(actor,'commit',allocated.page_id,r);assert.deepEqual(replay.draft,first.draft);assert.equal(replay.replayed,true);
+ const saveRequest=crypto.randomUUID(),edited={...payload,title:'Updated',slug:'renamed-page'};
+ await prepare(actor,saveRequest,'save',allocated.page_id,1,{page:edited},edited);
+ const save=await access(actor,'commit',allocated.page_id,saveRequest);assert.equal(save.currentVersion,2);
+ assert.deepEqual((await access(actor,'commit',allocated.page_id,r)).draft,first.draft,'old receipt returns old revision, never latest content');
+ await assert.rejects(prepare(actor,crypto.randomUUID(),'save',allocated.page_id,1,{page:payload},payload),e=>e.code==='PT409');
+ const stale=crypto.randomUUID();await prepare(actor,stale,'save',allocated.page_id,2,{page:payload},payload);
+ const archiveRequest=crypto.randomUUID();await prepare(actor,archiveRequest,'archive',allocated.page_id,2,{action:'archive'});
+ const archive=await access(actor,'commit',allocated.page_id,archiveRequest);assert.equal(archive.currentVersion,3);assert.equal(archive.draft.archived,true);assert.deepEqual(archive.draft.payload,edited);
+ assert.deepEqual((await access(actor,'commit',allocated.page_id,archiveRequest)).draft,archive.draft);
+ await assert.rejects(access(actor,'commit',allocated.page_id,stale),e=>e.code==='PT409');
+ await assert.rejects(prepare(actor,crypto.randomUUID(),'save',allocated.page_id,3,{page:payload},payload),e=>e.code==='PT409');
+ const collisionRequest=crypto.randomUUID(),second=await prepare(actor,collisionRequest,'create',null,0,command);
+ await prepare(actor,collisionRequest,'create',null,0,command,{...payload,id:second.page_id});
+ await assert.rejects(access(actor,'commit',second.page_id,collisionRequest),e=>e.code==='PT409','original address remains reserved after rename and archive');
+ const rows=await access(actor,'list');assert.equal(rows.length,1);assert.equal(rows[0].archived,true);assert.equal(rows[0].version,3);assert.ok(!('payload' in rows[0]));
+ assert.deepEqual(await access(actor,'list',null,null,allocated.page_id),[]);
+ assert.deepEqual((await access(actor,'load',allocated.page_id)).draft,archive.draft);
+ assert.equal((await access(actor,'load',crypto.randomUUID())).draft,null);
+ await db.query('update public.fixture_permissions set allowed=false where actor=$1',[actor]);
+ await assert.rejects(access(actor,'commit',allocated.page_id,r),e=>e.code==='42501','revoked permission blocks receipt replay');
+ await assert.rejects(access(actor,'list'),e=>e.code==='42501');
+ await assert.rejects(access(null,'list'),e=>e.code==='42501');
+ for(const table of ['requests','versions','addresses'])for(const role of ['anon','authenticated','service_role']){
+  await assert.rejects(run(role,other,'select * from scavland_pages.'+table),e=>e.code==='42501');
+  const result=(await db.query("select relrowsecurity from pg_class where oid=$1::regclass",['scavland_pages.'+table])).rows[0];assert.equal(result.relrowsecurity,true);
+  for(const privilege of ['SELECT','INSERT','UPDATE','DELETE'])assert.equal((await db.query('select has_table_privilege($1,$2,$3) as allowed',[role,'scavland_pages.'+table,privilege])).rows[0].allowed,false);
+ }
+ await assert.rejects(run('authenticated',other,'select public.scavland_prepare_page($1,$2,$3,$4,$5,$6) as v',[other,crypto.randomUUID(),'create',null,0,command]),e=>e.code==='42501');
+ await assert.rejects(run('anon',null,"select public.scavland_page('list') as v"),e=>e.code==='42501');
+ for(const name of ['scavland_pages.prepare','scavland_pages.access','public.scavland_prepare_page','public.scavland_page']){
+  const functions=(await db.query("select p.proconfig from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname||'.'||p.proname=$1",[name])).rows;
+  assert.equal(functions.length,1);assert.ok(functions[0].proconfig.includes('search_path=""'));
+ }
+ assert.equal((await db.query('select count(*)::integer as n from scavland_pages.versions')).rows[0].n,3);
+ console.log('PASS private page storage: allocated identity, immutable prepared receipts, exact retries, stale saves/archive, permission revocation, address reservations, RLS and retained history. Local fixture only.');
+}finally{await db.close();}})().catch(error=>{console.error(error);process.exitCode=1;});

@@ -1,3 +1,43 @@
+## Page Builder gated production setup — 1 October 2026
+
+Six private migrations and the complete gated admin-drafts version 16 bundle are deployed. Live Page Builder remains disabled; existing protected Attachment/Evidence routes retain anonymous denial. Combined local release and eleven PostgreSQL race checks pass; connected recovery/reload checks pass. Coordinate final activation and signed-in acceptance. The current details and deployment digest are in PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Page Builder connected integration in progress — 1 October 2026
+
+Real private save/history, saved-revision review, Owner publishing and deployment checks are connected in the release worktree; live switches remain disabled and migrations are unapplied. GitHub Pages settings confirm main/root branch publishing. Nine isolated database race cases and the connected-browser fixture pass. Finish interrupted-dispatch recovery and release regressions before deployment/activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md for the current boundary.
+
+## Pages deployment evidence prepared — 1 October 2026
+
+Read-only legacy build checking now requires the exact commit and matching public page bytes before success. Local tests and adjacent regression checks pass. Git write/recovery, build-mode confirmation and combined integration remain next; no live activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Page Builder durable publication records prepared — 1 October 2026
+
+Unapplied SQL now stores exact previews, Owner publication reservations and immutable outcome events. Pending/failed publication prevents save/archive until verified recovery. Local privacy/retry/Owner tests and six independent PostgreSQL concurrency cases pass, including revocation during lock wait. Next: Git/Pages evidence adapter and safe precommit refusal/reconciliation, then combined integration. No live activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Page Builder trusted preview prepared — 1 October 2026
+
+Reviewed renderer/style snapshot now creates deterministic saved-revision previews bound to identity, version, output/style digests, repository head and public path. Regenerated output replaces untrusted submitted HTML/metadata; hidden/private exclusion and validation tests pass. Next: durable preview/publication receipts, Owner reservation and Git/Pages reconciliation. No live preview route or activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Page Builder publication contracts prepared — 1 October 2026
+
+Strict public identity metadata and private publication outcome transitions now have local tests. Trusted source accepts indexed page routes and rejects unknown/missing custom HTML. Commit, pending build, failed build and confirmed live output remain distinct. Next: trusted preview/rendered digest, durable publication intents and Git/Pages recovery adapter. No public data, migration, deployment or live Page Builder activation. Details: PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Page Builder authenticated adapter prepared — 1 October 2026
+
+Unused gated adapter now connects caller authorization, server identity allocation, reviewed page-model validation, prepared receipts and private SQL commit. Trusted context reads pinned repository image files and paginated private identities. Lost-response/stale/privacy/source tests pass locally. Public identity manifest, preview/publication recovery, combined routing/editor/history and live acceptance remain next. No live changes; see PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## VS editor follow-up verified — 1 October 2026
+
+Exact Page Builder head e8ad5a6 independently reviewed; full Page Builder suite passed. Duplicate-address and preview accessibility consistency gaps are resolved. This is the reviewed editor checkpoint for upcoming backend integration, with no live enablement. See VS-PAGE-BUILDER-MODEL-REVIEW.md and PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Page Builder private storage prepared — 1 October 2026
+
+Unapplied private storage proposal now covers server identity allocation, prepared receipts, immutable save/archive versions and retained address reservations. Local permission/privacy/retry tests and six independent PostgreSQL concurrency scenarios pass. Fixture databases removed and server stopped. Next is trusted page model/context plus authenticated transport; no live Page Builder activation. Details: PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Page Builder backend preparation — 1 October 2026
+
+Independent VS checkpoint 052d175 review and Page Builder suite passed. Main backend work now has a tested, unused strict page-builder request boundary for private list/load/create/save/archive. Read PAGE-BUILDER-BACKEND-CHECKPOINT.md for exact guarantees and remaining storage, Auth, validation, publication and rollout steps. No live Page Builder route or controls enabled. VS is separately handling two accessibility consistency follow-ups.
+
 ## Final live release checkpoint
 
 Hub correction PR 40 / main 29b5cc1 deployed successfully in Pages run 36884317133. Attachment/Evidence backend v15 and all four migrations verified, counts retained, live Owner source/detail/screenshot loading checked. Current rollout evidence and expected advisor notices are in ADMIN-ROLLOUT-20261001.md. Next: deliberate genuine-change/restricted-account acceptance, VS accessibility handoff review, and remaining admin roadmap implementations. No fixture/game-data publication performed.

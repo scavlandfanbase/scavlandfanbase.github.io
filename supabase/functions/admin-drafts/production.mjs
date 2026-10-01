@@ -4,6 +4,7 @@ import {createEvidenceApi} from './evidence-api.mjs';
 import {createItemApi} from './item-api.mjs';
 import {createAttachmentTransport} from './attachment-transport.mjs';
 import {createAttachmentSource} from './attachment-source.mjs';
+import {createPageApi} from './page-api.mjs';
 const cors={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
 const reply=(value,status=200)=>Response.json(value,{status,headers:{...cors,'Cache-Control':'no-store'}});
 export function createProductionHandler({env,fetcher=fetch,core=createCore({env,fetcher})}){
@@ -11,6 +12,7 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
  const sharedItem=createItemApi({env,fetcher});
  const attachments=createAttachmentTransport({env,fetcher,readSource:createAttachmentSource({env,fetcher})});
  const evidence=createEvidenceApi({env,fetcher});
+ const pages=createPageApi({env,fetcher});
  return async request=>{
   if(request.method==='OPTIONS')return new Response('ok',{headers:cors});
   if(request.method!=='POST')return reply({error:'POST is required.'},405);
@@ -20,6 +22,7 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
    if(body?.domain==='shared-item')return sharedItem(request);
    if(body?.domain==='shared-attachment')return attachments(request);
    if(body?.domain==='evidence-review')return evidence(request);
+   if(body?.domain==='page-builder')return pages(request);
    if(!['items','vendors'].includes(body?.domain)||body.entityId!=='catalogue')fail('This editor is unavailable in Admin 0.1.',404);
    if(body.action==='publish'&&env('ADMIN_CORE_ENABLED')!=='true')fail('Publishing awaits activation of the trusted core and retirement of legacy editors.',503);
    if(!['source','prepare'].includes(body.action))return persistence(request);

@@ -21,3 +21,55 @@ Independently fetched and compared the exact checkpoint to ec7bc4e: only PAGE-BU
 Suitable as a planning foundation, not implementation or activation approval. Before delegating production implementation, align its proposed permission/storage/publication contracts with the existing Admin backend. Avoid treating a pending Pages build as an immediate successful publication; retain separate committed/build-confirmed outcomes and recovery. Do not imply Git and private database state can be updated atomically. Current Attachment publication race limitations must also be considered if a shared publisher is reused.
 
 Main workstream remains combined Attachment/Evidence release integration and regression checks. Page Builder live work waits for a concrete reviewed contract; VS should not choose production permissions, credentials or migrate local drafts independently.
+
+## Accessibility and local CSP review — 052d175
+
+Independently fetched origin/feature/page-builder-local-drafts at 052d1752268496031d090f93a6a70718b4f2083c and compared it with 028054d. Exactly four files changed: page-builder.js, scripts/page-builder-server.cjs, scripts/test-page-builder.cjs and PAGE-BUILDER-CHECKPOINT.md. No Admin Hub, Supabase, game data, Attachment or NEXT_JOBS changes.
+
+The full Page Builder suite passed independently in an isolated archive. Browser launch required the normal sandbox escalation; the rerun passed. Reviewed the trusted stylesheet hash: it is computed from server-owned page-builder.css with normalized newlines, enabled only in Page Builder mode, and does not allow unsafe-inline. Validation repair focus and failed-save recovery have regression coverage. Other suites in this handoff are VS-reported, not independently rerun for this isolated four-file change.
+
+Two remaining accessibility consistency cases should receive focused follow-up: the local duplicate-draft address branch focuses the address but bypasses aria-invalid/describedby setup; automatic preview validation uses its own preview-error path, so it does not establish the same repair-field association. Automatic preview updates should not steal focus while typing. These do not prevent local model validation or make live publication available. No screen-reader audit, actual browser zoom certification, merge, deployment or production activation is claimed.
+
+Next production work remains a reviewed contract for granular page permissions, private revision storage, approved assets and publication receipts. Do not enable the local filesystem service for live admins.
+
+## Accessibility follow-up independently verified — e8ad5a6
+
+Fetched exact pushed head e8ad5a68298cd2adf9e12d8ea20548d7d4095cde and compared with 052d175. Only page-builder.js, scripts/test-page-builder.cjs and PAGE-BUILDER-CHECKPOINT.md changed. The full Page Builder suite passed independently in an isolated archive, including duplicate-address association/correction, preserved original descriptions, automatic preview error association without focus movement, unchanged-error deduplication, repair and explicit Save/Export repair focus. The two previously recorded consistency gaps are resolved by this checkpoint. No full assistive-technology audit or production acceptance is claimed.
+
+Use e8ad5a6 as the reviewed editor checkpoint for backend integration. The pure model was unchanged by this follow-up; main workstream retains ownership of private storage, authenticated transport, approved source context and publication recovery. No VS branch edits, merge, migration, deployment or live activation performed during this review. Independent private page storage preparation remains recorded in PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
+## Documentation-only follow-up — 33e0950
+
+Fetched 33e0950588ae3ca6beb73651d3c505cc5f2b9d04 and compared with independently tested e8ad5a6. Only six lines of PAGE-BUILDER-CHECKPOINT.md differ, clarifying editor-owned ARIA cleanup and test descriptions. No implementation or test changes; no rerun was needed. The e8ad5a6 independent Page Builder result remains applicable. Version-history demonstration work is not included in this checkpoint and is still VS's next assigned task. Backend integration remains on the separate main workstream.
+
+## Fixture history review — b54e181
+
+Independently fetched exact origin/feature/page-builder-local-drafts head b54e18143797fce72bca3d34204df20963ae884b and compared with 33e0950. Five files changed: Page Builder HTML/JS/CSS, its browser tests and checkpoint. No local storage/service/model, Admin Hub, Supabase, game data or NEXT_JOBS edits. Full Page Builder suite passed independently in an isolated archive, including history fixtures, loading/empty/failure/retry, unsaved-buffer preservation, selected revisions, keyboard/focus and narrow layout. No live integration occurred.
+
+One reproduced correctness gap remains: historyValidationContext overwrites the cloned historical page id and slug with generated demonstration values before model validation/rendering. A malformed identity (../invalid) and reserved address (admin) are refused by the original model, but pass after this replacement. This can mask invalid saved metadata and means the inspected revision is not validated intact. Unsafe links and unapproved images still refuse as reported; no arbitrary-script execution was demonstrated.
+
+VS follow-up should preserve original historical identity/address, use a separate fixture validation context without mixing active-draft collisions, and avoid treating historic address reuse as new allocation. Malformed/protected historical metadata must remain blocked with repair messaging. Add targeted regressions for invalid identity/reserved address and for historical slug differing from the active draft while preserving the editor buffer. Existing model/service/backend files remain outside VS scope. Backend reviewed renderer/model snapshots are unchanged by this UI-only work; history will not be connected live until corrected and reverified.
+
+## History metadata correction independently verified — 39851d3
+
+Fetched exact pushed head 39851d3224575726eec232464ab3cde33a617162. Diff from b54e181 is confined to Page Builder JS/tests/checkpoint. historyValidationContext now validates original historical id/slug in a separate fixture context and does not rewrite either. Full Page Builder suite independently passes, including malformed identity/protected address refusal, valid history with a different active address, retained unsaved buffer/active revision/preview, selection/focus and existing recovery/layout checks. The previously reproduced history metadata gap is resolved.
+
+This is the reviewed fixture-history UI checkpoint for later integration. It remains demonstration-only; no real saved-history API, model/service change, backend activation, merge or deployment. Main backend work continues durable publication/Git/Pages reconciliation independently.
+
+## Publication demonstration review — ad1146d
+
+Independently fetched exact head ad1146d2a8b235cad90e297bc10dabb92eae3ac8 and compared with 39851d3. Five UI/test/checkpoint files changed; no model, renderer contract, service, backend, NEXT_JOBS or game-data change. Full Page Builder suite independently passed in an isolated archive, including publication scenarios, preserved unsaved changes, review invalidation, same-ID retry, confirmed-only Published labels, local-storage isolation and keyboard/narrow layouts.
+
+Two integration gaps remain. Real updatePublicationRequest code passes false to setPublicationLock for published/confirmed=false and deployment-failed; the UI therefore shows confirmation missing yet permits editing. Main backend publication guards retain exclusion for prepared/committed/failed intents until verified resolution. Before integration, normalize unconfirmed completion to unknown and retain locks for failed deployment unless the adapter explicitly confirms safe release. Add state-specific lock and action tests.
+
+Publication error handlers also set an error message in catch then call renderPublication in finally, which overwrites it with publicationMessage. A focused VM reproduction of the real runPublicationAction and publicationMessage confirms a thrown check error is written then replaced by the normal Outcome unknown message. Review/start handlers have the same catch/finally structure. Persist an action error separately through rendering, clear it deliberately on retry/success, and test rejecting review/start/check/retry adapters with recoverable focus and unchanged draft/request identity. Do not assume the passing scenario suite covers rejected operations.
+
+This remains fixture-only. No genuine publication or arbitrary-script issue was demonstrated. VS owns these focused UI corrections; main backend/Git/Pages work remains separate. Do not integrate publication controls until the UI status/lock/error contract is aligned and reverified.
+
+## Publication lock/error correction independently verified — 37aa542
+
+Fetched exact pushed branch head 37aa542 and reviewed the diff from ad1146d. Changes are confined to Page Builder JS/HTML, browser tests and checkpoint; no model, service, backend, game data or NEXT_JOBS changes. Full Page Builder suite independently passed in an isolated archive.
+
+Both recorded gaps are resolved for the fixture adapter. Failed deployment and unconfirmed completion retain editing locks; unconfirmed completion becomes Outcome unknown. Persistent action errors survive final rendering, clear on retry/success, and restore action focus. Rejection regressions cover review/start/check/retry with unchanged saved revisions, preserved unsaved edits, same-request recovery and no draft-service mutation. Fixture start rejection occurs before allocation; this does not prove recovery after a real server accepts a request and its response is lost.
+
+Accepted as the reviewed demonstration UI checkpoint only. Real publication still requires authenticated integration, durable request identity before external actions, Git/Pages evidence and uncertain-outcome reconciliation. No merge, deployment or live Page Builder enablement occurred.
