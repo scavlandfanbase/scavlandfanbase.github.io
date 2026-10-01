@@ -1,3 +1,7 @@
+## Final live release checkpoint
+
+Hub correction PR 40 / main 29b5cc1 deployed successfully in Pages run 36884317133. Attachment/Evidence backend v15 and all four migrations verified, counts retained, live Owner source/detail/screenshot loading checked. Current rollout evidence and expected advisor notices are in ADMIN-ROLLOUT-20261001.md. Next: deliberate genuine-change/restricted-account acceptance, VS accessibility handoff review, and remaining admin roadmap implementations. No fixture/game-data publication performed.
+
 ## LIVE rollout — 1 October 2026
 
 PR 39 merged cc6607c; Pages 36883290018 succeeded. All four migrations applied; admin-drafts v15 ACTIVE with Attachment/Evidence enabled. Counts preserved: Evidence 3 pending/12 approved/11 rejected, legacy versions 26, shared 2. Signed-in Evidence queue/detail/private screenshot and Attachment 74-candidate loading verified. Hub label/Owner/navigation/legacy-tab corrections prepared and tested. Read ADMIN-ROLLOUT-20261001.md; earlier disabled/unapplied notes are historical. No genuine game-data or Evidence review mutation performed.
