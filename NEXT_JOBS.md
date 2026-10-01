@@ -1,3 +1,5 @@
+**New Attachment handler/storage — 1 October:** authenticated create action now allocates, prepares and saves a private version; exact retry reuses identity/version and changed command is refused. New saved records load/list before public existence. Combined SQL/handler checks pass; new-record preview/publication and Add UI remain pending. No production changes.
+
 **New Attachment identity/storage checkpoint — 1 October:** unapplied allocation proposal generates and retains server UUIDs bound to actor/request/exact command. Local SQL verifies retry identity, wrong-actor/changed-command/direct-access refusal, receipt binding and version-1 creation save/retry. API/UI and new-record publication remain next; no live changes.
 
 **New Attachment creation contract — 1 October:** server-assigned UUID identity, collision inspection across canonical and saved private IDs, explicit facts, Unknown defaults and Unverified history pass focused tests. Contract is not exposed by the API/UI yet. Next: request-bound allocation/retries, private storage and new-record publication, then Add form/browser acceptance. No live changes.

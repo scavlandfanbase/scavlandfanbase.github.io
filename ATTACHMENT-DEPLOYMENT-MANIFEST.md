@@ -4,7 +4,7 @@ This is a review checklist for draft PR #37, not deployment authorization. Attac
 
 ## Release contents
 
-Deploy the complete `supabase/functions/admin-drafts` function from the reviewed commit, starting at `index.ts` and its `production.mjs` import graph. Include existing handler/core/shared-item modules and the Attachment modules: attachment-api.mjs, attachment-draft.mjs, attachment-publication.mjs, attachment-source.mjs, attachment-transport.mjs and attachment-compatibility.mjs. Include models.generated.mjs, item-draft.mjs, legacy-item-review.mjs and github-publisher.mjs; do not replace existing modules with a partial upload. Existing shared-function imports must remain available.
+Deploy the complete `supabase/functions/admin-drafts` function from the reviewed commit, starting at `index.ts` and its `production.mjs` import graph. Include existing handler/core/shared-item modules and the Attachment modules: attachment-api.mjs, attachment-draft.mjs, attachment-publication.mjs, attachment-source.mjs, attachment-transport.mjs, attachment-compatibility.mjs and attachment-create.mjs. Include models.generated.mjs, item-draft.mjs, legacy-item-review.mjs and github-publisher.mjs; do not replace existing modules with a partial upload. Existing shared-function imports must remain available.
 
 Web assets: admin.html, admin-dashboard.js, attachment-category.html, attachment-category.js, attachment-category.css and existing attachment-model.js. Frame, child script, model and stylesheet use `attachment-preparation-20261001-3`. Bump these together if the reviewed assets change. The frontend release switch is deliberately false. No game-data file is part of this code deployment; subsequent confirmed publication targets only data/items.json.
 

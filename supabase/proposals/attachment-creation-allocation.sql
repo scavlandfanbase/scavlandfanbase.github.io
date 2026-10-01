@@ -20,12 +20,12 @@ begin
  select * into allocation from scavland_item_drafts.attachment_allocations where request_id=p_request;
  if found then
   if allocation.actor<>p_actor or allocation.command<>p_command then raise sqlstate 'PT409' using message='Creation request reused with different entries.';end if;
-  return to_jsonb(allocation);
+  return to_jsonb(allocation)||jsonb_build_object('privateItemIds',coalesce((select jsonb_agg(item_id) from (select item_id from scavland_item_drafts.versions union select item_id from scavland_item_drafts.attachment_versions) ids),'[]'::jsonb));
  end if;
  if exists(select 1 from scavland_item_drafts.attachment_prepared where request_id=p_request)
  or exists(select 1 from scavland_item_drafts.prepared where request_id=p_request) then raise sqlstate 'PT409' using message='Request already belongs to another action.';end if;
  insert into scavland_item_drafts.attachment_allocations(request_id,actor,command) values(p_request,p_actor,p_command) returning * into allocation;
- return to_jsonb(allocation);
+ return to_jsonb(allocation)||jsonb_build_object('privateItemIds',coalesce((select jsonb_agg(item_id) from (select item_id from scavland_item_drafts.versions union select item_id from scavland_item_drafts.attachment_versions) ids),'[]'::jsonb));
 end $$;
 revoke all on function public.scavland_allocate_attachment(uuid,uuid,jsonb) from public,anon,authenticated;
 grant execute on function public.scavland_allocate_attachment(uuid,uuid,jsonb) to service_role;

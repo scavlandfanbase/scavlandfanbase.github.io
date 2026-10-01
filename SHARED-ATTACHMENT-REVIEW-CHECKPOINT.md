@@ -191,3 +191,9 @@ Focused tests pass for collisions, missing inspection, forged IDs/protected fact
 Prepared attachment-creation-allocation.sql: service-only allocation RPC stores generated UUID identity, actor and exact creation command; request lock makes retry return the original allocation. RLS/direct table revocations protect it. Reciprocal request binding refuses an allocated request in existing specialist preparation and requires matching actor/item/command, creation marker, null baseline and expected version 0 for Attachment preparation.
 
 Local PGlite tests pass for retained identity after lost-response retry, actor/command reuse refusal, invalid browser identity, browser/direct service table denial, valid bound receipt and immutable version-1 save/retry. Existing legacy revision guards remain effective. Allocation alone does not create a public or saved item. Proposal is unapplied. Next: API/transport allocation, private new-record loading/listing and null-baseline publication, then Add UI.
+
+## Authenticated private creation flow — 1 October
+
+Connected create action under the same feature/auth/items_edit gates. Server allocation and exact receipt lookup precede trusted creation preparation; receipt-only SQL save returns identity/version. Exact create retry returns original saved version and changed-command reuse is refused. Allocation RPC returns current shared private identity inspection. List combines public candidates with private-only saved Attachments; load permits a creation-marked saved record without public source. Subsequent edit validates null-baseline patch digest until publication integration.
+
+Combined handler/PGlite test verifies create/save/load/retry, changed-command refusal and no public insertion. New-record projection is still unsupported and safely refused; Add UI is absent. Full release regression run recorded before commit. No deployment/migration/flags changed.

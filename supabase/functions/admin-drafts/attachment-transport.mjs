@@ -1,4 +1,5 @@
 // Registered in production routing; disabled by default and requires reviewed RPC migrations.
+import {prepareAttachmentCreation} from './attachment-create.mjs';
 import {createAttachmentApi} from './attachment-api.mjs';
 import {fail} from './core.mjs';
 import {createAttachmentPublisher} from './attachment-publication.mjs';
@@ -15,12 +16,24 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
   return result;
  }
  return createAttachmentApi({enabled:()=>env('SHARED_ATTACHMENT_ENABLED')==='true',
+  create:async input=>{
+   const allocation=await rpc('scavland_allocate_attachment',{p_actor:input.actor,p_request:input.requestId,p_command:input.command},null,true);
+   const itemId=allocation.item_id;
+   const prior=await rpc('scavland_attachment_receipt',{p_actor:input.actor,p_item:itemId,p_request:input.requestId,p_command:input.command},null,true);
+   if(!prior){
+    const latest=await readSource(),legacy=await rpc('scavland_item_legacy',{},null,true);
+    const payload=await prepareAttachmentCreation(input.command,{actor:input.actor,permissions:input.permissions,newItemId:itemId,documents:latest.documents,settings:latest.settings,images:latest.images,privateItemIds:allocation.privateItemIds,legacyDrafts:legacy?[legacy]:[]});
+    await rpc('scavland_prepare_attachment',{p_actor:input.actor,p_item:itemId,p_request:input.requestId,p_command:input.command,p_payload:payload,p_legacy:legacy?.version||0},null,true);
+   }
+   return {...await rpc('scavland_attachment_draft',{p_action:'save',p_item:itemId,p_request:input.requestId},input.authorization),itemId};
+  },
   list:async authorization=>{
    if(typeof readSource!=='function')fail('Canonical source is unavailable.',503);
    const latest=await readSource();
    const drafts=await rpc('scavland_attachment_list',{},authorization);
    const privateRecords=new Map(drafts.map(row=>[row.item_id,row.payload.record]));
-   return {records:latest.documents['data/items.json'].data.filter(r=>!r.hidden&&(privateRecords.has(r.id)||r.contentType==='Attachment'||r.classification?.includes('attachment')||Attachments.candidate(r))).map(r=>({id:r.id,name:privateRecords.get(r.id)?.name||r.name,privateDraft:privateRecords.has(r.id),candidate:!privateRecords.has(r.id)&&r.contentType!=='Attachment'&&!r.classification?.includes('attachment')}))};
+   const publicRecords=latest.documents['data/items.json'].data;const combined=[...publicRecords,...drafts.filter(row=>!publicRecords.some(r=>r.id===row.item_id)).map(row=>row.payload.record)];
+   return {records:combined.filter(r=>!r.hidden&&(privateRecords.has(r.id)||r.contentType==='Attachment'||r.classification?.includes('attachment')||Attachments.candidate(r))).map(r=>({id:r.id,name:privateRecords.get(r.id)?.name||r.name||r.id,privateDraft:privateRecords.has(r.id),candidate:!privateRecords.has(r.id)&&r.contentType!=='Attachment'&&!r.classification?.includes('attachment')}))};
   },
   publishEnabled:()=>env('ADMIN_CORE_ENABLED')==='true'&&env('DRAFT_PUBLISH_ENABLED')==='true',
   publication:async input=>{
@@ -55,11 +68,11 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
   },
   loadContext:async(itemId,authorization)=>{
    if(typeof readSource!=='function')fail('Attachment source integration is unavailable.',503);
-   const latest=await readSource(),source=latest.documents['data/items.json'].data.find(r=>r.id===itemId);
-   if(!source)fail('Item not found.',404);
+   const latest=await readSource(),source=latest.documents['data/items.json'].data.find(r=>r.id===itemId)||null;
    // Also reject public specialist links even if an old classification is incomplete.
    for(const kind of ['ammo','armour','weapons'])if(latest.documents['data/'+kind+'.json']?.data.some(r=>r.id===itemId))fail('Review this item in its existing category editor.',409);
    const saved=await rpc('scavland_attachment_draft',{p_action:'load',p_item:itemId},authorization);
+   if(!source&&!saved.draft?.payload?.creation)fail('Item not found.',404);
    const legacy=await rpc('scavland_item_legacy',{},authorization,true);
    return {source,settings:latest.settings,images:latest.images,weapons:latest.documents['data/weapons.json']?.data,version:saved.currentVersion,savedDraft:saved.draft?.payload||null,legacyDrafts:legacy?[legacy]:[],legacyVersion:legacy?.version||0};
   },

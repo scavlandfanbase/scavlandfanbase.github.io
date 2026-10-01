@@ -69,8 +69,8 @@ const {PGlite}=require('@electric-sql/pglite');
  // Replace the deliberately malformed legacy SQL fixture with a real catalogue.
  await db.exec('delete from scavland_drafts.versions');
  const source={id:'api-item',name:'Existing',classification:['item']},settings={schemaVersion:1,current_patch_id:'fixture'};
- const latest={documents:{'data/items.json':{data:[source,{id:'browser-candidate',name:'Browser candidate',classification:['item'],source:'evidence-inbox/attachments/fixture.png'}]},'data/weapons.json':{data:[{id:'weapon-fixture',name:'Recorded fixture Weapon'},{id:'hidden-weapon',hidden:true}]}},settings,images:[],base:{'data/items.json':'fixture-blob'}};
- const rpcArguments={scavland_attachment_receipt:['p_actor','p_item','p_request','p_command'],scavland_prepare_attachment:['p_actor','p_item','p_request','p_command','p_payload','p_legacy'],scavland_attachment_draft:['p_action','p_item','p_request']};
+ const latest={documents:{'data/items.json':{data:[source,{id:'browser-candidate',name:'Browser candidate',classification:['item'],source:'evidence-inbox/attachments/fixture.png'}]},'data/armour.json':{data:[]},'data/ammo.json':{data:[]},'data/weapons.json':{data:[{id:'weapon-fixture',name:'Recorded fixture Weapon'},{id:'hidden-weapon',hidden:true}]}},settings,images:[],base:{'data/items.json':'fixture-blob'}};
+ const rpcArguments={scavland_allocate_attachment:['p_actor','p_request','p_command'],scavland_attachment_receipt:['p_actor','p_item','p_request','p_command'],scavland_prepare_attachment:['p_actor','p_item','p_request','p_command','p_payload','p_legacy'],scavland_attachment_draft:['p_action','p_item','p_request']};
  const gitWrites=[];
  const fetcher=async(url,options)=>{
   if(url.startsWith('https://api.github.com/')){
@@ -94,6 +94,13 @@ const {PGlite}=require('@electric-sql/pglite');
  const env=name=>({SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service',SHARED_ATTACHMENT_ENABLED:'true',ADMIN_CORE_ENABLED:'true',DRAFT_PUBLISH_ENABLED:'true',GITHUB_TOKEN:'fixture'})[name];
  const api=createAttachmentTransport({env,fetcher,readSource:async()=>latest});
  const call=body=>api(new Request('https://fixture/editor',{method:'POST',headers:{Authorization:'Bearer fixture-session'},body:JSON.stringify(body)}));
+ const createBody={action:'create',requestId:crypto.randomUUID(),command:{action:'create-attachment',confirmCreation:true,fields:{name:'API new Attachment',attachmentType:'Scope'}}};
+ const createdResponse=await call(createBody);assert.equal(createdResponse.status,200);const created=await createdResponse.json();assert.equal(created.version,1);assert.match(created.itemId,/^attachment-/);
+ const retryCreate=await (await call(createBody)).json();assert.equal(retryCreate.itemId,created.itemId);assert.equal(retryCreate.version,1);
+ assert.equal((await call({...createBody,command:{...createBody.command,fields:{name:'Changed'}}})).status,409);
+ const newLoaded=await (await call({action:'load',itemId:created.itemId})).json();assert.equal(newLoaded.draft.record.name,'API new Attachment');assert.equal(newLoaded.currentVersion,1);
+ assert(!latest.documents['data/items.json'].data.some(r=>r.id===created.itemId),'creation remains private');
+ console.log('PASS combined creation handler/SQL: allocation, durable save/load and exact retry without duplicate identity.');
  const apiRequest=crypto.randomUUID(),apiCommand={action:'classify-attachment',confirmId:source.id,attachmentType:'Unknown',confirmReclassification:true,expectedVersion:0,sourceDigest:await legacyDigest({source,settings})};
  assert.equal((await call({action:'prepare',itemId:source.id,requestId:apiRequest,command:apiCommand})).status,200);
  assert.equal((await call({action:'prepare',itemId:source.id,requestId:apiRequest,command:apiCommand})).status,200);
