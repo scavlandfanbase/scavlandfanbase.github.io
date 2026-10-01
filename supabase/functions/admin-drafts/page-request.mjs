@@ -11,7 +11,9 @@ function version(value){if(!Number.isSafeInteger(value)||value<1||value>=2147483
 export function validatePageRequest(input){
  if(!object(input)||input.domain!=='page-builder')invalid();
  switch(input.action){
-  case 'list':keys(input,['domain','action']);break;
+  case 'list':
+   keys(input,Object.hasOwn(input,'after')?['domain','action','after']:['domain','action']);
+   if(Object.hasOwn(input,'after'))identity(input.after);break;
   case 'load':keys(input,['domain','action','pageId']);identity(input.pageId);break;
   case 'create':
    keys(input,['domain','action','requestId','page']);identity(input.requestId);

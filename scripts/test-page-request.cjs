@@ -14,6 +14,8 @@ const assert=require('node:assert/strict');
   for(const field of ['actor','savedAt','permissions','approved','base','source','digest','extra'])rejects({...original,[field]:'forged'});
  }
  for(const action of ['publish','approve','delete','preview','source','prepare'])rejects({domain:'page-builder',action});
+ assert.deepEqual(validate({domain:'page-builder',action:'list',after:pageId}),{domain:'page-builder',action:'list',after:pageId});
+ rejects({domain:'page-builder',action:'list',after:'../private'});
  for(const input of [null,[],true,'page',{}, {domain:'items',action:'list'}])rejects(input);
  for(const value of [0,-1,1.5,'1',null,2147483647,Number.MAX_SAFE_INTEGER+1])rejects({...cases[3],expectedVersion:value});
  for(const value of ['../page','',null,[],pageId+' ']){
