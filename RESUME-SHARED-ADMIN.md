@@ -1,3 +1,5 @@
+Current handoff: ADMIN-AVAILABILITY-RELEASE.md. Shared storage/backend are now deployed; feature activation and frontend release remain pending. Earlier preparation-only statements below are historical.
+
 # Resume shared Admin work — saved 30 September 2026
 
 1 October follow-up: the reviewed import contract and authenticated save/acknowledgement UI are complete in PRs #31–32. See `SHARED-ROLLOUT-CHECKPOINT.md` for current release checks and rollout order. The historical overnight handoff below remains useful context; no shared-editor rollout has happened.
