@@ -19,7 +19,7 @@ The proposed production-integration workflow, unresolved decisions and release g
 ## Files Changed
 
 - `page-builder.html` — standalone local editor shell and accessible labels/states.
-- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration; validation errors are associated with and focus the repair field. Passes trusted image/address context to the model.
+- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration; duplicate-address and model errors are associated with and focus repair fields. Preview errors are associated without stealing typing focus, deduplicated while unchanged, and clear their editor-owned ARIA attributes on repair. Passes trusted image/address context to the model.
 - `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
 - `page-builder-model.js` — reusable metadata/content validator; independent of filesystem, authentication and publication.
 - `page-builder-contract.js` — escaped preview/export renderer using the reusable model.
@@ -60,7 +60,7 @@ The status area reports loading, unsaved, saving, saved and error states. In-app
 
 Passed:
 
-- `node scripts/test-page-builder.cjs` — existing model/service/editor safety suite plus keyboard activation of section/block actions; accessible names and labels; metadata Tab order and visible focus; field-associated/assertive validation; focus after save failure and canceled deletion; contrast including error state; empty page and maximum title; 640px reflow proxy plus 320–1280px layouts; trusted preview stylesheet/CSP; all prior image, hidden-content, export parity, stale-save and recovery cases.
+- `node scripts/test-page-builder.cjs` — existing model/service/editor safety suite plus keyboard activation of section/block actions; accessible names and labels; metadata Tab order and visible focus; duplicate-address association/correction; preview error association without focus theft or repeated unchanged announcements; preservation of pre-existing `aria-describedby` references; Save/Export repair focus; focus after save failure and canceled deletion; contrast including error state; empty page and maximum title; 640px reflow proxy plus 320–1280px layouts; trusted preview stylesheet/CSP; all prior image, hidden-content, export parity, stale-save and recovery cases.
 - `node scripts/test-items-builder.cjs` — PASS. Exact populated/zero count states, 40/80 pagination, search, hidden excluded from Active and available under Hidden, archived filtering, hidden status, stable ID through the list and collapsed technical details, evidence link, missing image, keyboard/dialog focus and public hidden-item filtering.
 - `node scripts/test-items-editor.cjs` — existing Items editor workflow and responsive checks.
 - `node scripts/test-vendor-builder.cjs` — existing Vendor editor workflow and responsive checks.
