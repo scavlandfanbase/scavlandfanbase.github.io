@@ -100,3 +100,13 @@ reconcileAttachment now adopts confirmed public fields before a later edit, keep
 Validation: real Edge browser with fixture endpoint passes parent token handoff, candidate Scope choice, private classification/save/reload, shared rename, preview and explicit publish, plus 390/1280px widths and no page errors. Separate real local SQL tests and classification/API/publication suites pass. Browser transport/Auth/Git publication remain fixtures. No production publication/migration/deployment occurred.
 
 Remaining release work: integrate pinned Git source reading and production routing with feature flags disabled; add cache/Hub permission routing, CORS and mixed-editor checks; expand browser error/retry/permission cases; review schema/transport and migration order; refresh production state and perform controlled Owner acceptance. Add-new, images, verification decisions, archive/restore and compatibility are not implemented in this initial Attachment screen. Keep the old Items route available. Do not claim full Attachment coverage or deploy draft PR #37 yet.
+
+## Disabled production routing and pinned source preparation
+
+production.mjs now dispatches shared-attachment requests to its dedicated transport. Missing/false SHARED_ATTACHMENT_ENABLED refuses the route before Auth/RPC/Git requests. attachment-source.mjs loads Items, specialist links, Vendors, patch and approved images from one pinned main commit; no browser-supplied source path/branch is accepted. Attachment responses include the existing site CORS origin; outer OPTIONS handling remains shared.
+
+test-attachment-routing passes pinned source/file count, approved images, disabled-default zero-network refusal and CORS. Attachment API and real local SQL suites pass; npm test (Admin/invites) passes after the shared production-handler change. No production deployment or flag changes. Earlier unregistered-route descriptions are historical.
+
+Copilot Page Builder branch/commits are not available in this local repository's branch list. Its reported completion remains unverified here; do not merge or alter its work based on the pasted report. Attachment changes touch no Page Builder files.
+
+Next: complete Hub/cache integration in preparation, broader browser failure/retry and permission acceptance, schema/receipt review and release manifest. Remaining Add/image/review/archive controls must stay accurately documented; no release yet.

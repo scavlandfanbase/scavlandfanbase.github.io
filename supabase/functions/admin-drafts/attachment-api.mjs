@@ -6,7 +6,7 @@ import {legacyItemBlockers} from './item-draft.mjs';
 import {reconcileAttachment} from './attachment-publication.mjs';
 export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,authenticate,loadContext,storage,publication,list}={}){
  return async request=>{
-  const reply=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store'}});
+  const reply=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store','Access-Control-Allow-Origin':'https://scavlandfanbase.github.io'}});
   try{
    if(!enabled())fail('Attachment editing is not enabled.',503);
    if(request.method!=='POST')fail('POST is required.',405);

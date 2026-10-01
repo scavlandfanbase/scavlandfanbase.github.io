@@ -1,3 +1,5 @@
+**Attachment disabled routing — 1 October:** backend dispatch/pinned source reader now prepared; missing flag refuses without network. Focused routing/API/SQL tests and Admin npm tests pass. No deployment/activation. Copilot branch is absent locally, so its commits remain unreviewed here.
+
 **Attachment interface batch — 1 October:** isolated review/classify/edit/preview/publish screen and post-publication baseline recovery are prepared. Edge fixture and local SQL/API tests pass. Not live; production source/routing integration, release review and remaining controls are documented in SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
 
 **Attachment preview/publish transport — 1 October:** saved-version preview intents and explicitly confirmed, flag-gated publication now connect through the transport. Focused fixture/local SQL tests pass. No live activation; UI, routing and post-publication recovery still pending.
