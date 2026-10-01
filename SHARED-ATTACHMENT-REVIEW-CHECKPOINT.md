@@ -32,3 +32,11 @@ attachment-classification-storage.sql adds RLS-protected private preparation and
 Real local PGlite tests pass for save/reload, retry, permission/direct-table denial, missing preparation, competing preparation and changed legacy-version refusal. Attachment contract tests and git diff --check pass. SQL has not been applied to production.
 
 Rollout blockers: add reciprocal Attachment-overlap checks to the existing specialist saver; bind API loading to the Attachment version store and authoritative source; add edit/update receipt support beyond first classification, source/public conflict checks and preview/publication integration. First-classification storage is intentionally limited to version 1. The database cannot independently read GitHub public facts; sourceDigest must be rechecked by the trusted API before preparation and later publication. No claim of cross-service atomicity. Test all combined paths before deploying.
+
+## Reciprocal saved-authority guard
+
+The storage proposal now guards INSERT on both specialist versions and Attachment versions under the existing shared-item advisory transaction lock. Either insertion order refuses a competing saved draft. This also covers future service adapters that insert directly, rather than relying solely on each API checking the other store. Preparation alone does not reserve an item indefinitely. Existing saved Attachment retries still succeed.
+
+Local PGlite checks pass for Attachment-first specialist refusal, specialist-first Attachment refusal through both the save function and direct trusted insertion, and preservation of the first saved draft. These tests exercise both insertion orders sequentially; they are not a multi-connection production concurrency acceptance test. Contract checks and git diff --check pass. Proposal remains unapplied.
+
+Next: subsequent Attachment revisions/edit contract, stable receipt binding and authenticated API integration. Existing specialist editor changes are not deployed by this checkpoint. Publication/legacy migration remain explicit, pending work.

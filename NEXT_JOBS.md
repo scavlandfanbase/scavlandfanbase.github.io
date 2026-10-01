@@ -1,3 +1,5 @@
+**Attachment reciprocal guard — 1 October:** storage proposal now blocks competing saved specialist/Attachment drafts in either insertion order using the shared item transaction lock. Local SQL tests pass; unapplied. Next: subsequent revisions and authenticated API integration.
+
 **Attachment private storage — 1 October:** first-classification receipt storage proposal now passes real local SQL save/reload/retry and conflict tests. Not deployed. Reciprocal specialist overlap checks, subsequent edits and API integration remain required. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
 
 **Attachment preparation binding — 1 October:** stale revision/source/patch and private legacy overlap checks now pass fixture tests. Durable master-only receipt storage remains next; current production shared storage supports three specialist categories only. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.

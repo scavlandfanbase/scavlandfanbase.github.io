@@ -65,4 +65,25 @@ revoke all on function scavland_item_drafts.prepare_attachment(uuid,text,uuid,js
 grant execute on function scavland_item_drafts.prepare_attachment(uuid,text,uuid,jsonb,jsonb,integer) to service_role;
 revoke all on function scavland_item_drafts.attachment_access(text,text,uuid) from public,anon;
 grant execute on function scavland_item_drafts.attachment_access(text,text,uuid) to authenticated;
+-- Both stores use one item lock even for inserts through future service adapters.
+create function scavland_item_drafts.guard_attachment_overlap()
+returns trigger language plpgsql security definer set search_path='' as $$
+begin
+ perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('shared-item:'||new.item_id,0));
+ if tg_table_name='versions' then
+  if exists(select 1 from scavland_item_drafts.attachment_versions where item_id=new.item_id) then
+   raise sqlstate 'PT409' using message='An Attachment draft already exists. Review it before saving specialist work.';
+  end if;
+ else
+  if exists(select 1 from scavland_item_drafts.versions where item_id=new.item_id) then
+   raise sqlstate 'PT409' using message='A specialist draft already exists. Review it before saving Attachment work.';
+  end if;
+ end if;
+ return new;
+end $$;
+revoke all on function scavland_item_drafts.guard_attachment_overlap() from public,anon,authenticated,service_role;
+create trigger shared_item_attachment_overlap before insert on scavland_item_drafts.versions
+ for each row execute function scavland_item_drafts.guard_attachment_overlap();
+create trigger attachment_shared_item_overlap before insert on scavland_item_drafts.attachment_versions
+ for each row execute function scavland_item_drafts.guard_attachment_overlap();
 commit;

@@ -24,5 +24,16 @@ const {PGlite}=require('@electric-sql/pglite');
  await db.exec("insert into scavland_drafts.versions values('items','catalogue',1,'{}')");
  await assert.rejects(access(actor,'save','second',stale),e=>e.code==='PT409');
  assert.equal((await access(actor,'load','second')).currentVersion,0);
+ // Trusted service insertion still cannot create competing saved authorities.
+ const specialistRequest=crypto.randomUUID();
+ const specialistPayload={itemId:'stable',category:'ammo'};
+ await db.query('insert into scavland_item_drafts.prepared(request_id,actor,item_id,category,expected_version,command,payload) values($1,$2,$3,$4,0,$5,$6)',[specialistRequest,actor,'stable','ammo',{},specialistPayload]);
+ await assert.rejects(db.query('insert into scavland_item_drafts.versions(item_id,version,payload,request_id,saved_by) values($1,1,$2,$3,$4)',['stable',specialistPayload,specialistRequest,actor]),e=>e.code==='PT409');
+ const prior=crypto.randomUUID(),pending=crypto.randomUUID();await prep(pending,'specialist-first',1);
+ await db.query('insert into scavland_item_drafts.prepared(request_id,actor,item_id,category,expected_version,command,payload) values($1,$2,$3,$4,0,$5,$6)',[prior,actor,'specialist-first','ammo',{},{}]);
+ await db.query('insert into scavland_item_drafts.versions(item_id,version,payload,request_id,saved_by) values($1,1,$2,$3,$4)',['specialist-first',{},prior,actor]);
+ await assert.rejects(access(actor,'save','specialist-first',pending),e=>e.code==='PT409');
+ await assert.rejects(db.query('insert into scavland_item_drafts.attachment_versions(item_id,version,payload,request_id,saved_by) values($1,1,$2,$3,$4)',['specialist-first',payload,pending,actor]),e=>e.code==='PT409');
+ assert.equal((await access(actor,'load','stable')).currentVersion,1);
  console.log('PASS Attachment SQL: protected receipt creation, permission denial, private reload, retry, competing work and legacy-version revocation.');
 }finally{await db.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
