@@ -5,6 +5,7 @@
   const titleInput=$('#page-title'),slugInput=$('#page-slug'),introInput=$('#page-intro'),saveButton=$('#save-draft');
   const preview=$('#preview-frame'),previewError=$('#preview-error');
   let token='',records=[],images=[],existingPages=[],active=null,revision=null,snapshot=null,dirty=false,slugEdited=false,cssText='',saving=false;
+  const errorState=new WeakMap();let previewErrorField=null;
   const blockTypes=[['heading','Heading'],['text','Text'],['image','Image'],['card','Card'],['divider','Divider'],['button','Link button']];
   const layoutChoices={columns:[[1,'One column'],[2,'Two columns'],[3,'Three columns']],align:[['start','Start'],['center','Center']],spacing:[['compact','Compact'],['normal','Normal'],['spacious','Spacious']],background:[['none','None'],['surface','Surface'],['subtle','Subtle']]};
   const uid=()=>globalThis.crypto?.randomUUID?crypto.randomUUID().replaceAll('-',''):Array.from(crypto.getRandomValues(new Uint8Array(16)),value=>value.toString(16).padStart(2,'0')).join('');
@@ -57,20 +58,43 @@
     if(/layout/i.test(message))return sections.querySelector('[data-field^="layout."]');
     return null;
   }
+  function associateError(field,id){
+    if(!field)return;
+    let state=errorState.get(field);
+    if(!state){state={originalInvalid:field.getAttribute('aria-invalid'),originalDescriptions:new Set((field.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean)),addedDescriptions:new Set()};errorState.set(field,state);}
+    if(!state.originalDescriptions.has(id)){
+      const descriptions=(field.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean);
+      if(!descriptions.includes(id)){descriptions.push(id);field.setAttribute('aria-describedby',descriptions.join(' '));state.addedDescriptions.add(id);}
+    }
+    field.setAttribute('aria-invalid','true');
+  }
+  function clearErrorAssociation(field,id){
+    const state=field&&errorState.get(field);if(!state)return;
+    if(state.addedDescriptions.delete(id)&&!state.originalDescriptions.has(id)){
+      const descriptions=(field.getAttribute('aria-describedby')||'').split(/\s+/).filter(description=>description&&description!==id);
+      if(descriptions.length)field.setAttribute('aria-describedby',descriptions.join(' '));else field.removeAttribute('aria-describedby');
+    }
+    if(state.addedDescriptions.size)return;
+    if(state.originalInvalid===null)field.removeAttribute('aria-invalid');else field.setAttribute('aria-invalid',state.originalInvalid);
+    errorState.delete(field);
+  }
   function reportError(error,{prefix='',suffix='',focusTarget=null}={}){
     setStatus(`${prefix}${error.message}${suffix}`,'error');
     const field=fieldForError(error.message)||focusTarget;if(!field)return;
-    field.setAttribute('aria-invalid','true');
-    const descriptions=(field.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean);
-    if(!descriptions.includes('status'))descriptions.push('status');
-    field.setAttribute('aria-describedby',descriptions.join(' '));
+    associateError(field,'status');
     if(field.disabled)requestAnimationFrame(()=>field.focus());else field.focus();
   }
-  function clearFieldError(field){
-    if(field.getAttribute('aria-invalid')!=='true')return;
-    field.removeAttribute('aria-invalid');
-    const descriptions=(field.getAttribute('aria-describedby')||'').split(/\s+/).filter(description=>description&&description!=='status');
-    if(descriptions.length)field.setAttribute('aria-describedby',descriptions.join(' '));else field.removeAttribute('aria-describedby');
+  function clearFieldError(field){clearErrorAssociation(field,'status');}
+  function clearPreviewError(){
+    if(previewErrorField)clearErrorAssociation(previewErrorField,'preview-error');
+    previewErrorField=null;previewError.hidden=true;previewError.textContent='';
+  }
+  function showPreviewError(error){
+    const message=`Preview unavailable: ${error.message}`,field=fieldForError(error.message);
+    if(previewErrorField!==field&&previewErrorField)clearErrorAssociation(previewErrorField,'preview-error');
+    previewErrorField=field;if(field)associateError(field,'preview-error');
+    if(previewError.textContent!==message)previewError.textContent=message;
+    previewError.hidden=false;
   }
   const slugify=value=>value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80).replace(/-+$/,'')||'new-page';
   const layoutDefault=()=>({columns:1,align:'start',spacing:'normal',background:'none',border:false});
@@ -90,10 +114,11 @@
     return node('button',{type:'button',dataset:{action},'aria-label':label,disabled,className},text);
   }
   function updatePreview(){
-    previewError.hidden=true;
-    if(!active){preview.srcdoc='';return;}
-    try{preview.srcdoc=Builder.document(active,{images,existingPages,currentPageId:existingPages.some(page=>page.id===active.id)?active.id:null,css:cssText});}
-    catch(error){preview.srcdoc='';previewError.textContent=`Preview unavailable: ${error.message}`;previewError.hidden=false;}
+    if(!active){clearPreviewError();preview.srcdoc='';return;}
+    try{
+      const output=Builder.document(active,{images,existingPages,currentPageId:existingPages.some(page=>page.id===active.id)?active.id:null,css:cssText});
+      clearPreviewError();if(preview.srcdoc!==output)preview.srcdoc=output;
+    }catch(error){if(preview.srcdoc)preview.srcdoc='';showPreviewError(error);}
   }
   function renderDraftList(){
     draftList.replaceChildren();$('#drafts-empty').hidden=records.length>0;
@@ -212,7 +237,7 @@
     if(!active||saving)return;
     active.title=titleInput.value;active.slug=slugInput.value;active.intro=introInput.value;
     const duplicate=records.find(record=>record.draft.slug===active.slug&&record.draft.id!==active.id);
-    if(duplicate){setStatus('A saved draft already uses this address. Choose another address.','error');slugInput.focus();return;}
+    if(duplicate){reportError(new Error('A saved draft already uses this address. Choose another address.'));return;}
     let page;try{page=Builder.validate(active,{images,existingPages,currentPageId:existingPages.some(entry=>entry.id===active.id)?active.id:null});}catch(error){reportError(error);return;}
     saving=true;saveButton.disabled=true;setStatus('Saving private draft...','saving');
     try{
