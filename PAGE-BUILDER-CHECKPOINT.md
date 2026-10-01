@@ -4,11 +4,11 @@
 
 **Date:** 1 October 2026  
 **Branch:** `feature/page-builder-local-drafts`  
-**Commits:** `77713bb` (draft-service foundation), `1b1ed58` (visual editor and acceptance tests), `45f6426` (focus restoration), `2997a7f` (Items count-state assertions), `d1c1b4d` (keyboard-navigation checks), `38cf7c7` (hidden-item filter and fixture corrections)
+**Commits:** `77713bb` (draft-service foundation), `1b1ed58` (visual editor and acceptance tests), `45f6426` (focus restoration), `2997a7f` (Items count-state assertions), `d1c1b4d` (keyboard-navigation checks), `38cf7c7` (hidden-item filter and fixture corrections), `d206ccb` (trusted validation model), `14ba115` (model trust-boundary tests), `ec714dd` (duplicate page identity protection)
 
 ## What Exists
 
-The repository already contained a shared, escaped page renderer in `page-model.js`, a local loopback draft service, and a stylesheet. The actual Page Builder HTML and JavaScript entry points were missing, so the service root returned 404. The shared renderer is also packaged by the Admin model-generation script; it was left unchanged. Page Builder-specific layout validation and rendering now live in `page-builder-contract.js`.
+The repository already contained a local loopback draft service and a shared page model used by other Admin code. The actual Page Builder HTML and JavaScript entry points were missing, so the service root returned 404. The shared `page-model.js` and generated Admin model bundle remain unchanged. Reusable Page Builder validation now lives in the side-effect-free `page-builder-model.js`; `page-builder-contract.js` uses that model for escaped preview/export rendering.
 
 The local editor supports page title, introduction and safe address; saved-draft listing/open/edit; section add/rename/reorder/hide/remove; block add/edit/reorder/duplicate/hide/remove; and heading, plain text, image, card, divider and link-button blocks. Section settings are limited to 1–3 columns, start/center alignment, compact/normal/spacious spacing, none/surface/subtle backgrounds and an optional border. Desktop and mobile previews and downloaded HTML use the same validated renderer. Hidden sections and blocks remain in the saved draft and are omitted from the preview/export.
 
@@ -17,10 +17,11 @@ The local editor supports page title, introduction and safe address; saved-draft
 ## Files Changed
 
 - `page-builder.html` — standalone local editor shell and accessible labels/states.
-- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration after reorder/removal/deletion.
+- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration; passes trusted image/address context to the model.
 - `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
-- `page-builder-contract.js` — Page Builder-only layout validation and escaped HTML output, built on the existing shared page model.
-- `scripts/page-builder-server.cjs` — serves the local editor, filters approved images, checks draft revisions and permits only local draft create/save/delete. Existing loopback, host/origin/session protections and private storage remain in place.
+- `page-builder-model.js` — reusable metadata/content validator; independent of filesystem, authentication and publication.
+- `page-builder-contract.js` — escaped preview/export renderer using the reusable model.
+- `scripts/page-builder-server.cjs` — validates create/save through the reusable model using image choices resolved from the existing inventory/filesystem and page identities/addresses derived from private saved drafts. Request envelopes reject unknown/protected fields. Existing loopback, host/origin/session protections and private storage remain in place.
 - `items-builder.js` — Active items excludes hidden records; hidden records remain reachable through the explicit Hidden items and Include archived views. Public Items behavior is unchanged.
 - `scripts/test-page-builder.cjs` — fixture-only service and browser acceptance checks using temporary storage.
 - `scripts/test-items-builder.cjs` — updated stale count/empty-state expectations and verifies hidden-item filter state, stable identity, collapsed technical reference, and visible evidence link.
@@ -47,7 +48,9 @@ The editor accepts plain text only. User text and attributes are escaped; there 
 
 Links are restricted to HTTPS, a safe `.html` address, or `/pages/<safe-address>`; unsafe protocols and malformed values are rejected. Page addresses use lowercase letters, digits and hyphens, are limited to 80 characters, protect system names and must be unique among saved drafts.
 
-Current content limits: 160 characters for page/block titles, 1,000 for the introduction, 160 for section titles, 10,000 for a text block, 300 for image alternative text, 500 for a link, 40 sections, 200 blocks per page, 100 saved pages and a 1 MiB request body. Section layout values are enums validated by the local service. Saves require the current revision; stale saves/deletes return a conflict without replacing the newer saved content. Writes use a temporary file and preserve the previous saved file if replacement fails.
+`page-builder-model.js` requires trusted context (`approvedImages`, `existingPages`, `currentPageId`) and rejects missing/malformed context. It checks strict key allowlists for page metadata, sections, layouts and each block type; protects the system address list; checks unique page addresses and page/section/block identities; validates approved image references, safe links, plain-text values and the content limits below. It returns a clone without normalizing a valid draft, so existing IDs, omitted optional layout defaults, and literal values such as `Unknown` remain unchanged. Browser-supplied roles, approval/reviewer metadata, timestamps and page revision fields are rejected. The service accepts a revision only as an optimistic-concurrency precondition, compares it with its stored revision, and generates revision increments and timestamps itself.
+
+Current content limits: 160 characters for page/block titles, 1,000 for the introduction, 160 for section titles, 10,000 for a text block, 300 for image alternative text, 500 for a link, 40 sections, 200 blocks per page, 100 saved pages and a 1 MiB request body. Section layout values are enums. Stale saves/deletes return a conflict without replacing newer saved content. Writes use a temporary file and preserve the previous saved file if replacement fails. A saved draft whose formerly approved image is now missing remains loadable for repair, but strict save/preview/export validation blocks that reference until it is replaced.
 
 The status area reports loading, unsaved, saving, saved and error states. In-app navigation warns before abandoning unsaved changes; browser navigation uses `beforeunload`; section/block/page deletion requires confirmation. Focus moves to a useful surviving control after confirmed section/block/page deletion and block/section reordering or duplication. A failed save leaves current edits on screen. On a stale revision, refresh the saved-draft list to inspect the newer copy before reopening it.
 
@@ -55,7 +58,7 @@ The status area reports loading, unsaved, saving, saved and error states. In-app
 
 Passed:
 
-- `node scripts/test-page-builder.cjs` — create/save/reopen/edit; all block types; ordering, duplication, hiding and deletion; safe/duplicate/reserved addresses; unsafe links and image paths; malicious text escaping; empty pages, 10,000-character text and 200-block rendering; hidden-content omission; preview/export equality and safe hrefs; save failure, single-save retry and stale-revision recovery; missing-image replacement; unsaved-change warnings; focus after cancel/confirm, reorder and delete actions; keyboard activation and 320–1280px layouts.
+- `node scripts/test-page-builder.cjs` — create/save/reopen/edit; all block types; ordering, duplication, hiding and deletion; exact preservation of valid drafts and `Unknown` values; missing trusted context; unknown/protected fields; duplicate stable identities, page IDs and addresses; reserved addresses; approved/unapproved/traversal images; unsafe/malformed links; layout/type/content limits; malicious text escaping; empty pages, 10,000-character text and 200-block rendering; hidden-content omission; preview/export equality and safe hrefs; strict request authority fields; save failure, single-save retry and stale-revision recovery; missing-image replacement; unsaved-change warnings; focus after cancel/confirm, reorder and delete actions; keyboard activation and 320–1280px layouts.
 - `node scripts/test-items-builder.cjs` — PASS. Exact populated/zero count states, 40/80 pagination, search, hidden excluded from Active and available under Hidden, archived filtering, hidden status, stable ID through the list and collapsed technical details, evidence link, missing image, keyboard/dialog focus and public hidden-item filtering.
 - `node scripts/test-items-editor.cjs` — existing Items editor workflow and responsive checks.
 - `node scripts/test-vendor-builder.cjs` — existing Vendor editor workflow and responsive checks.
