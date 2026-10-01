@@ -7,7 +7,7 @@ function keys(value,expected){
  if(!object(value)||Object.keys(value).length!==expected.length||expected.some(key=>!Object.hasOwn(value,key)))invalid();
 }
 function identity(value){if(typeof value!=='string'||!uuid.test(value))invalid();}
-function version(value){if(!Number.isSafeInteger(value)||value<1)invalid();}
+function version(value){if(!Number.isSafeInteger(value)||value<1||value>=2147483647)invalid();}
 export function validatePageRequest(input){
  if(!object(input)||input.domain!=='page-builder')invalid();
  switch(input.action){

@@ -1,3 +1,7 @@
+## Page Builder private storage prepared — 1 October 2026
+
+Unapplied private storage proposal now covers server identity allocation, prepared receipts, immutable save/archive versions and retained address reservations. Local permission/privacy/retry tests and six independent PostgreSQL concurrency scenarios pass. Fixture databases removed and server stopped. Next is trusted page model/context plus authenticated transport; no live Page Builder activation. Details: PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Page Builder backend preparation — 1 October 2026
 
 Independent VS checkpoint 052d175 review and Page Builder suite passed. Main backend work now has a tested, unused strict page-builder request boundary for private list/load/create/save/archive. Read PAGE-BUILDER-BACKEND-CHECKPOINT.md for exact guarantees and remaining storage, Auth, validation, publication and rollout steps. No live Page Builder route or controls enabled. VS is separately handling two accessibility consistency follow-ups.
