@@ -4,10 +4,34 @@
   const status=$('#status'),retry=$('#retry'),draftList=$('#draft-list'),sections=$('#section-list');
   const titleInput=$('#page-title'),slugInput=$('#page-slug'),introInput=$('#page-intro'),saveButton=$('#save-draft');
   const preview=$('#preview-frame'),previewError=$('#preview-error');
+  const historyToggle=$('#history-toggle'),historyPanel=$('#history-panel'),historyStatus=$('#history-status'),historyRetry=$('#history-retry'),historyList=$('#history-list'),historyEmpty=$('#history-empty'),historyDetail=$('#history-detail'),historyMetadata=$('#history-metadata'),historyFrame=$('#history-frame'),historyRepair=$('#history-repair');
   let token='',records=[],images=[],existingPages=[],active=null,revision=null,snapshot=null,dirty=false,slugEdited=false,cssText='',saving=false;
   const errorState=new WeakMap();let previewErrorField=null;
+  let historyVersions=[],historySelection=null,historyLoaded=false,historyLoading=false,historyRequest=0;
   const blockTypes=[['heading','Heading'],['text','Text'],['image','Image'],['card','Card'],['divider','Divider'],['button','Link button']];
   const layoutChoices={columns:[[1,'One column'],[2,'Two columns'],[3,'Three columns']],align:[['start','Start'],['center','Center']],spacing:[['compact','Compact'],['normal','Normal'],['spacious','Spacious']],background:[['none','None'],['surface','Surface'],['subtle','Subtle']]};
+  function longTitleHistoryFixture(source){
+    if(!source.revisions?.length)return null;
+    const revision=structuredClone(source.revisions[0]);
+    revision.key='demo-v4-long-title';revision.revision=4;revision.savedAt='2026-09-28T10:00:00.000Z';
+    revision.editorName='Fixture editor with an intentionally long display name for narrow-screen history layout checks';
+    revision.page.title='Demonstration History - '+'Northern Route Notes '.repeat(6);
+    revision.page.intro='Long fixture title and editor-name reflow example.';
+    return revision;
+  }
+  function createHistoryFixtureAdapter(source,imageRepair){
+    let attempts=0;
+    return Object.freeze({async list(){
+      attempts++;await new Promise(resolve=>setTimeout(resolve,Math.max(0,Number(source.delayMs)||0)));
+      if(source.failAttempts?.includes(attempts))throw new Error('Fixture history could not be loaded.');
+      if(!Array.isArray(source.revisions))throw new Error('Fixture history data is malformed.');
+      const revisions=structuredClone(source.revisions);
+      if(source.includeLongTitle!==false){const longRevision=longTitleHistoryFixture(source);if(longRevision)revisions.push(longRevision);}
+      if(source.includeImageRepair!==false)revisions.push(imageRepair);
+      return revisions;
+    }});
+  }
+  const historyAdapter=createHistoryFixtureAdapter(JSON.parse($('#page-builder-history-fixtures').content.textContent),JSON.parse($('#page-builder-history-image-fixture').content.textContent));
   const uid=()=>globalThis.crypto?.randomUUID?crypto.randomUUID().replaceAll('-',''):Array.from(crypto.getRandomValues(new Uint8Array(16)),value=>value.toString(16).padStart(2,'0')).join('');
   const node=(tag,attributes={},text='')=>{
     const element=document.createElement(tag);
@@ -22,6 +46,7 @@
     if(text)element.textContent=text;return element;
   };
   const setStatus=(message,state='saved')=>{status.textContent=message;status.dataset.state=state;status.setAttribute('aria-live',state==='error'?'assertive':'polite');};
+  const setHistoryStatus=(message,state='saved')=>{historyStatus.textContent=message;historyStatus.dataset.state=state;};
   function blockControl(block,field){
     const section=active?.sections.find(entry=>entry.blocks.some(candidate=>candidate.id===block?.id));
     return section&&block?sections.querySelector(`[data-section-card="${CSS.escape(section.id)}"] [data-block-id="${CSS.escape(block.id)}"][data-field="${field}"]`):null;
@@ -88,6 +113,53 @@
   function clearPreviewError(){
     if(previewErrorField)clearErrorAssociation(previewErrorField,'preview-error');
     previewErrorField=null;previewError.hidden=true;previewError.textContent='';
+  }
+  function renderHistoryList(){
+    historyList.replaceChildren();
+    for(const entry of historyVersions){
+      const item=node('li'),control=node('button',{type:'button',dataset:{historyKey:entry.key},'aria-pressed':String(entry.key===historySelection)});
+      control.append(node('span',{className:'pb-history-primary'},`Revision ${entry.revision} · ${entry.state}`),node('span',{className:'pb-history-secondary'},`${entry.savedAt} · ${entry.editorName}`));
+      item.append(control);historyList.append(item);
+    }
+  }
+  function historyValidationContext(page){
+    let suffix=0,pageId='page-builder-history-fixture',slug='page-builder-history-fixture';
+    while(existingPages.some(entry=>entry.id===pageId||entry.slug===slug)){suffix++;pageId=`page-builder-history-fixture-${suffix}`;slug=`page-builder-history-fixture-${suffix}`;}
+    page.id=pageId;page.slug=slug;
+    return {images,existingPages:[...existingPages,{id:pageId,slug}],currentPageId:pageId};
+  }
+  function selectHistoryRevision(entry){
+    historySelection=entry.key;
+    for(const control of historyList.querySelectorAll('[data-history-key]'))control.setAttribute('aria-pressed',String(control.dataset.historyKey===entry.key));
+    historyDetail.hidden=false;historyRepair.hidden=true;historyRepair.textContent='';
+    historyMetadata.textContent=`Revision ${entry.revision} · Saved ${entry.savedAt} · ${entry.editorName} · ${entry.state}`;
+    try{
+      const page=structuredClone(entry.page),context=historyValidationContext(page);
+      historyFrame.srcdoc=Builder.document(page,{...context,css:cssText});
+    }catch(error){
+      historyFrame.srcdoc='';
+      historyRepair.textContent=`Repair needed. This demonstration revision is invalid and was not rendered: ${error.message}`;
+      historyRepair.hidden=false;
+    }
+  }
+  async function loadHistory(){
+    if(historyLoading)return;
+    const request=++historyRequest;historyLoading=true;historyRetry.hidden=true;historyEmpty.hidden=true;historyDetail.hidden=true;historyList.replaceChildren();
+    setHistoryStatus('Loading demonstration history...','loading');
+    try{
+      const versions=await historyAdapter.list();
+      if(request!==historyRequest||historyPanel.hidden)return;
+      historyVersions=versions;historyLoaded=true;
+      if(!versions.length){historySelection=null;setHistoryStatus('No demonstration revisions are available.','saved');historyEmpty.hidden=false;return;}
+      renderHistoryList();setHistoryStatus(`${versions.length} demonstration revisions loaded. Select a revision to inspect its read-only preview.`,'saved');
+      const selected=versions.find(entry=>entry.key===historySelection);if(selected)selectHistoryRevision(selected);
+    }catch(error){
+      if(request!==historyRequest||historyPanel.hidden)return;
+      historyLoading=false;historyLoaded=false;setHistoryStatus(`Demonstration history failed to load: ${error.message}`,'error');historyRetry.hidden=false;
+    }finally{if(request===historyRequest)historyLoading=false;}
+  }
+  function closeHistory(){
+    historyRequest++;historyLoading=false;historyPanel.hidden=true;historyToggle.setAttribute('aria-expanded','false');historyToggle.focus();
   }
   function showPreviewError(error){
     const message=`Preview unavailable: ${error.message}`,field=fieldForError(error.message);
@@ -271,6 +343,17 @@
   $('#page-form').addEventListener('change',event=>syncField(event.target));
   $('#page-form').addEventListener('submit',event=>event.preventDefault());
   $('#page-title').dataset.field='title';$('#page-slug').dataset.field='slug';$('#page-intro').dataset.field='intro';
+  historyToggle.addEventListener('click',()=>{
+    if(!historyPanel.hidden){closeHistory();return;}
+    historyPanel.hidden=false;historyToggle.setAttribute('aria-expanded','true');
+    if(!historyLoaded)loadHistory();
+  });
+  $('#history-close').addEventListener('click',closeHistory);
+  historyRetry.addEventListener('click',loadHistory);
+  historyList.addEventListener('click',event=>{
+    const control=event.target.closest('[data-history-key]');if(!control)return;
+    const entry=historyVersions.find(version=>version.key===control.dataset.historyKey);if(entry)selectHistoryRevision(entry);
+  });
   draftList.addEventListener('click',event=>{const control=event.target.closest('[data-open-id]');if(control){const record=records.find(entry=>entry.draft.id===control.dataset.openId);if(record)setRecord(record);}});
   $('#new-page').addEventListener('click',()=>{if(canLeave())newPage();});
   $('#refresh-drafts').addEventListener('click',loadDrafts);
