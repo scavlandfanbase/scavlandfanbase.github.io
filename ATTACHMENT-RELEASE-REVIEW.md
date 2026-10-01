@@ -1,6 +1,6 @@
 # Attachment release review — 1 October 2026
 
-Status: draft preparation; no rollout performed. Work is on feature/shared-attachment-review / PR #37. Live Ammo/Armour/Weapons remain independent of this release proposal. Page Builder branch remains separate and unreviewed in this checkout.
+Status: draft preparation; no rollout performed. Work is on feature/shared-attachment-review / PR #37. Live Ammo/Armour/Weapons remain independent of this release proposal. Page Builder remains separate and unmerged; its local checkpoint was independently reviewed.
 
 ## Verified preparation
 
@@ -31,3 +31,9 @@ Repeated post-publication reconciliation could replace retained private verifica
 Publication checks span GitHub and Postgres; they do not provide one cross-service transaction. Non-force Git ref conflict protection remains; a private-state race after the final check is an acknowledged limitation requiring acceptance/mitigation review.
 
 Copilot checkpoint 3ce5f1a now has independent local suite reproduction and focused source review recorded in VS-PAGE-BUILDER-REVIEW.md. It remains separate, local-only and unmerged.
+
+## Release candidate metadata review — 1 October
+
+PR #37 remains open/draft and mergeable at prepared head 4330671. Updated its title/body to describe the completed editor, creation, compatibility and selected-item publication rather than the early transport foundation. Fresh read-only live function source inspection confirms ACTIVE v13, hash fbca9bf558c5ab9a43145593d5035ae56975f1b0b93dc2c27274028ed63b1a4a, with nine existing modules and no Attachment route. Configuration secret/flag values are not available through this source inspection and remain unverified.
+
+No deployment approval has been requested at this checkpoint: genuinely concurrent-session review and configuration acceptance remain unresolved. Local fixture success must not be described as live acceptance.

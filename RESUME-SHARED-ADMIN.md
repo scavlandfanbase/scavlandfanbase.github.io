@@ -1,3 +1,5 @@
+**Attachment release candidate review — 1 October:** PR #37 description now matches completed preparation. Fresh live function source confirms v13 has no Attachment route. Config values/concurrent-session acceptance and coordinated release approval remain unresolved; no deployment. See ATTACHMENT-RELEASE-REVIEW.md.
+
 **Attachment Add workflow — 1 October:** Add dialog now creates privately and retries the same request after lost replies. Combined browser/SQL checks pass for cancel/create/retry/reopen/preview/simulated publish/later edit; full release suite passes. All initial Attachment controls are prepared, but live configuration, concurrent-session review and release acceptance remain. No deployment.
 
 **New Attachment publication backend — 1 October:** creation-marked null-baseline drafts now preview/append only the shared master catalogue; exact public retry is idempotent and collisions/patch changes/protected facts stop publication. Combined handler/SQL preview intent/Git fixture checks and full release suites pass. Add form/browser creation acceptance remain; nothing deployed.
