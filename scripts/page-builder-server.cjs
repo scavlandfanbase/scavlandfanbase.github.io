@@ -1,8 +1,8 @@
 // Single-operator loopback draft service. Never connects to GitHub or Supabase.
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const Pages=require('../page-model.js');
+const Pages=require('../page-model.js'),Builder=require('../page-builder-contract.js');
 const root=path.resolve(__dirname,'..');
-const staticFiles=new Set(['page-builder.html','page-builder.js','page-builder.css','page-model.js','editor-dialog.js','editor-components.js','editor-components.css','data/site-images.json']);
+const staticFiles=new Set(['page-builder.html','page-builder.js','page-builder.css','page-model.js','page-builder-contract.js']);
 const contentTypes={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.gif':'image/gif','.webp':'image/webp'};
 const error=(message,status=400)=>Object.assign(new Error(message),{status});
 function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}={}){
@@ -12,6 +12,15 @@ function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}=
   const actual=fs.realpathSync(directory),actualRoot=fs.realpathSync(root);
   if(actual===actualRoot||actual.startsWith(actualRoot+path.sep))throw error('Private drafts must be outside the website repository.');
   const file=path.join(directory,ammoMode?'ammo.json':itemMode?'items.json':vendorMode?'vendors.json':'pages.json');
+  const imageChoices=()=>{
+    if(vendorMode||itemMode||ammoMode)return [];
+    const inventory=JSON.parse(fs.readFileSync(path.join(root,'data/site-images.json'),'utf8'));
+    return [...new Set(Object.values(inventory.categories||{}).flatMap(category=>category.images||[]))].filter(name=>{
+      if(!name.startsWith('images/')||!Pages.image(name))return false;
+      const target=path.resolve(root,name),imageRoot=path.join(root,'images');
+      return target.startsWith(imageRoot+path.sep)&&fs.existsSync(target)&&fs.statSync(target).isFile()&&fs.realpathSync(target).startsWith(fs.realpathSync(imageRoot)+path.sep);
+    });
+  };
   const Items=ammoMode?require('../ammo-model.cjs'):itemMode?require('../item-model.cjs'):null;
   const Vendors=vendorMode?require('../vendor-model.cjs'):null;
   const loadData=name=>JSON.parse(fs.readFileSync(path.join(root,'data',name+'.json'),'utf8'));
@@ -49,26 +58,22 @@ function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}=
         :Vendors.mutate(state,body,constraints);
       write(result.state);return result;
     }
-    if(!body||!['create','save','publish','delete'].includes(body.action))throw error('Unknown page action.');
+    if(!body||!['create','save','delete'].includes(body.action))throw error('Unknown page action.');
     let record=state.pages.find(r=>r.draft.id===body.id);
     const now=new Date().toISOString();
     if(body.action==='create'){
-      const draft=Pages.validate(body.page);
+      const draft=Builder.validate(body.page,{images:imageChoices()});
       if(state.pages.length>=100)throw error('This foundation supports up to 100 custom pages.');
       if(state.pages.some(r=>r.draft.id===draft.id||r.draft.slug===draft.slug))throw error('A page with this address already exists.',409);
-      record={draft,revision:1,updatedAt:now,published:null,publishedAt:null,publishedRevision:null};state.pages.push(record);
+      record={draft,revision:1,updatedAt:now};state.pages.push(record);
     }else{
       if(!record)throw error('This page no longer exists. Reload saved pages.',404);
       if(body.revision!==record.revision)throw error('This page changed in another window. Your work is still on screen. Copy any text you need, then reload saved pages.',409);
       if(body.action==='save'){
-        const draft=Pages.validate(body.page);
+        const draft=Builder.validate(body.page,{images:imageChoices()});
         if(draft.id!==body.id)throw error('Page identity cannot change.');
-        if(record.published&&record.published.slug!==draft.slug)throw error('The address of a published page is protected. Duplicate the page to use a new address.');
         if(state.pages.some(r=>r!==record&&r.draft.slug===draft.slug))throw error('A page with this address already exists.',409);
         record.draft=draft;record.revision++;record.updatedAt=now;
-      }else if(body.action==='publish'){
-        if(body.confirmSlug!==record.draft.slug)throw error('Confirm the page address before publishing.');
-        Pages.validate(record.draft);record.published=structuredClone(record.draft);record.revision++;record.publishedRevision=record.revision;record.publishedAt=now;
       }else{state.pages=state.pages.filter(r=>r!==record);record=null;}
     }
     write(state);return record;
@@ -80,10 +85,11 @@ function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}=
     require('../vendor-listings.js').registry({vendors:[],entities});
     return {entities,sources,settings:loadData('verification-settings')};
   }
-  return {read,mutate,catalog};
+  return {read,mutate,catalog,imageChoices};
 }
 function createServer({directory,vendorMode=false,itemMode=false,ammoMode=false,attachmentMode=false,token=crypto.randomBytes(32).toString('hex')}={}){
   if([itemMode,vendorMode,ammoMode,attachmentMode].filter(Boolean).length>1)throw error('Choose one editor mode.');
+  const pageBuilderMode=!vendorMode&&!itemMode&&!ammoMode&&!attachmentMode;
   const store=createStore(directory||(ammoMode?path.resolve(root,'../../private-state/ammo-builder'):(itemMode||attachmentMode)?path.resolve(root,'../../private-state/items-builder'):directory),{vendorMode,itemMode:itemMode||attachmentMode,ammoMode});
   const assets=attachmentMode?new Set(['attachment-builder.html','attachment-builder.js','attachment-builder.css','verification.js','page-builder.css','editor-dialog.js','editor-components.js','editor-components.css']):ammoMode?new Set(['ammo-builder.html','ammo-builder.js','ammo-builder.css','data/site-images.json','verification.js','page-builder.css','editor-dialog.js','editor-components.js','editor-components.css']):itemMode?new Set(['draft-persistence.js','production-editor.js','production-editor.css','items-builder.html','items-builder.js','items-builder.css','attachment-model.js','verification.js','page-builder.css','editor-dialog.js','editor-components.js','editor-components.css','data/site-images.json']):vendorMode?new Set(['draft-persistence.js','production-editor.js','production-editor.css','vendor-builder.html','vendor-builder.js','vendor-builder.css','vendor-workspace.js','vendor-inventory.js','vendor-legacy-review.js','attachment-model.js','vendor-listings.js','verification.js','page-builder.css','editor-dialog.js','editor-components.js','editor-components.css','data/site-images.json','data/factions.json']):staticFiles;
   const server=http.createServer(async(req,res)=>{
@@ -112,7 +118,7 @@ function createServer({directory,vendorMode=false,itemMode=false,ammoMode=false,
           return send(200,{catalogue:store.read(),categories:Items.categories,factFields:Items.factFields,settings:load('verification-settings')});
         }
         if(url.pathname==='/api/vendor-catalog')return req.method==='GET'?send(200,store.catalog()):send(405,{error:'Read-only catalogue.'});
-        if(req.method==='GET')return send(200,store.read());
+        if(req.method==='GET')return send(200,pageBuilderMode?{...store.read(),imageChoices:store.imageChoices()}:store.read());
         if(req.method!=='POST')return send(405,{error:'Unsupported operation.'});
         if(req.headers.origin!=='http://'+expected||!req.headers['content-type']?.startsWith('application/json'))return send(403,{error:'Local page editor requests only.'});
         let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>1024*1024)throw error('This page is too large.',413);}
@@ -120,13 +126,8 @@ function createServer({directory,vendorMode=false,itemMode=false,ammoMode=false,
         return send(200,{record:store.mutate(body)});
       }
       if(req.method!=='GET')return send(405,{error:'Unsupported operation.'});
-      if(!vendorMode&&!itemMode&&!ammoMode&&!attachmentMode&&url.pathname.startsWith('/pages/')){
-        const slug=name.slice(6),record=store.read().pages.find(r=>r.published?.slug===slug);
-        if(!record)return send(404,'Page not published.','text/plain');
-        return send(200,Pages.document(record.published),'text/html; charset=utf-8');
-      }
       const asset=name||(attachmentMode?'attachment-builder.html':ammoMode?'ammo-builder.html':itemMode?'items-builder.html':vendorMode?'vendor-builder.html':'page-builder.html');
-      if(!assets.has(asset)&&!Pages.image(asset))return send(404,'Not found.','text/plain');
+      if(!assets.has(asset)&&!(pageBuilderMode?store.imageChoices().includes(asset):Pages.image(asset)))return send(404,'Not found.','text/plain');
       const file=path.resolve(root,asset);
       if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()||!fs.realpathSync(file).startsWith(fs.realpathSync(root)+path.sep))return send(404,'Not found.','text/plain');
       return send(200,fs.readFileSync(file),contentTypes[path.extname(file).toLowerCase()]||'application/octet-stream');
