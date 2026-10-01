@@ -2,6 +2,7 @@
   const Builder=window.ScavPageBuilder;
   const live=window.ScavPageBackend;
   const $=selector=>document.querySelector(selector);
+  if(live){document.title='Page Builder | SCAVLAND';$('.pb-local-tag').textContent='PRIVATE DRAFTS';$('.pb-notice').textContent='Drafts save privately to the Admin backend. Save Draft does not publish. The Owner can review a saved revision and publish it through Publish and status. Export HTML downloads a file without publishing.';}
   const status=$('#status'),retry=$('#retry'),draftList=$('#draft-list'),sections=$('#section-list');
   const titleInput=$('#page-title'),slugInput=$('#page-slug'),introInput=$('#page-intro'),saveButton=$('#save-draft');
   const preview=$('#preview-frame'),previewError=$('#preview-error');
@@ -489,7 +490,7 @@
       existingPages=records.map(entry=>({id:entry.draft.id,slug:entry.draft.slug}));
       renderEditor();setStatus(`${live?'Saved privately':'Saved locally'} at revision ${revision}. This draft is not published.`,'saved');
     }catch(error){reportError(error,{prefix:'Save failed: ',suffix:' Your edits are still on screen; the last saved draft was preserved.',focusTarget:saveButton});}
-    finally{saving=false;saveButton.disabled=!active||publicationLock;renderPublication();}
+    finally{saving=false;saveButton.disabled=!active||publicationLock;$('#export-html').disabled=!active||publicationLock;$('#add-section').disabled=!active||publicationLock;renderPublication();}
   }
   async function deleteDraft(){
     if(!active)return;
