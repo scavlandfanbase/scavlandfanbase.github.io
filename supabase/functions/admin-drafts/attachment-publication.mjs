@@ -1,4 +1,5 @@
 // Selected master-only preview planner. No live publish route in this checkpoint.
+import {prepareAttachmentEdit} from './attachment-draft.mjs';
 import {validateAttachmentCompatibility} from './attachment-compatibility.mjs';
 import {publicValue,same,fail} from './core.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
@@ -9,6 +10,11 @@ const own=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(re
 const published=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:key==='verification'?publicValue({verification:record[key]}).verification:publicValue(record[key])}:{})});
 // Reconcile a confirmed public result before the next private edit. Retain review history.
 export async function reconcileAttachment(saved,source,settings){
+ if(saved?.creation&&saved.before===null){
+  if(saved.itemId!==source?.id||!same(publicValue(saved.record),publicValue(source)))fail('New Attachment identity conflicts with public data. Review before editing.',409);
+  if(saved.sourceDigest!==await legacyDigest({source:null,settings}))fail('The patch changed. Review before editing.',409);
+  return {...structuredClone(saved),creation:false,before:structuredClone(source),sourceDigest:await legacyDigest({source,settings}),baselineHistory:[...(saved.baselineHistory||[]),null]};
+ }
  if(!saved||saved.itemId!==source?.id||saved.before?.id!==source.id||saved.record?.id!==source.id)fail('Item identity changed. Reload before editing.',409);
  if(saved.sourceDigest!==await legacyDigest({source:saved.before,settings}))fail('The patch changed. Review before editing.',409);
  const result=structuredClone(saved),allKeys=new Set([...Object.keys(saved.before),...Object.keys(saved.record),...Object.keys(source)]);
@@ -28,8 +34,24 @@ export async function reconcileAttachment(saved,source,settings){
  }
  return result;
 }
-export async function planAttachmentPublication(saved,documents,{settings,legacyDrafts,permissions=[]}={}){
+export async function planAttachmentPublication(saved,documents,{settings,legacyDrafts,permissions=[],images=[]}={}){
  if(!permissions.includes('items_edit'))fail('Items editing permission is required.',403);
+ if(saved?.creation&&saved.before===null){
+  const record=saved.record;
+  if(saved.category!=='attachments'||saved.itemId!==record?.id||record.contentType!=='Attachment'||!/^attachment-[0-9a-f-]{36}$/i.test(record.id))fail('Invalid new Attachment identity.');
+  if(!Array.isArray(legacyDrafts)||!settings)fail('Load current patch and existing Items work.',503);
+  if(saved.sourceDigest!==await legacyDigest({source:null,settings}))fail('The patch changed. Review before publishing.',409);
+  if(Object.keys(record).some(key=>!['id',...fields].includes(key))||!same(record.classification,['attachment']))fail('Protected new Attachment facts changed.');
+  const inputFields=Object.fromEntries(['name','description','notes','image','estimatedPrice','maxStack','attachmentType','compatibleWeaponIds'].filter(key=>Object.hasOwn(record,key)).map(key=>[key,record[key]]));
+  prepareAttachmentEdit({action:'edit-attachment',confirmId:record.id,expectedVersion:1,fields:inputFields},{actor:saved.actor,permissions,settings,images,weapons:documents['data/weapons.json']?.data,version:1,savedDraft:{...saved,record:{...record,archived:false}}});
+  for(const kind of ['items','weapons','armour','ammo'])if(!Array.isArray(documents['data/'+kind+'.json']?.data))fail('Load complete canonical catalogues before publishing.',503);
+  for(const kind of ['weapons','armour','ammo'])if(documents['data/'+kind+'.json'].data.some(r=>r.id===record.id))fail('New Attachment identity is already used by another category.',409);
+  const rows=documents['data/items.json'].data,matches=rows.filter(r=>r.id===record.id);
+  if(matches.length>1||matches.length===1&&!same(publicValue(matches[0]),publicValue(record)))fail('New Attachment identity conflicts with public data.',409);
+  if(legacyItemBlockers(record.id,matches[0],legacyDrafts).length)fail('Existing Items work must be preserved before publishing.',409);
+  const output=structuredClone(documents['data/items.json']);if(!matches.length)output.data.push(publicValue(record));
+  return {'data/items.json':output};
+ }
  if(!saved||saved.category!=='attachments'||saved.itemId!==saved.before?.id||saved.itemId!==saved.record?.id||saved.record.contentType!=='Attachment')fail('Load the saved Attachment before previewing.');
  if(!Array.isArray(legacyDrafts)||!settings)fail('Load current patch and existing Items work.',503);
  if(await legacyDigest({source:saved.before,settings})!==saved.sourceDigest)fail('The patch changed. Review the draft before publishing.',409);

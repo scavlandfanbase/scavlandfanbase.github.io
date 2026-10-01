@@ -36,6 +36,16 @@ const assert=require('node:assert/strict');
  await assert.rejects(plan(saved,conflict,context),e=>e.status===409);
  await assert.rejects(plan(saved,{...documents,'data/weapons.json':{data:[{id:'stable'}]}},context),e=>e.status===409);
  await assert.rejects(plan({...saved,record:{...saved.record,effects:{invented:1}}},documents,context),/Protected/);
+ const {prepareAttachmentCreation}=await import('../supabase/functions/admin-drafts/attachment-create.mjs');
+ const creationDocs={...documents,'data/weapons.json':{data:[]},'data/armour.json':{data:[]},'data/ammo.json':{data:[]}};
+ const newDraft=await prepareAttachmentCreation({action:'create-attachment',confirmCreation:true,fields:{name:'New fixture'}},{...context,newItemId:'attachment-12345678-1234-4123-8123-123456789abc',documents:creationDocs,privateItemIds:[]});
+ const newOutput=await plan(newDraft,creationDocs,context);assert.equal(newOutput['data/items.json'].data.length,3);assert.equal(newOutput['data/items.json'].data[2].name,'New fixture');assert(!JSON.stringify(newOutput).includes('private-admin'));
+ assert.deepEqual(await plan(newDraft,{...creationDocs,...newOutput},context),newOutput,'creation retry does not duplicate');
+ const rebased=await reconcileAttachment(newDraft,newOutput['data/items.json'].data[2],settings);assert.equal(rebased.creation,false);assert.equal(rebased.before.id,newDraft.itemId);assert.deepEqual(rebased.record.verification,newDraft.record.verification);
+ await assert.rejects(plan(newDraft,{...creationDocs,'data/weapons.json':{data:[{id:newDraft.itemId}]}},context),e=>e.status===409);
+ const newConflict=structuredClone(newOutput);newConflict['data/items.json'].data[2].name='Conflicting public record';await assert.rejects(plan(newDraft,{...creationDocs,...newConflict},context),e=>e.status===409);
+ await assert.rejects(plan({...newDraft,record:{...newDraft.record,effects:{invented:1}}},creationDocs,context),/Protected/);
+ await assert.rejects(plan(newDraft,creationDocs,{...context,settings:{current_patch_id:'changed'}}),e=>e.status===409);
  const {createAttachmentPublisher}=await import('../supabase/functions/admin-drafts/attachment-publication.mjs');
  let writes=0,intent=null,live={...context,version:1,savedDraft:saved,documents};
  const fetcher=async(url,options={})=>{

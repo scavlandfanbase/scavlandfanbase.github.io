@@ -197,3 +197,9 @@ Local PGlite tests pass for retained identity after lost-response retry, actor/c
 Connected create action under the same feature/auth/items_edit gates. Server allocation and exact receipt lookup precede trusted creation preparation; receipt-only SQL save returns identity/version. Exact create retry returns original saved version and changed-command reuse is refused. Allocation RPC returns current shared private identity inspection. List combines public candidates with private-only saved Attachments; load permits a creation-marked saved record without public source. Subsequent edit validates null-baseline patch digest until publication integration.
 
 Combined handler/PGlite test verifies create/save/load/retry, changed-command refusal and no public insertion. New-record projection is still unsupported and safely refused; Add UI is absent. Full release regression run recorded before commit. No deployment/migration/flags changed.
+
+## New-record preview and publication backend — 1 October
+
+Creation-marked null-baseline drafts now validate known facts/approved images/Weapon references against current source, require complete identity catalogues and current patch, refuse specialist/public/legacy conflicts and project a single master append. Identical public retry returns the same output rather than duplicating. No vendor writes, invented effects or private history projection. Confirmed identical public output can become a normal baseline for later edits, retaining private history.
+
+Planner tests cover append/retry, collision, patch drift, protected fields and post-publication rebase. Combined actual handler/PGlite intent with simulated Git verifies new-record preview, explicit publish, one master append, private identity omission and non-force update. Full npm run test:attachments passes. Add UI and browser creation workflow remain next; no production changes.
