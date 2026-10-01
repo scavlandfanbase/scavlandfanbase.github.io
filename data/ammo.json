@@ -16,7 +16,12 @@
         "file": "evidence-inbox/ammo/special-fmj-ammo__stats__2026-09-16_115812.png",
         "status": "screenshot-verified"
       },
-      "image": "images/ammo/special-fmj-ammo-icon.png"
+      "image": "images/ammo/special-fmj-ammo-icon.png",
+      "verification": {
+        "schemaVersion": 2,
+        "decision": "unverified",
+        "verified_patch_id": null
+      }
     },
     {
       "id": "high-caliber-rifle-ammo-high-caliber-rifle-hp-ammo",
