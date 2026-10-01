@@ -1,3 +1,7 @@
+## 2026-10-01 — VS model handoff independently reviewed
+
+Exact c5b19d1 independently passes reported Page Builder/Items/Vendor/Admin suites. Found/reproduced one null-required-image validation gap that renders a broken image at /. Focused VS follow-up requested; keep local-only branch separate. See VS-PAGE-BUILDER-MODEL-REVIEW.md. No merge or deployment.
+
 ## 2026-10-01 — Evidence Review screen preparation
 
 Separate feature/evidence-review-backend worktree now has audited SQL, caller-JWT adapter, paginated queue and review screen with history/retry/stale recovery. Hub/backend are connected behind disabled switches; local Evidence and existing Admin tests pass. No live changes. EVIDENCE-REVIEW-CHECKPOINT.md records rollout dependencies. Attachment PR #37 and VS Page Builder remain separate; reconcile shared Hub/backend files during release integration.
