@@ -19,6 +19,13 @@
     revision.page.intro='Long fixture title and editor-name reflow example.';
     return revision;
   }
+  function historicalMetadataRepairFixtures(source){
+    if(!source.revisions?.length)return [];
+    const malformed=structuredClone(source.revisions[0]),reserved=structuredClone(source.revisions[0]);
+    malformed.key='demo-invalid-identity';malformed.revision=0;malformed.savedAt='2026-09-05T10:00:00.000Z';malformed.editorName='Fixture metadata editor';malformed.state='Archived';malformed.page.id='invalid page identity';malformed.page.title='Fixture with malformed identity';
+    reserved.key='demo-reserved-address';reserved.revision=0;reserved.savedAt='2026-09-03T10:00:00.000Z';reserved.editorName='Fixture metadata editor';reserved.state='Archived';reserved.page.slug='items';reserved.page.title='Fixture with protected address';
+    return [malformed,reserved];
+  }
   function createHistoryFixtureAdapter(source,imageRepair){
     let attempts=0;
     return Object.freeze({async list(){
@@ -27,6 +34,7 @@
       if(!Array.isArray(source.revisions))throw new Error('Fixture history data is malformed.');
       const revisions=structuredClone(source.revisions);
       if(source.includeLongTitle!==false){const longRevision=longTitleHistoryFixture(source);if(longRevision)revisions.push(longRevision);}
+      if(source.includeMetadataRepairs!==false)revisions.push(...historicalMetadataRepairFixtures(source));
       if(source.includeImageRepair!==false)revisions.push(imageRepair);
       return revisions;
     }});
@@ -123,10 +131,7 @@
     }
   }
   function historyValidationContext(page){
-    let suffix=0,pageId='page-builder-history-fixture',slug='page-builder-history-fixture';
-    while(existingPages.some(entry=>entry.id===pageId||entry.slug===slug)){suffix++;pageId=`page-builder-history-fixture-${suffix}`;slug=`page-builder-history-fixture-${suffix}`;}
-    page.id=pageId;page.slug=slug;
-    return {images,existingPages:[...existingPages,{id:pageId,slug}],currentPageId:pageId};
+    return {images,existingPages:[{id:page.id,slug:page.slug}],currentPageId:page.id};
   }
   function selectHistoryRevision(entry){
     historySelection=entry.key;

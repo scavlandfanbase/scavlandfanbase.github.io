@@ -212,10 +212,10 @@ async function main(){
       await activate(historyToggle);
       assert.equal(await historyToggle.getAttribute('aria-expanded'),'true');assert(await focused(historyToggle));
       await page.locator('#history-status').getByText(/Loading demonstration history/).waitFor();
-      await page.locator('#history-status').getByText(/5 demonstration revisions loaded/).waitFor();
+      await page.locator('#history-status').getByText(/7 demonstration revisions loaded/).waitFor();
       assert.match(await page.locator('#history-heading').innerText(),/Version history - demonstration/);
       assert.match(await page.locator('#history-panel').innerText(),/Fixture records only/);
-      assert.equal(await page.locator('#history-list button').count(),5);
+      assert.equal(await page.locator('#history-list button').count(),7);
       assert.equal(await page.getByRole('button',{name:/Restore|Publish|Approve|Delete version/}).count(),0);
       const revisionThree=page.locator('#history-list button[data-history-key="demo-v3"]');await activate(revisionThree);
       assert(await focused(revisionThree));
@@ -236,6 +236,15 @@ async function main(){
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Long history title/editor name caused horizontal overflow at 320px.');
       assert(await page.locator('#history-list').evaluate(list=>list.scrollWidth<=list.clientWidth),'History list overflowed at 320px.');
       await page.setViewportSize({width:1440,height:1000});
+      assert.notEqual(historyFixtureSource.revisions[0].page.slug,activeBeforeHistory.slug);
+      await activate(page.locator('#history-list button[data-history-key="demo-invalid-identity"]'));
+      await page.locator('#history-repair').getByText(/Existing page identity is invalid/).waitFor();
+      assert.equal(await page.locator('#history-frame').evaluate(frameElement=>frameElement.srcdoc),'');
+      assert.equal(historyFixtureSource.revisions[0].page.id,'demo-history-page');
+      assert.equal(historyFixtureSource.revisions[0].page.slug,'demo-history-page');
+      await activate(page.locator('#history-list button[data-history-key="demo-reserved-address"]'));
+      await page.locator('#history-repair').getByText(/System page names are protected/).waitFor();
+      assert.equal(await page.locator('#history-frame').evaluate(frameElement=>frameElement.srcdoc),'');
       await activate(page.locator('#history-list button[data-history-key="demo-v1-repair"]'));
       await page.locator('#history-repair').getByText(/Repair needed/).waitFor();
       assert.equal(await page.locator('#history-frame').evaluate(frameElement=>frameElement.srcdoc),'');
@@ -415,7 +424,7 @@ async function main(){
       const selectedDraft=page.getByRole('button',{name:/Retry fixture/}),savedRevision=await page.locator('#save-revision').innerText();
       assert.equal(await selectedDraft.getAttribute('aria-current'),'true');
       await activate(page.getByRole('button',{name:'Version history - demonstration'}));
-      await page.locator('#history-status').getByText(/5 demonstration revisions loaded/).waitFor();
+      await page.locator('#history-status').getByText(/7 demonstration revisions loaded/).waitFor();
       await activate(page.locator('#history-list button[data-history-key="demo-v2"]'));
       await page.locator('#history-frame').scrollIntoViewIfNeeded();
       await page.frameLocator('#history-frame').getByRole('heading',{name:'Fixture Field Notes - archived'}).waitFor();
@@ -479,7 +488,7 @@ async function main(){
         await page.getByText('Saved locally at revision 5. This draft is not published.').waitFor();
         const repaired=(await (await fetch(base+'/api/pages',{headers})).json()).pages[0];assert.equal(repaired.revision,5);assert.equal(repaired.draft.sections[0].blocks[0].image,approvedImage);
       }
-      const emptyHistoryPage=await historyScenarioPage({...historyFixtureSource,revisions:[],failAttempts:[],includeLongTitle:false,includeImageRepair:false});
+      const emptyHistoryPage=await historyScenarioPage({...historyFixtureSource,revisions:[],failAttempts:[],includeLongTitle:false,includeMetadataRepairs:false,includeImageRepair:false});
       await emptyHistoryPage.getByRole('button',{name:'Version history - demonstration'}).click();
       assert.equal(await emptyHistoryPage.locator('#history-status').getAttribute('data-state'),'loading');
       await emptyHistoryPage.locator('#history-status').getByText('No demonstration revisions are available.').waitFor();
@@ -488,7 +497,7 @@ async function main(){
       assert(await focused(emptyHistoryPage.getByRole('button',{name:'Version history - demonstration'})));
       await emptyHistoryPage.close();
       const localDraftIdsBeforeHistory=(await (await fetch(base+'/api/pages',{headers})).json()).pages.map(entry=>entry.draft.id);
-      const retryHistoryPage=await historyScenarioPage({...historyFixtureSource,failAttempts:[1],includeLongTitle:false,includeImageRepair:false});
+      const retryHistoryPage=await historyScenarioPage({...historyFixtureSource,failAttempts:[1],includeLongTitle:false,includeMetadataRepairs:false,includeImageRepair:false});
       await retryHistoryPage.getByRole('button',{name:'Version history - demonstration'}).click();
       const activateHistory=async locator=>{await locator.focus();await retryHistoryPage.keyboard.press('Enter');};
       assert.equal(await retryHistoryPage.locator('#history-status').getAttribute('data-state'),'loading');
