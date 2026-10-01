@@ -1,3 +1,5 @@
+> Superseded preparation status: approved rollout is now deployed. Read ADMIN-ROLLOUT-20261001.md for live versions, migrations, preserved counts and remaining acceptance. The historical preparation evidence below is retained.
+
 # Admin prepublication report — combined candidate, 1 October 2026
 
 ## Review decision

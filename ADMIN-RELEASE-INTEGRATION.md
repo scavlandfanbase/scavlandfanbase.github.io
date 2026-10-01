@@ -1,3 +1,5 @@
+> Superseded preparation status: approved rollout is now deployed. Read ADMIN-ROLLOUT-20261001.md for live versions, migrations, preserved counts and remaining acceptance. The historical preparation evidence below is retained.
+
 # Combined admin release candidate — 1 October 2026
 
 Separate feature/admin-release-integration combines Attachment checkpoint d78ca09 and Evidence checkpoint ad0770c. Original branches and VS worktree remain untouched. This is local release preparation; main is unchanged.

@@ -1,3 +1,5 @@
+> Superseded preparation status: approved rollout is now deployed. Read ADMIN-ROLLOUT-20261001.md for live versions, migrations, preserved counts and remaining acceptance. The historical preparation evidence below is retained.
+
 # Attachment deployment manifest — prepared 1 October 2026
 
 This is a review checklist for draft PR #37, not deployment authorization. Attachments remain disabled. Page Builder is a separate branch and is excluded.
