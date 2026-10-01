@@ -1,3 +1,7 @@
+## 2026-10-01 — Consolidated prepublication package
+
+Machine-readable Attachment package verification now checks full backend imports/assets, matching cache versions, disabled frontend gate and no game-data diff. Full Attachment/Admin release suites, shared catalogue/item/SQL/import/recovery tests, Items/Vendor browser suites and Dashboard suite passed. Real PostgreSQL concurrency separately passed twelve scenarios. Current release scope remains Attachments plus existing-editor preservation; Page Builder production and other planned Hub tools are not made live by this release. Read ADMIN-PREPUBLICATION-REPORT.md for the consolidated scope, evidence and release dependencies.
+
 ## 2026-10-01 — Real concurrent-session acceptance
 
 Completed twelve independently connected PostgreSQL 17.11/READ COMMITTED scenarios with observed advisory-lock blocking, stale/changed-request refusal, rollback, exact retry and final-count assertions. npm run test:attachment-concurrency is repeatable against an isolated loopback cluster. Fixture databases were dropped and portable server stopped; no production writes or system service. This supersedes the earlier unavailable-local-Postgres checkpoint. Live Auth/configuration and coordinated publication remain pending.

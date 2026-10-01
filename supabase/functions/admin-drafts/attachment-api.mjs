@@ -1,4 +1,4 @@
-// Preparation-only adapter. Production routing/transport are deliberately unregistered.
+// Registered preparation adapter; production use requires the reviewed release gate.
 import {prepareAttachmentDecision,prepareAttachmentEdit,prepareAttachmentAction} from './attachment-draft.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
 import {fail} from './core.mjs';

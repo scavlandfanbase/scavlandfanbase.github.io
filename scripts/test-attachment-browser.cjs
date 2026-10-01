@@ -26,7 +26,7 @@ const {chromium}=require('playwright');
  await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.attachmentType,'Scope');
  await frame.locator('#item-name').fill('Renamed');await Promise.all([page.waitForResponse(r=>r.url().endsWith('/admin-drafts')&&r.request().postDataJSON().action==='save'),frame.locator('#save').click()]);await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.name,'Renamed');
  loseReply=true;await frame.locator('#item-name').fill('Lost-response edit');await frame.locator('#save').click();
- await frame.locator('#retry').waitFor();const savedVersion=version,calls=prepareCalls;
+ await frame.locator('#retry:not(:disabled)').waitFor();const savedVersion=version,calls=prepareCalls;
  assert.equal(await frame.locator('#item-name').inputValue(),'Lost-response edit');
  await Promise.all([page.waitForResponse(r=>r.url().endsWith('/admin-drafts')&&r.request().postDataJSON().action==='save'),frame.locator('#retry').click()]);await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(version,savedVersion);assert.equal(prepareCalls,calls);
  denySave=true;await frame.locator('#item-name').fill('Permission test');await frame.locator('#save').click();await frame.locator('#status').filter({hasText:'Permission revoked'}).waitFor();

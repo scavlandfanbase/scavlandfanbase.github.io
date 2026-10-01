@@ -39,3 +39,9 @@ Run `npm run test:attachments` from the reviewed checkout. It enables combined b
 ## Repeatable database inventory
 
 Run supabase/proposals/attachment-readiness.sql read-only before migrations and again after all three. Before installation, all prerequisites must be present and Attachment objects absent; any partial installation requires inspection before rerunning CREATE proposals. Afterwards require all four tables with RLS and no direct SELECT/INSERT/UPDATE/DELETE for anon, authenticated or service_role; all six exact RPCs with no anon execution; authenticated execution only on draft/list, and service execution on preparation/receipt/preview/allocation. Require all four guards enabled (O). Inspect function settings against the reviewed proposals. This inventory is not a concurrency test or configuration/activation approval.
+
+## Machine-readable package check
+
+scripts/attachment-rollout-manifest.cjs walks the complete local backend import graph and relevant Hub/category assets, records SHA256/byte counts, verifies matching Attachment cache versions and disabled frontend activation, and refuses game-data changes in the release diff. It generates a review inventory only; readyForLiveActivation remains false until reviewed release acceptance. Generate a fresh inventory from the exact approved clean commit before deployment. The complete Attachment release runner now checks this inventory before its suites. PostgreSQL concurrency runs separately using npm run test:attachment-concurrency and a disposable local cluster.
+
+Independent PostgreSQL concurrency acceptance now passes as documented in ATTACHMENT-CONCURRENCY-REVIEW.md. This supersedes the earlier local-concurrency limitation; live Supabase authentication/configuration and the cross-service publication limitation remain distinct gates.
