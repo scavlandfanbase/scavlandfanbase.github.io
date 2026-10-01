@@ -1,3 +1,7 @@
+## Archived Page Builder history access — 1 October 2026
+
+Read-only archived-page history access and embedded preview/blur corrections pass browser regressions. No new backend actions or restoration/publication controls. Release and live read-only acceptance are next; see PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Page Builder live release — 1 October 2026
 
 PR #42 and Pages deployment succeeded; authenticated private save, retained history, saved-revision preview and archive passed live acceptance. Zero test publications. Focused acceptance UI corrections and regressions are complete. See PAGE-BUILDER-BACKEND-CHECKPOINT.md for release identities, recovery boundaries and first genuine publication verification.

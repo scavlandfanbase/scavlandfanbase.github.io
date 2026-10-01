@@ -21,7 +21,7 @@
    for(let batch=0;batch<100;batch++){const list=await call({action:'list',...(after?{after}:{})});summaries.push(...list.pages);if(!list.nextCursor)break;if(list.nextCursor===after||batch===99)throw Error('Page list is incomplete.');after=list.nextCursor;}
    const source=await call({action:'source'});
    canPublish=source.capabilities?.publish===true;
-   return {pages:summaries.filter(p=>!p.archived).map(p=>({draft:{id:p.pageId,title:p.title,slug:p.slug,intro:'',sections:[]},revision:p.version,summary:true})),imageChoices:source.imageChoices,existingPages:source.existingPages};
+   return {pages:summaries.filter(p=>!p.archived).map(p=>({draft:{id:p.pageId,title:p.title,slug:p.slug,intro:'',sections:[]},revision:p.version,summary:true})),archivedPages:summaries.filter(p=>p.archived),imageChoices:source.imageChoices,existingPages:source.existingPages};
   }
   const body=JSON.parse(options.body);let command;
   if(body.action==='create'){const {id,...page}=body.page;command={action:'create',page};}
