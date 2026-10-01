@@ -86,4 +86,24 @@ create trigger shared_item_attachment_overlap before insert on scavland_item_dra
  for each row execute function scavland_item_drafts.guard_attachment_overlap();
 create trigger attachment_shared_item_overlap before insert on scavland_item_drafts.attachment_versions
  for each row execute function scavland_item_drafts.guard_attachment_overlap();
+create function public.scavland_attachment_receipt(p_actor uuid,p_item text,p_request uuid,p_command jsonb)
+returns jsonb language plpgsql security definer set search_path='' as $$
+declare receipt scavland_item_drafts.attachment_prepared;
+begin
+ if p_actor is null or p_item is null or p_request is null or jsonb_typeof(p_command) is distinct from 'object' then raise sqlstate '22023' using message='Invalid preparation lookup.';end if;
+ select * into receipt from scavland_item_drafts.attachment_prepared where request_id=p_request;
+ if not found then return null;end if;
+ if receipt.actor<>p_actor or receipt.item_id<>p_item or receipt.command<>p_command then raise sqlstate 'PT409' using message='Request reused with different entries.';end if;
+ return to_jsonb(receipt);
+end $$;
+revoke all on function public.scavland_attachment_receipt(uuid,text,uuid,jsonb) from public,anon,authenticated;
+grant execute on function public.scavland_attachment_receipt(uuid,text,uuid,jsonb) to service_role;
+create function public.scavland_prepare_attachment(p_actor uuid,p_item text,p_request uuid,p_command jsonb,p_payload jsonb,p_legacy integer)
+returns jsonb language sql security invoker set search_path='' as $$select scavland_item_drafts.prepare_attachment(p_actor,p_item,p_request,p_command,p_payload,p_legacy);$$;
+revoke all on function public.scavland_prepare_attachment(uuid,text,uuid,jsonb,jsonb,integer) from public,anon,authenticated;
+grant execute on function public.scavland_prepare_attachment(uuid,text,uuid,jsonb,jsonb,integer) to service_role;
+create function public.scavland_attachment_draft(p_action text,p_item text,p_request uuid default null)
+returns jsonb language sql security invoker set search_path='' as $$select scavland_item_drafts.attachment_access(p_action,p_item,p_request);$$;
+revoke all on function public.scavland_attachment_draft(text,text,uuid) from public,anon;
+grant execute on function public.scavland_attachment_draft(text,text,uuid) to authenticated;
 commit;

@@ -45,5 +45,39 @@ const {PGlite}=require('@electric-sql/pglite');
  for(const id of [competingA,competingB])await run('service','select scavland_item_drafts.prepare_attachment($1,$2,$3,$4,$5,$6) as v',[actor,'stable',id,{action:'edit-attachment'},next,1]);
  assert.equal((await access(actor,'save','stable',competingA)).version,3);
  await assert.rejects(access(actor,'save','stable',competingB),e=>e.code==='PT409');
+ const {createAttachmentTransport}=await import('../supabase/functions/admin-drafts/attachment-transport.mjs');
+ const {legacyDigest}=await import('../supabase/functions/admin-drafts/legacy-item-review.mjs');
+ // Replace the deliberately malformed legacy SQL fixture with a real catalogue.
+ await db.exec('delete from scavland_drafts.versions');
+ const source={id:'api-item',name:'Existing',classification:['item']},settings={schemaVersion:1,current_patch_id:'fixture'};
+ const latest={documents:{'data/items.json':{data:[source]}},settings,images:[]};
+ const rpcArguments={scavland_attachment_receipt:['p_actor','p_item','p_request','p_command'],scavland_prepare_attachment:['p_actor','p_item','p_request','p_command','p_payload','p_legacy'],scavland_attachment_draft:['p_action','p_item','p_request']};
+ const fetcher=async(url,options)=>{
+  if(url.endsWith('/auth/v1/user'))return Response.json({id:actor});
+  const name=url.split('/').at(-1),args=JSON.parse(options.body);
+  if(name==='has_scavland_permission')return Response.json(true);
+  if(name==='scavland_item_legacy')return Response.json(null);
+  try{
+   const names=rpcArguments[name];assert(names,'Unexpected RPC');
+   const values=names.map(n=>args[n]??null),params=names.map((_,i)=>'$'+(i+1)).join(',');
+   const result=await run(options.headers.apikey==='service'?'service':actor,`select public.${name}(${params}) as v`,values);
+   return Response.json(result);
+  }catch(error){return Response.json({code:error.code,message:error.message},{status:400});}
+ };
+ const env=name=>({SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service',SHARED_ATTACHMENT_ENABLED:'true'})[name];
+ const api=createAttachmentTransport({env,fetcher,readSource:async()=>latest});
+ const call=body=>api(new Request('https://fixture/editor',{method:'POST',headers:{Authorization:'Bearer fixture-session'},body:JSON.stringify(body)}));
+ const apiRequest=crypto.randomUUID(),apiCommand={action:'classify-attachment',confirmId:source.id,attachmentType:'Unknown',confirmReclassification:true,expectedVersion:0,sourceDigest:await legacyDigest({source,settings})};
+ assert.equal((await call({action:'prepare',itemId:source.id,requestId:apiRequest,command:apiCommand})).status,200);
+ assert.equal((await call({action:'prepare',itemId:source.id,requestId:apiRequest,command:apiCommand})).status,200);
+ assert.equal((await call({action:'prepare',itemId:source.id,requestId:apiRequest,command:{...apiCommand,attachmentType:'Scope'}})).status,409);
+ assert.equal((await call({action:'save',itemId:source.id,requestId:apiRequest})).status,200);
+ const loaded=await (await call({action:'load',itemId:source.id})).json();assert.equal(loaded.currentVersion,1);assert.equal(loaded.draft.record.contentType,'Attachment');
+ const editId=crypto.randomUUID(),editCommand={action:'edit-attachment',confirmId:source.id,expectedVersion:1,fields:{name:'API renamed'}};
+ assert.equal((await call({action:'prepare',itemId:source.id,requestId:editId,command:editCommand})).status,200);
+ assert.equal((await call({action:'save',itemId:source.id,requestId:editId})).status,200);
+ assert.equal((await (await call({action:'load',itemId:source.id})).json()).draft.record.name,'API renamed');
+ assert.equal(source.name,'Existing','no public source publication');
+ console.log('PASS Attachment combined transport/SQL: classify, durable save/reload, exact receipt retry/refusal and subsequent edit. Auth/Git source fixture only.');
  console.log('PASS Attachment SQL: protected receipt creation, permission denial, private reload, retry, competing work and legacy-version revocation.');
 }finally{await db.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
