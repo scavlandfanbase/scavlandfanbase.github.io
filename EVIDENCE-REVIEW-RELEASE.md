@@ -1,3 +1,5 @@
+> Superseded preparation status: approved rollout is now deployed. Read ADMIN-ROLLOUT-20261001.md for live versions, migrations, preserved counts and remaining acceptance. The historical preparation evidence below is retained.
+
 # Evidence Review release preparation
 
 Prepared only. Draft PR 38 is separate from Attachment PR 37 and VS Page Builder. Both Evidence switches remain disabled; the history proposal is unapplied.

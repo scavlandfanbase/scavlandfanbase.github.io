@@ -1,3 +1,7 @@
+## LIVE rollout — 1 October 2026
+
+PR 39 merged cc6607c; Pages 36883290018 succeeded. All four migrations applied; admin-drafts v15 ACTIVE with Attachment/Evidence enabled. Counts preserved: Evidence 3 pending/12 approved/11 rejected, legacy versions 26, shared 2. Signed-in Evidence queue/detail/private screenshot and Attachment 74-candidate loading verified. Hub label/Owner/navigation/legacy-tab corrections prepared and tested. Read ADMIN-ROLLOUT-20261001.md; earlier disabled/unapplied notes are historical. No genuine game-data or Evidence review mutation performed.
+
 ## Approved rollout in progress
 
 Andrew explicitly approved main merge, database/backend deployment and Attachment/Evidence enablement. Combined backend v14 deployed with both routes disabled; all three Attachment migrations applied and readiness grants/RLS/guards verified. Evidence cutover and enabled backend/frontend follow. Source-controlled release-config.mjs gates preserve explicit server false as emergency stop; credentials remain server-only. Genuine live acceptance and retained-count verification remain pending until completion.
