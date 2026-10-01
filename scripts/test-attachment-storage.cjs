@@ -99,6 +99,32 @@ const {PGlite}=require('@electric-sql/pglite');
  await assert.rejects(preview('service',actor,'api-item',2,'invalid'),e=>e.code==='22023');
  await db.query("update scavland_item_drafts.attachment_previews set expires_at=clock_timestamp()-interval '1 second' where id=$1",[intent.id]);
  assert.equal(await preview('service',actor,'api-item',2,null,intent.id),null);
+ if(process.env.SCAVLAND_BROWSER==='1'){
+  const {chromium}=require('playwright'),browser=await chromium.launch({headless:true,channel:'msedge'});
+  rpcArguments.scavland_attachment_list=[];
+  try{
+   async function open(){
+    const page=await browser.newPage();
+    await page.route('https://scavlandfanbase.github.io/**',async route=>{
+     const file=new URL(route.request().url()).pathname.slice(1);
+     if(file==='fixture-parent.html')return route.fulfill({contentType:'text/html',body:'<iframe src="attachment-category.html" style="width:100%;height:1000px"></iframe><script>addEventListener("message",e=>{if(e.data.type==="scavland-admin-ready")e.source.postMessage({type:"scavland-admin-token",token:"fixture"},location.origin)})</script>'});
+     return route.fulfill({path:path.join(__dirname,'..',file)});
+    });
+    await page.route('https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts',async route=>{
+     const response=await api(new Request(route.request().url(),{method:'POST',headers:route.request().headers(),body:route.request().postData()}));
+     return route.fulfill({status:response.status,headers:Object.fromEntries(response.headers),body:await response.text()});
+    });
+    await page.goto('https://scavlandfanbase.github.io/fixture-parent.html');return page;
+   }
+   const page=await open(),frame=page.frameLocator('iframe');
+   await frame.getByRole('button',{name:'API renamed',exact:true}).click();await frame.locator('#item-name').fill('Browser durable Attachment');
+   await frame.locator('#save').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();
+   const actual=(await run(actor,'select public.scavland_attachment_draft($1,$2) as v',['load','api-item']));assert.equal(actual.draft.payload.record.name,'Browser durable Attachment');assert.equal(actual.currentVersion,3);
+   const second=await open(),otherFrame=second.frameLocator('iframe');await otherFrame.getByRole('button',{name:'Browser durable Attachment',exact:true}).click();
+   assert.equal(await otherFrame.locator('#item-name').inputValue(),'Browser durable Attachment');
+   console.log('PASS combined Attachment browser/transport/real SQL: durable private edit, authoritative version 3 and second page reload. Auth/Git remain fixtures.');
+  }finally{await browser.close();}
+ }
  console.log('PASS Attachment preview SQL: actor/version/digest binding, browser denial and expiration.');
  console.log('PASS Attachment combined transport/SQL: classify, durable save/reload, exact receipt retry/refusal and subsequent edit. Auth/Git source fixture only.');
  console.log('PASS Attachment SQL: protected receipt creation, permission denial, private reload, retry, competing work and legacy-version revocation.');

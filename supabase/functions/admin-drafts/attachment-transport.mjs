@@ -1,4 +1,4 @@
-// Requires reviewed RPC migration. Not registered in production routing.
+// Registered in production routing; disabled by default and requires reviewed RPC migrations.
 import {createAttachmentApi} from './attachment-api.mjs';
 import {fail} from './core.mjs';
 import {createAttachmentPublisher} from './attachment-publication.mjs';

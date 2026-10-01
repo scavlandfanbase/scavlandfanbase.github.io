@@ -13,6 +13,7 @@ Status: draft preparation; no rollout performed. Work is on feature/shared-attac
 - Approved images, explicit current-patch review, private archive/restore and preserved IDs/history.
 - Browser fixtures cover classification, edit/reload, lost save responses, permission refusal, retry, confirmed reload, images/review/archive/restore, preview/publish and mobile widths.
 - Pinned canonical source and disabled-default backend route verified. Existing Admin/invite suites passed after handler integration.
+- Combined Edge browser/server-handler/PGlite test verifies a durable edit at revision 3 and authoritative reload in a second page. Auth and GitHub remain fixtures; no live data is used.
 
 ## Review fix
 
@@ -21,7 +22,7 @@ Repeated post-publication reconciliation could replace retained private verifica
 ## Remaining release gates
 
 1. Full Hub permission/navigation and cache release coordination; current draft card remains Release pending.
-2. Combined browser-to-real-local-SQL endpoint checks and realistic multi-session race acceptance; separate browser/API/SQL suites do not establish this alone.
+2. Extend combined acceptance beyond edit/reload to classification/publication and realistic multi-session races. The combined edit/reload check passes; this does not establish live Auth or concurrent production behavior.
 3. Review full dependency deployment manifest and migrations in order: attachment-classification-storage.sql, attachment-preview.sql. Neither is applied in production.
 4. Check current production schema/permissions/drafts and publication flags before deployment. Preserve genuine old/shared drafts.
 5. Explicit review of release scope: current screen edits existing identities; Add-new and recorded Weapon-ID compatibility are still absent. General Items access must remain.

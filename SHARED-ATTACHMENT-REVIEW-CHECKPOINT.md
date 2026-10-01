@@ -135,3 +135,9 @@ Next: review complete Attachment schema/receipt/publication paths and remaining 
 ## Release review fix
 Repeated public reconciliation now preserves private verification history; divergent public verification requires review. Regression and restricted-permission tests pass. See ATTACHMENT-RELEASE-REVIEW.md for verified evidence and remaining release gates. No deployment.
 
+
+## Combined browser/storage checkpoint — 1 October
+
+`SCAVLAND_BROWSER=1 node scripts/test-attachment-storage.cjs` passes. A real Edge page sends an edit through createAttachmentTransport into the local PGlite RPCs, stores revision 3, and a second page loads the saved name from that database. Auth and GitHub are fixtures. No real item or production service was modified.
+
+Hub inspection: allowedAdminViews, navigate and session frame allowlists have no Attachment route. The dashboard Release pending action is disabled. This is a remaining integration gate, not an enabled editor. Full classification/publication through the combined harness and realistic concurrent sessions remain to verify.
