@@ -8,11 +8,11 @@
     const page=Pages.validate(input),approved=new Set(images);
     if(!identity(page.id))fail('Page identity is invalid.');
     page.sections=page.sections.map((section,index)=>{
-      const source=input.sections[index],layout=source.layout??{};
+      const source=input.sections[index],layout=source.layout===undefined?{}:source.layout;
       if(!plain(layout)||!choices.columns.includes(layout.columns??1)||!choices.align.includes(layout.align??'start')||!choices.spacing.includes(layout.spacing??'normal')||!choices.background.includes(layout.background??'none')||typeof (layout.border??false)!=='boolean')fail('Choose valid section layout settings.');
       if(!identity(section.id))fail('Section identity is invalid.');
       section.layout={columns:layout.columns??1,align:layout.align??'start',spacing:layout.spacing??'normal',background:layout.background??'none',border:layout.border??false};
-      section.blocks=section.blocks.map((block,blockIndex)=>{
+      section.blocks=section.blocks.map(block=>{
         if(!identity(block.id))fail('Block identity is invalid.');
         if(block.type==='image'||block.type==='card'&&block.image){if(!approved.has(block.image))fail('Choose an approved image from the image library.');}
         return block;

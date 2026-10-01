@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Local Page Builder | SCAVLAND</title>
+  <link rel="stylesheet" href="page-builder.css">
+</head>
+<body>
+  <main class="page-builder" id="page-builder">
+    <header class="pb-header">
+      <div>
+        <p class="pb-kicker">SCAVLAND / CONTENT TOOLS</p>
+        <h1>Page Builder</h1>
+      </div>
+      <span class="pb-local-tag">LOCAL PREVIEW</span>
+    </header>
+    <p class="pb-notice"><strong>Local drafts only.</strong> Drafts stay outside the website repository on this computer. Save Draft does not publish. Export HTML downloads a local file and does not deploy a website.</p>
+    <p id="status" class="pb-status" role="status" aria-live="polite" data-state="loading">Loading local drafts...</p>
+    <button id="retry" class="pb-button" type="button" hidden>Retry loading drafts</button>
+
+    <div class="pb-layout">
+      <aside class="pb-rail" aria-labelledby="drafts-heading">
+        <div class="pb-rail-heading">
+          <h2 id="drafts-heading">Saved drafts</h2>
+          <div class="pb-rail-actions">
+            <button id="refresh-drafts" class="pb-button pb-button-small" type="button">Refresh</button>
+            <button id="new-page" class="pb-button pb-button-small" type="button">New page</button>
+          </div>
+        </div>
+        <p id="drafts-empty" class="pb-empty" hidden>No saved pages yet. Start with a new page.</p>
+        <ul id="draft-list" class="pb-draft-list"></ul>
+      </aside>
+
+      <section class="pb-editor" aria-label="Page editor">
+        <form id="page-form" novalidate>
+          <fieldset class="pb-meta">
+            <legend>Page details</legend>
+            <label>Page title
+              <input id="page-title" name="title" type="text" maxlength="160" autocomplete="off" required disabled>
+            </label>
+            <label>Safe address
+              <span class="pb-address-prefix">/pages/</span>
+              <input id="page-slug" name="slug" type="text" maxlength="80" pattern="[a-z0-9]+(-[a-z0-9]+)*" autocomplete="off" required aria-describedby="slug-help" disabled>
+            </label>
+            <p id="slug-help" class="pb-hint">Lowercase letters, numbers and hyphens. System addresses are protected.</p>
+            <label>Introduction
+              <textarea id="page-intro" name="intro" maxlength="1000" rows="3" disabled></textarea>
+            </label>
+          </fieldset>
+
+          <div class="pb-actions">
+            <div class="pb-action-status"><span id="save-revision" class="pb-revision"></span></div>
+            <div class="pb-action-buttons">
+              <button id="save-draft" class="pb-button pb-primary" type="button" disabled>Save Draft</button>
+              <button id="export-html" class="pb-button" type="button" disabled>Export HTML</button>
+              <button id="delete-draft" class="pb-button pb-danger" type="button" hidden>Delete draft</button>
+            </div>
+          </div>
+
+          <section class="pb-section-editor" aria-labelledby="sections-heading">
+            <div class="pb-section-heading">
+              <div>
+                <h2 id="sections-heading">Sections</h2>
+                <p class="pb-hint">Hidden sections and blocks remain in this draft but are omitted from preview and export.</p>
+              </div>
+              <button id="add-section" class="pb-button" type="button" disabled>Add section</button>
+            </div>
+            <div id="section-list" class="pb-section-list"></div>
+            <p id="sections-empty" class="pb-empty" hidden>No sections yet. Add a section to begin arranging content.</p>
+          </section>
+        </form>
+      </section>
+
+      <aside class="pb-preview-panel" aria-labelledby="preview-heading">
+        <div class="pb-preview-heading">
+          <h2 id="preview-heading">Preview</h2>
+          <div class="pb-view-toggle" role="group" aria-label="Preview size">
+            <button id="desktop-view" type="button" aria-pressed="true">Desktop</button>
+            <button id="mobile-view" type="button" aria-pressed="false">Mobile</button>
+          </div>
+        </div>
+        <div class="pb-preview-stage">
+          <iframe id="preview-frame" title="Page output preview" sandbox="" loading="lazy"></iframe>
+          <p id="preview-error" class="pb-preview-error" role="status" hidden></p>
+        </div>
+        <p class="pb-hint">Preview and downloaded HTML use the same renderer. Hidden content does not appear here.</p>
+      </aside>
+    </div>
+    <noscript>This local editor needs JavaScript enabled.</noscript>
+  </main>
+  <script src="page-model.js"></script>
+  <script src="page-builder-contract.js"></script>
+  <script src="page-builder.js"></script>
+</body>
+</html>
