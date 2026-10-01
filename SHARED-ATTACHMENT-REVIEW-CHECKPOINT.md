@@ -88,3 +88,15 @@ Remaining: wire preview/publish actions and service intent callbacks into the au
 Attachment API/transport now accept saved-version preview and explicit-confirmation publish. Publication requires ADMIN_CORE_ENABLED and DRAFT_PUBLISH_ENABLED, rechecked in fresh context along with Auth and items_edit permission. Preview stores the exact output digest in the private intent RPC; publishing looks up the bound intent and delegates to the fixed-path non-force adapter. Browser payloads cannot supply publication content or credentials.
 
 Tests pass for API flag/confirmation refusal, allowed mocked handler dispatch, transport preview through real local SQL intent storage and fixture Git reads, existing SQL version/conflict cases and Git planner/adapter checks. Actual Git write integration remains fixture-only; no live publication. Production routing, source-reader integration, CORS/UI, post-publication recovery and release acceptance remain pending. Do not deploy this draft yet.
+
+## Review interface and post-publication recovery batch
+
+attachment-category.html/js/css now provide an isolated candidate list/search, explicit type/classification confirmation, private shared-field editing, receipt-preserving retries, saved preview and explicit publication confirmation. Session handoff accepts only same-origin parent messages and keeps the token in memory. Text uses textContent; styles are scoped to the Attachment editor. Dirty/pending work gets navigation protection. No Page Builder files or live Hub route changed.
+
+Authenticated list RPC exposes the latest private Attachment rows only to items_edit; transport combines their names with explicit/candidate public records without inferring membership. Existing specialist links remain blocked. The screen is not usable in production until shared-attachment routing/source integration and the proposed migrations are released.
+
+reconcileAttachment now adopts confirmed public fields before a later edit, keeps prior baselines privately and retains private verification history. Disjoint public changes are retained; conflicting changes or patch shifts refuse the next edit. Tests cover a second edit after publication.
+
+Validation: real Edge browser with fixture endpoint passes parent token handoff, candidate Scope choice, private classification/save/reload, shared rename, preview and explicit publish, plus 390/1280px widths and no page errors. Separate real local SQL tests and classification/API/publication suites pass. Browser transport/Auth/Git publication remain fixtures. No production publication/migration/deployment occurred.
+
+Remaining release work: integrate pinned Git source reading and production routing with feature flags disabled; add cache/Hub permission routing, CORS and mixed-editor checks; expand browser error/retry/permission cases; review schema/transport and migration order; refresh production state and perform controlled Owner acceptance. Add-new, images, verification decisions, archive/restore and compatibility are not implemented in this initial Attachment screen. Keep the old Items route available. Do not claim full Attachment coverage or deploy draft PR #37 yet.

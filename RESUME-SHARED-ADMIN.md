@@ -1,3 +1,5 @@
+**Attachment interface batch — 1 October:** isolated review/classify/edit/preview/publish screen and post-publication baseline recovery are prepared. Edge fixture and local SQL/API tests pass. Not live; production source/routing integration, release review and remaining controls are documented in SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
+
 **Attachment preview/publish transport — 1 October:** saved-version preview intents and explicitly confirmed, flag-gated publication now connect through the transport. Focused fixture/local SQL tests pass. No live activation; UI, routing and post-publication recovery still pending.
 
 **Attachment Git adapter — 1 October:** fixed-path non-force publication adapter now checks saved version/permission, public conflicts and exact stored preview output before writes. Fixture tests pass; transport/UI wiring and deployment remain pending.

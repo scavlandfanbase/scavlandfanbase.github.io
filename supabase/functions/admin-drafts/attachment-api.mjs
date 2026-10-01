@@ -3,7 +3,8 @@ import {prepareAttachmentDecision,prepareAttachmentEdit} from './attachment-draf
 import {legacyDigest} from './legacy-item-review.mjs';
 import {fail} from './core.mjs';
 import {legacyItemBlockers} from './item-draft.mjs';
-export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,authenticate,loadContext,storage,publication}={}){
+import {reconcileAttachment} from './attachment-publication.mjs';
+export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,authenticate,loadContext,storage,publication,list}={}){
  return async request=>{
   const reply=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store'}});
   try{
@@ -15,8 +16,12 @@ export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,
    if(!identity.permissions?.includes('items_edit'))fail('Items editing permission is required.',403);
    const raw=await request.text();if(new TextEncoder().encode(raw).length>50000)fail('Attachment request is too large.',413);
    let body;try{body=JSON.parse(raw);}catch{fail('Invalid request.');}
-   if(!body||Array.isArray(body)||Object.keys(body).some(k=>!['action','itemId','requestId','command','previewId','confirm','expectedVersion'].includes(k))||
-    !['load','prepare','save','preview','publish'].includes(body.action)||typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)fail('Invalid Attachment request.');
+   if(!body||Array.isArray(body)||Object.keys(body).some(k=>!['domain','action','itemId','requestId','command','previewId','confirm','expectedVersion'].includes(k))||
+    body.domain!==undefined&&body.domain!=='shared-attachment'||!['list','load','prepare','save','preview','publish'].includes(body.action)||body.action!=='list'&&(typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160))fail('Invalid Attachment request.');
+   if(body.action==='list'){
+    if(Object.keys(body).some(k=>!['domain','action'].includes(k))||typeof list!=='function')fail('Attachment review list is unavailable.',503);
+    return reply(await list(auth));
+   }
    if(['preview','publish'].includes(body.action)){
     if(body.command!==undefined||body.requestId!==undefined||!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<1)fail('Preview a saved Attachment version.');
     if(body.action==='publish'&&(!publishEnabled()||body.confirm!==true||typeof body.previewId!=='string'))fail('Publication requires enabled publishing and explicit preview confirmation.',403);
@@ -42,7 +47,7 @@ export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,
    if(context.savedDraft){
     if(!Array.isArray(context.legacyDrafts))fail('Load existing Items work before editing.',503);
     if(legacyItemBlockers(body.itemId,context.source,context.legacyDrafts).length)fail('Existing Items work changed. Preserve it before editing.',409);
-    if(context.savedDraft.sourceDigest!==await legacyDigest({source:context.source,settings:context.settings}))fail('Public facts or the patch changed. Review before editing.',409);
+    context.savedDraft=await reconcileAttachment(context.savedDraft,context.source,context.settings);
    }
    const payload=context.savedDraft?prepareAttachmentEdit(body.command,context):await prepareAttachmentDecision(body.command,context);
    return reply(await storage.prepare({actor:identity.actor,itemId:body.itemId,requestId:body.requestId,command:body.command,payload,legacyVersion:context.legacyVersion}));

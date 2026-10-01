@@ -41,6 +41,8 @@ const {PGlite}=require('@electric-sql/pglite');
  assert.equal((await access(actor,'load','stable')).draft.payload.record.name,'Edited');
  assert.equal((await access(actor,'save','stable',request)).version,1,'old receipt retry returns its original version');
  assert.equal((await access(actor,'load','stable')).currentVersion,2,'old retries cannot replace the head');
+ assert((await run(actor,'select public.scavland_attachment_list() as v')).some(r=>r.item_id==='stable'&&r.payload.record.name==='Edited'));
+ await assert.rejects(run(other,'select public.scavland_attachment_list() as v'),e=>e.code==='42501');
  const competingA=crypto.randomUUID(),competingB=crypto.randomUUID(),next={...editPayload,expectedVersion:2};
  for(const id of [competingA,competingB])await run('service','select scavland_item_drafts.prepare_attachment($1,$2,$3,$4,$5,$6) as v',[actor,'stable',id,{action:'edit-attachment'},next,1]);
  assert.equal((await access(actor,'save','stable',competingA)).version,3);

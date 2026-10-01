@@ -106,4 +106,12 @@ create function public.scavland_attachment_draft(p_action text,p_item text,p_req
 returns jsonb language sql security invoker set search_path='' as $$select scavland_item_drafts.attachment_access(p_action,p_item,p_request);$$;
 revoke all on function public.scavland_attachment_draft(text,text,uuid) from public,anon;
 grant execute on function public.scavland_attachment_draft(text,text,uuid) to authenticated;
+create function public.scavland_attachment_list()
+returns jsonb language plpgsql security definer set search_path='' as $$
+begin
+ if auth.uid() is null or not coalesce(public.has_scavland_permission('items_edit'),false) then raise sqlstate '42501' using message='Items editing permission required.';end if;
+ return coalesce((select jsonb_agg(to_jsonb(v)) from (select distinct on(item_id) item_id,payload from scavland_item_drafts.attachment_versions order by item_id,version desc) v),'[]'::jsonb);
+end $$;
+revoke all on function public.scavland_attachment_list() from public,anon;
+grant execute on function public.scavland_attachment_list() to authenticated;
 commit;

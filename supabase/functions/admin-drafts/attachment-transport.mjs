@@ -3,6 +3,7 @@ import {createAttachmentApi} from './attachment-api.mjs';
 import {fail} from './core.mjs';
 import {createAttachmentPublisher} from './attachment-publication.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
+import {Attachments} from './models.generated.mjs';
 export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
  const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY');
  async function rpc(name,args,authorization,trusted=false){
@@ -14,6 +15,13 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
   return result;
  }
  return createAttachmentApi({enabled:()=>env('SHARED_ATTACHMENT_ENABLED')==='true',
+  list:async authorization=>{
+   if(typeof readSource!=='function')fail('Canonical source is unavailable.',503);
+   const latest=await readSource();
+   const drafts=await rpc('scavland_attachment_list',{},authorization);
+   const privateRecords=new Map(drafts.map(row=>[row.item_id,row.payload.record]));
+   return {records:latest.documents['data/items.json'].data.filter(r=>!r.hidden&&!r.archived&&(privateRecords.has(r.id)||r.contentType==='Attachment'||r.classification?.includes('attachment')||Attachments.candidate(r))).map(r=>({id:r.id,name:privateRecords.get(r.id)?.name||r.name,privateDraft:privateRecords.has(r.id),candidate:!privateRecords.has(r.id)&&r.contentType!=='Attachment'&&!r.classification?.includes('attachment')}))};
+  },
   publishEnabled:()=>env('ADMIN_CORE_ENABLED')==='true'&&env('DRAFT_PUBLISH_ENABLED')==='true',
   publication:async input=>{
    async function current(){

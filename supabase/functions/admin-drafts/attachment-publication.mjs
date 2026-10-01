@@ -6,6 +6,23 @@ import {githubPublisher} from './github-publisher.mjs';
 const fields=['name','description','notes','image','estimatedPrice','maxStack','contentType','attachmentType','classification','verification'];
 const own=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:record[key]}:{})});
 const published=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:key==='verification'?publicValue({verification:record[key]}).verification:publicValue(record[key])}:{})});
+// Reconcile a confirmed public result before the next private edit. Retain review history.
+export async function reconcileAttachment(saved,source,settings){
+ if(!saved||saved.itemId!==source?.id||saved.before?.id!==source.id||saved.record?.id!==source.id)fail('Item identity changed. Reload before editing.',409);
+ if(saved.sourceDigest!==await legacyDigest({source:saved.before,settings}))fail('The patch changed. Review before editing.',409);
+ const result=structuredClone(saved),allKeys=new Set([...Object.keys(saved.before),...Object.keys(saved.record),...Object.keys(source)]);
+ for(const key of allKeys){
+  const before=published(saved.before,key),desired=published(saved.record,key),current=published(source,key);
+  if(same(before,desired)){
+   if(current.present)result.record[key]=structuredClone(source[key]);else delete result.record[key];
+  }else if(!same(current,before)&&!same(current,desired))fail('Public changes conflict with the Attachment draft. Review before editing.',409);
+ }
+ if(!same(saved.before,source)){
+  result.baselineHistory=[...(saved.baselineHistory||[]),structuredClone(saved.before)];
+  result.before=structuredClone(source);result.sourceDigest=await legacyDigest({source,settings});
+ }
+ return result;
+}
 export async function planAttachmentPublication(saved,documents,{settings,legacyDrafts,permissions=[]}={}){
  if(!permissions.includes('items_edit'))fail('Items editing permission is required.',403);
  if(!saved||saved.category!=='attachments'||saved.itemId!==saved.before?.id||saved.itemId!==saved.record?.id||saved.record.contentType!=='Attachment')fail('Load the saved Attachment before previewing.');
