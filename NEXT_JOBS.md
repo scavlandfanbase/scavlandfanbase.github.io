@@ -1,3 +1,7 @@
+## Page Builder trusted preview prepared — 1 October 2026
+
+Reviewed renderer/style snapshot now creates deterministic saved-revision previews bound to identity, version, output/style digests, repository head and public path. Regenerated output replaces untrusted submitted HTML/metadata; hidden/private exclusion and validation tests pass. Next: durable preview/publication receipts, Owner reservation and Git/Pages reconciliation. No live preview route or activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Page Builder publication contracts prepared — 1 October 2026
 
 Strict public identity metadata and private publication outcome transitions now have local tests. Trusted source accepts indexed page routes and rejects unknown/missing custom HTML. Commit, pending build, failed build and confirmed live output remain distinct. Next: trusted preview/rendered digest, durable publication intents and Git/Pages recovery adapter. No public data, migration, deployment or live Page Builder activation. Details: PAGE-BUILDER-BACKEND-CHECKPOINT.md.

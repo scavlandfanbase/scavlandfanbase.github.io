@@ -3,7 +3,7 @@ import {validatePageManifest} from './page-publication.mjs';
 // Read-only trusted context, pinned to one repository commit. No browser inventory.
 const root='https://api.github.com/repos/scavlandfanbase/scavlandfanbase.github.io';
 function unavailable(){const error=new Error();error.status=503;throw error;}
-export function createPageContextSource({env,fetcher=fetch}){
+export function createPageContextSource({env,fetcher=fetch,withSnapshot=false}){
  return async({pageId,rpc})=>{
   const token=env('GITHUB_TOKEN');if(!token)unavailable();
   async function get(path){
@@ -21,9 +21,9 @@ export function createPageContextSource({env,fetcher=fetch}){
    if(file.encoding!=='base64'||typeof file.content!=='string')unavailable();
    try{return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(file.content.replace(/\s/g,'')),c=>c.charCodeAt(0))));}catch{unavailable();}
   }
-  let publicPages=[];
+  let manifest={schemaVersion:1,pages:[]},publicPages=[];
   if(files.has('data/page-builder-pages.json')){
-   try{publicPages=validatePageManifest(await jsonFile('data/page-builder-pages.json')).pages;}catch{unavailable();}
+   try{manifest=validatePageManifest(await jsonFile('data/page-builder-pages.json'));publicPages=manifest.pages;}catch{unavailable();}
    const owned=new Set(publicPages.map(page=>'pages/'+page.slug+'/index.html'));
    if(publicHtml.some(path=>!owned.has(path))||[...owned].some(path=>!files.has(path)))unavailable();
   }else if(publicHtml.length)unavailable();
@@ -38,7 +38,8 @@ export function createPageContextSource({env,fetcher=fetch}){
    for(const page of pages)existingPages.push({id:page.pageId,slug:page.slug});
    if(pages.length<100){
     for(const published of publicPages)if(!existingPages.some(page=>page.id===published.id))existingPages.push({id:published.id,slug:published.slug});
-    return {approvedImages,existingPages,currentPageId:existingPages.some(page=>page.id===pageId)?pageId:null};
+    const context={approvedImages,existingPages,currentPageId:existingPages.some(page=>page.id===pageId)?pageId:null};
+    return withSnapshot?{context,head,manifest}:context;
    }
    const next=pages.at(-1).pageId;if(typeof next!=='string'||next===after)unavailable();after=next;
   }

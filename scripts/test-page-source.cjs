@@ -20,6 +20,12 @@ const assert=require('node:assert/strict');
  const rpcCalls=[];
  const rpc=async(name,args)=>{assert.equal(name,'scavland_page');rpcCalls.push(args);return args.p_after===null?Array.from({length:100},(_,i)=>({pageId:i===0?pageId:'page-'+i,slug:'fixture-'+i})):[{pageId:'page-last',slug:'last'}];};
  const context=await reader({pageId,rpc});assert.deepEqual(context.approvedImages,['images/approved.png']);assert.equal(context.existingPages.length,101);assert.equal(context.currentPageId,pageId);assert.equal(rpcCalls[1].p_after,'page-99');
+ const snapshotReader=createPageContextSource({env:key=>key==='GITHUB_TOKEN'?'fixture-token':undefined,withSnapshot:true,fetcher:async url=>{
+  if(url.endsWith('/git/ref/heads/main'))return Response.json({object:{sha:head}});
+  if(url.includes('/git/trees/'))return Response.json({truncated:false,tree:[]});
+  return Response.json({encoding:'base64',content:Buffer.from(JSON.stringify({categories:{}})).toString('base64')});
+ }});
+ const snapshot=await snapshotReader({pageId,rpc:async()=>[]});assert.equal(snapshot.head,head);assert.deepEqual(snapshot.manifest,{schemaVersion:1,pages:[]});assert.deepEqual(snapshot.context.approvedImages,[]);
  assert.ok(!JSON.stringify(context).includes('fixture-token'));
  truncated=true;await assert.rejects(reader({pageId,rpc}),error=>error.status===503);truncated=false;
  custom=true;await assert.rejects(reader({pageId,rpc}),error=>error.status===503);custom=false;
