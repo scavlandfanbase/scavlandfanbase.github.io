@@ -18,3 +18,8 @@ select schemaname,tablename,policyname,roles,cmd,qual,with_check from pg_policie
 where tablename='evidence_submissions';
 select schemaname,tablename,indexname,indexdef from pg_indexes
 where schemaname='public' and indexname='evidence_review_queue_order';
+
+-- Explicit column ACLs can survive table-level revocation: require review if present.
+select a.attname,a.attacl from pg_attribute a
+where a.attrelid=to_regclass('public.evidence_submissions')
+ and a.attnum>0 and not a.attisdropped and a.attacl is not null;

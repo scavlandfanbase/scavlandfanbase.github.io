@@ -1,3 +1,7 @@
+## Current live preflight and Owner alignment
+
+Read-only live baseline verified: main 6f5d9dc, admin-drafts v13, new objects absent, Evidence counts 3 pending/12 approved/11 rejected and private screenshot bucket. Prepared Owner Evidence route aligned to server permission rule behind disabled gate. See ADMIN-LIVE-PREFLIGHT-20261001.md. Next: final coordinated release review and configuration/signed-in acceptance; no activation performed.
+
 ## Current combined release candidate
 
 Attachment d78ca09 and Evidence ad0770c combined on feature/admin-release-integration. Both feature and existing-editor regression suites pass; independent gates stay off. Reviewed standalone VS Items visibility/fixture corrections included, Page Builder excluded. Read ADMIN-RELEASE-INTEGRATION.md for exact scope and outstanding production gates. No main merge or deployment.

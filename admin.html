@@ -43,6 +43,7 @@ function allowedAdminViews(){
     if(view)allowed.add(view);
   }
   if(ATTACHMENT_RELEASE_ENABLED && (adminProfile?.role==='owner'||adminProfile?.permissions?.includes('items_edit')))allowed.add('attachments');
+  if(EVIDENCE_REVIEW_RELEASE_ENABLED && adminProfile?.role==='owner')allowed.add('evidence');
   if(adminProfile?.role==='owner')allowed.add('admin-users');
   return allowed;
 }

@@ -11,3 +11,7 @@ Verified together: complete Attachment release suite (including real SQL, combin
 Recursive inventories pass: Evidence 34 dependencies, Attachment 42. No game-data changes, production SQL application, merge to main, deployment or live activation. Six Evidence and twelve Attachment independent PostgreSQL concurrency scenarios passed on originating branches; they are not claimed rerun on this combined branch.
 
 Remaining before activation: fresh deployed schema/grants/configuration/Storage review, final coordinated migration order and evidence moderation cutover, release-owner approval, disabled deployment and signed-in live permission/recovery acceptance. The Attachment Git/database publication race limitation remains disclosed in ATTACHMENT-CONCURRENCY-REVIEW.md; combined regression does not remove it. Page Builder remains local-only on its separate VS branch. This candidate does not make every planned Hub tool available.
+
+## Fresh read-only preflight
+
+See ADMIN-LIVE-PREFLIGHT-20261001.md for verified main/v13 baseline, absent new objects, 26 retained Evidence submissions, private Storage and actual grants. Owner Evidence navigation now matches server authorization behind the disabled release switch. Targeted combined gates, Attachment browser Hub and Evidence SQL checks pass. Configuration values and genuine signed-in acceptance remain unverified; no live changes.
