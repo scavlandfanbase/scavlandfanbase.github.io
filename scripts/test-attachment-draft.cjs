@@ -1,0 +1,25 @@
+const assert=require('node:assert/strict');
+(async()=>{
+ const {prepareAttachmentClassification:prepare}=await import('../supabase/functions/admin-drafts/attachment-draft.mjs');
+ const context={actor:'fixture-admin',permissions:['items_edit'],settings:{schemaVersion:1,current_patch_id:'fixture'},clock:()=>new Date('2026-10-01T10:00:00Z')};
+ const record={id:'stable',name:'Existing',classification:['item'],source:{file:'evidence-inbox/attachments/proof.png'},effects:{handling:2},image:null};
+ const before=JSON.stringify(record),command={action:'classify-attachment',confirmId:'stable',attachmentType:'Unknown',confirmReclassification:true};
+ const result=prepare(record,command,context);
+ assert.equal(JSON.stringify(record),before);assert.equal(result.itemId,'stable');assert.equal(result.record.name,'Existing');
+ assert.deepEqual(result.record.source,record.source);assert.deepEqual(result.record.effects,record.effects);
+ assert.equal(result.record.verification.decision,'unverified');assert.equal(result.record.verification.history.at(-1).by,context.actor);
+ assert.deepEqual(result.record.classification,['attachment']);
+ assert.throws(()=>prepare(record,command,{...context,permissions:[]}),e=>e.status===403);
+ assert.throws(()=>prepare(record,command,{...context,actor:null}),e=>e.status===401);
+ assert.throws(()=>prepare(record,{...command,confirmReclassification:false},context),/confirmation/);
+ assert.throws(()=>prepare(record,{...command,confirmId:'wrong'},context),/identity/);
+ assert.throws(()=>prepare(record,{...command,actor:'forged'},context),/Unsupported/);
+ assert.throws(()=>prepare(record,{...command,attachmentType:'Invented'},context),/Type/);
+ assert.throws(()=>prepare({...record,classification:['weapon']},command,context),e=>e.status===409);
+ assert.throws(()=>prepare({...record,contentType:'Armour'},command,context),e=>e.status===409);
+ assert.throws(()=>prepare({...record,archived:true},command,context),/Restore/);
+ assert.throws(()=>prepare({...record,classification:'attachment'},command,context),/malformed/);
+ const unchanged=prepare(result.record,command,context);assert.deepEqual(unchanged.changedFields,[]);
+ assert.deepEqual(unchanged.record.verification,result.record.verification);
+ console.log('PASS Attachment classification: server identity, Items permission, explicit consent, stable ID, preserved facts/history, category collision protection and idempotent decision.');
+})().catch(error=>{console.error(error);process.exitCode=1;});

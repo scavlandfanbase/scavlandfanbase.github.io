@@ -11,3 +11,10 @@ Next implementation: master-only trusted Attachment draft contract; explicit cla
 Production recovery acceptance: the read-only database check confirms Special FMJ Ammo shared draft v1, source Items v20, retained historical verification and a fresh Unverified Ammo decision. Rifle HP Ammo also has a preserved shared draft v1. No publication was performed by these checks.
 
 Page Builder is being developed independently in Copilot. This checkpoint changes no Page Builder, shared CSS/dialogs, production services or public game-data files.
+## Explicit classification contract — follow-up
+
+attachment-draft.mjs now prepares a master-only classification decision using the existing authoritative items_edit permission (no attachments_edit permission exists in the current allowlist). Requires authenticated server actor, exact Item confirmation, explicit consent and an allowed Attachment Type, including Unknown. Keeps canonical ID, source, effects and other facts. Classification changes produce an Unverified server-attributed review and retain prior history through the existing Verification model. Repeat identical decisions do not add reviews. Existing Weapon/Armour/Ammo/Blueprint membership is refused until linked-category reconciliation is designed. Malformed classifications and archived records are refused.
+
+This is a pure preparation contract, not durable saving, a hosted endpoint or permission rollout. No production changes. Next: bind this decision to source revision/digest, legacy-work protection and durable preparation/save receipts before exposing controls. Do not accept browser-supplied record/history as trusted input.
+
+Validation: test-attachment-draft, test-shared-attachment-review and test-item-draft pass; git diff --check passes. Fixture tests cover permission/identity refusal, explicit consent, unknown types, immutable provenance, category collision, malformed classification, Unverified attribution and repeated-decision history preservation.
