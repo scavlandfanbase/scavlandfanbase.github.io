@@ -4,6 +4,7 @@
  let token='',records=[],selected=null,loaded=null,busy=false,dirty=false,pending=null,preview=null;
  const controls=['type','item-name','description','notes','price','stack','image','compatibility-mode','compatible-weapons'];
  for(const type of ScavAttachments.types){const option=document.createElement('option');option.value=type;option.textContent=type;$('type').append(option);}
+ for(const type of ScavAttachments.types){const option=document.createElement('option');option.value=type;option.textContent=type;$('create-type').append(option);}
  const status=text=>$('status').textContent=text;
  function update(){
   const archived=!!loaded?.draft?.record.archived;
@@ -11,6 +12,7 @@
   controls.forEach(id=>$(id).disabled=!editable);
   $('compatible-weapons').disabled=!editable||$('compatibility-mode').value==='unknown';
   $('type').disabled=!token||!loaded||archived||busy||!!pending;
+  $('add').disabled=!token||busy||!!pending||dirty;
   $('save').disabled=!editable;$('classify').disabled=!loaded||!!loaded.draft||busy||!!pending;
   $('preview').disabled=!loaded?.currentVersion||busy||dirty||!!pending;
   $('publish').disabled=!preview||busy||dirty||!!pending;
@@ -22,7 +24,7 @@
   document.querySelectorAll('#records button').forEach(b=>b.disabled=busy||!!pending);
  }
  async function request(extra){
-  const response=await fetch(endpoint,{method:'POST',headers:{apikey:'sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH',Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({domain:'shared-attachment',...(selected&&extra.action!=='list'?{itemId:selected}:{}),...extra})});
+  const response=await fetch(endpoint,{method:'POST',headers:{apikey:'sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH',Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({domain:'shared-attachment',...(selected&&!['list','create'].includes(extra.action)?{itemId:selected}:{}),...extra})});
   const result=await response.json();if(!response.ok)throw Object.assign(Error(result.error||'Action failed. Saved work is retained.'),{status:response.status});return result;
  }
  function paintList(){
@@ -45,10 +47,16 @@
  }
  async function save(){
   if(busy||!pending)return;busy=true;update();
-  try{if(!pending.receipt)pending.receipt=await request({action:'prepare',requestId:pending.id,command:pending.command});
+  try{if(pending.kind==='create'){
+    const result=await request({action:'create',requestId:pending.id,command:pending.command});selected=result.itemId;pending=null;dirty=false;preview=null;records=(await request({action:'list'})).records;paintList();busy=false;await select(selected);status('Saved privately. Nothing published.');return;
+   }
+   if(!pending.receipt)pending.receipt=await request({action:'prepare',requestId:pending.id,command:pending.command});
    await request({action:'save',requestId:pending.id});pending=null;dirty=false;busy=false;await select(selected);status('Saved privately. Nothing published.');
   }catch(error){if(error.status===400||error.status===409&&!pending?.receipt)pending=null;status(error.message+' Your entries are retained. Retry the saved action if available.');}finally{busy=false;update();}
  }
+ $('add').onclick=()=>{if(busy||pending||dirty)return;$('create-name').value='';$('create-type').value='Unknown';$('create-dialog').showModal();$('create-name').focus();};
+ $('cancel-create').onclick=()=>$('create-dialog').close();
+ $('create-form').onsubmit=event=>{event.preventDefault();if(busy||pending||dirty)return;pending={kind:'create',id:crypto.randomUUID(),command:{action:'create-attachment',confirmCreation:true,fields:{name:$('create-name').value,attachmentType:$('create-type').value}}};$('create-dialog').close();preview=null;save();};
  $('classify').onclick=()=>{
   if(!loaded||busy||pending)return;
   if(!confirm('Classify '+loaded.source.name+' as an Attachment? Keep its identity and history, mark it Unverified and save privately.'))return;

@@ -203,3 +203,9 @@ Combined handler/PGlite test verifies create/save/load/retry, changed-command re
 Creation-marked null-baseline drafts now validate known facts/approved images/Weapon references against current source, require complete identity catalogues and current patch, refuse specialist/public/legacy conflicts and project a single master append. Identical public retry returns the same output rather than duplicating. No vendor writes, invented effects or private history projection. Confirmed identical public output can become a normal baseline for later edits, retaining private history.
 
 Planner tests cover append/retry, collision, patch drift, protected fields and post-publication rebase. Combined actual handler/PGlite intent with simulated Git verifies new-record preview, explicit publish, one master append, private identity omission and non-force update. Full npm run test:attachments passes. Add UI and browser creation workflow remain next; no production changes.
+
+## Add Attachment browser workflow — 1 October
+
+Added a labelled Add dialog with required name/type and explicit Create privately action. New records start Unverified; details remain available in the saved edit form. Creation retries reuse the same local request/command; other controls remain blocked during pending work. Existing dirty edits must be saved or reviewed before Add. Matching frame/child cache version is attachment-preparation-20261001-4.
+
+Actual browser/handler/PGlite acceptance covers cancel, lost creation response after durable save, retry with exactly one identity/version, second-page reopen, preview, simulated Git publication and subsequent edit/rebase. Full release suites pass. Older separate browser assertions now wait for matching save responses to avoid reading stale Saved text. No live rollout.

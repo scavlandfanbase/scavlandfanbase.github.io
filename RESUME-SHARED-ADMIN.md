@@ -1,3 +1,5 @@
+**Attachment Add workflow — 1 October:** Add dialog now creates privately and retries the same request after lost replies. Combined browser/SQL checks pass for cancel/create/retry/reopen/preview/simulated publish/later edit; full release suite passes. All initial Attachment controls are prepared, but live configuration, concurrent-session review and release acceptance remain. No deployment.
+
 **New Attachment publication backend — 1 October:** creation-marked null-baseline drafts now preview/append only the shared master catalogue; exact public retry is idempotent and collisions/patch changes/protected facts stop publication. Combined handler/SQL preview intent/Git fixture checks and full release suites pass. Add form/browser creation acceptance remain; nothing deployed.
 
 **New Attachment handler/storage — 1 October:** authenticated create action now allocates, prepares and saves a private version; exact retry reuses identity/version and changed command is refused. New saved records load/list before public existence. Combined SQL/handler checks pass; new-record preview/publication and Add UI remain pending. No production changes.

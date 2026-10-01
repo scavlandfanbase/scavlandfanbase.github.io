@@ -131,6 +131,7 @@ const {PGlite}=require('@electric-sql/pglite');
  if(process.env.SCAVLAND_BROWSER==='1'){
   const {chromium}=require('playwright'),browser=await chromium.launch({headless:true,channel:'msedge'});
   rpcArguments.scavland_attachment_list=[];
+  let loseCreateReply=false;
   try{
    async function open(){
     const page=await browser.newPage();
@@ -141,6 +142,7 @@ const {PGlite}=require('@electric-sql/pglite');
     });
     await page.route('https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts',async route=>{
      const response=await api(new Request(route.request().url(),{method:'POST',headers:route.request().headers(),body:route.request().postData()}));
+     if(route.request().postDataJSON().action==='create'&&loseCreateReply){loseCreateReply=false;return route.abort('failed');}
      return route.fulfill({status:response.status,headers:Object.fromEntries(response.headers),body:await response.text()});
     });
     await page.goto('https://scavlandfanbase.github.io/fixture-parent.html');return page;
@@ -160,6 +162,17 @@ const {PGlite}=require('@electric-sql/pglite');
    const output=JSON.parse(gitWrites[0].body.tree[0].content);assert.equal(output.data[0].name,'Concurrent saved Attachment');assert.equal(output.data[0].contentType,'Attachment');assert.deepEqual(output.data[0].compatibleWeaponIds,['weapon-fixture']);assert(!JSON.stringify(output).includes(actor),'private actor omitted');assert.equal(source.name,'Existing','Git fixture does not mutate real or source data');
    const third=await open();third.on('dialog',d=>d.accept());const candidateFrame=third.frameLocator('iframe');await candidateFrame.getByRole('button',{name:'Browser candidate · Candidate for review',exact:true}).click();await candidateFrame.locator('#type').selectOption('Scope');await candidateFrame.locator('#classify').click();await candidateFrame.locator('#status').filter({hasText:'Saved privately'}).waitFor();
    const classified=await run(actor,'select public.scavland_attachment_draft($1,$2) as v',['load','browser-candidate']);assert.equal(classified.currentVersion,1);assert.equal(classified.draft.payload.record.contentType,'Attachment');assert.equal(classified.draft.payload.record.attachmentType,'Scope');assert.equal(latest.documents['data/items.json'].data[1].contentType,undefined);assert.equal(gitWrites.length,3,'classification saves privately');
+   const fourth=await open();fourth.on('dialog',d=>d.accept());const addFrame=fourth.frameLocator('iframe');
+   await addFrame.locator('#add').click();await addFrame.locator('#create-name').fill('Cancelled fixture');await addFrame.locator('#cancel-create').click();assert.equal(await addFrame.locator('#create-dialog').getAttribute('open'),null);
+   await addFrame.locator('#add').click();await addFrame.locator('#create-name').fill('Browser new Attachment');await addFrame.locator('#create-type').selectOption('Scope');loseCreateReply=true;await addFrame.getByRole('button',{name:'Create privately',exact:true}).click();await addFrame.locator('#retry').waitFor();
+   const countBeforeRetry=(await db.query("select count(*)::int as n from scavland_item_drafts.attachment_versions where payload->'record'->>'name'='Browser new Attachment'")).rows[0].n;assert.equal(countBeforeRetry,1);
+   await addFrame.locator('#retry').click();await addFrame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(await addFrame.locator('#item-name').inputValue(),'Browser new Attachment');
+   const rows=(await db.query("select item_id,version from scavland_item_drafts.attachment_versions where payload->'record'->>'name'='Browser new Attachment'")).rows;assert.equal(rows.length,1);assert.equal(rows[0].version,1);
+   const newPage=await open(),newFrame=newPage.frameLocator('iframe');await newFrame.getByRole('button',{name:'Browser new Attachment',exact:true}).click();assert.equal(await newFrame.locator('#item-name').inputValue(),'Browser new Attachment');
+   await addFrame.locator('#preview').click();await addFrame.locator('#preview-dialog[open]').waitFor();await addFrame.locator('#close-preview').click();await addFrame.locator('#publish').click();await addFrame.locator('#status').filter({hasText:'Published commit'}).waitFor();assert.equal(gitWrites.length,6);
+   const newPublic=JSON.parse(gitWrites[3].body.tree[0].content).data.find(r=>r.id===rows[0].item_id);assert.equal(newPublic.name,'Browser new Attachment');assert.equal(newPublic.verification.decision,'unverified');latest.documents['data/items.json'].data.push(newPublic);
+   await newFrame.locator('#item-name').fill('Browser new Attachment edited');await newFrame.locator('#save').click();await newFrame.locator('#status').filter({hasText:'Saved privately'}).waitFor();const newSaved=await run(actor,'select public.scavland_attachment_draft($1,$2) as v',['load',rows[0].item_id]);assert.equal(newSaved.currentVersion,2);assert.equal(newSaved.draft.payload.creation,false);
+   console.log('PASS browser new Attachment: cancel, lost-response retry without duplicates, second-page reopen, preview/publication and subsequent edit baseline.');
    console.log('PASS browser explicit classification through handler/SQL, stable identity and no publication.');
    console.log('PASS combined browser/SQL publication: stale second-session preview refused without writes; fresh intent publishes only master data through non-force Git fixture.');
    console.log('PASS combined Attachment browser/transport/real SQL: durable private edit, authoritative version 3 and second page reload. Auth/Git remain fixtures.');
