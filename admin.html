@@ -22,8 +22,8 @@
 const SB_URL='https://demtoqsafufzmnhvaykj.supabase.co',KEY='sb_publishable_0kdLCpTy7Sf8BKkIU5TOqw_Qaay4gzH';
 const $=id=>document.getElementById(id),headers={apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},views=['hub','evidence','items','vendors','settings','weapons','armour','crafting','ammunition','content','patches','attachments','admin-users'];
 // Enable only as part of the reviewed Attachment deployment.
-const ATTACHMENT_RELEASE_ENABLED=false;
-const EVIDENCE_REVIEW_RELEASE_ENABLED=false;
+const ATTACHMENT_RELEASE_ENABLED=true;
+const EVIDENCE_REVIEW_RELEASE_ENABLED=true;
 let accessToken='',currentStatus='pending',authorized=false,adminProfile=null;
 const permissionViews={
   evidence_review:'evidence',

@@ -1,3 +1,7 @@
+## Approved rollout in progress
+
+Andrew explicitly approved main merge, database/backend deployment and Attachment/Evidence enablement. Combined backend v14 deployed with both routes disabled; all three Attachment migrations applied and readiness grants/RLS/guards verified. Evidence cutover and enabled backend/frontend follow. Source-controlled release-config.mjs gates preserve explicit server false as emergency stop; credentials remain server-only. Genuine live acceptance and retained-count verification remain pending until completion.
+
 ## Final combined local acceptance passed
 
 Full npm run test:release passes, including all 18 independent PostgreSQL concurrency scenarios on the combined candidate. ADMIN-PREPUBLICATION-REPORT.md is the current review report for draft PR 39. Next: coordinated rollout review/configuration and genuine signed-in acceptance. No live deployment, main merge or activation performed.

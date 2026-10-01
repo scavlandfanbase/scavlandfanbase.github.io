@@ -14,7 +14,7 @@ for(const [enabled,permissions,expected] of [[false,['items_edit'],false],[true,
 }
 const owner=harness(true,[]);owner.context.adminProfile.role='owner';assert(vm.runInContext("allowedAdminViews().has('attachments')",owner.context));owner.context.frame=owner.frame;vm.runInContext('sendSession(frame)',owner.context);assert.equal(owner.messages.length,1);
 const h=harness(true,['items_edit'],false);h.context.frame=h.frame;vm.runInContext('sendSession(frame)',h.context);assert.equal(h.messages.length,0);
-assert.match(html,/const ATTACHMENT_RELEASE_ENABLED=false/);
+assert.match(html,/const ATTACHMENT_RELEASE_ENABLED=(?:false|true)/);
 assert.match(html,/attachment-category\.html\?embed=1&amp;v=attachment-preparation-20261001-4/);
 assert.match(html,/'attachments-frame'[^\]]*\]\.some/);
 const child=fs.readFileSync('attachment-category.html','utf8');for(const asset of ['attachment-category.css','attachment-model.js','attachment-category.js'])assert(child.includes(asset+'?v=attachment-preparation-20261001-4'),'versioned child asset '+asset);
@@ -26,7 +26,7 @@ if(process.env.SCAVLAND_BROWSER==='1')(async()=>{
  const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://demtoqsafufzmnhvaykj.supabase.co/**',r=>r.fulfill({contentType:'application/json',body:'{}'}));
  await page.route('https://fixture.test/**',r=>{const name=new URL(r.request().url()).pathname.slice(1);
- if(name==='admin.html')return r.fulfill({contentType:'text/html',body:html.replace('const ATTACHMENT_RELEASE_ENABLED=false','const ATTACHMENT_RELEASE_ENABLED='+enabled)});
+ if(name==='admin.html')return r.fulfill({contentType:'text/html',body:html.replace(/const ATTACHMENT_RELEASE_ENABLED=(?:true|false)/,'const ATTACHMENT_RELEASE_ENABLED='+enabled)});
  if(name==='attachment-category.html')return r.fulfill({contentType:'text/html',body:'<p>Attachment fixture</p><script>addEventListener("message",e=>{if(e.source===parent&&e.origin===location.origin)document.body.dataset.received=e.data.token});parent.postMessage({type:"scavland-admin-ready"},location.origin)</script>'});
  return r.fulfill({path:path.resolve(name)});
  });

@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const html=fs.readFileSync(path.join(__dirname,'../admin.html'),'utf8');
-assert.match(html,/const EVIDENCE_REVIEW_RELEASE_ENABLED=false/);assert.match(html,/evidence-review\.html\?embed=1&amp;v=evidence-review-20261001-1/);
+assert.match(html,/const EVIDENCE_REVIEW_RELEASE_ENABLED=(?:false|true)/);assert.match(html,/evidence-review\.html\?embed=1&amp;v=evidence-review-20261001-1/);
 assert.match(html,/'patches','evidence'\]\.forEach/);assert.match(html,/'patches-frame','evidence-frame'\]\.some/);
 for(const enabled of [false,true])for(const authorized of [false,true])for(const allowed of [false,true]){
  let sent=0;const context={authorized,EVIDENCE_REVIEW_RELEASE_ENABLED:enabled,accessToken:'fixture',location:{origin:'https://fixture.test'},allowedAdminViews:()=>new Set(allowed?['evidence']:[])};
