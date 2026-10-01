@@ -155,3 +155,7 @@ Fetched Copilot branch without switching checkout. Head 3ce5f1aa4b0bf3fd35ebbe69
 Extended the Edge/transport/PGlite harness: explicit Scope classification saves a stable candidate identity privately at version 1 without Git writes; saved edits reload in another page; a newer second-page save invalidates the first preview before any Git write. A fresh preview publishes exactly data/items.json through three simulated Git writes with force false and no private actor in output. Vendor files are untouched. Auth/Git remain fixtures.
 
 The combined browser test passes. This interleaved two-page case does not establish truly simultaneous database transactions or a cross-service atomic guarantee. No live data, deployments or feature flags changed.
+
+## Deployment manifest and asset cache checkpoint — 1 October
+
+Prepared ATTACHMENT-DEPLOYMENT-MANIFEST.md covering complete backend deployment, existing dependencies, migration order, protected permissions, flags, coordinated frontend activation and retained-data recovery. Corrected an asset cache gap: child CSS/model/script now share the frame version attachment-preparation-20261001-2. Hub and combined browser/SQL tests pass after this fix. No flags, migrations, live data or deployments changed. Fresh production state and remaining release acceptance are still required.

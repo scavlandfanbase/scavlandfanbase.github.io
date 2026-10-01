@@ -14,8 +14,9 @@ for(const [enabled,permissions,expected] of [[false,['items_edit'],false],[true,
 }
 const h=harness(true,['items_edit'],false);h.context.frame=h.frame;vm.runInContext('sendSession(frame)',h.context);assert.equal(h.messages.length,0);
 assert.match(html,/const ATTACHMENT_RELEASE_ENABLED=false/);
-assert.match(html,/attachment-category\.html\?embed=1&amp;v=attachment-preparation-20261001-1/);
+assert.match(html,/attachment-category\.html\?embed=1&amp;v=attachment-preparation-20261001-2/);
 assert.match(html,/'attachments-frame'\]\.some/);
+const child=fs.readFileSync('attachment-category.html','utf8');for(const asset of ['attachment-category.css','attachment-model.js','attachment-category.js'])assert(child.includes(asset+'?v=attachment-preparation-20261001-2'),'versioned child asset '+asset);
 console.log('PASS Attachment Hub release/permission gates and session refusal for unauthorized or disabled access.');
 
 if(process.env.SCAVLAND_BROWSER==='1')(async()=>{
