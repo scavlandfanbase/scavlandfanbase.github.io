@@ -1,3 +1,5 @@
+**Parallel handoff — 1 October:** Copilot reports Page Builder follow-up commits and a remaining hidden-item fixture failure; branch unavailable locally, so report remains unverified. Attachment Hub status says Release pending (disabled); Admin tests pass. No live activation.
+
 **Attachment controls — 1 October:** approved images, explicit current-patch review and archive/restore now prepared with contract/browser checks. No deployment. Remaining: Add-new/compatibility scope, Hub/cache integration and coordinated release review.
 
 **Attachment recovery tests — 1 October:** lost-response/permission-denial retries preserve entries and avoid duplicate versions; explicit Review saved state reload is added and browser-tested. No deployment. Remaining controls/Hub integration and release review continue next.

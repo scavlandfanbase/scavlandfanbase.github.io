@@ -122,3 +122,11 @@ Next: remaining Attachment image/review/lifecycle controls and Hub/cache integra
 Attachment controls now expose approved-library image selection, explicit Verified/Unverified decisions for the current patch, and private archive/restore. Trusted actions require items_edit, exact identity and current saved version. Review retains server-attributed history; archived items refuse edit/review until restored. Image updates use the validated library; unchanged historical images need not be resubmitted. Archived explicit/private Attachments remain reachable in the review list for restoration. Master-only publication supports the explicit archive field while retaining conflict checks and vendor references.
 
 Focused contract tests pass current-patch review, wrong-patch/identity denial and archive/restore fact preservation. Edge fixtures pass image save/reload, explicit verification, archived editing disabled, restoration and existing retry/preview/publication flows. SQL/storage and publication suites pass; whitespace checks pass. No production changes. Add-new/compatibility, Hub/cache integration and full release review remain outstanding.
+
+## Hub status and parallel Page Builder handoff
+
+Draft Hub card now accurately marks Attachments as prepared with Release pending disabled; no new navigable editor route is enabled. Admin npm tests and whitespace checks pass. This is preparation status only, not availability.
+
+Copilot reports Page Builder commits 45f6426, 2997a7f, d1c1b4d and 014cee1 on feature/page-builder-local-drafts, with local preview at port 4181 and broader browser checks passing. Its reported Items count assertion update passes, but a hidden-item fixture assertion remains failing. These are reported results, not independently verified here: branch is absent locally. Do not treat that remaining suite as fully passing or weaken visibility protection to satisfy the fixture. Page Builder files were not changed by this checkpoint.
+
+Next: review complete Attachment schema/receipt/publication paths and remaining Add/compatibility scope before enabling Hub navigation. Coordinate actual Page Builder branch integration only when its commits are available. No deployment.
