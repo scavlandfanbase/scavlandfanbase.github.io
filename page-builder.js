@@ -6,11 +6,14 @@
   const status=$('#status'),retry=$('#retry'),draftList=$('#draft-list'),sections=$('#section-list');
   const titleInput=$('#page-title'),slugInput=$('#page-slug'),introInput=$('#page-intro'),saveButton=$('#save-draft');
   const preview=$('#preview-frame'),previewError=$('#preview-error');
-  const historyToggle=$('#history-toggle'),historyPanel=$('#history-panel'),historyStatus=$('#history-status'),historyRetry=$('#history-retry'),historyList=$('#history-list'),historyEmpty=$('#history-empty'),historyDetail=$('#history-detail'),historyMetadata=$('#history-metadata'),historyFrame=$('#history-frame'),historyRepair=$('#history-repair');
+  const historyToggle=$('#history-toggle'),historyPanel=$('#history-panel'),historyStatus=$('#history-status'),historyRetry=$('#history-retry'),historyList=$('#history-list'),historyEmpty=$('#history-empty'),historyDetail=$('#history-detail'),historyMetadata=$('#history-metadata'),historyRepair=$('#history-repair');
+  let historyFrame=$('#history-frame');
+  if(live){historyList.setAttribute('aria-label','Saved revisions');$('#history-preview-title').textContent='Read-only saved revision preview';}
   const publicationToggle=$('#publication-toggle'),publicationPanel=$('#publication-panel'),publicationClose=$('#publication-close'),publicationStatus=$('#publication-status'),publicationLockNote=$('#publication-lock-note'),publicationScenarioInput=$('#publication-scenario'),publicationCurrentDraft=$('#publication-current-draft'),publicationReviewButton=$('#publication-review'),publicationStartButton=$('#publication-start'),publicationNextButton=$('#publication-next'),publicationCheckButton=$('#publication-check'),publicationRetryButton=$('#publication-retry'),publicationReviewed=$('#publication-reviewed'),publicationRequestLabel=$('#publication-request'),publicationEventsList=$('#publication-events'),publicationPreviewPanel=$('#publication-preview-panel'),publicationPreviewLabel=$('#publication-preview-label'),publicationReviewFrame=$('#publication-review-frame');
   let token='',records=[],images=[],existingPages=[],active=null,revision=null,snapshot=null,dirty=false,slugEdited=false,cssText='',saving=false;
   const errorState=new WeakMap();let previewErrorField=null;
   let historyVersions=[],historySelection=null,historyLoaded=false,historyLoading=false,historyRequest=0,recordRequest=0;
+  let archivedRecords=[],historyArchiveId=null,historyReturnFocus=null;
   let publicationScenario='success',publicationReview=null,publicationReviewInvalidated=false,publicationRequest=null,publicationError='',publicationErrorFocus=null,publicationState='not-reviewed',publicationInFlight=false,publicationReviewing=false,publicationLock=false,publicationDisabled=new Map(),publicationEvents=[];
   const blockTypes=[['heading','Heading'],['text','Text'],['image','Image'],['card','Card'],['divider','Divider'],['button','Link button']];
   const layoutChoices={columns:[[1,'One column'],[2,'Two columns'],[3,'Three columns']],align:[['start','Start'],['center','Center']],spacing:[['compact','Compact'],['normal','Normal'],['spacious','Spacious']],background:[['none','None'],['surface','Surface'],['subtle','Subtle']]};
@@ -43,7 +46,7 @@
       return revisions;
     }});
   }
-  const historyAdapter=live?live.historyAdapter(()=>revision?active?.id:null):createHistoryFixtureAdapter(JSON.parse($('#page-builder-history-fixtures').content.textContent),JSON.parse($('#page-builder-history-image-fixture').content.textContent));
+  const historyAdapter=live?live.historyAdapter(()=>historyArchiveId||(revision?active?.id:null)):createHistoryFixtureAdapter(JSON.parse($('#page-builder-history-fixtures').content.textContent),JSON.parse($('#page-builder-history-image-fixture').content.textContent));
   function createPublicationFixtureAdapter(fixtures){
     const requests=new Map(),failActions={...(fixtures.failActions||{})};let sequence=0;
     const wait=async action=>{
@@ -184,7 +187,9 @@
     historyMetadata.textContent=`Revision ${entry.revision} · Saved ${entry.savedAt} · ${entry.editorName} · ${entry.state}`;
     try{
       const page=structuredClone(entry.page),context=historyValidationContext(page);
-      historyFrame.srcdoc=Builder.document(page,{...context,css:cssText});
+      const html=Builder.document(page,{...context,css:cssText});
+      const nextFrame=node('iframe',{id:'history-frame',title:historyFrame.title,sandbox:'',loading:'eager',srcdoc:html});
+      historyFrame.replaceWith(nextFrame);historyFrame=nextFrame;
     }catch(error){
       historyFrame.srcdoc='';
       historyRepair.textContent=`Repair needed. ${live?"This saved":"This demonstration"} revision is invalid and was not rendered: ${error.message}`;
@@ -208,7 +213,18 @@
     }finally{if(request===historyRequest)historyLoading=false;}
   }
   function closeHistory(){
-    historyRequest++;historyLoading=false;historyPanel.hidden=true;historyToggle.setAttribute('aria-expanded','false');historyToggle.focus();
+    historyRequest++;historyLoading=false;historyPanel.hidden=true;historyToggle.setAttribute('aria-expanded','false');
+    (historyReturnFocus?.isConnected?historyReturnFocus:historyToggle).focus();
+  }
+  function resetLiveHistory(){
+    if(!live)return;
+    historyRequest++;historyLoading=false;historyLoaded=false;historyVersions=[];historySelection=null;historyArchiveId=null;historyReturnFocus=null;
+    historyPanel.hidden=true;historyToggle.setAttribute('aria-expanded','false');historyList.replaceChildren();historyDetail.hidden=true;historyFrame.srcdoc='';$('#history-heading').textContent='Version history';
+  }
+  function openArchivedHistory(record,control){
+    resetLiveHistory();historyArchiveId=record.pageId;historyReturnFocus=control;
+    $('#history-heading').textContent=`Archived history: ${record.title}`;
+    historyPanel.hidden=false;historyToggle.setAttribute('aria-expanded','true');$('#history-close').focus();loadHistory();
   }
   function publicationSavedRecord(){return active&&revision?records.find(record=>record.draft.id===active.id&&record.revision===revision):null;}
   function publicationReviewIsCurrent(){const record=publicationSavedRecord();return !!record&&!!publicationReview&&publicationReview.id===record.draft.id&&publicationReview.revision===record.revision&&publicationReview.editorFingerprint===JSON.stringify(active);}
@@ -353,6 +369,8 @@
   }
   function renderDraftList(){
     draftList.replaceChildren();$('#drafts-empty').hidden=records.length>0;
+    $('#archived-pages').hidden=!live||!archivedRecords.length;$('#archived-list').replaceChildren();
+    for(const record of archivedRecords){const item=node('li'),control=node('button',{type:'button',dataset:{archivedId:record.pageId}},`View archived history: ${record.title}`);item.append(control);$('#archived-list').append(item);}
     for(const record of records){
       const item=node('li'),open=node('button',{type:'button','aria-current':active?.id===record.draft.id?'true':'false',dataset:{openId:record.draft.id}});
       open.append(node('span',{className:'pb-draft-title'},record.draft.title),node('span',{className:'pb-draft-address'},`/pages/${record.draft.slug} · revision ${record.revision}`));item.append(open);draftList.append(item);
@@ -417,6 +435,7 @@
     return block;
   }
   function newPage(){
+    resetLiveHistory();
     let slug='new-page',suffix=2;while(records.some(record=>record.draft.slug===slug))slug=`new-page-${suffix++}`;
     invalidatePublicationReview();
     active={id:uid(),title:'New page',slug,intro:'',sections:[]};revision=null;snapshot=null;slugEdited=false;dirty=true;
@@ -427,7 +446,7 @@
     if(!canLeave())return;
     const opening=++recordRequest,before=JSON.stringify(active);
     if(live&&record.summary){try{record=await live.load(record.draft.id);if(opening!==recordRequest)return;if(JSON.stringify(active)!==before){setStatus('Your editor changed while loading. Changes are preserved; select the draft again when ready.','unsaved');return;}const index=records.findIndex(value=>value.draft.id===record.draft.id);records[index]=record;}catch(error){reportError(error);return;}}
-    historyRequest++;historyLoading=false;historyLoaded=false;historyVersions=[];historySelection=null;if(live){historyPanel.hidden=true;historyToggle.setAttribute('aria-expanded','false');historyList.replaceChildren();historyDetail.hidden=true;historyFrame.srcdoc='';}
+    resetLiveHistory();historyRequest++;historyLoading=false;historyLoaded=false;historyVersions=[];historySelection=null;if(live){historyPanel.hidden=true;historyToggle.setAttribute('aria-expanded','false');historyList.replaceChildren();historyDetail.hidden=true;historyFrame.srcdoc='';}
     invalidatePublicationReview();
     active=structuredClone(record.draft);revision=record.revision;snapshot=JSON.stringify(active);dirty=false;slugEdited=true;
     if(live){setPublicationLock(false);publicationRequest=record.publication||null;}
@@ -447,12 +466,14 @@
   }
   function syncField(target){
     const {field,sectionId,blockId}=target.dataset;if(!field)return;
+    if(!active)return;const before=JSON.stringify(active);
     clearFieldError(target);
     if(field==='title'&&!sectionId&&!blockId){active.title=target.value;if(!slugEdited){active.slug=slugify(target.value);slugInput.value=active.slug;}}
     else if(field==='slug'){active.slug=target.value;slugEdited=true;}
     else if(field==='intro')active.intro=target.value;
     else if(sectionId){const section=active.sections.find(entry=>entry.id===sectionId);if(!section)return;if(field.startsWith('layout.')){const key=field.slice(7);section.layout[key]=key==='columns'?Number(target.value):key==='border'?target.checked:target.value;}else section[field]=target.type==='checkbox'?target.checked:target.value;}
     else if(blockId){const block=active.sections.flatMap(section=>section.blocks).find(entry=>entry.id===blockId);if(!block)return;block[field]=target.type==='checkbox'?target.checked:target.value;if(field==='image'&&block.type==='card'&&!target.value)block.image=null;}
+    if(JSON.stringify(active)===before)return;
     updateDirty();renderDraftList();updatePreview();
     if(sectionId&&field==='title'){const sectionIndex=active.sections.findIndex(section=>section.id===sectionId),card=sections.querySelector(`[data-section-card="${CSS.escape(sectionId)}"] h3`);if(card)card.textContent=`Section ${sectionIndex+1}${target.value?`: ${target.value}`:''}`;}
   }
@@ -465,7 +486,7 @@
   async function loadDrafts(){
     retry.hidden=true;setStatus('Loading private local drafts...','loading');
     try{
-      if(live){await live.ready;const data=await api('/api/pages');records=data.pages;existingPages=data.existingPages;images=data.imageChoices;cssText=await fetch('page-builder.css').then(response=>response.text());renderDraftList();renderPublication();setStatus('Choose a saved page or create a new one. Drafts save privately.','saved');return;}
+      if(live){await live.ready;const data=await api('/api/pages');records=data.pages;archivedRecords=data.archivedPages||[];existingPages=data.existingPages;images=data.imageChoices;cssText=await fetch('page-builder.css').then(response=>response.text());renderDraftList();renderPublication();setStatus('Choose a saved page or create a new one. Drafts save privately.','saved');return;}
       const session=await fetch('/api/session').then(async response=>{if(!response.ok)throw new Error('The local draft service is unavailable.');return response.json();});
       if(session.mode!=='local'||typeof session.token!=='string')throw new Error('Unexpected local session response.');token=session.token;
       const data=await api('/api/pages');records=data.pages;existingPages=records.map(record=>({id:record.draft.id,slug:record.draft.slug}));images=data.imageChoices;cssText=await fetch('/page-builder.css').then(async response=>{if(!response.ok)throw new Error('Could not load preview styles.');return response.text();});
@@ -499,7 +520,7 @@
     else if(!window.confirm('Discard this unsaved page?'))return;
     if(!revision){active=null;dirty=false;snapshot=null;renderEditor();setStatus('Unsaved page discarded.','saved');$('#new-page').focus();return;}
     setStatus('Deleting local draft...','saving');
-    try{await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id:deletingId,revision})});invalidatePublicationReview();records=records.filter(record=>record.draft.id!==deletingId);existingPages=records.map(record=>({id:record.draft.id,slug:record.draft.slug}));active=null;revision=null;snapshot=null;dirty=false;renderEditor();setStatus(live?'Draft archived. Saved revisions are retained.':'Saved draft deleted.','saved');(draftList.querySelector('button')||$('#new-page')).focus();}
+    try{const result=await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id:deletingId,revision})});if(live)archivedRecords.push({pageId:deletingId,title:active.title,slug:active.slug,version:result.record.revision,archived:true});resetLiveHistory();invalidatePublicationReview();records=records.filter(record=>record.draft.id!==deletingId);existingPages=records.map(record=>({id:record.draft.id,slug:record.draft.slug}));active=null;revision=null;snapshot=null;dirty=false;renderEditor();setStatus(live?'Draft archived. Saved revisions are retained.':'Saved draft deleted.','saved');(draftList.querySelector('button')||$('#new-page')).focus();}
     catch(error){reportError(error,{prefix:'Delete failed: ',suffix:' The saved draft remains available.',focusTarget:$('#delete-draft')});}
   }
   async function exportHtml(){
@@ -515,6 +536,7 @@
   $('#page-title').dataset.field='title';$('#page-slug').dataset.field='slug';$('#page-intro').dataset.field='intro';
   historyToggle.addEventListener('click',()=>{
     if(!historyPanel.hidden){closeHistory();return;}
+    if(historyArchiveId)resetLiveHistory();historyReturnFocus=null;
     historyPanel.hidden=false;historyToggle.setAttribute('aria-expanded','true');
     if(!historyLoaded)loadHistory();
   });
@@ -539,6 +561,7 @@
     const entry=historyVersions.find(version=>version.key===control.dataset.historyKey);if(entry)selectHistoryRevision(entry);
   });
   draftList.addEventListener('click',event=>{const control=event.target.closest('[data-open-id]');if(control){const record=records.find(entry=>entry.draft.id===control.dataset.openId);if(record)setRecord(record);}});
+  $('#archived-list').addEventListener('click',event=>{const control=event.target.closest('[data-archived-id]');if(!control)return;const record=archivedRecords.find(entry=>entry.pageId===control.dataset.archivedId);if(record)openArchivedHistory(record,control);});
   $('#new-page').addEventListener('click',()=>{if(canLeave())newPage();});
   $('#refresh-drafts').addEventListener('click',loadDrafts);
   $('#retry').addEventListener('click',loadDrafts);
