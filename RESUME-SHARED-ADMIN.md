@@ -1,3 +1,5 @@
+**Attachment edit preparation — 1 October:** subsequent shared-field/type edits now have version/permission/value validation and preserve baseline/history. Tests pass. Next: extend SQL receipt/version storage beyond version 1, then authenticated API. No deployment.
+
 **Attachment reciprocal guard — 1 October:** storage proposal now blocks competing saved specialist/Attachment drafts in either insertion order using the shared item transaction lock. Local SQL tests pass; unapplied. Next: subsequent revisions and authenticated API integration.
 
 **Attachment private storage — 1 October:** first-classification receipt storage proposal now passes real local SQL save/reload/retry and conflict tests. Not deployed. Reciprocal specialist overlap checks, subsequent edits and API integration remain required. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.

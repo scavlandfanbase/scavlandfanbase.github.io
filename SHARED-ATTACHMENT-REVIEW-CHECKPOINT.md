@@ -40,3 +40,9 @@ The storage proposal now guards INSERT on both specialist versions and Attachmen
 Local PGlite checks pass for Attachment-first specialist refusal, specialist-first Attachment refusal through both the save function and direct trusted insertion, and preservation of the first saved draft. These tests exercise both insertion orders sequentially; they are not a multi-connection production concurrency acceptance test. Contract checks and git diff --check pass. Proposal remains unapplied.
 
 Next: subsequent Attachment revisions/edit contract, stable receipt binding and authenticated API integration. Existing specialist editor changes are not deployed by this checkpoint. Publication/legacy migration remain explicit, pending work.
+
+## Subsequent Attachment edit preparation
+
+prepareAttachmentEdit now accepts only recorded shared name/description/notes/image/reference price/max-stack and Attachment Type. It requires trusted Items permission, exact saved identity and expected saved version. Approved image library, nullable text/numbers and integer stack limits are validated. Existing IDs, classification, effects, provenance, original baseline and source/legacy bindings remain intact; changes record an Unverified review using server identity/time, while unchanged edits preserve history.
+
+Fixture edit tests pass for preserved identity/baseline, immutable saved input, stale-version denial, protected ID refusal, image/number validation, permission denial and no-op review preservation. Attachment preparation/storage suites and diff check pass. This preparation does not yet save subsequent versions: the version-1 SQL proposal must be extended and tested before API/UI activation. No deployment.

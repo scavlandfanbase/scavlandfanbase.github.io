@@ -51,3 +51,29 @@ export function prepareAttachmentClassification(record,command,context={}){
   changedFields:['contentType','attachmentType','classification','verification'].filter(key=>JSON.stringify(record[key])!==JSON.stringify(result[key]))};
 }
 
+export function prepareAttachmentEdit(command,context={}){
+ authorize(context);
+ const allowed=['action','confirmId','expectedVersion','fields'];
+ if(!object(command)||Object.keys(command).some(k=>!allowed.includes(k))||command.action!=='edit-attachment')fail('Unsupported Attachment edit.');
+ if(!Number.isSafeInteger(context.version)||context.version<1||command.expectedVersion!==context.version)fail('The saved draft changed. Reload before editing.',409);
+ const saved=context.savedDraft;
+ if(!object(saved)||saved.category!=='attachments'||saved.itemId!==command.confirmId||saved.record?.id!==saved.itemId||saved.record.contentType!=='Attachment')fail('Load the saved Attachment before editing.');
+ if(saved.record.archived)fail('Restore the item before editing.');
+ const fields=['name','description','notes','image','estimatedPrice','maxStack','attachmentType'];
+ if(!object(command.fields)||Object.keys(command.fields).some(k=>!fields.includes(k)))fail('Unsupported Attachment fields.');
+ const result=structuredClone(saved),changed=[];
+ for(const [key,value]of Object.entries(command.fields)){
+  if(key==='name'&&(typeof value!=='string'||!value.trim()||value.length>300))fail('Enter an item name.');
+  if(['description','notes'].includes(key)&&value!==null&&(typeof value!=='string'||value.length>10000))fail('Enter text or an unknown value.');
+  if(key==='image'&&value!==null&&(!Array.isArray(context.images)||!context.images.includes(value)))fail('Choose an image from the trusted library.');
+  if(['estimatedPrice','maxStack'].includes(key)&&value!==null&&(typeof value!=='number'||!Number.isFinite(value)||value<0||key==='maxStack'&&!Number.isSafeInteger(value)))fail('Enter a valid recorded number or unknown value.');
+  if(key==='attachmentType'&&!Attachments.types.includes(value))fail('Choose an Attachment Type, including Unknown.');
+  if(JSON.stringify(result.record[key])!==JSON.stringify(value)){result.record[key]=structuredClone(value);changed.push(key);}
+ }
+ Attachments.validate(result.record);
+ if(changed.length)result.record.verification=Verification.decide(saved.record,'unverified',context.settings,context.actor,context.clock||(()=>new Date())).verification;
+ result.expectedVersion=context.version;result.actor=context.actor;
+ result.changedFields=['contentType','attachmentType','classification','verification',...fields].filter((key,index,array)=>array.indexOf(key)===index&&JSON.stringify(result.before?.[key])!==JSON.stringify(result.record[key]));
+ return result;
+}
+
