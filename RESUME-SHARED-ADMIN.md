@@ -1,5 +1,7 @@
 # Resume shared Admin work — saved 30 September 2026
 
+1 October follow-up: resumed and prepared the reviewed import contract described in `SHARED-LEGACY-IMPORT-CHECKPOINT.md`. Next is its authenticated save/acknowledgement and explicit UI integration. The historical overnight handoff below remains useful context; no shared-editor rollout has happened.
+
 User stopped work for the night. Resume from this handoff and NEXT_JOBS.md; do not restart completed checkpoints or activate production from historical approvals.
 
 ## Saved state

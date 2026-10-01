@@ -52,7 +52,13 @@ export function reconcilePublishedItem(input,documents){
  return state;
 }
 function validate(state){
- keys(state,['schemaVersion','itemId','category','revision','original','records','changes','creation']);
+ keys(state,['schemaVersion','itemId','category','revision','original','records','changes','creation','legacyTransfer']);
+ if(state.legacyTransfer){
+  const t=state.legacyTransfer;keys(t,['sourceVersion','sourceDigest','publicDigest','preserved','importedFields','actor','at']);
+  if(!Number.isSafeInteger(t.sourceVersion)||t.sourceVersion<1||!Array.isArray(t.importedFields)||
+   !/^[0-9a-f]{64}$/.test(t.sourceDigest)||!/^[0-9a-f]{64}$/.test(t.publicDigest)||
+   t.preserved?.privateRecord?.id!==state.itemId||t.preserved?.sourceRecord?.id!==state.itemId||typeof t.actor!=='string'||!t.actor||!Number.isFinite(Date.parse(t.at)))fail('Invalid legacy transfer context.');
+ }
  if(state.schemaVersion!==1||typeof state.itemId!=='string'||!Object.hasOwn(tags,state.category)||!Number.isSafeInteger(state.revision)||state.revision<0)fail('Invalid per-item draft.');
  keys(state.original,Object.keys(paths));keys(state.records,Object.keys(paths));keys(state.changes,Object.keys(paths));
  if(!state.original.items||!state.records.items)fail('Missing shared identity.');
