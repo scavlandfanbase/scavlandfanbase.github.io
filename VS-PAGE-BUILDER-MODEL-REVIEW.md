@@ -65,3 +65,11 @@ Two integration gaps remain. Real updatePublicationRequest code passes false to 
 Publication error handlers also set an error message in catch then call renderPublication in finally, which overwrites it with publicationMessage. A focused VM reproduction of the real runPublicationAction and publicationMessage confirms a thrown check error is written then replaced by the normal Outcome unknown message. Review/start handlers have the same catch/finally structure. Persist an action error separately through rendering, clear it deliberately on retry/success, and test rejecting review/start/check/retry adapters with recoverable focus and unchanged draft/request identity. Do not assume the passing scenario suite covers rejected operations.
 
 This remains fixture-only. No genuine publication or arbitrary-script issue was demonstrated. VS owns these focused UI corrections; main backend/Git/Pages work remains separate. Do not integrate publication controls until the UI status/lock/error contract is aligned and reverified.
+
+## Publication lock/error correction independently verified — 37aa542
+
+Fetched exact pushed branch head 37aa542 and reviewed the diff from ad1146d. Changes are confined to Page Builder JS/HTML, browser tests and checkpoint; no model, service, backend, game data or NEXT_JOBS changes. Full Page Builder suite independently passed in an isolated archive.
+
+Both recorded gaps are resolved for the fixture adapter. Failed deployment and unconfirmed completion retain editing locks; unconfirmed completion becomes Outcome unknown. Persistent action errors survive final rendering, clear on retry/success, and restore action focus. Rejection regressions cover review/start/check/retry with unchanged saved revisions, preserved unsaved edits, same-request recovery and no draft-service mutation. Fixture start rejection occurs before allocation; this does not prove recovery after a real server accepts a request and its response is lost.
+
+Accepted as the reviewed demonstration UI checkpoint only. Real publication still requires authenticated integration, durable request identity before external actions, Git/Pages evidence and uncertain-outcome reconciliation. No merge, deployment or live Page Builder enablement occurred.
