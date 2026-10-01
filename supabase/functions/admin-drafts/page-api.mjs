@@ -2,21 +2,25 @@
 import {validatePageRequest} from './page-request.mjs';
 import model from './page-model.mjs';
 import {createPageContextSource} from './page-source.mjs';
+import {createPageControlApi} from './page-control-api.mjs';
 const uuid=value=>typeof value==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
 const headers={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Cache-Control':'no-store'};
 const reply=(body,status=200)=>Response.json(body,{status,headers});
 function fail(status){const error=new Error();error.status=status;throw error;}
 export function createPageApi({env,fetcher=fetch,readContext}){
  const contextReader=readContext??createPageContextSource({env,fetcher});
+ const controls=createPageControlApi({env,fetcher});
  return async request=>{
   if(env('PAGE_BUILDER_ENABLED')!=='true')return reply({error:'Page Builder is not enabled.'},503);
   if(request.method!=='POST')return reply({error:'POST is required.'},405);
   const authorization=request.headers.get('Authorization');
   if(!authorization?.startsWith('Bearer ')||!authorization.slice(7).trim())return reply({error:'Sign in to continue.'},401);
+  const controlRequest=request.clone();
   try{
    const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY');if(!sb||!key)fail(503);
    const raw=await request.text();if(new TextEncoder().encode(raw).length>1100000)fail(413);
    let command;try{command=validatePageRequest(JSON.parse(raw));}catch{fail(400);}
+   if(['source','history','revision','preview','publish','status','page-state'].includes(command.action))return controls(controlRequest);
    async function rpc(name,args,trusted=false){
     const credential=trusted?env('SUPABASE_SERVICE_ROLE_KEY'):key;if(!credential)fail(503);
     const response=await fetcher(sb+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:credential,

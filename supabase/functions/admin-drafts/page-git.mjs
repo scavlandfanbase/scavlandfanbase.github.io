@@ -2,6 +2,17 @@ import {verifyTrustedPagePreview} from './page-preview.mjs';
 const root='https://api.github.com/repos/scavlandfanbase/scavlandfanbase.github.io';
 const sha=value=>typeof value==='string'&&/^[a-f0-9]{40}$/.test(value);
 function fail(status=503){const error=new Error('Page repository operation unavailable.');error.status=status;throw error;}
+export function createPageGitObserver({env,fetcher=fetch}){
+ return async candidate=>{
+  if(!sha(candidate?.commit)||!sha(candidate?.baseHead)||!env('GITHUB_TOKEN'))fail();
+  async function get(path){const response=await fetcher(root+path,{headers:{Authorization:'Bearer '+env('GITHUB_TOKEN'),Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2026-03-10'},redirect:'error',signal:AbortSignal.timeout(15000)});if(!response.ok)fail();return response.json();}
+  const ref=await get('/git/ref/heads/main');if(ref.ref!=='refs/heads/main'||ref.object?.type!=='commit'||!sha(ref.object.sha))fail();
+  if(ref.object.sha===candidate.commit)return {...candidate,state:'committed'};
+  if(ref.object.sha===candidate.baseHead)return {...candidate,state:'unknown'};
+  const comparison=await get('/compare/'+candidate.commit+'...'+ref.object.sha);
+  return {...candidate,state:comparison.merge_base_commit?.sha===candidate.commit&&['ahead','identical'].includes(comparison.status)?'committed':'unknown'};
+ };
+}
 // Unwired server adapter. persistCandidate must durably bind one candidate per
 // publication request BEFORE any ref write. Its database implementation is required.
 export function createPageGitPublisher({env,fetcher=fetch,persistCandidate,claimAttempt}){

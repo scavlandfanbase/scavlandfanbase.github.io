@@ -13,7 +13,12 @@ const assert=require('node:assert/strict');
   for(const key of Object.keys(original)){const value={...original};delete value[key];rejects(value);}
   for(const field of ['actor','savedAt','permissions','approved','base','source','digest','extra'])rejects({...original,[field]:'forged'});
  }
- for(const action of ['publish','approve','delete','preview','source','prepare'])rejects({domain:'page-builder',action});
+ for(const action of ['publish','approve','delete','preview','prepare','status','revision','history'])rejects({domain:'page-builder',action});
+ for(const command of [{domain:'page-builder',action:'source'},{domain:'page-builder',action:'history',pageId},
+ {domain:'page-builder',action:'revision',pageId,version:1},{domain:'page-builder',action:'preview',pageId,version:1,requestId},
+ {domain:'page-builder',action:'publish',previewId:pageId,requestId},{domain:'page-builder',action:'status',requestId}]){
+  assert.deepEqual(validate(command),command);rejects({...command,actor:'forged'});
+ }
  assert.deepEqual(validate({domain:'page-builder',action:'list',after:pageId}),{domain:'page-builder',action:'list',after:pageId});
  rejects({domain:'page-builder',action:'list',after:'../private'});
  for(const input of [null,[],true,'page',{}, {domain:'items',action:'list'}])rejects(input);

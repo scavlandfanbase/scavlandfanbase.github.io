@@ -47,12 +47,12 @@ async function seed(slug){
  once(database,service+';select public.scavland_prepare_page_preview('+[actor,previewId,payload.id,1,preview].map(quote).join(',')+')');
  const saveRequest=crypto.randomUUID(),edited={...payload,title:'Later'};
  once(database,service+';'+prep(saveRequest,'save',payload.id,1,{page:edited},edited));
- return {id:payload.id,previewId,saveRequest};
+ return {id:payload.id,previewId,saveRequest,preview};
 }
 (async()=>{let created=false;try{
  once('postgres','create database '+database);created=true;
  once(database,"create schema auth;create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;create function public.has_scavland_permission(p text) returns boolean language sql stable as $$select auth.uid()='"+actor+"'::uuid and p='content_edit'$$;create table public.fixture_owners(id uuid primary key,enabled boolean);insert into public.fixture_owners values('"+actor+"',true);create function public.is_scavland_owner() returns boolean language sql stable security definer set search_path='' as $$select coalesce((select enabled from public.fixture_owners where id=auth.uid()),false)$$;grant usage on schema auth to authenticated");
- for(const file of ['page-builder-storage.sql','page-builder-publication.sql'])once(database,fs.readFileSync(path.join(__dirname,'../supabase/proposals',file),'utf8'));
+ for(const file of ['page-builder-storage.sql','page-builder-publication.sql','page-builder-git-candidate.sql','page-builder-dispatch.sql','page-builder-read.sql'])once(database,fs.readFileSync(path.join(__dirname,'../supabase/proposals',file),'utf8'));
  console.log('PostgreSQL '+once(database,'show server_version')+'; isolation '+once(database,'show transaction_isolation'));
  let page=await seed('reservation-first');
  await race('Publication reservation refuses a waiting save',reserve(crypto.randomUUID(),page.previewId),commit(page.id,page.saveRequest),{conflict:true});
@@ -81,6 +81,19 @@ async function seed(slug){
   assert.equal(once(database,'select count(*) from scavland_pages.publications where page_id='+quote(page.id)),'0');
   console.log('PASS Owner revocation during lock wait refuses publication — observed independent wait and 42501.');
  }finally{holder.close();waiting.close();once(database,"update public.fixture_owners set enabled=true where id="+quote(actor));}
- console.log('PASS six independent page publication reservation/edit concurrency scenarios. No production calls.');
+ async function dispatchSeed(slug){const p=await seed(slug),r=crypto.randomUUID();once(database,auth(actor)+';'+reserve(r,p.previewId));
+ const candidate={requestId:r,commit:'c'.repeat(40),tree:'d'.repeat(40),baseHead:p.preview.baseHead,digest:p.preview.digest,path:p.preview.path};
+ once(database,service+';select public.scavland_prepare_page_git_candidate('+quote(r)+','+quote(candidate)+')');return {...p,request:r};}
+ const dispatch=(r,a,action)=>'select public.scavland_page_dispatch('+[r,a,action].map(quote).join(',')+')';
+ page=await dispatchSeed('single-dispatch-race');
+ const attempts=await race('Concurrent dispatchers acquire exactly one claim',dispatch(page.request,crypto.randomUUID(),'claim'),dispatch(page.request,crypto.randomUUID(),'claim'),{roleA:service,roleB:service});
+ assert.equal(JSON.parse(attempts.first).acquired,true);assert.equal(JSON.parse(attempts.second.value).acquired,false);
+ page=await dispatchSeed('dispatch-rollback');
+ const rolled=await race('Rolled-back claim permits the waiting dispatcher',dispatch(page.request,crypto.randomUUID(),'claim'),dispatch(page.request,crypto.randomUUID(),'claim'),{roleA:service,roleB:service,rollback:true});
+ assert.equal(JSON.parse(rolled.second.value).acquired,true);
+ page=await dispatchSeed('refusal-save-race');const attempt=crypto.randomUUID();once(database,service+';'+dispatch(page.request,attempt,'claim'));
+ await race('Proven no-write refusal releases a waiting save',dispatch(page.request,attempt,'refuse-no-write'),commit(page.id,page.saveRequest),{roleA:service});
+ assert.equal(once(database,'select count(*) from scavland_pages.versions where page_id='+quote(page.id)),'2');
+ console.log('PASS nine independent publication/edit/dispatch concurrency scenarios. No production calls.');
  }finally{if(created)once('postgres','drop database '+database+' with (force)');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

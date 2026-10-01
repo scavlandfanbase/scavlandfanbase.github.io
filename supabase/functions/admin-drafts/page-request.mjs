@@ -15,6 +15,13 @@ export function validatePageRequest(input){
    keys(input,Object.hasOwn(input,'after')?['domain','action','after']:['domain','action']);
    if(Object.hasOwn(input,'after'))identity(input.after);break;
   case 'load':keys(input,['domain','action','pageId']);identity(input.pageId);break;
+  case 'source':keys(input,['domain','action']);break;
+  case 'history':keys(input,['domain','action','pageId']);identity(input.pageId);break;
+  case 'page-state':keys(input,['domain','action','pageId']);identity(input.pageId);break;
+  case 'revision':keys(input,['domain','action','pageId','version']);identity(input.pageId);version(input.version);break;
+  case 'preview':keys(input,['domain','action','pageId','version','requestId']);identity(input.pageId);version(input.version);identity(input.requestId);break;
+  case 'publish':keys(input,['domain','action','previewId','requestId']);identity(input.previewId);identity(input.requestId);break;
+  case 'status':keys(input,['domain','action','requestId']);identity(input.requestId);break;
   case 'create':
    keys(input,['domain','action','requestId','page']);identity(input.requestId);
    // The server assigns permanent page identity. Local IDs cannot become live IDs.

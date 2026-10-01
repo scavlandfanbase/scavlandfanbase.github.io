@@ -4,13 +4,13 @@ import {validatePageManifest} from './page-publication.mjs';
 const root='https://api.github.com/repos/scavlandfanbase/scavlandfanbase.github.io';
 function unavailable(){const error=new Error();error.status=503;throw error;}
 export function createPageContextSource({env,fetcher=fetch,withSnapshot=false}){
- return async({pageId,rpc})=>{
+ return async({pageId,rpc,pinnedHead})=>{
   const token=env('GITHUB_TOKEN');if(!token)unavailable();
   async function get(path){
    const response=await fetcher(root+path,{headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(15000)});
    if(!response.ok)unavailable();return response.json();
   }
-  const head=(await get('/git/ref/heads/main')).object?.sha;
+  const head=pinnedHead??(await get('/git/ref/heads/main')).object?.sha;
   if(typeof head!=='string'||!/^[a-f0-9]{40}$/i.test(head))unavailable();
   const tree=await get('/git/trees/'+head+'?recursive=1');
   if(tree.truncated!==false||!Array.isArray(tree.tree))unavailable();
