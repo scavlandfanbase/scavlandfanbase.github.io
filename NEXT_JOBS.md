@@ -1,3 +1,5 @@
+**Attachment compatibility contract — 1 October:** compatibleWeaponIds now validates explicit unique active Weapon references; null means Unknown and [] means an explicitly empty list. Trusted preparation and fresh publication checks reject invented/ambiguous/inactive references; full Attachment release suite passes. UI and combined storage acceptance remain next. No live changes.
+
 **Consolidated Attachment release checks — 1 October:** npm run test:attachments runs all eight Attachment suites plus Admin/invites with browser coverage enabled and stops on failure. Fixed an older browser-fixture save timing race by waiting for the actual save response. Full run passes. Existing-item scope remains; Add-new/Weapon-ID compatibility and live acceptance are separate outstanding work.
 
 **VS handoff independently verified — 1 October:** exact 3ce5f1a isolated source passes Page Builder, Items shell/full editor, Vendor and Admin/invite suites. Focused local service/render/filter review confirms reported scope. No merge/deployment; production builder gates remain. See VS-PAGE-BUILDER-REVIEW.md.

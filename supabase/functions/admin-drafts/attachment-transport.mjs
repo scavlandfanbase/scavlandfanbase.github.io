@@ -61,7 +61,7 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
    for(const kind of ['ammo','armour','weapons'])if(latest.documents['data/'+kind+'.json']?.data.some(r=>r.id===itemId))fail('Review this item in its existing category editor.',409);
    const saved=await rpc('scavland_attachment_draft',{p_action:'load',p_item:itemId},authorization);
    const legacy=await rpc('scavland_item_legacy',{},authorization,true);
-   return {source,settings:latest.settings,images:latest.images,version:saved.currentVersion,savedDraft:saved.draft?.payload||null,legacyDrafts:legacy?[legacy]:[],legacyVersion:legacy?.version||0};
+   return {source,settings:latest.settings,images:latest.images,weapons:latest.documents['data/weapons.json']?.data,version:saved.currentVersion,savedDraft:saved.draft?.payload||null,legacyDrafts:legacy?[legacy]:[],legacyVersion:legacy?.version||0};
   },
   storage:{
    receipt:input=>rpc('scavland_attachment_receipt',{p_actor:input.actor,p_item:input.itemId,p_request:input.requestId,p_command:input.command},null,true),

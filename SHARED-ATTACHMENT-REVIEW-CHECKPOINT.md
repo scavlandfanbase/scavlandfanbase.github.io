@@ -167,3 +167,9 @@ Recorded live v13 deployment, absence of Attachment objects, existing RLS tables
 ## Consolidated release acceptance — 1 October
 
 Added npm run test:attachments with fail-fast execution of all eight Attachment suites and Admin/invites. First consolidated run exposed a browser fixture reading an old Saved message before the next save completed; changed that assertion to wait for the matching save response. Full rerun passes. No production code, data or flags changed.
+
+## Explicit Weapon compatibility contract — 1 October
+
+Added compatibleWeaponIds to trusted private edits and selected-item public projection. References must be unique exact IDs in the current trusted Weapon catalogue, with hidden/archived/ambiguous identities refused. null is Unknown; [] is explicitly empty. Input is copied and sorted; facts changes trigger Unverified while retaining history. Transport supplies the pinned Weapon catalogue and publication revalidates current references. No names/effects imply compatibility and vendor values stay independent.
+
+Contract tests cover valid/unknown/empty, invented/duplicate/missing catalogue/archived/ambiguous references; publication tests cover references removed or hidden after preparation. Full npm run test:attachments passes. Compatibility UI and combined database/browser acceptance are still pending, as is Add-new. No rollout.

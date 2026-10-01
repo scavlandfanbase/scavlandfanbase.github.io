@@ -1,9 +1,10 @@
 // Selected master-only preview planner. No live publish route in this checkpoint.
+import {validateAttachmentCompatibility} from './attachment-compatibility.mjs';
 import {publicValue,same,fail} from './core.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
 import {legacyItemBlockers} from './item-draft.mjs';
 import {githubPublisher} from './github-publisher.mjs';
-const fields=['name','description','notes','image','estimatedPrice','maxStack','contentType','attachmentType','classification','verification','archived'];
+const fields=['name','description','notes','image','estimatedPrice','maxStack','contentType','attachmentType','classification','verification','archived','compatibleWeaponIds'];
 const own=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:record[key]}:{})});
 const published=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:key==='verification'?publicValue({verification:record[key]}).verification:publicValue(record[key])}:{})});
 // Reconcile a confirmed public result before the next private edit. Retain review history.
@@ -39,6 +40,7 @@ export async function planAttachmentPublication(saved,documents,{settings,legacy
  for(const kind of ['ammo','armour','weapons'])if(documents['data/'+kind+'.json']?.data.some(r=>r.id===saved.itemId))fail('This item has specialist links. Review before reclassifying.',409);
  const allKeys=new Set([...Object.keys(saved.before),...Object.keys(saved.record)]);
  const changed=[...allKeys].filter(key=>!same(own(saved.before,key),own(saved.record,key)));
+ if(changed.includes('compatibleWeaponIds'))validateAttachmentCompatibility(saved.record.compatibleWeaponIds,documents['data/weapons.json']?.data);
  if(changed.some(key=>!fields.includes(key)))fail('Protected Attachment facts changed. Review the saved draft.');
  if(!same(own(current,'archived'),own(saved.before,'archived'))&&!same(own(current,'archived'),own(saved.record,'archived'))||!same(own(current,'hidden'),own(saved.before,'hidden')))fail('Item visibility changed. Reload before publishing.',409);
  const output=structuredClone(source),target=output.data.find(r=>r.id===saved.itemId),conflicts=[];

@@ -25,7 +25,7 @@ Repeated post-publication reconciliation could replace retained private verifica
 2. Combined browser/handler/local SQL classification, edit/reload and preview/publication checks pass. Two pages verify stale-preview refusal after a newer save, with no Git writes. Auth/Git remain simulated; genuinely simultaneous Postgres sessions and live Auth acceptance remain unverified.
 3. Deployment manifest prepared in ATTACHMENT-DEPLOYMENT-MANIFEST.md; review it against fresh production state. Migrations in order: attachment-classification-storage.sql, attachment-preview.sql. Neither is applied in production.
 4. Read-only schema/permission/draft/deployment snapshot recorded in ATTACHMENT-PRODUCTION-PREFLIGHT.md. Repeat at rollout; configuration/flag values and signed-in acceptance remain unverified. Preserve genuine old/shared drafts.
-5. Explicit review of release scope: current screen edits existing identities; Add-new and recorded Weapon-ID compatibility are still absent. General Items access must remain.
+5. Explicit review of release scope: current screen edits existing identities; Add-new is absent; Weapon-ID compatibility server preparation/projection checks are prepared, with UI and combined acceptance still pending. General Items access must remain.
 6. Production deployment approval and subsequent signed-in Owner acceptance with an intended controlled item action. Do not publish fixture game data.
 
 Publication checks span GitHub and Postgres; they do not provide one cross-service transaction. Non-force Git ref conflict protection remains; a private-state race after the final check is an acknowledged limitation requiring acceptance/mitigation review.

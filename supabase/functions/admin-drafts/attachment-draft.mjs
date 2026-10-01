@@ -1,4 +1,5 @@
 // Trusted master-only classification preparation; not registered as a live API.
+import {validateAttachmentCompatibility} from './attachment-compatibility.mjs';
 import {Attachments,Verification} from './models.generated.mjs';
 import {fail} from './core.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
@@ -82,10 +83,11 @@ export function prepareAttachmentEdit(command,context={}){
  const saved=context.savedDraft;
  if(!object(saved)||saved.category!=='attachments'||saved.itemId!==command.confirmId||saved.record?.id!==saved.itemId||saved.record.contentType!=='Attachment')fail('Load the saved Attachment before editing.');
  if(saved.record.archived)fail('Restore the item before editing.');
- const fields=['name','description','notes','image','estimatedPrice','maxStack','attachmentType'];
+ const fields=['name','description','notes','image','estimatedPrice','maxStack','attachmentType','compatibleWeaponIds'];
  if(!object(command.fields)||Object.keys(command.fields).some(k=>!fields.includes(k)))fail('Unsupported Attachment fields.');
  const result=structuredClone(saved),changed=[];
- for(const [key,value]of Object.entries(command.fields)){
+ for(const [key,input]of Object.entries(command.fields)){
+  const value=key==='compatibleWeaponIds'?validateAttachmentCompatibility(input,context.weapons):input;
   if(key==='name'&&(typeof value!=='string'||!value.trim()||value.length>300))fail('Enter an item name.');
   if(['description','notes'].includes(key)&&value!==null&&(typeof value!=='string'||value.length>10000))fail('Enter text or an unknown value.');
   if(key==='image'&&value!==null&&(!Array.isArray(context.images)||!context.images.includes(value)))fail('Choose an image from the trusted library.');
