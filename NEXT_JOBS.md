@@ -1,3 +1,7 @@
+## Page Builder durable publication records prepared — 1 October 2026
+
+Unapplied SQL now stores exact previews, Owner publication reservations and immutable outcome events. Pending/failed publication prevents save/archive until verified recovery. Local privacy/retry/Owner tests and six independent PostgreSQL concurrency cases pass, including revocation during lock wait. Next: Git/Pages evidence adapter and safe precommit refusal/reconciliation, then combined integration. No live activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Page Builder trusted preview prepared — 1 October 2026
 
 Reviewed renderer/style snapshot now creates deterministic saved-revision previews bound to identity, version, output/style digests, repository head and public path. Regenerated output replaces untrusted submitted HTML/metadata; hidden/private exclusion and validation tests pass. Next: durable preview/publication receipts, Owner reservation and Git/Pages reconciliation. No live preview route or activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
