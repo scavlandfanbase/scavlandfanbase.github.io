@@ -12,7 +12,7 @@ create table scavland_pages.publications (
  commit_sha text,build_run text,created_at timestamptz not null default clock_timestamp(),
  updated_at timestamptz not null default clock_timestamp()
 );
-create unique index page_one_pending_publication on scavland_pages.publications(page_id) where state<>'live';
+create unique index page_one_pending_publication on scavland_pages.publications(page_id) where state not in ('live','refused');
 create table scavland_pages.publication_events (
  event_id uuid primary key,request_id uuid not null references scavland_pages.publications(request_id),
  event jsonb not null,outcome jsonb not null,recorded_at timestamptz not null default clock_timestamp()
@@ -79,7 +79,7 @@ begin
  if not coalesce(public.is_scavland_owner(),false) then raise sqlstate '42501' using message='Owner publication permission required.';end if;
  select * into current_row from scavland_pages.versions where page_id=preview_row.page_id order by version desc limit 1;
  if current_row.version is distinct from preview_row.version or current_row.archived then raise sqlstate 'PT409' using message='Saved page changed since preview.';end if;
- if exists(select 1 from scavland_pages.publications where page_id=preview_row.page_id and state<>'live') then raise sqlstate 'PT409' using message='Page publication still requires reconciliation.';end if;
+ if exists(select 1 from scavland_pages.publications where page_id=preview_row.page_id and state not in ('live','refused')) then raise sqlstate 'PT409' using message='Page publication still requires reconciliation.';end if;
  insert into scavland_pages.publications(request_id,actor,page_id,preview_id) values(p_request,actor,preview_row.page_id,p_preview) returning * into receipt;
  return to_jsonb(receipt);
 end;$$;
@@ -94,7 +94,7 @@ create function scavland_pages.guard_pending_publication()
 returns trigger language plpgsql security definer set search_path='' as $$
 begin
  perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('page-catalogue-write',0));
- if exists(select 1 from scavland_pages.publications where page_id=new.page_id and state<>'live') then
+ if exists(select 1 from scavland_pages.publications where page_id=new.page_id and state not in ('live','refused')) then
   raise sqlstate 'PT409' using message='Page publication is pending. Keep your edits.';end if;
  return new;
 end;$$;
@@ -117,6 +117,7 @@ begin
  perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('page-publish-request:'||p_request::text,0));
  select * into receipt from scavland_pages.publications where request_id=p_request;
  if not found then raise sqlstate '22023' using message='Publication intent required.';end if;
+ if receipt.state='refused' then raise sqlstate 'PT409' using message='Refused publication is terminal.';end if;
  perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('page-catalogue-write',0));
  kind:=p_event->>'type';
  if kind='commit' then

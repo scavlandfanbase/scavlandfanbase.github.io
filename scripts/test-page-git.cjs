@@ -6,7 +6,7 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
  const snapshot={head:'a'.repeat(40),manifest:{schemaVersion:1,pages:[]},context:{approvedImages:[],existingPages:[{id,slug:'field-notes'}],currentPageId:id}};
  const preview=await createTrustedPagePreview({saved,snapshot}),input={requestId:crypto.randomUUID(),createdAt:'2026-10-01T12:00:00.000Z',preview,saved,snapshot};
  const candidate='c'.repeat(40),tree='b'.repeat(40);let head=snapshot.head,persisted=false,loss=false,deny=false,readFail=false,ancestor=false,patches=0,bodies=[];
- const publisher=createPageGitPublisher({env:()=> 'fixture-token',persistCandidate:async value=>{assert.equal(value.commit,candidate);persisted=true;},fetcher:async(url,options)=>{
+ const claims=new Set();const publisher=createPageGitPublisher({env:()=> 'fixture-token',claimAttempt:async value=>{if(claims.has(value.requestId))return false;claims.add(value.requestId);return true;},persistCandidate:async value=>{assert.equal(value.commit,candidate);persisted=true;},fetcher:async(url,options)=>{
   assert.equal(options.redirect,'error');const body=options.body&&JSON.parse(options.body);if(body)bodies.push(body);
   if(url.endsWith('/git/commits/'+snapshot.head))return Response.json({sha:snapshot.head,tree:{sha:tree}});
   if(url.endsWith('/git/trees')){assert.equal(body.base_tree,tree);assert.deepEqual(body.tree.map(x=>x.path),['pages/field-notes/index.html','data/page-builder-pages.json']);assert.equal(body.tree[0].content,preview.html);return Response.json({sha:tree});}
@@ -18,13 +18,14 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
  }});
  assert.equal((await publisher(input)).state,'committed');assert.equal(patches,1);
  assert.equal((await publisher(input)).state,'committed');assert.equal(patches,1,'retry must not repeat a landed ref update');
- head=snapshot.head;loss=true;assert.equal((await publisher(input)).state,'committed','recover lost ref response');
- head=snapshot.head;deny=true;assert.equal((await publisher(input)).state,'unknown','ref rejection cannot release editing');deny=false;
- head='d'.repeat(40);const count=patches;assert.equal((await publisher(input)).state,'refused');assert.equal(patches,count,'changed baseline must not write');
+ head=snapshot.head;input.requestId=crypto.randomUUID();loss=true;assert.equal((await publisher(input)).state,'committed','recover lost ref response');
+ head=snapshot.head;input.requestId=crypto.randomUUID();deny=true;assert.equal((await publisher(input)).state,'unknown','ref rejection cannot release editing');deny=false;
+ const deniedCount=patches;assert.equal((await publisher(input)).state,'unknown');assert.equal(patches,deniedCount,'uncertain replay must never dispatch again');
+ head='d'.repeat(40);input.requestId=crypto.randomUUID();const count=patches;const refused=await publisher(input);assert.equal(refused.state,'refused');assert.equal(refused.noWrite,true);assert.equal(patches,count,'changed baseline must not write');
  ancestor=true;assert.equal((await publisher(input)).state,'committed','later unrelated commits retain landed evidence');ancestor=false;
  head=snapshot.head;readFail=true;assert.equal((await publisher(input)).state,'unknown');readFail=false;
  await assert.rejects(publisher({...input,preview:{...preview,digest:'0'.repeat(64)}}),error=>error.status===409);
- await assert.rejects(createPageGitPublisher({env:()=> 'fixture-token',persistCandidate:async()=>{throw Error('database unavailable');},fetcher:async(url)=>{
+ await assert.rejects(createPageGitPublisher({env:()=> 'fixture-token',claimAttempt:async()=>true,persistCandidate:async()=>{throw Error('database unavailable');},fetcher:async(url)=>{
   if(url.endsWith('/git/commits/'+snapshot.head))return Response.json({sha:snapshot.head,tree:{sha:tree}});
   if(url.endsWith('/git/trees'))return Response.json({sha:tree});if(url.endsWith('/git/commits'))return Response.json({sha:candidate});throw Error('ref must never be touched');
  }})(input),/database unavailable/);
