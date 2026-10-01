@@ -82,3 +82,9 @@ createAttachmentPublisher now reuses the existing non-force Git tree/commit/ref 
 Fixture Git tests pass preview with zero writes, missing preview refusal, exact output publication via tree/commit/non-force ref, and stale/revoked refusal with zero writes. Real local SQL/transport/preview suites remain passing. No real Git publication occurs in tests. Cross-service changes after the final check are not transactionally locked; production integration must preserve existing race disclosure and conflict handling.
 
 Remaining: wire preview/publish actions and service intent callbacks into the authenticated transport, add explicit publish flag/confirmation checks and UI; verify retries/recovery after publication, then coordinated migration/backend/frontend release review. Adapter is unregistered and no production services changed.
+
+## Preview/publish request integration
+
+Attachment API/transport now accept saved-version preview and explicit-confirmation publish. Publication requires ADMIN_CORE_ENABLED and DRAFT_PUBLISH_ENABLED, rechecked in fresh context along with Auth and items_edit permission. Preview stores the exact output digest in the private intent RPC; publishing looks up the bound intent and delegates to the fixed-path non-force adapter. Browser payloads cannot supply publication content or credentials.
+
+Tests pass for API flag/confirmation refusal, allowed mocked handler dispatch, transport preview through real local SQL intent storage and fixture Git reads, existing SQL version/conflict cases and Git planner/adapter checks. Actual Git write integration remains fixture-only; no live publication. Production routing, source-reader integration, CORS/UI, post-publication recovery and release acceptance remain pending. Do not deploy this draft yet.

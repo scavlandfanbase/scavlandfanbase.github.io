@@ -50,9 +50,15 @@ const {PGlite}=require('@electric-sql/pglite');
  // Replace the deliberately malformed legacy SQL fixture with a real catalogue.
  await db.exec('delete from scavland_drafts.versions');
  const source={id:'api-item',name:'Existing',classification:['item']},settings={schemaVersion:1,current_patch_id:'fixture'};
- const latest={documents:{'data/items.json':{data:[source]}},settings,images:[]};
+ const latest={documents:{'data/items.json':{data:[source]}},settings,images:[],base:{'data/items.json':'fixture-blob'}};
  const rpcArguments={scavland_attachment_receipt:['p_actor','p_item','p_request','p_command'],scavland_prepare_attachment:['p_actor','p_item','p_request','p_command','p_payload','p_legacy'],scavland_attachment_draft:['p_action','p_item','p_request']};
  const fetcher=async(url,options)=>{
+  if(url.startsWith('https://api.github.com/')){
+   if(url.includes('/git/ref/heads/'))return Response.json({object:{sha:'fixture-head'}});
+   if(url.includes('/git/commits/'))return Response.json({tree:{sha:'fixture-tree'}});
+   if(url.includes('/contents/'))return Response.json({sha:'fixture-blob',encoding:'base64',content:Buffer.from(JSON.stringify(latest.documents['data/items.json'])).toString('base64')});
+   throw Error('Unexpected Git write');
+  }
   if(url.endsWith('/auth/v1/user'))return Response.json({id:actor});
   const name=url.split('/').at(-1),args=JSON.parse(options.body);
   if(name==='has_scavland_permission')return Response.json(true);
@@ -79,6 +85,9 @@ const {PGlite}=require('@electric-sql/pglite');
  assert.equal((await (await call({action:'load',itemId:source.id})).json()).draft.record.name,'API renamed');
  assert.equal(source.name,'Existing','no public source publication');
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/attachment-preview.sql'),'utf8'));
+ rpcArguments.scavland_attachment_preview=['p_actor','p_item','p_version','p_digest','p_id'];
+ const apiPreview=await call({action:'preview',itemId:source.id,expectedVersion:2});
+ assert.equal(apiPreview.status,200);assert((await apiPreview.json()).previewId);
  const preview=(who,owner=actor,item='api-item',version=2,digest='a'.repeat(64),id=null)=>run(who,'select public.scavland_attachment_preview($1,$2,$3,$4,$5) as v',[owner,item,version,digest,id]);
  const intent=await preview('service');assert.equal(intent.version,2);
  assert.equal((await preview('service',actor,'api-item',2,null,intent.id)).digest,'a'.repeat(64));

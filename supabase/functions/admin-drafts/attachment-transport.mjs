@@ -1,6 +1,8 @@
 // Requires reviewed RPC migration. Not registered in production routing.
 import {createAttachmentApi} from './attachment-api.mjs';
 import {fail} from './core.mjs';
+import {createAttachmentPublisher} from './attachment-publication.mjs';
+import {legacyDigest} from './legacy-item-review.mjs';
 export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
  const sb=env('SUPABASE_URL'),key=env('SUPABASE_ANON_KEY');
  async function rpc(name,args,authorization,trusted=false){
@@ -12,6 +14,29 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
   return result;
  }
  return createAttachmentApi({enabled:()=>env('SHARED_ATTACHMENT_ENABLED')==='true',
+  publishEnabled:()=>env('ADMIN_CORE_ENABLED')==='true'&&env('DRAFT_PUBLISH_ENABLED')==='true',
+  publication:async input=>{
+   async function current(){
+    if(input.action==='publish'&&(env('ADMIN_CORE_ENABLED')!=='true'||env('DRAFT_PUBLISH_ENABLED')!=='true'))fail('Publishing is disabled.',403);
+    const session=await fetcher(sb+'/auth/v1/user',{headers:{apikey:key,Authorization:input.authorization}});
+    if(!session.ok||(await session.json()).id!==input.actor)fail('Sign in again.',401);
+    if(await rpc('has_scavland_permission',{required_permission:'items_edit'},input.authorization)!==true)fail('Items editing permission is required.',403);
+    if(typeof readSource!=='function')fail('Canonical source is unavailable.',503);
+    const latest=await readSource(),saved=await rpc('scavland_attachment_draft',{p_action:'load',p_item:input.itemId},input.authorization);
+    const legacy=await rpc('scavland_item_legacy',{},null,true);
+    return {...latest,actor:input.actor,permissions:['items_edit'],version:saved.currentVersion,savedDraft:saved.draft?.payload,legacyDrafts:legacy?[legacy]:[]};
+   }
+   const context=await current();
+   if(context.version!==input.expectedVersion||!context.savedDraft)fail('The saved version changed. Preview again.',409);
+   const publisher=createAttachmentPublisher({saved:context.savedDraft,version:context.version,base:context.base?.['data/items.json'],token:env('GITHUB_TOKEN'),fetcher,actor:input.actor,previewId:input.previewId,readCurrent:current,
+    readIntent:args=>rpc('scavland_attachment_preview',{p_actor:args.actor,p_item:args.itemId,p_version:args.version,p_id:args.previewId},null,true)});
+   if(input.action==='preview'){
+    const preview=await publisher.preview();
+    const intent=await rpc('scavland_attachment_preview',{p_actor:input.actor,p_item:input.itemId,p_version:context.version,p_digest:await legacyDigest(preview.files)},null,true);
+    return {...preview,previewId:intent.id};
+   }
+   return publisher.publish();
+  },
   authenticate:async authorization=>{
    if(!sb||!key)fail('Authentication is unavailable.',503);
    const response=await fetcher(sb+'/auth/v1/user',{headers:{apikey:key,Authorization:authorization}});

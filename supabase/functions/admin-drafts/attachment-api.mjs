@@ -3,7 +3,7 @@ import {prepareAttachmentDecision,prepareAttachmentEdit} from './attachment-draf
 import {legacyDigest} from './legacy-item-review.mjs';
 import {fail} from './core.mjs';
 import {legacyItemBlockers} from './item-draft.mjs';
-export function createAttachmentApi({enabled=()=>false,authenticate,loadContext,storage}={}){
+export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,authenticate,loadContext,storage,publication}={}){
  return async request=>{
   const reply=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store'}});
   try{
@@ -15,9 +15,16 @@ export function createAttachmentApi({enabled=()=>false,authenticate,loadContext,
    if(!identity.permissions?.includes('items_edit'))fail('Items editing permission is required.',403);
    const raw=await request.text();if(new TextEncoder().encode(raw).length>50000)fail('Attachment request is too large.',413);
    let body;try{body=JSON.parse(raw);}catch{fail('Invalid request.');}
-   if(!body||Array.isArray(body)||Object.keys(body).some(k=>!['action','itemId','requestId','command'].includes(k))||
-    !['load','prepare','save'].includes(body.action)||typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)fail('Invalid Attachment request.');
-   const receiptActions=body.action!=='load';
+   if(!body||Array.isArray(body)||Object.keys(body).some(k=>!['action','itemId','requestId','command','previewId','confirm','expectedVersion'].includes(k))||
+    !['load','prepare','save','preview','publish'].includes(body.action)||typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160)fail('Invalid Attachment request.');
+   if(['preview','publish'].includes(body.action)){
+    if(body.command!==undefined||body.requestId!==undefined||!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<1)fail('Preview a saved Attachment version.');
+    if(body.action==='publish'&&(!publishEnabled()||body.confirm!==true||typeof body.previewId!=='string'))fail('Publication requires enabled publishing and explicit preview confirmation.',403);
+    if(typeof publication!=='function')fail('Attachment publication is unavailable.',503);
+    return reply(await publication({...body,actor:identity.actor,authorization:auth}));
+   }
+   if(body.previewId!==undefined||body.confirm!==undefined||body.expectedVersion!==undefined)fail('Unsupported action fields.');
+   const receiptActions=['prepare','save'].includes(body.action);
    if(receiptActions&&(typeof body.requestId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(body.requestId)))fail('A save request identity is required.');
    if(body.action==='save'){
     if(body.command!==undefined)fail('Save accepts a prepared receipt only.');
