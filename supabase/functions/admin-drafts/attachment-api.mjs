@@ -42,7 +42,7 @@ export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,
    const context={...await loadContext(body.itemId,auth),...identity};
    if(context.source?.id!==body.itemId)fail('Item not found.',404);
    if(body.action==='load')return reply({itemId:body.itemId,currentVersion:context.version,
-    draft:context.savedDraft||null,source:context.source,images:context.images||[],patchId:context.settings?.current_patch_id||null,sourceDigest:await legacyDigest({source:context.source,settings:context.settings})});
+    draft:context.savedDraft||null,source:context.source,images:context.images||[],weapons:(context.weapons||[]).filter(r=>!r.hidden&&!r.archived&&context.weapons.filter(w=>w.id===r.id).length===1).map(r=>({id:r.id,name:r.name||r.id})),patchId:context.settings?.current_patch_id||null,sourceDigest:await legacyDigest({source:context.source,settings:context.settings})});
    if(body.command?.confirmId!==body.itemId)fail('Confirm the selected Item identity.');
    if(context.savedDraft){
     if(!Array.isArray(context.legacyDrafts))fail('Load existing Items work before editing.',503);

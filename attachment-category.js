@@ -2,13 +2,14 @@
 (()=>{
  const $=id=>document.getElementById(id),endpoint='https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts';
  let token='',records=[],selected=null,loaded=null,busy=false,dirty=false,pending=null,preview=null;
- const controls=['type','item-name','description','notes','price','stack','image'];
+ const controls=['type','item-name','description','notes','price','stack','image','compatibility-mode','compatible-weapons'];
  for(const type of ScavAttachments.types){const option=document.createElement('option');option.value=type;option.textContent=type;$('type').append(option);}
  const status=text=>$('status').textContent=text;
  function update(){
   const archived=!!loaded?.draft?.record.archived;
   const editable=!!token&&!!loaded?.draft&&!archived&&!busy&&!pending;
   controls.forEach(id=>$(id).disabled=!editable);
+  $('compatible-weapons').disabled=!editable||$('compatibility-mode').value==='unknown';
   $('type').disabled=!token||!loaded||archived||busy||!!pending;
   $('save').disabled=!editable;$('classify').disabled=!loaded||!!loaded.draft||busy||!!pending;
   $('preview').disabled=!loaded?.currentVersion||busy||dirty||!!pending;
@@ -36,6 +37,9 @@
    $('name').textContent=r.name;$('type').value=r.attachmentType||'Unknown';
    $('image').replaceChildren();for(const image of [...new Set(['',...(loaded.images||[]),...(r.image?[r.image]:[])])]){const option=document.createElement('option');option.value=image;option.textContent=image||'No image recorded';$('image').append(option);}$('image').value=r.image||'';
    for(const [id,key]of [['item-name','name'],['description','description'],['notes','notes'],['price','estimatedPrice'],['stack','maxStack']])$(id).value=r[key]??'';
+   const ids=r.compatibleWeaponIds; $('compatibility-mode').value=Array.isArray(ids)?'recorded':'unknown';$('compatible-weapons').replaceChildren();
+   const weapons=new Map((loaded.weapons||[]).map(w=>[w.id,w.name]));for(const id of Array.isArray(ids)?ids:[])if(!weapons.has(id))weapons.set(id,id+' (recorded; currently unavailable)');
+   for(const [id,name]of weapons){const option=document.createElement('option');option.value=id;option.textContent=name+' ['+id+']';option.selected=Array.isArray(ids)&&ids.includes(id);$('compatible-weapons').append(option);}
    $('state').textContent=loaded.draft?'Saved private Attachment draft':'Candidate: choose a type and explicitly confirm classification. Evidence alone does not establish membership.';status('Loaded.');
   }catch(error){status(error.message);}finally{busy=false;update();}
  }
@@ -54,7 +58,7 @@
  $('review').onclick=()=>{if(!loaded?.draft||busy||dirty||pending)return;if(confirm('Record this review against the current patch? Verified requires checking the actual item.'))prepareAction({action:'review-attachment',decision:$('review-decision').value,patchId:loaded.patchId});};
  $('lifecycle').onclick=()=>{if(!loaded?.draft||busy||dirty||pending)return;const archive=!loaded.draft.record.archived;if(confirm((archive?'Archive':'Restore')+' this item privately? Its identity, history and vendor references are retained.'))prepareAction({action:archive?'archive-attachment':'restore-attachment'});};
  $('form').onsubmit=event=>{event.preventDefault();if(!loaded?.draft||busy||pending)return;
-  pending={id:crypto.randomUUID(),command:{action:'edit-attachment',confirmId:selected,expectedVersion:loaded.currentVersion,fields:{name:$('item-name').value,description:$('description').value||null,notes:$('notes').value||null,estimatedPrice:$('price').value===''?null:Number($('price').value),maxStack:$('stack').value===''?null:Number($('stack').value),attachmentType:$('type').value}}};if(($('image').value||null)!==(loaded.draft.record.image??null))pending.command.fields.image=$('image').value||null;preview=null;save();
+  pending={id:crypto.randomUUID(),command:{action:'edit-attachment',confirmId:selected,expectedVersion:loaded.currentVersion,fields:{name:$('item-name').value,description:$('description').value||null,notes:$('notes').value||null,estimatedPrice:$('price').value===''?null:Number($('price').value),maxStack:$('stack').value===''?null:Number($('stack').value),attachmentType:$('type').value}}};if(($('image').value||null)!==(loaded.draft.record.image??null))pending.command.fields.image=$('image').value||null;const compatibility=$('compatibility-mode').value==='unknown'?null:[...$('compatible-weapons').selectedOptions].map(o=>o.value).sort();if(JSON.stringify(compatibility)!==JSON.stringify(loaded.draft.record.compatibleWeaponIds??null))pending.command.fields.compatibleWeaponIds=compatibility;preview=null;save();
  };
  $('retry').onclick=save;$('search').oninput=paintList;
  $('reload').onclick=()=>{

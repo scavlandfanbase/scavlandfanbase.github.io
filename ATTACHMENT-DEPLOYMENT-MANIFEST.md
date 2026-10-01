@@ -6,7 +6,7 @@ This is a review checklist for draft PR #37, not deployment authorization. Attac
 
 Deploy the complete `supabase/functions/admin-drafts` function from the reviewed commit, starting at `index.ts` and its `production.mjs` import graph. Include existing handler/core/shared-item modules and the Attachment modules: attachment-api.mjs, attachment-draft.mjs, attachment-publication.mjs, attachment-source.mjs, attachment-transport.mjs and attachment-compatibility.mjs. Include models.generated.mjs, item-draft.mjs, legacy-item-review.mjs and github-publisher.mjs; do not replace existing modules with a partial upload. Existing shared-function imports must remain available.
 
-Web assets: admin.html, admin-dashboard.js, attachment-category.html, attachment-category.js, attachment-category.css and existing attachment-model.js. Frame, child script, model and stylesheet use `attachment-preparation-20261001-2`. Bump these together if the reviewed assets change. The frontend release switch is deliberately false. No game-data file is part of this code deployment; subsequent confirmed publication targets only data/items.json.
+Web assets: admin.html, admin-dashboard.js, attachment-category.html, attachment-category.js, attachment-category.css and existing attachment-model.js. Frame, child script, model and stylesheet use `attachment-preparation-20261001-3`. Bump these together if the reviewed assets change. The frontend release switch is deliberately false. No game-data file is part of this code deployment; subsequent confirmed publication targets only data/items.json.
 
 ## Database order and preflight
 
@@ -22,7 +22,7 @@ Existing server configuration: SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE
 
 Deploy backend with SHARED_ATTACHMENT_ENABLED absent or false. Verify ordinary shared editors still work and Attachment requests refuse while disabled. After migrations and permission acceptance, reviewed activation sets SHARED_ATTACHMENT_ENABLED=true. Publishing additionally requires existing ADMIN_CORE_ENABLED=true and DRAFT_PUBLISH_ENABLED=true; do not toggle shared publication settings casually because other editors use them.
 
-Enable frontend ATTACHMENT_RELEASE_ENABLED only in the coordinated reviewed release after backend acceptance. It grants the Attachment route to active authorized Owners or items_edit accounts, matching the existing server permission function. Retain general Items access because Add-new and Weapon-ID compatibility editing are outside this screen's current scope.
+Enable frontend ATTACHMENT_RELEASE_ENABLED only in the coordinated reviewed release after backend acceptance. It grants the Attachment route to active authorized Owners or items_edit accounts, matching the existing server permission function. Retain general Items access because Add-new is outside this screen's current scope.
 
 Confirm Pages deployment completion and fresh frame/child asset versions. Signed-in acceptance must include permission refusal, private save/reload, preview and an explicitly intended real item publication. Never publish fixtures or mark genuine facts Verified merely to test a control.
 

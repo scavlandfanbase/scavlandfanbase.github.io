@@ -1,3 +1,5 @@
+**Attachment compatibility selector — 1 October:** Unknown/recorded-list controls now use server-supplied active Weapon IDs. Combined browser/SQL checks verify save, second-page reload and selected-item publication output; hidden Weapons are excluded and unchanged historical references are retained. Full release suite passes. Add-new and live acceptance remain. No deployment.
+
 **Attachment compatibility contract — 1 October:** compatibleWeaponIds now validates explicit unique active Weapon references; null means Unknown and [] means an explicitly empty list. Trusted preparation and fresh publication checks reject invented/ambiguous/inactive references; full Attachment release suite passes. UI and combined storage acceptance remain next. No live changes.
 
 **Consolidated Attachment release checks — 1 October:** npm run test:attachments runs all eight Attachment suites plus Admin/invites with browser coverage enabled and stops on failure. Fixed an older browser-fixture save timing race by waiting for the actual save response. Full run passes. Existing-item scope remains; Add-new/Weapon-ID compatibility and live acceptance are separate outstanding work.

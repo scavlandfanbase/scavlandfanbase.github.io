@@ -173,3 +173,9 @@ Added npm run test:attachments with fail-fast execution of all eight Attachment 
 Added compatibleWeaponIds to trusted private edits and selected-item public projection. References must be unique exact IDs in the current trusted Weapon catalogue, with hidden/archived/ambiguous identities refused. null is Unknown; [] is explicitly empty. Input is copied and sorted; facts changes trigger Unverified while retaining history. Transport supplies the pinned Weapon catalogue and publication revalidates current references. No names/effects imply compatibility and vendor values stay independent.
 
 Contract tests cover valid/unknown/empty, invented/duplicate/missing catalogue/archived/ambiguous references; publication tests cover references removed or hidden after preparation. Full npm run test:attachments passes. Compatibility UI and combined database/browser acceptance are still pending, as is Add-new. No rollout.
+
+## Compatibility selector acceptance — 1 October
+
+Added explicit Unknown/recorded-list mode and a labelled multi-select of server-supplied active unambiguous Weapon IDs. Historical unavailable IDs remain labelled in saved selections; unchanged compatibility is omitted from unrelated edit commands, preserving retained references. Changing compatibility is subject to the trusted contract.
+
+Combined browser/transport/PGlite coverage verifies selecting a recorded Weapon, hidden choices absent, durable save, second-page selection reload and exact reference in master-only simulated publication. Full release suite passes. Bumped frame and child cache versions together to attachment-preparation-20261001-3. No live activation. Add-new and signed-in production acceptance remain.
