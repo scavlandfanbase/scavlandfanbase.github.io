@@ -1,3 +1,7 @@
+## 2026-10-01 — VS required-image fix verified
+
+Page Builder ec7bc4e independently passes its full acceptance suite. Required-image validation defect is resolved, optional card images preserved, and invalid saved drafts remain repairable. See VS-PAGE-BUILDER-MODEL-REVIEW.md. Builder remains local-only; production integration gates remain outstanding.
+
 ## 2026-10-01 — Evidence concurrency verified
 
 Six independent-session PostgreSQL scenarios pass: competing decisions/restores, exact retries, actor-bound receipts, rollback and consistent state/history. Adapter/SQL and API/Hub regressions also pass. Next: readiness inventory and combined acceptance, then coordinated release review. Activation switches remain disabled and SQL unapplied. See EVIDENCE-REVIEW-CHECKPOINT.md.
