@@ -194,7 +194,7 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     await frame.locator('#blocked').filter({hasText:'pending work'}).waitFor();assert.equal(await frame.locator('#item-form').isVisible(),false);
     assert.equal(await frame.locator('#publish').isDisabled(),true);
     await frame.getByRole('button',{name:'Review existing Items work',exact:true}).click();
-    const legacyDialog=frame.getByRole('dialog');await legacyDialog.waitFor();assert.match(await legacyDialog.innerText(),/Pending legacy change/);assert.match(await legacyDialog.innerText(),/nothing is imported or published/);
+    const legacyDialog=frame.getByRole('dialog');await legacyDialog.waitFor();assert.match(await legacyDialog.innerText(),/Pending legacy change/);assert.match(await legacyDialog.innerText(),/publication requires a separate preview and Publish/);
     await legacyDialog.getByRole('button',{name:'Import privately',exact:true}).click();await legacyDialog.waitFor({state:'detached'});
     assert.equal(await frame.getByLabel('Name',{exact:true}).inputValue(),'Pending legacy change');assert.equal(docs['data/items.json'].data[0].name,'One connected edit');
     const browserImportHead=await access(alice,'load','api-item');

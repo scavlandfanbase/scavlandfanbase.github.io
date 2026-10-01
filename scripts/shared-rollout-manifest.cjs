@@ -22,7 +22,7 @@ function manifest(){
   workingTreeChanged:!!cp.execFileSync('git',['status','--porcelain'],{cwd:root,encoding:'utf8'}).trim(),
   mode:'preparation-only',readyForLiveActivation:false,migrationsInOrder:migrations,
   initialFlags:{SHARED_ITEM_ENABLED:false},requiredPublishingFlags:['ADMIN_CORE_ENABLED','DRAFT_PUBLISH_ENABLED'],
-  remaining:['Explicit reviewed legacy import and version-bound preservation proof','Fresh production flag/schema/deployment check','Coordinated frontend/backend cache version','Real Owner connected publication acceptance'],
+  remaining:['Review genuine legacy fields privately before importing','Confirm deployed flags without exposing secrets','Apply all three final proposal versions before backend activation','Coordinated backend/frontend rollout and real Owner acceptance'],
   files:[...files.values()].sort((a,b)=>a.path.localeCompare(b.path)),externalFrontendDependencies:[...external].sort()};
 }
 module.exports={manifest};

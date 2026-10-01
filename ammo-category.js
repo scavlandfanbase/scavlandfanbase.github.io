@@ -104,7 +104,7 @@
   try{const report=await request({action:'legacy-review'});
    const importable=['ready-for-reviewed-import','no-pending-public-fields'].includes(report.status)&&report.sourceVersion;
    scavEditorDialog({title:'Existing Items work — '+report.name,submit:importable?'Import privately':'Close',readOnly:!importable,build:({body})=>{
-    const summary=document.createElement('p');summary.textContent='Read-only review: '+report.status+(report.sourceVersion?' · Items draft version '+report.sourceVersion:'')+'. Existing work stays saved; nothing is imported or published.';body.append(summary);
+    const summary=document.createElement('p');summary.textContent='Read-only review: '+report.status+(report.sourceVersion?' · Items draft version '+report.sourceVersion:'')+'. Existing work stays saved. Import privately saves supported work into this editor; publication requires a separate preview and Publish.';body.append(summary);
     for(const field of report.fields){const heading=document.createElement('h3');heading.textContent=label(field.field)+' · '+field.status;body.append(heading);
      for(const [key,title]of [['baseline','Original public value'],['private','Saved private value'],['public','Current public value']]){const line=document.createElement('p');line.textContent=title+': '+(field[key].present?JSON.stringify(field[key].value):'Not present');body.append(line);}
     }
