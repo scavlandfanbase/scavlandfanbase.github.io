@@ -1,3 +1,7 @@
+## Pages deployment evidence prepared — 1 October 2026
+
+Read-only legacy build checking now requires the exact commit and matching public page bytes before success. Local tests and adjacent regression checks pass. Git write/recovery, build-mode confirmation and combined integration remain next; no live activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Page Builder durable publication records prepared — 1 October 2026
 
 Unapplied SQL now stores exact previews, Owner publication reservations and immutable outcome events. Pending/failed publication prevents save/archive until verified recovery. Local privacy/retry/Owner tests and six independent PostgreSQL concurrency cases pass, including revocation during lock wait. Next: Git/Pages evidence adapter and safe precommit refusal/reconciliation, then combined integration. No live activation. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
@@ -593,3 +597,4 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
 
 - Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
+
