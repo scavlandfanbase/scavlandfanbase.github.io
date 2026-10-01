@@ -1,3 +1,7 @@
+## Evidence combined acceptance passed
+
+Browser-to-production-handler-to-actual-SQL acceptance passes, including committed lost-response retry, genuine second-reviewer conflict, permission refusal and history/source preservation. Next: isolated Attachment/Evidence integration and combined regressions. Production activation remains pending.
+
 ## Evidence release inventory prepared
 
 27-file dependency inventory and read-only SQL readiness query prepared and locally checked. See EVIDENCE-REVIEW-RELEASE.md. Next: combined browser/handler/SQL acceptance and explicit Attachment/Evidence release integration; production gates remain pending.

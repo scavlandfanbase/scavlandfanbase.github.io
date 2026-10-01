@@ -35,3 +35,7 @@ Run with SCAVLAND_PSQL pointing to local psql and optional SCAVLAND_PG_TEST_PORT
 ## Release inventory checkpoint
 
 Prepared recursive 27-file release inventory and read-only SQL readiness inspection. The readiness query executes against the local SQL fixture; adapter/SQL and Evidence browser regressions pass. EVIDENCE-REVIEW-RELEASE.md records coordinated cutover, shared-file reconciliation, permission/Storage checks, recovery and exact remaining acceptance limits. No production inspection or activation is implied by the local manifest.
+
+## Combined browser/backend/SQL acceptance
+
+New integrated suite passes through actual browser assets, production handler, adapter and proposal SQL: committed lost-response retry creates one audit record, another permitted reviewer creates a genuine stale conflict, restore/reload/history and permission refusal work, source facts remain intact. Auth/Storage and fixture CORS transport remain explicit test boundaries; PostgreSQL concurrency is separately verified. See EVIDENCE-REVIEW-RELEASE.md. Next: reconcile Attachment/Evidence in an isolated release integration and run combined regressions, then production readiness and coordinated approval.

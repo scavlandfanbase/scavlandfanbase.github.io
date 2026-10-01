@@ -18,4 +18,10 @@ Deploy the complete backend with Evidence disabled first. Arrange the frontend/d
 
 ## Verified and outstanding
 
-Local actual adapter/SQL acceptance, six independent PostgreSQL concurrency cases and browser retry/conflict/history/responsive checks pass. The browser currently uses a mocked endpoint; the adapter/SQL suite uses actual SQL with fixture identity. A complete browser-to-handler-to-database acceptance run remains pending, as do combined branch regression, deployed schema/configuration checks, explicit release approval and signed-in production acceptance. No production changes in this checkpoint.
+Local actual adapter/SQL acceptance, six independent PostgreSQL concurrency cases and browser retry/conflict/history/responsive checks pass. The browser currently uses a mocked endpoint; the adapter/SQL suite uses actual SQL with fixture identity. The combined browser-to-production-handler-to-SQL acceptance now passes (see checkpoint below). Combined branch regression remains pending, alongside deployed schema/configuration checks, explicit release approval and signed-in production acceptance. No production changes in this checkpoint.
+
+## Combined acceptance checkpoint
+
+`scripts/test-evidence-review-integrated.cjs` loads the actual browser assets and passes browser requests into createProductionHandler, its Evidence adapter and the actual SQL proposal in an isolated PGlite database. It proves durable review/history, exact retry after a committed response is lost, restore, a real competing reviewer update producing a stale conflict, retained notes and explicit reload, denied SQL permission, preserved original submission/screenshot and 320/1280 widths. It does not mock review receipts or status transitions.
+
+Fixture boundaries: parent session handoff provides a test token; the local RPC bridge maps test tokens to fixture database claims/permissions, not production JWT validation. Screenshot signing returns an unavailable fixture response. Playwright transport substitutes its fixture origin in response CORS headers; production CORS configuration is unchanged. Concurrency is covered separately by the independent PostgreSQL-session suite, not PGlite. No production calls.
