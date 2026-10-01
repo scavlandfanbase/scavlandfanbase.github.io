@@ -9,11 +9,11 @@ const {chromium}=require('playwright');
  await page.route('https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts',async route=>{
  const body=route.request().postDataJSON();let result;
  if(body.action==='list')result={records:[{id:'fixture',name:source.name,candidate:true}]};
- if(body.action==='load')result={source,currentVersion:version,draft:saved,sourceDigest:'fixture-digest'};
+ if(body.action==='load')result={source,currentVersion:version,draft:saved,sourceDigest:'fixture-digest',patchId:'fixture',images:['images/approved.png']};
  if(body.action==='prepare'){prepareCalls++;prepared=body.command;result={request_id:body.requestId};}
  if(body.action==='save'){
   if(denySave)return route.fulfill({status:403,contentType:'application/json',body:JSON.stringify({error:'Permission revoked.'})});
-  if(!receipts.has(body.requestId)){version++;saved={record:{...(saved?.record||source),contentType:'Attachment',attachmentType:prepared.attachmentType||prepared.fields?.attachmentType,...prepared.fields}};receipts.set(body.requestId,{version});}
+  if(!receipts.has(body.requestId)){version++;saved={record:{...(saved?.record||source),contentType:'Attachment',attachmentType:prepared.attachmentType||prepared.fields?.attachmentType||saved?.record.attachmentType,...prepared.fields}};if(prepared.action==='review-attachment')saved.record.verification={decision:prepared.decision};if(prepared.action==='archive-attachment'||prepared.action==='restore-attachment')saved.record.archived=prepared.action==='archive-attachment';receipts.set(body.requestId,{version});}
   result=receipts.get(body.requestId);if(loseReply){loseReply=false;return route.abort('failed');}
  }
  if(body.action==='preview')result={previewId:'fixture-preview',files:[{content:JSON.stringify(saved.record)}]};
@@ -35,6 +35,10 @@ const {chromium}=require('playwright');
  await frame.locator('#retry').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.name,'Permission test');
  await frame.locator('#item-name').fill('Unsaved entry');await frame.locator('#reload').click();
  await frame.locator('#status').filter({hasText:'Loaded.'}).waitFor();assert.equal(await frame.locator('#item-name').inputValue(),'Permission test');assert.equal(version,savedVersion+1);
+ await frame.locator('#image').selectOption('images/approved.png');await frame.locator('#save').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.image,'images/approved.png');
+ await frame.locator('#review-decision').selectOption('verified');await frame.locator('#review').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.verification.decision,'verified');
+ await frame.locator('#lifecycle').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.archived,true);assert(await frame.locator('#item-name').isDisabled());
+ await frame.locator('#lifecycle').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.archived,false);
  await frame.locator('#preview').click();await frame.locator('#preview-dialog').waitFor();await frame.locator('#close-preview').click();await frame.locator('#publish').click();await frame.locator('#status').filter({hasText:'fixture-commit'}).waitFor();assert.equal(published,1);
  for(const width of [390,1280]){await page.setViewportSize({width,height:1000});assert(await frame.locator('body').evaluate(el=>el.scrollWidth<=el.clientWidth+1));}
  assert.deepEqual(errors,[]);console.log('PASS Attachment browser fixtures: parent session handoff, candidate type decision, private edit/reload, preview/explicit publish and mobile widths.');

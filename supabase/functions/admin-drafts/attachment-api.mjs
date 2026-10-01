@@ -1,5 +1,5 @@
 // Preparation-only adapter. Production routing/transport are deliberately unregistered.
-import {prepareAttachmentDecision,prepareAttachmentEdit} from './attachment-draft.mjs';
+import {prepareAttachmentDecision,prepareAttachmentEdit,prepareAttachmentAction} from './attachment-draft.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
 import {fail} from './core.mjs';
 import {legacyItemBlockers} from './item-draft.mjs';
@@ -42,14 +42,14 @@ export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,
    const context={...await loadContext(body.itemId,auth),...identity};
    if(context.source?.id!==body.itemId)fail('Item not found.',404);
    if(body.action==='load')return reply({itemId:body.itemId,currentVersion:context.version,
-    draft:context.savedDraft||null,source:context.source,sourceDigest:await legacyDigest({source:context.source,settings:context.settings})});
+    draft:context.savedDraft||null,source:context.source,images:context.images||[],patchId:context.settings?.current_patch_id||null,sourceDigest:await legacyDigest({source:context.source,settings:context.settings})});
    if(body.command?.confirmId!==body.itemId)fail('Confirm the selected Item identity.');
    if(context.savedDraft){
     if(!Array.isArray(context.legacyDrafts))fail('Load existing Items work before editing.',503);
     if(legacyItemBlockers(body.itemId,context.source,context.legacyDrafts).length)fail('Existing Items work changed. Preserve it before editing.',409);
     context.savedDraft=await reconcileAttachment(context.savedDraft,context.source,context.settings);
    }
-   const payload=context.savedDraft?prepareAttachmentEdit(body.command,context):await prepareAttachmentDecision(body.command,context);
+   const payload=context.savedDraft?(body.command.action==='edit-attachment'?prepareAttachmentEdit(body.command,context):prepareAttachmentAction(body.command,context)):await prepareAttachmentDecision(body.command,context);
    return reply(await storage.prepare({actor:identity.actor,itemId:body.itemId,requestId:body.requestId,command:body.command,payload,legacyVersion:context.legacyVersion}));
   }catch(error){return reply({error:error.status?error.message:'Attachment storage is unavailable. Your saved draft is retained.'},error.status||503);}
  };

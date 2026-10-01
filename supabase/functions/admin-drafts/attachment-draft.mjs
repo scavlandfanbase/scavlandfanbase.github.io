@@ -9,6 +9,29 @@ function authorize(context){
  if(!context.permissions?.includes('items_edit'))fail('Items editing permission is required.',403);
 }
 
+export function prepareAttachmentAction(command,context={}){
+ authorize(context);
+ const allowed=['action','confirmId','expectedVersion','decision','patchId'];
+ if(!object(command)||Object.keys(command).some(key=>!allowed.includes(key))||!['review-attachment','archive-attachment','restore-attachment'].includes(command.action))fail('Unsupported Attachment action.');
+ const saved=context.savedDraft;
+ if(!saved||saved.itemId!==command.confirmId||saved.record?.id!==command.confirmId||saved.record.contentType!=='Attachment')fail('Load the saved Attachment identity.');
+ if(!Number.isSafeInteger(context.version)||context.version<1||command.expectedVersion!==context.version)fail('The saved draft changed. Reload before reviewing.',409);
+ const result=structuredClone(saved);
+ if(command.action==='review-attachment'){
+  if(saved.record.archived)fail('Restore the item before reviewing.');
+  if(!['verified','unverified'].includes(command.decision)||command.patchId!==Verification.patchId(context.settings))fail('Choose a review decision for the current patch.',409);
+  if(command.decision==='verified'&&!Verification.patchId(context.settings))fail('Set the current patch before verifying.');
+  result.record.verification=Verification.decide(saved.record,command.decision,context.settings,context.actor,context.clock||(()=>new Date()));
+  result.record.verification=result.record.verification.verification;
+ }else{
+  if(command.decision!==undefined||command.patchId!==undefined)fail('Unsupported visibility fields.');
+  const archive=command.action==='archive-attachment';
+  if(!!saved.record.archived===archive)fail('Item is already in that state.');
+  result.record.archived=archive;
+ }
+ result.actor=context.actor;result.expectedVersion=context.version;return result;
+}
+
 // Context is loaded by the trusted service, never supplied in a browser payload.
 // The eventual receipt store must recheck these bindings within its save transaction.
 export async function prepareAttachmentDecision(command,context={}){

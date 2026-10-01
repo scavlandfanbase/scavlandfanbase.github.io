@@ -20,7 +20,7 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
    const latest=await readSource();
    const drafts=await rpc('scavland_attachment_list',{},authorization);
    const privateRecords=new Map(drafts.map(row=>[row.item_id,row.payload.record]));
-   return {records:latest.documents['data/items.json'].data.filter(r=>!r.hidden&&!r.archived&&(privateRecords.has(r.id)||r.contentType==='Attachment'||r.classification?.includes('attachment')||Attachments.candidate(r))).map(r=>({id:r.id,name:privateRecords.get(r.id)?.name||r.name,privateDraft:privateRecords.has(r.id),candidate:!privateRecords.has(r.id)&&r.contentType!=='Attachment'&&!r.classification?.includes('attachment')}))};
+   return {records:latest.documents['data/items.json'].data.filter(r=>!r.hidden&&(privateRecords.has(r.id)||r.contentType==='Attachment'||r.classification?.includes('attachment')||Attachments.candidate(r))).map(r=>({id:r.id,name:privateRecords.get(r.id)?.name||r.name,privateDraft:privateRecords.has(r.id),candidate:!privateRecords.has(r.id)&&r.contentType!=='Attachment'&&!r.classification?.includes('attachment')}))};
   },
   publishEnabled:()=>env('ADMIN_CORE_ENABLED')==='true'&&env('DRAFT_PUBLISH_ENABLED')==='true',
   publication:async input=>{

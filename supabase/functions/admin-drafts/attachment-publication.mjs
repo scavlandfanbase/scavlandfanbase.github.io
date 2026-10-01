@@ -3,7 +3,7 @@ import {publicValue,same,fail} from './core.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
 import {legacyItemBlockers} from './item-draft.mjs';
 import {githubPublisher} from './github-publisher.mjs';
-const fields=['name','description','notes','image','estimatedPrice','maxStack','contentType','attachmentType','classification','verification'];
+const fields=['name','description','notes','image','estimatedPrice','maxStack','contentType','attachmentType','classification','verification','archived'];
 const own=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:record[key]}:{})});
 const published=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:key==='verification'?publicValue({verification:record[key]}).verification:publicValue(record[key])}:{})});
 // Reconcile a confirmed public result before the next private edit. Retain review history.
@@ -36,7 +36,7 @@ export async function planAttachmentPublication(saved,documents,{settings,legacy
  const allKeys=new Set([...Object.keys(saved.before),...Object.keys(saved.record)]);
  const changed=[...allKeys].filter(key=>!same(own(saved.before,key),own(saved.record,key)));
  if(changed.some(key=>!fields.includes(key)))fail('Protected Attachment facts changed. Review the saved draft.');
- if(!same(own(current,'archived'),own(saved.before,'archived'))||!same(own(current,'hidden'),own(saved.before,'hidden')))fail('Item visibility changed. Reload before publishing.',409);
+ if(!same(own(current,'archived'),own(saved.before,'archived'))&&!same(own(current,'archived'),own(saved.record,'archived'))||!same(own(current,'hidden'),own(saved.before,'hidden')))fail('Item visibility changed. Reload before publishing.',409);
  const output=structuredClone(source),target=output.data.find(r=>r.id===saved.itemId),conflicts=[];
  for(const key of changed){
   const before=published(saved.before,key),after=published(saved.record,key),now=published(current,key);

@@ -1,3 +1,5 @@
+**Attachment controls — 1 October:** approved images, explicit current-patch review and archive/restore now prepared with contract/browser checks. No deployment. Remaining: Add-new/compatibility scope, Hub/cache integration and coordinated release review.
+
 **Attachment recovery tests — 1 October:** lost-response/permission-denial retries preserve entries and avoid duplicate versions; explicit Review saved state reload is added and browser-tested. No deployment. Remaining controls/Hub integration and release review continue next.
 
 **Attachment disabled routing — 1 October:** backend dispatch/pinned source reader now prepared; missing flag refuses without network. Focused routing/API/SQL tests and Admin npm tests pass. No deployment/activation. Copilot branch is absent locally, so its commits remain unreviewed here.

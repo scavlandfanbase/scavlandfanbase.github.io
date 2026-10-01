@@ -116,3 +116,9 @@ Next: complete Hub/cache integration in preparation, broader browser failure/ret
 Browser fixture tests now save a version then simulate a lost response; Retry reuses the original receipt with no duplicate version or extra preparation. Permission-denied saves preserve form entries and disable publication until a permitted retry succeeds. Review saved state now explicitly confirms discarding local unsaved/retry entries, reloads the authoritative saved version and leaves server history intact. Browser checks pass those paths along with existing classification/edit/preview/publish and mobile layout fixtures; diff whitespace check passes. No production calls.
 
 Next: remaining Attachment image/review/lifecycle controls and Hub/cache integration, then schema/security and coordinated release review. Page Builder unchanged. Still preparation only.
+
+## Image, review and lifecycle controls
+
+Attachment controls now expose approved-library image selection, explicit Verified/Unverified decisions for the current patch, and private archive/restore. Trusted actions require items_edit, exact identity and current saved version. Review retains server-attributed history; archived items refuse edit/review until restored. Image updates use the validated library; unchanged historical images need not be resubmitted. Archived explicit/private Attachments remain reachable in the review list for restoration. Master-only publication supports the explicit archive field while retaining conflict checks and vendor references.
+
+Focused contract tests pass current-patch review, wrong-patch/identity denial and archive/restore fact preservation. Edge fixtures pass image save/reload, explicit verification, archived editing disabled, restoration and existing retry/preview/publication flows. SQL/storage and publication suites pass; whitespace checks pass. No production changes. Add-new/compatibility, Hub/cache integration and full release review remain outstanding.
