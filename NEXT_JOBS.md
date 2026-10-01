@@ -1,3 +1,7 @@
+## 2026-10-01 — Evidence concurrency verified
+
+Six independent-session PostgreSQL scenarios pass: competing decisions/restores, exact retries, actor-bound receipts, rollback and consistent state/history. Adapter/SQL and API/Hub regressions also pass. Next: readiness inventory and combined acceptance, then coordinated release review. Activation switches remain disabled and SQL unapplied. See EVIDENCE-REVIEW-CHECKPOINT.md.
+
 ## 2026-10-01 — VS model handoff independently reviewed
 
 Exact c5b19d1 independently passes reported Page Builder/Items/Vendor/Admin suites. Found/reproduced one null-required-image validation gap that renders a broken image at /. Focused VS follow-up requested; keep local-only branch separate. See VS-PAGE-BUILDER-MODEL-REVIEW.md. No merge or deployment.
