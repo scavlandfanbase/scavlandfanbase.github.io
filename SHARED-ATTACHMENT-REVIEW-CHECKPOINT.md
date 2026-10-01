@@ -46,3 +46,11 @@ Next: subsequent Attachment revisions/edit contract, stable receipt binding and 
 prepareAttachmentEdit now accepts only recorded shared name/description/notes/image/reference price/max-stack and Attachment Type. It requires trusted Items permission, exact saved identity and expected saved version. Approved image library, nullable text/numbers and integer stack limits are validated. Existing IDs, classification, effects, provenance, original baseline and source/legacy bindings remain intact; changes record an Unverified review using server identity/time, while unchanged edits preserve history.
 
 Fixture edit tests pass for preserved identity/baseline, immutable saved input, stale-version denial, protected ID refusal, image/number validation, permission denial and no-op review preservation. Attachment preparation/storage suites and diff check pass. This preparation does not yet save subsequent versions: the version-1 SQL proposal must be extended and tested before API/UI activation. No deployment.
+
+## Later revisions and request adapter
+
+Storage proposal now retains multiple immutable versions, binds expectedVersion, returns historical receipts without replacing the head, and rejects the second competing save. Real local SQL tests pass through version 3, historical retry and stale competing save.
+
+attachment-api.mjs provides an unregistered, disabled-by-default request adapter for load/prepare/save. Trusted injected authentication must verify the actual session and permission; context loads authoritative source and private records. Browser payload/actor authority is refused. Saves accept a receipt only. Preparation checks public source/patch and legacy overlap before subsequent editing. Receipt lookup must enforce actor/item/command binding; storage adapters are trusted dependencies, not browser inputs.
+
+Request-adapter tests pass with mocked authentication/transport. This is not a live Supabase transport or hosted API. Next: implement public RPC wrappers/transport and receipt lookup with combined SQL/API tests, then authenticated review UI and selected-item preview/publication. No production deployment. Page Builder work remains untouched.

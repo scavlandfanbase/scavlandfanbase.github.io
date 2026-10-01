@@ -1,3 +1,5 @@
+**Attachment batch — 1 October:** multiple immutable private revisions and the disabled request adapter are prepared/tested. SQL tests cover versions 1–3 and stale saves; adapter transport remains mocked. Next: real RPC transport/receipt lookup, combined tests and hosted UI. No deployment.
+
 **Attachment edit preparation — 1 October:** subsequent shared-field/type edits now have version/permission/value validation and preserve baseline/history. Tests pass. Next: extend SQL receipt/version storage beyond version 1, then authenticated API. No deployment.
 
 **Attachment reciprocal guard — 1 October:** storage proposal now blocks competing saved specialist/Attachment drafts in either insertion order using the shared item transaction lock. Local SQL tests pass; unapplied. Next: subsequent revisions and authenticated API integration.
