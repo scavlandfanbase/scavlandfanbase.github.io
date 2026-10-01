@@ -1,5 +1,5 @@
 // Read-only maintenance dashboard. Authentication and editor navigation stay in admin.html.
-window.createScavDashboard = function ({ hub, read, navigate, allowedViews=null }) {
+window.createScavDashboard = function ({ hub, read, navigate, allowedViews=null,pageBuilderEnabled=false }) {
   const $ = id => document.getElementById(id);
   let state = null, rows = [], loading = false;
   const names = {weapons:'Weapons',armour:'Armour',items:'Items',ammo:'Ammo',vendors:'Vendors',crafting:'Crafting',listings:'Vendor listings'};
@@ -45,7 +45,8 @@ window.createScavDashboard = function ({ hub, read, navigate, allowedViews=null 
   const pagesHeading=document.createElement('h2');pagesHeading.textContent='Page Builder';
   const pagesDescription=document.createElement('p');pagesDescription.textContent='Create custom pages with sections, text, images and links. Available for local review; live publishing is not enabled.';
   pagesCard.append(pagesHeading,pagesDescription);
-  if(['127.0.0.1','localhost'].includes(location.hostname)){
+  if(pageBuilderEnabled){pagesDescription.textContent='Create custom pages, save private drafts, review saved revisions and publish as Owner.';const button=action(pagesCard,'Open Page Builder',()=>navigate('pages'));button.classList.add('view-button');button.dataset.view='pages';}
+  else if(['127.0.0.1','localhost'].includes(location.hostname)){
     const link=document.createElement('a');link.className='btn';link.textContent='Open Page Builder';link.href='http://127.0.0.1:4181/';pagesCard.append(link);
   }else{const unavailable=action(pagesCard,'Local review only',()=>{});unavailable.disabled=true;}
   $('dashboard-website').append(pagesCard);
