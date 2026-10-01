@@ -1,3 +1,5 @@
+**Attachment Hub preparation — 1 October:** gated route, cache version, Items-permission access and session handoff now pass unit and Edge navigation fixtures. Frontend release switch remains false; backend remains separately gated. Copilot branch fetched at 3ce5f1a; the hidden-item fix was inspected, but full Page Builder review/test reproduction is still pending. No merge or deployment.
+
 **Combined Attachment acceptance — 1 October:** Edge edits now pass through the actual handler and local SQL proposal, save revision 3 and reload in a second browser page. Hub inspection confirms Attachments still has no allowed view/frame/session route and its card is disabled. Next: coordinated Hub route/cache preparation, broader combined acceptance and release scope review. Nothing deployed; Page Builder remains separate.
 **Attachment release review — 1 October:** found/fixed repeated-refresh private-history loss; regression and restricted-permission tests pass. Exact remaining gates are in ATTACHMENT-RELEASE-REVIEW.md. Hub navigation, combined acceptance and scope review remain before rollout.
 

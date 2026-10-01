@@ -21,7 +21,7 @@ Repeated post-publication reconciliation could replace retained private verifica
 
 ## Remaining release gates
 
-1. Full Hub permission/navigation and cache release coordination; current draft card remains Release pending.
+1. Hub route/session/permission fixtures pass with a versioned Attachment frame. Frontend ATTACHMENT_RELEASE_ENABLED remains false. Coordinate its reviewed enablement and asset cache versions with backend/migrations; signed-in production acceptance remains required.
 2. Extend combined acceptance beyond edit/reload to classification/publication and realistic multi-session races. The combined edit/reload check passes; this does not establish live Auth or concurrent production behavior.
 3. Review full dependency deployment manifest and migrations in order: attachment-classification-storage.sql, attachment-preview.sql. Neither is applied in production.
 4. Check current production schema/permissions/drafts and publication flags before deployment. Preserve genuine old/shared drafts.
@@ -30,4 +30,4 @@ Repeated post-publication reconciliation could replace retained private verifica
 
 Publication checks span GitHub and Postgres; they do not provide one cross-service transaction. Non-force Git ref conflict protection remains; a private-state race after the final check is an acknowledged limitation requiring acceptance/mitigation review.
 
-Copilot reports Page Builder tests and one unresolved hidden-item fixture assertion. Its source/branch is unavailable locally; those claims are not independently certified by this review.
+Copilot reports Page Builder tests and one unresolved hidden-item fixture assertion. The pushed branch is now available at 3ce5f1a. The 38cf7c7 change correctly excludes hidden records from Active items; the full Page Builder source and reported suites still require independent review.

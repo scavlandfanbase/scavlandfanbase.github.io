@@ -141,3 +141,11 @@ Repeated public reconciliation now preserves private verification history; diver
 `SCAVLAND_BROWSER=1 node scripts/test-attachment-storage.cjs` passes. A real Edge page sends an edit through createAttachmentTransport into the local PGlite RPCs, stores revision 3, and a second page loads the saved name from that database. Auth and GitHub are fixtures. No real item or production service was modified.
 
 Hub inspection: allowedAdminViews, navigate and session frame allowlists have no Attachment route. The dashboard Release pending action is disabled. This is a remaining integration gate, not an enabled editor. Full classification/publication through the combined harness and realistic concurrent sessions remain to verify.
+
+## Gated Hub navigation — 1 October
+
+Prepared the Attachment section, versioned frame, navigation/title and session allowlist. ATTACHMENT_RELEASE_ENABLED defaults false. Enabled access requires items_edit; disabled/unauthorized Attachment frames receive no session. The single Hub card stays Release pending until reviewed activation. General Items access remains.
+
+Unit checks and Edge fixtures pass: release off, enabled without Items permission, enabled with Items permission, token handoff and return to Hub. Admin/invite tests pass. No production enablement, SQL application, merge or deployment occurred.
+
+Fetched Copilot branch without switching checkout. Head 3ce5f1aa4b0bf3fd35ebbe69c55acd5b7320d586 is available. Inspected 38cf7c7 visibility fix: Active excludes both hidden and archived; other visibility routes remain. Full branch review and independent suite reproduction are pending.
