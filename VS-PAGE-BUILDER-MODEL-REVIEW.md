@@ -13,3 +13,11 @@ VS follow-up: add focused model/service/renderer regressions for null/empty/miss
 Independently fetched and reviewed c1d4afc/ec7bc4e against c5b19d1. Only page-builder-model.js, scripts/test-page-builder.cjs and PAGE-BUILDER-CHECKPOINT.md changed. Required image blocks now reject null, empty, omitted and unapproved paths; optional card images still allow null/omission. No Admin, Evidence, Attachment or game-data changes.
 
 The full Page Builder suite passed independently in an isolated archive of ec7bc4e, including model/render/export refusal, service create/save refusal without revision mutation, stored invalid drafts opening for repair, blocked preview/save/export, and successful approved-image repair. The previously reproduced broken root-image defect is resolved. Other regression suites in the VS handoff were reported by VS; this follow-up independently reran the Page Builder suite only. Local-only scope remains; production permissions/storage/publication and combined release acceptance are still pending. No merge or deployment.
+
+## Production plan reviewed — 028054d
+
+Independently fetched and compared the exact checkpoint to ec7bc4e: only PAGE-BUILDER-PRODUCTION-PLAN.md and its checkpoint reference changed. NEXT_JOBS.md and implementation files are unchanged. The proposal correctly keeps local behaviour separate from proposed private storage, permissions, exact-revision approval, publication history, protected addresses and coordinated activation. No new tests were required for this documentation-only checkpoint.
+
+Suitable as a planning foundation, not implementation or activation approval. Before delegating production implementation, align its proposed permission/storage/publication contracts with the existing Admin backend. Avoid treating a pending Pages build as an immediate successful publication; retain separate committed/build-confirmed outcomes and recovery. Do not imply Git and private database state can be updated atomically. Current Attachment publication race limitations must also be considered if a shared publisher is reused.
+
+Main workstream remains combined Attachment/Evidence release integration and regression checks. Page Builder live work waits for a concrete reviewed contract; VS should not choose production permissions, credentials or migrate local drafts independently.
