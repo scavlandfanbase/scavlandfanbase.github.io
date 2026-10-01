@@ -1,8 +1,8 @@
 // Single-operator loopback draft service. Never connects to GitHub or Supabase.
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const Pages=require('../page-model.js'),Builder=require('../page-builder-contract.js');
+const Pages=require('../page-model.js'),PageBuilderModel=require('../page-builder-model.js');
 const root=path.resolve(__dirname,'..');
-const staticFiles=new Set(['page-builder.html','page-builder.js','page-builder.css','page-model.js','page-builder-contract.js']);
+const staticFiles=new Set(['page-builder.html','page-builder.js','page-builder.css','page-builder-model.js','page-builder-contract.js']);
 const contentTypes={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.gif':'image/gif','.webp':'image/webp'};
 const error=(message,status=400)=>Object.assign(new Error(message),{status});
 function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}={}){
@@ -20,6 +20,10 @@ function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}=
       const target=path.resolve(root,name),imageRoot=path.join(root,'images');
       return target.startsWith(imageRoot+path.sep)&&fs.existsSync(target)&&fs.statSync(target).isFile()&&fs.realpathSync(target).startsWith(fs.realpathSync(imageRoot)+path.sep);
     });
+  };
+  const validatePage=(page,existingPages,currentPageId)=>{
+    try{return PageBuilderModel.validate(page,{approvedImages:imageChoices(),existingPages,currentPageId});}
+    catch(reason){if(reason.message==='A page with this address already exists.')throw error(reason.message,409);throw reason;}
   };
   const Items=ammoMode?require('../ammo-model.cjs'):itemMode?require('../item-model.cjs'):null;
   const Vendors=vendorMode?require('../vendor-model.cjs'):null;
@@ -58,21 +62,24 @@ function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}=
         :Vendors.mutate(state,body,constraints);
       write(result.state);return result;
     }
-    if(!body||!['create','save','delete'].includes(body.action))throw error('Unknown page action.');
+    if(!body||typeof body!=='object'||Array.isArray(body)||!['create','save','delete'].includes(body.action))throw error('Unknown page action.');
+    const allowed=body.action==='create'?['action','page']:['action','id','revision'];
+    if(body.action==='save')allowed.push('page');
+    if(Object.keys(body).some(key=>!allowed.includes(key)))throw error('The page request contains an unsupported or protected field.');
+    if(body.action!=='create'&&(typeof body.id!=='string'||!Number.isInteger(body.revision)||body.revision<0))throw error('Reload saved pages before continuing.');
     let record=state.pages.find(r=>r.draft.id===body.id);
     const now=new Date().toISOString();
     if(body.action==='create'){
-      const draft=Builder.validate(body.page,{images:imageChoices()});
+      const existingPages=state.pages.map(entry=>({id:entry.draft.id,slug:entry.draft.slug}));
+      const draft=validatePage(body.page,existingPages,null);
       if(state.pages.length>=100)throw error('This foundation supports up to 100 custom pages.');
-      if(state.pages.some(r=>r.draft.id===draft.id||r.draft.slug===draft.slug))throw error('A page with this address already exists.',409);
       record={draft,revision:1,updatedAt:now};state.pages.push(record);
     }else{
       if(!record)throw error('This page no longer exists. Reload saved pages.',404);
       if(body.revision!==record.revision)throw error('This page changed in another window. Your work is still on screen. Copy any text you need, then reload saved pages.',409);
       if(body.action==='save'){
-        const draft=Builder.validate(body.page,{images:imageChoices()});
-        if(draft.id!==body.id)throw error('Page identity cannot change.');
-        if(state.pages.some(r=>r!==record&&r.draft.slug===draft.slug))throw error('A page with this address already exists.',409);
+        const existingPages=state.pages.map(entry=>({id:entry.draft.id,slug:entry.draft.slug}));
+        const draft=validatePage(body.page,existingPages,record.draft.id);
         record.draft=draft;record.revision++;record.updatedAt=now;
       }else{state.pages=state.pages.filter(r=>r!==record);record=null;}
     }

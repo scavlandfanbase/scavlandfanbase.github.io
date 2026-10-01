@@ -4,7 +4,7 @@
   const status=$('#status'),retry=$('#retry'),draftList=$('#draft-list'),sections=$('#section-list');
   const titleInput=$('#page-title'),slugInput=$('#page-slug'),introInput=$('#page-intro'),saveButton=$('#save-draft');
   const preview=$('#preview-frame'),previewError=$('#preview-error');
-  let token='',records=[],images=[],active=null,revision=null,snapshot=null,dirty=false,slugEdited=false,cssText='',saving=false;
+  let token='',records=[],images=[],existingPages=[],active=null,revision=null,snapshot=null,dirty=false,slugEdited=false,cssText='',saving=false;
   const blockTypes=[['heading','Heading'],['text','Text'],['image','Image'],['card','Card'],['divider','Divider'],['button','Link button']];
   const layoutChoices={columns:[[1,'One column'],[2,'Two columns'],[3,'Three columns']],align:[['start','Start'],['center','Center']],spacing:[['compact','Compact'],['normal','Normal'],['spacious','Spacious']],background:[['none','None'],['surface','Surface'],['subtle','Subtle']]};
   const uid=()=>globalThis.crypto?.randomUUID?crypto.randomUUID().replaceAll('-',''):Array.from(crypto.getRandomValues(new Uint8Array(16)),value=>value.toString(16).padStart(2,'0')).join('');
@@ -41,7 +41,7 @@
   function updatePreview(){
     previewError.hidden=true;
     if(!active){preview.srcdoc='';return;}
-    try{preview.srcdoc=Builder.document(active,{images,css:cssText});}
+    try{preview.srcdoc=Builder.document(active,{images,existingPages,currentPageId:existingPages.some(page=>page.id===active.id)?active.id:null,css:cssText});}
     catch(error){preview.srcdoc='';previewError.textContent=`Preview unavailable: ${error.message}`;previewError.hidden=false;}
   }
   function renderDraftList(){
@@ -151,7 +151,7 @@
     try{
       const session=await fetch('/api/session').then(async response=>{if(!response.ok)throw new Error('The local draft service is unavailable.');return response.json();});
       if(session.mode!=='local'||typeof session.token!=='string')throw new Error('Unexpected local session response.');token=session.token;
-      const data=await api('/api/pages');records=data.pages;images=data.imageChoices;cssText=await fetch('/page-builder.css').then(async response=>{if(!response.ok)throw new Error('Could not load preview styles.');return response.text();});
+      const data=await api('/api/pages');records=data.pages;existingPages=records.map(record=>({id:record.draft.id,slug:record.draft.slug}));images=data.imageChoices;cssText=await fetch('/page-builder.css').then(async response=>{if(!response.ok)throw new Error('Could not load preview styles.');return response.text();});
       if(!active){renderDraftList();setStatus(records.length?'Choose a saved page or create a new one.':'No saved drafts yet. Create a page to begin.','saved');}
       else{renderDraftList();setStatus(dirty?'Saved list refreshed. Your unsaved editor content remains on screen.':'Saved list refreshed. The open draft is unchanged.',dirty?'unsaved':'saved');}
     }catch(error){setStatus(`Could not load local drafts: ${error.message}`,'error');retry.hidden=false;}
@@ -161,13 +161,14 @@
     active.title=titleInput.value;active.slug=slugInput.value;active.intro=introInput.value;
     const duplicate=records.find(record=>record.draft.slug===active.slug&&record.draft.id!==active.id);
     if(duplicate){setStatus('A saved draft already uses this address. Choose another address.','error');slugInput.focus();return;}
-    let page;try{page=Builder.validate(active,{images});}catch(error){setStatus(error.message,'error');return;}
+    let page;try{page=Builder.validate(active,{images,existingPages,currentPageId:existingPages.some(entry=>entry.id===active.id)?active.id:null});}catch(error){setStatus(error.message,'error');return;}
     saving=true;saveButton.disabled=true;setStatus('Saving private draft...','saving');
     try{
       const body=revision?{action:'save',id:active.id,revision,page}:{action:'create',page};
       const result=await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),record=result.record;
       active=structuredClone(record.draft);revision=record.revision;snapshot=JSON.stringify(active);dirty=false;
       const existing=records.findIndex(entry=>entry.draft.id===active.id);if(existing<0)records.push(record);else records[existing]=record;
+      existingPages=records.map(entry=>({id:entry.draft.id,slug:entry.draft.slug}));
       renderEditor();setStatus(`Saved locally at revision ${revision}. This draft is not published.`,'saved');
     }catch(error){setStatus(`Save failed: ${error.message} Your edits are still on screen; the last saved draft was preserved.`,'error');}
     finally{saving=false;saveButton.disabled=!active;}
@@ -179,13 +180,13 @@
     else if(!window.confirm('Discard this unsaved page?'))return;
     if(!revision){active=null;dirty=false;snapshot=null;renderEditor();setStatus('Unsaved page discarded.','saved');$('#new-page').focus();return;}
     setStatus('Deleting local draft...','saving');
-    try{await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id:deletingId,revision})});records=records.filter(record=>record.draft.id!==deletingId);active=null;revision=null;snapshot=null;dirty=false;renderEditor();setStatus('Saved draft deleted.','saved');(draftList.querySelector('button')||$('#new-page')).focus();}
+    try{await api('/api/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id:deletingId,revision})});records=records.filter(record=>record.draft.id!==deletingId);existingPages=records.map(record=>({id:record.draft.id,slug:record.draft.slug}));active=null;revision=null;snapshot=null;dirty=false;renderEditor();setStatus('Saved draft deleted.','saved');(draftList.querySelector('button')||$('#new-page')).focus();}
     catch(error){setStatus(`Delete failed: ${error.message} The saved draft remains available.`,'error');}
   }
   async function exportHtml(){
     if(!active)return;
     try{
-      const page=Builder.document(active,{images,css:cssText}),blob=new Blob([page],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=node('a',{href:url,download:`${slugify(active.slug)}.html`});
+      const page=Builder.document(active,{images,existingPages,currentPageId:existingPages.some(entry=>entry.id===active.id)?active.id:null,css:cssText}),blob=new Blob([page],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=node('a',{href:url,download:`${slugify(active.slug)}.html`});
       document.body.append(anchor);anchor.click();anchor.remove();URL.revokeObjectURL(url);setStatus('HTML downloaded locally. This did not publish or deploy a website.','saved');
     }catch(error){setStatus(`Export failed: ${error.message} Your saved draft is unchanged.`,'error');}
   }
