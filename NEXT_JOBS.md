@@ -2,7 +2,8 @@
 
 ## Local Page Builder checkpoint - 1 October 2026
 
-- [x] Local-only visual Page Builder checkpoint completed on eature/page-builder-local-drafts; see PAGE-BUILDER-CHECKPOINT.md for features, tests, limits and next production gates. This does not integrate the builder into live Admin Hub or enable publication.
+- [x] Local-only visual Page Builder checkpoint completed on feature/page-builder-local-drafts; see PAGE-BUILDER-CHECKPOINT.md for features, tests, limits and next production gates. This does not integrate the builder into live Admin Hub or enable publication.
+
 ## DONE
 
 - Admin email privacy and Owner-only Admin Users management hardened and regression-tested.

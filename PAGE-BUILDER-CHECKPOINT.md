@@ -4,7 +4,7 @@
 
 **Date:** 1 October 2026  
 **Branch:** `feature/page-builder-local-drafts`  
-**Commits:** `77713bb` (draft-service foundation), `1b1ed58` (visual editor and acceptance tests)
+**Commits:** `77713bb` (draft-service foundation), `1b1ed58` (visual editor and acceptance tests), `45f6426` (focus restoration), `2997a7f` (Items count-state assertions), `d1c1b4d` (keyboard-navigation checks)
 
 ## What Exists
 
@@ -17,11 +17,12 @@ The local editor supports page title, introduction and safe address; saved-draft
 ## Files Changed
 
 - `page-builder.html` — standalone local editor shell and accessible labels/states.
-- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations and conflict refresh.
+- `page-builder.js` — draft workflow, sections/blocks, preview, local export, confirmations, conflict refresh and focus restoration after reorder/removal/deletion.
 - `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
 - `page-builder-contract.js` — Page Builder-only layout validation and escaped HTML output, built on the existing shared page model.
 - `scripts/page-builder-server.cjs` — serves the local editor, filters approved images, checks draft revisions and permits only local draft create/save/delete. Existing loopback, host/origin/session protections and private storage remain in place.
 - `scripts/test-page-builder.cjs` — fixture-only service and browser acceptance checks using temporary storage.
+- `scripts/test-items-builder.cjs` — updated stale count assertions to check total, filtered and displayed counts; no Items editor behavior changed.
 - `PAGE-BUILDER-CHECKPOINT.md` — this handoff.
 - `NEXT_JOBS.md` — brief checkpoint reference only.
 
@@ -47,29 +48,30 @@ Links are restricted to HTTPS, a safe `.html` address, or `/pages/<safe-address>
 
 Current content limits: 160 characters for page/block titles, 1,000 for the introduction, 160 for section titles, 10,000 for a text block, 300 for image alternative text, 500 for a link, 40 sections, 200 blocks per page, 100 saved pages and a 1 MiB request body. Section layout values are enums validated by the local service. Saves require the current revision; stale saves/deletes return a conflict without replacing the newer saved content. Writes use a temporary file and preserve the previous saved file if replacement fails.
 
-The status area reports loading, unsaved, saving, saved and error states. In-app navigation warns before abandoning unsaved changes; browser navigation uses `beforeunload`; section/block/page deletion requires confirmation. A failed save leaves current edits on screen. On a stale revision, refresh the saved-draft list to inspect the newer copy before reopening it.
+The status area reports loading, unsaved, saving, saved and error states. In-app navigation warns before abandoning unsaved changes; browser navigation uses `beforeunload`; section/block/page deletion requires confirmation. Focus moves to a useful surviving control after confirmed section/block/page deletion and block/section reordering or duplication. A failed save leaves current edits on screen. On a stale revision, refresh the saved-draft list to inspect the newer copy before reopening it.
 
 ## Verification
 
 Passed:
 
-- `node scripts/test-page-builder.cjs` — create/save/reopen/edit; all block types; ordering, duplication, hiding and deletion; safe/duplicate/reserved addresses; unsafe links and image paths; malicious text escaping; empty pages, 10,000-character text and 200-block rendering; hidden-content omission; preview/export equality; save failure and stale-revision recovery; missing-image replacement; confirmation branches; contrast ratios; keyboard interaction and 320–1280px layouts.
+- `node scripts/test-page-builder.cjs` — create/save/reopen/edit; all block types; ordering, duplication, hiding and deletion; safe/duplicate/reserved addresses; unsafe links and image paths; malicious text escaping; empty pages, 10,000-character text and 200-block rendering; hidden-content omission; preview/export equality and safe hrefs; save failure, single-save retry and stale-revision recovery; missing-image replacement; unsaved-change warnings; focus after cancel/confirm, reorder and delete actions; keyboard activation and 320–1280px layouts.
 - `node scripts/test-items-editor.cjs` — existing Items editor workflow and responsive checks.
 - `node scripts/test-vendor-builder.cjs` — existing Vendor editor workflow and responsive checks.
 - `npm test` — Admin core and Admin invitation/privacy suites.
 - `git diff --check`, JavaScript syntax checks and VS Code diagnostics for changed code — passed.
 
-Known unrelated test failure:
+Items shell test status:
 
-- `node scripts/test-items-builder.cjs` fails at its existing assertion expecting `/285 items/`; the current UI reports `285 total · 285 match current filters · showing 40`. No Items code or test was changed for this Page Builder checkpoint.
+- The original failure was an outdated `/285 items/` wording expectation. The test now verifies the exact total/matching/page-size state (`285 total`, `285 match current filters`, `showing 40`) and exact zero-match state; those assertions pass.
+- The same shell suite then fails later at its pre-existing `assert.match(..., /two/)` fixture check because the selected hidden item's internal ID is not rendered in the visible facts panel. The Items editor was not changed; the separate full Items editor suite passes. No other stale shell-suite assertions were modified.
 
-The repository Admin test run emitted its existing non-fatal Node `MODULE_TYPELESS_PACKAGE_JSON` warning. No production browser/authentication or deployment checks were attempted.
+The browser suite replaces `window.confirm` with a deterministic fixture to exercise accept/cancel paths; application focus restoration after those paths is asserted, but native browser-chrome dialog focus itself is not automated. The repository Admin test run emitted its existing non-fatal Node `MODULE_TYPELESS_PACKAGE_JSON` warning. No production browser/authentication or deployment checks were attempted.
 
 ## Limitations and Next Tasks
 
 This is a single-operator local service, not an authenticated or durable production draft system. There is no image upload/manager, rich-text/HTML input, live public route, Admin Hub integration, approval workflow or publication action. Existing image paths in an export require the site root as described above.
 
-Before any live integration, complete a separate reviewed design and implementation for:
+Exact next tasks before considering live integration:
 
 1. Durable private draft storage, retention, backup and recovery outside public assets.
 2. Server-enforced Admin permissions and auditable access; the loopback session token is not production authentication.
