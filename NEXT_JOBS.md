@@ -1,3 +1,7 @@
+## Current combined release candidate
+
+Attachment d78ca09 and Evidence ad0770c combined on feature/admin-release-integration. Both feature and existing-editor regression suites pass; independent gates stay off. Reviewed standalone VS Items visibility/fixture corrections included, Page Builder excluded. Read ADMIN-RELEASE-INTEGRATION.md for exact scope and outstanding production gates. No main merge or deployment.
+
 ## 2026-10-01 — Consolidated prepublication package
 
 Machine-readable Attachment package verification now checks full backend imports/assets, matching cache versions, disabled frontend gate and no game-data diff. Full Attachment/Admin release suites, shared catalogue/item/SQL/import/recovery tests, Items/Vendor browser suites and Dashboard suite passed. Real PostgreSQL concurrency separately passed twelve scenarios. Current release scope remains Attachments plus existing-editor preservation; Page Builder production and other planned Hub tools are not made live by this release. Read ADMIN-PREPUBLICATION-REPORT.md for the consolidated scope, evidence and release dependencies.
@@ -90,6 +94,34 @@ This is preparation only: no SQL migration, deployment, live enablement or game-
 **1 October next checkpoint:** Special FMJ Ammo recovery confirmed saved privately with history retained and Ammo Unverified. Read-only Attachment review foundation is implemented/tested: zero explicit Attachments, 74 candidates, exact vendor IDs and preserved commercial values. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md. Next is the master-only trusted Attachment contract and permission/storage integration; no hosted Attachment editor or deployment yet. Page Builder work belongs to Copilot.
 
 **Verified live — 1 October 2026:** PR #36 merged at e4b243d2c8855ddbdb9aa1df777190f8ea60c56e. Pages run 36834183922 succeeded; live Admin and all three category pages return 200 with shared-category-20261001-3, and the live script contains the explicit historical-review decision. admin-drafts v13 is ACTIVE. Ammo, Armour and Weapons releases are live. This supersedes preparation/approval-pending entries below. No genuine item import or game-data publication was performed during deployment. Next: administrator reviews Special FMJ Ammo, chooses Keep history and mark Unverified, and uses Preserve history and import; then reviews the private result before any explicit publication.
+## VS Page Builder production plan reviewed
+
+028054d is verified documentation-only. Its plan is a suitable proposal; production contracts remain unresolved and no activation is approved. See VS-PAGE-BUILDER-MODEL-REVIEW.md. Continue Attachment/Evidence combined release integration while coordinating a concrete Page Builder backend contract.
+
+## Evidence combined acceptance passed
+
+Browser-to-production-handler-to-actual-SQL acceptance passes, including committed lost-response retry, genuine second-reviewer conflict, permission refusal and history/source preservation. Next: isolated Attachment/Evidence integration and combined regressions. Production activation remains pending.
+
+## Evidence release inventory prepared
+
+27-file dependency inventory and read-only SQL readiness query prepared and locally checked. See EVIDENCE-REVIEW-RELEASE.md. Next: combined browser/handler/SQL acceptance and explicit Attachment/Evidence release integration; production gates remain pending.
+
+## 2026-10-01 — VS required-image fix verified
+
+Page Builder ec7bc4e independently passes its full acceptance suite. Required-image validation defect is resolved, optional card images preserved, and invalid saved drafts remain repairable. See VS-PAGE-BUILDER-MODEL-REVIEW.md. Builder remains local-only; production integration gates remain outstanding.
+
+## 2026-10-01 — Evidence concurrency verified
+
+Six independent-session PostgreSQL scenarios pass: competing decisions/restores, exact retries, actor-bound receipts, rollback and consistent state/history. Adapter/SQL and API/Hub regressions also pass. Next: readiness inventory and combined acceptance, then coordinated release review. Activation switches remain disabled and SQL unapplied. See EVIDENCE-REVIEW-CHECKPOINT.md.
+
+## 2026-10-01 — VS model handoff independently reviewed
+
+Exact c5b19d1 independently passes reported Page Builder/Items/Vendor/Admin suites. Found/reproduced one null-required-image validation gap that renders a broken image at /. Focused VS follow-up requested; keep local-only branch separate. See VS-PAGE-BUILDER-MODEL-REVIEW.md. No merge or deployment.
+
+## 2026-10-01 — Evidence Review screen preparation
+
+Separate feature/evidence-review-backend worktree now has audited SQL, caller-JWT adapter, paginated queue and review screen with history/retry/stale recovery. Hub/backend are connected behind disabled switches; local Evidence and existing Admin tests pass. No live changes. EVIDENCE-REVIEW-CHECKPOINT.md records rollout dependencies. Attachment PR #37 and VS Page Builder remain separate; reconcile shared Hub/backend files during release integration.
+
 **1 October recovery fix:** explicit preservation of historical verification into private context with a new Unverified category review is prepared/tested. See LEGACY-REVIEW-RECOVERY.md. No genuine draft changed; deployment and administrator opt-in remain pending.
 
 **Deployment update — 1 October:** admin-drafts v12 is active. PR #34 is ready for review but its frontend merge was rejected by automatic approval review pending explicit approval of the Armour/Weapons production rollout. Main/Pages remain cd460b2 (Ammo release). Items v20, Vendors v6 and zero shared versions are unchanged. No genuine game-data publication occurred.

@@ -16,7 +16,7 @@ const owner=harness(true,[]);owner.context.adminProfile.role='owner';assert(vm.r
 const h=harness(true,['items_edit'],false);h.context.frame=h.frame;vm.runInContext('sendSession(frame)',h.context);assert.equal(h.messages.length,0);
 assert.match(html,/const ATTACHMENT_RELEASE_ENABLED=false/);
 assert.match(html,/attachment-category\.html\?embed=1&amp;v=attachment-preparation-20261001-4/);
-assert.match(html,/'attachments-frame'\]\.some/);
+assert.match(html,/'attachments-frame'[^\]]*\]\.some/);
 const child=fs.readFileSync('attachment-category.html','utf8');for(const asset of ['attachment-category.css','attachment-model.js','attachment-category.js'])assert(child.includes(asset+'?v=attachment-preparation-20261001-4'),'versioned child asset '+asset);
 console.log('PASS Attachment Hub release/permission gates and session refusal for unauthorized or disabled access.');
 
