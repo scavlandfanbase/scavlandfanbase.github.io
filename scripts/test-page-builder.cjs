@@ -73,10 +73,14 @@ async function main(){
       await page.getByText('No saved drafts yet. Create a page to begin.').waitFor();
       assert.equal(await page.locator('#page-title').isDisabled(),true);
       await page.getByRole('button',{name:'New page'}).click();
+      assert(await focused(page.getByLabel('Page title')));
+      await page.keyboard.press('Tab');assert(await focused(page.getByLabel(/Safe address/)));
+      await page.keyboard.press('Tab');assert(await focused(page.getByLabel('Introduction')));
       await page.getByLabel('Page title').fill('Browser fixture');
       assert.equal(await page.locator('#page-slug').inputValue(),'browser-fixture');
       const abandonMessage=await confirmAction(()=>page.getByRole('button',{name:'New page'}).click(),false);
       assert.match(abandonMessage,/Discard your unsaved changes/);
+      assert(await focused(page.getByRole('button',{name:'New page'})));
       assert.equal(await page.getByLabel('Page title').inputValue(),'Browser fixture');
       await page.getByLabel('Introduction').fill('<img src=x onerror=alert(1)>');
       const previewFrame=page.frameLocator('#preview-frame');
