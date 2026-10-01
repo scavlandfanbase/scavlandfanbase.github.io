@@ -82,6 +82,7 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
      else if(u.pathname.endsWith('/scavland_prepare_item')){assert.equal(user,'service');result=await prepare(b.p_actor,b.p_item,b.p_version,b.p_request,b.p_command,b.p_payload??null,b.p_category);}
      else if(u.pathname.endsWith('/scavland_item_preview'))result=await invoke(user,'select public.scavland_item_preview($1,$2,$3,$4,$5,$6) as v',[b.p_actor,b.p_item,b.p_category,b.p_version,b.p_digest??null,b.p_id??null]);
      else if(u.pathname.endsWith('/scavland_item_legacy'))result=await invoke(user,'select public.scavland_item_legacy() as v');
+     else if(u.pathname.endsWith('/scavland_preserve_item_legacy'))result=await invoke(user,'select public.scavland_preserve_item_legacy($1) as v',[b.p_version]);
      else throw Error('Unexpected fixture RPC '+url);
      return Response.json(result);
     }catch(e){return Response.json({code:e.code,message:e.message},{status:e.code==='42501'?403:400});}
@@ -152,6 +153,23 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   await assert.rejects(invoke('service','select snapshot as v from scavland_item_drafts.legacy_snapshots'),e=>e.code==='42501');
   await assert.rejects(invoke('service','select public.scavland_preserve_item_legacy($1) as v',[19]),e=>e.code==='PT409');
   assert.equal((await db.query('select count(*)::int as n from scavland_item_drafts.legacy_snapshots')).rows[0].n,1);
+  const importHead=await access(alice,'load','api-item'),importRequest=crypto.randomUUID();
+  const importCommand={action:'import-legacy',expectedRevision:importHead.draft.payload.revision,confirmId:'api-item',sourceVersion:legacyReview.result.sourceVersion,sourceDigest:legacyReview.result.sourceDigest,publicDigest:legacyReview.result.publicDigest};
+  const importPrepared=await call(alice,{action:'prepare',expectedVersion:importHead.currentVersion,requestId:importRequest,command:importCommand});assert.equal(importPrepared.status,200);
+  const importSaved=await call(alice,{action:'save',expectedVersion:importHead.currentVersion,requestId:importRequest,command:importCommand});assert.equal(importSaved.status,200);
+  assert.equal((await call(alice,{action:'load'})).result.state.records.items.name,'Pending legacy change');
+  assert.equal((await call(alice,{action:'save',expectedVersion:importHead.currentVersion,requestId:importRequest,command:importCommand})).result.draft.version,importSaved.result.currentVersion);
+  const beforeImportPublication=structuredClone(docs),importPreview=await call(alice,{action:'preview',expectedVersion:importSaved.result.currentVersion});assert.equal(importPreview.status,200);
+  assert(!JSON.stringify(importPreview.result.preview).includes('legacyTransfer'));
+  assert.equal((await call(alice,{action:'publish',expectedVersion:importSaved.result.currentVersion,previewId:importPreview.result.previewId,confirm:true})).status,200);
+  assert.equal(docs['data/items.json'].data[0].name,'Pending legacy change');assert.equal(docs['data/ammo.json'].data[0].name,'Pending legacy change');
+  assert.deepEqual(docs['data/vendors.json'],beforeImportPublication['data/vendors.json']);docs=beforeImportPublication; // Local fixture reset.
+  await db.query('insert into scavland_drafts.versions values ($1,$2,$3,$4)',['items','catalogue',21,{source:oldSource,catalogue:oldCatalogue}]);
+  assert.equal((await call(alice,{action:'load'})).status,409,'newer legacy version revokes the selected acknowledgement');
+  await db.exec('delete from scavland_drafts.versions where version=21');
+  assert.equal(docs['data/items.json'].data[0].name,'One connected edit');
+  // Restore local fixture overlap for the blocked-editor tests below.
+  await db.query("delete from scavland_item_drafts.versions where item_id='api-item' and version=$1",[importSaved.result.currentVersion]);
   assert.equal((await db.query("select payload->'catalogue'->'data'->0->>'name' as name from scavland_drafts.versions")).rows[0].name,'Pending legacy change');
   await assert.rejects(invoke(alice,'select public.scavland_item_legacy() as v'),e=>e.code==='42501');
   if(process.env.SCAVLAND_BROWSER==='1'){
@@ -176,8 +194,11 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     await frame.locator('#blocked').filter({hasText:'pending work'}).waitFor();assert.equal(await frame.locator('#item-form').isVisible(),false);
     assert.equal(await frame.locator('#publish').isDisabled(),true);
     await frame.getByRole('button',{name:'Review existing Items work',exact:true}).click();
-    const legacyDialog=frame.getByRole('dialog');await legacyDialog.waitFor();assert.match(await legacyDialog.innerText(),/Pending legacy change/);assert.match(await legacyDialog.innerText(),/nothing is imported or published/);
-    await legacyDialog.getByRole('button',{name:'Close',exact:true}).click();await legacyDialog.waitFor({state:'detached'});
+    const legacyDialog=frame.getByRole('dialog');await legacyDialog.waitFor();assert.match(await legacyDialog.innerText(),/Pending legacy change/);assert.match(await legacyDialog.innerText(),/publication requires a separate preview and Publish/);
+    await legacyDialog.getByRole('button',{name:'Import privately',exact:true}).click();await legacyDialog.waitFor({state:'detached'});
+    assert.equal(await frame.getByLabel('Name',{exact:true}).inputValue(),'Pending legacy change');assert.equal(docs['data/items.json'].data[0].name,'One connected edit');
+    const browserImportHead=await access(alice,'load','api-item');
+    await db.query("delete from scavland_item_drafts.versions where item_id='api-item' and version=$1",[browserImportHead.currentVersion]); // Restore local fixture only.
     await db.exec('delete from scavland_drafts.versions'); // Local fixture only, never production.
     await page.reload();await frame.locator('#item-form').waitFor();
     assert.equal(await frame.getByLabel('Damage',{exact:true}).inputValue(),'6 x 5 = 30');

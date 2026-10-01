@@ -1,4 +1,8 @@
+**1 October release review:** combined local checks pass; production remains main 98d121a / admin-drafts v10, Items v20 and Vendors v6. Handoff, manifest and cache tags refreshed. See SHARED-ROLLOUT-CHECKPOINT.md for final migration order and pending genuine-draft/flag/Owner acceptance. No live changes.
+
 # CURRENT STATE — 29 SEPTEMBER 2026
+
+**1 October import bridge:** explicit Import privately is connected to trusted snapshot/receipt saves and version/digest-bound saved acknowledgement, then ordinary preview/publication. SQL/API/browser fixtures pass; no genuine drafts imported or live changes. See `SHARED-LEGACY-IMPORT-SAVE-CHECKPOINT.md`. Next: full stack/migration review, refreshed production state and concrete coordinated rollout preparation; unresolved manual fields stay blocked.
 
 **1 October resume:** reviewed legacy import preparation now checks exact source/public digests and identity/revision, preserves disjoint pending work and historical private context, and rejects conflicts. See `SHARED-LEGACY-IMPORT-CHECKPOINT.md`. Next is authenticated receipt-backed import/save, durable acknowledgement and the explicit UI; overlap protection remains enabled. No live changes.
 
@@ -409,5 +413,3 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
 
 - Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
-
-

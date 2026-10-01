@@ -15,6 +15,7 @@ declare source jsonb;existing scavland_item_drafts.legacy_snapshots;head integer
 begin
  if p_version is null or p_version<1 then raise sqlstate '22023' using message='A reviewed legacy version is required.';end if;
  perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('legacy-preserve:items',0));
+ perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('items:catalogue',0));
  select max(version) into head from scavland_drafts.versions where domain='items' and entity_id='catalogue';
  if head is distinct from p_version then raise sqlstate 'PT409' using message='Legacy draft changed. Review its current version before preservation.';end if;
  select to_jsonb(v) into source from scavland_drafts.versions v where domain='items' and entity_id='catalogue' and version=p_version;

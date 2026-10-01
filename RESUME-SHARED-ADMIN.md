@@ -1,6 +1,6 @@
 # Resume shared Admin work — saved 30 September 2026
 
-1 October follow-up: resumed and prepared the reviewed import contract described in `SHARED-LEGACY-IMPORT-CHECKPOINT.md`. Next is its authenticated save/acknowledgement and explicit UI integration. The historical overnight handoff below remains useful context; no shared-editor rollout has happened.
+1 October follow-up: the reviewed import contract and authenticated save/acknowledgement UI are complete in PRs #31–32. See `SHARED-ROLLOUT-CHECKPOINT.md` for current release checks and rollout order. The historical overnight handoff below remains useful context; no shared-editor rollout has happened.
 
 User stopped work for the night. Resume from this handoff and NEXT_JOBS.md; do not restart completed checkpoints or activate production from historical approvals.
 
@@ -23,7 +23,7 @@ PR #22 remains held: its independent Ammo draft design is superseded. PRs above 
 
 Tests pass for contract/Git publication, local SQL permissions/receipts/history/snapshots, headless Edge flows and existing admin/invitation regressions. The latest batch tests include legacy conflict/private-context reports, stale/altered snapshot rejection and a blocked editor's read-only review dialog.
 
-## First task tomorrow
+## Historical first task (completed by PR #32)
 
 Implement the explicit reviewed legacy import and acknowledgement path described in `SHARED-LEGACY-PRESERVATION-CHECKPOINT.md`. Bind intent to exact legacy version/digest, selected identity, current public baseline and per-item version. Preserve private notes/history and unsupported fields, reject newer drafts/conflicts, and use trusted receipts. Do not bypass the current overlap blocker until exact transferred work has durable proof. No automatic classification, verification or game-data guesses.
 

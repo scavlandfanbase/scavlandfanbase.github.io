@@ -86,6 +86,7 @@ begin
  if p_item is null or length(p_item) not between 1 and 160 or p_action is null or p_action not in ('load','save') then
   raise sqlstate '22023' using message='Invalid item draft request.';
  end if;
+ if p_action='save' then perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('items:catalogue',0));end if;
  perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('shared-item:'||p_item,0));
  select * into current_row from scavland_item_drafts.versions where item_id=p_item order by version desc limit 1;
  head:=coalesce(current_row.version,0);
@@ -106,6 +107,14 @@ begin
  end if;
  select * into prior from scavland_item_drafts.versions where request_id=p_request;
  if found then return jsonb_build_object('currentVersion',head,'draft',to_jsonb(prior));end if;
+ if receipt.payload ? 'legacyTransfer' then
+  if not exists(select 1 from scavland_item_drafts.legacy_snapshots s join scavland_drafts.versions v
+   on v.domain=s.domain and v.entity_id=s.entity_id and v.version=s.version
+   where s.version=(receipt.payload->'legacyTransfer'->>'sourceVersion')::integer
+   and s.snapshot=to_jsonb(v) and v.version=(select max(version) from scavland_drafts.versions where domain='items' and entity_id='catalogue')) then
+   raise sqlstate 'PT409' using message='Legacy snapshot changed. Review again.';
+  end if;
+ end if;
  if head<>p_expected_version then raise sqlstate 'PT409' using message='A newer item draft exists.';end if;
  insert into scavland_item_drafts.versions(item_id,version,payload,request_id,saved_by)
  values(p_item,head+1,receipt.payload,p_request,actor) returning * into current_row;

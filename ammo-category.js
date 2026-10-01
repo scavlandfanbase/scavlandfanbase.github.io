@@ -79,7 +79,7 @@
    status('Saving private item draft…');
    if(!pending.receipt)pending.receipt=await request({action:pending.creation?'create':'prepare',...(pending.creation?{itemId:undefined}:{}),expectedVersion:pending.version,requestId:pending.requestId,command:pending.command});
    const target=pending.creation?pending.receipt.item_id:selected;
-   await request({action:'save',itemId:target,expectedVersion:pending.version,requestId:pending.requestId});
+   await request({action:'save',itemId:target,expectedVersion:pending.version,requestId:pending.requestId,...(pending.command.action==='import-legacy'?{command:pending.command}:{})});
    loaded=await request({action:'load',itemId:target});selected=target;pending=null;
    let record=records.find(r=>r.id===selected);if(!record){record={id:selected,unpublished:true};records.push(record);}record.name=loaded.state.records.items.name;
    paint();status('Saved — private item draft. Nothing has been published.');return true;
@@ -102,13 +102,18 @@
  $('legacy-review').onclick=async()=>{
   busy=true;buttons();
   try{const report=await request({action:'legacy-review'});
-   scavEditorDialog({title:'Existing Items work — '+report.name,submit:'Close',readOnly:true,build:({body})=>{
-    const summary=document.createElement('p');summary.textContent='Read-only review: '+report.status+(report.sourceVersion?' · Items draft version '+report.sourceVersion:'')+'. Existing work stays saved; nothing is imported or published.';body.append(summary);
+   const importable=['ready-for-reviewed-import','no-pending-public-fields'].includes(report.status)&&report.sourceVersion;
+   scavEditorDialog({title:'Existing Items work — '+report.name,submit:importable?'Import privately':'Close',readOnly:!importable,build:({body})=>{
+    const summary=document.createElement('p');summary.textContent='Read-only review: '+report.status+(report.sourceVersion?' · Items draft version '+report.sourceVersion:'')+'. Existing work stays saved. Import privately saves supported work into this editor; publication requires a separate preview and Publish.';body.append(summary);
     for(const field of report.fields){const heading=document.createElement('h3');heading.textContent=label(field.field)+' · '+field.status;body.append(heading);
      for(const [key,title]of [['baseline','Original public value'],['private','Saved private value'],['public','Current public value']]){const line=document.createElement('p');line.textContent=title+': '+(field[key].present?JSON.stringify(field[key].value):'Not present');body.append(line);}
     }
     if(report.preserved){const note=document.createElement('p');note.textContent='The complete selected private record, including its notes and review history, remains preserved in the existing draft. An explicit version-bound import is still required.';body.append(note);}
-   },onSubmit:()=>{}});
+   },onSubmit:async()=>{
+    if(!importable)return;
+    pending??={requestId:crypto.randomUUID(),version:report.currentVersion,command:{action:'import-legacy',expectedRevision:report.revision,confirmId:selected,sourceVersion:report.sourceVersion,sourceDigest:report.sourceDigest,publicDigest:report.publicDigest}};
+    if(!await save())throw Error('Import could not finish. Review the status message before retrying.');
+   }});
   }catch(e){status(e.message);}finally{busy=false;buttons();}
  };
  $('review').onclick=()=>{
