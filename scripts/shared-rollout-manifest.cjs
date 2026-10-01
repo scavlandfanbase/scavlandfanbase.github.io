@@ -13,7 +13,7 @@ function manifest(){
   }
  }
  const migrations=['supabase/proposals/shared-item-drafts.sql','supabase/proposals/shared-item-api.sql','supabase/proposals/shared-item-legacy-preservation.sql'];
- for(const file of ['admin.html','ammo-category.html','supabase/functions/admin-drafts/index.ts','scripts/shared-rollout-manifest.cjs',...migrations])add(file);
+ for(const file of ['admin.html','ammo-category.html','armour-category.html','weapons-category.html','supabase/functions/admin-drafts/index.ts','scripts/shared-rollout-manifest.cjs',...migrations])add(file);
  const html=fs.readFileSync(path.join(root,'admin.html'),'utf8');
  if(!html.includes('ammo-category.html?embed=1'))throw Error('Hub Ammo route is not connected.');
  const api=fs.readFileSync(path.join(root,'supabase/functions/admin-drafts/item-api.mjs'),'utf8');

@@ -1,3 +1,5 @@
+**1 October category release:** Ammo activated explicitly after PR #33; Armour/Weapons shared screen, creation and receipt integration now fixture-tested. See SHARED-CATEGORY-RELEASE.md. Current live Admin tab is signed out; genuine acceptance remains pending.
+
 Current handoff: ADMIN-AVAILABILITY-RELEASE.md. Shared storage/backend are now deployed; feature activation and frontend release remain pending. Earlier preparation-only statements below are historical.
 
 # Resume shared Admin work — saved 30 September 2026

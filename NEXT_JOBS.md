@@ -1,3 +1,5 @@
+**1 October category release:** Ammo activated explicitly after PR #33; Armour/Weapons shared screen, creation and receipt integration now fixture-tested. See SHARED-CATEGORY-RELEASE.md. Current live Admin tab is signed out; genuine acceptance remains pending.
+
 **1 October live foundation:** final three shared migrations applied; admin-drafts v11 deployed with shared editing still disabled. Existing drafts unchanged. See ADMIN-AVAILABILITY-RELEASE.md for exact evidence, remaining category work and pending explicit flag/frontend activation. This supersedes earlier no-production-change notes.
 
 **1 October release review:** combined local checks pass; production remains main 98d121a / admin-drafts v10, Items v20 and Vendors v6. Handoff, manifest and cache tags refreshed. See SHARED-ROLLOUT-CHECKPOINT.md for final migration order and pending genuine-draft/flag/Owner acceptance. No live changes.

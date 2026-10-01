@@ -63,8 +63,8 @@ function validate(state){
  keys(state.original,Object.keys(paths));keys(state.records,Object.keys(paths));keys(state.changes,Object.keys(paths));
  if(!state.original.items||!state.records.items)fail('Missing shared identity.');
  if(state.creation!==undefined){
-  keys(state.creation,['items','ammo']);
-  for(const [kind,created]of Object.entries(state.creation))if(created!==true||state.category!=='ammo'||!state.records[kind])fail('Invalid new item draft.');
+  keys(state.creation,['items',state.category]);
+  for(const [kind,created]of Object.entries(state.creation))if(created!==true||!state.records[kind])fail('Invalid new item draft.');
  }
  for(const group of [state.original,state.records])for(const r of Object.values(group))if(r.id!==state.itemId)fail('A draft can contain only its own item.');
  for(const [kind,changes]of Object.entries(state.changes)){
@@ -90,28 +90,32 @@ function set(state,kind,key,v){
  state.changes[kind][key]=true;return true;
 }
 // Server supplies the permanent ID. Browser commands contain only recorded facts.
-export function createAmmoItem(documents,itemId,command,context={}){
+export function createAmmoItem(documents,itemId,command,context={}){return createCategoryItem(documents,itemId,'ammo',command,context);}
+export function createCategoryItem(documents,itemId,category,command,context={}){
+ if(!['ammo','armour','weapons'].includes(category))fail('Category creation is not available.');
  keys(command,['action','shared','specialist']);
  if(command.action!=='create'||typeof itemId!=='string'||!/^item-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(itemId))fail('A server-assigned item identity is required.');
  for(const path of Object.values(paths))if(rows(documents[path]).some(r=>r.id===itemId))fail('This identity already exists. Reload its saved draft.',409);
- keys(command.shared||{},sharedFields);keys(command.specialist||{},facetFields.ammo);
+ keys(command.shared||{},sharedFields);keys(command.specialist||{},facetFields[category]);
  if(!command.shared?.name)fail('Enter an item name.');
  value('name',command.shared?.name,{images:context.images||[]});
- const item={id:itemId,name:command.shared.name,classification:['ammunition'],image:null,description:null,notes:null,estimatedPrice:null,maxStack:null,source:{status:'pending-review'},hidden:false,archived:false};
- const facet={id:itemId,name:item.name,image:null,description:null,estimatedPrice:null,maxStack:null,category:null,damage:null,penetrationPercent:null,source:{status:'pending-review'}};
- const state={schemaVersion:1,itemId,category:'ammo',revision:0,original:{items:structuredClone(item),ammo:structuredClone(facet)},records:{items:item,ammo:facet},changes:{},creation:{items:true,ammo:true}};
+ const item={id:itemId,name:command.shared.name,classification:[tags[category]],image:null,description:null,notes:null,estimatedPrice:null,maxStack:null,source:{status:'pending-review'},hidden:false,archived:false};
+ const facet={id:itemId,name:item.name,image:null,description:null,estimatedPrice:null,maxStack:null,...Object.fromEntries(facetFields[category].map(k=>[k,null])),source:{status:'pending-review'}};
+ const state={schemaVersion:1,itemId,category,revision:0,original:{items:structuredClone(item),[category]:structuredClone(facet)},records:{items:item,[category]:facet},changes:{},creation:{items:true,[category]:true}};
  return editItem(state,{action:'edit',expectedRevision:0,shared:command.shared,specialist:command.specialist},context);
 }
 // Explicitly add a missing facet only to an already classified Ammo identity.
-export function addAmmoFacet(input,command,context={}){
+export function addAmmoFacet(input,command,context={}){return addCategoryFacet(input,command,context);}
+export function addCategoryFacet(input,command,context={}){
+ const category=input.category;
  validate(input);keys(command,['action','expectedRevision','confirmId','specialist']);
- if(input.category!=='ammo'||command.action!=='add-facet'||command.expectedRevision!==input.revision)fail('Reload the Ammo item before adding its details.',409);
- authorize('ammo',input.records.items,null,context.permissions);
+ if(!['ammo','armour','weapons'].includes(category)||command.action!=='add-facet'||command.expectedRevision!==input.revision)fail('Reload the category item before adding its details.',409);
+ authorize(category,input.records.items,null,context.permissions);
  if(command.confirmId!==input.itemId)fail('Confirm the existing item identity.');
- if(input.records.ammo)fail('This item already has Ammo details.',409);
+ if(input.records[category])fail('This item already has category details.',409);
  const state=structuredClone(input),item=state.records.items;
  const facet={id:input.itemId,name:item.name,image:item.image??null,description:item.description??null,estimatedPrice:item.estimatedPrice??null,maxStack:item.maxStack??null,category:null,damage:null,penetrationPercent:null,source:{status:'pending-review'}};
- state.original.ammo=structuredClone(facet);state.records.ammo=facet;state.creation={...(state.creation||{}),ammo:true};
+ state.original[category]=structuredClone(facet);state.records[category]=facet;state.creation={...(state.creation||{}),[category]:true};
  return editItem(state,{action:'edit',expectedRevision:input.revision,specialist:command.specialist},context);
 }
 export function editItem(input,command,{actor,permissions:allowed,settings,images=[],clock=()=>new Date()}={}){
