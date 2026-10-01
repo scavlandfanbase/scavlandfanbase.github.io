@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run test:admin && npm run test:invites",
     "test:admin": "node scripts/test-admin01-core.cjs",
-    "test:invites": "node scripts/test-admin-invites.cjs"
+    "test:invites": "node scripts/test-admin-invites.cjs",
+    "test:attachments": "node scripts/test-attachment-release.cjs"
   },
   "repository": {
     "type": "git",

@@ -31,3 +31,7 @@ Confirm Pages deployment completion and fresh frame/child asset versions. Signed
 If acceptance fails, disable SHARED_ATTACHMENT_ENABLED and the frontend switch. Keep private SQL versions/receipts and existing shared editors. Do not drop tables, reset public data or remove overlap guards without a reviewed recovery plan: saved Attachment authority may already exist. Inspect Git main after an uncertain publish before retrying.
 
 Git and Postgres are separate services: non-force ref updates and repeated permission/version checks do not create a cross-service transaction. Local two-page tests establish stale-preview refusal after another save, not truly simultaneous production transaction behavior. Fresh production inspection, concurrent-session review, release scope approval and signed-in Owner acceptance remain required.
+
+## Repeatable local acceptance
+
+Run `npm run test:attachments` from the reviewed checkout. It enables combined browser/SQL coverage and runs all Attachment suites plus existing Admin/invite regressions, stopping at the first failed suite. Passing does not replace live Auth, concurrent production sessions or release approval.

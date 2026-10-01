@@ -1,3 +1,5 @@
+**Consolidated Attachment release checks — 1 October:** npm run test:attachments runs all eight Attachment suites plus Admin/invites with browser coverage enabled and stops on failure. Fixed an older browser-fixture save timing race by waiting for the actual save response. Full run passes. Existing-item scope remains; Add-new/Weapon-ID compatibility and live acceptance are separate outstanding work.
+
 **VS handoff independently verified — 1 October:** exact 3ce5f1a isolated source passes Page Builder, Items shell/full editor, Vendor and Admin/invite suites. Focused local service/render/filter review confirms reported scope. No merge/deployment; production builder gates remain. See VS-PAGE-BUILDER-REVIEW.md.
 
 **Attachment production preflight — 1 October:** live admin-drafts remains v13; no Attachment SQL/RPC installed. Existing private tables have RLS, retained aggregate drafts recorded. Corrected prepared Hub Owner access to match live server permission semantics; gate/browser tests pass. Secret/flag values and signed-in live acceptance remain unverified. See ATTACHMENT-PRODUCTION-PREFLIGHT.md. No rollout.

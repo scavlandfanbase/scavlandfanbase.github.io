@@ -24,7 +24,7 @@ const {chromium}=require('playwright');
  await frame.getByRole('button',{name:'Fixture candidate · Candidate for review'}).click();
  await frame.locator('#type').selectOption('Scope');await frame.locator('#classify').click();
  await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.attachmentType,'Scope');
- await frame.locator('#item-name').fill('Renamed');await frame.locator('#save').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.name,'Renamed');
+ await frame.locator('#item-name').fill('Renamed');await Promise.all([page.waitForResponse(r=>r.url().endsWith('/admin-drafts')&&r.request().postDataJSON().action==='save'),frame.locator('#save').click()]);await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.name,'Renamed');
  loseReply=true;await frame.locator('#item-name').fill('Lost-response edit');await frame.locator('#save').click();
  await frame.locator('#retry').waitFor();const savedVersion=version,calls=prepareCalls;
  assert.equal(await frame.locator('#item-name').inputValue(),'Lost-response edit');

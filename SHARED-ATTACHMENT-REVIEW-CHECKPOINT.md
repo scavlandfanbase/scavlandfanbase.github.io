@@ -163,3 +163,7 @@ Prepared ATTACHMENT-DEPLOYMENT-MANIFEST.md covering complete backend deployment,
 ## Read-only production preflight — 1 October
 
 Recorded live v13 deployment, absence of Attachment objects, existing RLS tables and aggregate retained draft baseline in ATTACHMENT-PRODUCTION-PREFLIGHT.md. Live permission SQL grants active Owners by role; corrected the prepared Hub rule accordingly and added Owner coverage. Release switch remains false. Hub browser tests pass. No production changes.
+
+## Consolidated release acceptance — 1 October
+
+Added npm run test:attachments with fail-fast execution of all eight Attachment suites and Admin/invites. First consolidated run exposed a browser fixture reading an old Saved message before the next save completed; changed that assertion to wait for the matching save response. Full rerun passes. No production code, data or flags changed.
