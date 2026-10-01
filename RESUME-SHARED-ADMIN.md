@@ -1,3 +1,11 @@
+## 2026-10-01 — Repeatable Attachment database readiness
+
+Added read-only supabase/proposals/attachment-readiness.sql. It reports exact prerequisite identities, four expected private tables and their RLS/direct access, six RPC signatures and role execution rights, and four overlap/allocation triggers. It returns no private draft contents, account identities or secrets. Missing objects are reported safely; the inventory does not authorize activation.
+
+Executed against production: all six prerequisites present; all four Attachment tables, six RPCs and four triggers absent. Existing seven private tables retain RLS. Aggregate versions remain legacy 26/max 20 and shared 2/max 1. admin-drafts remains ACTIVE v13 with the previously recorded hash. Configuration values, real concurrency and signed-in acceptance remain outstanding.
+
+Verified the same SQL against the local installed proposal fixture with the storage suite: table access restrictions, RLS, RPC role grants and trigger activation pass. The fixture mocks rather than installs scavland_item_legacy; the inventory correctly reports that missing dependency. No migrations, deployment, flags or game data changed.
+
 ## 2026-10-01 — Attachment configuration refusal checkpoint
 
 The prepared Attachment transport now checks all required server settings and its canonical-source reader when enabled. Missing or blank configuration returns a generic 503 before any authentication, storage or Git request; disabled routing still makes no requests. Tests cover each missing setting, blank values, missing reader and the fully configured unsigned-in refusal. The complete Attachment release suite passed, including browser/storage checks and Admin checks (existing non-fatal Node module warning).

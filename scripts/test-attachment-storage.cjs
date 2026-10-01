@@ -178,6 +178,14 @@ const {PGlite}=require('@electric-sql/pglite');
    console.log('PASS combined Attachment browser/transport/real SQL: durable private edit, authoritative version 3 and second page reload. Auth/Git remain fixtures.');
   }finally{await browser.close();}
  }
+ const inventory=(await db.query(fs.readFileSync(path.join(__dirname,'../supabase/proposals/attachment-readiness.sql'),'utf8'))).rows[0].attachment_release_inventory;
+ assert.equal(inventory.prerequisites.legacy_rpc,false,'fixture mocks the legacy RPC; inventory must report its absence');
+ assert.ok(Object.entries(inventory.prerequisites).filter(([name])=>name!=='legacy_rpc').every(([,present])=>present));
+ assert.equal(inventory.tables.length,4);assert.ok(inventory.tables.every(t=>t.present&&t.rls&&!t.anon_direct&&!t.authenticated_direct&&!t.service_direct));
+ assert.equal(inventory.triggers.length,4);assert.ok(inventory.triggers.every(t=>t.present&&t.enabled==='O'));
+ assert.equal(inventory.functions.length,6);assert.ok(inventory.functions.every(f=>f.present&&!f.anon_execute));
+ for(const f of inventory.functions){const browser=f.signature.includes('scavland_attachment_draft(')||f.signature.includes('scavland_attachment_list(');assert.equal(f.authenticated_execute,browser);if(!browser)assert.equal(f.service_execute,true);}
+ console.log('PASS read-only release inventory: complete local installation, RLS, denied direct access, RPC roles and enabled guards.');
  console.log('PASS Attachment preview SQL: actor/version/digest binding, browser denial and expiration.');
  console.log('PASS Attachment combined transport/SQL: classify, durable save/reload, exact receipt retry/refusal and subsequent edit. Auth/Git source fixture only.');
  console.log('PASS Attachment SQL: protected receipt creation, permission denial, private reload, retry, competing work and legacy-version revocation.');

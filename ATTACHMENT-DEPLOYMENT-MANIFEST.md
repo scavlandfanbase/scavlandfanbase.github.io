@@ -12,7 +12,7 @@ Web assets: admin.html, admin-dashboard.js, attachment-category.html, attachment
 
 Read current production state before executing anything: confirm the existing scavland_item_drafts and scavland_drafts schemas, their versions/prepared tables, auth.uid(), has_scavland_permission(text), and scavland_item_legacy RPC. Check whether any proposed Attachment objects already exist. The proposals use CREATE rather than an idempotent repair path; do not blindly rerun them.
 
-Apply reviewed proposals in order: `supabase/proposals/attachment-classification-storage.sql`, then `supabase/proposals/attachment-preview.sql`, then `supabase/proposals/attachment-creation-allocation.sql` for the forthcoming Add flow. Each has its own transaction. If the second fails, leave the feature disabled and inspect the committed first migration before retrying. None of these proposals has been applied by this checkpoint.
+Apply reviewed proposals in order: `supabase/proposals/attachment-classification-storage.sql`, then `supabase/proposals/attachment-preview.sql`, then `supabase/proposals/attachment-creation-allocation.sql` for the prepared Add flow. Each has its own transaction. If the second fails, leave the feature disabled and inspect the committed first migration before retrying. None of these proposals has been applied by this checkpoint.
 
 Verify RLS, revoked direct table access, service-only preparation/receipt/preview functions, authenticated permission-gated draft/list functions and both reciprocal overlap triggers. Record counts of existing legacy/shared drafts before and after. Preserve receipts, versions, genuine history and all game records.
 
@@ -35,3 +35,7 @@ Git and Postgres are separate services: non-force ref updates and repeated permi
 ## Repeatable local acceptance
 
 Run `npm run test:attachments` from the reviewed checkout. It enables combined browser/SQL coverage and runs all Attachment suites plus existing Admin/invite regressions, stopping at the first failed suite. Passing does not replace live Auth, concurrent production sessions or release approval.
+
+## Repeatable database inventory
+
+Run supabase/proposals/attachment-readiness.sql read-only before migrations and again after all three. Before installation, all prerequisites must be present and Attachment objects absent; any partial installation requires inspection before rerunning CREATE proposals. Afterwards require all four tables with RLS and no direct SELECT/INSERT/UPDATE/DELETE for anon, authenticated or service_role; all six exact RPCs with no anon execution; authenticated execution only on draft/list, and service execution on preparation/receipt/preview/allocation. Require all four guards enabled (O). Inspect function settings against the reviewed proposals. This inventory is not a concurrency test or configuration/activation approval.
