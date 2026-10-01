@@ -1,3 +1,5 @@
+**Attachment private storage — 1 October:** first-classification receipt storage proposal now passes real local SQL save/reload/retry and conflict tests. Not deployed. Reciprocal specialist overlap checks, subsequent edits and API integration remain required. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
+
 **Attachment preparation binding — 1 October:** stale revision/source/patch and private legacy overlap checks now pass fixture tests. Durable master-only receipt storage remains next; current production shared storage supports three specialist categories only. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.
 
 **Attachment follow-up — 1 October:** explicit master-only classification preparation is implemented/tested under existing items_edit permission. Durable receipt saving/API remains next; no live activation or real reclassification. See SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.

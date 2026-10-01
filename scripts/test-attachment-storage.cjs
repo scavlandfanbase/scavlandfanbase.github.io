@@ -1,0 +1,28 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const {PGlite}=require('@electric-sql/pglite');
+(async()=>{const db=new PGlite(),actor='11111111-1111-4111-8111-111111111111',other='22222222-2222-4222-8222-222222222222';try{
+ await db.exec(`create role anon;create role authenticated;create role service_role;create schema auth;
+ create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+ create function public.has_scavland_permission(p text) returns boolean language sql stable as $$select auth.uid()='${actor}'::uuid and p='items_edit'$$;
+ grant usage on schema auth to authenticated;create schema scavland_drafts;
+ create table scavland_drafts.versions(domain text,entity_id text,version integer,payload jsonb);`);
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/shared-item-drafts.sql'),'utf8'));
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/attachment-classification-storage.sql'),'utf8'));
+ const run=(who,sql,args=[])=>db.transaction(async tx=>{await tx.exec('set local role '+(who==='service'?'service_role':'authenticated'));await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[who==='service'?'':who]);return (await tx.query(sql,args)).rows[0]?.v;});
+ const request=crypto.randomUUID(),payload={itemId:'stable',category:'attachments',expectedVersion:0,actor,record:{id:'stable',contentType:'Attachment'}},command={action:'classify-attachment'};
+ const prep=(id=request,item='stable',legacy=0)=>run('service','select scavland_item_drafts.prepare_attachment($1,$2,$3,$4,$5,$6) as v',[actor,item,id,command,{...payload,itemId:item,record:{...payload.record,id:item}},legacy]);
+ const access=(who,action,id='stable',receipt=request)=>run(who,'select scavland_item_drafts.attachment_access($1,$2,$3) as v',[action,id,receipt]);
+ assert.equal((await access(actor,'load')).currentVersion,0);
+ await assert.rejects(access(actor,'save'),e=>e.code==='42501');
+ await prep();await prep();
+ await assert.rejects(access(other,'save'),e=>e.code==='42501');
+ await assert.rejects(run(actor,'select * from scavland_item_drafts.attachment_prepared'),e=>e.code==='42501');
+ assert.equal((await access(actor,'save')).version,1);assert.equal((await access(actor,'save')).version,1);
+ assert.deepEqual((await access(actor,'load')).draft.payload,payload);
+ await assert.rejects(prep(crypto.randomUUID()),e=>e.code==='PT409');
+ const stale=crypto.randomUUID();await prep(stale,'second');
+ await db.exec("insert into scavland_drafts.versions values('items','catalogue',1,'{}')");
+ await assert.rejects(access(actor,'save','second',stale),e=>e.code==='PT409');
+ assert.equal((await access(actor,'load','second')).currentVersion,0);
+ console.log('PASS Attachment SQL: protected receipt creation, permission denial, private reload, retry, competing work and legacy-version revocation.');
+}finally{await db.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
