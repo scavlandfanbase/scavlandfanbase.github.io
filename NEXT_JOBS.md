@@ -1,3 +1,9 @@
+## 2026-10-01 — Attachment configuration refusal checkpoint
+
+The prepared Attachment transport now checks all required server settings and its canonical-source reader when enabled. Missing or blank configuration returns a generic 503 before any authentication, storage or Git request; disabled routing still makes no requests. Tests cover each missing setting, blank values, missing reader and the fully configured unsigned-in refusal. The complete Attachment release suite passed, including browser/storage checks and Admin checks (existing non-fatal Node module warning).
+
+This is preparation only: no SQL migration, deployment, live enablement or game-data publication occurred. The coordinated release gates in ATTACHMENT-RELEASE-REVIEW.md still apply.
+
 **Attachment release candidate review — 1 October:** PR #37 description now matches completed preparation. Fresh live function source confirms v13 has no Attachment route. Config values/concurrent-session acceptance and coordinated release approval remain unresolved; no deployment. See ATTACHMENT-RELEASE-REVIEW.md.
 
 **Attachment Add workflow — 1 October:** Add dialog now creates privately and retries the same request after lost replies. Combined browser/SQL checks pass for cancel/create/retry/reopen/preview/simulated publish/later edit; full release suite passes. All initial Attachment controls are prepared, but live configuration, concurrent-session review and release acceptance remain. No deployment.

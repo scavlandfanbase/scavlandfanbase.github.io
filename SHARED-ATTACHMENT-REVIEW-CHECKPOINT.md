@@ -209,3 +209,9 @@ Planner tests cover append/retry, collision, patch drift, protected fields and p
 Added a labelled Add dialog with required name/type and explicit Create privately action. New records start Unverified; details remain available in the saved edit form. Creation retries reuse the same local request/command; other controls remain blocked during pending work. Existing dirty edits must be saved or reviewed before Add. Matching frame/child cache version is attachment-preparation-20261001-4.
 
 Actual browser/handler/PGlite acceptance covers cancel, lost creation response after durable save, retry with exactly one identity/version, second-page reopen, preview, simulated Git publication and subsequent edit/rebase. Full release suites pass. Older separate browser assertions now wait for matching save responses to avoid reading stale Saved text. No live rollout.
+
+## 2026-10-01 — Attachment configuration refusal checkpoint
+
+The prepared Attachment transport now checks all required server settings and its canonical-source reader when enabled. Missing or blank configuration returns a generic 503 before any authentication, storage or Git request; disabled routing still makes no requests. Tests cover each missing setting, blank values, missing reader and the fully configured unsigned-in refusal. The complete Attachment release suite passed, including browser/storage checks and Admin checks (existing non-fatal Node module warning).
+
+This is preparation only: no SQL migration, deployment, live enablement or game-data publication occurred. The coordinated release gates in ATTACHMENT-RELEASE-REVIEW.md still apply.

@@ -15,7 +15,13 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
   if(!response.ok)fail(result.message||'Private storage is unavailable.',result.code==='PT409'?409:result.code==='42501'?403:response.status>=500?503:400);
   return result;
  }
- return createAttachmentApi({enabled:()=>env('SHARED_ATTACHMENT_ENABLED')==='true',
+ function enabled(){
+  if(env('SHARED_ATTACHMENT_ENABLED')!=='true')return false;
+  const required=['SUPABASE_URL','SUPABASE_ANON_KEY','SUPABASE_SERVICE_ROLE_KEY','GITHUB_TOKEN'];
+  if(required.some(name=>typeof env(name)!=='string'||!env(name).trim())||typeof readSource!=='function')fail('Attachment server configuration is unavailable.',503);
+  return true;
+ }
+ return createAttachmentApi({enabled,
   create:async input=>{
    const allocation=await rpc('scavland_allocate_attachment',{p_actor:input.actor,p_request:input.requestId,p_command:input.command},null,true);
    const itemId=allocation.item_id;
