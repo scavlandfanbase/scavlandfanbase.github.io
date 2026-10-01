@@ -1,3 +1,7 @@
+## Page Builder live release — 1 October 2026
+
+PR #42 and Pages deployment succeeded; authenticated private save, retained history, saved-revision preview and archive passed live acceptance. Zero test publications. Focused acceptance UI corrections and regressions are complete. See PAGE-BUILDER-BACKEND-CHECKPOINT.md for release identities, recovery boundaries and first genuine publication verification.
+
 ## Page Builder gated production setup — 1 October 2026
 
 Six private migrations and the complete gated admin-drafts version 16 bundle are deployed. Live Page Builder remains disabled; existing protected Attachment/Evidence routes retain anonymous denial. Combined local release and eleven PostgreSQL race checks pass; connected recovery/reload checks pass. Coordinate final activation and signed-in acceptance. The current details and deployment digest are in PAGE-BUILDER-BACKEND-CHECKPOINT.md.
