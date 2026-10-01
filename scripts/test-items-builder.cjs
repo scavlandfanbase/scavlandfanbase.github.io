@@ -16,11 +16,13 @@ const root=path.resolve(__dirname,'..');
   browser=await chromium.launch({headless:true,channel:'msedge'});const context=await browser.newContext(),page=await context.newPage(),errors=[],writes=[];
   await context.route('**/*',r=>r.request().url().startsWith(base)?r.continue():r.abort());page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(r.method()!=='GET')writes.push(r.url());});
   await page.route('**/api/items',r=>r.fulfill({status:503,json:{error:'test'}}));await page.goto(base);await page.locator('#retry').waitFor();assert.equal(await page.locator('#workspace').isVisible(),false);
-  await page.unroute('**/api/items');await page.locator('#retry').click();await page.locator('#workspace').waitFor();assert.match(await page.locator('#count').innerText(),/285 items/);
+  await page.unroute('**/api/items');await page.locator('#retry').click();await page.locator('#workspace').waitFor();
+  assert.deepEqual((await page.locator('#count').innerText()).split(' · '),['285 total','285 match current filters','showing 40']);
   if(process.env.SCAVLAND_TEST_OUTPUT){fs.mkdirSync(process.env.SCAVLAND_TEST_OUTPUT,{recursive:true});for(const width of [320,1280]){await page.setViewportSize({width,height:900});await page.screenshot({path:path.join(process.env.SCAVLAND_TEST_OUTPUT,'items-real-'+width+'.png'),fullPage:true});}}
   assert.equal(await page.locator('.item-choice').count(),40);await page.locator('#more').click();assert.equal(await page.locator('.item-choice').count(),80);
   await page.getByLabel('Search items',{exact:true}).fill(real.catalogue.data[150].id);assert.equal(await page.locator('.item-choice').count(),1);assert.equal(await page.locator('#item-name').innerText(),real.catalogue.data[150].name);
-  await page.getByLabel('Search items',{exact:true}).fill('no-such-item-zzzz');assert.equal(await page.locator('#detail').isVisible(),false);assert.match(await page.locator('#count').innerText(),/No matching/);
+  await page.getByLabel('Search items',{exact:true}).fill('no-such-item-zzzz');assert.equal(await page.locator('#detail').isVisible(),false);
+  assert.deepEqual((await page.locator('#count').innerText()).split(' · '),['285 total','0 match current filters','showing 0']);
   const fixture={catalogue:Items.foundation({schemaVersion:1,data:[{id:'one',name:'Same name',category:'Medical',properties:{health:null,quantity:0},source:{status:'screenshot-verified',file:'evidence-inbox/test.png'},image:'images/missing.png',description:'<img src=x onerror=alert(1)>'},{id:'two',name:'Same name',category:'Legacy category',hidden:true},{id:'three',name:'Archived item',archived:true}]}),categories:Items.categories,settings:real.settings};
   await page.route('**/api/items',r=>r.fulfill({json:fixture}));await page.reload();await page.locator('#workspace').waitFor();assert.equal(await page.locator('.item-choice').count(),2);
   await page.locator('.item-choice').nth(1).click();assert.match(await page.locator('#facts').innerText(),/two/);assert.equal(await page.locator('#item-state').innerText(),'Hidden item');
