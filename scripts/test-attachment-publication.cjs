@@ -20,5 +20,27 @@ const assert=require('node:assert/strict');
  await assert.rejects(plan(saved,conflict,context),e=>e.status===409);
  await assert.rejects(plan(saved,{...documents,'data/weapons.json':{data:[{id:'stable'}]}},context),e=>e.status===409);
  await assert.rejects(plan({...saved,record:{...saved.record,effects:{invented:1}}},documents,context),/Protected/);
+ const {createAttachmentPublisher}=await import('../supabase/functions/admin-drafts/attachment-publication.mjs');
+ let writes=0,intent=null,live={...context,version:1,savedDraft:saved,documents};
+ const fetcher=async(url,options={})=>{
+  const path=new URL(url).pathname.split('/scavlandfanbase.github.io')[1];
+  if(!options.method||options.method==='GET'){
+   if(path==='/git/ref/heads/main')return Response.json({object:{sha:'head'}});
+   if(path==='/git/commits/head')return Response.json({tree:{sha:'base-tree'}});
+   if(path==='/contents/data/items.json')return Response.json({sha:'blob',encoding:'base64',content:Buffer.from(JSON.stringify(documents['data/items.json'])).toString('base64')});
+  }
+  writes++;if(path==='/git/trees')return Response.json({sha:'tree'});
+  if(path==='/git/commits')return Response.json({sha:'commit'});
+  if(path==='/git/refs/heads/main'){assert.equal(JSON.parse(options.body).force,false);return Response.json({});}
+  throw Error('Unexpected Git request');
+ };
+ const publisher=createAttachmentPublisher({saved,version:1,base:'blob',token:'fixture',fetcher,actor:context.actor,previewId:'fixture-intent',readCurrent:async()=>live,readIntent:async()=>intent});
+ const preview=await publisher.preview();assert.equal(writes,0);
+ await assert.rejects(publisher.publish(),e=>e.status===409);assert.equal(writes,0);
+ intent={digest:await legacyDigest(preview.files)};
+ assert.deepEqual(await publisher.publish(),{commit:'commit'});assert.equal(writes,3);
+ writes=0;live={...live,version:2};await assert.rejects(publisher.publish(),e=>e.status===409);assert.equal(writes,0);
+ live={...live,version:1,permissions:[]};await assert.rejects(publisher.publish(),e=>e.status===403);assert.equal(writes,0);
+ console.log('PASS Attachment Git adapter fixtures: read-only preview, missing intent/stale version/revoked permission refuse writes and approved output uses non-force publication.');
  console.log('PASS Attachment preview planner: one master output, no vendor changes, private history omitted, disjoint edits/retries preserved and conflicts/protected facts refused.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

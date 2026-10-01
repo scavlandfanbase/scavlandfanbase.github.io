@@ -2,6 +2,7 @@
 import {publicValue,same,fail} from './core.mjs';
 import {legacyDigest} from './legacy-item-review.mjs';
 import {legacyItemBlockers} from './item-draft.mjs';
+import {githubPublisher} from './github-publisher.mjs';
 const fields=['name','description','notes','image','estimatedPrice','maxStack','contentType','attachmentType','classification','verification'];
 const own=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:record[key]}:{})});
 const published=(record,key)=>({present:Object.hasOwn(record,key),...(Object.hasOwn(record,key)?{value:key==='verification'?publicValue({verification:record[key]}).verification:publicValue(record[key])}:{})});
@@ -27,4 +28,32 @@ export async function planAttachmentPublication(saved,documents,{settings,legacy
  }
  if(conflicts.length)throw Object.assign(Error('Public changes conflict with the Attachment draft. Nothing was published.'),{status:409,conflicts});
  return {'data/items.json':output};
+}
+
+// All callbacks and credentials are trusted service dependencies. No browser paths.
+export function createAttachmentPublisher({saved,version,base,token,fetcher,readCurrent,readIntent,previewId,actor}={}){
+ if(!Number.isSafeInteger(version)||version<1||typeof readCurrent!=='function'||typeof actor!=='string'||!actor)fail('Load a saved Attachment version before publishing.');
+ const draft={domain:'shared-attachment',entity_id:saved?.itemId,version,payload:structuredClone(saved),base:{'data/items.json':base}};
+ async function current(){
+  const context=await readCurrent();
+  if(context.version!==version||!same(context.savedDraft,saved))fail('The Attachment draft changed. Preview again.',409);
+  if(context.actor!==actor||!context.permissions?.includes('items_edit'))fail('Items editing permission is required.',403);
+  return context;
+ }
+ const adapter=githubPublisher({repository:'scavlandfanbase/scavlandfanbase.github.io',token,fetcher,paths:['data/items.json'],allowUnrelatedChanges:true,
+  validate:async()=>{await current();},
+  project:async(_draft,documents)=>{
+   const context=await current();
+   return planAttachmentPublication(saved,{...context.documents,...documents},context);
+  },
+  beforePublish:async plan=>{
+   const context=await current();
+   await planAttachmentPublication(saved,context.documents,context);
+   if(typeof readIntent!=='function'||!previewId)fail('Review a saved preview before publishing.',409);
+   const intent=await readIntent({actor,itemId:saved.itemId,version,previewId});
+   const files=plan.tree.map(({path,content})=>({path,content}));
+   if(!intent||intent.digest!==await legacyDigest(files))fail('The preview changed or expired. Preview again.',409);
+  }
+ });
+ return {preview:()=>adapter.preview(draft),publish:()=>adapter.publish(draft)};
 }

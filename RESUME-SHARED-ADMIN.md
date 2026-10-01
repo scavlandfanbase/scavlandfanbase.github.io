@@ -1,3 +1,5 @@
+**Attachment Git adapter — 1 October:** fixed-path non-force publication adapter now checks saved version/permission, public conflicts and exact stored preview output before writes. Fixture tests pass; transport/UI wiring and deployment remain pending.
+
 **Attachment preview intents — 1 October:** private actor/version/output-bound expiring intents are proposed and local SQL-tested. Next: handler/Git publication connection and review UI. Nothing deployed.
 
 **Attachment publication planning — 1 October:** selected master-only output and conflict/privacy protections are implemented/tested. Vendor data remains independent. Next: version-bound preview intent/Git publication and authenticated review UI; no live route or deployment.

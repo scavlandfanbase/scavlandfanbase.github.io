@@ -74,3 +74,11 @@ Tests pass for selected output, unchanged inputs/unrelated Items, omitted privat
 attachment-preview.sql adds private service-only preview intents bound to actor, selected Item, saved Attachment version and 64-character output digest. Intents expire after 30 minutes; stale saved versions stop lookup and creation. Browser roles cannot call preparation or read the table. The trusted publish handler must reauthenticate, recheck permissions, regenerate the plan and compare its digest before publishing; this proposal alone does not authorize Git writes.
 
 Real local SQL tests pass valid lookup, wrong actor, stale version, malformed digest, browser denial and expired intent. Existing combined transport/storage and master-only publication-planner tests pass. No production migration or route activation. Next: connect these intents to preview/publish requests and trusted Git publication, then the category UI and coordinated release checks.
+
+## Trusted Git publication adapter preparation
+
+createAttachmentPublisher now reuses the existing non-force Git tree/commit/ref adapter with one fixed output path. It rechecks current saved version/payload and permission, plans against latest public Items, then checks fresh context and the stored preview output digest immediately before Git writes. Preview reads only. Missing/expired intents, stale versions and revoked permission refuse writes. No browser controls repository/path/token.
+
+Fixture Git tests pass preview with zero writes, missing preview refusal, exact output publication via tree/commit/non-force ref, and stale/revoked refusal with zero writes. Real local SQL/transport/preview suites remain passing. No real Git publication occurs in tests. Cross-service changes after the final check are not transactionally locked; production integration must preserve existing race disclosure and conflict handling.
+
+Remaining: wire preview/publish actions and service intent callbacks into the authenticated transport, add explicit publish flag/confirmation checks and UI; verify retries/recovery after publication, then coordinated migration/backend/frontend release review. Adapter is unregistered and no production services changed.
