@@ -106,10 +106,50 @@
             <iframe id="history-frame" title="Read-only demonstration revision preview" sandbox="" loading="eager"></iframe>
           </section>
         </section>
+        <button id="publication-toggle" class="pb-button" type="button" aria-expanded="false" aria-controls="publication-panel">Publication status - demonstration</button>
+        <section id="publication-panel" class="pb-publication-panel" aria-labelledby="publication-heading" hidden>
+          <header class="pb-history-header">
+            <div>
+              <h3 id="publication-heading">Publication status - demonstration</h3>
+              <p class="pb-hint">Fixture simulation only. No repository commit, deployment, approval or publication occurs.</p>
+            </div>
+            <button id="publication-close" class="pb-button" type="button">Close publication demonstration</button>
+          </header>
+          <p id="publication-status" class="pb-status" role="status" aria-live="polite" tabindex="-1" data-state="saved">No publication demonstration has run.</p>
+          <p id="publication-lock-note" class="pb-history-repair" hidden>Editing is temporarily blocked while the fixture request is processing or deployment is pending. Check the demonstration status to continue.</p>
+          <div class="pb-publication-tools">
+            <label>Outcome scenario
+              <select id="publication-scenario" aria-describedby="publication-scenario-help">
+                <option value="success">Successful deployment</option>
+                <option value="failure">Deployment fails after commit</option>
+                <option value="unknown">Outcome unknown after commit</option>
+                <option value="unconfirmed">Completion signal is unconfirmed</option>
+              </select>
+            </label>
+            <p id="publication-scenario-help" class="pb-hint">Scenarios are deterministic fixtures, not real publication outcomes.</p>
+            <p id="publication-current-draft" class="pb-hint" role="status" aria-live="polite">No editor page is selected.</p>
+            <div class="pb-publication-actions">
+              <button id="publication-review" class="pb-button" type="button">Preview saved revision for demonstration</button>
+              <button id="publication-start" class="pb-button pb-primary" type="button" disabled>Start publication demonstration</button>
+              <button id="publication-next" class="pb-button" type="button" hidden>Advance demonstration status</button>
+              <button id="publication-check" class="pb-button" type="button" hidden>Check fixture status</button>
+              <button id="publication-retry" class="pb-button" type="button" hidden>Retry fixture deployment</button>
+            </div>
+          </div>
+          <p id="publication-reviewed" class="pb-hint" hidden></p>
+          <p id="publication-request" class="pb-hint" hidden></p>
+          <ol id="publication-events" class="pb-history-list" aria-label="Demonstration publication status history"></ol>
+          <section id="publication-preview-panel" class="pb-history-detail" aria-labelledby="publication-preview-heading" hidden>
+            <h4 id="publication-preview-heading">Exact saved revision preview</h4>
+            <p id="publication-preview-label" class="pb-hint"></p>
+            <iframe id="publication-review-frame" title="Read-only saved revision publication preview" sandbox="" loading="eager"></iframe>
+          </section>
+        </section>
       </aside>
     </div>
     <template id="page-builder-history-fixtures">{"delayMs":80,"failAttempts":[],"revisions":[{"key":"demo-v3","revision":3,"savedAt":"2026-09-25T14:30:00.000Z","editorName":"Fixture Editor A","state":"Saved","page":{"id":"demo-history-page","title":"Fixture Field Notes","slug":"demo-history-page","intro":"A deterministic example revision for the local history demonstration.","sections":[{"id":"demo-section-main","title":"Route notes","hidden":false,"layout":{"columns":1,"align":"start","spacing":"normal","background":"none","border":false},"blocks":[{"id":"demo-heading-main","type":"heading","title":"North road","hidden":false},{"id":"demo-text-main","type":"text","text":"Unknown values remain plain text in this fixture.","hidden":false},{"id":"demo-text-hidden","type":"text","text":"Demonstration hidden note - never included in the historical preview.","hidden":true}]}]}},{"key":"demo-v2","revision":2,"savedAt":"2026-09-20T09:15:00.000Z","editorName":"Fixture Editor B","state":"Archived","page":{"id":"demo-history-page","title":"Fixture Field Notes - archived","slug":"demo-history-page","intro":"An older archived fixture revision.","sections":[{"id":"demo-section-main","title":"Route notes","hidden":false,"layout":{"columns":2,"align":"center","spacing":"compact","background":"surface","border":true},"blocks":[{"id":"demo-heading-main","type":"heading","title":"Old bridge","hidden":false},{"id":"demo-text-main","type":"text","text":"Archived demo copy.","hidden":false}]}]}},{"key":"demo-v1-repair","revision":1,"savedAt":"2026-09-12T17:45:00.000Z","editorName":"Fixture Editor A","state":"Archived","page":{"id":"demo-history-page","title":"Fixture Field Notes - needs repair","slug":"demo-history-page","intro":"This deliberately invalid fixture must not render.","sections":[{"id":"demo-section-main","title":"Route notes","hidden":false,"layout":{"columns":1,"align":"start","spacing":"normal","background":"none","border":false},"blocks":[{"id":"demo-button-unsafe","type":"button","title":"Unsafe fixture link","href":"javascript:alert(1)","hidden":false}]}]}}]}</template>
     <template id="page-builder-history-image-fixture">{"key":"demo-v0-image-repair","revision":0,"savedAt":"2026-09-01T08:00:00.000Z","editorName":"Fixture Editor B","state":"Archived","page":{"id":"demo-history-page","title":"Fixture Field Notes - image repair","slug":"demo-history-page","intro":"An unapproved-image fixture must not render.","sections":[{"id":"demo-section-main","title":"Route notes","hidden":false,"layout":{"columns":1,"align":"start","spacing":"normal","background":"none","border":false},"blocks":[{"id":"demo-image-unapproved","type":"image","image":"images/not-approved.png","alt":"Unapproved fixture image","hidden":false}]}]}}</template>
+    <template id="page-builder-publication-fixtures">{"delayMs":45,"scenarios":[{"id":"success","label":"Successful deployment","transitions":["publishing","repository-commit-recorded","deployment-pending","published"]},{"id":"failure","label":"Deployment fails after commit","transitions":["publishing","repository-commit-recorded","deployment-pending","deployment-failed"]},{"id":"unknown","label":"Outcome unknown after commit","transitions":["publishing","repository-commit-recorded","outcome-unknown"]},{"id":"unconfirmed","label":"Completion signal is unconfirmed","transitions":["publishing","repository-commit-recorded","deployment-pending","published"],"confirmedPublished":false}],"unknownChecks":["deployment-pending","published"],"retryTransitions":["deployment-pending","published"]}</template>
     <noscript>This local editor needs JavaScript enabled.</noscript>
   </main>
   <script src="page-builder-model.js"></script>
