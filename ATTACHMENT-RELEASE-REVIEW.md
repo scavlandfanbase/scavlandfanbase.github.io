@@ -30,4 +30,4 @@ Repeated post-publication reconciliation could replace retained private verifica
 
 Publication checks span GitHub and Postgres; they do not provide one cross-service transaction. Non-force Git ref conflict protection remains; a private-state race after the final check is an acknowledged limitation requiring acceptance/mitigation review.
 
-Copilot reports Page Builder tests and one unresolved hidden-item fixture assertion. The pushed branch is now available at 3ce5f1a. The 38cf7c7 change correctly excludes hidden records from Active items; the full Page Builder source and reported suites still require independent review.
+Copilot checkpoint 3ce5f1a now has independent local suite reproduction and focused source review recorded in VS-PAGE-BUILDER-REVIEW.md. It remains separate, local-only and unmerged.

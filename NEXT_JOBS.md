@@ -1,3 +1,5 @@
+**VS handoff independently verified — 1 October:** exact 3ce5f1a isolated source passes Page Builder, Items shell/full editor, Vendor and Admin/invite suites. Focused local service/render/filter review confirms reported scope. No merge/deployment; production builder gates remain. See VS-PAGE-BUILDER-REVIEW.md.
+
 **Attachment production preflight — 1 October:** live admin-drafts remains v13; no Attachment SQL/RPC installed. Existing private tables have RLS, retained aggregate drafts recorded. Corrected prepared Hub Owner access to match live server permission semantics; gate/browser tests pass. Secret/flag values and signed-in live acceptance remain unverified. See ATTACHMENT-PRODUCTION-PREFLIGHT.md. No rollout.
 
 **Attachment deployment preparation — 1 October:** release manifest now records full function/assets, SQL order, permissions, flags, activation and non-destructive recovery. Fixed child asset cache versions to match the frame (-2); Hub and combined browser/SQL suites pass. Fresh production inspection and release approval remain; nothing deployed. See ATTACHMENT-DEPLOYMENT-MANIFEST.md.
