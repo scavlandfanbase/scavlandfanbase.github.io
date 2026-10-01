@@ -25,3 +25,11 @@ Found misleading Permission required labels retained after profile authorization
 This release enables Attachments and audited Evidence Review while preserving existing editors. It does not finish every Hub tool. Page Builder remains local-only on VS branch with reviewed production plan and ongoing accessibility work. Blueprint/Crafting expansion, Image Manager, Navigation and other roadmap tools remain separate tasks. Git/database publication race limitation remains disclosed in ATTACHMENT-CONCURRENCY-REVIEW.md.
 
 Current local repeatable acceptance: npm run test:release. Full combined checks and all 18 independent PostgreSQL concurrency cases passed before activation. Targeted activation and Hub correction checks passed afterward. Production deployment is verified; comprehensive role-by-role live write/recovery acceptance is not claimed.
+
+## Final Hub deployment and advisor review
+
+Hub correction PR 40 merged as 29b5cc17fe0dbb29fc9829758ab22912a13d9fce; Pages run 36884317133 succeeded. Fresh HTTP 200 Admin source contains label restoration, Owner view alignment and enforced legacy-control hiding. Signed-in acceptance occurred on the prior release; corrected UI behaviour is covered by targeted tests and deployed-source verification, not a second complete signed-in run.
+
+Post-DDL security advisor review reports expected private-table RLS-without-policy INFO notices: direct access is revoked and trusted RPCs own access. It also warns about authenticated execution of definer list/state/queue functions. Reviewed functions have internal current-permission checks, empty search paths and revoked anonymous execution; this intentional RPC boundary remains security-sensitive and should be re-reviewed when changed. No new anonymous execution was enabled. See [RLS advisor](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy) and [database function security guidance](https://supabase.com/docs/guides/database/functions). Other pre-existing advisories were not broadened into an unrelated audit.
+
+Release inventories now record actual source gate booleans rather than historical initial false values. Source gates are enabled; explicit server false can still stop actions. An inventory does not independently approve activation or verify environment values.
