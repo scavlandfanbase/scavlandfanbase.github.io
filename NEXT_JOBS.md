@@ -1,3 +1,7 @@
+## 2026-10-01 — Evidence Review screen preparation
+
+Separate feature/evidence-review-backend worktree now has audited SQL, caller-JWT adapter, paginated queue and review screen with history/retry/stale recovery. Hub/backend are connected behind disabled switches; local Evidence and existing Admin tests pass. No live changes. EVIDENCE-REVIEW-CHECKPOINT.md records rollout dependencies. Attachment PR #37 and VS Page Builder remain separate; reconcile shared Hub/backend files during release integration.
+
 **1 October recovery fix:** explicit preservation of historical verification into private context with a new Unverified category review is prepared/tested. See LEGACY-REVIEW-RECOVERY.md. No genuine draft changed; deployment and administrator opt-in remain pending.
 
 **Deployment update — 1 October:** admin-drafts v12 is active. PR #34 is ready for review but its frontend merge was rejected by automatic approval review pending explicit approval of the Armour/Weapons production rollout. Main/Pages remain cd460b2 (Ammo release). Items v20, Vendors v6 and zero shared versions are unchanged. No genuine game-data publication occurred.

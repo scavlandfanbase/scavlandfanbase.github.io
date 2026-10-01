@@ -61,6 +61,19 @@ begin
 end $$;
 revoke all on function public.scavland_evidence_state(uuid) from public,anon,service_role;
 grant execute on function public.scavland_evidence_state(uuid) to authenticated;
+create index evidence_review_queue_order on public.evidence_submissions(status,created_at desc,id desc);
+create function public.scavland_evidence_queue(p_status text,p_before timestamptz default null,p_before_id uuid default null)
+returns jsonb language plpgsql security definer set search_path='' as $$
+begin
+ if auth.uid() is null or not coalesce(public.has_scavland_permission('evidence_review'),false) then raise sqlstate '42501' using message='Evidence review permission required.';end if;
+ if p_status is null or p_status not in ('pending','approved','rejected') or (p_before is null)<>(p_before_id is null) then raise sqlstate '22023' using message='Invalid evidence queue.';end if;
+ return coalesce((select jsonb_agg(to_jsonb(q) order by created_at desc,id desc) from
+ (select id,item_name,category,submission_type,status,created_at from public.evidence_submissions
+ where status=p_status and (p_before is null or (created_at,id)<(p_before,p_before_id))
+ order by created_at desc,id desc limit 30) q),'[]'::jsonb);
+end $$;
+revoke all on function public.scavland_evidence_queue(text,timestamptz,uuid) from public,anon,service_role;
+grant execute on function public.scavland_evidence_queue(text,timestamptz,uuid) to authenticated;
 -- Preserve public submission/read policies. Browser moderation must use the audited RPC.
 revoke update,delete on public.evidence_submissions from public,anon,authenticated;
 commit;

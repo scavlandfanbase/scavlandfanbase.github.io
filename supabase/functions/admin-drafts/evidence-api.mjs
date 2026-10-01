@@ -11,10 +11,14 @@ export function createEvidenceApi({env,fetcher=fetch}){
   try{
    const raw=await request.text();if(new TextEncoder().encode(raw).length>20000)return reply({error:'Evidence request is too large.'},413);
    let body;try{body=JSON.parse(raw);}catch{return reply({error:'Invalid evidence request.'},400);}
-   if(!body||Array.isArray(body)||body.domain!=='evidence-review'||!['load','decide'].includes(body.action)||!uuid(body.submissionId))return reply({error:'Invalid evidence request.'},400);
-   const allowed=body.action==='load'?['domain','action','submissionId']:['domain','action','submissionId','requestId','expectedVersion','expectedStatus','decision','notes'];
+   if(!body||Array.isArray(body)||body.domain!=='evidence-review'||!['list','load','decide'].includes(body.action)||body.action!=='list'&&!uuid(body.submissionId))return reply({error:'Invalid evidence request.'},400);
+   const allowed=body.action==='list'?['domain','action','status','before','beforeId']:body.action==='load'?['domain','action','submissionId']:['domain','action','submissionId','requestId','expectedVersion','expectedStatus','decision','notes'];
    if(Object.keys(body).some(key=>!allowed.includes(key)))return reply({error:'Unsupported evidence fields.'},400);
    let name='scavland_evidence_state',args={p_submission:body.submissionId};
+   if(body.action==='list'){
+    if(!['pending','approved','rejected'].includes(body.status)||(body.before===undefined)!==(body.beforeId===undefined)||body.before!==undefined&&(typeof body.before!=='string'||!/^\d{4}-\d{2}-\d{2}T/.test(body.before)||!Number.isFinite(Date.parse(body.before))||!uuid(body.beforeId)))return reply({error:'Invalid evidence queue.'},400);
+    name='scavland_evidence_queue';args={p_status:body.status,p_before:body.before??null,p_before_id:body.beforeId??null};
+   }
    if(body.action==='decide'){
     if(!uuid(body.requestId)||!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<0||!['pending','approved','rejected'].includes(body.expectedStatus)||!['pending','approved','rejected'].includes(body.decision)||body.notes!==undefined&&body.notes!==null&&(typeof body.notes!=='string'||body.notes.length>4000))return reply({error:'Invalid evidence decision.'},400);
     name='scavland_review_evidence';args={...args,p_request:body.requestId,p_version:body.expectedVersion,p_status:body.expectedStatus,p_decision:body.decision,p_notes:body.notes??null};

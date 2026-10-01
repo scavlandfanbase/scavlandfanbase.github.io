@@ -13,3 +13,15 @@ Passed: test-evidence-review-storage.cjs with actual PGlite SQL proposals, and t
 Next: combined adapter/SQL acceptance, paginated permission-gated listing, isolated review UI with recoverable same-request retry and visible history, disabled Hub route and deployment/readiness review. Preserve existing read/submission behavior. Do not apply the SQL before replacing the old UI; do not remove submissions, upload fixtures, alter game facts or enable the live feature.
 
 Current Supabase functions guidance was consulted: https://supabase.com/docs/guides/database/functions. Changelog markdown fetch was unsupported; HTML https://supabase.com/changelog was reviewed. No relevant changes require a new dependency for these ordinary SQL RPCs.
+
+## Queue, screen and disabled integration checkpoint
+
+The permission-gated queue now returns at most 30 summaries with stable created_at/id keyset pagination and a matching index. Combined actual adapter/SQL tests cover load, durable decision, exact retry, conflict and pagination with identical timestamps and no duplicates. Queue summaries omit notes/screenshot paths.
+
+New evidence-review.html/js/css screen uses same-origin parent session handoff, plain-text rendering, private signed screenshots, bounded network waits, retained submission notes, review notes/history, explicit approve/reject/restore confirmation and the same request identity after a lost reply. Stale decisions stop and require confirmed saved-state reload; unsaved notes trigger unload protection. No delete control or game-data publication/verification exists. Image failures do not prevent review.
+
+Prepared Hub evidence frame and session allowlist are connected behind EVIDENCE_REVIEW_RELEASE_ENABLED=false. Existing evidence navigation remains unchanged while false. The backend evidence-review domain is registered behind EVIDENCE_REVIEW_ENABLED (absent/false). Frame/script/CSS cache tag is evidence-review-20261001-1. Hub tests verify disabled/unauthorized session refusal; browser tests verify safe text, lost reply/retry, restore, stale notes/reload/history and 320/1280 widths. Existing Admin/invite npm tests pass (existing non-fatal module warning). No production changes.
+
+Next: real PostgreSQL simultaneous review acceptance, production readiness inventory, broader combined browser/handler/SQL acceptance and coordinated rollout review. The Attachment branch also edits admin.html and production.mjs: reconcile both import/frame/session changes explicitly in the release integration; do not replace either file wholesale.
+
+Rollout order: review current schema/policies and exact proposals, deploy complete backend disabled, arrange moderation cutover, apply the reviewed proposal (which revokes old direct writes), verify grants/history/retained counts, enable backend then frontend together, verify signed-in reviewer/Owner and restricted account acceptance. SQL makes the old direct-moderation UI unavailable; avoid applying it independently of the prepared replacement. Recovery can disable new actions while retaining submissions/audit; never delete audit rows to roll back or casually restore unaudited write grants.
