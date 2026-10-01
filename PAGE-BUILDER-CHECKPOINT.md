@@ -4,7 +4,7 @@
 
 **Date:** 1 October 2026  
 **Branch:** `feature/page-builder-local-drafts`  
-**Commits:** `77713bb` (draft-service foundation), `1b1ed58` (visual editor and acceptance tests), `45f6426` (focus restoration), `2997a7f` (Items count-state assertions), `d1c1b4d` (keyboard-navigation checks)
+**Commits:** `77713bb` (draft-service foundation), `1b1ed58` (visual editor and acceptance tests), `45f6426` (focus restoration), `2997a7f` (Items count-state assertions), `d1c1b4d` (keyboard-navigation checks), `38cf7c7` (hidden-item filter and fixture corrections)
 
 ## What Exists
 
@@ -21,12 +21,13 @@ The local editor supports page title, introduction and safe address; saved-draft
 - `page-builder.css` — Page Builder and exported-page styles are scoped to `.page-builder` and `.published-page`. A narrow `.builder:not(.page-builder)` control-height rule preserves the existing Admin editor baseline.
 - `page-builder-contract.js` — Page Builder-only layout validation and escaped HTML output, built on the existing shared page model.
 - `scripts/page-builder-server.cjs` — serves the local editor, filters approved images, checks draft revisions and permits only local draft create/save/delete. Existing loopback, host/origin/session protections and private storage remain in place.
+- `items-builder.js` — Active items excludes hidden records; hidden records remain reachable through the explicit Hidden items and Include archived views. Public Items behavior is unchanged.
 - `scripts/test-page-builder.cjs` — fixture-only service and browser acceptance checks using temporary storage.
-- `scripts/test-items-builder.cjs` — updated stale count assertions to check total, filtered and displayed counts; no Items editor behavior changed.
+- `scripts/test-items-builder.cjs` — updated stale count/empty-state expectations and verifies hidden-item filter state, stable identity, collapsed technical reference, and visible evidence link.
 - `PAGE-BUILDER-CHECKPOINT.md` — this handoff.
 - `NEXT_JOBS.md` — brief checkpoint reference only.
 
-No game-data JSON, Admin authentication/permissions, Supabase schema/functions, production settings or publishing infrastructure were changed. `page-model.js` and the generated Admin model bundle were not changed.
+No game-data JSON, Attachment files, Admin authentication/permissions, Supabase schema/functions, production settings or publishing infrastructure were changed. `page-model.js` and the generated Admin model bundle were not changed.
 
 ## Start Locally
 
@@ -55,15 +56,13 @@ The status area reports loading, unsaved, saving, saved and error states. In-app
 Passed:
 
 - `node scripts/test-page-builder.cjs` — create/save/reopen/edit; all block types; ordering, duplication, hiding and deletion; safe/duplicate/reserved addresses; unsafe links and image paths; malicious text escaping; empty pages, 10,000-character text and 200-block rendering; hidden-content omission; preview/export equality and safe hrefs; save failure, single-save retry and stale-revision recovery; missing-image replacement; unsaved-change warnings; focus after cancel/confirm, reorder and delete actions; keyboard activation and 320–1280px layouts.
+- `node scripts/test-items-builder.cjs` — PASS. Exact populated/zero count states, 40/80 pagination, search, hidden excluded from Active and available under Hidden, archived filtering, hidden status, stable ID through the list and collapsed technical details, evidence link, missing image, keyboard/dialog focus and public hidden-item filtering.
 - `node scripts/test-items-editor.cjs` — existing Items editor workflow and responsive checks.
 - `node scripts/test-vendor-builder.cjs` — existing Vendor editor workflow and responsive checks.
 - `npm test` — Admin core and Admin invitation/privacy suites.
 - `git diff --check`, JavaScript syntax checks and VS Code diagnostics for changed code — passed.
 
-Items shell test status:
-
-- The original failure was an outdated `/285 items/` wording expectation. The test now verifies the exact total/matching/page-size state (`285 total`, `285 match current filters`, `showing 40`) and exact zero-match state; those assertions pass.
-- The same shell suite then fails later at its pre-existing `assert.match(..., /two/)` fixture check because the selected hidden item's internal ID is not rendered in the visible facts panel. The Items editor was not changed; the separate full Items editor suite passes. No other stale shell-suite assertions were modified.
+The fixture expected hidden item ID `two` in visible facts, but permanent references are intentionally inside a collapsed technical-details disclosure. The test now checks the stable list identity and opens that disclosure before checking the reference. Investigation also found and fixed a separate visibility-filter bug: Active items had included hidden records; hidden records now appear only under Hidden items, Include archived, or other explicitly matching filters. The public Items page already omitted hidden records and remains unchanged.
 
 The browser suite replaces `window.confirm` with a deterministic fixture to exercise accept/cancel paths; application focus restoration after those paths is asserted, but native browser-chrome dialog focus itself is not automated. The repository Admin test run emitted its existing non-fatal Node `MODULE_TYPELESS_PACKAGE_JSON` warning. No production browser/authentication or deployment checks were attempted.
 
