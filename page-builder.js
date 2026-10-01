@@ -9,7 +9,7 @@
   let token='',records=[],images=[],existingPages=[],active=null,revision=null,snapshot=null,dirty=false,slugEdited=false,cssText='',saving=false;
   const errorState=new WeakMap();let previewErrorField=null;
   let historyVersions=[],historySelection=null,historyLoaded=false,historyLoading=false,historyRequest=0;
-  let publicationScenario='success',publicationReview=null,publicationReviewInvalidated=false,publicationRequest=null,publicationState='not-reviewed',publicationInFlight=false,publicationReviewing=false,publicationLock=false,publicationDisabled=new Map(),publicationEvents=[];
+  let publicationScenario='success',publicationReview=null,publicationReviewInvalidated=false,publicationRequest=null,publicationError='',publicationErrorFocus=null,publicationState='not-reviewed',publicationInFlight=false,publicationReviewing=false,publicationLock=false,publicationDisabled=new Map(),publicationEvents=[];
   const blockTypes=[['heading','Heading'],['text','Text'],['image','Image'],['card','Card'],['divider','Divider'],['button','Link button']];
   const layoutChoices={columns:[[1,'One column'],[2,'Two columns'],[3,'Three columns']],align:[['start','Start'],['center','Center']],spacing:[['compact','Compact'],['normal','Normal'],['spacious','Spacious']],background:[['none','None'],['surface','Surface'],['subtle','Subtle']]};
   function longTitleHistoryFixture(source){
@@ -43,24 +43,28 @@
   }
   const historyAdapter=createHistoryFixtureAdapter(JSON.parse($('#page-builder-history-fixtures').content.textContent),JSON.parse($('#page-builder-history-image-fixture').content.textContent));
   function createPublicationFixtureAdapter(fixtures){
-    const requests=new Map();let sequence=0;
-    const wait=()=>new Promise(resolve=>setTimeout(resolve,Math.max(0,Number(fixtures.delayMs)||0)));
+    const requests=new Map(),failActions={...(fixtures.failActions||{})};let sequence=0;
+    const wait=async action=>{
+      await new Promise(resolve=>setTimeout(resolve,Math.max(0,Number(fixtures.delayMs)||0)));
+      if(failActions[action]>0){failActions[action]--;throw new Error(`Fixture ${action} adapter rejected the request.`);}
+    };
     const snapshot=request=>structuredClone(request);
     const find=requestId=>{const request=requests.get(requestId);if(!request)throw new Error('Demonstration request was not found.');return request;};
     return Object.freeze({
       count:()=>requests.size,
+      async review({revision,page}){await wait('review');return {revision,page:snapshot(page)};},
       async start({scenario,revision,digest,pageId,title,slug}){
-        await wait();const plan=fixtures.scenarios.find(entry=>entry.id===scenario);if(!plan)throw new Error('Choose a demonstration scenario.');
+        await wait('start');const plan=fixtures.scenarios.find(entry=>entry.id===scenario);if(!plan)throw new Error('Choose a demonstration scenario.');
         const number=++sequence,request={requestId:`DEMO-PUB-${String(number).padStart(3,'0')}`,scenario,revision,digest,pageId,title,slug,plan,retries:0,checks:0,statusChecks:0,index:1,state:plan.transitions[0],commitId:`DEMO-COMMIT-${String(number).padStart(3,'0')}`,commitRecorded:false,confirmed:plan.transitions[0]==='published'&&plan.confirmedPublished!==false,retrying:false};
         requests.set(request.requestId,request);return snapshot(request);
       },
       async advance(requestId){
-        await wait();const request=find(requestId),steps=request.retrying?fixtures.retryTransitions:request.plan.transitions,next=steps[request.index++];
+        await wait('advance');const request=find(requestId),steps=request.retrying?fixtures.retryTransitions:request.plan.transitions,next=steps[request.index++];
         if(!next)throw new Error('This demonstration has no further status step.');
-        request.state=next;if(next==='repository-commit-recorded')request.commitRecorded=true;if(next==='published')request.confirmed=request.plan.confirmedPublished!==false;return snapshot(request);
+        request.state=next;if(next==='repository-commit-recorded')request.commitRecorded=true;if(next==='published'){request.confirmed=request.plan.confirmedPublished!==false;if(!request.confirmed)request.state='outcome-unknown';}return snapshot(request);
       },
       async check(requestId){
-        await wait();const request=find(requestId);request.checks++;
+        await wait('check');const request=find(requestId);request.checks++;
         if(request.state==='published'&&request.confirmed!==true)request.state='outcome-unknown';
         else if(['unknown','unconfirmed'].includes(request.scenario)&&!request.confirmed&&['outcome-unknown','deployment-pending'].includes(request.state)){
           const next=fixtures.unknownChecks[Math.min(request.statusChecks++,fixtures.unknownChecks.length-1)];
@@ -69,7 +73,7 @@
         return snapshot(request);
       },
       async retry(requestId){
-        await wait();const request=find(requestId);if(request.state!=='deployment-failed')throw new Error('Check status before retrying an uncertain outcome.');
+        await wait('retry');const request=find(requestId);if(request.state!=='deployment-failed')throw new Error('Check status before retrying an uncertain outcome.');
         request.retries++;request.retrying=true;request.index=1;request.state=fixtures.retryTransitions[0];request.confirmed=false;return snapshot(request);
       }
     });
@@ -203,6 +207,9 @@
   }
   function publicationSavedRecord(){return active&&revision?records.find(record=>record.draft.id===active.id&&record.revision===revision):null;}
   function publicationReviewIsCurrent(){const record=publicationSavedRecord();return !!record&&!!publicationReview&&publicationReview.id===record.draft.id&&publicationReview.revision===record.revision&&publicationReview.editorFingerprint===JSON.stringify(active);}
+  function publicationNeedsEditorLock(request=publicationRequest){return !!request&&(['publishing','repository-commit-recorded','deployment-pending','deployment-failed','outcome-unknown'].includes(request.state)||request.state==='published'&&request.confirmed!==true);}
+  function setPublicationError(message,focusTarget){publicationError=message;publicationErrorFocus=focusTarget;}
+  function restorePublicationErrorFocus(){const target=publicationErrorFocus;publicationErrorFocus=null;if(!publicationError)return;if(target?.isConnected&&!target.disabled&&!target.hidden)target.focus();else publicationStatus.focus();}
   function setPublicationLock(locked){
     publicationLock=locked;publicationLockNote.hidden=!locked;
     const controls=document.querySelectorAll('#page-form input,#page-form select,#page-form textarea,#page-form [data-action],#new-page,#save-draft,#delete-draft,#export-html,#add-section,#draft-list button');
@@ -227,7 +234,7 @@
     const record=publicationSavedRecord(),current=active?`${active.title||'Untitled page'}${revision?` · saved revision ${revision}`:' · not saved'}`:'No editor page is selected';
     if(!publicationRequest)publicationState=record?'ready-for-review':'not-reviewed';
     publicationCurrentDraft.textContent=`Editor: ${current}${dirty?' · unsaved editor changes are separate from the saved revision':''}`;
-    publicationStatus.textContent=publicationMessage();publicationStatus.dataset.state=publicationRequest?.state==='published'&&publicationRequest.confirmed!==true?'outcome-unknown':publicationRequest?.state||publicationState;
+    publicationStatus.textContent=publicationError||publicationMessage();publicationStatus.dataset.state=publicationError?'error':publicationRequest?.state==='published'&&publicationRequest.confirmed!==true?'outcome-unknown':publicationRequest?.state||publicationState;
     publicationReviewButton.disabled=publicationInFlight||publicationReviewing||saving||publicationLock||!record;
     publicationStartButton.disabled=publicationInFlight||saving||publicationLock||!publicationReviewIsCurrent()||!!publicationRequest&&!(publicationRequest.state==='published'&&publicationRequest.confirmed===true);
     publicationScenarioInput.disabled=publicationInFlight||publicationLock||!!publicationRequest&&!(publicationRequest.state==='published'&&publicationRequest.confirmed===true);
@@ -260,41 +267,46 @@
   async function reviewSavedRevision(){
     if(publicationInFlight||publicationReviewing||publicationLock)return;
     const record=publicationSavedRecord();if(!record)return;
+    publicationError='';publicationErrorFocus=null;
     const editorFingerprint=JSON.stringify(active),page=structuredClone(record.draft),reviewRevision=record.revision;
     publicationReviewing=true;renderPublication();publicationStatus.textContent='Preparing exact saved-revision preview...';publicationStatus.dataset.state='loading';
     try{
-      const validated=Builder.validate(page,{images,existingPages,currentPageId:page.id}),payload=JSON.stringify({revision:reviewRevision,page:validated});
+      const reviewed=await publicationAdapter.review({revision:reviewRevision,page}),validated=Builder.validate(reviewed.page,{images,existingPages,currentPageId:page.id});
+      if(reviewed.revision!==reviewRevision)throw new Error('Fixture review returned a different saved revision.');
+      const payload=JSON.stringify({revision:reviewed.revision,page:validated});
       const digestBytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(payload)),digest=Array.from(new Uint8Array(digestBytes),value=>value.toString(16).padStart(2,'0')).join('');
-      if(active?.id!==page.id||revision!==reviewRevision||JSON.stringify(active)!==editorFingerprint){publicationReviewInvalidated=true;publicationReview=null;publicationReviewFrame.srcdoc='';renderPublication();publicationStatus.textContent='The editor changed while the saved revision was being reviewed. Review it again.';publicationStatus.dataset.state='error';return;}
+      if(active?.id!==page.id||revision!==reviewRevision||JSON.stringify(active)!==editorFingerprint){publicationReviewInvalidated=true;publicationReview=null;publicationReviewFrame.srcdoc='';setPublicationError('The editor changed while the saved revision was being reviewed. Review it again.',publicationReviewButton);return;}
       const context={images,existingPages,currentPageId:page.id,css:cssText};
       publicationReview={id:page.id,title:page.title,slug:page.slug,revision:reviewRevision,digest,page:validated,editorFingerprint};
       publicationReviewInvalidated=false;publicationState='ready-for-review';publicationReviewFrame.srcdoc=Builder.document(validated,context);renderPublication();
-    }catch(error){publicationStatus.textContent=`Saved revision could not be reviewed: ${error.message}`;publicationStatus.dataset.state='error';}
-    finally{publicationReviewing=false;renderPublication();}
+    }catch(error){setPublicationError(`Saved revision could not be reviewed: ${error.message}`,publicationReviewButton);}
+    finally{publicationReviewing=false;renderPublication();restorePublicationErrorFocus();}
   }
   function updatePublicationRequest(request,action){
-    publicationRequest=request;publicationState=request.state;recordPublicationEvent(request,action);
-    setPublicationLock(['publishing','repository-commit-recorded','deployment-pending','outcome-unknown'].includes(request.state));renderPublication();
+    publicationError='';publicationErrorFocus=null;publicationRequest=request;publicationState=request.state;recordPublicationEvent(request,action);
+    setPublicationLock(publicationNeedsEditorLock(request));renderPublication();
   }
   async function startPublication(){
     if(publicationInFlight||publicationRequest&&!(publicationRequest.state==='published'&&publicationRequest.confirmed===true))return;
-    if(!publicationReviewIsCurrent()){publicationStatus.textContent='Review the exact saved revision again before starting this demonstration.';publicationStatus.dataset.state='error';return;}
+    if(!publicationReviewIsCurrent()){setPublicationError('Review the exact saved revision again before starting this demonstration.',publicationStartButton);renderPublication();restorePublicationErrorFocus();return;}
+    publicationError='';publicationErrorFocus=null;
     const review=publicationReview;publicationInFlight=true;publicationRequest=null;publicationEvents=[];publicationState='publishing';setPublicationLock(true);renderPublication();
     publicationStatus.textContent='Starting fixture-only publication demonstration...';publicationStatus.dataset.state='loading';
     try{
       const request=await publicationAdapter.start({scenario:publicationScenario,revision:review.revision,digest:review.digest,pageId:review.id,title:review.title,slug:review.slug});
       updatePublicationRequest(request,'start');
-    }catch(error){setPublicationLock(false);publicationState='ready-for-review';renderPublication();publicationStatus.textContent=`Demonstration did not start: ${error.message}`;publicationStatus.dataset.state='error';}
-    finally{publicationInFlight=false;renderPublication();}
+    }catch(error){setPublicationLock(false);publicationState='ready-for-review';setPublicationError(`Demonstration did not start: ${error.message}`,publicationStartButton);}
+    finally{publicationInFlight=false;renderPublication();restorePublicationErrorFocus();}
   }
   async function runPublicationAction(action){
     if(publicationInFlight||!publicationRequest)return;
     if(action==='retry'&&publicationRequest.state!=='deployment-failed')return;
-    const requestId=publicationRequest.requestId;publicationInFlight=true;setPublicationLock(true);renderPublication();
+    const actionButton={advance:publicationNextButton,check:publicationCheckButton,retry:publicationRetryButton}[action];
+    publicationError='';publicationErrorFocus=null;const requestId=publicationRequest.requestId;publicationInFlight=true;setPublicationLock(true);renderPublication();
     publicationStatus.textContent=action==='check'?'Checking fixture status...':action==='retry'?'Retrying the fixture deployment with the same request ID...':'Advancing the fixture status...';publicationStatus.dataset.state='loading';
     try{updatePublicationRequest(await publicationAdapter[action](requestId),action);}
-    catch(error){publicationStatus.textContent=`Fixture ${action} failed: ${error.message}`;publicationStatus.dataset.state='error';}
-    finally{publicationInFlight=false;setPublicationLock(['publishing','repository-commit-recorded','deployment-pending','outcome-unknown'].includes(publicationRequest?.state));renderPublication();}
+    catch(error){setPublicationError(`Fixture ${action} failed: ${error.message}`,actionButton);}
+    finally{publicationInFlight=false;setPublicationLock(publicationNeedsEditorLock());renderPublication();restorePublicationErrorFocus();}
   }
   function showPreviewError(error){
     const message=`Preview unavailable: ${error.message}`,field=fieldForError(error.message);
