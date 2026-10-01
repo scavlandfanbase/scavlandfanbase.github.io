@@ -9,6 +9,8 @@ const assert=require('node:assert/strict');
  storage:{receipt:async()=>prepared,prepare:async input=>{preparations++;prepared=input;return input;},save:async()=>{saved=prepared.payload;return {version:1,payload:saved};}}};
  const api=createAttachmentApi(dependencies),call=(body,token='valid')=>api(new Request('https://fixture/attachment',{method:'POST',headers:{Authorization:'Bearer '+token},body:JSON.stringify(body)}));
  assert.equal((await call({action:'load',itemId:'stable'},'bad')).status,401);
+ const restricted=createAttachmentApi({...dependencies,authenticate:async()=>({actor,permissions:['weapons_edit']})});
+ assert.equal((await restricted(new Request('https://fixture',{method:'POST',headers:{Authorization:'Bearer restricted'},body:JSON.stringify({action:'load',itemId:'stable'})}))).status,403);
  assert.equal((await createAttachmentApi({...dependencies,enabled:()=>false})(new Request('https://fixture'))).status,503);
  const load=await (await call({action:'load',itemId:'stable'})).json();assert.equal(load.currentVersion,0);
  const command={action:'classify-attachment',confirmId:'stable',attachmentType:'Unknown',confirmReclassification:true,expectedVersion:0,sourceDigest:await legacyDigest({source:item,settings})};

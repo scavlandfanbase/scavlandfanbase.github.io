@@ -14,6 +14,10 @@ export async function reconcileAttachment(saved,source,settings){
  for(const key of allKeys){
   const before=published(saved.before,key),desired=published(saved.record,key),current=published(source,key);
   if(same(before,desired)){
+   if(key==='verification'){
+    if(same(current,desired))continue;
+    fail('Public verification changed. Review the saved history before editing.',409);
+   }
    if(current.present)result.record[key]=structuredClone(source[key]);else delete result.record[key];
   }else if(!same(current,before)&&!same(current,desired))fail('Public changes conflict with the Attachment draft. Review before editing.',409);
  }

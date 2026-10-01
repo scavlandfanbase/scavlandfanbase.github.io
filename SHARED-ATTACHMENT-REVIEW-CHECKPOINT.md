@@ -130,3 +130,8 @@ Draft Hub card now accurately marks Attachments as prepared with Release pending
 Copilot reports Page Builder commits 45f6426, 2997a7f, d1c1b4d and 014cee1 on feature/page-builder-local-drafts, with local preview at port 4181 and broader browser checks passing. Its reported Items count assertion update passes, but a hidden-item fixture assertion remains failing. These are reported results, not independently verified here: branch is absent locally. Do not treat that remaining suite as fully passing or weaken visibility protection to satisfy the fixture. Page Builder files were not changed by this checkpoint.
 
 Next: review complete Attachment schema/receipt/publication paths and remaining Add/compatibility scope before enabling Hub navigation. Coordinate actual Page Builder branch integration only when its commits are available. No deployment.
+
+
+## Release review fix
+Repeated public reconciliation now preserves private verification history; divergent public verification requires review. Regression and restricted-permission tests pass. See ATTACHMENT-RELEASE-REVIEW.md for verified evidence and remaining release gates. No deployment.
+
