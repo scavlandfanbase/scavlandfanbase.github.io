@@ -1,3 +1,7 @@
+## Guides genuinely published — 1 October 2026
+
+Owner saved/reviewed/published Guides revision 1 through the live Page Builder. Exact commit and public content confirmed live; Pages run 36923562601 succeeded. PR #44 archived-history release is included. Refreshed-session archived-history inspection also passed. Next: public navigation integration; restricted-account and real failed-build recovery remain unclaimed. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
+
 ## Archived Page Builder history access — 1 October 2026
 
 Read-only archived-page history access and embedded preview/blur corrections pass browser regressions. No new backend actions or restoration/publication controls. Release and live read-only acceptance are next; see PAGE-BUILDER-BACKEND-CHECKPOINT.md.
