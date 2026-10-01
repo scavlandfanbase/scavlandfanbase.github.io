@@ -1,3 +1,5 @@
+**Attachment recovery tests — 1 October:** lost-response/permission-denial retries preserve entries and avoid duplicate versions; explicit Review saved state reload is added and browser-tested. No deployment. Remaining controls/Hub integration and release review continue next.
+
 **Attachment disabled routing — 1 October:** backend dispatch/pinned source reader now prepared; missing flag refuses without network. Focused routing/API/SQL tests and Admin npm tests pass. No deployment/activation. Copilot branch is absent locally, so its commits remain unreviewed here.
 
 **Attachment interface batch — 1 October:** isolated review/classify/edit/preview/publish screen and post-publication baseline recovery are prepared. Edge fixture and local SQL/API tests pass. Not live; production source/routing integration, release review and remaining controls are documented in SHARED-ATTACHMENT-REVIEW-CHECKPOINT.md.

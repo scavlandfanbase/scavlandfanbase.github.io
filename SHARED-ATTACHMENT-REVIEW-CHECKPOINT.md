@@ -110,3 +110,9 @@ test-attachment-routing passes pinned source/file count, approved images, disabl
 Copilot Page Builder branch/commits are not available in this local repository's branch list. Its reported completion remains unverified here; do not merge or alter its work based on the pasted report. Attachment changes touch no Page Builder files.
 
 Next: complete Hub/cache integration in preparation, broader browser failure/retry and permission acceptance, schema/receipt review and release manifest. Remaining Add/image/review/archive controls must stay accurately documented; no release yet.
+
+## Browser failure/recovery checks
+
+Browser fixture tests now save a version then simulate a lost response; Retry reuses the original receipt with no duplicate version or extra preparation. Permission-denied saves preserve form entries and disable publication until a permitted retry succeeds. Review saved state now explicitly confirms discarding local unsaved/retry entries, reloads the authoritative saved version and leaves server history intact. Browser checks pass those paths along with existing classification/edit/preview/publish and mobile layout fixtures; diff whitespace check passes. No production calls.
+
+Next: remaining Attachment image/review/lifecycle controls and Hub/cache integration, then schema/security and coordinated release review. Page Builder unchanged. Still preparation only.

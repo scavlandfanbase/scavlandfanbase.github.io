@@ -13,6 +13,7 @@
   $('preview').disabled=!loaded?.currentVersion||busy||dirty||!!pending;
   $('publish').disabled=!preview||busy||dirty||!!pending;
   $('retry').hidden=!pending;$('retry').disabled=busy;$('search').disabled=busy||!!pending;
+  $('reload').disabled=!selected||busy||!token;
   document.querySelectorAll('#records button').forEach(b=>b.disabled=busy||!!pending);
  }
  async function request(extra){
@@ -48,6 +49,11 @@
   pending={id:crypto.randomUUID(),command:{action:'edit-attachment',confirmId:selected,expectedVersion:loaded.currentVersion,fields:{name:$('item-name').value,description:$('description').value||null,notes:$('notes').value||null,estimatedPrice:$('price').value===''?null:Number($('price').value),maxStack:$('stack').value===''?null:Number($('stack').value),attachmentType:$('type').value}}};preview=null;save();
  };
  $('retry').onclick=save;$('search').oninput=paintList;
+ $('reload').onclick=()=>{
+  if(busy||!selected)return;
+  if((dirty||pending)&&!confirm('Review the server-saved draft? Unsaved form entries and this local retry action will be cleared. Existing server-saved versions remain intact.'))return;
+  pending=null;dirty=false;preview=null;select(selected);
+ };
  controls.forEach(id=>$(id).oninput=()=>{dirty=true;preview=null;update();});
  $('preview').onclick=async()=>{busy=true;update();try{preview=await request({action:'preview',expectedVersion:loaded.currentVersion});$('output').textContent=preview.files.map(f=>f.content).join('\n');$('preview-dialog').showModal();status('Saved preview ready.');}catch(error){preview=null;status(error.message);}finally{busy=false;update();}};
  $('close-preview').onclick=()=>$('preview-dialog').close();
