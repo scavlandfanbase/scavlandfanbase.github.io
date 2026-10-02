@@ -19,7 +19,7 @@
         return `<section ${editing?`data-section="${esc(section.id)}"`:''} class="page-section canvas-section ${editing&&section.hidden?'is-hidden':''}">${section.title?`<h2>${esc(section.title)}</h2>`:''}<div class="section-blocks">${blocks.map(block=>{
           const {desktop:r,style}=block.canvas;
           const classes=Object.entries(style).map(([key,value])=>`canvas-${key}-${value}`).join(' ');
-          return `<div ${editing?`data-block="${esc(block.id)}"`:''} class="page-block ${classes} ${editing&&block.hidden?'is-hidden':''}" style="grid-column:${r.x+1}/span ${r.w};grid-row:${r.y+1}/span ${r.h}">${renderBlock(block)}</div>`;
+          return `<div ${editing?`data-block="${esc(block.id)}"`:''} class="page-block ${classes} canvas-x-${r.x} canvas-y-${r.y} canvas-w-${r.w} canvas-h-${r.h} ${editing&&block.hidden?'is-hidden':''}">${renderBlock(block)}</div>`;
         }).join('')}</div></section>`;
       }
       const layout=section.layout,classes=['page-section',`columns-${layout.columns??1}`,`align-${layout.align??'start'}`,`spacing-${layout.spacing??'normal'}`,`background-${layout.background??'none'}`,layout.border?'has-border':'',editing&&section.hidden?'is-hidden':''].filter(Boolean).join(' ');

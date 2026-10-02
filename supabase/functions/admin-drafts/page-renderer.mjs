@@ -1,6 +1,6 @@
 import Model from './page-model.mjs';
 // Browser renderer plus canvas layout; UMD wrapper adapted to ESM.
-// Original normalized SHA-256: 4d0e106a706c6df4fac28109f405cd9ac9a0cf8eba325424e3f0bbd490e2a0d5
+// Original normalized SHA-256: 3b7a4254405ec7f84f62a3d9e96fa87d925ab5d2167beeebc521e5a70ca89137
 const renderer=(()=>{
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function validate(input,{images,existingPages,currentPageId=null}={}){
@@ -22,7 +22,7 @@ const renderer=(()=>{
         return `<section ${editing?`data-section="${esc(section.id)}"`:''} class="page-section canvas-section ${editing&&section.hidden?'is-hidden':''}">${section.title?`<h2>${esc(section.title)}</h2>`:''}<div class="section-blocks">${blocks.map(block=>{
           const {desktop:r,style}=block.canvas;
           const classes=Object.entries(style).map(([key,value])=>`canvas-${key}-${value}`).join(' ');
-          return `<div ${editing?`data-block="${esc(block.id)}"`:''} class="page-block ${classes} ${editing&&block.hidden?'is-hidden':''}" style="grid-column:${r.x+1}/span ${r.w};grid-row:${r.y+1}/span ${r.h}">${renderBlock(block)}</div>`;
+          return `<div ${editing?`data-block="${esc(block.id)}"`:''} class="page-block ${classes} canvas-x-${r.x} canvas-y-${r.y} canvas-w-${r.w} canvas-h-${r.h} ${editing&&block.hidden?'is-hidden':''}">${renderBlock(block)}</div>`;
         }).join('')}</div></section>`;
       }
       const layout=section.layout,classes=['page-section',`columns-${layout.columns??1}`,`align-${layout.align??'start'}`,`spacing-${layout.spacing??'normal'}`,`background-${layout.background??'none'}`,layout.border?'has-border':'',editing&&section.hidden?'is-hidden':''].filter(Boolean).join(' ');
