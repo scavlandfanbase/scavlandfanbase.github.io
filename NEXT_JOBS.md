@@ -1,3 +1,7 @@
+## Homepage Page Builder links — 2 October 2026
+
+Homepage box Save and Edit Link now accept canonical /pages/name/ addresses, including Guides. Original .html links remain supported; malformed/traversal/protocol-relative routes remain rejected. Focused link validation and homepage save/order browser regressions pass. This fixes the live user's Guides box validation failure; their unsaved edit is preserved in their browser until they retry.
+
 ## Canvas Page Builder activation — 2 October 2026
 
 Reviewer Page Builder preparation: content_edit is added to Reviewer defaults and existing Reviewer rows, enabling shared private page drafts for Owner review. Publishing remains Owner-only. See REVIEWER-DRAFT-CHECKPOINT.md; genuine Reviewer login remains untested because no Reviewer accounts exist.
