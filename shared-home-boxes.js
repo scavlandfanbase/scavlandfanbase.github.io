@@ -1,5 +1,5 @@
 (function(){
- if(document.querySelector('[data-section-id="feature-grid"]')||document.querySelector('.scav-shared-boxes')||document.documentElement.dataset.sharedBoxesLoading||/^\/(?:admin|[^/]+-builder|[^/]+-category)\.html$/.test(location.pathname))return;
+ if(document.querySelector('[data-section-id="feature-grid"]')||document.querySelector('.scav-shared-boxes')||document.documentElement.dataset.sharedBoxesLoading||/^\/(?:admin|[^/]+-(?:admin|builder|category))\.html$/.test(location.pathname))return;
  document.documentElement.dataset.sharedBoxesLoading='true';
  const safeHref=value=>typeof value==='string'&&(/^(?:[a-z-]+\.html|\/pages\/[a-z0-9]+(?:-[a-z0-9]+)*\/)(?:[?#][^\s\\]*)?$/.test(value)||/^https:\/\/[^\s\\]+$/i.test(value));
  fetch('/data/site-content.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(content=>{

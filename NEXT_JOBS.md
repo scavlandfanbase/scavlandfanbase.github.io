@@ -2,7 +2,7 @@
 
 Public standard pages and generated Page Builder pages now load the visible homepage feature-grid cards from data/site-content.json. Titles, descriptions, links, images, order and visibility share the Home source; no cards are copied into drafts. Home keeps its original grid and Admin remains separate. Guides gains only the fixed shared-navigation script; its published text and section payload are preserved. The current hidden Guides card stays hidden. Shared navigation fails quietly if its data cannot load.
 
-The renderer adds one fixed trusted external script; read-only previews continue to sandbox it. Regression checks permit only this exact empty script element and still reject injected content. Deploy the matching admin-drafts renderer bundle before releasing the frontend. Shared navigation and Page Builder checks cover standard/custom pages, updates, hidden exclusion, narrow width, trusted-renderer parity and private publication fixtures.
+The renderer adds one fixed trusted external script; read-only previews continue to sandbox it. Regression checks permit only this exact empty script element and still reject injected content. PR #57 merged at c122270; Pages run 36988150382 succeeded. admin-drafts version 22 is deployed with all 30 files matching the tested bundle (digest 294a164cdeeec3da7b2768336d5f7307220f5b53e03670044e30f90aeddb5e57). The shared source preserves the current hidden Guides card. Shared navigation and Page Builder checks cover standard/custom pages, updates, hidden exclusion, narrow width, trusted-renderer parity and private publication fixtures.
 
 ## Shared editor styling repair — 2 October 2026
 
