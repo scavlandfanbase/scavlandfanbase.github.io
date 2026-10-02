@@ -1,5 +1,7 @@
 ## Canvas Page Builder activation — 2 October 2026
 
+Reviewer Page Builder preparation: content_edit is added to Reviewer defaults and existing Reviewer rows, enabling shared private page drafts for Owner review. Publishing remains Owner-only. See REVIEWER-DRAFT-CHECKPOINT.md; genuine Reviewer login remains untested because no Reviewer accounts exist.
+
 PR #50 and Pages deployment succeeded. Backend version 21 enables canvas editing; all 30 files match the activation bundle. Signed-in private save/reopen, retained history and exact Owner review passed. PR #51 includes the save-control correction. The private acceptance page is archived with all three revisions accessible. Final cache-version follow-up uses canvas-2. See VISUAL-CANVAS-INTEGRATION-PLAN.md. No test page was published and Guides content is unchanged.
 
 ## Reviewer private drafts live — 2 October 2026

@@ -1,7 +1,7 @@
 const cors={'Access-Control-Allow-Origin':'https://scavlandfanbase.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
 const reply=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{...cors,'Content-Type':'application/json'}});
 const allowed=['evidence_review','items_edit','weapons_edit','armour_edit','crafting_edit','ammunition_edit','vendors_edit','settings_edit','content_edit','publish_public'];
-const reviewerPermissions=['evidence_review','items_edit','weapons_edit','armour_edit','ammunition_edit','vendors_edit'];
+const reviewerPermissions=['evidence_review','items_edit','weapons_edit','armour_edit','ammunition_edit','vendors_edit','content_edit'];
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return new Response('ok',{headers:cors});
  if(req.method!=='POST')return reply({error:'POST is required.'},405);
