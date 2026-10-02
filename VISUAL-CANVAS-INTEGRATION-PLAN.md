@@ -172,3 +172,25 @@ Remaining before release: connected authenticated acceptance with actual saved
 history and Owner review, rollout capability/versioning and cache updates,
 complete backend bundle readback, and genuine publication only for chosen content.
 No live draft, public page, role, database or deployment changed in this checkpoint.
+
+## Release preparation and session bridge checks
+
+PAGE_CANVAS_ENABLED is a separate source/backend emergency-stop gate. Canvas
+create/save is refused while disabled; saved history and preview remain readable.
+The live adapter exposes the trusted source capability, and the editor reveals
+Add canvas section only when that capability is enabled. Local ?canvas=1 remains
+a loopback review convenience and cannot override the backend save gate.
+
+Connected session-bridge browser tests now cover saved canvas history and Owner
+review: opening archived history preserves unsaved canvas coordinates; saved
+publication preview uses the original saved position; pending publication blocks
+keyboard movement; reload/recovery retains the existing lock boundary. Auth and
+Git are fixtures in this acceptance. No real signed-in canvas acceptance claimed.
+
+The complete test-admin-release.cjs suite passes, including all canvas tests and
+Items, Vendors, Attachment/Evidence storage/browser tests and publication/recovery.
+Independent PostgreSQL concurrency was not rerun (SCAVLAND_PSQL unset); local
+PGlite schema tests passed. Final section background/border preservation and
+canvas form/preview regressions also passed. Asset cache tags are refreshed to
+page-builder-integration-20261002-canvas-1. Real signed-in save/reopen/history
+and publication review remain the post-deployment acceptance gate.
