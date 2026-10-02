@@ -1,3 +1,11 @@
+## Confirmed Item type corrections and Junk — 2 October 2026
+
+The Items type dialog now prepares confirmed Ammo/Armour/Weapon/Blueprint corrections and a Junk shortcut (Content Type Item, category Junk). It changes only master classification metadata, preserves the exact identity, source/evidence, vendor relationships and specialist files, and invalidates verification when the effective type changes. Matching historical specialist facts remain stored and become visible again if that type is restored. New Junk Items and Item category edits also maintain the public junk-item tag.
+
+The trusted prepare handler checks editing permissions for both old and new specialist types using the real caller; publishing permission remains separate. Category lists respect explicit corrected types, while existing specialist drafts/publication retain their conflict checks. Missing specialist details remain unknown; classification does not manufacture stats or migrate pending specialist draft work. Review and resolve pre-existing draft conflicts before publishing.
+
+Regressions cover the genuine stored Item/classified Ammo conflict, explicit identity confirmation, stable references, Junk filtering, retained specialist stats, type reversal, stale saves, permissions, Reviewer publishing denial and actual browser saves. Public Items Ammo stats now resolve by exact ID before legacy name matching; superseded specialist types do not render stats on corrected Items. No live item facts or classifications are changed by this code release.
+
 ## Shared homepage categories — 2 October 2026
 
 Public standard pages and generated Page Builder pages now load the visible homepage feature-grid cards from data/site-content.json. Titles, descriptions, links, images, order and visibility share the Home source; no cards are copied into drafts. Home keeps its original grid and Admin remains separate. Guides gains only the fixed shared-navigation script; its published text and section payload are preserved. The current hidden Guides card stays hidden. Shared navigation fails quietly if its data cannot load.

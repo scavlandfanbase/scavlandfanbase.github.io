@@ -159,19 +159,17 @@
   const r=chosen();let content,type,confirmation;
   scavEditorDialog({title:'Content Type · '+r.name,submit:'Save private draft',build:({body,save})=>{
    if(classificationInfo(r).conflict)paragraph(body,classificationInfo(r).message);
-   content=E.selectField(body,'Content Type','content-type',ScavAttachments.contentTypes.map(t=>[t,t]),ScavAttachments.contentType(r));
+   content=E.selectField(body,'Content Type','content-type',[...ScavAttachments.contentTypes.map(t=>[t,t]),['Junk','Junk (general Item category)']],ScavAttachments.contentType(r)==='Item'&&r.category==='Junk'?'Junk':ScavAttachments.contentType(r));
    type=E.selectField(body,'Attachment Type','attachment-type',ScavAttachments.types.map(v=>[v,v]),r.attachmentType??'Unknown');
-   confirmation=E.selectField(body,'Confirm return to Item','confirm-return',[['','Choose a decision'],['yes','Return to Item and retain all recorded information']],'');
+   confirmation=E.selectField(body,'Confirm category change','confirm-return',[['','Choose a decision'],['yes','Change type and retain the same item and all recorded information']],'');
    const boundary=document.createElement('p');boundary.className='item-type-boundary';boundary.setAttribute('role','status');body.append(boundary);
-   function show(){const blocked=!['Item','Attachment'].includes(content.value)||specialist(r);save.disabled=blocked;
-    type.parentElement.hidden=content.value!=='Attachment'||blocked;confirmation.parentElement.hidden=!(ScavAttachments.contentType(r)==='Attachment'&&content.value==='Item')||blocked;
-    boundary.hidden=!blocked;boundary.textContent=blocked?'This content belongs in its dedicated catalogue. Moving an existing record needs an explicit reviewed migration so references and facts stay intact. No record will be moved or copied here.':'';
+   function show(){const target=content.value==='Junk'?'Item':content.value,needsConfirm=!['Item','Attachment'].includes(target)||specialist(r)||ScavAttachments.contentType(r)==='Attachment'&&target==='Item'||content.value==='Junk'||classificationInfo(r).type!==ScavAttachments.contentType(r)&&classificationInfo(r).type!==target;save.disabled=needsConfirm&&confirmation.value!=='yes';
+    type.parentElement.hidden=target!=='Attachment';confirmation.parentElement.hidden=!needsConfirm;
+    boundary.hidden=false;boundary.textContent='This saves a private type correction for the same item. Existing stats, evidence and vendor references are retained. Publish after reviewing; this does not create or delete specialist stats. Junk is a general Item category.';
    }
-   content.onchange=show;show();
+   content.onchange=show;confirmation.onchange=show;show();
   },onSubmit:()=>{
-   if(!['Item','Attachment'].includes(content.value)||specialist(r))throw new Error('Use the dedicated catalogue. A reviewed migration is required to move this record.');
-   if(ScavAttachments.contentType(r)==='Attachment'&&content.value==='Item'&&confirmation.value!=='yes')throw new Error('Confirm returning to Item. All recorded information will be retained.');
-   return change('classify',{contentType:content.value,attachmentType:type.value,...(confirmation.value==='yes'?{confirmId:r.id}:{})});
+   return change('classify',{contentType:content.value==='Junk'?'Item':content.value,attachmentType:type.value,...(content.value==='Junk'?{category:'Junk'}:{}),...(confirmation.value==='yes'?{confirmId:r.id}:{})});
   }});
  }
  E.button('item-classify','Content Type / Attachment Type',classify,$('item-actions'));

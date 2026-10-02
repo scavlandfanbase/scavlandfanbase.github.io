@@ -221,27 +221,37 @@ function mutate(input,body,{images=[],settings,actorId='local-operator'}={}){
  switch(body.action){
   case 'classify':{
    if(!Attachments.contentTypes.includes(body.contentType))fail('Choose a recognised Content Type.');
-   if(!['Item','Attachment'].includes(body.contentType)||!['Item','Attachment'].includes(Attachments.contentType(r)))fail('This content belongs in its dedicated catalogue. Moving it requires an explicit reviewed migration; no record has been moved or copied.');
+   const previous=Attachments.describe(r),target=body.contentType;
+   if((!['Item','Attachment'].includes(target)||!['Item','Attachment'].includes(Attachments.contentType(r))||previous.type!==previous.recorded&&previous.type!==target||Object.hasOwn(body,'category'))&&body.confirmId!==r.id)fail('Confirm this item before changing its Content Type. Its identity and all recorded facts will be retained.');
+   if(r.classification!==undefined&&(!Array.isArray(r.classification)||r.classification.some(tag=>typeof tag!=='string')))fail('Review the malformed classification before changing type.');
    if(body.contentType==='Attachment'&&!Attachments.types.includes(body.attachmentType))fail('Choose an Attachment Type, including Unknown.');
    // Always confirm reversal, including unknown future relationships. Never delete source fields.
    if(Attachments.contentType(r)==='Attachment'&&body.contentType==='Item'&&body.confirmId!==r.id)fail('Confirm changing this Attachment back to Item. All recorded information will be retained.');
    r.contentType=body.contentType;
+   const tags={Item:'item',Weapon:'weapon',Armour:'armour',Ammo:'ammunition',Attachment:'attachment',Blueprint:'blueprint'};
+   const primary=new Set([...Object.values(tags),'ammo','junk-item']);
+   r.classification=[...new Set([...(r.classification||[]).filter(tag=>!primary.has(tag)),tags[target]])];
+   if(Object.hasOwn(body,'category')){if(target!=='Item')fail('Choose an Item category only for general Items.');r.category=optional(body.category,300);if(r.category!==null&&!r.category.trim())fail('Enter an Item category or choose Not recorded.');resetVerification(r);}
+   if(target==='Item'&&r.category==='Junk')r.classification.push('junk-item');
+   if(previous.type!==target)resetVerification(r);
    if(body.contentType==='Attachment')r.attachmentType=body.attachmentType;
    break;
   }
   case 'add':{
    const record={id:crypto.randomUUID(),...details(body.details),image:null,evidence:null,verification:null,hidden:false,archived:false,createdAt:now,updatedAt:now};
+   if(record.category==='Junk'){record.contentType='Item';record.classification=['item','junk-item'];}
    state.data.push(record);selectedId=record.id;break;
   }
   case 'edit':{
    if(!['Item','Attachment'].includes(Attachments.contentType(r)))fail('Edit this content in its dedicated catalogue; its existing information has been retained.');
    const next=details(body.details);
+   if(Attachments.describe(r).type!=='Item'&&Attachments.contentType(r)!=='Attachment'&&next.category!==r.category)fail('Use Content Type to correct this specialist category before changing its Item category.');
    if(body.details.facts!==undefined){
     if(!object(body.details.facts)||Object.keys(body.details.facts).some(key=>!factFields.includes(key)||!Object.hasOwn(r,key)))fail('Choose an existing recorded fact.');
     if(JSON.stringify(body.details.facts).length>100000)fail('Too many recorded facts.');
     Object.assign(next,structuredClone(body.details.facts));
    }
-   if(JSON.stringify(next)!==JSON.stringify(Object.fromEntries(Object.keys(next).map(k=>[k,r[k]])))){Object.assign(r,next);resetVerification(r);}break;
+   if(JSON.stringify(next)!==JSON.stringify(Object.fromEntries(Object.keys(next).map(k=>[k,r[k]])))){const categoryChanged=next.category!==r.category;Object.assign(r,next);if(categoryChanged&&Attachments.contentType(r)==='Item'){r.classification=(r.classification||[]).filter(tag=>tag!=='junk-item');if(r.category==='Junk')r.classification.push('junk-item');}resetVerification(r);}break;
   }
   case 'duplicate':{
    if(!['Item','Attachment'].includes(Attachments.contentType(r)))fail('Duplicate this content only in its dedicated catalogue.');
