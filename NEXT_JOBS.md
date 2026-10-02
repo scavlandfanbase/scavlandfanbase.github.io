@@ -1,6 +1,6 @@
-## Reviewer private drafts prepared — 2 October 2026
+## Reviewer private drafts live — 2 October 2026
 
-Editing/publishing separation and role defaults pass SQL, API and browser checks. Ordered backend/permission deployment is required before activation. See REVIEWER-DRAFT-CHECKPOINT.md; private Crafting recipe support remains a separate gap.
+PR #48 and Pages deployment succeeded. Publishing backends and role defaults are activated and read back against the tested release. Owner/Admin publication permission is confirmed; a genuine Reviewer session remains untested because no Reviewer accounts exist. See REVIEWER-DRAFT-CHECKPOINT.md; private Crafting recipe support remains a separate gap.
 
 ## Wider desktop layout — 1 October 2026
 

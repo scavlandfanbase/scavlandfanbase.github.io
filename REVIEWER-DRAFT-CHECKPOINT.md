@@ -1,6 +1,7 @@
 # Reviewer draft preparation — 2 October 2026
 
-Prepared and verified locally; not activated in production yet.
+Live through approved PR #48, merged at bfae657353a1b944567cc43f41343f7442c3d868.
+GitHub Pages run 36977777276 completed successfully on 2 October 2026.
 
 Reviewer defaults: evidence_review, items_edit, weapons_edit, armour_edit,
 ammunition_edit and vendors_edit. These cover shared Items and category stats,
@@ -41,3 +42,9 @@ Rollback: withdraw Reviewer editing permissions first, then revert application
 code if necessary. Do not remove publication guards while expanded Reviewer
 editing remains active. Do not change account roles, create invitees or publish
 game facts as part of verification.
+
+Production verification:
+- Applied reviewer_publication_boundary, then deployed and read back all publication guards before applying reviewer_draft_activation.
+- admin-drafts v19; publish-item v17; publish-vendor v17; publish-specialist v18; publish-site-content v18; publish-site-settings v12; manage-admin-users v10. All deployed source files exactly match the tested release. Existing JWT configuration and rollout flags were retained.
+- Live SQL permission function matches the new role boundary. Existing active Owner/Admin retain items_edit and publish_public. No Reviewer accounts currently exist; no account was created or role changed for verification. Genuine Reviewer session acceptance is still outstanding.
+- No game facts were published or changed during this release.
