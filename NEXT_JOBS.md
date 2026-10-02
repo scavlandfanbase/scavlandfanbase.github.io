@@ -1,5 +1,7 @@
 ## Homepage Page Builder links — 2 October 2026
 
+Backend follow-up: publish-site-content rejected the existing homepage because section intro/title/image fields may be omitted. Optional section text and images now accept omission while invalid types/paths remain rejected. The real backend handler regression saves a new Guides card against actual site-content.json, preserves other content, and confirms Reviewer publishing denial. Deploy/readback this focused publisher correction; the user's open edit can retry without refresh.
+
 Homepage box Save and Edit Link now accept canonical /pages/name/ addresses, including Guides. Original .html links remain supported; malformed/traversal/protocol-relative routes remain rejected. Focused link validation and homepage save/order browser regressions pass. This fixes the live user's Guides box validation failure; their unsaved edit is preserved in their browser until they retry.
 
 ## Canvas Page Builder activation — 2 October 2026
