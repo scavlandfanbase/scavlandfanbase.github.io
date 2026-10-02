@@ -1,4 +1,4 @@
-(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.ScavVisualCanvasModel=api;})(globalThis,()=>{
+(function(root,factory){const api=factory(typeof module==='object'?require('./visual-canvas-layout.js'):root.ScavVisualCanvasLayout);if(typeof module==='object')module.exports=api;else root.ScavVisualCanvasModel=api;})(globalThis,Layout=>{
   // Proposed data contract for a free-position canvas layout. Fixture/demo only:
   // not read or written by any live save, history or publication service.
   const GRID_COLUMNS=12;
@@ -41,6 +41,7 @@
     int(region.w,limits.minW,GRID_COLUMNS,`${label} region width`);
     int(region.h,limits.minH,limits.maxH,`${label} region height`);
     if(region.x+region.w>GRID_COLUMNS)fail(`${label} region extends past the ${GRID_COLUMNS}-column grid.`);
+    if(region.y+region.h>limits.maxH)fail(`${label} region extends past the ${limits.maxH}-row grid.`);
     return region;
   }
 
@@ -97,6 +98,8 @@
       if(block.type==='image'||block.type==='card')text(block.alt,limits.alt,'Image description',block.type==='image');
       if(block.type==='card'){text(block.href,limits.href,'Link',true);if(!safeLink(block.href))fail('Use an HTTPS link or an existing page such as items.html.');}
     }
+    for(let i=0;i<input.blocks.length;i++)for(let j=i+1;j<input.blocks.length;j++)
+      if(Layout.regionsOverlap(input.blocks[i].desktop,input.blocks[j].desktop))fail('Desktop blocks must not overlap.');
     return structuredClone(input);
   }
 
