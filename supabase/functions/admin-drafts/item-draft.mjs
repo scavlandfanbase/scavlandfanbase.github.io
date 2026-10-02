@@ -115,7 +115,7 @@ export function addCategoryFacet(input,command,context={}){
  if(command.confirmId!==input.itemId)fail('Confirm the existing item identity.');
  if(input.records[category])fail('This item already has category details.',409);
  const state=structuredClone(input),item=state.records.items;
- const facet={id:input.itemId,name:item.name,image:item.image??null,description:item.description??null,estimatedPrice:item.estimatedPrice??null,maxStack:item.maxStack??null,category:null,damage:null,penetrationPercent:null,source:{status:'pending-review'}};
+ const facet={id:input.itemId,name:item.name,image:item.image??null,description:item.description??null,estimatedPrice:item.estimatedPrice??null,maxStack:item.maxStack??null,...Object.fromEntries(facetFields[category].map(key=>[key,null])),source:{status:'pending-review'}};
  state.original[category]=structuredClone(facet);state.records[category]=facet;state.creation={...(state.creation||{}),[category]:true};
  return editItem(state,{action:'edit',expectedRevision:input.revision,specialist:command.specialist},context);
 }
