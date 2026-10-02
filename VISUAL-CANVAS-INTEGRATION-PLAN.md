@@ -110,3 +110,28 @@ Remaining: review VS fixes; connect editor controls to this page contract and
 trusted asset source; test genuine canvas save/reopen/history through the private
 API; complete authenticated UI and release/recovery acceptance. Do not deploy
 this partial checkpoint or claim production canvas support.
+
+## Private persistence and editing commands checkpoint
+
+The real page API against the local PostgreSQL schema now also verifies canvas
+save, response-loss replay, reopen, stale-save refusal, invalid-overlap refusal
+and archive retention. Exactly three saved revisions remain after the replay;
+the earlier legacy payload is unchanged. This is local SQL acceptance, not a
+live canvas draft or signed-in browser acceptance.
+
+Saved canvas publication preview tests verify exact server bytes and hidden
+exclusion. Moving a box or changing a style invalidates the previous publication
+review, using the existing digest boundary rather than a new publishing path.
+
+page-canvas-operations.js provides pure commands for existing page payloads:
+new canvas section, first-free-space block addition, position/size updates, closed
+appearance updates, independent mobile reordering and safe duplication. Every
+command returns a detached validated page; refused operations leave the input
+unchanged. Hidden boxes reserve space. No storage or network calls are present.
+All existing content types remain under the main page validator.
+
+Passed: test-page-api.cjs with new real SQL cases; test-page-preview.cjs with
+canvas review invalidation; test-page-canvas-operations.cjs with hidden collision,
+failure atomicity, full-canvas refusal and duplicate/mobile-order retention;
+syntax/whitespace checks. These changes do not expose live canvas UI controls.
+VS's fix commits were not yet present on its remote branch when checked.
