@@ -410,7 +410,7 @@
       heading.append(actions);card.append(heading);
       const fields=node('div',{className:'pb-section-fields'});
       labelInput(fields,'Section title',section.title,{field:'title',sectionId:section.id,maxLength:160,wide:true});
-      for(const [field,choices]of Object.entries(layoutChoices))labelInput(fields,field==='align'?'Alignment':field==='columns'?'Columns':field==='spacing'?'Spacing':'Background',section.layout[field],{field:`layout.${field}`,sectionId:section.id,choices});
+      for(const [field,choices]of Object.entries(layoutChoices)){if(section.layout.mode==='canvas'&&field!=='background')continue;labelInput(fields,field==='align'?'Alignment':field==='columns'?'Columns':field==='spacing'?'Spacing':'Background',section.layout[field],{field:`layout.${field}`,sectionId:section.id,choices});}
       addToggle(fields,'Show border',section.layout.border,{field:'layout.border',sectionId:section.id});
       addToggle(fields,'Hidden from export',section.hidden,{field:'hidden',sectionId:section.id});
       card.append(fields);
@@ -495,7 +495,7 @@
   async function loadDrafts(){
     retry.hidden=true;setStatus('Loading private local drafts...','loading');
     try{
-      if(live){await live.ready;const data=await api('/api/pages');records=data.pages;archivedRecords=data.archivedPages||[];existingPages=data.existingPages;images=data.imageChoices;cssText=await fetch('page-builder.css').then(response=>response.text());renderDraftList();renderPublication();setStatus('Choose a saved page or create a new one. Drafts save privately.','saved');return;}
+      if(live){await live.ready;const data=await api('/api/pages');records=data.pages;archivedRecords=data.archivedPages||[];existingPages=data.existingPages;images=data.imageChoices;$('#add-canvas-section').hidden=!live.canCanvas;cssText=await fetch('page-builder.css').then(response=>response.text());renderDraftList();renderPublication();setStatus('Choose a saved page or create a new one. Drafts save privately.','saved');return;}
       const session=await fetch('/api/session').then(async response=>{if(!response.ok)throw new Error('The local draft service is unavailable.');return response.json();});
       if(session.mode!=='local'||typeof session.token!=='string')throw new Error('Unexpected local session response.');token=session.token;
       const data=await api('/api/pages');records=data.pages;existingPages=records.map(record=>({id:record.draft.id,slug:record.draft.slug}));images=data.imageChoices;cssText=await fetch('/page-builder.css').then(async response=>{if(!response.ok)throw new Error('Could not load preview styles.');return response.text();});
@@ -577,9 +577,9 @@
   $('#save-draft').addEventListener('click',saveDraft);
   $('#delete-draft').addEventListener('click',deleteDraft);
   $('#export-html').addEventListener('click',exportHtml);
-  if(canvasEnabled){
-    const addCanvas=button('Add canvas section','new-canvas-section');addCanvas.id='add-canvas-section';$('#add-section').after(addCanvas);
-    addCanvas.addEventListener('click',()=>{if(!active||publicationLock||saving)return;try{active=window.ScavPageCanvasOperations.addSection(active,canvasContext(),uid());renderSections();updateDirty();updatePreview();sections.lastElementChild?.querySelector('input')?.focus();}catch(error){reportError(error);}});
+  {
+    const addCanvas=button('Add canvas section','new-canvas-section');addCanvas.id='add-canvas-section';addCanvas.hidden=!canvasEnabled;$('#add-section').after(addCanvas);
+    addCanvas.addEventListener('click',()=>{if((!canvasEnabled&&!live?.canCanvas)||!active||publicationLock||saving)return;try{active=window.ScavPageCanvasOperations.addSection(active,canvasContext(),uid());renderSections();updateDirty();updatePreview();sections.lastElementChild?.querySelector('input')?.focus();}catch(error){reportError(error);}});
   }
   $('#add-section').addEventListener('click',()=>{if(!active)return;active.sections.push({id:uid(),title:'',hidden:false,layout:layoutDefault(),blocks:[]});renderSections();updateDirty();updatePreview();sections.lastElementChild?.querySelector('input')?.focus();});
   sections.addEventListener('click',event=>{

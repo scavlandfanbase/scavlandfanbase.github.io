@@ -29,7 +29,7 @@ export function createPageControlApi({env,fetcher=fetch,readSnapshot,publisherFa
    if(command.action==='source'){
     await rpc('scavland_page',{p_action:'list',p_page:null,p_request:null,p_after:null});
     const snapshot=await source({pageId:null,rpc});const owner=await rpc('is_scavland_owner',{});
-    return reply({imageChoices:snapshot.context.approvedImages,existingPages:snapshot.context.existingPages,capabilities:{publish:owner===true}});
+    return reply({imageChoices:snapshot.context.approvedImages,existingPages:snapshot.context.existingPages,capabilities:{publish:owner===true,canvas:env('PAGE_CANVAS_ENABLED')==='true'}});
    }
    if(command.action==='preview'){
     const current=await rpc('scavland_page',{p_action:'load',p_page:command.pageId,p_request:null,p_after:null});

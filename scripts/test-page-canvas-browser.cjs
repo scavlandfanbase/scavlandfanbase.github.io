@@ -40,7 +40,7 @@ const {chromium}=require('playwright'),{createServer,createStore}=require('./pag
   await page.locator('.pb-canvas-box').focus();await page.locator('.pb-canvas-box').press('ArrowRight');
   assert.equal(await page.locator('.pb-canvas-box').evaluate(el=>el.style.gridColumn),lockedPosition,'keyboard cannot bypass publication lock');
   assert.deepEqual(errors,[]);
-  const hiddenGate=await browser.newPage();await hiddenGate.goto(base);assert.equal(await hiddenGate.locator('#add-canvas-section').count(),0,'new canvas controls remain opt-in');
+  const hiddenGate=await browser.newPage();await hiddenGate.goto(base);assert.equal(await hiddenGate.locator('#add-canvas-section').isVisible(),false,'new canvas controls remain opt-in');
   console.log('Connected canvas browser: opt-in section, typing/focus, keyboard move/resize, existing private save/reopen, style revision and no default activation passed.');
  }finally{await browser.close();await new Promise(resolve=>server.close(resolve));fs.rmSync(directory,{recursive:true,force:true});}
 })().catch(e=>{console.error(e);process.exitCode=1;});

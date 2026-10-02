@@ -9,7 +9,7 @@ const {PGlite}=require('@electric-sql/pglite');
  grant usage on schema auth to authenticated;`);
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/page-builder-storage.sql'),'utf8'));
  const {createPageApi}=await import('../supabase/functions/admin-drafts/page-api.mjs');
- const config={PAGE_BUILDER_ENABLED:'true',SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'public-fixture',SUPABASE_SERVICE_ROLE_KEY:'private-fixture'};
+ const config={PAGE_BUILDER_ENABLED:'true',PAGE_CANVAS_ENABLED:'true',SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'public-fixture',SUPABASE_SERVICE_ROLE_KEY:'private-fixture'};
  const log=[];let loseCommit=false,contexts=0;
  const fetcher=async(url,options)=>{
   log.push({url,options});const token=options.headers.Authorization;
@@ -55,6 +55,7 @@ const {PGlite}=require('@electric-sql/pglite');
   {id:'canvas-text',type:'text',hidden:false,text:'Canvas facts',canvas:{desktop:{x:0,y:0,w:6,h:4},mobileOrder:1,style:canvasStyle}},
   {id:'canvas-hidden',type:'text',hidden:true,text:'Private notes',canvas:{desktop:{x:6,y:0,w:6,h:4},mobileOrder:0,style:canvasStyle}}
  ]}]};
+ config.PAGE_CANVAS_ENABLED='false';assert.equal((await call({...save,expectedVersion:2,requestId:crypto.randomUUID(),page:canvasPage})).status,400,'disabled canvas refuses writes');config.PAGE_CANVAS_ENABLED='true';
  const canvasSave={...save,expectedVersion:2,requestId:crypto.randomUUID(),page:canvasPage};
  loseCommit=true;assert.equal((await call(canvasSave)).status,503);
  const canvasRetry=await call(canvasSave);assert.equal(canvasRetry.status,200);const canvasRecord=await canvasRetry.json();

@@ -34,6 +34,7 @@ export function createPageApi({env,fetcher=fetch,readContext}){
     p_request:null,p_after:command.action==='list'?command.after??null:null});
    if(command.action==='list')return reply({pages:state,nextCursor:state.length===100?state.at(-1).pageId:null});
    if(command.action==='load')return reply(state); // invalid historic content remains repairable
+   if(command.page?.sections?.some(section=>section.layout?.mode==='canvas')&&env('PAGE_CANVAS_ENABLED')!=='true')fail(400);
    if(!env('SUPABASE_SERVICE_ROLE_KEY'))fail(503);
    const userResponse=await fetcher(sb+'/auth/v1/user',{headers:{apikey:key,Authorization:authorization},signal:AbortSignal.timeout(15000)});
    if(!userResponse.ok)fail(401);const actor=(await userResponse.json()).id;if(!uuid(actor))fail(401);

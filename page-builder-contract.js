@@ -16,7 +16,7 @@
     return `<header class="page-heading"><p class="page-brand">SCAVLAND</p><h1>${esc(page.title)}</h1><p class="page-text">${esc(page.intro)}</p></header>`+page.sections.filter(section=>editing||!section.hidden).map(section=>{
       if(section.layout.mode==='canvas'){
         const blocks=section.blocks.filter(block=>editing||!block.hidden).slice().sort((a,b)=>a.canvas.mobileOrder-b.canvas.mobileOrder);
-        return `<section ${editing?`data-section="${esc(section.id)}"`:''} class="page-section canvas-section ${editing&&section.hidden?'is-hidden':''}">${section.title?`<h2>${esc(section.title)}</h2>`:''}<div class="section-blocks">${blocks.map(block=>{
+        return `<section ${editing?`data-section="${esc(section.id)}"`:''} class="page-section canvas-section background-${section.layout.background??'none'} ${section.layout.border?'has-border':''} ${editing&&section.hidden?'is-hidden':''}">${section.title?`<h2>${esc(section.title)}</h2>`:''}<div class="section-blocks">${blocks.map(block=>{
           const {desktop:r,style}=block.canvas;
           const classes=Object.entries(style).map(([key,value])=>`canvas-${key}-${value}`).join(' ');
           return `<div ${editing?`data-block="${esc(block.id)}"`:''} class="page-block ${classes} canvas-x-${r.x} canvas-y-${r.y} canvas-w-${r.w} canvas-h-${r.h} ${editing&&block.hidden?'is-hidden':''}">${renderBlock(block)}</div>`;
