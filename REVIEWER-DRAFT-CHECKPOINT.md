@@ -1,5 +1,22 @@
 # Reviewer draft preparation — 2 October 2026
 
+## Page Builder private preparation — 2 October 2026
+
+Reviewer invitation and role-update defaults now include content_edit, which the
+live Page Builder uses for shared private drafts and history. Existing Reviewer
+rows receive this permission through reviewer-page-drafts.sql without replacing
+their other permissions. Page publication remains Owner-only. Public content
+publication also requires publish_public, which the permission function always
+denies to Reviewers. No public deletion/unpublish control is introduced.
+
+PGlite regression uses the real Page Builder storage schema: Reviewer commits a
+private page with recorded authorship, then Owner loads the exact saved payload.
+Invitation defaults, inactive access denial and Reviewer publishing denial pass,
+including an accidentally assigned publish_public permission. Page control API
+regressions confirm non-Owner publication is refused before Git writes.
+No real Reviewer login is claimed; no Reviewer accounts currently exist.
+Deployment/readback status is recorded after applying this focused change.
+
 Live through approved PR #48, merged at bfae657353a1b944567cc43f41343f7442c3d868.
 GitHub Pages run 36977777276 completed successfully on 2 October 2026.
 

@@ -16,5 +16,6 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
  assert.equal((await run('owner@example.invalid')).status,400);assert.equal(writes.length,0);
  const denied=await run('invited@example.invalid',false);assert.equal(denied.status,403);assert.equal(writes.length,0);assert.equal(adminUserReads,0);const deniedBody=await denied.text();assert.equal(deniedBody.includes('owner@example.invalid'),false);assert.equal(deniedBody.includes('invited@example.invalid'),false);
  assert.equal((await run('invited@example.invalid',true,'reviewer')).status,200);const reviewer=JSON.parse(writes[0].opt.body);assert(reviewer.permissions.includes('items_edit'));assert(reviewer.permissions.includes('vendors_edit'));assert(!reviewer.permissions.includes('publish_public'));assert(!reviewer.permissions.includes('settings_edit'));
- console.log('PASS retry saves existing invite without email; Owner protected; non-owner rejected');
+ assert(reviewer.permissions.includes('content_edit'),'Reviewers can prepare private page drafts');
+ console.log('PASS retry saves existing invite without email; Owner protected; non-owner rejected; Reviewer page draft permission without publishing');
 })();
