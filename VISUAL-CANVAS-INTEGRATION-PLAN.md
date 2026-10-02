@@ -218,3 +218,12 @@ Live acceptance found that Add canvas section stayed disabled after saving
 until reopening the page. Save completion now restores that control, with a
 passing connected browser regression. This frontend correction is the final
 follow-up release; no further backend change is needed.
+
+PR #51 merged at 3fa4b9af6c6644222b3d21215e580613edc2ca80 with the activation
+flag and save-control regression. Private acceptance cleanup succeeded:
+"Draft archived. Saved revisions are retained." Archived history lists all three
+revisions (two saves and the archive). No publication was triggered. The final
+frontend asset tag is page-builder-integration-20261002-canvas-2 so cached clients
+receive the save-control correction. Real live image/card canvas acceptance,
+cross-browser and screen-reader checks remain unclaimed; local regressions cover
+all six block types, approved assets, escaping and mobile rendering.
