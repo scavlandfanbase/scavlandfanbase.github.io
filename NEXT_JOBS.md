@@ -1,3 +1,7 @@
+## Canvas Page Builder activation — 2 October 2026
+
+PR #50 and Pages deployment succeeded. Backend version 21 enables canvas editing; all 30 files match the activation bundle. Signed-in private save/reopen, retained history and exact Owner review passed. Final frontend save-control correction and private acceptance archive cleanup are being finalized. See VISUAL-CANVAS-INTEGRATION-PLAN.md. No test page was published and Guides content is unchanged.
+
 ## Reviewer private drafts live — 2 October 2026
 
 PR #48 and Pages deployment succeeded. Publishing backends and role defaults are activated and read back against the tested release. Owner/Admin publication permission is confirmed; a genuine Reviewer session remains untested because no Reviewer accounts exist. See REVIEWER-DRAFT-CHECKPOINT.md; private Crafting recipe support remains a separate gap.

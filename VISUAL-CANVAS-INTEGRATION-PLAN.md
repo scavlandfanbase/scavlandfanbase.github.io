@@ -194,3 +194,27 @@ PGlite schema tests passed. Final section background/border preservation and
 canvas form/preview regressions also passed. Asset cache tags are refreshed to
 page-builder-integration-20261002-canvas-1. Real signed-in save/reopen/history
 and publication review remain the post-deployment acceptance gate.
+
+## Live canvas acceptance — 2 October 2026
+
+PR #50 merged at 27acdfc640a04fd292aed7ba4585bf4edf3e584f. Pages run
+36981925988 succeeded. The complete gated backend version 20 was deployed first;
+version 21 enables PAGE_CANVAS_ENABLED after the complete local release checks.
+All 30 deployed files match the activation bundle. Version 21 digest:
+8415053fd1295b406b731884b5eff3ff8a8fec8fcbb6c7aa2fb88adeab3bbd8d.
+Existing permissions, authentication, emergency-stop behavior and other rollout
+flags are preserved. No schema or game-data changes.
+
+Signed-in Owner acceptance created a private canvas test page, moved its text
+box to column 2, resized to height 9 and selected large text. Two real private
+revisions saved and reopened with coordinates/text retained. Read-only revision
+1 preview retained its original text while the editor kept unsaved changes.
+Owner review returned exact saved revision 2 and SHA-256
+c87c3327c4e781c1d7f0b7348cdb3838c7c5fa7a43683c4c6a998127a41151e3,
+excluding the unsaved editor changes. The acceptance page was not published;
+Guides content was not modified. Archive cleanup is being verified separately.
+
+Live acceptance found that Add canvas section stayed disabled after saving
+until reopening the page. Save completion now restores that control, with a
+passing connected browser regression. This frontend correction is the final
+follow-up release; no further backend change is needed.

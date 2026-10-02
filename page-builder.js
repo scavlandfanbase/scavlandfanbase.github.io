@@ -520,7 +520,7 @@
       existingPages=records.map(entry=>({id:entry.draft.id,slug:entry.draft.slug}));
       renderEditor();setStatus(`${live?'Saved privately':'Saved locally'} at revision ${revision}. This draft is not published.`,'saved');
     }catch(error){reportError(error,{prefix:'Save failed: ',suffix:' Your edits are still on screen; the last saved draft was preserved.',focusTarget:saveButton});}
-    finally{saving=false;saveButton.disabled=!active||publicationLock;$('#export-html').disabled=!active||publicationLock;$('#add-section').disabled=!active||publicationLock;renderPublication();}
+    finally{saving=false;saveButton.disabled=!active||publicationLock;$('#export-html').disabled=!active||publicationLock;$('#add-section').disabled=!active||publicationLock;if($('#add-canvas-section'))$('#add-canvas-section').disabled=!active||publicationLock;renderPublication();}
   }
   async function deleteDraft(){
     if(!active)return;
