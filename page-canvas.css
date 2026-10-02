@@ -1,0 +1,158 @@
+/* Validated canvas sections only; existing stacked sections retain their layout. */
+.published-page .canvas-section .section-blocks{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(20px,auto);gap:4px;align-items:stretch;text-align:left}
+.published-page .canvas-section .page-block{min-width:0;min-height:0;overflow-wrap:anywhere}
+.published-page .canvas-section .page-block p,.published-page .canvas-section .page-block h3{font-size:inherit;color:inherit}
+.published-page .canvas-fontSize-sm{font-size:.875rem}.published-page .canvas-fontSize-md{font-size:1rem}.published-page .canvas-fontSize-lg{font-size:1.25rem}.published-page .canvas-fontSize-xl{font-size:1.5rem}
+.published-page .canvas-textColor-default{color:#e8ece5}.published-page .canvas-textColor-ink{color:#bac9bf}.published-page .canvas-textColor-paper{color:#fff}.published-page .canvas-textColor-accent{color:#efbf61}.published-page .canvas-textColor-danger{color:#ffb3a8}
+.published-page .canvas-background-none{background:transparent}.published-page .canvas-background-surface{background:#1a231e}.published-page .canvas-background-subtle{background:#202922}
+.published-page .canvas-border-none{border:0}.published-page .canvas-border-thin{border:1px solid #64756a}.published-page .canvas-border-thick{border:3px solid #64756a}
+.published-page .canvas-padding-none{padding:0}.published-page .canvas-padding-sm{padding:8px}.published-page .canvas-padding-md{padding:16px}.published-page .canvas-padding-lg{padding:24px}
+.published-page .canvas-align-left{text-align:left}.published-page .canvas-align-center{text-align:center}.published-page .canvas-align-right{text-align:right}
+.published-page .canvas-spacing-tight{line-height:1.25}.published-page .canvas-spacing-normal{line-height:1.5}.published-page .canvas-spacing-loose{line-height:1.8}
+@media(max-width:760px){.published-page .canvas-section .section-blocks{display:flex;flex-direction:column;gap:14px}}
+
+/* Grid position classes keep publication/preview compatible with strict CSP. */
+.published-page .canvas-x-0{grid-column-start:1}
+.published-page .canvas-x-1{grid-column-start:2}
+.published-page .canvas-x-2{grid-column-start:3}
+.published-page .canvas-x-3{grid-column-start:4}
+.published-page .canvas-x-4{grid-column-start:5}
+.published-page .canvas-x-5{grid-column-start:6}
+.published-page .canvas-x-6{grid-column-start:7}
+.published-page .canvas-x-7{grid-column-start:8}
+.published-page .canvas-x-8{grid-column-start:9}
+.published-page .canvas-x-9{grid-column-start:10}
+.published-page .canvas-x-10{grid-column-start:11}
+.published-page .canvas-x-11{grid-column-start:12}
+.published-page .canvas-y-0{grid-row-start:1}
+.published-page .canvas-y-1{grid-row-start:2}
+.published-page .canvas-y-2{grid-row-start:3}
+.published-page .canvas-y-3{grid-row-start:4}
+.published-page .canvas-y-4{grid-row-start:5}
+.published-page .canvas-y-5{grid-row-start:6}
+.published-page .canvas-y-6{grid-row-start:7}
+.published-page .canvas-y-7{grid-row-start:8}
+.published-page .canvas-y-8{grid-row-start:9}
+.published-page .canvas-y-9{grid-row-start:10}
+.published-page .canvas-y-10{grid-row-start:11}
+.published-page .canvas-y-11{grid-row-start:12}
+.published-page .canvas-y-12{grid-row-start:13}
+.published-page .canvas-y-13{grid-row-start:14}
+.published-page .canvas-y-14{grid-row-start:15}
+.published-page .canvas-y-15{grid-row-start:16}
+.published-page .canvas-y-16{grid-row-start:17}
+.published-page .canvas-y-17{grid-row-start:18}
+.published-page .canvas-y-18{grid-row-start:19}
+.published-page .canvas-y-19{grid-row-start:20}
+.published-page .canvas-y-20{grid-row-start:21}
+.published-page .canvas-y-21{grid-row-start:22}
+.published-page .canvas-y-22{grid-row-start:23}
+.published-page .canvas-y-23{grid-row-start:24}
+.published-page .canvas-y-24{grid-row-start:25}
+.published-page .canvas-y-25{grid-row-start:26}
+.published-page .canvas-y-26{grid-row-start:27}
+.published-page .canvas-y-27{grid-row-start:28}
+.published-page .canvas-y-28{grid-row-start:29}
+.published-page .canvas-y-29{grid-row-start:30}
+.published-page .canvas-y-30{grid-row-start:31}
+.published-page .canvas-y-31{grid-row-start:32}
+.published-page .canvas-y-32{grid-row-start:33}
+.published-page .canvas-y-33{grid-row-start:34}
+.published-page .canvas-y-34{grid-row-start:35}
+.published-page .canvas-y-35{grid-row-start:36}
+.published-page .canvas-y-36{grid-row-start:37}
+.published-page .canvas-y-37{grid-row-start:38}
+.published-page .canvas-y-38{grid-row-start:39}
+.published-page .canvas-y-39{grid-row-start:40}
+.published-page .canvas-y-40{grid-row-start:41}
+.published-page .canvas-y-41{grid-row-start:42}
+.published-page .canvas-y-42{grid-row-start:43}
+.published-page .canvas-y-43{grid-row-start:44}
+.published-page .canvas-y-44{grid-row-start:45}
+.published-page .canvas-y-45{grid-row-start:46}
+.published-page .canvas-y-46{grid-row-start:47}
+.published-page .canvas-y-47{grid-row-start:48}
+.published-page .canvas-y-48{grid-row-start:49}
+.published-page .canvas-y-49{grid-row-start:50}
+.published-page .canvas-y-50{grid-row-start:51}
+.published-page .canvas-y-51{grid-row-start:52}
+.published-page .canvas-y-52{grid-row-start:53}
+.published-page .canvas-y-53{grid-row-start:54}
+.published-page .canvas-y-54{grid-row-start:55}
+.published-page .canvas-y-55{grid-row-start:56}
+.published-page .canvas-y-56{grid-row-start:57}
+.published-page .canvas-y-57{grid-row-start:58}
+.published-page .canvas-y-58{grid-row-start:59}
+.published-page .canvas-y-59{grid-row-start:60}
+.published-page .canvas-w-1{grid-column-end:span 1}
+.published-page .canvas-w-2{grid-column-end:span 2}
+.published-page .canvas-w-3{grid-column-end:span 3}
+.published-page .canvas-w-4{grid-column-end:span 4}
+.published-page .canvas-w-5{grid-column-end:span 5}
+.published-page .canvas-w-6{grid-column-end:span 6}
+.published-page .canvas-w-7{grid-column-end:span 7}
+.published-page .canvas-w-8{grid-column-end:span 8}
+.published-page .canvas-w-9{grid-column-end:span 9}
+.published-page .canvas-w-10{grid-column-end:span 10}
+.published-page .canvas-w-11{grid-column-end:span 11}
+.published-page .canvas-w-12{grid-column-end:span 12}
+.published-page .canvas-h-1{grid-row-end:span 1}
+.published-page .canvas-h-2{grid-row-end:span 2}
+.published-page .canvas-h-3{grid-row-end:span 3}
+.published-page .canvas-h-4{grid-row-end:span 4}
+.published-page .canvas-h-5{grid-row-end:span 5}
+.published-page .canvas-h-6{grid-row-end:span 6}
+.published-page .canvas-h-7{grid-row-end:span 7}
+.published-page .canvas-h-8{grid-row-end:span 8}
+.published-page .canvas-h-9{grid-row-end:span 9}
+.published-page .canvas-h-10{grid-row-end:span 10}
+.published-page .canvas-h-11{grid-row-end:span 11}
+.published-page .canvas-h-12{grid-row-end:span 12}
+.published-page .canvas-h-13{grid-row-end:span 13}
+.published-page .canvas-h-14{grid-row-end:span 14}
+.published-page .canvas-h-15{grid-row-end:span 15}
+.published-page .canvas-h-16{grid-row-end:span 16}
+.published-page .canvas-h-17{grid-row-end:span 17}
+.published-page .canvas-h-18{grid-row-end:span 18}
+.published-page .canvas-h-19{grid-row-end:span 19}
+.published-page .canvas-h-20{grid-row-end:span 20}
+.published-page .canvas-h-21{grid-row-end:span 21}
+.published-page .canvas-h-22{grid-row-end:span 22}
+.published-page .canvas-h-23{grid-row-end:span 23}
+.published-page .canvas-h-24{grid-row-end:span 24}
+.published-page .canvas-h-25{grid-row-end:span 25}
+.published-page .canvas-h-26{grid-row-end:span 26}
+.published-page .canvas-h-27{grid-row-end:span 27}
+.published-page .canvas-h-28{grid-row-end:span 28}
+.published-page .canvas-h-29{grid-row-end:span 29}
+.published-page .canvas-h-30{grid-row-end:span 30}
+.published-page .canvas-h-31{grid-row-end:span 31}
+.published-page .canvas-h-32{grid-row-end:span 32}
+.published-page .canvas-h-33{grid-row-end:span 33}
+.published-page .canvas-h-34{grid-row-end:span 34}
+.published-page .canvas-h-35{grid-row-end:span 35}
+.published-page .canvas-h-36{grid-row-end:span 36}
+.published-page .canvas-h-37{grid-row-end:span 37}
+.published-page .canvas-h-38{grid-row-end:span 38}
+.published-page .canvas-h-39{grid-row-end:span 39}
+.published-page .canvas-h-40{grid-row-end:span 40}
+.published-page .canvas-h-41{grid-row-end:span 41}
+.published-page .canvas-h-42{grid-row-end:span 42}
+.published-page .canvas-h-43{grid-row-end:span 43}
+.published-page .canvas-h-44{grid-row-end:span 44}
+.published-page .canvas-h-45{grid-row-end:span 45}
+.published-page .canvas-h-46{grid-row-end:span 46}
+.published-page .canvas-h-47{grid-row-end:span 47}
+.published-page .canvas-h-48{grid-row-end:span 48}
+.published-page .canvas-h-49{grid-row-end:span 49}
+.published-page .canvas-h-50{grid-row-end:span 50}
+.published-page .canvas-h-51{grid-row-end:span 51}
+.published-page .canvas-h-52{grid-row-end:span 52}
+.published-page .canvas-h-53{grid-row-end:span 53}
+.published-page .canvas-h-54{grid-row-end:span 54}
+.published-page .canvas-h-55{grid-row-end:span 55}
+.published-page .canvas-h-56{grid-row-end:span 56}
+.published-page .canvas-h-57{grid-row-end:span 57}
+.published-page .canvas-h-58{grid-row-end:span 58}
+.published-page .canvas-h-59{grid-row-end:span 59}
+.published-page .canvas-h-60{grid-row-end:span 60}

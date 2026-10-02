@@ -1,7 +1,7 @@
 // Same-origin embedded Admin session only. No tokens or drafts in browser storage.
 (()=>{
  if(new URLSearchParams(location.search).get('live')!=='1')return;
- let token='',readyResolve,canPublish=false;const ready=new Promise(resolve=>{readyResolve=resolve;}),pending=new Map();
+ let token='',readyResolve,canPublish=false,canCanvas=false;const ready=new Promise(resolve=>{readyResolve=resolve;}),pending=new Map();
  const endpoint='https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts';
  window.addEventListener('message',event=>{
   if(parent===window||event.source!==parent||event.origin!==location.origin||event.data?.type!=='scavland-admin-token'||typeof event.data.token!=='string')return;
@@ -20,7 +20,7 @@
    const summaries=[];let after=null;
    for(let batch=0;batch<100;batch++){const list=await call({action:'list',...(after?{after}:{})});summaries.push(...list.pages);if(!list.nextCursor)break;if(list.nextCursor===after||batch===99)throw Error('Page list is incomplete.');after=list.nextCursor;}
    const source=await call({action:'source'});
-   canPublish=source.capabilities?.publish===true;
+   canPublish=source.capabilities?.publish===true;canCanvas=source.capabilities?.canvas===true;
    return {pages:summaries.filter(p=>!p.archived).map(p=>({draft:{id:p.pageId,title:p.title,slug:p.slug,intro:'',sections:[]},revision:p.version,summary:true})),archivedPages:summaries.filter(p=>p.archived),imageChoices:source.imageChoices,existingPages:source.existingPages};
   }
   const body=JSON.parse(options.body);let command;
@@ -45,7 +45,7 @@
    const result=await call({action:'status',requestId});lastRequest=publication(result);return lastRequest;},
   advance:async requestId=>publicationAdapter.check(requestId),retry:async requestId=>{if(lastRequest?.state==='outcome-unknown'&&lastRequest.own!==false){const result=await call({action:'recover',requestId});lastRequest=publication(result);return lastRequest;}return publicationAdapter.check(requestId);}
  };
- window.ScavPageBackend={ready,api,call,record,publicationAdapter,get canPublish(){return canPublish;},
+ window.ScavPageBackend={ready,api,call,record,publicationAdapter,get canPublish(){return canPublish;},get canCanvas(){return canCanvas;},
   load:async id=>{const result=await call({action:'load',pageId:id});if(!result.draft||result.draft.archived)throw Error('This page is archived or unavailable.');
    const state=await call({action:'page-state',pageId:id}),loaded=record(result.draft);
    lastPageId=id;

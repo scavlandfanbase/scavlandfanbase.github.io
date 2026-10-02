@@ -24,6 +24,17 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto'),fs=requ
  await assert.rejects(create({saved,snapshot:{...snapshot,context:{...snapshot.context,approvedImages:[]}}}),/approved image/);
  const unsafe=structuredClone(saved);unsafe.payload.sections[0].blocks.push({id:'unsafe',type:'button',hidden:false,title:'Bad',href:'javascript:bad()'});
  await assert.rejects(create({saved:unsafe,snapshot}),/HTTPS link/);
+ const canvasSaved=structuredClone(saved);canvasSaved.payload.sections[0].layout.mode='canvas';
+ const canvasStyle={fontSize:'md',textColor:'default',background:'surface',border:'thin',padding:'md',align:'left',spacing:'normal'};
+ canvasSaved.payload.sections[0].blocks.forEach((block,i)=>{block.canvas={desktop:{x:i*4,y:0,w:4,h:4},mobileOrder:2-i,style:canvasStyle};});
+ const canvasPreview=await create({saved:canvasSaved,snapshot});
+ assert.notEqual(canvasPreview.digest,preview.digest,'canvas layout is bound into exact server preview');
+ assert.ok(canvasPreview.html.includes('canvas-section'));assert.ok(!canvasPreview.html.includes('SECRET HIDDEN BLOCK'));
+ assert.deepEqual(await verify(canvasPreview,{saved:canvasSaved,snapshot}),canvasPreview);
+ const repositioned=structuredClone(canvasSaved);repositioned.payload.sections[0].blocks[0].canvas.desktop.y=4;
+ await assert.rejects(verify(canvasPreview,{saved:repositioned,snapshot}),error=>error.status===409,'position change invalidates publication review');
+ const restyled=structuredClone(canvasSaved);restyled.payload.sections[0].blocks[0].canvas.style.fontSize='lg';
+ await assert.rejects(verify(canvasPreview,{saved:restyled,snapshot}),error=>error.status===409,'style change invalidates publication review');
  const renderer=fs.readFileSync(path.join(__dirname,'../supabase/functions/admin-drafts/page-renderer.mjs'),'utf8').replace(/\r\n/g,'\n');
  const expected=/Original normalized SHA-256: ([a-f0-9]{64})/.exec(renderer)[1],inner=renderer.split('const renderer=(()=>{\n')[1].split('})();\nexport default renderer;')[0];
  const wrapper="(function(root,factory){const api=factory(typeof module==='object'?require('./page-builder-model.js'):root.ScavPageBuilderModel);if(typeof module==='object')module.exports=api;else root.ScavPageBuilder=api;})(globalThis,Model=>{\n"+inner+'});';

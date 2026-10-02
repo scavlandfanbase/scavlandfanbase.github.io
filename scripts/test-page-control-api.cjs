@@ -35,6 +35,7 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
   observeGit:async value=>{observations++;return {...value,state:'committed'};},discoverBuild:async()=> '123',readBuild:async({commit,buildId})=>({type:'build',sha:commit,runId:buildId,status:build})});
  const call=body=>api(new Request('https://fixture',{method:'POST',headers:{Authorization:'Bearer caller'},body:JSON.stringify({domain:'page-builder',...body})}));
  assert.equal((await call({action:'source'})).status,200);
+ assert.equal((await (await call({action:'source'})).json()).capabilities.canvas,false);config.PAGE_CANVAS_ENABLED='true';assert.equal((await (await call({action:'source'})).json()).capabilities.canvas,true);config.PAGE_CANVAS_ENABLED='false';
  assert.equal((await call({action:'history',pageId})).status,200);assert.equal((await call({action:'revision',pageId,version:1})).status,200);
  assert.equal((await call({action:'preview',pageId,version:2,requestId:previewId})).status,409);
  assert.equal((await call({action:'preview',pageId,version:1,requestId:previewId})).status,200);assert.equal(preview.pageId,pageId);

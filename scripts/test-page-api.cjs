@@ -9,7 +9,7 @@ const {PGlite}=require('@electric-sql/pglite');
  grant usage on schema auth to authenticated;`);
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/proposals/page-builder-storage.sql'),'utf8'));
  const {createPageApi}=await import('../supabase/functions/admin-drafts/page-api.mjs');
- const config={PAGE_BUILDER_ENABLED:'true',SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'public-fixture',SUPABASE_SERVICE_ROLE_KEY:'private-fixture'};
+ const config={PAGE_BUILDER_ENABLED:'true',PAGE_CANVAS_ENABLED:'true',SUPABASE_URL:'https://fixture',SUPABASE_ANON_KEY:'public-fixture',SUPABASE_SERVICE_ROLE_KEY:'private-fixture'};
  const log=[];let loseCommit=false,contexts=0;
  const fetcher=async(url,options)=>{
   log.push({url,options});const token=options.headers.Authorization;
@@ -49,7 +49,29 @@ const {PGlite}=require('@electric-sql/pglite');
  assert.equal((await call({...command,requestId:crypto.randomUUID()},actor,missingContext)).status,503);
  const list=await (await call({domain:'page-builder',action:'list'})).json();assert.equal(list.pages.length,1);assert.equal(list.nextCursor,null);assert.ok(!('payload' in list.pages[0]));
  assert.deepEqual((await (await call({domain:'page-builder',action:'list',after:pageId})).json()).pages,[]);
- assert.equal((await call({domain:'page-builder',action:'archive',pageId,expectedVersion:2,requestId:crypto.randomUUID()})).status,200);
+ // Canvas content uses the same allocated identity, immutable revisions and retry boundary.
+ const canvasStyle={fontSize:'md',textColor:'default',background:'surface',border:'thin',padding:'md',align:'left',spacing:'normal'};
+ const canvasPage={...save.page,sections:[{id:'canvas-section',title:'Canvas',hidden:false,layout:{mode:'canvas'},blocks:[
+  {id:'canvas-text',type:'text',hidden:false,text:'Canvas facts',canvas:{desktop:{x:0,y:0,w:6,h:4},mobileOrder:1,style:canvasStyle}},
+  {id:'canvas-hidden',type:'text',hidden:true,text:'Private notes',canvas:{desktop:{x:6,y:0,w:6,h:4},mobileOrder:0,style:canvasStyle}}
+ ]}]};
+ config.PAGE_CANVAS_ENABLED='false';assert.equal((await call({...save,expectedVersion:2,requestId:crypto.randomUUID(),page:canvasPage})).status,400,'disabled canvas refuses writes');config.PAGE_CANVAS_ENABLED='true';
+ const canvasSave={...save,expectedVersion:2,requestId:crypto.randomUUID(),page:canvasPage};
+ loseCommit=true;assert.equal((await call(canvasSave)).status,503);
+ const canvasRetry=await call(canvasSave);assert.equal(canvasRetry.status,200);const canvasRecord=await canvasRetry.json();
+ assert.equal(canvasRecord.currentVersion,3);assert.equal(canvasRecord.replayed,true);assert.equal(canvasRecord.draft.saved_by,actor);
+ const reopened=await (await call({domain:'page-builder',action:'load',pageId})).json();
+ assert.deepEqual(reopened.draft.payload,canvasPage,'canvas positions, mobile order, styles and hidden content survive private reopen');
+ const stored=(await db.query('select version,payload from scavland_pages.versions where page_id=$1 order by version',[pageId])).rows;
+ assert.equal(stored.length,3,'lost response retry cannot duplicate canvas revisions');
+ assert.deepEqual(stored[0].payload,first.draft.payload,'legacy history is unchanged');assert.deepEqual(stored[2].payload,canvasPage);
+ const overlap=structuredClone(canvasPage);overlap.sections[0].blocks[1].canvas.desktop.x=5;
+ assert.equal((await call({...canvasSave,expectedVersion:3,requestId:crypto.randomUUID(),page:overlap})).status,400);
+ assert.equal((await db.query('select count(*)::integer as n from scavland_pages.versions')).rows[0].n,3,'invalid canvas does not save');
+ assert.equal((await call({...canvasSave,requestId:crypto.randomUUID()})).status,409,'canvas stale save rejected');
+ assert.equal((await call({domain:'page-builder',action:'archive',pageId,expectedVersion:3,requestId:crypto.randomUUID()})).status,200);
+ const archivedPayload=(await db.query('select payload from scavland_pages.versions where page_id=$1 and version=4',[pageId])).rows[0].payload;
+ assert.deepEqual(archivedPayload,canvasPage,'archive retains canvas history');
  await db.query('update public.fixture_permissions set allowed=false where actor=$1',[actor]);
  const denied=await call(command);assert.equal(denied.status,403);assert.ok(!(await denied.text()).includes('PRIVATE SQL DETAIL'));
  assert.ok(contexts>=2);assert.ok(log.filter(entry=>entry.url.endsWith('scavland_prepare_page')).every(entry=>entry.options.headers.apikey==='private-fixture'));

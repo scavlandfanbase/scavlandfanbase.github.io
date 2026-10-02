@@ -2,7 +2,9 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),http=require('n
 const {chromium}=require('playwright');
 (async()=>{
  const root=path.resolve(__dirname,'..'),id=crypto.randomUUID(),archivedId=crypto.randomUUID();let state=null,version=1,recoveryFailures=1;
- let payload={id,title:'Live fixture',slug:'live-fixture',intro:'Saved intro',sections:[]};const actions=[];
+ const style={fontSize:'md',textColor:'default',background:'surface',border:'thin',padding:'md',align:'left',spacing:'normal'};
+ let payload={id,title:'Live fixture',slug:'live-fixture',intro:'Saved intro',sections:[{id:'canvas-section',title:'Canvas',hidden:false,layout:{mode:'canvas'},blocks:[{id:'canvas-box',type:'text',text:'Saved canvas text',hidden:false,canvas:{desktop:{x:0,y:0,w:6,h:8},mobileOrder:0,style}}]}]};const actions=[];
+ const renderer=(await import('../supabase/functions/admin-drafts/page-renderer.mjs')).default;
  const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');if(url.pathname==='/host'){res.setHeader('Content-Type','text/html');res.end('<iframe id="builder" style="width:100%;height:900px;border:0" src="/page-builder.html?live=1" onload="this.contentWindow.postMessage({type:\'scavland-admin-token\',token:\'fixture-token\'},location.origin)"></iframe>');return;}
   const file=path.join(root,url.pathname.slice(1));if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);res.end();return;}
@@ -13,11 +15,11 @@ const {chromium}=require('playwright');
   await page.route('https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts',async route=>{
    const command=route.request().postDataJSON();actions.push(command);assert.equal(command.domain,'page-builder');assert.equal(route.request().headers().authorization,'Bearer fixture-token');let result;
    if(command.action==='list')result={pages:[{pageId:id,title:payload.title,slug:payload.slug,version,archived:false},{pageId:archivedId,title:'Archived fixture',slug:'archived-fixture',version:3,archived:true}],nextCursor:null};
-   else if(command.action==='source')result={imageChoices:[],existingPages:[{id,slug:payload.slug}],capabilities:{publish:true}};
+   else if(command.action==='source')result={imageChoices:[],existingPages:[{id,slug:payload.slug}],capabilities:{publish:true,canvas:true}};
    else if(command.action==='load')result={draft:{page_id:id,payload,version,archived:false},currentVersion:version};
    else if(command.action==='page-state')result={publication:state?{requestId:state.request_id,version,state:state.state,own:true,commit:state.commit_sha}:null};
    else if(command.action==='save'){payload=command.page;version++;result={draft:{payload,version,archived:false}};}
-   else if(command.action==='preview')result={previewId:command.requestId,page:payload,preview:{version,html:'<h1>Trusted saved preview</h1>',digest:'f'.repeat(64)}};
+   else if(command.action==='preview')result={previewId:command.requestId,page:payload,preview:{version,html:'<h1>Trusted saved preview</h1>'+renderer.render(payload,{images:[],existingPages:[{id,slug:payload.slug}],currentPageId:id}),digest:'f'.repeat(64)}};
    else if(command.action==='publish'){state={request_id:command.requestId,state:'committed',commit_sha:'c'.repeat(40)};result={publication:state};}
    else if(command.action==='recover'){if(recoveryFailures-- >0){await route.fulfill({status:503,headers:{'Access-Control-Allow-Origin':base,'Content-Type':'application/json'},body:JSON.stringify({error:'Recovery not confirmed.'})});return;}state.state='refused';result={publication:state};}
    else if(command.action==='status'){state.state='live';result={publication:state};}
@@ -37,6 +39,10 @@ const {chromium}=require('playwright');
   await frame.getByText('PRIVATE DRAFTS',{exact:true}).waitFor();
   assert.equal(await frame.getByText('Local drafts only.',{exact:true}).count(),0);
   assert.equal(await frame.getByLabel('Outcome scenario').isVisible(),false);
+  assert.equal(await frame.getByRole('button',{name:'Add canvas section',exact:true}).isVisible(),true,'trusted source capability enables canvas UI');
+  await frame.locator('.pb-canvas-box').click();await frame.locator('.pb-canvas-box').press('ArrowRight');
+  assert.equal(await frame.locator('.pb-canvas-box').evaluate(el=>el.style.gridColumn),'2 / span 6');
+  assert.equal(payload.sections[0].blocks[0].canvas.desktop.x,0,'unsaved canvas remains separate from saved revision');
   await frame.getByLabel('Introduction').fill('Unsaved stays private');
   const beforeHistoryWrites=actions.filter(action=>['save','create','archive','publish'].includes(action.action)).length;
   await frame.getByRole('button',{name:'View archived history: Archived fixture',exact:true}).click();
@@ -47,14 +53,19 @@ const {chromium}=require('playwright');
   assert.equal(await frame.getByLabel('Introduction').inputValue(),'Unsaved stays private');
   assert.equal(await frame.locator('#save-revision').innerText(),'Saved revision 2');
   assert.equal(actions.filter(action=>['save','create','archive','publish'].includes(action.action)).length,beforeHistoryWrites);
+  assert.equal(await frame.locator('.pb-canvas-box').evaluate(el=>el.style.gridColumn),'2 / span 6','read-only history preserves unsaved canvas layout');
+  assert.equal(await frame.frameLocator('#history-frame').locator('.canvas-x-0').count(),1,'saved archived history retains its original layout');
   await frame.getByRole('button',{name:'Close history',exact:true}).click();
   assert.equal(await frame.getByRole('button',{name:'View archived history: Archived fixture',exact:true}).evaluate(element=>element===document.activeElement),true);
   await frame.getByRole('button',{name:'Publish and status',exact:true}).click();
   await frame.getByRole('button',{name:'Review saved revision',exact:true}).click();
   await frame.frameLocator('#publication-review-frame').getByRole('heading',{name:'Trusted saved preview'}).waitFor();
+  assert.equal(await frame.frameLocator('#publication-review-frame').locator('.canvas-x-0').count(),1,'publication reviews saved coordinates, not unsaved drag position');
   await frame.getByRole('button',{name:'Publish reviewed revision'}).click();
   try{await frame.getByText('Repository commit recorded. Waiting for confirmed deployment.').waitFor();}catch(error){console.error(await frame.locator('#publication-status').innerText(),actions,errors);throw error;}
   assert.equal(await frame.getByLabel('Introduction').isDisabled(),true);assert.equal(await frame.getByLabel('Introduction').inputValue(),'Unsaved stays private');
+  await frame.locator('.pb-canvas-box').focus();await frame.locator('.pb-canvas-box').press('ArrowRight');
+  assert.equal(await frame.locator('.pb-canvas-box').evaluate(el=>el.style.gridColumn),'2 / span 6','publication lock protects unsaved canvas coordinates');
   assert.equal(actions.find(command=>command.action==='publish').previewId,actions.find(command=>command.action==='preview').requestId);
   await frame.getByRole('button',{name:'Check publication status'}).click();
   await frame.getByText('Published: the exact commit and public page content are confirmed.').waitFor();

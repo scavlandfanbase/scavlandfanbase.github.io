@@ -1,0 +1,46 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {chromium}=require('playwright'),{createServer,createStore}=require('./page-builder-server.cjs');
+(async()=>{
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'scav-canvas-connected-')),server=createServer({directory});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+server.address().port;
+ const browser=await chromium.launch({headless:true});
+ try{
+  const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(base+'/?canvas=1');await page.getByText('No saved drafts yet. Create a page to begin.').waitFor();
+  await page.locator('#new-page').click();await page.locator('#page-title').fill('Connected canvas');
+  await page.locator('#add-canvas-section').click();
+  await page.locator('[data-add-type]').selectOption('text');await page.getByRole('button',{name:'Add selected block to section 1',exact:true}).click();
+  const text=page.locator('.pb-block-fields textarea');await text.fill('Canvas <img src=x onerror=bad()> text');
+  await text.press('End');await text.pressSequentially(' plus typing');assert.equal(await text.evaluate(e=>document.activeElement===e),true);
+  const box=page.locator('.pb-canvas-box').first();await box.click();await box.press('ArrowRight');await box.press('Shift+ArrowDown');
+  await page.locator('#save-draft').click();await page.getByText('Saved locally at revision 1. This draft is not published.').waitFor();
+  const store=createStore(directory),saved=structuredClone(store.read().pages[0]);
+  assert.equal(saved.draft.sections[0].layout.mode,'canvas');assert.equal(saved.draft.sections[0].blocks[0].canvas.desktop.x,1);assert.equal(saved.draft.sections[0].blocks[0].canvas.desktop.h,9);
+  assert.ok(saved.draft.sections[0].blocks[0].text.endsWith(' plus typing'));
+  const preview=page.locator('#preview-frame');const previewFrame=await preview.elementHandle().then(el=>el.contentFrame());
+  await previewFrame.waitForSelector('.canvas-section .page-block');
+  assert.equal(await previewFrame.locator('.canvas-section .page-block').evaluate(el=>getComputedStyle(el).gridColumnStart),'2','trusted position classes work under the preview CSP');
+  await page.locator('.pb-canvas-box').click();const start=await page.locator('.pb-canvas-box').boundingBox();
+  const pitch=await page.locator('.pb-canvas-stage').evaluate(el=>(el.getBoundingClientRect().width+4)/12);
+  await page.mouse.move(start.x+10,start.y+10);await page.mouse.down();await page.mouse.move(start.x+10+pitch,start.y+10);await page.mouse.up();
+  await page.locator('#save-draft').click();await page.getByText('Saved locally at revision 2. This draft is not published.').waitFor();
+  const dragged=structuredClone(store.read().pages[0]);assert.equal(dragged.draft.sections[0].blocks[0].canvas.desktop.x,2);
+  await page.reload();await page.locator('.pb-draft-list button').click();await page.locator('.pb-canvas-box').waitFor();
+  assert.equal(await page.locator('.pb-block-fields textarea').inputValue(),saved.draft.sections[0].blocks[0].text);
+  assert.deepEqual(store.read().pages[0],dragged,'reopening cannot mutate the saved canvas');
+  await page.locator('.pb-canvas-box').click();const style=page.locator('.pb-canvas-tools label').filter({hasText:'font Size'}).locator('select');await style.selectOption('lg');
+  await page.locator('#save-draft').click();await page.getByText('Saved locally at revision 3. This draft is not published.').waitFor();
+  assert.equal(store.read().pages[0].draft.sections[0].blocks[0].canvas.style.fontSize,'lg');
+  await page.setViewportSize({width:375,height:900});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'connected controls fit narrow screens');
+  await page.locator('#publication-toggle').click();await page.locator('#publication-review').click();
+  await page.locator('#publication-start').click();
+  assert.equal(await page.locator('#add-canvas-section').isDisabled(),true,'publication locks new canvas sections');
+  const lockedPosition=await page.locator('.pb-canvas-box').evaluate(el=>el.style.gridColumn);
+  await page.locator('.pb-canvas-box').focus();await page.locator('.pb-canvas-box').press('ArrowRight');
+  assert.equal(await page.locator('.pb-canvas-box').evaluate(el=>el.style.gridColumn),lockedPosition,'keyboard cannot bypass publication lock');
+  assert.deepEqual(errors,[]);
+  const hiddenGate=await browser.newPage();await hiddenGate.goto(base);assert.equal(await hiddenGate.locator('#add-canvas-section').isVisible(),false,'new canvas controls remain opt-in');
+  console.log('Connected canvas browser: opt-in section, typing/focus, keyboard move/resize, existing private save/reopen, style revision and no default activation passed.');
+ }finally{await browser.close();await new Promise(resolve=>server.close(resolve));fs.rmSync(directory,{recursive:true,force:true});}
+})().catch(e=>{console.error(e);process.exitCode=1;});

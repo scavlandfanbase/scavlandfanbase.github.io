@@ -1,5 +1,5 @@
-// Reviewed model from VS e8ad5a6; only the UMD wrapper is adapted to ESM.
-// Original normalized SHA-256: 449306b083d5e0e1e4623152ff8d1b60509339c761871c9e7901ef63ba3b00fc
+// Browser model plus canvas validation; UMD wrapper adapted to ESM.
+// Original normalized SHA-256: e4b05a618c832a3b26f4c5cf9bc02731ce62fa87d80756139e928420aea8cde6
 const model=(()=>{
   const blockTypes=Object.freeze(['heading','text','image','card','divider','button']);
   const limits=Object.freeze({pageTitle:160,intro:1000,pageAddress:80,sectionTitle:160,blockTitle:160,text:10000,alt:300,link:500,sections:40,blocks:200});
@@ -37,6 +37,24 @@ const model=(()=>{
     if(pageMatch)return !reserved.has(pageMatch[1]);
     return /^(?:[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*\.html)(?:#[a-zA-Z0-9_-]+)?$/.test(value);
   }
+  // Optional canvas metadata extends existing content; absent mode preserves legacy pages.
+  const canvasStyles=Object.freeze({fontSize:['sm','md','lg','xl'],textColor:['default','ink','paper','accent','danger'],background:['none','surface','subtle'],border:['none','thin','thick'],padding:['none','sm','md','lg'],align:['left','center','right'],spacing:['tight','normal','loose']});
+  const canvasLimits=Object.freeze({columns:12,rows:60,minWidth:2,minHeight:2});
+  function validateCanvas(canvas,regions,orders){
+    if(!plain(canvas))fail('Canvas position and style are required.');
+    exactKeys(canvas,['desktop','mobileOrder','style'],'Canvas');
+    const r=canvas.desktop;
+    if(!plain(r))fail('Choose a valid canvas region.');
+    exactKeys(r,['x','y','w','h'],'Canvas region');
+    if(![r.x,r.y,r.w,r.h].every(Number.isInteger)||r.x<0||r.y<0||r.w<canvasLimits.minWidth||r.h<canvasLimits.minHeight||r.x+r.w>canvasLimits.columns||r.y+r.h>canvasLimits.rows)fail('Canvas region is outside the grid.');
+    if(regions.some(a=>r.x<a.x+a.w&&r.x+r.w>a.x&&r.y<a.y+a.h&&r.y+r.h>a.y))fail('Canvas blocks must not overlap, including hidden blocks.');
+    regions.push(r);
+    if(!Number.isInteger(canvas.mobileOrder)||canvas.mobileOrder<0||canvas.mobileOrder>=limits.blocks||orders.has(canvas.mobileOrder))fail('Choose a unique valid mobile order.');
+    orders.add(canvas.mobileOrder);
+    if(!plain(canvas.style))fail('Choose valid canvas styles.');
+    exactKeys(canvas.style,Object.keys(canvasStyles),'Canvas style');
+    for(const [key,values]of Object.entries(canvasStyles))if(!values.includes(canvas.style[key]))fail('Choose valid canvas styles.');
+  }
   function validateContext(context){
     if(!plain(context))fail('Trusted validation context is required.');
     exactKeys(context,['approvedImages','existingPages','currentPageId'],'Validation context');
@@ -71,14 +89,17 @@ const model=(()=>{
       text(section.title,limits.sectionTitle,'Section title');
       if(typeof section.hidden!=='boolean')fail('Invalid section visibility.');
       if(!plain(section.layout))fail('Choose valid section layout settings.');
-      exactKeys(section.layout,['columns','align','spacing','background','border'],'Section layout');
+      exactKeys(section.layout,['columns','align','spacing','background','border','mode'],'Section layout');
+      if(own(section.layout,'mode')&&section.layout.mode!=='canvas')fail('Choose a supported section layout mode.');
+      const isCanvas=section.layout.mode==='canvas',regions=[],orders=new Set();
       for(const [key,values]of Object.entries(layoutValues))if(own(section.layout,key)&&!values.includes(section.layout[key]))fail('Choose valid section layout settings.');
       if(own(section.layout,'border')&&typeof section.layout.border!=='boolean')fail('Choose valid section layout settings.');
       if(!Array.isArray(section.blocks))fail('Invalid section blocks.');
       for(const block of section.blocks){
         if(!plain(block))fail('Invalid block.');
         if(!blockTypes.includes(block.type))fail('Choose a supported block type.');
-        exactKeys(block,blockFields[block.type],'Block');
+        exactKeys(block,isCanvas?[...blockFields[block.type],'canvas']:blockFields[block.type],'Block');
+        if(isCanvas)validateCanvas(block.canvas,regions,orders);
         const blockId=identity(block.id,'Block identity');
         if(identities.has(blockId))fail('Content identities must be unique.');identities.add(blockId);
         if(typeof block.hidden!=='boolean')fail('Invalid block visibility.');
@@ -100,6 +121,6 @@ const model=(()=>{
     if(conflict)fail('A page with this address already exists.');
     return structuredClone(input);
   }
-  return Object.freeze({blockTypes,limits,validate,pageAddress,safeImagePath,safeLink});
+  return Object.freeze({blockTypes,limits,canvasStyles,canvasLimits,validate,pageAddress,safeImagePath,safeLink});
 })();
 export default model;
