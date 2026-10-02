@@ -28,7 +28,7 @@
   }
   function document(input,{images,existingPages,currentPageId=null,css=''}={}){
     const page=validate(input,{images,existingPages,currentPageId});
-    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(page.title)} | SCAVLAND</title><style>${css}</style></head><body class="published-page"><main class="page-preview">${render(page,{images,existingPages,currentPageId})}</main></body></html>`;
+    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(page.title)} | SCAVLAND</title><style>${css}</style></head><body class="published-page"><main class="page-preview">${render(page,{images,existingPages,currentPageId})}</main><script src="/shared-home-boxes.js?v=20261002-1" defer></script></body></html>`;
   }
   return Object.freeze({validate,render,document});
 });

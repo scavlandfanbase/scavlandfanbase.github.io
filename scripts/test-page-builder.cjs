@@ -398,7 +398,9 @@ async function main(){
       assert.equal(await frame.getByText('<img src=x onerror=alert(1)>',{exact:true}).count(),1);
       assert.equal(await frame.getByText('Text block fixture').count(),0);
       assert((await frame.locator('.page-text').allTextContents()).some(text=>text.length>=9000));
-      assert.equal(await frame.locator('script').count(),0);
+      assert.equal(await frame.locator('script').count(),1);
+      assert.equal(await frame.locator('script').getAttribute('src'),'/shared-home-boxes.js?v=20261002-1');
+      assert.equal(await frame.locator('script').textContent(),'');
       assert.equal(await frame.locator('img').getAttribute('alt'),'Approved fixture image');
       const initialSectionId=await page.locator('.pb-section-card').nth(0).getAttribute('data-section-card');
       const exportEvent=page.waitForEvent('download');await activate(page.getByRole('button',{name:'Export HTML'}));

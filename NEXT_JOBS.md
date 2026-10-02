@@ -1,3 +1,9 @@
+## Shared homepage categories — 2 October 2026
+
+Public standard pages and generated Page Builder pages now load the visible homepage feature-grid cards from data/site-content.json. Titles, descriptions, links, images, order and visibility share the Home source; no cards are copied into drafts. Home keeps its original grid and Admin remains separate. Guides gains only the fixed shared-navigation script; its published text and section payload are preserved. The current hidden Guides card stays hidden. Shared navigation fails quietly if its data cannot load.
+
+The renderer adds one fixed trusted external script; read-only previews continue to sandbox it. Regression checks permit only this exact empty script element and still reject injected content. Deploy the matching admin-drafts renderer bundle before releasing the frontend. Shared navigation and Page Builder checks cover standard/custom pages, updates, hidden exclusion, narrow width, trusted-renderer parity and private publication fixtures.
+
 ## Shared editor styling repair — 2 October 2026
 
 Items, Vendors and the Weapons/Armour/Ammo category shells now use admin-builder.css, preserving their established dark controls, readable text, touch sizing and full desktop width independently of the scoped Page Builder stylesheet. Items styling assertions and full Items/Vendor browser suites pass, including 280–1280px layouts. No facts, permissions or drafts are changed. Release this stylesheet repair before further shared-navigation work.
