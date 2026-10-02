@@ -160,6 +160,8 @@ export function createHandler(endpoint, env, fetcher=fetch) {
       const permission={items:'items_edit',vendors:'vendors_edit',weapons:'weapons_edit',armour:'armour_edit',ammunition:'ammunition_edit',crafting:'crafting_edit'}[body.kind];
       const admin=await fetcher(sb+'/rest/v1/rpc/has_scavland_permission',{method:'POST',headers,body:JSON.stringify({required_permission:permission})});
       if(!permission||!admin.ok||await admin.json()!==true)fail('You do not have permission to publish from this editor.',403);
+      const publication=await fetcher(sb+'/rest/v1/rpc/has_scavland_permission',{method:'POST',headers,body:JSON.stringify({required_permission:'publish_public'})});
+      if(!publication.ok||await publication.json()!==true)fail('Publishing permission required. Prepare a private draft for Owner review.',403);
       const ghHeaders={Accept:'application/vnd.github+json',Authorization:'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'};
       async function gh(path,method='GET',data) {
         const r=await fetcher(root+path,{method,headers:ghHeaders,...(data?{body:JSON.stringify(data)}:{})});

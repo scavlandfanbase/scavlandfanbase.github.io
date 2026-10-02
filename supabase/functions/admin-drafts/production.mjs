@@ -39,7 +39,7 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
    }
    // Permission check uses the real caller JWT, never the service identity.
    const saved=await rpc('scavland_draft',{p_action:'load',p_domain:body.domain,p_entity_id:'catalogue'});
-   if(body.action==='source')return reply({...core.view(body.domain,saved.draft,await core.read(body.domain)),capabilities:{publish:env('ADMIN_CORE_ENABLED')==='true'&&env('DRAFT_PUBLISH_ENABLED')==='true'}});
+   if(body.action==='source')return reply({...core.view(body.domain,saved.draft,await core.read(body.domain)),capabilities:{publish:env('ADMIN_CORE_ENABLED')==='true'&&env('DRAFT_PUBLISH_ENABLED')==='true'&&await rpc('has_scavland_permission',{required_permission:'publish_public'})===true}});
    if(!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<0||typeof body.requestId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(body.requestId)||!body.command||typeof body.command!=='object'||Array.isArray(body.command))fail('Invalid editor action.');
    const userResponse=await fetcher(sb+'/auth/v1/user',{headers:{apikey:key,Authorization:auth}});
    if(!userResponse.ok)fail('Sign in again. Your entries are retained.',401);

@@ -43,6 +43,8 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    if(!userResponse.ok)fail('Sign in again. Your draft is retained.',401);
    const actor=(await userResponse.json()).id;if(typeof actor!=='string'||!actor)fail('Sign in again.',401);
    if(await rpc('has_scavland_permission',{required_permission:permission[body.category]})!==true)fail('Category editing permission is required.',403);
+   const canPublish=await rpc('has_scavland_permission',{required_permission:'publish_public'})===true;
+   if(body.action==='publish'&&!canPublish)fail('Publishing permission required. Your private draft is retained.',403);
    const latest=await source();const context={actor,permissions:[permission[body.category]],settings:latest.settings,images:latest.images};
    if(body.action==='legacy-review'){
     const legacy=await rpc('scavland_item_legacy',{},true);
@@ -84,7 +86,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const legacyDrafts=await guardedLegacy(state,legacy);
    const importing=body.command?.action==='import-legacy'&&['prepare','save'].includes(body.action);
    if(state&&!importing)planItem(state,latest.documents,{legacyDrafts});
-   if(body.action==='load')return reply({currentVersion:saved.currentVersion,state,hasChanges:!!(Object.keys(state.changes).length||Object.keys(state.creation||{}).length),settings:latest.settings,images:latest.documents['data/site-images.json'],usage:usage(body.itemId),canPublish:env('DRAFT_PUBLISH_ENABLED')==='true'&&env('ADMIN_CORE_ENABLED')==='true'});
+   if(body.action==='load')return reply({currentVersion:saved.currentVersion,state,hasChanges:!!(Object.keys(state.changes).length||Object.keys(state.creation||{}).length),settings:latest.settings,images:latest.documents['data/site-images.json'],usage:usage(body.itemId),savedBy:saved.draft?.saved_by||null,canPublish:canPublish&&env('DRAFT_PUBLISH_ENABLED')==='true'&&env('ADMIN_CORE_ENABLED')==='true'});
    if(!Number.isSafeInteger(body.expectedVersion)||body.expectedVersion<0)fail('The saved item version is required.');
    if(body.action==='save'){
     if(!uuid(body.requestId))fail('A prepared receipt is required.');
@@ -120,6 +122,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
    const intent=await rpc('scavland_item_preview',{p_actor:actor,...args,p_version:body.expectedVersion,p_id:body.previewId},true);
    if(!intent)fail('Preview this saved item again.',409);
    const publication=await create(async plan=>{
+    if(await rpc('has_scavland_permission',{required_permission:'publish_public'})!==true)fail('Publishing permission required.',403);
     if(await previewDigest(plan.tree)!==intent.digest)fail('Public content changed since preview. Review again.',409);
     if((await load()).currentVersion!==body.expectedVersion)fail('A newer item draft exists. Review again.',409);
     const currentLegacy=await rpc('scavland_item_legacy',{},true);

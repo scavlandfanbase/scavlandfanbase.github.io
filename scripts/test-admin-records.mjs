@@ -62,6 +62,7 @@ function service({deny=false,conflict=false,missing=false}={}){
     const body=opt.body?JSON.parse(opt.body):null;calls.push({url,...opt,body});
     if(url.endsWith('/auth/v1/user'))return json({},deny?401:200);
     if(url.endsWith('/rpc/is_scavland_admin'))return json(true);
+    if(url.endsWith('/rpc/has_scavland_permission'))return json(!deny);
     if(url.endsWith('/git/ref/heads/main'))return json({object:{sha:'base'}});
     if(url.endsWith('/git/commits/base'))return json({tree:{sha:'tree'}});
     if(url.includes('/contents/')){const path=url.split('/contents/')[1].split('?')[0];return json({content:Buffer.from(JSON.stringify(docs[path])).toString('base64')});}

@@ -2,14 +2,14 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const {chromium}=require('playwright');
 (async()=>{const browser=await chromium.launch({headless:true,channel:'msedge'});try{
  const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
- let saved=null,version=0,prepared=null,published=0,loseReply=false,denySave=false,prepareCalls=0;
+ let saved=null,version=0,prepared=null,published=0,loseReply=false,denySave=false,prepareCalls=0,canPublish=true;
  const receipts=new Map();
  const source={id:'fixture',name:'Fixture candidate'},root=path.join(__dirname,'..');
  await page.route('https://fixture.test/**',async route=>{const name=new URL(route.request().url()).pathname.slice(1);if(!name)return route.fulfill({contentType:'text/html',body:'<iframe src="attachment-category.html" style="width:100%;height:900px"></iframe><script>addEventListener("message",e=>{if(e.data.type==="scavland-admin-ready")e.source.postMessage({type:"scavland-admin-token",token:"fixture"},location.origin)})</script>'});return route.fulfill({path:path.join(root,name)});});
  await page.route('https://demtoqsafufzmnhvaykj.supabase.co/functions/v1/admin-drafts',async route=>{
  const body=route.request().postDataJSON();let result;
  if(body.action==='list')result={records:[{id:'fixture',name:source.name,candidate:true}]};
- if(body.action==='load')result={source,currentVersion:version,draft:saved,sourceDigest:'fixture-digest',patchId:'fixture',images:['images/approved.png']};
+ if(body.action==='load')result={canPublish,source,currentVersion:version,draft:saved,sourceDigest:'fixture-digest',patchId:'fixture',images:['images/approved.png']};
  if(body.action==='prepare'){prepareCalls++;prepared=body.command;result={request_id:body.requestId};}
  if(body.action==='save'){
   if(denySave)return route.fulfill({status:403,contentType:'application/json',body:JSON.stringify({error:'Permission revoked.'})});
@@ -40,6 +40,7 @@ const {chromium}=require('playwright');
  await Promise.all([page.waitForResponse(r=>r.url().endsWith('/admin-drafts')&&r.request().postDataJSON().action==='save'),frame.locator('#lifecycle').click()]);await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.archived,true);assert(await frame.locator('#item-name').isDisabled());
  await Promise.all([page.waitForResponse(r=>r.url().endsWith('/admin-drafts')&&r.request().postDataJSON().action==='save'),frame.locator('#lifecycle').click()]);await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.archived,false);
  await frame.locator('#preview').click();await frame.locator('#preview-dialog').waitFor();await frame.locator('#close-preview').click();await frame.locator('#publish').click();await frame.locator('#status').filter({hasText:'fixture-commit'}).waitFor();assert.equal(published,1);
+ canPublish=false;await frame.locator('#reload').click();await frame.locator('#status').filter({hasText:'Loaded.'}).waitFor();await frame.locator('#item-name').fill('Reviewer private correction');await frame.locator('#save').click();await frame.locator('#status').filter({hasText:'Saved privately'}).waitFor();assert.equal(saved.record.name,'Reviewer private correction');assert(await frame.locator('#item-name').isEnabled());await frame.locator('#preview').click();await frame.locator('#preview-dialog').waitFor();await frame.locator('#close-preview').click();assert(await frame.locator('#publish').isDisabled());assert.equal(published,1);
  for(const width of [390,1280]){await page.setViewportSize({width,height:1000});assert(await frame.locator('body').evaluate(el=>el.scrollWidth<=el.clientWidth+1));}
  assert.deepEqual(errors,[]);console.log('PASS Attachment browser fixtures: parent session handoff, candidate type decision, private edit/reload, preview/explicit publish and mobile widths.');
 }finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

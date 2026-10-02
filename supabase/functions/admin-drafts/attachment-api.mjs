@@ -18,6 +18,7 @@ export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,
    let body;try{body=JSON.parse(raw);}catch{fail('Invalid request.');}
    if(!body||Array.isArray(body)||Object.keys(body).some(k=>!['domain','action','itemId','requestId','command','previewId','confirm','expectedVersion'].includes(k))||
     body.domain!==undefined&&body.domain!=='shared-attachment'||!['list','create','load','prepare','save','preview','publish'].includes(body.action)||!['list','create'].includes(body.action)&&(typeof body.itemId!=='string'||!body.itemId.trim()||body.itemId.length>160))fail('Invalid Attachment request.');
+   if(body.action==='publish'&&!identity.permissions.includes('publish_public'))fail('Publishing permission required. Your private draft is retained.',403);
    if(body.action==='create'){
     if(Object.keys(body).some(k=>!['domain','action','requestId','command'].includes(k))||typeof body.requestId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(body.requestId)||typeof create!=='function')fail('Invalid new Attachment request.');
     return reply(await create({...body,actor:identity.actor,permissions:identity.permissions,authorization:auth}));
@@ -46,7 +47,7 @@ export function createAttachmentApi({enabled=()=>false,publishEnabled=()=>false,
    const context={...await loadContext(body.itemId,auth),...identity};
    if(context.source?.id!==body.itemId&&!(context.source===null&&context.savedDraft?.creation&&context.savedDraft.record?.id===body.itemId))fail('Item not found.',404);
    if(body.action==='load')return reply({itemId:body.itemId,currentVersion:context.version,
-    draft:context.savedDraft||null,source:context.source||context.savedDraft?.record,images:context.images||[],weapons:(context.weapons||[]).filter(r=>!r.hidden&&!r.archived&&context.weapons.filter(w=>w.id===r.id).length===1).map(r=>({id:r.id,name:r.name||r.id})),patchId:context.settings?.current_patch_id||null,sourceDigest:await legacyDigest({source:context.source,settings:context.settings})});
+    canPublish:identity.permissions.includes('publish_public'),draft:context.savedDraft||null,source:context.source||context.savedDraft?.record,images:context.images||[],weapons:(context.weapons||[]).filter(r=>!r.hidden&&!r.archived&&context.weapons.filter(w=>w.id===r.id).length===1).map(r=>({id:r.id,name:r.name||r.id})),patchId:context.settings?.current_patch_id||null,sourceDigest:await legacyDigest({source:context.source,settings:context.settings})});
    if(body.command?.confirmId!==body.itemId)fail('Confirm the selected Item identity.');
    if(context.savedDraft){
     if(!Array.isArray(context.legacyDrafts))fail('Load existing Items work before editing.',503);

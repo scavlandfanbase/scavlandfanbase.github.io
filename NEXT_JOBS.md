@@ -1,3 +1,7 @@
+## Reviewer private drafts prepared — 2 October 2026
+
+Editing/publishing separation and role defaults pass SQL, API and browser checks. Ordered backend/permission deployment is required before activation. See REVIEWER-DRAFT-CHECKPOINT.md; private Crafting recipe support remains a separate gap.
+
 ## Wider desktop layout — 1 October 2026
 
 Shared public/Admin desktop widths and Page Builder workspace/output styles are live through PR #46. Backend version 18 and Guides revision 2 are confirmed; desktop live output fills its viewport. See PAGE-BUILDER-BACKEND-CHECKPOINT.md.
@@ -621,5 +625,6 @@ Do not remove embedded HTML/JavaScript data until the equivalent JSON-powered pa
 - Official header logo: `images/branding/Scavland_Logo_2025.png`
 
 - Evidence form UI update 19 September 2026: `items.html` now uses a darker amber Submit Evidence button and a separate high-visibility armour/gear warning. The warning explicitly requires screenshots used for resistance verification to show **100% durability**. Commit `e987d829022e954f66088c219848d004bda3f600`.
+
 
 

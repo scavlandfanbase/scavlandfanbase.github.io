@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
  const {legacyDigest}=await import('../supabase/functions/admin-drafts/legacy-item-review.mjs');
  const actor='11111111-1111-4111-8111-111111111111',item={id:'stable',name:'Known',classification:['item']},settings={schemaVersion:1,current_patch_id:'fixture'};
  let saved=null,prepared=null,preparations=0;
- const dependencies={enabled:()=>true,authenticate:async token=>token==='Bearer valid'?{actor,permissions:['items_edit']}:null,
+ const dependencies={enabled:()=>true,authenticate:async token=>token==='Bearer valid'?{actor,permissions:['items_edit','publish_public']}:null,
  loadContext:async()=>({source:item,settings,version:saved?1:0,savedDraft:saved,legacyDrafts:[],legacyVersion:0}),
  storage:{receipt:async()=>prepared,prepare:async input=>{preparations++;prepared=input;return input;},save:async()=>{saved=prepared.payload;return {version:1,payload:saved};}}};
  const api=createAttachmentApi(dependencies),call=(body,token='valid')=>api(new Request('https://fixture/attachment',{method:'POST',headers:{Authorization:'Bearer '+token},body:JSON.stringify(body)}));
@@ -28,5 +28,7 @@ const assert=require('node:assert/strict');
  const publishCall=body=>publishApi(new Request('https://fixture',{method:'POST',headers:{Authorization:'Bearer valid'},body:JSON.stringify(body)}));
  assert.equal((await publishCall({action:'publish',itemId:'stable',expectedVersion:1,previewId:requestId})).status,403);assert.equal(published,0);
  assert.equal((await publishCall({action:'publish',itemId:'stable',expectedVersion:1,previewId:requestId,confirm:true})).status,200);assert.equal(published,1);
+ const reviewerApi=createAttachmentApi({...dependencies,publishEnabled:()=>true,authenticate:async()=>({actor,permissions:['items_edit']}),publication:async()=>{throw Error('Reviewer must not publish');}});
+ assert.equal((await reviewerApi(new Request('https://fixture',{method:'POST',headers:{Authorization:'Bearer valid'},body:JSON.stringify({action:'publish',itemId:'stable',expectedVersion:1,previewId:requestId,confirm:true})}))).status,403);
  console.log('PASS Attachment request adapter: feature gate, authenticated permission, trusted preparation, receipt retry, receipt-only save and private reload. Storage transport mocked.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

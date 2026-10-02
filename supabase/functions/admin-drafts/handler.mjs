@@ -23,6 +23,7 @@ export function createHandler({env,fetcher=fetch,publishers={}}){
    }
    // RPC is the authorization boundary for all operations, including publication.
    const saved=await rpc(body.action==='save'?'save':'load');
+   if(body.action==='publish'){const permission=await fetcher(url+'/rest/v1/rpc/has_scavland_permission',{method:'POST',headers:{apikey:key,Authorization:auth,'Content-Type':'application/json'},body:JSON.stringify({required_permission:'publish_public'})});if(!permission.ok||await permission.json()!==true)fail('Publishing permission required. Your private draft is retained.',403);}
    if(['save','load'].includes(body.action))return reply(saved);
    if(!saved.draft)fail('Save a private draft first.',404);
    if(!Number.isInteger(body.expectedVersion)||body.expectedVersion!==saved.currentVersion)fail('Conflict — newer draft version exists.',409);
