@@ -1,6 +1,6 @@
 ## Homepage Page Builder links — 2 October 2026
 
-Backend follow-up: publish-site-content rejected the existing homepage because section intro/title/image fields may be omitted. Optional section text and images now accept omission while invalid types/paths remain rejected. The real backend handler regression saves a new Guides card against actual site-content.json, preserves other content, and confirms Reviewer publishing denial. Deploy/readback this focused publisher correction; the user's open edit can retry without refresh.
+Backend follow-up: publish-site-content rejected the existing homepage because section intro/title/image fields may be omitted. Optional section text and images now accept omission while invalid types/paths remain rejected. The real backend handler regression saves a new Guides card against actual site-content.json, preserves other content, and confirms Reviewer publishing denial. PR #55 merged; publisher version 19 is deployed and matches tested source on readback (digest 9986b903c9633d01b89aadcddde0263f7b8da5fcc947e6b55fefe0c56208163c). The user's open edit can retry without refresh; their actual save result is not yet verified.
 
 Homepage box Save and Edit Link now accept canonical /pages/name/ addresses, including Guides. Original .html links remain supported; malformed/traversal/protocol-relative routes remain rejected. Focused link validation and homepage save/order browser regressions pass. This fixes the live user's Guides box validation failure; their unsaved edit is preserved in their browser until they retry.
 
