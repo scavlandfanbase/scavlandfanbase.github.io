@@ -24,9 +24,10 @@
   #1b1e26;
   border:1px solid #333;border-radius:6px;padding:8px;min-height:420px;}
 
-.vcb-block{position:relative;border-radius:4px;padding:8px;overflow:hidden;cursor:grab;background:#20242d;border:2px solid transparent;}
+.vcb-block{position:relative;border-radius:4px;padding:8px;cursor:grab;background:#20242d;border:2px solid transparent;}
 .vcb-block:active{cursor:grabbing;}
 .vcb-block.is-selected{border-color:#6fb7ff;box-shadow:0 0 0 2px rgba(111,183,255,.35);}
+.vcb-block-content{overflow:hidden;}
 .vcb-block-label{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#9aa0ab;margin-bottom:4px;}
 
 .vcb-handle{position:absolute;width:12px;height:12px;background:#6fb7ff;border-radius:2px;display:none;}

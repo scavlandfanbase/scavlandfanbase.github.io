@@ -3,7 +3,9 @@
   const Model=window.ScavVisualCanvasModel;
   const Renderer=window.ScavVisualCanvasRenderer;
   const Fixtures=window.ScavVisualCanvasFixtures;
+  const Layout=window.ScavVisualCanvasLayout;
   const COLS=Model.GRID_COLUMNS;
+  const GRID={cols:COLS,maxRows:Model.limits.maxH,minW:Model.limits.minW,minH:Model.limits.minH};
 
   const stage=document.getElementById('stage');
   const propertiesPanel=document.getElementById('properties-panel');
@@ -29,14 +31,6 @@
     let order=0;while(used.has(order))order++;return order;
   }
 
-  function firstFreeRow(){
-    let maxY=0;
-    for(const block of doc.blocks)maxY=Math.max(maxY,block.desktop.y+block.desktop.h);
-    return maxY;
-  }
-
-  function clamp(value,min,max){return Math.min(max,Math.max(min,value));}
-
   function announce(message){statusLine.textContent=message;}
 
   function validateCurrentDoc(){
@@ -47,8 +41,13 @@
   }
 
   function addBlock(type){
+    const size={w:type==='text'?6:4,h:type==='card'?14:8};
+    const desktop=Layout.findFreeRegion(doc.blocks,size,GRID);
+    if(!desktop){
+      announce(`No space is available for a new ${type} block. Resize or remove existing blocks, then try again. The canvas is unchanged.`);
+      return;
+    }
     const id=nextId(type);
-    const desktop={x:0,y:firstFreeRow(),w:type==='text'?6:4,h:type==='card'?14:8};
     const style={...Fixtures.defaultStyle};
     const block={id,type,desktop,mobileOrder:nextMobileOrder(),style};
     if(type==='text')block.text='New text block.';
@@ -74,8 +73,12 @@
   function moveSelected(dx,dy){
     const block=findBlock(selectedId);
     if(!block)return;
-    block.desktop.x=clamp(block.desktop.x+dx,0,COLS-block.desktop.w);
-    block.desktop.y=clamp(block.desktop.y+dy,0,Model.limits.maxH-block.desktop.h);
+    const candidate={...block.desktop,x:block.desktop.x+dx,y:block.desktop.y+dy};
+    if(!Layout.canPlace(candidate,doc.blocks,GRID,block.id)){
+      announce("Can't move there - it would overlap another block or leave the grid. Position unchanged.");
+      return;
+    }
+    block.desktop=candidate;
     render();
     announce('Position updated. Edited - not saved, demonstration only.');
   }
@@ -83,8 +86,12 @@
   function resizeSelected(dw,dh){
     const block=findBlock(selectedId);
     if(!block)return;
-    block.desktop.w=clamp(block.desktop.w+dw,Model.limits.minW,COLS-block.desktop.x);
-    block.desktop.h=clamp(block.desktop.h+dh,Model.limits.minH,Model.limits.maxH-block.desktop.y);
+    const candidate={...block.desktop,w:block.desktop.w+dw,h:block.desktop.h+dh};
+    if(!Layout.canPlace(candidate,doc.blocks,GRID,block.id)){
+      announce("Can't resize there - it would overlap another block or leave the grid. Size unchanged.");
+      return;
+    }
+    block.desktop=candidate;
     render();
     announce('Size updated. Edited - not saved, demonstration only.');
   }
@@ -159,25 +166,35 @@
     const {mode,block,metrics,startX,startY,origin}=dragState;
     const dxCols=Math.round((event.clientX-startX)/metrics.colWidth);
     const dyRows=Math.round((event.clientY-startY)/metrics.rowHeight);
+    let candidate=null;
     if(mode==='move'){
-      block.desktop.x=clamp(origin.x+dxCols,0,COLS-block.desktop.w);
-      block.desktop.y=clamp(origin.y+dyRows,0,Model.limits.maxH-block.desktop.h);
+      candidate={...origin,x:origin.x+dxCols,y:origin.y+dyRows};
     }else if(mode==='resize-se'){
-      block.desktop.w=clamp(origin.w+dxCols,Model.limits.minW,COLS-block.desktop.x);
-      block.desktop.h=clamp(origin.h+dyRows,Model.limits.minH,Model.limits.maxH-block.desktop.y);
+      candidate={...origin,w:origin.w+dxCols,h:origin.h+dyRows};
     }else if(mode==='resize-e'){
-      block.desktop.w=clamp(origin.w+dxCols,Model.limits.minW,COLS-block.desktop.x);
+      candidate={...origin,w:origin.w+dxCols};
     }else if(mode==='resize-s'){
-      block.desktop.h=clamp(origin.h+dyRows,Model.limits.minH,Model.limits.maxH-block.desktop.y);
+      candidate={...origin,h:origin.h+dyRows};
+    }
+    if(candidate&&Layout.canPlace(candidate,doc.blocks,GRID,block.id)){
+      block.desktop=candidate;
+      dragState.rejected=false;
+    }else{
+      dragState.rejected=true;
     }
     renderStageOnly();
   }
 
   function onStagePointerUp(){
     if(!dragState)return;
+    const {block,origin,rejected}=dragState;
     dragState=null;
     render();
-    announce('Edited - not saved, demonstration only.');
+    if(rejected&&block.desktop.x===origin.x&&block.desktop.y===origin.y&&block.desktop.w===origin.w&&block.desktop.h===origin.h){
+      announce('No change - that position would overlap another block or leave the grid.');
+    }else{
+      announce('Edited - not saved, demonstration only.');
+    }
   }
 
   function buildHandles(block){
@@ -199,7 +216,7 @@
 
   function blockContentNode(block){
     const wrap=document.createElement('div');
-    wrap.className=styleClassString(block.style);
+    wrap.className=`vcb-block-content ${styleClassString(block.style)}`;
     const label=document.createElement('div');
     label.className='vcb-block-label';
     label.textContent=`${block.type} - ${block.id}`;
@@ -318,8 +335,8 @@
       propertiesPanel.appendChild(empty);
       return;
     }
-    const update=(key,value)=>{block[key]=value;render();announce('Edited - not saved, demonstration only.');};
-    const updateStyle=(key,value)=>{block.style={...block.style,[key]:value};render();announce('Edited - not saved, demonstration only.');};
+    const update=(key,value)=>{block[key]=value;refreshCanvasAndPreview();announce('Edited - not saved, demonstration only.');};
+    const updateStyle=(key,value)=>{block.style={...block.style,[key]:value};refreshCanvasAndPreview();announce('Edited - not saved, demonstration only.');};
 
     if(block.type==='text'||block.type==='card')propertiesPanel.appendChild(textField('Text',block.text||'',value=>update('text',value),true));
     if(block.type==='card')propertiesPanel.appendChild(textField('Title',block.title||'',value=>update('title',value)));
@@ -340,6 +357,15 @@
   function render(){
     renderStageOnly();
     renderProperties();
+    renderPreview();
+    const error=validateCurrentDoc();
+    if(error)announce(`Fixture data invalid: ${error}`);
+  }
+
+  // Updates the canvas and preview without rebuilding the properties panel, so
+  // typing in a text/title/link/alt field keeps its focus, cursor and selection.
+  function refreshCanvasAndPreview(){
+    renderStageOnly();
     renderPreview();
     const error=validateCurrentDoc();
     if(error)announce(`Fixture data invalid: ${error}`);
@@ -397,5 +423,12 @@
     getDoc:()=>structuredClone(doc),
     getSelectedId:()=>selectedId,
     getPreviewMode:()=>previewMode,
+    // Test-only setup helper for boundary scenarios (e.g. a full grid); still goes
+    // through model validation so it cannot introduce an invalid document.
+    setDocForTest:testDoc=>{
+      doc=Model.validate(testDoc,{approvedImages:Fixtures.approvedImages});
+      selectedId=null;
+      render();
+    },
   };
 })();
