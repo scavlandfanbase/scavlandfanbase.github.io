@@ -108,7 +108,8 @@
               "title": "Guides",
               "description": "Scavland Guides",
               "href": "https://scavlandfanbase.github.io/pages/guides/",
-              "image": null
+              "image": null,
+              "hidden": true
             }
           ]
         },
