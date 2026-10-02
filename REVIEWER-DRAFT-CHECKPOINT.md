@@ -15,7 +15,11 @@ Invitation defaults, inactive access denial and Reviewer publishing denial pass,
 including an accidentally assigned publish_public permission. Page control API
 regressions confirm non-Owner publication is refused before Git writes.
 No real Reviewer login is claimed; no Reviewer accounts currently exist.
-Deployment/readback status is recorded after applying this focused change.
+PR #53 merged at ad9b08879cf2fa1796948842286a2241f4d7051c. Live
+manage-admin-users version 11 matches the tested source on readback (digest
+6e6d0c9f5fd634b0a5c91a351112fcf1aed8092ba8060a7e709821d9d49c304d).
+The additive Reviewer permission update was applied and verified; zero Reviewer
+rows currently exist. Existing Owner/Admin permissions were not changed.
 
 Live through approved PR #48, merged at bfae657353a1b944567cc43f41343f7442c3d868.
 GitHub Pages run 36977777276 completed successfully on 2 October 2026.
