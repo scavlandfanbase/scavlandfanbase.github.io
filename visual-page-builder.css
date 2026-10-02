@@ -1,0 +1,67 @@
+/* SCAVLAND Visual Page Builder canvas - isolated fixture/demo UI.
+   Scoped entirely under .visual-canvas-app; does not affect any other page. */
+
+.visual-canvas-app{font-family:Bahnschrift,"Segoe UI",sans-serif;color:#e8e8e8;background:#15171c;min-height:100vh;padding:16px;box-sizing:border-box;}
+.visual-canvas-app *{box-sizing:border-box;}
+
+.vcb-banner{background:#3a2c08;border:1px solid #caa23a;color:#f3dca0;padding:10px 14px;border-radius:6px;margin-bottom:16px;font-size:14px;}
+
+.vcb-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px;}
+.vcb-toolbar fieldset{display:flex;flex-wrap:wrap;gap:6px;border:1px solid #333;border-radius:6px;padding:6px 8px;margin:0;}
+.vcb-toolbar legend{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#9aa0ab;padding:0 4px;}
+.vcb-toolbar button{background:#232834;color:#e8e8e8;border:1px solid #3a4150;border-radius:4px;padding:6px 10px;font-size:13px;cursor:pointer;}
+.vcb-toolbar button:hover{background:#2c3342;}
+.vcb-toolbar button:focus-visible,.vcb-block:focus-visible,.vcb-handle:focus-visible{outline:2px solid #6fb7ff;outline-offset:2px;}
+.vcb-toolbar button[aria-pressed="true"]{background:#2f5d8a;border-color:#6fb7ff;}
+
+.vcb-layout{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;}
+.vcb-canvas-column{flex:3 1 520px;min-width:280px;}
+.vcb-panel-column{flex:1 1 260px;min-width:240px;}
+
+.vcb-stage-wrap{position:relative;}
+.vcb-stage{position:relative;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:20px;gap:4px;background:
+  linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/calc((100% - 44px)/12 + 4px) 100%,
+  #1b1e26;
+  border:1px solid #333;border-radius:6px;padding:8px;min-height:420px;}
+
+.vcb-block{position:relative;border-radius:4px;padding:8px;overflow:hidden;cursor:grab;background:#20242d;border:2px solid transparent;}
+.vcb-block:active{cursor:grabbing;}
+.vcb-block.is-selected{border-color:#6fb7ff;box-shadow:0 0 0 2px rgba(111,183,255,.35);}
+.vcb-block-label{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#9aa0ab;margin-bottom:4px;}
+
+.vcb-handle{position:absolute;width:12px;height:12px;background:#6fb7ff;border-radius:2px;display:none;}
+.vcb-block.is-selected .vcb-handle{display:block;}
+.vcb-handle-se{right:-6px;bottom:-6px;cursor:se-resize;}
+.vcb-handle-e{right:-6px;top:calc(50% - 6px);cursor:e-resize;}
+.vcb-handle-s{bottom:-6px;left:calc(50% - 6px);cursor:s-resize;}
+
+/* Style tokens shared with the renderer output so the editor and the preview match. */
+.fs-sm{font-size:13px;}.fs-md{font-size:16px;}.fs-lg{font-size:20px;}.fs-xl{font-size:28px;font-weight:600;}
+.tc-default{color:#e8e8e8;}.tc-ink{color:#101114;}.tc-paper{color:#f5f1e6;}.tc-accent{color:#6fb7ff;}.tc-danger{color:#ff8080;}
+.bg-none{background:transparent;}.bg-surface{background:#262b35;}.bg-subtle{background:#1d2129;}
+.bd-none{border-width:0;}.bd-thin{border:1px solid #4a5160;}.bd-thick{border:3px solid #4a5160;}
+.pd-none{padding:0;}.pd-sm{padding:6px;}.pd-md{padding:14px;}.pd-lg{padding:24px;}
+.al-left{text-align:left;}.al-center{text-align:center;}.al-right{text-align:right;}
+.sp-tight>*+*{margin-top:4px;}.sp-normal>*+*{margin-top:10px;}.sp-loose>*+*{margin-top:20px;}
+
+.canvas-figure img,.canvas-card img{max-width:100%;display:block;border-radius:4px;}
+.canvas-card-link{color:#6fb7ff;}
+
+.vcb-panel{background:#1b1e26;border:1px solid #333;border-radius:6px;padding:12px;}
+.vcb-panel h2{font-size:14px;margin:0 0 10px;color:#cfd4dc;}
+.vcb-field{display:block;margin-bottom:10px;font-size:13px;}
+.vcb-field span{display:block;margin-bottom:4px;color:#aeb4bf;}
+.vcb-field select,.vcb-field input,.vcb-field textarea{width:100%;background:#262b35;color:#e8e8e8;border:1px solid #3a4150;border-radius:4px;padding:6px 8px;font:inherit;}
+.vcb-field textarea{resize:vertical;min-height:60px;}
+.vcb-empty-note{color:#9aa0ab;font-size:13px;}
+
+.vcb-preview-frame{border:1px solid #333;border-radius:6px;background:#0f1115;padding:12px;margin-top:12px;overflow:auto;}
+.vcb-preview-frame.is-mobile{max-width:375px;}
+.canvas-stage.desktop-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:20px;gap:4px;}
+.canvas-stage.mobile-stack{display:flex;flex-direction:column;gap:10px;}
+.canvas-doc-title{font-size:18px;margin:0 0 10px;}
+
+@media (max-width:720px){
+  .vcb-layout{flex-direction:column;}
+  .vcb-canvas-column,.vcb-panel-column{flex:1 1 auto;width:100%;}
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visual Page Builder canvas - fixture demonstration</title>
+<link rel="stylesheet" href="visual-page-builder.css">
+</head>
+<body class="visual-canvas-app">
+  <p class="vcb-banner" role="note">
+    Demonstration only. This visual canvas works on isolated fixture data in your browser. It is not
+    connected to any live save, revision history or publishing service, and nothing here is deployed
+    or sent to a server.
+  </p>
+
+  <div class="vcb-toolbar" role="toolbar" aria-label="Canvas tools">
+    <fieldset>
+      <legend>Add block</legend>
+      <button type="button" id="add-text">Add text</button>
+      <button type="button" id="add-image">Add image</button>
+      <button type="button" id="add-card">Add card</button>
+    </fieldset>
+    <fieldset>
+      <legend>Move selected (desktop position)</legend>
+      <button type="button" id="move-left" aria-label="Move selected block left">&larr;</button>
+      <button type="button" id="move-right" aria-label="Move selected block right">&rarr;</button>
+      <button type="button" id="move-up" aria-label="Move selected block up">&uarr;</button>
+      <button type="button" id="move-down" aria-label="Move selected block down">&darr;</button>
+    </fieldset>
+    <fieldset>
+      <legend>Resize selected</legend>
+      <button type="button" id="grow-w">Wider</button>
+      <button type="button" id="shrink-w">Narrower</button>
+      <button type="button" id="grow-h">Taller</button>
+      <button type="button" id="shrink-h">Shorter</button>
+    </fieldset>
+    <fieldset>
+      <legend>Mobile stacking order</legend>
+      <button type="button" id="order-earlier">Move earlier</button>
+      <button type="button" id="order-later">Move later</button>
+    </fieldset>
+    <fieldset>
+      <legend>Selected block</legend>
+      <button type="button" id="delete-block">Delete</button>
+    </fieldset>
+    <fieldset>
+      <legend>Responsive preview</legend>
+      <button type="button" id="preview-desktop" aria-pressed="true">Desktop</button>
+      <button type="button" id="preview-mobile" aria-pressed="false">Mobile</button>
+    </fieldset>
+    <fieldset>
+      <legend>Fixture data</legend>
+      <button type="button" id="reset-fixture">Reset to fixture</button>
+      <button type="button" id="export-json">Export fixture JSON</button>
+    </fieldset>
+  </div>
+
+  <p id="status-line" role="status" aria-live="polite" class="vcb-empty-note"></p>
+
+  <div class="vcb-layout">
+    <div class="vcb-canvas-column">
+      <h2 class="vcb-panel-visually-hidden" style="font-size:14px;">Editable canvas (desktop positions)</h2>
+      <div class="vcb-stage-wrap">
+        <div class="vcb-stage" id="stage" aria-label="Canvas blocks"></div>
+      </div>
+
+      <div class="vcb-preview-frame" id="preview-frame">
+        <h2 style="font-size:13px;color:#9aa0ab;margin:0 0 8px;">Responsive preview (read-only, safely rendered)</h2>
+        <div id="preview-output"></div>
+      </div>
+    </div>
+
+    <div class="vcb-panel-column">
+      <div class="vcb-panel" id="properties-panel" aria-live="polite">
+        <h2>Properties</h2>
+        <p class="vcb-empty-note" id="properties-empty">Select a block to edit its position, size and appearance.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="visual-canvas-model.js"></script>
+  <script src="visual-canvas-renderer.js"></script>
+  <script src="visual-canvas-fixtures.js"></script>
+  <script src="visual-page-builder.js"></script>
+</body>
+</html>
