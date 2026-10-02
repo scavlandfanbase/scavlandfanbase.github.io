@@ -15,7 +15,7 @@
   $('add').disabled=!token||busy||!!pending||dirty;
   $('save').disabled=!editable;$('classify').disabled=!loaded||!!loaded.draft||busy||!!pending;
   $('preview').disabled=!loaded?.currentVersion||busy||dirty||!!pending;
-  $('publish').disabled=!preview||busy||dirty||!!pending;
+  $('publish').disabled=!loaded?.canPublish||!preview||busy||dirty||!!pending;
   $('retry').hidden=!pending;$('retry').disabled=busy;$('search').disabled=busy||!!pending;
   $('reload').disabled=!selected||busy||!token;
   $('review').disabled=!editable||dirty;

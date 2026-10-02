@@ -77,7 +77,7 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
     const user=token==='fixture-service'?'service':token;
     try{
      let result;
-     if(u.pathname.endsWith('/has_scavland_permission')){assert.deepEqual(Object.keys(b),['required_permission']);result=(b.required_permission==='ammunition_edit'&&[alice,bob].includes(token))||(b.required_permission==='armour_edit'&&token===armourUser)||(b.required_permission==='weapons_edit'&&token===weaponUser);}
+     if(u.pathname.endsWith('/has_scavland_permission')){assert.deepEqual(Object.keys(b),['required_permission']);result=(b.required_permission==='ammunition_edit'&&[alice,bob].includes(token))||(b.required_permission==='armour_edit'&&token===armourUser)||(b.required_permission==='weapons_edit'&&token===weaponUser)||(b.required_permission==='publish_public'&&[alice,bob,armourUser,weaponUser].includes(token));}
      else if(u.pathname.endsWith('/scavland_item_draft'))result=await access(user,b.p_action,b.p_item,b.p_expected_version??null,b.p_request??null,b.p_category);
      else if(u.pathname.endsWith('/scavland_prepare_item')){assert.equal(user,'service');result=await prepare(b.p_actor,b.p_item,b.p_version,b.p_request,b.p_command,b.p_payload??null,b.p_category);}
      else if(u.pathname.endsWith('/scavland_item_preview'))result=await invoke(user,'select public.scavland_item_preview($1,$2,$3,$4,$5,$6) as v',[b.p_actor,b.p_item,b.p_category,b.p_version,b.p_digest??null,b.p_id??null]);
@@ -100,7 +100,9 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
    if(p==='/git/refs/heads/main'){assert.equal(b.force,false);assert.deepEqual(gitCommit.parents,[head]);for(const f of gitTree.tree)docs[f.path]=JSON.parse(f.content);head=b.sha;return Response.json({});}
    throw Error('Unexpected fixture Git call '+url);
   };
-  const api=createItemApi({env,fetcher:transport});
+  let reviewer=false;
+  const originalTransport=transport;const reviewerTransport=async(url,options)=>url.endsWith('/has_scavland_permission')&&JSON.parse(options.body).required_permission==='publish_public'&&reviewer?Response.json(false):originalTransport(url,options);
+  const api=createItemApi({env,fetcher:reviewerTransport});
   const call=async(actor,extra={})=>{
    const response=await api(new Request('https://fixture-edge.invalid',{method:'POST',headers:{Authorization:'Bearer '+actor},body:JSON.stringify({domain:'shared-item',category:'ammo',itemId:'api-item',...extra})}));
    return {status:response.status,result:await response.json()};
@@ -109,6 +111,8 @@ const root=path.resolve(__dirname,'..'),alice='11111111-1111-4111-8111-111111111
   assert.equal((await call('bad-token',{action:'load'})).status,401);
   assert.equal((await call(alice,{action:'load',payload:{verification:'forged'}})).status,400);
   assert.equal((await call(alice,{action:'load'})).result.currentVersion,0);
+  reviewer=true;assert.equal((await call(bob,{action:'load'})).result.canPublish,false);
+  assert.equal((await call(bob,{action:'publish',expectedVersion:1,previewId:crypto.randomUUID(),confirm:true})).status,403);assert.equal(gitWrites,0);reviewer=false;
   assert.equal((await call(alice,{action:'list'})).result.records.length,3);
   assert((await call(alice,{action:'list'})).result.records.some(r=>r.id===creationId&&r.unpublished));
   assert.equal((await call(armourUser,{action:'list',category:'armour'})).result.records.length,0);

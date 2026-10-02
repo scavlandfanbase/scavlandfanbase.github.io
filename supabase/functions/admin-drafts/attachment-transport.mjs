@@ -44,6 +44,7 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
   publishEnabled:()=>env('ADMIN_CORE_ENABLED')==='true'&&env('DRAFT_PUBLISH_ENABLED')==='true',
   publication:async input=>{
    async function current(){
+    if(input.action==='publish'&&await rpc('has_scavland_permission',{required_permission:'publish_public'},input.authorization)!==true)fail('Publishing permission required.',403);
     if(input.action==='publish'&&(env('ADMIN_CORE_ENABLED')!=='true'||env('DRAFT_PUBLISH_ENABLED')!=='true'))fail('Publishing is disabled.',403);
     const session=await fetcher(sb+'/auth/v1/user',{headers:{apikey:key,Authorization:input.authorization}});
     if(!session.ok||(await session.json()).id!==input.actor)fail('Sign in again.',401);
@@ -70,7 +71,8 @@ export function createAttachmentTransport({env,fetcher=fetch,readSource}={}){
    if(!response.ok)fail('Sign in again.',401);
    const actor=(await response.json()).id;if(typeof actor!=='string'||!actor)fail('Sign in again.',401);
    const allowed=await rpc('has_scavland_permission',{required_permission:'items_edit'},authorization);
-   return {actor,permissions:allowed===true?['items_edit']:[]};
+   const publish=await rpc('has_scavland_permission',{required_permission:'publish_public'},authorization);
+   return {actor,permissions:allowed===true?['items_edit',...(publish===true?['publish_public']:[])]:[]};
   },
   loadContext:async(itemId,authorization)=>{
    if(typeof readSource!=='function')fail('Attachment source integration is unavailable.',503);

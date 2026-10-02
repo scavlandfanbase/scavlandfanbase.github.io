@@ -14,7 +14,7 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
  db=new PGlite(directory);
  await db.exec(`create role anon;create role authenticated;create role service_role;
  create schema auth;create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
- create function public.has_scavland_permission(permission text) returns boolean language sql stable as $$select auth.uid() in ('${alice}'::uuid,'${bob}'::uuid) and permission in ('items_edit','vendors_edit')$$;
+ create function public.has_scavland_permission(permission text) returns boolean language sql stable as $$select auth.uid() in ('${alice}'::uuid,'${bob}'::uuid) and permission in ('items_edit','vendors_edit','publish_public')$$;
  grant usage on schema auth to authenticated;grant execute on function auth.uid() to authenticated;`);
  await db.exec(fs.readFileSync(path.join(root,'supabase/proposals/r1-private-drafts.sql'),'utf8'));
  await db.exec(fs.readFileSync(path.join(root,'supabase/proposals/admin01-trusted-drafts.sql'),'utf8'));
@@ -22,6 +22,7 @@ const sha=v=>crypto.createHash('sha1').update(JSON.stringify(v)).digest('hex');
   return db.transaction(async tx=>{
    const service=token==='service-test-only';await tx.exec('set local role '+(service?'service_role':'authenticated'));
    await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[service?'':token]);
+   if(name==='has_scavland_permission')return (await tx.query('select public.has_scavland_permission($1) as v',[b.required_permission])).rows[0].v;
    if(name==='scavland_draft')return (await tx.query('select public.scavland_draft($1,$2,$3,$4,$5,$6,$7) as v',[b.p_action,b.p_domain,b.p_entity_id,b.p_expected_version??null,b.p_payload??null,b.p_base??null,b.p_request_id??null])).rows[0].v;
    if(name==='scavland_patch_audit')return (await tx.query('select public.scavland_patch_audit($1,$2,$3) as v',[b.p_actor,b.p_base,b.p_settings])).rows[0].v;
    if(name==='scavland_patch_history')return (await tx.query('select public.scavland_patch_history($1) as v',[b.p_patch])).rows[0].v;

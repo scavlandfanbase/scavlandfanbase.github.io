@@ -20,6 +20,7 @@
   $('review').disabled=busy||dirty||!!pending||!loaded?.state.records[category]||archived;
   $('preview').disabled=busy||dirty||!!pending||!loaded||loaded.currentVersion===0||!loaded.hasChanges;
   $('publish').disabled=busy||dirty||!!pending||!previewId||!loaded?.canPublish;
+  $('publish').title=loaded?.canPublish?'Publish reviewed changes':'Save privately for an authorized publisher to review';
   $('retry').hidden=!pending;$('retry').disabled=busy;
   $('search').disabled=busy||!!pending;
   document.querySelectorAll('#ammo-list button').forEach(b=>b.disabled=busy||!!pending);

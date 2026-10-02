@@ -1,7 +1,7 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
 (async()=>{
  let handler;const writes=[];let adminUserReads=0;
- const run=async(email,owner=true)=>{
+ const run=async(email,owner=true,role='admin')=>{
  writes.length=0;adminUserReads=0;
  vm.runInNewContext(fs.readFileSync('supabase/functions/manage-admin-users/index.ts','utf8'),{Response,Request,Map,JSON,Error,encodeURIComponent,Deno:{env:{get:()=> 'test'},serve:fn=>handler=fn},fetch:async(url,opt={})=>{
  if(url.endsWith('/auth/v1/user'))return Response.json({id:'owner'});
@@ -10,10 +10,11 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
  if(url.includes('/admin_users?select='))return Response.json([{user_id:'owner',role:'owner'}]);
  writes.push({url,opt});return new Response(null,{status:201});
  }});
- return handler(new Request('https://local',{method:'POST',headers:{Authorization:'Bearer test'},body:JSON.stringify({action:'invite',email,role:'admin'})}));
+ return handler(new Request('https://local',{method:'POST',headers:{Authorization:'Bearer test'},body:JSON.stringify({action:'invite',email,role})}));
  };
  assert.equal((await run('invited@example.invalid')).status,200);assert.equal(writes.length,1);assert.ok(writes[0].url.includes('admin_users?on_conflict='));
  assert.equal((await run('owner@example.invalid')).status,400);assert.equal(writes.length,0);
  const denied=await run('invited@example.invalid',false);assert.equal(denied.status,403);assert.equal(writes.length,0);assert.equal(adminUserReads,0);const deniedBody=await denied.text();assert.equal(deniedBody.includes('owner@example.invalid'),false);assert.equal(deniedBody.includes('invited@example.invalid'),false);
+ assert.equal((await run('invited@example.invalid',true,'reviewer')).status,200);const reviewer=JSON.parse(writes[0].opt.body);assert(reviewer.permissions.includes('items_edit'));assert(reviewer.permissions.includes('vendors_edit'));assert(!reviewer.permissions.includes('publish_public'));assert(!reviewer.permissions.includes('settings_edit'));
  console.log('PASS retry saves existing invite without email; Owner protected; non-owner rejected');
 })();
