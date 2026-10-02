@@ -144,3 +144,16 @@
   .pb-header,.pb-notice,.pb-status,.pb-layout{max-width:none}
   .published-page .page-preview{width:100%;max-width:none}
 }
+
+/* Validated canvas sections only; existing stacked sections retain their layout. */
+.published-page .canvas-section .section-blocks{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(20px,auto);gap:4px;align-items:stretch;text-align:left}
+.published-page .canvas-section .page-block{min-width:0;min-height:0;overflow-wrap:anywhere}
+.published-page .canvas-section .page-block p,.published-page .canvas-section .page-block h3{font-size:inherit;color:inherit}
+.published-page .canvas-fontSize-sm{font-size:.875rem}.published-page .canvas-fontSize-md{font-size:1rem}.published-page .canvas-fontSize-lg{font-size:1.25rem}.published-page .canvas-fontSize-xl{font-size:1.5rem}
+.published-page .canvas-textColor-default{color:#e8ece5}.published-page .canvas-textColor-ink{color:#bac9bf}.published-page .canvas-textColor-paper{color:#fff}.published-page .canvas-textColor-accent{color:#efbf61}.published-page .canvas-textColor-danger{color:#ffb3a8}
+.published-page .canvas-background-none{background:transparent}.published-page .canvas-background-surface{background:#1a231e}.published-page .canvas-background-subtle{background:#202922}
+.published-page .canvas-border-none{border:0}.published-page .canvas-border-thin{border:1px solid #64756a}.published-page .canvas-border-thick{border:3px solid #64756a}
+.published-page .canvas-padding-none{padding:0}.published-page .canvas-padding-sm{padding:8px}.published-page .canvas-padding-md{padding:16px}.published-page .canvas-padding-lg{padding:24px}
+.published-page .canvas-align-left{text-align:left}.published-page .canvas-align-center{text-align:center}.published-page .canvas-align-right{text-align:right}
+.published-page .canvas-spacing-tight{line-height:1.25}.published-page .canvas-spacing-normal{line-height:1.5}.published-page .canvas-spacing-loose{line-height:1.8}
+@media(max-width:760px){.published-page .canvas-section .section-blocks{display:flex;flex-direction:column;gap:14px}}

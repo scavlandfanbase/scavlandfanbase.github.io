@@ -1,6 +1,6 @@
 import Model from './page-model.mjs';
-// Reviewed renderer e8ad5a6; UMD wrapper adapted to ESM only.
-// Original normalized SHA-256: a28c4c559edc69fa3a8bda852f453c18be130757685afe19986daa88d3d5ecd5
+// Browser renderer plus canvas layout; UMD wrapper adapted to ESM.
+// Original normalized SHA-256: 4d0e106a706c6df4fac28109f405cd9ac9a0cf8eba325424e3f0bbd490e2a0d5
 const renderer=(()=>{
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function validate(input,{images,existingPages,currentPageId=null}={}){
@@ -17,6 +17,14 @@ const renderer=(()=>{
       return `<article class="page-card">${block.image?`<img src="/${esc(block.image)}" alt="${esc(block.alt)}">`:''}<h3><a href="${esc(href(block.href))}">${esc(block.title)}</a></h3><p class="page-text">${esc(block.text)}</p></article>`;
     };
     return `<header class="page-heading"><p class="page-brand">SCAVLAND</p><h1>${esc(page.title)}</h1><p class="page-text">${esc(page.intro)}</p></header>`+page.sections.filter(section=>editing||!section.hidden).map(section=>{
+      if(section.layout.mode==='canvas'){
+        const blocks=section.blocks.filter(block=>editing||!block.hidden).slice().sort((a,b)=>a.canvas.mobileOrder-b.canvas.mobileOrder);
+        return `<section ${editing?`data-section="${esc(section.id)}"`:''} class="page-section canvas-section ${editing&&section.hidden?'is-hidden':''}">${section.title?`<h2>${esc(section.title)}</h2>`:''}<div class="section-blocks">${blocks.map(block=>{
+          const {desktop:r,style}=block.canvas;
+          const classes=Object.entries(style).map(([key,value])=>`canvas-${key}-${value}`).join(' ');
+          return `<div ${editing?`data-block="${esc(block.id)}"`:''} class="page-block ${classes} ${editing&&block.hidden?'is-hidden':''}" style="grid-column:${r.x+1}/span ${r.w};grid-row:${r.y+1}/span ${r.h}">${renderBlock(block)}</div>`;
+        }).join('')}</div></section>`;
+      }
       const layout=section.layout,classes=['page-section',`columns-${layout.columns??1}`,`align-${layout.align??'start'}`,`spacing-${layout.spacing??'normal'}`,`background-${layout.background??'none'}`,layout.border?'has-border':'',editing&&section.hidden?'is-hidden':''].filter(Boolean).join(' ');
       return `<section ${editing?`data-section="${esc(section.id)}"`:''} class="${classes}">${editing&&section.hidden?'<span class="hidden-label">HIDDEN SECTION - omitted from export</span>':''}${section.title?`<h2>${esc(section.title)}</h2>`:''}<div class="section-blocks">${section.blocks.filter(block=>editing||!block.hidden).map(block=>`<div ${editing?`data-block="${esc(block.id)}"`:''} class="page-block ${editing&&block.hidden?'is-hidden':''}">${editing&&block.hidden?'<span class="hidden-label">HIDDEN BLOCK - omitted from export</span>':''}${renderBlock(block)}</div>`).join('')}</div></section>`;
     }).join('');
