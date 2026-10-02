@@ -38,7 +38,7 @@
   function category(kind,{includeInactive=false}={}){
    if(!Object.hasOwn(categories,kind))throw Error('Unsupported specialist category.');
    return [...canonical.values()].filter(r=>(includeInactive||!r.hidden&&!r.archived)&&
-    (sources[kind].has(r.id)||r.classification?.includes(categories[kind]))).map(r=>item(r.id));
+    (r.contentType!==undefined?r.contentType===({ammo:'Ammo',armour:'Armour',weapons:'Weapon'})[kind]:(sources[kind].has(r.id)||r.classification?.includes(categories[kind])))).map(r=>item(r.id));
   }
   function report(){
    return {items:canonical.size,categories:Object.fromEntries(Object.keys(categories).map(kind=>[kind,{

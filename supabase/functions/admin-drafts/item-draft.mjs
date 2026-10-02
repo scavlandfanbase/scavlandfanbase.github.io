@@ -18,6 +18,7 @@ function publicationValue(key,field){
 }
 function authorize(category,item,facet,permissionsFromServer){
  if(!Object.hasOwn(tags,category)||!Array.isArray(permissionsFromServer)||!permissionsFromServer.includes(permissions[category]))fail('Category editing permission is required.',403);
+ if(item.contentType!==undefined&&item.contentType!==({ammo:'Ammo',armour:'Armour',weapons:'Weapon'})[category]&&!item.classification?.includes(tags[category]))fail('This item has changed category. Its saved specialist facts are retained.',409);
  if(!facet&&!item.classification?.includes(tags[category]))fail('This item does not belong to that category.',403);
 }
 export function snapshotItem(documents,itemId,category,{permissions:allowed}={}){

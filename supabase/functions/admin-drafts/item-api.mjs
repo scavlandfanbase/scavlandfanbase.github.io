@@ -66,7 +66,7 @@ export function createItemApi({env,fetcher=fetch,readSource}={}){
     .map(r=>({vendorId:r.vendorId,name:vendorDocument.data.find(v=>v.id===r.vendorId)?.name||'Vendor',price:r.price,rank:r.rank,quantity:r.quantity}));
    if(body.action==='list'){
     const facets=new Set(latest.documents['data/'+body.category+'.json'].data.map(r=>r.id));
-    const entries=new Map(latest.documents['data/items.json'].data.filter(r=>facets.has(r.id)||r.classification?.includes(tags[body.category])).map(r=>[r.id,{id:r.id,name:r.name,archived:!!r.archived,hidden:!!r.hidden}]));
+    const entries=new Map(latest.documents['data/items.json'].data.filter(r=>(r.contentType===undefined&&facets.has(r.id))||r.contentType===({ammo:'Ammo',armour:'Armour',weapons:'Weapon'})[body.category]||r.classification?.includes(tags[body.category])).map(r=>[r.id,{id:r.id,name:r.name,archived:!!r.archived,hidden:!!r.hidden}]));
     const privateEntries=await rpc('scavland_item_draft',{p_action:'list',p_item:null,p_category:body.category});
     for(const d of privateEntries){const view=categoryView(d.payload,body.category,context),r=view.records.items;
      if(entries.has(d.itemId))Object.assign(entries.get(d.itemId),{name:r.name,archived:!!r.archived});

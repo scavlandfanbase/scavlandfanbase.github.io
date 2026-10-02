@@ -49,6 +49,13 @@ export function createProductionHandler({env,fetcher=fetch,core=createCore({env,
    if(receipt)return reply(receipt); // Original ID/time even after response loss.
    if(saved.currentVersion!==body.expectedVersion)fail('Conflict — newer version exists. Your entries are retained.',409);
    const latest=await core.read(body.domain),context=core.context(body.domain,saved.draft,latest);
+   if(body.domain==='items'&&body.command.action==='classify'){
+    const current=context.payload.catalogue.data.find(r=>r.id===body.command.id);
+    const permissions={Weapon:'weapons_edit',Armour:'armour_edit',Ammo:'ammunition_edit',Attachment:'attachments_edit'};
+    const sourceTypes={weapon:'Weapon',armour:'Armour',ammunition:'Ammo',ammo:'Ammo',attachment:'Attachment'};
+    const required=new Set([body.command.contentType,current?.contentType,...(Array.isArray(current?.classification)?current.classification:[]).map(tag=>sourceTypes[tag])].map(type=>permissions[type]).filter(Boolean));
+    for(const permission of required)if(await rpc('has_scavland_permission',{required_permission:permission})!==true)fail('Editing permission for the current and selected category is required. Your draft is retained.',403);
+   }
    let prepared;
    if(body.command.action==='refresh-public'){
     if(body.domain!=='items'||Object.keys(body.command).some(k=>k!=='action'))fail('Invalid refresh action.');
