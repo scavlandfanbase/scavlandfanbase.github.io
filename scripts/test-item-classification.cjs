@@ -19,6 +19,12 @@ assert.throws(()=>Items.mutate(state,{action:'classify',id:record.id,revision:0,
 assert.throws(()=>apply(state,{contentType:'Invented'}),/recognised/);assert.throws(()=>Items.mutate(ammo,{action:'classify',id:record.id,revision:0,contentType:'Item',confirmId:record.id},{settings}),/another window/);
 assert.equal(JSON.stringify(state),before);
 (async()=>{
+ const {snapshotItem,addCategoryFacet}=await import('../supabase/functions/admin-drafts/item-draft.mjs');
+ for(const [category,type,permission,field]of [['ammo','Ammo','ammunition_edit','penetrationPercent'],['armour','Armour','armour_edit','ballistic'],['weapons','Weapon','weapons_edit','rpm']]){
+  const corrected=apply(state,{contentType:type}),documents={'data/items.json':{schemaVersion:1,data:corrected.data},...Object.fromEntries(['ammo','armour','weapons'].map(kind=>['data/'+kind+'.json',{schemaVersion:1,data:[]}]))},context={actor:'fixture-admin',permissions:[permission],settings,images:[]};
+  const details=addCategoryFacet(snapshotItem(documents,record.id,category,context),{action:'add-facet',expectedRevision:0,confirmId:record.id,specialist:{}},context);
+  assert.equal(details.records[category][field],null);assert.equal(details.records[category].id,record.id);if(category!=='ammo')assert(!Object.hasOwn(details.records[category],'penetrationPercent'));
+ }
  const {createCore}=await import('../supabase/functions/admin-drafts/core.mjs'),{createProductionHandler}=await import('../supabase/functions/admin-drafts/production.mjs');
  const env=k=>({SUPABASE_URL:'https://fixture.invalid',SUPABASE_ANON_KEY:'public-fixture',SUPABASE_SERVICE_ROLE_KEY:'service-fixture',ADMIN_CORE_ENABLED:'true',DRAFT_PUBLISH_ENABLED:'true'})[k];
  let allowed=new Set(['items_edit']),preparations=0;

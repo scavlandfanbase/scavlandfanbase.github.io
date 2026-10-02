@@ -1,3 +1,5 @@
+Category correction release: PR #59 merged at 19aad9d; Pages run 36990583945 succeeded and the new item-types-20261002-1 controls are served publicly. Backend version 23 matched all tested files; a follow-up fixes missing Armour/Weapon detail creation to use their correct unknown field sets. Classification, per-item model and SQL/API regressions pass for this follow-up. No live item facts were changed.
+
 ## Confirmed Item type corrections and Junk — 2 October 2026
 
 The Items type dialog now prepares confirmed Ammo/Armour/Weapon/Blueprint corrections and a Junk shortcut (Content Type Item, category Junk). It changes only master classification metadata, preserves the exact identity, source/evidence, vendor relationships and specialist files, and invalidates verification when the effective type changes. Matching historical specialist facts remain stored and become visible again if that type is restored. New Junk Items and Item category edits also maintain the public junk-item tag.
