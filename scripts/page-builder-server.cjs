@@ -2,7 +2,7 @@
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const Pages=require('../page-model.js'),PageBuilderModel=require('../page-builder-model.js');
 const root=path.resolve(__dirname,'..');
-const staticFiles=new Set(['page-builder.html','page-builder.js','page-builder.css','page-builder-model.js','page-builder-contract.js']);
+const staticFiles=new Set(['page-builder.html','page-builder.js','page-builder.css','page-builder-model.js','page-builder-contract.js','page-canvas-operations.js','page-canvas-panel.js']);
 const contentTypes={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.gif':'image/gif','.webp':'image/webp'};
 const error=(message,status=400)=>Object.assign(new Error(message),{status});
 function createStore(directory,{vendorMode=false,itemMode=false,ammoMode=false}={}){
