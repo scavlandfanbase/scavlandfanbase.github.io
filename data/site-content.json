@@ -102,6 +102,13 @@
               "description": "Meet the groups that rule the wasteland.",
               "href": "factions.html",
               "image": null
+            },
+            {
+              "id": "custom-1790930484935",
+              "title": "Guides",
+              "description": "Scavland Guides",
+              "href": "https://scavlandfanbase.github.io/pages/guides/",
+              "image": null
             }
           ]
         },
