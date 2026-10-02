@@ -1,6 +1,7 @@
 # Visual canvas integration — 2 October 2026
 
-Status: source-reviewed implementation plan; no model or live behavior changed.
+Status: backward-compatible canvas validation and rendering implemented locally;
+no live behavior changed and no canvas editing controls connected yet.
 VS owns isolated canvas fixes on feature/visual-page-builder-canvas. The main
 workstream owns connection to the existing live Page Builder.
 
@@ -81,8 +82,31 @@ versions, reset of private storage or change to game data is permitted.
 
 ## Verification scope
 
-This plan is based on source inspection, not new runtime acceptance. No code,
-database migration, deployment, saved draft or public page was changed while
-preparing it. The exact canvas extension still requires implementation and the
-checks above; the standalone demonstration's passing tests do not establish
-production readiness.
+The initial plan was source-reviewed. The following implementation checkpoint
+has since been verified locally; no database migration, deployment, live saved
+draft or public page changed.
+
+Browser/backend models accept layout.mode='canvas' on sections and block.canvas
+containing desktop:{x,y,w,h}, mobileOrder and closed style tokens. Bounds are
+12 columns by 60 minimum-size rows; overlap includes hidden blocks. Legacy
+sections reject canvas metadata and retain their exact payload. All six existing
+block types and /pages/ links remain supported.
+
+Browser/backend renderers use the same validated payload. DOM order follows
+mobileOrder; numeric grid positions determine desktop placement. Grid rows grow
+for long content. Scoped trusted CSS applies only to canvas sections. Both
+validation and renderer source fingerprints were updated to the matching browser
+source. The main stylesheet and backend trusted stylesheet contain the same
+canvas CSS fragment (page-canvas.css).
+
+Passed: test-page-canvas-model.cjs (legacy preservation, six block types, bounds,
+hidden overlap, unsafe assets/links, protected fields and model parity);
+test-page-canvas-render.cjs (renderer parity, hidden exclusion, escaping, long
+content, independent stacking and non-overlap at 320/375/800/1440px);
+existing Page Builder browser suite; page API/storage/preview/publication/
+publication-storage/control API/live-adapter suites; syntax and whitespace.
+
+Remaining: review VS fixes; connect editor controls to this page contract and
+trusted asset source; test genuine canvas save/reopen/history through the private
+API; complete authenticated UI and release/recovery acceptance. Do not deploy
+this partial checkpoint or claim production canvas support.
