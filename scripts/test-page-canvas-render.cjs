@@ -25,7 +25,7 @@ const opts={images:[],existingPages:[],currentPageId:null};
     const blocks=[...document.querySelectorAll('.canvas-section .page-block')];
     return {viewport:innerWidth,width:document.documentElement.scrollWidth,
      boxes:blocks.map(el=>{const r=el.getBoundingClientRect();return {text:el.textContent,x:r.x,y:r.y,right:r.right,bottom:r.bottom,height:r.height,scroll:el.scrollHeight,client:el.clientHeight};}),
-     unsafe:!!document.querySelector('script, img[onerror]')};
+     unsafe:!!document.querySelector('script:not([src="/shared-home-boxes.js?v=20261002-1"]), img[onerror]')};
    });
    assert.equal(result.unsafe,false);assert.ok(result.width<=result.viewport,'no horizontal overflow at '+width);
    for(const b of result.boxes)assert.ok(b.scroll<=b.client+1,'long text must not clip at '+width);

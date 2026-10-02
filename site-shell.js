@@ -21,6 +21,7 @@ function buildShell(){
  const nav=document.createElement('nav');nav.className='scav-site-nav';nav.setAttribute('aria-label','Main navigation');
  nav.innerHTML='<div class="scav-site-nav-inner">'+links.map(([href,label])=>'<a href="'+href+'"'+(page===href?' class="active" aria-current="page"':'')+'>'+label+'</a>').join('')+'</div>';
  document.body.prepend(nav);document.body.prepend(header);
+ if(page!=='index.html'&&!/^\/(?:admin|[^/]+-builder|[^/]+-category)\.html$/.test(location.pathname)){const shared=document.createElement('script');shared.src='/shared-home-boxes.js?v=20261002-1';document.head.append(shared);}
  const applySettings=settings=>{
   const pageSettings=(settings.pages||{})[page]||{}, values={...(settings.global||{}),...pageSettings};
   const root=document.documentElement.style;

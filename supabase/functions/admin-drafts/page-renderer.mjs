@@ -1,6 +1,6 @@
 import Model from './page-model.mjs';
 // Browser renderer plus canvas layout; UMD wrapper adapted to ESM.
-// Original normalized SHA-256: 6970d050da850829370b65eb75007ad3e74bfd244e3980ec8c952948da7fa1ee
+// Original normalized SHA-256: 7c515f83f8394069f43649f81116a451b5f6dc2f361eabefb504bd6b71af660e
 const renderer=(()=>{
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function validate(input,{images,existingPages,currentPageId=null}={}){
@@ -31,7 +31,7 @@ const renderer=(()=>{
   }
   function document(input,{images,existingPages,currentPageId=null,css=''}={}){
     const page=validate(input,{images,existingPages,currentPageId});
-    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(page.title)} | SCAVLAND</title><style>${css}</style></head><body class="published-page"><main class="page-preview">${render(page,{images,existingPages,currentPageId})}</main></body></html>`;
+    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(page.title)} | SCAVLAND</title><style>${css}</style></head><body class="published-page"><main class="page-preview">${render(page,{images,existingPages,currentPageId})}</main><script src="/shared-home-boxes.js?v=20261002-1" defer></script></body></html>`;
   }
   return Object.freeze({validate,render,document});
 })();
