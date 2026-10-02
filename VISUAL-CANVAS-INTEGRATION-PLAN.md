@@ -1,7 +1,7 @@
 # Visual canvas integration — 2 October 2026
 
-Status: backward-compatible canvas validation and rendering implemented locally;
-no live behavior changed and no canvas editing controls connected yet.
+Status: canvas validation, rendering and editing controls connected to the
+existing editor locally. Live activation remains disabled.
 VS owns isolated canvas fixes on feature/visual-page-builder-canvas. The main
 workstream owns connection to the existing live Page Builder.
 
@@ -135,3 +135,40 @@ canvas review invalidation; test-page-canvas-operations.cjs with hidden collisio
 failure atomicity, full-canvas refusal and duplicate/mobile-order retention;
 syntax/whitespace checks. These changes do not expose live canvas UI controls.
 VS's fix commits were not yet present on its remote branch when checked.
+
+## Connected editor checkpoint
+
+VS's dcfb703 branch was subsequently fetched, reviewed and merged into the
+integration branch at cc58786. Its complete visual-canvas suite and existing
+Admin/invite tests pass. The isolated demonstration is retained separately.
+
+page-canvas-panel.js now mounts a drag/resize canvas inside existing canvas
+sections in page-builder.js. It edits the same active page used by Save Draft,
+the live bridge, preview, history and publication. Text/content fields remain
+the existing labeled forms, preserving typing focus. Canvas style selectors use
+the main closed-token contract; images come only from the trusted approved-image
+context. All six existing block types remain editable in the main form. Hidden
+boxes retain their space and mobile order. Duplicating a canvas box allocates a
+new region instead of duplicating overlapping coordinates.
+
+New canvas sections remain opt-in for local review: /?canvas=1 on the loopback
+builder. The explicit SCAV_CANVAS_ENABLED switch is false by default and is not
+set in the production page. No live Hub enablement or deployment is included.
+Existing sections are never automatically converted or rewritten.
+
+Public grid coordinates now use fixed trusted CSS classes rather than inline
+style attributes. This preserves the strict stylesheet-hash CSP inherited by
+the preview iframe. Local browser acceptance verifies actual computed grid
+placement under that policy, not only generated HTML text.
+
+Passed: test-page-canvas-browser.cjs (connected opt-in section, typed content and
+focus, keyboard position/resize, pointer drag, private save/reopen/style revisions,
+375px layout, preview CSP grid placement, and publication-lock refusal);
+test-page-canvas-render.cjs; existing complete test-page-builder.cjs;
+test-page-api.cjs with real SQL canvas retention/retry cases;
+test-page-preview.cjs; model/operation checks; syntax and whitespace.
+
+Remaining before release: connected authenticated acceptance with actual saved
+history and Owner review, rollout capability/versioning and cache updates,
+complete backend bundle readback, and genuine publication only for chosen content.
+No live draft, public page, role, database or deployment changed in this checkpoint.
