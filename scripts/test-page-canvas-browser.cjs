@@ -14,6 +14,7 @@ const {chromium}=require('playwright'),{createServer,createStore}=require('./pag
   await text.press('End');await text.pressSequentially(' plus typing');assert.equal(await text.evaluate(e=>document.activeElement===e),true);
   const box=page.locator('.pb-canvas-box').first();await box.click();await box.press('ArrowRight');await box.press('Shift+ArrowDown');
   await page.locator('#save-draft').click();await page.getByText('Saved locally at revision 1. This draft is not published.').waitFor();
+  assert.equal(await page.locator('#add-canvas-section').isDisabled(),false,'saving restores canvas section creation');
   const store=createStore(directory),saved=structuredClone(store.read().pages[0]);
   assert.equal(saved.draft.sections[0].layout.mode,'canvas');assert.equal(saved.draft.sections[0].blocks[0].canvas.desktop.x,1);assert.equal(saved.draft.sections[0].blocks[0].canvas.desktop.h,9);
   assert.ok(saved.draft.sections[0].blocks[0].text.endsWith(' plus typing'));
