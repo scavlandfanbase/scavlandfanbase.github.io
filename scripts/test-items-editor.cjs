@@ -13,6 +13,9 @@ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'scav-items-editor-')),root
   async function action(id){if(['item-duplicate','item-visibility','item-archive'].includes(id)&&!await page.locator('#item-more').evaluate(n=>n.open))await page.locator('#item-more>summary').click();await page.locator('#'+id).click();await save();}
   async function cancel(){await page.keyboard.press('Escape');if(await dialog().count())await page.keyboard.press('Escape');}
   await page.goto(base);await page.locator('#workspace').waitFor();
+  assert.equal(await page.locator('#workspace input').first().evaluate(n=>getComputedStyle(n).backgroundColor),'rgb(16, 19, 16)','Items fields retain dark editor styling');
+  assert.equal(await page.locator('.builder').evaluate(n=>getComputedStyle(n).color),'rgb(232, 229, 220)','Items retains readable light text');
+  assert(await page.locator('#item-edit').evaluate(n=>n.getBoundingClientRect().height>=44),'Items actions retain shared touch sizing');
   if(process.env.SCAVLAND_TEST_OUTPUT){fs.mkdirSync(process.env.SCAVLAND_TEST_OUTPUT,{recursive:true});for(const width of [320,1280]){await page.setViewportSize({width,height:900});await page.screenshot({path:path.join(process.env.SCAVLAND_TEST_OUTPUT,'9b-catalogue-'+width+'.png'),fullPage:true});}}
   await page.locator('#item-edit').click();await dialog().getByLabel('Estimated Price',{exact:true}).fill('0');await save();assert.equal(store.read().data[0].estimatedPrice,0);
   // Keyboard opening, unsaved discard, and focus return.
