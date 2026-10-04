@@ -89,7 +89,8 @@
         "weapon"
       ],
       "image": null,
-      "notes": null
+      "notes": null,
+      "maxStack": 1
     },
     {
       "id": "2hmg-long",
