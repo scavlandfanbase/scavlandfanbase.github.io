@@ -147,6 +147,51 @@ nav a:hover {
     color: #ccc;
 }
 
+/* Official links frame the news without changing the feed. */
+.news-layout {
+    display: grid;
+    grid-template-columns: minmax(180px, 230px) minmax(0, 1fr) minmax(180px, 230px);
+    gap: 22px;
+    align-items: start;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+.news-layout .update-box { box-sizing: border-box; width: 100%; min-width: 0; overflow-wrap: anywhere; }
+.social-panel {
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 20px;
+    background: var(--site-panel-color, #222);
+    border: 1px solid var(--scav-line, #333);
+    border-radius: var(--site-radius, 6px);
+}
+.social-panel h3 { color: var(--scav-gold-bright, #ffcc66); margin: 0 0 16px; font-size: 18px; }
+.social-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #4a4434;
+    border-radius: 4px;
+    color: #eee;
+    text-decoration: none;
+    font-weight: bold;
+}
+.social-link:hover { background: #302a1e; border-color: #ffcc66; color: #ffcc66; }
+.social-link:focus-visible { outline: 2px solid #ffcc66; outline-offset: 3px; }
+.social-link span[aria-hidden] { width: 24px; text-align: center; font-size: 20px; flex-shrink: 0; }
+@media (max-width: 900px) {
+    .news-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+    .news-layout .update-box { grid-column: 1 / -1; grid-row: 1; }
+}
+@media (max-width: 480px) {
+    .news-layout { grid-template-columns: minmax(0, 1fr); }
+    .social-panel { padding: 16px; }
+}
+
 /* FOOTER */
 footer {
     text-align: center;
@@ -230,9 +275,28 @@ footer {
 <!-- UPDATE FEED -->
 <section class="updates" data-section-id="latest-update">
     <h2>Latest Update</h2>
+    <div class="news-layout">
+    <aside class="social-panel" aria-labelledby="official-links-title">
+        <h3 id="official-links-title">Official SCAVLAND links</h3>
+        <ul>
+            <li><a class="social-link" href="https://scavland.com/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">🌐</span>Website</a></li>
+            <li><a class="social-link" href="https://store.steampowered.com/app/3373500/Scavland" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">🎮</span>Steam</a></li>
+            <li><a class="social-link" href="https://patreon.com/scavland" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">★</span>Patreon</a></li>
+        </ul>
+    </aside>
     <div class="update-box" id="updateBox">
         <h3>Loading latest update...</h3>
         <p>Please wait.</p>
+    </div>
+    <aside class="social-panel" aria-labelledby="social-links-title">
+        <h3 id="social-links-title">Follow &amp; connect</h3>
+        <ul>
+            <li><a class="social-link" href="https://www.youtube.com/@scavland" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span>YouTube</a></li>
+            <li><a class="social-link" href="https://twitter.com/Scavland_" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">𝕏</span>Twitter / X</a></li>
+            <li><a class="social-link" href="https://www.tiktok.com/@scavland" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">♪</span>TikTok</a></li>
+            <li><a class="social-link" href="https://discord.gg/scavland" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">💬</span>Discord</a></li>
+        </ul>
+    </aside>
     </div>
 </section>
 
