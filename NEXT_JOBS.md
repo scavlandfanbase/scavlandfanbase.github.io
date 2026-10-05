@@ -1,3 +1,15 @@
+## Page Builder — Google Drive image import — parked, 5 October 2026
+
+- [ ] Add Google Drive as a second image source in Page Builder alongside the existing GitHub image library.
+- [x] Existing shared SCAVLAND Google Drive image structure confirmed; dedicated `Page Builder` folder created.
+- [ ] Configure restricted server-side Google Drive authorization for the SCAVLAND backend. Do not expose Drive credentials in browser code or make the shared Drive public.
+- [ ] Let authorized Page Builder users browse approved SCAVLAND Drive folders and preview image files.
+- [ ] Import a selected Drive image once into the GitHub repository, validate its type/path, give it a safe canonical path/name, and register it in `data/site-images.json`.
+- [ ] Detect already-imported Drive files so repeated selection does not create duplicate GitHub assets.
+- [ ] Public/generated pages must use the GitHub copy only; Google Drive is the team upload/inbox source, not the public image host.
+- [ ] Preserve the existing authenticated `content_edit` boundary and server-only GitHub token. Add tests for unauthorized access, invalid/non-image files, duplicates, failed GitHub writes, retry, and mobile/desktop picker behaviour.
+- [ ] Keep this work independent of Vendor editor/checkpoint changes.
+
 ## Vendor listing verification — local only, 5 October 2026
 
 Implemented private listing review on `feature/vendor-listing-verification`. Trusted attribution/current patch, optional evidence, durable save/retry, conflicts, separate sessions, public privacy and desktop/mobile checks pass. See VENDOR-LISTING-VERIFICATION.md for validation and release steps. Await release approval; no production changes or genuine record reviews performed. Historical pending entries below must be checked against current released code before beginning new work.
