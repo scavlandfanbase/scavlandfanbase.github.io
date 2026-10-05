@@ -50,6 +50,17 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
    for(const event of (row.verification.history||[]))text(body,'p',event.decision+' · '+event.at+' · '+(event.patch_id||'Patch unknown')+' · '+event.by);
   },onSubmit:()=>{}});
  }
+ function reviewListing(row){
+  const patchId=catalog.settings.current_patch_id;
+  scavEditorDialog({title:'Review Vendor listing · '+name(row),submit:'Save private review',build:({body})=>{
+   text(body,'p','Review this Vendor’s price, rank and stock only. This does not verify the Item or any other Vendor’s listing.');
+   text(body,'p','Evidence is optional. Your identity, review time and current patch are recorded by the server. Saving does not publish.');
+   text(body,'p','Price: '+unknown(row.price)+' · Rank: '+unknown(row.rank)+' · Stock: '+unknown(row.quantity));
+   text(body,'p','Current patch: '+(patchId||'Not recorded'));
+   E.verificationInfo(body,ScavVerification.inspect(row,catalog.settings));
+   E.selectField(body,'Review decision','decision',[['unverified','Unverified — needs review'],...(patchId?[['verified','Verified — still correct for this patch']]:[])],'unverified');
+  },onSubmit:({form})=>save('verify',{listingId:row.id,confirmId:row.id,decision:new FormData(form).get('decision'),patchId})});
+ }
  function add(){
   let selected=null,limit=40;
   scavEditorDialog({title:'Add existing stock',submit:'Add private listing',build:({body,save:submit,setDirty})=>{
@@ -74,7 +85,7 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
    E.search(query,()=>{limit=40;show();});type.onchange=()=>{limit=40;show();};show();
   },onSubmit:()=>{if(!selected)throw new Error('Select an existing record.');return save('add',{entity:selected});}});
  }
- const helpLabel=text($('inventory-tools'),'span','Inventory help');E.help(helpLabel,'Vendor inventory','Edit changes this Vendor’s price, rank and stock only. Not recorded means unknown. Status shows verification; history is under More actions. Listing verification is not available here yet. Archive keeps a restorable listing; Remove deletes only the listing after confirmation. Move up/down changes its order.');
+ const helpLabel=text($('inventory-tools'),'span','Inventory help');E.help(helpLabel,'Vendor inventory','Edit changes this Vendor’s price, rank and stock only. Not recorded means unknown. Verify records a private listing review; evidence is optional. History is under More actions. Save does not publish. Archive keeps a restorable listing; Remove deletes only the listing after confirmation. Move up/down changes its order.');
  const addButton=E.button('inventory-add','+ Add listing',add,$('inventory-tools'));
  const retry=E.button('inventory-retry','Reload catalogue',()=>load(),$('inventory-tools'));
  E.button('inventory-close','Close inventory',()=>{section.hidden=true;$('vendor-inventory').focus();},$('inventory-tools'));
@@ -105,7 +116,8 @@ window.ScavVendorInventory=function({state,vendor,session,change,catalogSource=n
    function button(action,label,fn,disabled=false,aria,parent=actions){const b=E.button('',label,fn,parent,aria);b.dataset.action=action;b.dataset.helpAdded='true';b.disabled=disabled;return b;}
    if(row.archived)button('restore','Restore',()=>save('restore',{listingId:row.id}).catch(()=>{}),unavailable);
    else button('edit','Edit',()=>edit(row),unavailable);
-   button('status','Status',()=>scavEditorDialog({title:'Verification status · '+name(row),submit:'Close',readOnly:true,build:({body})=>{E.verificationInfo(body,inspection);text(body,'p','Listing verification cannot be recorded in this editor yet. Viewing status does not verify this listing. Item evidence is managed separately.');},onSubmit:()=>{}}));
+   if(!row.archived)button('verify','Verify',()=>reviewListing(row),unavailable);
+   button('status','Status',()=>scavEditorDialog({title:'Verification status · '+name(row),submit:'Close',readOnly:true,build:({body})=>{E.verificationInfo(body,inspection);text(body,'p','Viewing status does not verify this listing. Use Verify to record a private review. Item evidence is managed separately.');},onSubmit:()=>{}}));
    const menu=document.createElement('details');menu.className='inventory-more';const toggle=text(menu,'summary','•••');toggle.setAttribute('aria-label','More actions for '+name(row));actions.append(menu);
    const options=document.createElement('div');options.className='inventory-menu';menu.append(options);
    function option(action,label,fn,disabled=false){return button(action,label,()=>{menu.open=false;toggle.focus();fn();},disabled,undefined,options);}

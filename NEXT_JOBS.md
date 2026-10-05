@@ -1,3 +1,7 @@
+## Vendor listing verification — local only, 5 October 2026
+
+Implemented private listing review on `feature/vendor-listing-verification`. Trusted attribution/current patch, optional evidence, durable save/retry, conflicts, separate sessions, public privacy and desktop/mobile checks pass. See VENDOR-LISTING-VERIFICATION.md for validation and release steps. Await release approval; no production changes or genuine record reviews performed. Historical pending entries below must be checked against current released code before beginning new work.
+
 Category correction release: PR #59 merged at 19aad9d; Pages run 36990583945 succeeded and the new item-types-20261002-1 controls are served publicly. Backend version 24 is deployed; all 30 files match the tested bundle (digest 4157e7bde4d5b619dd0bc5c369fa3e6718b4b43e2dc6e4f9470a99614767119c). The follow-up fixes missing Armour/Weapon detail creation to use their correct unknown field sets. Classification, per-item model and SQL/API regressions pass for this follow-up. No live item facts were changed.
 
 ## Confirmed Item type corrections and Junk — 2 October 2026

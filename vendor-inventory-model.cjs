@@ -14,6 +14,11 @@ function mutate(state,body,entities,settings,actorId='local-operator'){
  switch(body.operation){
   case 'add': collection=L.add(collection,{id:crypto.randomUUID(),vendorId:vendor.id,entity:body.entity},catalog);break;
   case 'edit': collection=L.update(collection,row.id,body.fields,catalog,review);break;
+  case 'verify':
+   if(Object.keys(body).some(key=>!['action','operation','id','revision','listingId','confirmId','decision','patchId','requestId'].includes(key)))fail('Verification identity, time and history are recorded by the server.');
+   if(body.confirmId!==row.id)fail('Confirm the exact listing to review.');
+   if(body.patchId!==settings.current_patch_id)fail('The current patch changed. Reopen the inventory and review again.');
+   collection=L.decide(collection,row.id,body.decision,catalog,review);break;
   case 'archive': collection=L.archive(collection,row.id);break;
   case 'restore': collection=L.restore(collection,row.id,catalog);break;
   case 'remove':

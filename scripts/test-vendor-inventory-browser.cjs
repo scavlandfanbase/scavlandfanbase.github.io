@@ -24,6 +24,23 @@ const {createServer,createStore}=require('./page-builder-server.cjs');
   await card.locator('[data-action=edit]').click();await dialog().locator('[name=quantity]').fill('');await submit();assert.equal(await card.locator('.inventory-facts dd').last().innerText(),'Not recorded');
   const movedId=await cards().first().getAttribute('data-listing-id');await cards().first().locator('.inventory-more summary').click();await cards().first().locator('[data-action=down]').click();await page.locator('#inventory-status').filter({hasText:'Saved'}).waitFor();assert.equal(await cards().last().getAttribute('data-listing-id'),movedId);
   await card.locator('.inventory-more summary').click();await card.locator('[data-action=verification]').click();await dialog().getByText('This vendor listing has not been verified yet.').waitFor();await page.keyboard.press('Escape');
+  const fixtureStore=createStore(directory,{vendorMode:true}),beforeReview=fixtureStore.read();
+  for(const width of [280,375,1280]){
+   await page.setViewportSize({width,height:900});await card.locator('[data-action=verify]').focus();await page.keyboard.press('Enter');
+   assert.match(await dialog().innerText(),/Evidence is optional/);assert.equal(await dialog().getByLabel('Review decision',{exact:true}).inputValue(),'unverified');
+   assert(await dialog().evaluate(d=>d.scrollWidth<=d.clientWidth));
+   if(process.env.SCAVLAND_TEST_OUTPUT){fs.mkdirSync(process.env.SCAVLAND_TEST_OUTPUT,{recursive:true});await page.screenshot({path:path.join(process.env.SCAVLAND_TEST_OUTPUT,'listing-review-'+width+'.png')});}
+   await page.keyboard.press('Escape');assert.equal(await page.evaluate(()=>document.activeElement.dataset.action),'verify');
+  }
+  assert.deepEqual(fixtureStore.read(),beforeReview,'Opening/cancelling review makes no write');
+  await card.locator('[data-action=verify]').click();await dialog().getByLabel('Review decision',{exact:true}).selectOption('verified');
+  await page.route('**/api/vendors',r=>r.request().method()==='POST'?r.fulfill({status:503,json:{error:'Review save unavailable'}}):r.continue());
+  await dialog().locator('button[type=submit]').click();await dialog().getByText('Review save unavailable').waitFor();assert.equal(await dialog().getByLabel('Review decision',{exact:true}).inputValue(),'verified');
+  await page.unroute('**/api/vendors');await submit();assert.equal(await card.locator('.inventory-verification').innerText(),'Verified');
+  const savedReview=fixtureStore.read().vendorListings.listings.find(r=>r.id===listingId);assert.equal(savedReview.verification.last_verified_by,'local-operator');assert.equal(savedReview.verification.history.length,1);
+  await page.reload();await page.locator('#workspace').waitFor();await page.locator('#vendor-inventory').click();await card.locator('.inventory-verification').filter({hasText:'Verified'}).waitFor();
+  await card.locator('[data-action=verify]').click();await submit();assert.equal(await card.locator('.inventory-verification').innerText(),'Unverified');assert.equal(fixtureStore.read().vendorListings.listings.find(r=>r.id===listingId).verification.history.length,2);
+  assert.deepEqual(fixtureStore.read().data,beforeReview.data,'Vendor and legacy stock unchanged by listing reviews');
   await card.locator('.inventory-more summary').click();await card.locator('[data-action=archive]').click();await submit();assert.equal(await cards().count(),1);await page.locator('#inventory-archived').check();await card.locator('[data-action=restore]').click();await page.locator('#inventory-status').filter({hasText:'Saved'}).waitFor();await card.locator('[data-action=edit]').waitFor();
   const second=await context.newPage();await open(second);await card.locator('[data-action=edit]').click();await dialog().locator('[name=price]').fill('451');await submit();
   await second.locator('.inventory-card').first().locator('[data-action=edit]').click();await second.getByLabel('Note state',{exact:true}).selectOption('text');await second.locator('[name=notes]').fill('Preserved stale note');await second.locator('dialog button[type=submit]').click();await second.locator('dialog [role=alert]').filter({hasText:'Vendors changed in another window'}).waitFor();assert.equal(await second.locator('[name=notes]').inputValue(),'Preserved stale note');await second.keyboard.press('Escape');await second.keyboard.press('Escape');await second.locator('#retry').click();await second.locator('#workspace').waitFor();await second.close();

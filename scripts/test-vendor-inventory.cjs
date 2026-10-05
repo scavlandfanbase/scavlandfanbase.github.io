@@ -38,6 +38,17 @@ const {createStore,createServer}=require('./page-builder-server.cjs'),L=require(
  const entities=Object.fromEntries(L.types.map(t=>[t,[{id:'same',name:'Same name'}]]));let fixture={version:1,revision:0,data:[{id:'v',name:'Vendor'}]};
  for(const type of L.types)fixture=M.mutate(fixture,{revision:fixture.revision,id:'v',operation:'add',entity:{type,id:'same'}},entities,catalog.settings).state;
  assert.equal(fixture.vendorListings.listings.length,6);
+ // Review intent is exact, patch-bound and isolated from other listings/entities.
+ const target=fixture.vendorListings.listings[0],beforeReview=structuredClone(fixture),beforeEntities=structuredClone(entities);
+ const review={revision:fixture.revision,id:'v',operation:'verify',listingId:target.id,confirmId:target.id,decision:'verified',patchId:catalog.settings.current_patch_id};
+ for(const extra of [{actorId:'forged'},{clock:'forged'},{history:[]},{confirmId:'wrong'},{patchId:'stale'},{decision:'invented'}])assert.throws(()=>M.mutate(fixture,{...review,...extra},entities,catalog.settings,'trusted-reviewer'));
+ assert.throws(()=>M.mutate(fixture,review,{...entities,[target.entity.type]:[]},catalog.settings,'trusted-reviewer'));
+ assert.throws(()=>M.mutate({...fixture,data:[{id:'v',name:'Vendor',archived:true}]},review,entities,catalog.settings,'trusted-reviewer'));
+ const noPatch={...catalog.settings,current_patch_id:null};assert.throws(()=>M.mutate(fixture,{...review,patchId:null},entities,noPatch,'trusted-reviewer'));
+ fixture=M.mutate(fixture,review,entities,catalog.settings,'trusted-reviewer').state;
+ assert.equal(fixture.vendorListings.listings[0].verification.last_verified_by,'trusted-reviewer');
+ assert.deepEqual(fixture.vendorListings.listings.slice(1),beforeReview.vendorListings.listings.slice(1));assert.deepEqual(entities,beforeEntities);
+ for(const field of ['rank','price','quantity','notes'])assert.equal(fixture.vendorListings.listings[0][field],null);
  const server=createServer({directory,vendorMode:true,token:'test'});await new Promise(r=>server.listen(0,'127.0.0.1',r));
  try{
   const base='http://127.0.0.1:'+server.address().port,headers={'X-Scav-Session':'test',Origin:base,'Content-Type':'application/json'};
