@@ -1,0 +1,9 @@
+/* Latest-build adapter reuses the approved catalogue, armour and weapon styles. */
+.latest-nav{display:flex;flex-wrap:wrap}.latest-nav a{min-height:44px;display:flex;align-items:center}.historical-link{display:inline-flex;min-height:44px;align-items:center}.weapon-art .missing{font-size:16px}.pagination a{min-height:44px;display:flex;align-items:center}main{overflow-wrap:anywhere}.player-links{padding-left:20px}.player-links a{min-height:44px;display:inline-flex;align-items:center}details summary{min-height:44px;cursor:pointer} .weapon-stat strong{font-size:23px}@media(max-width:700px){.latest-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.latest-nav a{justify-content:center;font-size:13px}.edition{display:none}.weapon-art{min-height:180px}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Keep the accepted global grids; only general-item prose becomes single-column on small phones. */
+@media(max-width:420px){.general-item-summary .player-stats{grid-template-columns:1fr}}
+
+@media(max-width:420px){.ammunition-summary .player-stats{grid-template-columns:1fr}}
+
+@media(max-width:420px){.weapon-base-summary .player-stats{grid-template-columns:1fr}}
